@@ -1,0 +1,836 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+    <title>Clinique WENDTOIN – Urgences 24h/24 à Ouagadougou</title>
+    <meta name="description" content="Clinique privée à Pissy, Ouagadougou. Urgences médicales et chirurgicales 24h/24, 7j/7. Consultations générales et spécialisées.">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            color: #1e293b;
+            line-height: 1.6;
+            background: #F8F9FA;
+        }
+
+        .container {
+            max-width: 1280px;
+            margin: 0 auto;
+            padding: 0 24px;
+        }
+
+        /* ========== HEADER ========== */
+        header {
+            background: white;
+            box-shadow: 0 2px 20px rgba(0,0,0,0.05);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            background: white;
+        }
+
+        .header-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 16px 24px;
+            max-width: 1280px;
+            margin: 0 auto;
+        }
+
+        .logo h1 {
+            font-size: 1.6rem;
+            font-weight: 700;
+        }
+
+        .logo span {
+            color: #0077A4;
+        }
+
+        .logo p {
+            font-size: 0.7rem;
+            color: #64748b;
+            letter-spacing: 0.5px;
+        }
+
+        nav ul {
+            display: flex;
+            list-style: none;
+            gap: 28px;
+        }
+
+        nav a {
+            text-decoration: none;
+            color: #1e293b;
+            font-weight: 500;
+            transition: color 0.3s;
+            cursor: pointer;
+        }
+
+        nav a:hover, nav a.active {
+            color: #0077A4;
+        }
+
+        .mobile-menu-btn {
+            display: none;
+            font-size: 28px;
+            cursor: pointer;
+        }
+
+        /* ========== SECTIONS ========== */
+        .page-section {
+            display: none;
+            animation: fadeIn 0.4s ease;
+        }
+
+        .page-section.active-page {
+            display: block;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* ========== HERO ========== */
+        .hero {
+            position: relative;
+            background: linear-gradient(135deg, #0077A4 0%, #005a7c 100%);
+            min-height: 550px;
+            display: flex;
+            align-items: center;
+            text-align: center;
+            color: white;
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 2;
+        }
+
+        .hero-content h2 {
+            font-size: 3.2rem;
+            margin-bottom: 20px;
+            font-weight: 700;
+        }
+
+        .hero-content h2 span {
+            color: #1D8B5D;
+        }
+
+        .hero-slogan {
+            font-size: 1.2rem;
+            margin-bottom: 32px;
+            opacity: 0.95;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 14px 36px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 600;
+            margin: 0 10px;
+            transition: all 0.3s;
+            cursor: pointer;
+            border: none;
+            font-size: 1rem;
+        }
+
+        .btn-primary {
+            background: #1D8B5D;
+            color: white;
+        }
+
+        .btn-primary:hover {
+            background: #156d48;
+            transform: translateY(-2px);
+        }
+
+        .btn-outline {
+            background: transparent;
+            border: 2px solid white;
+            color: white;
+        }
+
+        .btn-outline:hover {
+            background: white;
+            color: #0077A4;
+        }
+
+        /* ========== CARTES ========== */
+        .section-title {
+            text-align: center;
+            font-size: 2.2rem;
+            margin-bottom: 48px;
+            color: #0077A4;
+            font-weight: 700;
+        }
+
+        .cards-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 32px;
+            margin-bottom: 40px;
+        }
+
+        .card {
+            background: white;
+            padding: 32px;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+            transition: all 0.3s;
+            text-align: center;
+            border: 1px solid #e2e8f0;
+        }
+
+        .card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+        }
+
+        .card-icon {
+            font-size: 3rem;
+            margin-bottom: 16px;
+        }
+
+        /* ========== STATS ========== */
+        .stats {
+            background: #0077A4;
+            color: white;
+            padding: 60px 0;
+            margin: 40px 0;
+        }
+
+        .stats-container {
+            display: flex;
+            justify-content: space-around;
+            text-align: center;
+            flex-wrap: wrap;
+            gap: 30px;
+        }
+
+        .stat-number {
+            display: block;
+            font-size: 2.5rem;
+            font-weight: 800;
+        }
+
+        /* ========== FORMULAIRES ========== */
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        input, select, textarea {
+            width: 100%;
+            padding: 14px;
+            border: 1px solid #cbd5e1;
+            border-radius: 12px;
+            font-family: inherit;
+            font-size: 1rem;
+        }
+
+        input:focus, select:focus, textarea:focus {
+            outline: none;
+            border-color: #1D8B5D;
+            box-shadow: 0 0 0 3px rgba(29,139,93,0.1);
+        }
+
+        .rdv-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 48px;
+        }
+
+        /* ========== FILTRES ACTUS ========== */
+        .filters {
+            display: flex;
+            gap: 16px;
+            justify-content: center;
+            margin-bottom: 40px;
+            flex-wrap: wrap;
+        }
+
+        .filter-btn {
+            padding: 10px 24px;
+            border: none;
+            background: white;
+            border-radius: 30px;
+            cursor: pointer;
+            font-weight: 500;
+            transition: all 0.3s;
+            border: 1px solid #e2e8f0;
+        }
+
+        .filter-btn.active, .filter-btn:hover {
+            background: #0077A4;
+            color: white;
+            border-color: #0077A4;
+        }
+
+        /* ========== ÉTOILES ========== */
+        .stars {
+            color: #f39c12;
+            font-size: 1.2rem;
+            margin-bottom: 12px;
+        }
+
+        /* ========== FOOTER ========== */
+        footer {
+            background: #1e293b;
+            color: #cbd5e1;
+            padding: 60px 0 30px;
+            margin-top: 60px;
+        }
+
+        .footer-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 40px;
+        }
+
+        .footer-grid a {
+            color: #cbd5e1;
+            text-decoration: none;
+        }
+
+        .footer-grid a:hover {
+            color: #1D8B5D;
+        }
+
+        /* ========== BADGES ========== */
+        .badge {
+            background: #e2e8f0;
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            display: inline-block;
+            margin: 10px 0;
+        }
+
+        /* ========== RESPONSIVE ========== */
+        @media (max-width: 768px) {
+            nav ul {
+                display: none;
+            }
+            .mobile-menu-btn {
+                display: block;
+            }
+            .hero-content h2 {
+                font-size: 2rem;
+            }
+            .rdv-grid {
+                grid-template-columns: 1fr;
+            }
+            .stats-container {
+                flex-direction: column;
+            }
+            .btn {
+                margin: 10px 0;
+            }
+            .hero-buttons {
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+            }
+        }
+
+        /* ========== SECTIONS INTERNES ========== */
+        .page-section {
+            background: #F8F9FA;
+        }
+
+        .presentation-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 48px;
+            align-items: center;
+            background: white;
+            border-radius: 24px;
+            padding: 40px;
+            margin: 40px 0;
+        }
+
+        @media (max-width: 768px) {
+            .presentation-grid {
+                grid-template-columns: 1fr;
+                padding: 24px;
+            }
+        }
+
+        .info-box {
+            background: white;
+            padding: 24px;
+            border-radius: 16px;
+            margin-bottom: 24px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+        }
+
+        .info-box h3 {
+            color: #0077A4;
+            margin-bottom: 12px;
+        }
+
+        .emergency-badge {
+            background: #1D8B5D;
+            color: white;
+            padding: 8px 16px;
+            border-radius: 30px;
+            display: inline-block;
+            font-weight: 600;
+            font-size: 0.8rem;
+        }
+    </style>
+</head>
+<body>
+
+<header>
+    <div class="header-container">
+        <div class="logo">
+            <h1>Clinique <span>WENDTOIN</span></h1>
+            <p>Depuis janvier 2016</p>
+        </div>
+        <nav>
+            <ul>
+                <li><a data-page="accueil" class="nav-link active">Accueil</a></li>
+                <li><a data-page="services" class="nav-link">Services</a></li>
+                <li><a data-page="equipe" class="nav-link">Équipe</a></li>
+                <li><a data-page="rdv" class="nav-link">Rendez-vous</a></li>
+                <li><a data-page="actu" class="nav-link">Actualités</a></li>
+                <li><a data-page="avis" class="nav-link">Témoignages</a></li>
+                <li><a data-page="contact" class="nav-link">Contact</a></li>
+            </ul>
+        </nav>
+        <div class="mobile-menu-btn">☰</div>
+    </div>
+</header>
+
+<main>
+    <!-- ========== ACCUEIL ========== -->
+    <div id="accueil" class="page-section active-page">
+        <section class="hero">
+            <div class="container">
+                <div class="hero-content">
+                    <h2>Votre santé, notre priorité <span>24h/24</span></h2>
+                    <p class="hero-slogan">Urgences médicales et chirurgicales assurées par des généralistes et spécialistes<br>24h/24 – 7j/7</p>
+                    <div class="hero-buttons">
+                        <button class="btn btn-primary" data-page="rdv">📅 Prendre rendez-vous</button>
+                        <button class="btn btn-outline" onclick="window.location.href='tel:79095532'">🆘 Urgence 24/24 – Appeler</button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <div class="container">
+            <div class="presentation-grid">
+                <div>
+                    <h2 style="color: #0077A4; margin-bottom: 20px;">Bienvenue à la Clinique WENDTOIN</h2>
+                    <p>Ouverte depuis <strong>janvier 2016</strong>, la Clinique WENDTOIN est un établissement privé qui place le patient au cœur de ses priorités.</p>
+                    <p style="margin-top: 15px;">En plus des <strong>soins standards</strong> (consultations générales, spécialités, vaccinations), nous assurons les <strong>urgences médicales et chirurgicales</strong> 24h/24 et 7j/7 grâce à une équipe de médecins généralistes et spécialistes dédiés.</p>
+                    <p style="margin-top: 15px;">Située à <strong>Pissy, Ouagadougou</strong>, notre clinique vous accueille dans un environnement moderne et sécurisé.</p>
+                </div>
+                <div style="background: #e2e8f0; border-radius: 20px; height: 300px; display: flex; align-items: center; justify-content: center; font-size: 5rem;">🏥</div>
+            </div>
+        </div>
+
+        <section style="padding: 0 0 60px;">
+            <div class="container">
+                <h3 class="section-title">Nos soins en un coup d'œil</h3>
+                <div class="cards-grid">
+                    <div class="card"><div class="card-icon">🏥</div><h4>Consultations générales</h4><p>Médecine générale quotidienne, suivi patient, prescriptions.</p></div>
+                    <div class="card"><div class="card-icon">🩺</div><h4>Spécialités médicales</h4><p>Cardiologie, pédiatrie, gynécologie, chirurgie, et plus.</p></div>
+                    <div class="card"><div class="card-icon">🚨</div><h4>Urgences 24h/24</h4><p>Prise en charge immédiate des urgences médicales et chirurgicales.</p></div>
+                </div>
+            </div>
+        </section>
+
+        <div class="stats">
+            <div class="container stats-container">
+                <div><span class="stat-number">9+</span><span> années d'existence</span></div>
+                <div><span class="stat-number">24/24</span><span> Service d'urgence</span></div>
+                <div><span class="stat-number">Généralistes</span><span>& spécialistes</span></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ========== SERVICES ========== -->
+    <div id="services" class="page-section">
+        <div class="container" style="padding: 60px 0;">
+            <h1 class="section-title">Nos services</h1>
+            <div class="cards-grid">
+                <div class="card"><div class="card-icon">🩺</div><h4>Consultations générales</h4><p>Médecine générale quotidienne, suivi des maladies chroniques, certificats médicaux.</p></div>
+                <div class="card"><div class="card-icon">❤️</div><h4>Cardiologie</h4><p>Explorations cardiaques complètes, électrocardiogramme, échographie cardiaque.</p></div>
+                <div class="card"><div class="card-icon">👶</div><h4>Pédiatrie</h4><p>Suivi médical des enfants, vaccinations, consultations préventives.</p></div>
+                <div class="card"><div class="card-icon">💉</div><h4>Vaccinations</h4><p>Calendrier vaccinal complet pour enfants et adultes.</p></div>
+                <div class="card"><div class="card-icon">🚑</div><h4>Urgences 24/24</h4><p>Sans rendez-vous, prise en charge immédiate.</p></div>
+                <div class="card"><div class="card-icon">🔬</div><h4>Analyses & imagerie</h4><p>Laboratoire d'analyses, échographie, radiologie.</p></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ========== ÉQUIPE ========== -->
+    <div id="equipe" class="page-section">
+        <div class="container" style="padding: 60px 0;">
+            <h1 class="section-title">Notre équipe médicale</h1>
+            <div class="cards-grid">
+                <div class="card"><div class="card-icon">👨‍⚕️</div><h4>Dr. Adama Koné</h4><p>Médecin généraliste – 15 ans d'expérience</p><span class="badge">Urgences 24/24</span></div>
+                <div class="card"><div class="card-icon">👩‍⚕️</div><h4>Dr. Fatimata Zongo</h4><p>Cardiologue – Spécialiste en pathologies cardiaques</p><span class="badge">Consultation sur RDV</span></div>
+                <div class="card"><div class="card-icon">👨‍⚕️</div><h4>Dr. Issa Ouédraogo</h4><p>Pédiatre – Prise en charge des enfants</p><span class="badge">Vaccinations</span></div>
+                <div class="card"><div class="card-icon">👩‍⚕️</div><h4>Dr. Mariam Sawadogo</h4><p>Gynécologue-obstétricienne</p><span class="badge">Suivi grossesse</span></div>
+                <div class="card"><div class="card-icon">👨‍⚕️</div><h4>Dr. Paul Zongo</h4><p>Chirurgien général – Urgences chirurgicales</p><span class="badge">Disponible 24/24</span></div>
+                <div class="card"><div class="card-icon">🧑‍⚕️</div><h4>Infirmiers diplômés</h4><p>Équipe soignante dévouée, disponible jour et nuit</p><span class="badge">Soins & accompagnement</span></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ========== RENDEZ-VOUS ========== -->
+    <div id="rdv" class="page-section">
+        <div class="container" style="padding: 60px 0;">
+            <h1 class="section-title">Prendre rendez-vous</h1>
+            <div class="rdv-grid">
+                <div class="info-box">
+                    <h3>Formulaire de rendez-vous</h3>
+                    <form id="rdvForm">
+                        <div class="form-group"><input type="text" placeholder="Nom complet" required id="rdvNom"></div>
+                        <div class="form-group"><input type="tel" placeholder="Téléphone" required id="rdvTel"></div>
+                        <div class="form-group"><input type="email" placeholder="Email" id="rdvEmail"></div>
+                        <div class="form-group"><input type="date" id="rdvDate"></div>
+                        <div class="form-group">
+                            <select id="rdvService">
+                                <option>Consultation générale</option>
+                                <option>Cardiologie</option>
+                                <option>Pédiatrie</option>
+                                <option>Gynécologie</option>
+                                <option>Urgences (sans RDV)</option>
+                            </select>
+                        </div>
+                        <div class="form-group"><textarea rows="3" placeholder="Motif de la consultation" id="rdvMessage"></textarea></div>
+                        <button type="submit" class="btn btn-primary">Envoyer la demande</button>
+                        <p id="formMessage" style="margin-top: 15px;"></p>
+                    </form>
+                </div>
+                <div>
+                    <div class="info-box">
+                        <h3>📅 Horaires d'ouverture</h3>
+                        <p><strong>Consultations :</strong><br>
+                        Lundi – Vendredi : 7h30 – 19h30<br>
+                        Samedi : 7h30 – 12h00</p>
+                    </div>
+                    <div class="info-box">
+                        <h3>🚨 Urgences 24h/24 – 7j/7</h3>
+                        <p>Téléphone : <strong style="color:#1D8B5D; font-size:1.3rem;">79 09 55 32</strong></p>
+                        <p>Sans rendez-vous, prise en charge immédiate.</p>
+                    </div>
+                    <div class="info-box">
+                        <h3>🏛️ Assurances acceptées</h3>
+                        <p>CNSS, mutuelles de santé, Inami Burkina, assurances privées.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ========== ACTUALITÉS ========== -->
+    <div id="actu" class="page-section">
+        <div class="container" style="padding: 60px 0;">
+            <h1 class="section-title">Actualités</h1>
+            <div class="filters">
+                <button class="filter-btn active" data-filter="all">Toutes</button>
+                <button class="filter-btn" data-filter="Information">Information</button>
+                <button class="filter-btn" data-filter="Santé">Santé</button>
+                <button class="filter-btn" data-filter="Événement">Événement</button>
+            </div>
+            <div id="articlesList" class="cards-grid"></div>
+            
+            <div style="margin-top: 60px; background: white; border-radius: 24px; padding: 32px;">
+                <h2 style="color: #0077A4; text-align: center;">🔐 Espace administrateur</h2>
+                <div id="adminPanel" style="text-align: center; margin-top: 30px;">
+                    <button id="showAdminLogin" class="btn btn-primary" style="background:#0077A4;">Se connecter (admin)</button>
+                    <div id="adminLoginForm" style="display:none; margin-top:20px;">
+                        <input type="password" id="adminPassword" placeholder="Mot de passe" style="width: 250px;">
+                        <button id="loginAdmin" class="btn btn-primary">Valider</button>
+                    </div>
+                    <div id="adminActions" style="display:none; margin-top:20px;">
+                        <button id="newArticleBtn" class="btn btn-primary">➕ Nouvel article</button>
+                        <div id="newArticleForm" style="display:none; margin-top:20px; text-align:left; max-width:500px; margin-left:auto; margin-right:auto;">
+                            <input type="text" id="articleTitre" placeholder="Titre" style="width:100%; margin-bottom:10px;">
+                            <select id="articleCategorie" style="width:100%; margin-bottom:10px;">
+                                <option>Information</option>
+                                <option>Santé</option>
+                                <option>Événement</option>
+                            </select>
+                            <textarea id="articleResume" placeholder="Résumé de l'article" rows="3" style="width:100%; margin-bottom:10px;"></textarea>
+                            <button id="saveArticle" class="btn btn-primary">Publier l'article</button>
+                        </div>
+                        <div id="articlesAdminList" style="margin-top: 30px;"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ========== TÉMOIGNAGES ========== -->
+    <div id="avis" class="page-section">
+        <div class="container" style="padding: 60px 0;">
+            <h1 class="section-title">Ce que nos patients disent</h1>
+            <div id="temoignagesList" class="cards-grid"></div>
+            
+            <div style="margin-top: 50px; background: white; border-radius: 24px; padding: 32px;">
+                <h3 style="color: #0077A4; margin-bottom: 20px;">Ajouter votre avis</h3>
+                <form id="newAvisForm">
+                    <div class="form-group"><input type="text" id="avisNom" placeholder="Votre nom" required></div>
+                    <div class="form-group">
+                        <select id="avisNote" style="width: auto;">
+                            <option value="5">★★★★★ (5/5)</option>
+                            <option value="4">★★★★☆ (4/5)</option>
+                            <option value="3">★★★☆☆ (3/5)</option>
+                            <option value="2">★★☆☆☆ (2/5)</option>
+                            <option value="1">★☆☆☆☆ (1/5)</option>
+                        </select>
+                    </div>
+                    <div class="form-group"><textarea id="avisTexte" placeholder="Votre témoignage..." rows="3"></textarea></div>
+                    <button type="submit" class="btn btn-primary">Publier mon avis</button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- ========== CONTACT ========== -->
+    <div id="contact" class="page-section">
+        <div class="container" style="padding: 60px 0;">
+            <h1 class="section-title">Contact & localisation</h1>
+            <div class="rdv-grid">
+                <div>
+                    <div class="info-box">
+                        <h3>📍 Adresse</h3>
+                        <p>Pissy, Ouagadougou<br>Burkina Faso</p>
+                    </div>
+                    <div class="info-box">
+                        <h3>📞 Téléphone</h3>
+                        <p><strong>Urgences 24/24 :</strong> <span style="color:#1D8B5D; font-size:1.2rem;">79 09 55 32</span><br>
+                        <strong>Standard :</strong> 79 09 55 32</p>
+                    </div>
+                    <div class="info-box">
+                        <h3>📧 Email</h3>
+                        <p>contact@cliniquewendtoin.bf</p>
+                    </div>
+                </div>
+                <div>
+                    <div class="info-box">
+                        <h3>🗺️ Plan d'accès</h3>
+                        <div style="background: #e2e8f0; border-radius: 16px; height: 300px; display: flex; align-items: center; justify-content: center; font-size: 3rem;">
+                            📍 Pissy, Ouagadougou
+                        </div>
+                        <p style="margin-top: 15px;"><small>Google Maps intégrable facilement avec une clé API</small></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</main>
+
+<footer>
+    <div class="container">
+        <div class="footer-grid">
+            <div>
+                <h4 style="color: #1D8B5D;">Clinique WENDTOIN</h4>
+                <p>📍 Pissy, Ouagadougou<br>📞 79 09 55 32</p>
+            </div>
+            <div>
+                <h4 style="color: #1D8B5D;">🚨 Urgences 24/24</h4>
+                <p><strong style="font-size: 1.2rem;">79 09 55 32</strong></p>
+            </div>
+            <div>
+                <h4 style="color: #1D8B5D;">Horaires consultations</h4>
+                <p>Lun-Ven : 7h30-19h30<br>Sam : 7h30-12h</p>
+            </div>
+            <div>
+                <h4 style="color: #1D8B5D;">Liens rapides</h4>
+                <p><a data-page="rdv" class="nav-link" style="cursor:pointer; color:#cbd5e1;">Prendre RDV</a><br>
+                <a data-page="services" class="nav-link" style="cursor:pointer; color:#cbd5e1;">Nos services</a></p>
+            </div>
+        </div>
+        <div style="text-align:center; margin-top:40px; padding-top:20px; border-top:1px solid #334155;">
+            &copy; 2026 Clinique WENDTOIN – Tous droits réservés
+        </div>
+    </div>
+</footer>
+
+<script>
+    // ========== DONNÉES ==========
+    let articles = [
+        { id: 1, titre: "Campagne de vaccination gratuite", categorie: "Santé", date: "01/04/2026", resume: "Vaccination contre la fièvre typhoïde à la clinique. Venez nombreux !" },
+        { id: 2, titre: "Nouveau spécialiste en cardiologie", categorie: "Information", date: "25/03/2026", resume: "Le Dr Fatimata Zongo rejoint notre équipe de cardiologie." },
+        { id: 3, titre: "Journée portes ouvertes", categorie: "Événement", date: "10/04/2026", resume: "Visitez la clinique et rencontrez nos médecins le 15 avril." }
+    ];
+    
+    let temoignages = [
+        { nom: "Marie K.", note: 5, texte: "Accueil parfait, urgences rapides. Je recommande vivement.", date: "15/03/2026" },
+        { nom: "Issa O.", note: 5, texte: "Clinique propre et médecins à l'écoute. Service d'urgence très réactif.", date: "10/03/2026" },
+        { nom: "Amina T.", note: 4, texte: "Très bonne prise en charge, personnel sympathique.", date: "05/03/2026" }
+    ];
+
+    // ========== NAVIGATION ==========
+    function showPage(pageId) {
+        document.querySelectorAll('.page-section').forEach(section => {
+            section.classList.remove('active-page');
+        });
+        document.getElementById(pageId).classList.add('active-page');
+        
+        document.querySelectorAll('.nav-link').forEach(link => {
+            link.classList.remove('active');
+            if(link.getAttribute('data-page') === pageId) {
+                link.classList.add('active');
+            }
+        });
+        
+        if(pageId === 'actu') { renderArticles(); renderAdminArticles(); }
+        if(pageId === 'avis') renderTemoignages();
+        window.scrollTo({top: 0, behavior: 'smooth'});
+    }
+    
+    document.querySelectorAll('.nav-link').forEach(link => {
+        link.addEventListener('click', (e) => {
+            e.preventDefault();
+            const page = link.getAttribute('data-page');
+            if(page) showPage(page);
+        });
+    });
+    
+    document.querySelectorAll('[data-page="rdv"]').forEach(btn => {
+        btn.addEventListener('click', () => showPage('rdv'));
+    });
+    
+    // ========== RENDEZ-VOUS ==========
+    document.getElementById('rdvForm')?.addEventListener('submit', (e) => {
+        e.preventDefault();
+        document.getElementById('formMessage').innerHTML = '✅ Demande envoyée. Nous vous recontacterons rapidement.';
+        e.target.reset();
+    });
+    
+    // ========== ARTICLES ==========
+    function renderArticles(filter = 'all') {
+        const container = document.getElementById('articlesList');
+        if(!container) return;
+        let filtered = filter === 'all' ? articles : articles.filter(a => a.categorie === filter);
+        container.innerHTML = filtered.map(a => `
+            <div class="card">
+                <div class="card-icon">📰</div>
+                <h4>${a.titre}</h4>
+                <span class="badge">${a.categorie}</span>
+                <p style="margin:15px 0;">${a.resume}</p>
+                <small>📅 ${a.date}</small>
+            </div>
+        `).join('');
+    }
+    
+    document.querySelectorAll('.filter-btn').forEach(btn => {
+        btn.addEventListener('click', () => {
+            document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+            btn.classList.add('active');
+            renderArticles(btn.getAttribute('data-filter'));
+        });
+    });
+    
+    // ========== ADMIN ==========
+    let adminLogged = false;
+    document.getElementById('showAdminLogin')?.addEventListener('click', () => {
+        document.getElementById('adminLoginForm').style.display = 'block';
+    });
+    document.getElementById('loginAdmin')?.addEventListener('click', () => {
+        const pwd = document.getElementById('adminPassword').value;
+        if(pwd === 'Wendtoin2026') {
+            adminLogged = true;
+            document.getElementById('adminLoginForm').style.display = 'none';
+            document.getElementById('adminActions').style.display = 'block';
+            renderAdminArticles();
+        } else alert('❌ Mot de passe incorrect');
+    });
+    
+    function renderAdminArticles() {
+        const container = document.getElementById('articlesAdminList');
+        if(!container) return;
+        container.innerHTML = articles.map(a => `
+            <div style="background:#F8F9FA; border:1px solid #e2e8f0; margin:10px 0; padding:15px; border-radius:12px; display:flex; justify-content:space-between; align-items:center;">
+                <div><strong>${a.titre}</strong><br><small>${a.categorie} - ${a.date}</small></div>
+                <button onclick="deleteArticle(${a.id})" style="background:#dc2626; color:white; border:none; padding:8px 16px; border-radius:8px; cursor:pointer;">❌ Supprimer</button>
+            </div>
+        `).join('');
+    }
+    
+    window.deleteArticle = (id) => {
+        articles = articles.filter(a => a.id !== id);
+        renderAdminArticles();
+        renderArticles();
+    };
+    
+    document.getElementById('newArticleBtn')?.addEventListener('click', () => {
+        document.getElementById('newArticleForm').style.display = 'block';
+    });
+    document.getElementById('saveArticle')?.addEventListener('click', () => {
+        const titre = document.getElementById('articleTitre').value;
+        const categorie = document.getElementById('articleCategorie').value;
+        const resume = document.getElementById('articleResume').value;
+        if(titre && resume) {
+            const newId = Date.now();
+            articles.push({ id: newId, titre, categorie, resume, date: new Date().toLocaleDateString() });
+            renderAdminArticles();
+            renderArticles();
+            document.getElementById('newArticleForm').style.display = 'none';
+            document.getElementById('articleTitre').value = '';
+            document.getElementById('articleResume').value = '';
+            alert('✅ Article publié avec succès !');
+        } else {
+            alert('Veuillez remplir le titre et le résumé');
+        }
+    });
+    
+    // ========== TÉMOIGNAGES ==========
+    function renderTemoignages() {
+        const container = document.getElementById('temoignagesList');
+        if(!container) return;
+        container.innerHTML = temoignages.map(t => `
+            <div class="card">
+                <div class="stars">${'★'.repeat(t.note)}${'☆'.repeat(5-t.note)}</div>
+                <p>"${t.texte}"</p>
+                <small>- ${t.nom}, ${t.date || 'récent'}</small>
+            </div>
+        `).join('');
+    }
+    
+    document.getElementById('newAvisForm')?.addEventListener('submit', (e) => {
+        e.preventDefault();
+        const nom = document.getElementById('avisNom').value;
+        const note = parseInt(document.getElementById('avisNote').value);
+        const texte = document.getElementById('avisTexte').value;
+        if(nom && texte) {
+            temoignages.unshift({ nom, note, texte, date: new Date().toLocaleDateString() });
+            renderTemoignages();
+            e.target.reset();
+            alert('✅ Merci pour votre témoignage !');
+        } else {
+            alert('Veuillez remplir tous les champs');
+        }
+    });
+    
+    // Menu mobile
+    document.querySelector('.mobile-menu-btn')?.addEventListener('click', () => {
+        const nav = document.querySelector('nav ul');
+        if(nav.style.display === 'flex') nav.style.display = 'none';
+        else nav.style.display = 'flex';
+    });
+    
+    // Initialisation
+    renderArticles();
+    renderTemoignages();
+</script>
+</body>
+</html>
