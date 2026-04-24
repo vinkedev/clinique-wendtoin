@@ -92,13 +92,14 @@
             }
         }
 
-        @keyframes shine {
-            0% {
-                background-position: -100% 0;
-            }
-            100% {
-                background-position: 200% 0;
-            }
+        @keyframes waveMove {
+            0% { background-position: 0 100%; }
+            100% { background-position: 1440px 100%; }
+        }
+
+        @keyframes rotateBg {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
         }
 
         .animate-on-scroll {
@@ -243,11 +244,6 @@
             animation: waveMove 20s linear infinite;
         }
 
-        @keyframes waveMove {
-            0% { background-position: 0 100%; }
-            100% { background-position: 1440px 100%; }
-        }
-
         .hero-content {
             position: relative;
             z-index: 2;
@@ -372,7 +368,7 @@
 
         .cards-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
             gap: 32px;
             margin-bottom: 20px;
         }
@@ -437,11 +433,6 @@
             height: 200%;
             background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, transparent 70%);
             animation: rotateBg 20s linear infinite;
-        }
-
-        @keyframes rotateBg {
-            from { transform: rotate(0deg); }
-            to { transform: rotate(360deg); }
         }
 
         .stats-container {
@@ -530,6 +521,7 @@
             color: #f39c12;
             font-size: 1.2rem;
             margin-bottom: 12px;
+            letter-spacing: 2px;
         }
 
         /* ========== FOOTER ========== */
@@ -601,6 +593,31 @@
             align-items: center;
         }
 
+        /* ========== BANDEAU ALERTE ========== */
+        .alert-banner {
+            background: #fef3c7;
+            border-left: 4px solid #f59e0b;
+            padding: 12px 20px;
+            border-radius: 12px;
+            margin-bottom: 30px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            flex-wrap: wrap;
+            animation: pulse 2s infinite;
+        }
+
+        .alert-banner i {
+            font-size: 1.5rem;
+            color: #f59e0b;
+        }
+
+        .alert-banner p {
+            margin: 0;
+            flex: 1;
+            font-weight: 500;
+        }
+
         /* ========== RESPONSIVE ========== */
         @media (max-width: 768px) {
             nav ul {
@@ -653,6 +670,9 @@
             .logo-text h1 {
                 font-size: 1.1rem;
             }
+            .cards-grid {
+                grid-template-columns: 1fr;
+            }
         }
     </style>
 </head>
@@ -703,7 +723,7 @@
             <div class="presentation-grid">
                 <div class="animate-on-scroll">
                     <h2 style="color: #0077A4; margin-bottom: 20px;">Bienvenue à la Clinique WENDTOIN</h2>
-                    <p>Ouverte depuis <strong>janvier 2016</strong>, la Clinique WENDTOIN est un établissement privé qui place le patient au cœur de ses priorités.</p>
+                    <p>Ouverte depuis <strong>janvier 2016</strong>, la Clinique WENDTOIN est une clinique privée qui place le patient au cœur de ses priorités.</p>
                     <p style="margin-top: 15px;">En plus des <strong>soins standards</strong> (consultations générales, spécialités, vaccinations), nous assurons les <strong>urgences médicales et chirurgicales</strong> 24h/24 et 7j/7 grâce à une équipe de médecins généralistes et spécialistes dédiés.</p>
                     <p style="margin-top: 15px;">Située à <strong>Pissy, Ouagadougou</strong>, notre clinique vous accueille dans un environnement moderne et sécurisé.</p>
                 </div>
@@ -719,7 +739,7 @@
         <div class="container stats-container">
             <div class="animate-on-scroll"><span class="stat-number">9+</span><br>années d'existence</div>
             <div class="animate-on-scroll"><span class="stat-number">24/24</span><br>Service d'urgence</div>
-            <div class="animate-on-scroll"><span class="stat-number">Généralistes</span><br>& spécialistes</div>
+            <div class="animate-on-scroll"><span class="stat-number">15+</span><br>Médecins spécialistes</div>
         </div>
     </div>
 
@@ -804,11 +824,19 @@
     <section id="actualites" class="bg-light">
         <div class="container">
             <h2 class="section-title animate-on-scroll">Actualités</h2>
+            
+            <!-- Bandeau d'alerte info -->
+            <div class="alert-banner animate-on-scroll">
+                <i class="fas fa-info-circle"></i>
+                <p>📢 Nouveau : Service de télémédecine disponible ! Consultez un médecin à distance du lundi au vendredi.</p>
+            </div>
+            
             <div class="filters">
                 <button class="filter-btn active" data-filter="all">Toutes</button>
                 <button class="filter-btn" data-filter="Information">Information</button>
                 <button class="filter-btn" data-filter="Santé">Santé</button>
                 <button class="filter-btn" data-filter="Événement">Événement</button>
+                <button class="filter-btn" data-filter="Promotion">Promotion</button>
             </div>
             <div id="articlesList" class="cards-grid"></div>
             
@@ -829,6 +857,7 @@
                                 <option>Information</option>
                                 <option>Santé</option>
                                 <option>Événement</option>
+                                <option>Promotion</option>
                             </select>
                             <textarea id="articleResume" placeholder="Résumé de l'article" rows="3" style="width:100%; margin-bottom:10px;"></textarea>
                             <button id="saveArticle" class="btn btn-primary">Publier l'article</button>
@@ -845,6 +874,13 @@
         <div class="container">
             <h2 class="section-title animate-on-scroll">Ce que nos patients disent</h2>
             <div id="temoignagesList" class="cards-grid"></div>
+            
+            <!-- Statistiques des avis -->
+            <div style="text-align: center; margin: 30px 0; display: flex; justify-content: center; gap: 30px; flex-wrap: wrap;">
+                <div><i class="fas fa-star" style="color: #f39c12;"></i> <strong>4.8/5</strong> (42 avis)</div>
+                <div><i class="fas fa-smile" style="color: #1D8B5D;"></i> <strong>98%</strong> de patients satisfaits</div>
+                <div><i class="fas fa-calendar-check" style="color: #0077A4;"></i> <strong>500+</strong> consultations par mois</div>
+            </div>
             
             <div style="margin-top: 50px; background: #F8F9FA; border-radius: 24px; padding: 32px; transition: all 0.3s ease;">
                 <h3 style="color: #0077A4; margin-bottom: 20px;">Ajouter votre avis</h3>
@@ -928,17 +964,29 @@
 </footer>
 
 <script>
-    // ========== DONNÉES ==========
+    // ========== DONNÉES AVEC ACTUALITÉS FICTIVES SUPPLEMENTAIRES ==========
     let articles = [
-        { id: 1, titre: "Campagne de vaccination gratuite", categorie: "Santé", date: "01/04/2026", resume: "Vaccination contre la fièvre typhoïde à la clinique. Venez nombreux !" },
-        { id: 2, titre: "Nouveau spécialiste en cardiologie", categorie: "Information", date: "25/03/2026", resume: "Le Dr Fatimata Zongo rejoint notre équipe de cardiologie." },
-        { id: 3, titre: "Journée portes ouvertes", categorie: "Événement", date: "10/04/2026", resume: "Visitez la clinique et rencontrez nos médecins le 15 avril." }
+        { id: 1, titre: "Campagne de vaccination gratuite", categorie: "Santé", date: "01/04/2026", resume: "Vaccination contre la fièvre typhoïde à la clinique. Venez nombreux du 10 au 20 avril !" },
+        { id: 2, titre: "Nouveau spécialiste en cardiologie", categorie: "Information", date: "25/03/2026", resume: "Le Dr Fatimata Zongo rejoint notre équipe de cardiologie. Prenez dès maintenant vos rendez-vous." },
+        { id: 3, titre: "Journée portes ouvertes", categorie: "Événement", date: "10/04/2026", resume: "Visitez la clinique et rencontrez nos médecins le 15 avril de 9h à 16h." },
+        { id: 4, titre: "Dépistage gratuit du diabète", categorie: "Santé", date: "05/04/2026", resume: "Opération de dépistage gratuit du diabète les samedis matin du mois d'avril. Sans rendez-vous !" },
+        { id: 5, titre: "Nouveau laboratoire d'analyses", categorie: "Information", date: "28/03/2026", resume: "Notre nouveau laboratoire est opérationnel avec des résultats en 24h pour la plupart des analyses." },
+        { id: 6, titre: "Réduction sur les bilans de santé", categorie: "Promotion", date: "01/04/2026", resume: "-20% sur tous les bilans de santé complets pendant le mois d'avril. Offre limitée !" },
+        { id: 7, titre: "Conférence sur les maladies cardiovasculaires", categorie: "Événement", date: "15/04/2026", resume: "Le Dr Zongo animera une conférence gratuite le 22 avril à 17h à la clinique." },
+        { id: 8, titre: "Télémédecine : consultez à distance", categorie: "Information", date: "20/03/2026", resume: "Désormais, consultez un médecin depuis chez vous via notre nouveau service de télémédecine." }
     ];
     
+    // ========== TÉMOIGNAGES AVEC AVIS FICTIFS SUPPLEMENTAIRES ==========
     let temoignages = [
-        { nom: "Marie K.", note: 5, texte: "Accueil parfait, urgences rapides. Je recommande vivement.", date: "15/03/2026" },
-        { nom: "Issa O.", note: 5, texte: "Clinique propre et médecins à l'écoute. Service d'urgence très réactif.", date: "10/03/2026" },
-        { nom: "Amina T.", note: 4, texte: "Très bonne prise en charge, personnel sympathique.", date: "05/03/2026" }
+        { nom: "Marie K.", note: 5, texte: "Accueil parfait, urgences rapides. Je recommande vivement cette clinique.", date: "15/03/2026" },
+        { nom: "Issa O.", note: 5, texte: "Clinique propre et médecins à l'écoute. Service d'urgence très réactif, je suis soulagé.", date: "10/03/2026" },
+        { nom: "Amina T.", note: 4, texte: "Très bonne prise en charge, personnel sympathique et compétent. Je reviendrai.", date: "05/03/2026" },
+        { nom: "Mamadou S.", note: 5, texte: "Le Dr Koné est très professionnel et à l'écoute. Service impeccable du début à la fin.", date: "20/03/2026" },
+        { nom: "Fatoumata D.", note: 5, texte: "J'ai accouché à la clinique, tout s'est merveilleusement bien passé. Équipe formidable !", date: "18/03/2026" },
+        { nom: "Boubacar Z.", note: 4, texte: "Très bon accueil aux urgences à 3h du matin. Prise en charge rapide et efficace.", date: "12/03/2026" },
+        { nom: "Claire R.", note: 5, texte: "Service pédiatrie au top ! Mon fils a été très bien soigné. Merci à toute l'équipe.", date: "25/03/2026" },
+        { nom: "Jean-Paul L.", note: 5, texte: "Consultation cardiologie parfaite, équipement moderne et médecin très compétent.", date: "22/03/2026" },
+        { nom: "Ramatou B.", note: 4, texte: "Très bonne clinique, juste un peu d'attente parfois mais la qualité compense.", date: "28/03/2026" }
     ];
 
     // ========== ANIMATION SCROLL ==========
@@ -982,7 +1030,7 @@
         let filtered = filter === 'all' ? articles : articles.filter(a => a.categorie === filter);
         container.innerHTML = filtered.map(a => `
             <div class="card animate-on-scroll">
-                <div class="card-icon">📰</div>
+                <div class="card-icon">${a.categorie === 'Santé' ? '🩺' : (a.categorie === 'Événement' ? '🎉' : (a.categorie === 'Promotion' ? '🏷️' : '📰'))}</div>
                 <h4>${a.titre}</h4>
                 <span class="badge">${a.categorie}</span>
                 <p style="margin:15px 0;">${a.resume}</p>
@@ -1042,7 +1090,7 @@
         const resume = document.getElementById('articleResume').value;
         if(titre && resume) {
             const newId = Date.now();
-            articles.push({ id: newId, titre, categorie, resume, date: new Date().toLocaleDateString() });
+            articles.unshift({ id: newId, titre, categorie, resume, date: new Date().toLocaleDateString() });
             renderAdminArticles();
             renderArticles();
             document.getElementById('newArticleForm').style.display = 'none';
@@ -1061,8 +1109,11 @@
         container.innerHTML = temoignages.map(t => `
             <div class="card animate-on-scroll">
                 <div class="stars">${'★'.repeat(t.note)}${'☆'.repeat(5-t.note)}</div>
-                <p>"${t.texte}"</p>
-                <small>- ${t.nom}, ${t.date || 'récent'}</small>
+                <p style="font-style: italic;">"${t.texte}"</p>
+                <div style="margin-top: 15px; display: flex; justify-content: center; gap: 10px; flex-wrap: wrap;">
+                    <small style="color: #0077A4;">- ${t.nom}</small>
+                    <small style="color: #94a3b8;">📅 ${t.date || 'récent'}</small>
+                </div>
             </div>
         `).join('');
         checkVisibility();
