@@ -23,6 +23,7 @@
             color: #1e293b;
             line-height: 1.6;
             background: #F8F9FA;
+            overflow-x: hidden;
         }
 
         .container {
@@ -31,14 +32,53 @@
             padding: 0 24px;
         }
 
-        /* ========== HEADER ========== */
+        /* ========== SCROLL REVEAL (animations au défilement) ========== */
+        .reveal {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.8s ease-out;
+        }
+
+        .reveal.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .reveal-left {
+            opacity: 0;
+            transform: translateX(-30px);
+            transition: all 0.8s ease-out;
+        }
+
+        .reveal-left.active {
+            opacity: 1;
+            transform: translateX(0);
+        }
+
+        .reveal-right {
+            opacity: 0;
+            transform: translateX(30px);
+            transition: all 0.8s ease-out;
+        }
+
+        .reveal-right.active {
+            opacity: 1;
+            transform: translateX(0);
+        }
+
+        /* ========== HEADER DYNAMIQUE ========== */
         header {
             background: white;
             box-shadow: 0 2px 20px rgba(0,0,0,0.05);
             position: sticky;
             top: 0;
             z-index: 1000;
-            background: white;
+            transition: all 0.3s ease;
+        }
+
+        header.scrolled {
+            padding: 5px 0;
+            box-shadow: 0 5px 25px rgba(0,0,0,0.1);
         }
 
         .header-container {
@@ -48,22 +88,42 @@
             padding: 12px 24px;
             max-width: 1280px;
             margin: 0 auto;
+            transition: padding 0.3s ease;
+        }
+
+        header.scrolled .header-container {
+            padding: 6px 24px;
         }
 
         .logo {
             display: flex;
             align-items: center;
             gap: 12px;
+            transition: transform 0.3s ease;
+        }
+
+        .logo:hover {
+            transform: scale(1.02);
         }
 
         .logo img {
             height: 55px;
             width: auto;
+            transition: height 0.3s ease;
+        }
+
+        header.scrolled .logo img {
+            height: 45px;
         }
 
         .logo-text h1 {
             font-size: 1.4rem;
             font-weight: 700;
+            transition: font-size 0.3s ease;
+        }
+
+        header.scrolled .logo-text h1 {
+            font-size: 1.2rem;
         }
 
         .logo-text span {
@@ -86,7 +146,23 @@
             text-decoration: none;
             color: #1e293b;
             font-weight: 500;
-            transition: color 0.3s;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        nav a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: #0077A4;
+            transition: width 0.3s ease;
+        }
+
+        nav a:hover::after {
+            width: 100%;
         }
 
         nav a:hover {
@@ -97,22 +173,74 @@
             display: none;
             font-size: 28px;
             cursor: pointer;
+            transition: transform 0.3s ease;
         }
 
-        /* ========== HERO ========== */
+        .mobile-menu-btn:hover {
+            transform: scale(1.1);
+        }
+
+        /* ========== SLIDER HERO ========== */
         .hero {
             position: relative;
-            background: linear-gradient(135deg, #0077A4 0%, #005a7c 100%);
-            min-height: 500px;
+            min-height: 550px;
             display: flex;
             align-items: center;
             text-align: center;
             color: white;
+            overflow: hidden;
+        }
+
+        .hero-slider {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 0;
+        }
+
+        .slide {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-size: cover;
+            background-position: center;
+            opacity: 0;
+            transition: opacity 1s ease-in-out;
+        }
+
+        .slide.active {
+            opacity: 1;
+        }
+
+        .slide::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, rgba(0,119,164,0.85) 0%, rgba(0,90,124,0.85) 100%);
         }
 
         .hero-content {
             position: relative;
             z-index: 2;
+            animation: fadeInUp 1s ease-out;
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
         }
 
         .hero-content h2 {
@@ -123,7 +251,7 @@
 
         .hero-content h2 span {
             color: #1D8B5D;
-            background: rgba(255,255,255,0.1);
+            background: rgba(255,255,255,0.15);
             padding: 0 12px;
             border-radius: 40px;
             display: inline-block;
@@ -135,6 +263,7 @@
             opacity: 0.95;
         }
 
+        /* ========== BOUTONS ========== */
         .btn {
             display: inline-block;
             padding: 14px 36px;
@@ -142,7 +271,7 @@
             text-decoration: none;
             font-weight: 600;
             margin: 0 10px;
-            transition: all 0.3s;
+            transition: all 0.3s ease;
             cursor: pointer;
             border: none;
             font-size: 1rem;
@@ -151,11 +280,13 @@
         .btn-primary {
             background: #1D8B5D;
             color: white;
+            box-shadow: 0 4px 15px rgba(29,139,93,0.3);
         }
 
         .btn-primary:hover {
             background: #156d48;
-            transform: translateY(-2px);
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(29,139,93,0.4);
         }
 
         .btn-outline {
@@ -167,6 +298,7 @@
         .btn-outline:hover {
             background: white;
             color: #0077A4;
+            transform: translateY(-3px);
         }
 
         /* ========== SECTIONS ========== */
@@ -180,6 +312,17 @@
             margin-bottom: 48px;
             color: #0077A4;
             font-weight: 700;
+            position: relative;
+        }
+
+        .section-title::after {
+            content: '';
+            display: block;
+            width: 60px;
+            height: 3px;
+            background: #1D8B5D;
+            margin: 15px auto 0;
+            border-radius: 3px;
         }
 
         .bg-white {
@@ -190,6 +333,7 @@
             background: #F8F9FA;
         }
 
+        /* ========== CARTES ========== */
         .cards-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
@@ -202,19 +346,24 @@
             padding: 32px;
             border-radius: 20px;
             box-shadow: 0 10px 30px rgba(0,0,0,0.05);
-            transition: all 0.3s;
+            transition: all 0.4s cubic-bezier(0.2, 0.9, 0.4, 1.1);
             text-align: center;
             border: 1px solid #e2e8f0;
         }
 
         .card:hover {
-            transform: translateY(-8px);
-            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+            transform: translateY(-10px) scale(1.02);
+            box-shadow: 0 25px 45px rgba(0,0,0,0.12);
         }
 
         .card-icon {
             font-size: 3rem;
             margin-bottom: 16px;
+            transition: transform 0.3s ease;
+        }
+
+        .card:hover .card-icon {
+            transform: scale(1.1);
         }
 
         /* ========== STATS ========== */
@@ -232,10 +381,19 @@
             gap: 30px;
         }
 
+        .stat-item {
+            transition: transform 0.3s ease;
+        }
+
+        .stat-item:hover {
+            transform: translateY(-5px);
+        }
+
         .stat-number {
             display: block;
             font-size: 2.5rem;
             font-weight: 800;
+            animation: countUp 0.5s ease-out;
         }
 
         /* ========== FORMULAIRES ========== */
@@ -250,12 +408,14 @@
             border-radius: 12px;
             font-family: inherit;
             font-size: 1rem;
+            transition: all 0.3s ease;
         }
 
         input:focus, select:focus, textarea:focus {
             outline: none;
             border-color: #1D8B5D;
             box-shadow: 0 0 0 3px rgba(29,139,93,0.1);
+            transform: translateY(-2px);
         }
 
         .rdv-grid {
@@ -280,7 +440,7 @@
             border-radius: 30px;
             cursor: pointer;
             font-weight: 500;
-            transition: all 0.3s;
+            transition: all 0.3s ease;
             border: 1px solid #e2e8f0;
         }
 
@@ -288,6 +448,7 @@
             background: #0077A4;
             color: white;
             border-color: #0077A4;
+            transform: translateY(-2px);
         }
 
         /* ========== ÉTOILES ========== */
@@ -313,6 +474,7 @@
         .footer-grid a {
             color: #cbd5e1;
             text-decoration: none;
+            transition: color 0.3s ease;
         }
 
         .footer-grid a:hover {
@@ -327,6 +489,12 @@
             font-size: 0.8rem;
             display: inline-block;
             margin: 10px 0;
+            transition: all 0.3s ease;
+        }
+
+        .card:hover .badge {
+            background: #0077A4;
+            color: white;
         }
 
         /* ========== INFO BOX ========== */
@@ -336,6 +504,12 @@
             border-radius: 16px;
             margin-bottom: 24px;
             box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+            transition: all 0.3s ease;
+        }
+
+        .info-box:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 30px rgba(0,0,0,0.1);
         }
 
         .info-box h3 {
@@ -348,6 +522,20 @@
             grid-template-columns: 1fr 1fr;
             gap: 48px;
             align-items: center;
+        }
+
+        .presentation-image {
+            overflow: hidden;
+            border-radius: 20px;
+        }
+
+        .presentation-image img {
+            width: 100%;
+            transition: transform 0.5s ease;
+        }
+
+        .presentation-image:hover img {
+            transform: scale(1.05);
         }
 
         /* ========== RESPONSIVE ========== */
@@ -391,6 +579,14 @@
                 font-size: 1.1rem;
             }
         }
+
+        /* ========== ADMIN PANEL ========== */
+        .admin-section {
+            margin-top: 60px;
+            background: white;
+            border-radius: 24px;
+            padding: 32px;
+        }
     </style>
 </head>
 <body>
@@ -420,8 +616,13 @@
 </header>
 
 <main>
-    <!-- ========== SECTION ACCUEIL / HERO ========== -->
+    <!-- ========== SECTION ACCUEIL / SLIDER HERO ========== -->
     <section id="accueil" class="hero">
+        <div class="hero-slider" id="heroSlider">
+            <div class="slide active" style="background-image: url('https://placehold.co/1920x800/0077A4/white?text=Clinique+WENDTOIN+-+Entr%C3%A9e')"></div>
+            <div class="slide" style="background-image: url('https://placehold.co/1920x800/1D8B5D/white?text=Urgences+24h%2F24')"></div>
+            <div class="slide" style="background-image: url('https://placehold.co/1920x800/005a7c/white?text=%C3%89quipe+m%C3%A9dicale')"></div>
+        </div>
         <div class="container">
             <div class="hero-content">
                 <h2>Votre santé, notre priorité <span>24h/24</span></h2>
@@ -438,13 +639,15 @@
     <section class="bg-light">
         <div class="container">
             <div class="presentation-grid">
-                <div>
+                <div class="reveal-left">
                     <h2 style="color: #0077A4; margin-bottom: 20px;">Bienvenue à la Clinique WENDTOIN</h2>
                     <p>Ouverte depuis <strong>janvier 2016</strong>, la Clinique WENDTOIN est un établissement privé qui place le patient au cœur de ses priorités.</p>
                     <p style="margin-top: 15px;">En plus des <strong>soins standards</strong> (consultations générales, spécialités, vaccinations), nous assurons les <strong>urgences médicales et chirurgicales</strong> 24h/24 et 7j/7 grâce à une équipe de médecins généralistes et spécialistes dédiés.</p>
                     <p style="margin-top: 15px;">Située à <strong>Pissy, Ouagadougou</strong>, notre clinique vous accueille dans un environnement moderne et sécurisé.</p>
                 </div>
-                <div style="background: #e2e8f0; border-radius: 20px; height: 280px; display: flex; align-items: center; justify-content: center; font-size: 5rem;">🏥</div>
+                <div class="presentation-image reveal-right">
+                    <img src="https://placehold.co/600x400/0077A4/white?text=Clinique+WENDTOIN" alt="Clinique WENDTOIN">
+                </div>
             </div>
         </div>
     </section>
@@ -452,23 +655,23 @@
     <!-- ========== STATS ========== -->
     <div class="stats">
         <div class="container stats-container">
-            <div><span class="stat-number">9+</span><br>années d'existence</div>
-            <div><span class="stat-number">24/24</span><br>Service d'urgence</div>
-            <div><span class="stat-number">Généralistes</span><br>& spécialistes</div>
+            <div class="stat-item reveal"><span class="stat-number">9+</span><br>années d'existence</div>
+            <div class="stat-item reveal"><span class="stat-number">24/24</span><br>Service d'urgence</div>
+            <div class="stat-item reveal"><span class="stat-number">Généralistes</span><br>& spécialistes</div>
         </div>
     </div>
 
     <!-- ========== SECTION SERVICES ========== -->
     <section id="services" class="bg-white">
         <div class="container">
-            <h2 class="section-title">Nos services</h2>
+            <h2 class="section-title reveal">Nos services</h2>
             <div class="cards-grid">
-                <div class="card"><div class="card-icon">🩺</div><h4>Consultations générales</h4><p>Médecine générale quotidienne, suivi des maladies chroniques, certificats médicaux.</p></div>
-                <div class="card"><div class="card-icon">❤️</div><h4>Cardiologie</h4><p>Explorations cardiaques complètes, électrocardiogramme, échographie cardiaque.</p></div>
-                <div class="card"><div class="card-icon">👶</div><h4>Pédiatrie</h4><p>Suivi médical des enfants, vaccinations, consultations préventives.</p></div>
-                <div class="card"><div class="card-icon">💉</div><h4>Vaccinations</h4><p>Calendrier vaccinal complet pour enfants et adultes.</p></div>
-                <div class="card"><div class="card-icon">🚑</div><h4>Urgences 24/24</h4><p>Sans rendez-vous, prise en charge immédiate.</p></div>
-                <div class="card"><div class="card-icon">🔬</div><h4>Analyses & imagerie</h4><p>Laboratoire d'analyses, échographie, radiologie.</p></div>
+                <div class="card reveal"><div class="card-icon">🩺</div><h4>Consultations générales</h4><p>Médecine générale quotidienne, suivi des maladies chroniques, certificats médicaux.</p></div>
+                <div class="card reveal"><div class="card-icon">❤️</div><h4>Cardiologie</h4><p>Explorations cardiaques complètes, électrocardiogramme, échographie cardiaque.</p></div>
+                <div class="card reveal"><div class="card-icon">👶</div><h4>Pédiatrie</h4><p>Suivi médical des enfants, vaccinations, consultations préventives.</p></div>
+                <div class="card reveal"><div class="card-icon">💉</div><h4>Vaccinations</h4><p>Calendrier vaccinal complet pour enfants et adultes.</p></div>
+                <div class="card reveal"><div class="card-icon">🚑</div><h4>Urgences 24/24</h4><p>Sans rendez-vous, prise en charge immédiate.</p></div>
+                <div class="card reveal"><div class="card-icon">🔬</div><h4>Analyses & imagerie</h4><p>Laboratoire d'analyses, échographie, radiologie.</p></div>
             </div>
         </div>
     </section>
@@ -476,14 +679,14 @@
     <!-- ========== SECTION ÉQUIPE ========== -->
     <section id="equipe" class="bg-light">
         <div class="container">
-            <h2 class="section-title">Notre équipe médicale</h2>
+            <h2 class="section-title reveal">Notre équipe médicale</h2>
             <div class="cards-grid">
-                <div class="card"><div class="card-icon">👨‍⚕️</div><h4>Dr. Adama Koné</h4><p>Médecin généraliste – 15 ans d'expérience</p><span class="badge">Urgences 24/24</span></div>
-                <div class="card"><div class="card-icon">👩‍⚕️</div><h4>Dr. Fatimata Zongo</h4><p>Cardiologue – Spécialiste en pathologies cardiaques</p><span class="badge">Consultation sur RDV</span></div>
-                <div class="card"><div class="card-icon">👨‍⚕️</div><h4>Dr. Issa Ouédraogo</h4><p>Pédiatre – Prise en charge des enfants</p><span class="badge">Vaccinations</span></div>
-                <div class="card"><div class="card-icon">👩‍⚕️</div><h4>Dr. Mariam Sawadogo</h4><p>Gynécologue-obstétricienne</p><span class="badge">Suivi grossesse</span></div>
-                <div class="card"><div class="card-icon">👨‍⚕️</div><h4>Dr. Paul Zongo</h4><p>Chirurgien général – Urgences chirurgicales</p><span class="badge">Disponible 24/24</span></div>
-                <div class="card"><div class="card-icon">🧑‍⚕️</div><h4>Infirmiers diplômés</h4><p>Équipe soignante dévouée, disponible jour et nuit</p><span class="badge">Soins & accompagnement</span></div>
+                <div class="card reveal"><div class="card-icon">👨‍⚕️</div><h4>Dr. Adama Koné</h4><p>Médecin généraliste – 15 ans d'expérience</p><span class="badge">Urgences 24/24</span></div>
+                <div class="card reveal"><div class="card-icon">👩‍⚕️</div><h4>Dr. Fatimata Zongo</h4><p>Cardiologue – Spécialiste en pathologies cardiaques</p><span class="badge">Consultation sur RDV</span></div>
+                <div class="card reveal"><div class="card-icon">👨‍⚕️</div><h4>Dr. Issa Ouédraogo</h4><p>Pédiatre – Prise en charge des enfants</p><span class="badge">Vaccinations</span></div>
+                <div class="card reveal"><div class="card-icon">👩‍⚕️</div><h4>Dr. Mariam Sawadogo</h4><p>Gynécologue-obstétricienne</p><span class="badge">Suivi grossesse</span></div>
+                <div class="card reveal"><div class="card-icon">👨‍⚕️</div><h4>Dr. Paul Zongo</h4><p>Chirurgien général – Urgences chirurgicales</p><span class="badge">Disponible 24/24</span></div>
+                <div class="card reveal"><div class="card-icon">🧑‍⚕️</div><h4>Infirmiers diplômés</h4><p>Équipe soignante dévouée, disponible jour et nuit</p><span class="badge">Soins & accompagnement</span></div>
             </div>
         </div>
     </section>
@@ -491,9 +694,9 @@
     <!-- ========== SECTION RENDEZ-VOUS ========== -->
     <section id="rdv" class="bg-white">
         <div class="container">
-            <h2 class="section-title">Prendre rendez-vous</h2>
+            <h2 class="section-title reveal">Prendre rendez-vous</h2>
             <div class="rdv-grid">
-                <div class="info-box">
+                <div class="info-box reveal-left">
                     <h3>Formulaire de rendez-vous</h3>
                     <form id="rdvForm">
                         <div class="form-group"><input type="text" placeholder="Nom complet" required id="rdvNom"></div>
@@ -515,18 +718,18 @@
                     </form>
                 </div>
                 <div>
-                    <div class="info-box">
+                    <div class="info-box reveal-right">
                         <h3>📅 Horaires d'ouverture</h3>
                         <p><strong>Consultations :</strong><br>
                         Lundi – Vendredi : 7h30 – 19h30<br>
                         Samedi : 7h30 – 12h00</p>
                     </div>
-                    <div class="info-box">
+                    <div class="info-box reveal-right">
                         <h3>🚨 Urgences 24h/24 – 7j/7</h3>
                         <p>Téléphone : <strong style="color:#1D8B5D; font-size:1.3rem;">79 09 55 32</strong></p>
                         <p>Sans rendez-vous, prise en charge immédiate.</p>
                     </div>
-                    <div class="info-box">
+                    <div class="info-box reveal-right">
                         <h3>🏛️ Assurances acceptées</h3>
                         <p>CNSS, mutuelles de santé, Inami Burkina, assurances privées.</p>
                     </div>
@@ -538,8 +741,8 @@
     <!-- ========== SECTION ACTUALITÉS ========== -->
     <section id="actualites" class="bg-light">
         <div class="container">
-            <h2 class="section-title">Actualités</h2>
-            <div class="filters">
+            <h2 class="section-title reveal">Actualités</h2>
+            <div class="filters reveal">
                 <button class="filter-btn active" data-filter="all">Toutes</button>
                 <button class="filter-btn" data-filter="Information">Information</button>
                 <button class="filter-btn" data-filter="Santé">Santé</button>
@@ -548,7 +751,7 @@
             <div id="articlesList" class="cards-grid"></div>
             
             <!-- Espace Admin -->
-            <div style="margin-top: 60px; background: white; border-radius: 24px; padding: 32px;">
+            <div class="admin-section reveal">
                 <h3 style="color: #0077A4; text-align: center;">🔐 Espace administrateur</h3>
                 <div id="adminPanel" style="text-align: center; margin-top: 30px;">
                     <button id="showAdminLogin" class="btn btn-primary" style="background:#0077A4;">Se connecter (admin)</button>
@@ -578,10 +781,10 @@
     <!-- ========== SECTION TÉMOIGNAGES ========== -->
     <section id="temoignages" class="bg-white">
         <div class="container">
-            <h2 class="section-title">Ce que nos patients disent</h2>
+            <h2 class="section-title reveal">Ce que nos patients disent</h2>
             <div id="temoignagesList" class="cards-grid"></div>
             
-            <div style="margin-top: 50px; background: #F8F9FA; border-radius: 24px; padding: 32px;">
+            <div class="reveal" style="margin-top: 50px; background: #F8F9FA; border-radius: 24px; padding: 32px;">
                 <h3 style="color: #0077A4; margin-bottom: 20px;">Ajouter votre avis</h3>
                 <form id="newAvisForm">
                     <div class="form-group"><input type="text" id="avisNom" placeholder="Votre nom" required></div>
@@ -604,25 +807,25 @@
     <!-- ========== SECTION CONTACT ========== -->
     <section id="contact" class="bg-light">
         <div class="container">
-            <h2 class="section-title">Contact & localisation</h2>
+            <h2 class="section-title reveal">Contact & localisation</h2>
             <div class="rdv-grid">
                 <div>
-                    <div class="info-box">
+                    <div class="info-box reveal-left">
                         <h3>📍 Adresse</h3>
                         <p>Pissy, Ouagadougou<br>Burkina Faso</p>
                     </div>
-                    <div class="info-box">
+                    <div class="info-box reveal-left">
                         <h3>📞 Téléphone</h3>
                         <p><strong>Urgences 24/24 :</strong> <span style="color:#1D8B5D; font-size:1.2rem;">79 09 55 32</span><br>
                         <strong>Standard :</strong> 79 09 55 32</p>
                     </div>
-                    <div class="info-box">
+                    <div class="info-box reveal-left">
                         <h3>📧 Email</h3>
                         <p>contact@cliniquewendtoin.bf</p>
                     </div>
                 </div>
                 <div>
-                    <div class="info-box">
+                    <div class="info-box reveal-right">
                         <h3>🗺️ Plan d'accès</h3>
                         <div style="background: #e2e8f0; border-radius: 16px; height: 280px; display: flex; align-items: center; justify-content: center; font-size: 3rem; flex-direction: column;">
                             📍 Pissy, Ouagadougou
@@ -638,19 +841,19 @@
 <footer>
     <div class="container">
         <div class="footer-grid">
-            <div>
+            <div class="reveal">
                 <h4 style="color: #1D8B5D;">Clinique WENDTOIN</h4>
                 <p>📍 Pissy, Ouagadougou<br>📞 79 09 55 32</p>
             </div>
-            <div>
+            <div class="reveal">
                 <h4 style="color: #1D8B5D;">🚨 Urgences 24/24</h4>
                 <p><strong style="font-size: 1.2rem;">79 09 55 32</strong></p>
             </div>
-            <div>
+            <div class="reveal">
                 <h4 style="color: #1D8B5D;">Horaires consultations</h4>
                 <p>Lun-Ven : 7h30-19h30<br>Sam : 7h30-12h</p>
             </div>
-            <div>
+            <div class="reveal">
                 <h4 style="color: #1D8B5D;">Liens rapides</h4>
                 <p><a href="#rdv" style="color:#cbd5e1;">Prendre RDV</a><br>
                 <a href="#services" style="color:#cbd5e1;">Nos services</a></p>
@@ -663,6 +866,48 @@
 </footer>
 
 <script>
+    // ========== SLIDER HERO ==========
+    let currentSlide = 0;
+    const slides = document.querySelectorAll('.slide');
+    
+    function nextSlide() {
+        if(!slides.length) return;
+        slides[currentSlide].classList.remove('active');
+        currentSlide = (currentSlide + 1) % slides.length;
+        slides[currentSlide].classList.add('active');
+    }
+    
+    if(slides.length > 1) {
+        setInterval(nextSlide, 5000);
+    }
+    
+    // ========== HEADER DYNAMIQUE ==========
+    window.addEventListener('scroll', () => {
+        const header = document.querySelector('header');
+        if(window.scrollY > 50) {
+            header.classList.add('scrolled');
+        } else {
+            header.classList.remove('scrolled');
+        }
+    });
+    
+    // ========== SCROLL REVEAL ==========
+    const revealElements = document.querySelectorAll('.reveal, .reveal-left, .reveal-right');
+    
+    function checkReveal() {
+        revealElements.forEach(el => {
+            const rect = el.getBoundingClientRect();
+            const windowHeight = window.innerHeight;
+            if(rect.top < windowHeight - 100) {
+                el.classList.add('active');
+            }
+        });
+    }
+    
+    window.addEventListener('scroll', checkReveal);
+    window.addEventListener('load', checkReveal);
+    checkReveal();
+    
     // ========== DONNÉES ==========
     let articles = [
         { id: 1, titre: "Campagne de vaccination gratuite", categorie: "Santé", date: "01/04/2026", resume: "Vaccination contre la fièvre typhoïde à la clinique. Venez nombreux !" },
@@ -690,7 +935,7 @@
         if(!container) return;
         let filtered = filter === 'all' ? articles : articles.filter(a => a.categorie === filter);
         container.innerHTML = filtered.map(a => `
-            <div class="card">
+            <div class="card reveal">
                 <div class="card-icon">📰</div>
                 <h4>${a.titre}</h4>
                 <span class="badge">${a.categorie}</span>
@@ -699,6 +944,7 @@
             </div>
         `).join('');
         if(container.innerHTML === '') container.innerHTML = '<p style="text-align:center;">Aucun article dans cette catégorie</p>';
+        checkReveal();
     }
     
     document.querySelectorAll('.filter-btn').forEach(btn => {
@@ -730,7 +976,7 @@
         container.innerHTML = articles.map(a => `
             <div style="background:#F8F9FA; border:1px solid #e2e8f0; margin:10px 0; padding:15px; border-radius:12px; display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap;">
                 <div><strong>${a.titre}</strong><br><small>${a.categorie} - ${a.date}</small></div>
-                <button onclick="deleteArticle(${a.id})" style="background:#dc2626; color:white; border:none; padding:8px 16px; border-radius:8px; cursor:pointer;">❌ Supprimer</button>
+                <button onclick="deleteArticle(${a.id})" style="background:#dc2626; color:white; border:none; padding:8px 16px; border-radius:8px; cursor:pointer; transition:all 0.3s;">❌ Supprimer</button>
             </div>
         `).join('');
     }
@@ -767,12 +1013,13 @@
         const container = document.getElementById('temoignagesList');
         if(!container) return;
         container.innerHTML = temoignages.map(t => `
-            <div class="card">
+            <div class="card reveal">
                 <div class="stars">${'★'.repeat(t.note)}${'☆'.repeat(5-t.note)}</div>
                 <p>"${t.texte}"</p>
                 <small>- ${t.nom}, ${t.date || 'récent'}</small>
             </div>
         `).join('');
+        checkReveal();
     }
     
     document.getElementById('newAvisForm')?.addEventListener('submit', (e) => {
@@ -794,7 +1041,18 @@
     document.querySelector('.mobile-menu-btn')?.addEventListener('click', () => {
         const nav = document.querySelector('nav ul');
         if(nav.style.display === 'flex') nav.style.display = 'none';
-        else nav.style.display = 'flex';
+        else {
+            nav.style.display = 'flex';
+            nav.style.flexDirection = 'column';
+            nav.style.position = 'absolute';
+            nav.style.top = '80px';
+            nav.style.left = '0';
+            nav.style.width = '100%';
+            nav.style.backgroundColor = 'white';
+            nav.style.padding = '20px';
+            nav.style.boxShadow = '0 5px 20px rgba(0,0,0,0.1)';
+            nav.style.zIndex = '999';
+        }
     });
     
     // Initialisation
