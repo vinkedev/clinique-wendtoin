@@ -23,12 +23,93 @@
             color: #1e293b;
             line-height: 1.6;
             background: #F8F9FA;
+            overflow-x: hidden;
         }
 
         .container {
             max-width: 1280px;
             margin: 0 auto;
             padding: 0 24px;
+        }
+
+        /* ========== ANIMATIONS GLOBALES ========== */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes fadeInLeft {
+            from {
+                opacity: 0;
+                transform: translateX(-40px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        @keyframes fadeInRight {
+            from {
+                opacity: 0;
+                transform: translateX(40px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        @keyframes scaleIn {
+            from {
+                opacity: 0;
+                transform: scale(0.9);
+            }
+            to {
+                opacity: 1;
+                transform: scale(1);
+            }
+        }
+
+        @keyframes pulse {
+            0% {
+                transform: scale(1);
+                box-shadow: 0 0 0 0 rgba(29, 139, 93, 0.7);
+            }
+            70% {
+                transform: scale(1.05);
+                box-shadow: 0 0 0 10px rgba(29, 139, 93, 0);
+            }
+            100% {
+                transform: scale(1);
+                box-shadow: 0 0 0 0 rgba(29, 139, 93, 0);
+            }
+        }
+
+        @keyframes shine {
+            0% {
+                background-position: -100% 0;
+            }
+            100% {
+                background-position: 200% 0;
+            }
+        }
+
+        .animate-on-scroll {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+        }
+
+        .animate-on-scroll.visible {
+            opacity: 1;
+            transform: translateY(0);
         }
 
         /* ========== HEADER ========== */
@@ -38,7 +119,13 @@
             position: sticky;
             top: 0;
             z-index: 1000;
-            background: white;
+            transition: all 0.3s ease;
+        }
+
+        header.scrolled {
+            box-shadow: 0 4px 30px rgba(0,0,0,0.1);
+            background: rgba(255,255,255,0.98);
+            backdrop-filter: blur(10px);
         }
 
         .header-container {
@@ -54,16 +141,26 @@
             display: flex;
             align-items: center;
             gap: 12px;
+            transition: transform 0.3s ease;
+        }
+
+        .logo:hover {
+            transform: scale(1.02);
         }
 
         .logo img {
             height: 55px;
             width: auto;
+            transition: all 0.3s ease;
         }
 
         .logo-text h1 {
             font-size: 1.4rem;
             font-weight: 700;
+            background: linear-gradient(135deg, #0077A4 0%, #1D8B5D 100%);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
         }
 
         .logo-text span {
@@ -86,17 +183,39 @@
             text-decoration: none;
             color: #1e293b;
             font-weight: 500;
-            transition: color 0.3s;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        nav a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: #0077A4;
+            transition: width 0.3s ease;
+        }
+
+        nav a:hover::after {
+            width: 100%;
         }
 
         nav a:hover {
             color: #0077A4;
+            transform: translateY(-2px);
         }
 
         .mobile-menu-btn {
             display: none;
             font-size: 28px;
             cursor: pointer;
+            transition: transform 0.3s ease;
+        }
+
+        .mobile-menu-btn:hover {
+            transform: rotate(90deg);
         }
 
         /* ========== HERO ========== */
@@ -108,11 +227,31 @@
             align-items: center;
             text-align: center;
             color: white;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320"><path fill="rgba(255,255,255,0.05)" fill-opacity="1" d="M0,192L48,197.3C96,203,192,213,288,208C384,203,480,181,576,181.3C672,181,768,203,864,208C960,213,1056,203,1152,186.7C1248,171,1344,149,1392,138.7L1440,128L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z"></path></svg>') repeat-x bottom;
+            background-size: cover;
+            opacity: 0.3;
+            animation: waveMove 20s linear infinite;
+        }
+
+        @keyframes waveMove {
+            0% { background-position: 0 100%; }
+            100% { background-position: 1440px 100%; }
         }
 
         .hero-content {
             position: relative;
             z-index: 2;
+            animation: fadeInUp 1s ease-out;
         }
 
         .hero-content h2 {
@@ -122,11 +261,11 @@
         }
 
         .hero-content h2 span {
-            color: #1D8B5D;
-            background: rgba(255,255,255,0.1);
+            background: rgba(255,255,255,0.15);
             padding: 0 12px;
             border-radius: 40px;
             display: inline-block;
+            animation: pulse 2s infinite;
         }
 
         .hero-slogan {
@@ -142,20 +281,42 @@
             text-decoration: none;
             font-weight: 600;
             margin: 0 10px;
-            transition: all 0.3s;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
             cursor: pointer;
             border: none;
             font-size: 1rem;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .btn::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 0;
+            height: 0;
+            border-radius: 50%;
+            background: rgba(255,255,255,0.3);
+            transform: translate(-50%, -50%);
+            transition: width 0.6s, height 0.6s;
+        }
+
+        .btn:hover::before {
+            width: 300px;
+            height: 300px;
         }
 
         .btn-primary {
             background: #1D8B5D;
             color: white;
+            box-shadow: 0 4px 15px rgba(29,139,93,0.3);
         }
 
         .btn-primary:hover {
             background: #156d48;
-            transform: translateY(-2px);
+            transform: translateY(-3px);
+            box-shadow: 0 6px 20px rgba(29,139,93,0.4);
         }
 
         .btn-outline {
@@ -167,11 +328,13 @@
         .btn-outline:hover {
             background: white;
             color: #0077A4;
+            transform: translateY(-3px);
         }
 
         /* ========== SECTIONS ========== */
         section {
             padding: 70px 0;
+            position: relative;
         }
 
         .section-title {
@@ -180,6 +343,23 @@
             margin-bottom: 48px;
             color: #0077A4;
             font-weight: 700;
+            position: relative;
+            display: inline-block;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 60px;
+            height: 3px;
+            background: linear-gradient(90deg, #0077A4, #1D8B5D);
+            border-radius: 3px;
+            animation: scaleIn 0.6s ease-out;
         }
 
         .bg-white {
@@ -202,19 +382,41 @@
             padding: 32px;
             border-radius: 20px;
             box-shadow: 0 10px 30px rgba(0,0,0,0.05);
-            transition: all 0.3s;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
             text-align: center;
             border: 1px solid #e2e8f0;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(0,119,164,0.1), transparent);
+            transition: left 0.5s ease;
+        }
+
+        .card:hover::before {
+            left: 100%;
         }
 
         .card:hover {
-            transform: translateY(-8px);
-            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+            transform: translateY(-10px) scale(1.02);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.12);
         }
 
         .card-icon {
             font-size: 3rem;
             margin-bottom: 16px;
+            transition: transform 0.3s ease;
+        }
+
+        .card:hover .card-icon {
+            transform: scale(1.1) rotate(5deg);
         }
 
         /* ========== STATS ========== */
@@ -222,6 +424,24 @@
             background: #0077A4;
             color: white;
             padding: 60px 0;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .stats::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, transparent 70%);
+            animation: rotateBg 20s linear infinite;
+        }
+
+        @keyframes rotateBg {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
         }
 
         .stats-container {
@@ -230,12 +450,23 @@
             text-align: center;
             flex-wrap: wrap;
             gap: 30px;
+            position: relative;
+            z-index: 1;
         }
 
         .stat-number {
             display: block;
             font-size: 2.5rem;
             font-weight: 800;
+            animation: fadeInUp 0.6s ease-out;
+        }
+
+        .stats-container div {
+            transition: transform 0.3s ease;
+        }
+
+        .stats-container div:hover {
+            transform: translateY(-5px);
         }
 
         /* ========== FORMULAIRES ========== */
@@ -250,12 +481,14 @@
             border-radius: 12px;
             font-family: inherit;
             font-size: 1rem;
+            transition: all 0.3s ease;
         }
 
         input:focus, select:focus, textarea:focus {
             outline: none;
             border-color: #1D8B5D;
             box-shadow: 0 0 0 3px rgba(29,139,93,0.1);
+            transform: scale(1.01);
         }
 
         .rdv-grid {
@@ -280,7 +513,7 @@
             border-radius: 30px;
             cursor: pointer;
             font-weight: 500;
-            transition: all 0.3s;
+            transition: all 0.3s ease;
             border: 1px solid #e2e8f0;
         }
 
@@ -288,6 +521,8 @@
             background: #0077A4;
             color: white;
             border-color: #0077A4;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(0,119,164,0.3);
         }
 
         /* ========== ÉTOILES ========== */
@@ -313,10 +548,13 @@
         .footer-grid a {
             color: #cbd5e1;
             text-decoration: none;
+            transition: all 0.3s ease;
         }
 
         .footer-grid a:hover {
             color: #1D8B5D;
+            transform: translateX(5px);
+            display: inline-block;
         }
 
         /* ========== BADGES ========== */
@@ -327,6 +565,13 @@
             font-size: 0.8rem;
             display: inline-block;
             margin: 10px 0;
+            transition: all 0.3s ease;
+        }
+
+        .badge:hover {
+            background: #0077A4;
+            color: white;
+            transform: scale(1.05);
         }
 
         /* ========== INFO BOX ========== */
@@ -336,6 +581,12 @@
             border-radius: 16px;
             margin-bottom: 24px;
             box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+            transition: all 0.3s ease;
+        }
+
+        .info-box:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 25px rgba(0,0,0,0.1);
         }
 
         .info-box h3 {
@@ -354,6 +605,18 @@
         @media (max-width: 768px) {
             nav ul {
                 display: none;
+                flex-direction: column;
+                position: absolute;
+                top: 100%;
+                left: 0;
+                right: 0;
+                background: white;
+                padding: 20px;
+                box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+                gap: 15px;
+            }
+            nav ul.show {
+                display: flex;
             }
             .mobile-menu-btn {
                 display: block;
@@ -438,13 +701,15 @@
     <section class="bg-light">
         <div class="container">
             <div class="presentation-grid">
-                <div>
+                <div class="animate-on-scroll">
                     <h2 style="color: #0077A4; margin-bottom: 20px;">Bienvenue à la Clinique WENDTOIN</h2>
                     <p>Ouverte depuis <strong>janvier 2016</strong>, la Clinique WENDTOIN est un établissement privé qui place le patient au cœur de ses priorités.</p>
                     <p style="margin-top: 15px;">En plus des <strong>soins standards</strong> (consultations générales, spécialités, vaccinations), nous assurons les <strong>urgences médicales et chirurgicales</strong> 24h/24 et 7j/7 grâce à une équipe de médecins généralistes et spécialistes dédiés.</p>
                     <p style="margin-top: 15px;">Située à <strong>Pissy, Ouagadougou</strong>, notre clinique vous accueille dans un environnement moderne et sécurisé.</p>
                 </div>
-                <div style="background: #e2e8f0; border-radius: 20px; height: 280px; display: flex; align-items: center; justify-content: center; font-size: 5rem;">🏥</div>
+                <div style="background: linear-gradient(135deg, #0077A4, #1D8B5D); border-radius: 20px; height: 280px; display: flex; align-items: center; justify-content: center; font-size: 5rem; transition: transform 0.3s ease;" class="animate-on-scroll">
+                    🏥
+                </div>
             </div>
         </div>
     </section>
@@ -452,23 +717,23 @@
     <!-- ========== STATS ========== -->
     <div class="stats">
         <div class="container stats-container">
-            <div><span class="stat-number">9+</span><br>années d'existence</div>
-            <div><span class="stat-number">24/24</span><br>Service d'urgence</div>
-            <div><span class="stat-number">Généralistes</span><br>& spécialistes</div>
+            <div class="animate-on-scroll"><span class="stat-number">9+</span><br>années d'existence</div>
+            <div class="animate-on-scroll"><span class="stat-number">24/24</span><br>Service d'urgence</div>
+            <div class="animate-on-scroll"><span class="stat-number">Généralistes</span><br>& spécialistes</div>
         </div>
     </div>
 
     <!-- ========== SECTION SERVICES ========== -->
     <section id="services" class="bg-white">
         <div class="container">
-            <h2 class="section-title">Nos services</h2>
+            <h2 class="section-title animate-on-scroll">Nos services</h2>
             <div class="cards-grid">
-                <div class="card"><div class="card-icon">🩺</div><h4>Consultations générales</h4><p>Médecine générale quotidienne, suivi des maladies chroniques, certificats médicaux.</p></div>
-                <div class="card"><div class="card-icon">❤️</div><h4>Cardiologie</h4><p>Explorations cardiaques complètes, électrocardiogramme, échographie cardiaque.</p></div>
-                <div class="card"><div class="card-icon">👶</div><h4>Pédiatrie</h4><p>Suivi médical des enfants, vaccinations, consultations préventives.</p></div>
-                <div class="card"><div class="card-icon">💉</div><h4>Vaccinations</h4><p>Calendrier vaccinal complet pour enfants et adultes.</p></div>
-                <div class="card"><div class="card-icon">🚑</div><h4>Urgences 24/24</h4><p>Sans rendez-vous, prise en charge immédiate.</p></div>
-                <div class="card"><div class="card-icon">🔬</div><h4>Analyses & imagerie</h4><p>Laboratoire d'analyses, échographie, radiologie.</p></div>
+                <div class="card animate-on-scroll"><div class="card-icon">🩺</div><h4>Consultations générales</h4><p>Médecine générale quotidienne, suivi des maladies chroniques, certificats médicaux.</p></div>
+                <div class="card animate-on-scroll"><div class="card-icon">❤️</div><h4>Cardiologie</h4><p>Explorations cardiaques complètes, électrocardiogramme, échographie cardiaque.</p></div>
+                <div class="card animate-on-scroll"><div class="card-icon">👶</div><h4>Pédiatrie</h4><p>Suivi médical des enfants, vaccinations, consultations préventives.</p></div>
+                <div class="card animate-on-scroll"><div class="card-icon">💉</div><h4>Vaccinations</h4><p>Calendrier vaccinal complet pour enfants et adultes.</p></div>
+                <div class="card animate-on-scroll"><div class="card-icon">🚑</div><h4>Urgences 24/24</h4><p>Sans rendez-vous, prise en charge immédiate.</p></div>
+                <div class="card animate-on-scroll"><div class="card-icon">🔬</div><h4>Analyses & imagerie</h4><p>Laboratoire d'analyses, échographie, radiologie.</p></div>
             </div>
         </div>
     </section>
@@ -476,14 +741,14 @@
     <!-- ========== SECTION ÉQUIPE ========== -->
     <section id="equipe" class="bg-light">
         <div class="container">
-            <h2 class="section-title">Notre équipe médicale</h2>
+            <h2 class="section-title animate-on-scroll">Notre équipe médicale</h2>
             <div class="cards-grid">
-                <div class="card"><div class="card-icon">👨‍⚕️</div><h4>Dr. Adama Koné</h4><p>Médecin généraliste – 15 ans d'expérience</p><span class="badge">Urgences 24/24</span></div>
-                <div class="card"><div class="card-icon">👩‍⚕️</div><h4>Dr. Fatimata Zongo</h4><p>Cardiologue – Spécialiste en pathologies cardiaques</p><span class="badge">Consultation sur RDV</span></div>
-                <div class="card"><div class="card-icon">👨‍⚕️</div><h4>Dr. Issa Ouédraogo</h4><p>Pédiatre – Prise en charge des enfants</p><span class="badge">Vaccinations</span></div>
-                <div class="card"><div class="card-icon">👩‍⚕️</div><h4>Dr. Mariam Sawadogo</h4><p>Gynécologue-obstétricienne</p><span class="badge">Suivi grossesse</span></div>
-                <div class="card"><div class="card-icon">👨‍⚕️</div><h4>Dr. Paul Zongo</h4><p>Chirurgien général – Urgences chirurgicales</p><span class="badge">Disponible 24/24</span></div>
-                <div class="card"><div class="card-icon">🧑‍⚕️</div><h4>Infirmiers diplômés</h4><p>Équipe soignante dévouée, disponible jour et nuit</p><span class="badge">Soins & accompagnement</span></div>
+                <div class="card animate-on-scroll"><div class="card-icon">👨‍⚕️</div><h4>Dr. Adama Koné</h4><p>Médecin généraliste – 15 ans d'expérience</p><span class="badge">Urgences 24/24</span></div>
+                <div class="card animate-on-scroll"><div class="card-icon">👩‍⚕️</div><h4>Dr. Fatimata Zongo</h4><p>Cardiologue – Spécialiste en pathologies cardiaques</p><span class="badge">Consultation sur RDV</span></div>
+                <div class="card animate-on-scroll"><div class="card-icon">👨‍⚕️</div><h4>Dr. Issa Ouédraogo</h4><p>Pédiatre – Prise en charge des enfants</p><span class="badge">Vaccinations</span></div>
+                <div class="card animate-on-scroll"><div class="card-icon">👩‍⚕️</div><h4>Dr. Mariam Sawadogo</h4><p>Gynécologue-obstétricienne</p><span class="badge">Suivi grossesse</span></div>
+                <div class="card animate-on-scroll"><div class="card-icon">👨‍⚕️</div><h4>Dr. Paul Zongo</h4><p>Chirurgien général – Urgences chirurgicales</p><span class="badge">Disponible 24/24</span></div>
+                <div class="card animate-on-scroll"><div class="card-icon">🧑‍⚕️</div><h4>Infirmiers diplômés</h4><p>Équipe soignante dévouée, disponible jour et nuit</p><span class="badge">Soins & accompagnement</span></div>
             </div>
         </div>
     </section>
@@ -491,9 +756,9 @@
     <!-- ========== SECTION RENDEZ-VOUS ========== -->
     <section id="rdv" class="bg-white">
         <div class="container">
-            <h2 class="section-title">Prendre rendez-vous</h2>
+            <h2 class="section-title animate-on-scroll">Prendre rendez-vous</h2>
             <div class="rdv-grid">
-                <div class="info-box">
+                <div class="info-box animate-on-scroll">
                     <h3>Formulaire de rendez-vous</h3>
                     <form id="rdvForm">
                         <div class="form-group"><input type="text" placeholder="Nom complet" required id="rdvNom"></div>
@@ -515,18 +780,18 @@
                     </form>
                 </div>
                 <div>
-                    <div class="info-box">
+                    <div class="info-box animate-on-scroll">
                         <h3>📅 Horaires d'ouverture</h3>
                         <p><strong>Consultations :</strong><br>
                         Lundi – Vendredi : 7h30 – 19h30<br>
                         Samedi : 7h30 – 12h00</p>
                     </div>
-                    <div class="info-box">
+                    <div class="info-box animate-on-scroll">
                         <h3>🚨 Urgences 24h/24 – 7j/7</h3>
                         <p>Téléphone : <strong style="color:#1D8B5D; font-size:1.3rem;">79 09 55 32</strong></p>
                         <p>Sans rendez-vous, prise en charge immédiate.</p>
                     </div>
-                    <div class="info-box">
+                    <div class="info-box animate-on-scroll">
                         <h3>🏛️ Assurances acceptées</h3>
                         <p>CNSS, mutuelles de santé, Inami Burkina, assurances privées.</p>
                     </div>
@@ -538,7 +803,7 @@
     <!-- ========== SECTION ACTUALITÉS ========== -->
     <section id="actualites" class="bg-light">
         <div class="container">
-            <h2 class="section-title">Actualités</h2>
+            <h2 class="section-title animate-on-scroll">Actualités</h2>
             <div class="filters">
                 <button class="filter-btn active" data-filter="all">Toutes</button>
                 <button class="filter-btn" data-filter="Information">Information</button>
@@ -548,7 +813,7 @@
             <div id="articlesList" class="cards-grid"></div>
             
             <!-- Espace Admin -->
-            <div style="margin-top: 60px; background: white; border-radius: 24px; padding: 32px;">
+            <div style="margin-top: 60px; background: white; border-radius: 24px; padding: 32px; transition: all 0.3s ease;">
                 <h3 style="color: #0077A4; text-align: center;">🔐 Espace administrateur</h3>
                 <div id="adminPanel" style="text-align: center; margin-top: 30px;">
                     <button id="showAdminLogin" class="btn btn-primary" style="background:#0077A4;">Se connecter (admin)</button>
@@ -578,10 +843,10 @@
     <!-- ========== SECTION TÉMOIGNAGES ========== -->
     <section id="temoignages" class="bg-white">
         <div class="container">
-            <h2 class="section-title">Ce que nos patients disent</h2>
+            <h2 class="section-title animate-on-scroll">Ce que nos patients disent</h2>
             <div id="temoignagesList" class="cards-grid"></div>
             
-            <div style="margin-top: 50px; background: #F8F9FA; border-radius: 24px; padding: 32px;">
+            <div style="margin-top: 50px; background: #F8F9FA; border-radius: 24px; padding: 32px; transition: all 0.3s ease;">
                 <h3 style="color: #0077A4; margin-bottom: 20px;">Ajouter votre avis</h3>
                 <form id="newAvisForm">
                     <div class="form-group"><input type="text" id="avisNom" placeholder="Votre nom" required></div>
@@ -604,27 +869,27 @@
     <!-- ========== SECTION CONTACT ========== -->
     <section id="contact" class="bg-light">
         <div class="container">
-            <h2 class="section-title">Contact & localisation</h2>
+            <h2 class="section-title animate-on-scroll">Contact & localisation</h2>
             <div class="rdv-grid">
                 <div>
-                    <div class="info-box">
+                    <div class="info-box animate-on-scroll">
                         <h3>📍 Adresse</h3>
                         <p>Pissy, Ouagadougou<br>Burkina Faso</p>
                     </div>
-                    <div class="info-box">
+                    <div class="info-box animate-on-scroll">
                         <h3>📞 Téléphone</h3>
                         <p><strong>Urgences 24/24 :</strong> <span style="color:#1D8B5D; font-size:1.2rem;">79 09 55 32</span><br>
                         <strong>Standard :</strong> 79 09 55 32</p>
                     </div>
-                    <div class="info-box">
+                    <div class="info-box animate-on-scroll">
                         <h3>📧 Email</h3>
                         <p>contact@cliniquewendtoin.bf</p>
                     </div>
                 </div>
                 <div>
-                    <div class="info-box">
+                    <div class="info-box animate-on-scroll">
                         <h3>🗺️ Plan d'accès</h3>
-                        <div style="background: #e2e8f0; border-radius: 16px; height: 280px; display: flex; align-items: center; justify-content: center; font-size: 3rem; flex-direction: column;">
+                        <div style="background: linear-gradient(135deg, #e2e8f0, #cbd5e1); border-radius: 16px; height: 280px; display: flex; align-items: center; justify-content: center; font-size: 3rem; flex-direction: column; transition: transform 0.3s ease;">
                             📍 Pissy, Ouagadougou
                             <p style="font-size: 0.9rem; margin-top: 10px;">Secteur 44, près du lycée de Pissy</p>
                         </div>
@@ -652,8 +917,8 @@
             </div>
             <div>
                 <h4 style="color: #1D8B5D;">Liens rapides</h4>
-                <p><a href="#rdv" style="color:#cbd5e1;">Prendre RDV</a><br>
-                <a href="#services" style="color:#cbd5e1;">Nos services</a></p>
+                <p><a href="#rdv">Prendre RDV</a><br>
+                <a href="#services">Nos services</a></p>
             </div>
         </div>
         <div style="text-align:center; margin-top:40px; padding-top:20px; border-top:1px solid #334155;">
@@ -676,6 +941,32 @@
         { nom: "Amina T.", note: 4, texte: "Très bonne prise en charge, personnel sympathique.", date: "05/03/2026" }
     ];
 
+    // ========== ANIMATION SCROLL ==========
+    const animateElements = document.querySelectorAll('.animate-on-scroll');
+    
+    const checkVisibility = () => {
+        animateElements.forEach(element => {
+            const rect = element.getBoundingClientRect();
+            const windowHeight = window.innerHeight;
+            if (rect.top < windowHeight - 100) {
+                element.classList.add('visible');
+            }
+        });
+    };
+    
+    window.addEventListener('scroll', checkVisibility);
+    window.addEventListener('load', checkVisibility);
+    
+    // Header scroll effect
+    window.addEventListener('scroll', () => {
+        const header = document.querySelector('header');
+        if (window.scrollY > 50) {
+            header.classList.add('scrolled');
+        } else {
+            header.classList.remove('scrolled');
+        }
+    });
+
     // ========== RENDEZ-VOUS ==========
     document.getElementById('rdvForm')?.addEventListener('submit', (e) => {
         e.preventDefault();
@@ -690,7 +981,7 @@
         if(!container) return;
         let filtered = filter === 'all' ? articles : articles.filter(a => a.categorie === filter);
         container.innerHTML = filtered.map(a => `
-            <div class="card">
+            <div class="card animate-on-scroll">
                 <div class="card-icon">📰</div>
                 <h4>${a.titre}</h4>
                 <span class="badge">${a.categorie}</span>
@@ -699,6 +990,7 @@
             </div>
         `).join('');
         if(container.innerHTML === '') container.innerHTML = '<p style="text-align:center;">Aucun article dans cette catégorie</p>';
+        checkVisibility();
     }
     
     document.querySelectorAll('.filter-btn').forEach(btn => {
@@ -730,7 +1022,7 @@
         container.innerHTML = articles.map(a => `
             <div style="background:#F8F9FA; border:1px solid #e2e8f0; margin:10px 0; padding:15px; border-radius:12px; display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap;">
                 <div><strong>${a.titre}</strong><br><small>${a.categorie} - ${a.date}</small></div>
-                <button onclick="deleteArticle(${a.id})" style="background:#dc2626; color:white; border:none; padding:8px 16px; border-radius:8px; cursor:pointer;">❌ Supprimer</button>
+                <button onclick="deleteArticle(${a.id})" style="background:#dc2626; color:white; border:none; padding:8px 16px; border-radius:8px; cursor:pointer; transition: all 0.3s ease;">❌ Supprimer</button>
             </div>
         `).join('');
     }
@@ -767,12 +1059,13 @@
         const container = document.getElementById('temoignagesList');
         if(!container) return;
         container.innerHTML = temoignages.map(t => `
-            <div class="card">
+            <div class="card animate-on-scroll">
                 <div class="stars">${'★'.repeat(t.note)}${'☆'.repeat(5-t.note)}</div>
                 <p>"${t.texte}"</p>
                 <small>- ${t.nom}, ${t.date || 'récent'}</small>
             </div>
         `).join('');
+        checkVisibility();
     }
     
     document.getElementById('newAvisForm')?.addEventListener('submit', (e) => {
@@ -793,8 +1086,7 @@
     // Menu mobile
     document.querySelector('.mobile-menu-btn')?.addEventListener('click', () => {
         const nav = document.querySelector('nav ul');
-        if(nav.style.display === 'flex') nav.style.display = 'none';
-        else nav.style.display = 'flex';
+        nav.classList.toggle('show');
     });
     
     // Initialisation
