@@ -14,6 +14,10 @@
             box-sizing: border-box;
         }
 
+        html {
+            scroll-behavior: smooth;
+        }
+
         body {
             font-family: 'Inter', sans-serif;
             color: #1e293b;
@@ -41,22 +45,33 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
-            padding: 16px 24px;
+            padding: 12px 24px;
             max-width: 1280px;
             margin: 0 auto;
         }
 
-        .logo h1 {
-            font-size: 1.6rem;
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .logo img {
+            height: 55px;
+            width: auto;
+        }
+
+        .logo-text h1 {
+            font-size: 1.4rem;
             font-weight: 700;
         }
 
-        .logo span {
+        .logo-text span {
             color: #0077A4;
         }
 
-        .logo p {
-            font-size: 0.7rem;
+        .logo-text p {
+            font-size: 0.65rem;
             color: #64748b;
             letter-spacing: 0.5px;
         }
@@ -64,7 +79,7 @@
         nav ul {
             display: flex;
             list-style: none;
-            gap: 28px;
+            gap: 24px;
         }
 
         nav a {
@@ -72,10 +87,9 @@
             color: #1e293b;
             font-weight: 500;
             transition: color 0.3s;
-            cursor: pointer;
         }
 
-        nav a:hover, nav a.active {
+        nav a:hover {
             color: #0077A4;
         }
 
@@ -85,26 +99,11 @@
             cursor: pointer;
         }
 
-        /* ========== SECTIONS ========== */
-        .page-section {
-            display: none;
-            animation: fadeIn 0.4s ease;
-        }
-
-        .page-section.active-page {
-            display: block;
-        }
-
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(10px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-
         /* ========== HERO ========== */
         .hero {
             position: relative;
             background: linear-gradient(135deg, #0077A4 0%, #005a7c 100%);
-            min-height: 550px;
+            min-height: 500px;
             display: flex;
             align-items: center;
             text-align: center;
@@ -117,13 +116,17 @@
         }
 
         .hero-content h2 {
-            font-size: 3.2rem;
+            font-size: 3rem;
             margin-bottom: 20px;
             font-weight: 700;
         }
 
         .hero-content h2 span {
             color: #1D8B5D;
+            background: rgba(255,255,255,0.1);
+            padding: 0 12px;
+            border-radius: 40px;
+            display: inline-block;
         }
 
         .hero-slogan {
@@ -166,7 +169,11 @@
             color: #0077A4;
         }
 
-        /* ========== CARTES ========== */
+        /* ========== SECTIONS ========== */
+        section {
+            padding: 70px 0;
+        }
+
         .section-title {
             text-align: center;
             font-size: 2.2rem;
@@ -175,11 +182,19 @@
             font-weight: 700;
         }
 
+        .bg-white {
+            background: white;
+        }
+
+        .bg-light {
+            background: #F8F9FA;
+        }
+
         .cards-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
             gap: 32px;
-            margin-bottom: 40px;
+            margin-bottom: 20px;
         }
 
         .card {
@@ -207,7 +222,6 @@
             background: #0077A4;
             color: white;
             padding: 60px 0;
-            margin: 40px 0;
         }
 
         .stats-container {
@@ -288,7 +302,6 @@
             background: #1e293b;
             color: #cbd5e1;
             padding: 60px 0 30px;
-            margin-top: 60px;
         }
 
         .footer-grid {
@@ -316,6 +329,27 @@
             margin: 10px 0;
         }
 
+        /* ========== INFO BOX ========== */
+        .info-box {
+            background: white;
+            padding: 24px;
+            border-radius: 16px;
+            margin-bottom: 24px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+        }
+
+        .info-box h3 {
+            color: #0077A4;
+            margin-bottom: 12px;
+        }
+
+        .presentation-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 48px;
+            align-items: center;
+        }
+
         /* ========== RESPONSIVE ========== */
         @media (max-width: 768px) {
             nav ul {
@@ -341,52 +375,21 @@
                 flex-direction: column;
                 align-items: center;
             }
-        }
-
-        /* ========== SECTIONS INTERNES ========== */
-        .page-section {
-            background: #F8F9FA;
-        }
-
-        .presentation-grid {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 48px;
-            align-items: center;
-            background: white;
-            border-radius: 24px;
-            padding: 40px;
-            margin: 40px 0;
-        }
-
-        @media (max-width: 768px) {
             .presentation-grid {
                 grid-template-columns: 1fr;
-                padding: 24px;
             }
-        }
-
-        .info-box {
-            background: white;
-            padding: 24px;
-            border-radius: 16px;
-            margin-bottom: 24px;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
-        }
-
-        .info-box h3 {
-            color: #0077A4;
-            margin-bottom: 12px;
-        }
-
-        .emergency-badge {
-            background: #1D8B5D;
-            color: white;
-            padding: 8px 16px;
-            border-radius: 30px;
-            display: inline-block;
-            font-weight: 600;
-            font-size: 0.8rem;
+            section {
+                padding: 50px 0;
+            }
+            .section-title {
+                font-size: 1.8rem;
+            }
+            .logo img {
+                height: 45px;
+            }
+            .logo-text h1 {
+                font-size: 1.1rem;
+            }
         }
     </style>
 </head>
@@ -395,18 +398,21 @@
 <header>
     <div class="header-container">
         <div class="logo">
-            <h1>Clinique <span>WENDTOIN</span></h1>
-            <p>Depuis janvier 2016</p>
+            <img src="wendtoin/logo_wendtoin.jpg" alt="Logo Clinique WENDTOIN" onerror="this.src='https://placehold.co/55x55/0077A4/white?text=W'">
+            <div class="logo-text">
+                <h1>Clinique <span>WENDTOIN</span></h1>
+                <p>Depuis janvier 2016</p>
+            </div>
         </div>
         <nav>
             <ul>
-                <li><a data-page="accueil" class="nav-link active">Accueil</a></li>
-                <li><a data-page="services" class="nav-link">Services</a></li>
-                <li><a data-page="equipe" class="nav-link">Équipe</a></li>
-                <li><a data-page="rdv" class="nav-link">Rendez-vous</a></li>
-                <li><a data-page="actu" class="nav-link">Actualités</a></li>
-                <li><a data-page="avis" class="nav-link">Témoignages</a></li>
-                <li><a data-page="contact" class="nav-link">Contact</a></li>
+                <li><a href="#accueil">Accueil</a></li>
+                <li><a href="#services">Services</a></li>
+                <li><a href="#equipe">Équipe</a></li>
+                <li><a href="#rdv">Rendez-vous</a></li>
+                <li><a href="#actualites">Actualités</a></li>
+                <li><a href="#temoignages">Avis</a></li>
+                <li><a href="#contact">Contact</a></li>
             </ul>
         </nav>
         <div class="mobile-menu-btn">☰</div>
@@ -414,21 +420,22 @@
 </header>
 
 <main>
-    <!-- ========== ACCUEIL ========== -->
-    <div id="accueil" class="page-section active-page">
-        <section class="hero">
-            <div class="container">
-                <div class="hero-content">
-                    <h2>Votre santé, notre priorité <span>24h/24</span></h2>
-                    <p class="hero-slogan">Urgences médicales et chirurgicales assurées par des généralistes et spécialistes<br>24h/24 – 7j/7</p>
-                    <div class="hero-buttons">
-                        <button class="btn btn-primary" data-page="rdv">📅 Prendre rendez-vous</button>
-                        <button class="btn btn-outline" onclick="window.location.href='tel:79095532'">🆘 Urgence 24/24 – Appeler</button>
-                    </div>
+    <!-- ========== SECTION ACCUEIL / HERO ========== -->
+    <section id="accueil" class="hero">
+        <div class="container">
+            <div class="hero-content">
+                <h2>Votre santé, notre priorité <span>24h/24</span></h2>
+                <p class="hero-slogan">Urgences médicales et chirurgicales assurées par des généralistes et spécialistes<br>24h/24 – 7j/7</p>
+                <div class="hero-buttons">
+                    <a href="#rdv" class="btn btn-primary">📅 Prendre rendez-vous</a>
+                    <a href="tel:79095532" class="btn btn-outline">🆘 Urgence 24/24 – Appeler</a>
                 </div>
             </div>
-        </section>
+        </div>
+    </section>
 
+    <!-- ========== PRÉSENTATION ========== -->
+    <section class="bg-light">
         <div class="container">
             <div class="presentation-grid">
                 <div>
@@ -437,34 +444,24 @@
                     <p style="margin-top: 15px;">En plus des <strong>soins standards</strong> (consultations générales, spécialités, vaccinations), nous assurons les <strong>urgences médicales et chirurgicales</strong> 24h/24 et 7j/7 grâce à une équipe de médecins généralistes et spécialistes dédiés.</p>
                     <p style="margin-top: 15px;">Située à <strong>Pissy, Ouagadougou</strong>, notre clinique vous accueille dans un environnement moderne et sécurisé.</p>
                 </div>
-                <div style="background: #e2e8f0; border-radius: 20px; height: 300px; display: flex; align-items: center; justify-content: center; font-size: 5rem;">🏥</div>
+                <div style="background: #e2e8f0; border-radius: 20px; height: 280px; display: flex; align-items: center; justify-content: center; font-size: 5rem;">🏥</div>
             </div>
         </div>
+    </section>
 
-        <section style="padding: 0 0 60px;">
-            <div class="container">
-                <h3 class="section-title">Nos soins en un coup d'œil</h3>
-                <div class="cards-grid">
-                    <div class="card"><div class="card-icon">🏥</div><h4>Consultations générales</h4><p>Médecine générale quotidienne, suivi patient, prescriptions.</p></div>
-                    <div class="card"><div class="card-icon">🩺</div><h4>Spécialités médicales</h4><p>Cardiologie, pédiatrie, gynécologie, chirurgie, et plus.</p></div>
-                    <div class="card"><div class="card-icon">🚨</div><h4>Urgences 24h/24</h4><p>Prise en charge immédiate des urgences médicales et chirurgicales.</p></div>
-                </div>
-            </div>
-        </section>
-
-        <div class="stats">
-            <div class="container stats-container">
-                <div><span class="stat-number">9+</span><span> années d'existence</span></div>
-                <div><span class="stat-number">24/24</span><span> Service d'urgence</span></div>
-                <div><span class="stat-number">Généralistes</span><span>& spécialistes</span></div>
-            </div>
+    <!-- ========== STATS ========== -->
+    <div class="stats">
+        <div class="container stats-container">
+            <div><span class="stat-number">9+</span><br>années d'existence</div>
+            <div><span class="stat-number">24/24</span><br>Service d'urgence</div>
+            <div><span class="stat-number">Généralistes</span><br>& spécialistes</div>
         </div>
     </div>
 
-    <!-- ========== SERVICES ========== -->
-    <div id="services" class="page-section">
-        <div class="container" style="padding: 60px 0;">
-            <h1 class="section-title">Nos services</h1>
+    <!-- ========== SECTION SERVICES ========== -->
+    <section id="services" class="bg-white">
+        <div class="container">
+            <h2 class="section-title">Nos services</h2>
             <div class="cards-grid">
                 <div class="card"><div class="card-icon">🩺</div><h4>Consultations générales</h4><p>Médecine générale quotidienne, suivi des maladies chroniques, certificats médicaux.</p></div>
                 <div class="card"><div class="card-icon">❤️</div><h4>Cardiologie</h4><p>Explorations cardiaques complètes, électrocardiogramme, échographie cardiaque.</p></div>
@@ -474,12 +471,12 @@
                 <div class="card"><div class="card-icon">🔬</div><h4>Analyses & imagerie</h4><p>Laboratoire d'analyses, échographie, radiologie.</p></div>
             </div>
         </div>
-    </div>
+    </section>
 
-    <!-- ========== ÉQUIPE ========== -->
-    <div id="equipe" class="page-section">
-        <div class="container" style="padding: 60px 0;">
-            <h1 class="section-title">Notre équipe médicale</h1>
+    <!-- ========== SECTION ÉQUIPE ========== -->
+    <section id="equipe" class="bg-light">
+        <div class="container">
+            <h2 class="section-title">Notre équipe médicale</h2>
             <div class="cards-grid">
                 <div class="card"><div class="card-icon">👨‍⚕️</div><h4>Dr. Adama Koné</h4><p>Médecin généraliste – 15 ans d'expérience</p><span class="badge">Urgences 24/24</span></div>
                 <div class="card"><div class="card-icon">👩‍⚕️</div><h4>Dr. Fatimata Zongo</h4><p>Cardiologue – Spécialiste en pathologies cardiaques</p><span class="badge">Consultation sur RDV</span></div>
@@ -489,12 +486,12 @@
                 <div class="card"><div class="card-icon">🧑‍⚕️</div><h4>Infirmiers diplômés</h4><p>Équipe soignante dévouée, disponible jour et nuit</p><span class="badge">Soins & accompagnement</span></div>
             </div>
         </div>
-    </div>
+    </section>
 
-    <!-- ========== RENDEZ-VOUS ========== -->
-    <div id="rdv" class="page-section">
-        <div class="container" style="padding: 60px 0;">
-            <h1 class="section-title">Prendre rendez-vous</h1>
+    <!-- ========== SECTION RENDEZ-VOUS ========== -->
+    <section id="rdv" class="bg-white">
+        <div class="container">
+            <h2 class="section-title">Prendre rendez-vous</h2>
             <div class="rdv-grid">
                 <div class="info-box">
                     <h3>Formulaire de rendez-vous</h3>
@@ -536,12 +533,12 @@
                 </div>
             </div>
         </div>
-    </div>
+    </section>
 
-    <!-- ========== ACTUALITÉS ========== -->
-    <div id="actu" class="page-section">
-        <div class="container" style="padding: 60px 0;">
-            <h1 class="section-title">Actualités</h1>
+    <!-- ========== SECTION ACTUALITÉS ========== -->
+    <section id="actualites" class="bg-light">
+        <div class="container">
+            <h2 class="section-title">Actualités</h2>
             <div class="filters">
                 <button class="filter-btn active" data-filter="all">Toutes</button>
                 <button class="filter-btn" data-filter="Information">Information</button>
@@ -550,8 +547,9 @@
             </div>
             <div id="articlesList" class="cards-grid"></div>
             
+            <!-- Espace Admin -->
             <div style="margin-top: 60px; background: white; border-radius: 24px; padding: 32px;">
-                <h2 style="color: #0077A4; text-align: center;">🔐 Espace administrateur</h2>
+                <h3 style="color: #0077A4; text-align: center;">🔐 Espace administrateur</h3>
                 <div id="adminPanel" style="text-align: center; margin-top: 30px;">
                     <button id="showAdminLogin" class="btn btn-primary" style="background:#0077A4;">Se connecter (admin)</button>
                     <div id="adminLoginForm" style="display:none; margin-top:20px;">
@@ -575,15 +573,15 @@
                 </div>
             </div>
         </div>
-    </div>
+    </section>
 
-    <!-- ========== TÉMOIGNAGES ========== -->
-    <div id="avis" class="page-section">
-        <div class="container" style="padding: 60px 0;">
-            <h1 class="section-title">Ce que nos patients disent</h1>
+    <!-- ========== SECTION TÉMOIGNAGES ========== -->
+    <section id="temoignages" class="bg-white">
+        <div class="container">
+            <h2 class="section-title">Ce que nos patients disent</h2>
             <div id="temoignagesList" class="cards-grid"></div>
             
-            <div style="margin-top: 50px; background: white; border-radius: 24px; padding: 32px;">
+            <div style="margin-top: 50px; background: #F8F9FA; border-radius: 24px; padding: 32px;">
                 <h3 style="color: #0077A4; margin-bottom: 20px;">Ajouter votre avis</h3>
                 <form id="newAvisForm">
                     <div class="form-group"><input type="text" id="avisNom" placeholder="Votre nom" required></div>
@@ -601,12 +599,12 @@
                 </form>
             </div>
         </div>
-    </div>
+    </section>
 
-    <!-- ========== CONTACT ========== -->
-    <div id="contact" class="page-section">
-        <div class="container" style="padding: 60px 0;">
-            <h1 class="section-title">Contact & localisation</h1>
+    <!-- ========== SECTION CONTACT ========== -->
+    <section id="contact" class="bg-light">
+        <div class="container">
+            <h2 class="section-title">Contact & localisation</h2>
             <div class="rdv-grid">
                 <div>
                     <div class="info-box">
@@ -626,15 +624,15 @@
                 <div>
                     <div class="info-box">
                         <h3>🗺️ Plan d'accès</h3>
-                        <div style="background: #e2e8f0; border-radius: 16px; height: 300px; display: flex; align-items: center; justify-content: center; font-size: 3rem;">
+                        <div style="background: #e2e8f0; border-radius: 16px; height: 280px; display: flex; align-items: center; justify-content: center; font-size: 3rem; flex-direction: column;">
                             📍 Pissy, Ouagadougou
+                            <p style="font-size: 0.9rem; margin-top: 10px;">Secteur 44, près du lycée de Pissy</p>
                         </div>
-                        <p style="margin-top: 15px;"><small>Google Maps intégrable facilement avec une clé API</small></p>
                     </div>
                 </div>
             </div>
         </div>
-    </div>
+    </section>
 </main>
 
 <footer>
@@ -654,8 +652,8 @@
             </div>
             <div>
                 <h4 style="color: #1D8B5D;">Liens rapides</h4>
-                <p><a data-page="rdv" class="nav-link" style="cursor:pointer; color:#cbd5e1;">Prendre RDV</a><br>
-                <a data-page="services" class="nav-link" style="cursor:pointer; color:#cbd5e1;">Nos services</a></p>
+                <p><a href="#rdv" style="color:#cbd5e1;">Prendre RDV</a><br>
+                <a href="#services" style="color:#cbd5e1;">Nos services</a></p>
             </div>
         </div>
         <div style="text-align:center; margin-top:40px; padding-top:20px; border-top:1px solid #334155;">
@@ -678,42 +676,12 @@
         { nom: "Amina T.", note: 4, texte: "Très bonne prise en charge, personnel sympathique.", date: "05/03/2026" }
     ];
 
-    // ========== NAVIGATION ==========
-    function showPage(pageId) {
-        document.querySelectorAll('.page-section').forEach(section => {
-            section.classList.remove('active-page');
-        });
-        document.getElementById(pageId).classList.add('active-page');
-        
-        document.querySelectorAll('.nav-link').forEach(link => {
-            link.classList.remove('active');
-            if(link.getAttribute('data-page') === pageId) {
-                link.classList.add('active');
-            }
-        });
-        
-        if(pageId === 'actu') { renderArticles(); renderAdminArticles(); }
-        if(pageId === 'avis') renderTemoignages();
-        window.scrollTo({top: 0, behavior: 'smooth'});
-    }
-    
-    document.querySelectorAll('.nav-link').forEach(link => {
-        link.addEventListener('click', (e) => {
-            e.preventDefault();
-            const page = link.getAttribute('data-page');
-            if(page) showPage(page);
-        });
-    });
-    
-    document.querySelectorAll('[data-page="rdv"]').forEach(btn => {
-        btn.addEventListener('click', () => showPage('rdv'));
-    });
-    
     // ========== RENDEZ-VOUS ==========
     document.getElementById('rdvForm')?.addEventListener('submit', (e) => {
         e.preventDefault();
         document.getElementById('formMessage').innerHTML = '✅ Demande envoyée. Nous vous recontacterons rapidement.';
         e.target.reset();
+        setTimeout(() => { document.getElementById('formMessage').innerHTML = ''; }, 5000);
     });
     
     // ========== ARTICLES ==========
@@ -730,6 +698,7 @@
                 <small>📅 ${a.date}</small>
             </div>
         `).join('');
+        if(container.innerHTML === '') container.innerHTML = '<p style="text-align:center;">Aucun article dans cette catégorie</p>';
     }
     
     document.querySelectorAll('.filter-btn').forEach(btn => {
@@ -759,7 +728,7 @@
         const container = document.getElementById('articlesAdminList');
         if(!container) return;
         container.innerHTML = articles.map(a => `
-            <div style="background:#F8F9FA; border:1px solid #e2e8f0; margin:10px 0; padding:15px; border-radius:12px; display:flex; justify-content:space-between; align-items:center;">
+            <div style="background:#F8F9FA; border:1px solid #e2e8f0; margin:10px 0; padding:15px; border-radius:12px; display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap;">
                 <div><strong>${a.titre}</strong><br><small>${a.categorie} - ${a.date}</small></div>
                 <button onclick="deleteArticle(${a.id})" style="background:#dc2626; color:white; border:none; padding:8px 16px; border-radius:8px; cursor:pointer;">❌ Supprimer</button>
             </div>
