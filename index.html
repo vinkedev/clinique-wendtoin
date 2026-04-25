@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes, viewport-fit=cover">
     <title>Clinique WENDTOIN – Urgences 24h/24 à Ouagadougou</title>
-    <meta name="description" content="Clinique privée à Pissy, Ouagadougou. Urgences médicales et chirurgicales 24h/24, 7j/7. Consultations générales et spécialisées.">
+    <meta name="description" content="Clinique privée à Pissy, Ouagadougou. Urgences médicales et chirurgicales 24h/24, 7j/7. 6 services de soins spécialisés.">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <style>
@@ -14,7 +14,6 @@
             box-sizing: border-box;
         }
 
-        /* Amélioration du scroll fluide */
         html {
             scroll-behavior: smooth;
             -webkit-overflow-scrolling: touch;
@@ -83,7 +82,7 @@
             transform: translateY(0);
         }
 
-        /* ========== HEADER OPTIMISÉ MOBILE ========== */
+        /* ========== HEADER ========== */
         header {
             background: white;
             box-shadow: 0 2px 20px rgba(0,0,0,0.05);
@@ -109,7 +108,6 @@
             gap: 12px;
         }
 
-        /* Logo compact sur mobile */
         .logo {
             display: flex;
             align-items: center;
@@ -137,7 +135,6 @@
             letter-spacing: 0.3px;
         }
 
-        /* Navigation mobile */
         nav ul {
             display: none;
             flex-direction: column;
@@ -182,7 +179,7 @@
             justify-content: center;
         }
 
-        /* ========== HERO - MOBILE FIRST ========== */
+        /* ========== HERO ========== */
         .hero {
             position: relative;
             background: linear-gradient(135deg, #0077A4 0%, #005a7c 100%);
@@ -458,28 +455,6 @@
             align-items: center;
         }
 
-        .alert-banner {
-            background: linear-gradient(105deg, #fef3c7 0%, #fffbeb 100%);
-            border-left: 4px solid #f59e0b;
-            padding: 12px 20px;
-            border-radius: 20px;
-            margin-bottom: 30px;
-            display: flex;
-            align-items: center;
-            gap: 12px;
-            flex-wrap: wrap;
-        }
-
-        .alert-banner i {
-            font-size: 1.3rem;
-            color: #f59e0b;
-        }
-
-        .alert-banner p {
-            font-size: 0.9rem;
-            flex: 1;
-        }
-
         /* ========== FOOTER ========== */
         footer {
             background: #0f172a;
@@ -505,27 +480,23 @@
             color: #1D8B5D;
         }
 
-        /* ========== RESPONSIVE TABLETTE ========== */
+        /* ========== RESPONSIVE ========== */
         @media (min-width: 640px) {
             .cards-grid {
                 grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
             }
-            
             .hero-content h2 {
                 font-size: 2.2rem;
             }
-            
             .section-title {
                 font-size: 2rem;
             }
         }
 
-        /* ========== RESPONSIVE DESKTOP ========== */
         @media (min-width: 1024px) {
             .mobile-menu-btn {
                 display: none;
             }
-            
             nav ul {
                 display: flex !important;
                 flex-direction: row;
@@ -535,92 +506,72 @@
                 padding: 0;
                 gap: 28px;
             }
-            
             nav a {
                 padding: 0;
             }
-            
             .header-container {
                 padding: 12px 24px;
             }
-            
             .logo img {
                 height: 55px;
             }
-            
             .logo-text h1 {
                 font-size: 1.4rem;
             }
-            
             .logo-text p {
                 font-size: 0.65rem;
             }
-            
             .hero-content h2 {
                 font-size: 3rem;
             }
-            
             .hero-slogan {
                 font-size: 1.2rem;
             }
-            
             .btn {
                 padding: 14px 38px;
                 font-size: 1rem;
             }
-            
             section {
                 padding: 80px 0;
             }
-            
             .section-title {
                 font-size: 2.3rem;
             }
-            
             .rdv-grid {
                 grid-template-columns: 1fr 1fr;
                 gap: 52px;
             }
-            
             .presentation-grid {
                 grid-template-columns: 1fr 1fr;
                 gap: 56px;
             }
-            
             .footer-grid {
                 grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
                 text-align: left;
             }
-            
             .stats-container {
                 gap: 40px;
             }
-            
             .stat-number {
                 font-size: 2.7rem;
             }
         }
 
-        /* Amélioration du scroll fluide sur mobile */
         @media (max-width: 768px) {
             .container {
                 padding: 0 16px;
             }
-            
             .hero-buttons {
                 display: flex;
                 flex-direction: column;
                 align-items: center;
                 gap: 10px;
             }
-            
             .btn {
                 width: 90%;
                 margin: 5px auto;
                 text-align: center;
             }
-            
-            /* Éviter les débordements */
             .card-header, .card-title, .card-content, .card-footer {
                 padding-left: 16px;
                 padding-right: 16px;
@@ -695,25 +646,52 @@
         </div>
     </div>
 
-    <!-- SERVICES -->
+    <!-- SERVICES : 6 SERVICES PRINCIPAUX -->
     <section id="services" class="bg-white">
         <div class="container">
-            <h2 class="section-title animate-on-scroll">Nos services</h2>
+            <h2 class="section-title animate-on-scroll">Nos 6 services de soins</h2>
             <div class="cards-grid">
-                <div class="card animate-on-scroll"><div class="card-header"><div class="card-icon">🩺</div><span class="badge-category">Consultation</span></div><div class="card-title">Consultations générales</div><div class="card-content"><p class="card-text">Médecine générale quotidienne, suivi des maladies chroniques, certificats médicaux.</p></div></div>
-                <div class="card animate-on-scroll"><div class="card-header"><div class="card-icon">❤️</div><span class="badge-category">Spécialiste</span></div><div class="card-title">Cardiologie</div><div class="card-content"><p class="card-text">Explorations cardiaques complètes, électrocardiogramme, échographie cardiaque.</p></div></div>
-                <div class="card animate-on-scroll"><div class="card-header"><div class="card-icon">🚑</div><span class="badge-category">Urgence 24/24</span></div><div class="card-title">Urgences 24/24</div><div class="card-content"><p class="card-text">Sans rendez-vous, prise en charge immédiate par une équipe dédiée.</p></div></div>
+                <div class="card animate-on-scroll">
+                    <div class="card-header"><div class="card-icon">🚑</div><span class="badge-category">Urgence 24/24</span></div>
+                    <div class="card-title">Médecine d'urgence</div>
+                    <div class="card-content"><p class="card-text">Prise en charge immédiate 24h/24, 7j/7. Équipe dédiée aux accidents, détresses respiratoires, douleurs aiguës et pathologies urgentes.</p></div>
+                </div>
+                <div class="card animate-on-scroll">
+                    <div class="card-header"><div class="card-icon">🩺</div><span class="badge-category">Consultation</span></div>
+                    <div class="card-title">Consultations générales</div>
+                    <div class="card-content"><p class="card-text">Médecine générale, suivi des maladies chroniques (diabète, HTA), certificats médicaux et vaccinations. RDV ou sans RDV.</p></div>
+                </div>
+                <div class="card animate-on-scroll">
+                    <div class="card-header"><div class="card-icon">❤️</div><span class="badge-category">Spécialiste</span></div>
+                    <div class="card-title">Cardiologie</div>
+                    <div class="card-content"><p class="card-text">Explorations cardiaques complètes : ECG, échocardiographie, Holter tensionnel et suivi personnalisé.</p></div>
+                </div>
+                <div class="card animate-on-scroll">
+                    <div class="card-header"><div class="card-icon">👶</div><span class="badge-category">Pédiatrie</span></div>
+                    <div class="card-title">Pédiatrie & néonatologie</div>
+                    <div class="card-content"><p class="card-text">Consultations spécialisées pour enfants, suivi de croissance, vaccinations et prise en charge des pathologies infantiles.</p></div>
+                </div>
+                <div class="card animate-on-scroll">
+                    <div class="card-header"><div class="card-icon">🦴</div><span class="badge-category">Chirurgie</span></div>
+                    <div class="card-title">Chirurgie générale</div>
+                    <div class="card-content"><p class="card-text">Bloc opératoire moderne, chirurgie programmée et d’urgence (appendicite, hernie, traumatologie).</p></div>
+                </div>
+                <div class="card animate-on-scroll">
+                    <div class="card-header"><div class="card-icon">🧠</div><span class="badge-category">Spécialiste</span></div>
+                    <div class="card-title">Neurologie & imagerie</div>
+                    <div class="card-content"><p class="card-text">Consultations neurologiques, électroencéphalogramme, échographies et examens d’imagerie de première intention.</p></div>
+                </div>
             </div>
         </div>
     </section>
 
-    <!-- ÉQUIPE -->
+    <!-- ÉQUIPE MÉDICALE -->
     <section id="equipe" class="bg-light">
         <div class="container">
             <h2 class="section-title animate-on-scroll">Notre équipe médicale</h2>
             <div class="cards-grid">
-                <div class="card animate-on-scroll"><div class="card-header"><div class="card-icon">👨‍⚕️</div><span class="badge-category">Urgences 24/24</span></div><div class="card-title">Dr. Adama Koné</div><div class="card-content"><p class="card-text">Médecin généraliste – 15 ans d'expérience</p></div></div>
-                <div class="card animate-on-scroll"><div class="card-header"><div class="card-icon">👩‍⚕️</div><span class="badge-category">Consultation sur RDV</span></div><div class="card-title">Dr. Fatimata Zongo</div><div class="card-content"><p class="card-text">Cardiologue – Spécialiste en pathologies cardiaques</p></div></div>
+                <div class="card animate-on-scroll"><div class="card-header"><div class="card-icon">👨‍⚕️</div><span class="badge-category">Urgences 24/24</span></div><div class="card-title">Dr. Adama Koné</div><div class="card-content"><p class="card-text">Médecin généraliste – 15 ans d'expérience, responsable du pôle urgences</p></div></div>
+                <div class="card animate-on-scroll"><div class="card-header"><div class="card-icon">👩‍⚕️</div><span class="badge-category">Consultation sur RDV</span></div><div class="card-title">Dr. Fatimata Zongo</div><div class="card-content"><p class="card-text">Cardiologue – Spécialiste en pathologies cardiaques et prévention</p></div></div>
                 <div class="card animate-on-scroll"><div class="card-header"><div class="card-icon">👨‍⚕️</div><span class="badge-category">Pédiatrie</span></div><div class="card-title">Dr. Issa Ouédraogo</div><div class="card-content"><p class="card-text">Pédiatre – Prise en charge des enfants et vaccinations</p></div></div>
             </div>
         </div>
@@ -736,6 +714,8 @@
                                 <option>Consultation générale</option>
                                 <option>Cardiologie</option>
                                 <option>Pédiatrie</option>
+                                <option>Neurologie</option>
+                                <option>Chirurgie générale</option>
                             </select>
                         </div>
                         <div class="form-group"><textarea rows="2" placeholder="Motif de la consultation"></textarea></div>
@@ -765,13 +745,9 @@
     <section id="actualites" class="bg-light">
         <div class="container">
             <h2 class="section-title animate-on-scroll">📰 Actualités</h2>
-            <div class="alert-banner animate-on-scroll">
-                <i class="fas fa-microphone-alt"></i>
-                <p>✨ Nouveau : Service de télémédecine disponible ! Consultez un médecin à distance.</p>
-            </div>
             <div class="cards-grid">
                 <div class="card animate-on-scroll"><div class="card-header"><div class="card-icon">🩺</div><span class="badge-category">Santé</span></div><div class="card-title">Campagne de vaccination gratuite</div><div class="card-content"><p class="card-text">Vaccination contre la fièvre typhoïde à la clinique. Venez nombreux du 10 au 20 avril !</p></div><div class="card-footer"><span>📅 01/04/2026</span><span>🔖 Prévention</span></div></div>
-                <div class="card animate-on-scroll"><div class="card-header"><div class="card-icon">📰</div><span class="badge-category">Information</span></div><div class="card-title">Nouveau spécialiste en cardiologie</div><div class="card-content"><p class="card-text">Le Dr Fatimata Zongo rejoint notre équipe de cardiologie. Prenez dès maintenant vos rendez-vous.</p></div><div class="card-footer"><span>📅 25/03/2026</span><span>🔖 Cardiologie</span></div></div>
+                <div class="card animate-on-scroll"><div class="card-header"><div class="card-icon">📰</div><span class="badge-category">Information</span></div><div class="card-title">Nouveau spécialiste en cardiologie</div><div class="card-content"><p class="card-text">Le Dr Fatimata Zongo rejoint notre équipe de cardiologie. Prenez rendez-vous dès maintenant.</p></div><div class="card-footer"><span>📅 25/03/2026</span><span>🔖 Cardiologie</span></div></div>
                 <div class="card animate-on-scroll"><div class="card-header"><div class="card-icon">🎉</div><span class="badge-category">Événement</span></div><div class="card-title">Journée portes ouvertes</div><div class="card-content"><p class="card-text">Visitez la clinique et rencontrez nos médecins le 15 avril de 9h à 16h. Entrée libre !</p></div><div class="card-footer"><span>📅 10/04/2026</span><span>🔖 Visite</span></div></div>
             </div>
         </div>
@@ -784,7 +760,7 @@
             <div class="cards-grid">
                 <div class="card animate-on-scroll"><div class="card-header"><div class="stars">★★★★★</div><span class="badge-category">Patient vérifié</span></div><div class="card-title">Marie K.</div><div class="card-content"><p class="card-text">"Accueil parfait, urgences rapides. Je recommande vivement cette clinique."</p></div><div class="card-footer"><span>📅 15/03/2026</span><span>👍 Recommandé</span></div></div>
                 <div class="card animate-on-scroll"><div class="card-header"><div class="stars">★★★★★</div><span class="badge-category">Patient vérifié</span></div><div class="card-title">Issa O.</div><div class="card-content"><p class="card-text">"Clinique propre et médecins à l'écoute. Service d'urgence très réactif."</p></div><div class="card-footer"><span>📅 10/03/2026</span><span>👍 Recommandé</span></div></div>
-                <div class="card animate-on-scroll"><div class="card-header"><div class="stars">★★★★☆</div><span class="badge-category">Patient vérifié</span></div><div class="card-title">Amina T.</div><div class="card-content"><p class="card-text">"Très bonne prise en charge, personnel sympathique et compétent. Je reviendrai."</p></div><div class="card-footer"><span>📅 05/03/2026</span><span>👍 Satisfaite</span></div></div>
+                <div class="card animate-on-scroll"><div class="card-header"><div class="stars">★★★★☆</div><span class="badge-category">Patient vérifié</span></div><div class="card-title">Amina T.</div><div class="card-content"><p class="card-text">"Très bonne prise en charge, personnel sympathique. Je reviendrai."</p></div><div class="card-footer"><span>📅 05/03/2026</span><span>👍 Satisfaite</span></div></div>
             </div>
             <div style="text-align: center; margin-top: 35px; display: flex; justify-content: center; gap: 25px; flex-wrap: wrap;">
                 <div><i class="fas fa-star" style="color: #f39c12;"></i> <strong>4.8/5</strong> (48 avis)</div>
@@ -840,7 +816,6 @@
 </footer>
 
 <script>
-    // Animations au scroll
     const animateElements = document.querySelectorAll('.animate-on-scroll');
     const checkVisibility = () => {
         animateElements.forEach(el => {
@@ -855,14 +830,12 @@
     window.addEventListener('load', checkVisibility);
     window.addEventListener('resize', checkVisibility);
     
-    // Header au scroll
     window.addEventListener('scroll', () => {
         const header = document.querySelector('header');
         if (window.scrollY > 50) header.classList.add('scrolled');
         else header.classList.remove('scrolled');
     });
     
-    // Menu mobile - Version améliorée
     const mobileBtn = document.querySelector('.mobile-menu-btn');
     const navMenu = document.getElementById('navMenu');
     
@@ -873,7 +846,6 @@
             mobileBtn.textContent = navMenu.classList.contains('show') ? '✕' : '☰';
         });
         
-        // Fermer le menu quand on clique sur un lien
         navMenu.querySelectorAll('a').forEach(link => {
             link.addEventListener('click', () => {
                 navMenu.classList.remove('show');
@@ -881,7 +853,6 @@
             });
         });
         
-        // Fermer le menu en cliquant à l'extérieur
         document.addEventListener('click', (e) => {
             if (!mobileBtn.contains(e.target) && !navMenu.contains(e.target)) {
                 navMenu.classList.remove('show');
@@ -890,7 +861,6 @@
         });
     }
     
-    // Formulaire RDV
     const rdvForm = document.getElementById('rdvForm');
     if (rdvForm) {
         rdvForm.addEventListener('submit', (e) => {
