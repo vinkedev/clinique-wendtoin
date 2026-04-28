@@ -74,7 +74,7 @@
         .animate-on-scroll {
             opacity: 0;
             transform: translateY(35px);
-            transition: opacity 0.9s cubic-bezier(0.2, 0.9, 0.4, 1.1), transform 0.9s cubic-bezier(0.2, 0.9, 0.4, 1.1);
+            transition: opacity 0.7s cubic-bezier(0.2, 0.9, 0.4, 1.1), transform 0.7s cubic-bezier(0.2, 0.9, 0.4, 1.1);
         }
 
         .animate-on-scroll.visible {
@@ -163,6 +163,10 @@
             display: block;
             padding: 8px 0;
             font-size: 1rem;
+        }
+
+        nav a:hover {
+            color: #1D8B5D;
         }
 
         .mobile-menu-btn {
@@ -279,9 +283,8 @@
             color: #0077A4;
             font-weight: 700;
             position: relative;
-            display: inline-block;
-            left: 50%;
-            transform: translateX(-50%);
+            display: block;
+            width: 100%;
         }
 
         .section-title::after {
@@ -294,6 +297,20 @@
             height: 3px;
             background: linear-gradient(90deg, #0077A4, #1D8B5D);
             border-radius: 4px;
+        }
+
+        /* Titre présentation */
+        .presentation-title {
+            text-align: center;
+            color: #0077A4;
+            margin-bottom: 20px;
+            font-size: 1.6rem;
+        }
+
+        @media (min-width: 768px) {
+            .presentation-title {
+                text-align: left;
+            }
         }
 
         /* ========== CARTES ========== */
@@ -455,7 +472,6 @@
             align-items: center;
         }
 
-        /* Style pour l'image de la clinique */
         .clinic-image {
             width: 100%;
             height: 100%;
@@ -606,7 +622,7 @@
 <header>
     <div class="header-container">
         <div class="logo">
-            <img src="wendtoin/logo_wendtoin.jpg" alt="Logo Clinique WENDTOIN" onerror="this.src='https://placehold.co/40x40/0077A4/white?text=W'">
+            <img src="wendtoin/logo_wendtoin.jpg" alt="Logo Clinique WENDTOIN" onerror="this.src='https://placehold.co/55x55/0077A4/white?text=W'">
             <div class="logo-text">
                 <h1>Clinique WENDTOIN</h1>
                 <p>Depuis janvier 2016</p>
@@ -647,7 +663,7 @@
         <div class="container">
             <div class="presentation-grid">
                 <div class="animate-on-scroll">
-                    <h2 style="color: #0077A4; margin-bottom: 20px; font-size: 1.6rem;">Bienvenue à la Clinique WENDTOIN</h2>
+                    <h2 class="presentation-title">Bienvenue à la Clinique WENDTOIN</h2>
                     <p>Ouverte depuis <strong>janvier 2016</strong>, la Clinique WENDTOIN est un établissement privé qui place le patient au cœur de ses priorités.</p>
                     <p style="margin-top: 15px;">En plus des <strong>soins standards</strong> (consultations générales, spécialités, vaccinations), nous assurons les <strong>urgences médicales et chirurgicales</strong> 24h/24 et 7j/7 grâce à une équipe de médecins généralistes et spécialistes dédiés.</p>
                     <p style="margin-top: 15px;">Située à <strong>Pissy, Ouagadougou</strong>, notre clinique vous accueille dans un environnement moderne et sécurisé.</p>
@@ -792,7 +808,7 @@
         </div>
     </section>
 
-    <!-- CONTACT -->
+    <!-- CONTACT AVEC GOOGLE MAPS -->
     <section id="contact" class="bg-light">
         <div class="container">
             <h2 class="section-title animate-on-scroll">Contact & localisation</h2>
@@ -814,10 +830,20 @@
                 <div>
                     <div class="info-box animate-on-scroll">
                         <h3>🗺️ Plan d'accès</h3>
-                        <div style="background: linear-gradient(135deg, #e2e8f0, #cbd5e1); border-radius: 24px; height: 220px; display: flex; align-items: center; justify-content: center; flex-direction: column;">
-                            📍 Pissy, Ouagadougou
-                            <p style="font-size: 0.85rem; margin-top: 10px;">Secteur 44, près du lycée de Pissy</p>
+                        <div style="border-radius: 24px; overflow: hidden; height: 280px; margin-top: 10px; box-shadow: 0 5px 15px rgba(0,0,0,0.1);">
+                            <iframe 
+                                src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d15590.747808531722!2d-1.5628767!3d12.3368449!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0xe2e967403b1226b%3A0xd4fdc5490ba66f45!2sClinique%20WendToin!5e0!3m2!1sfr!2sbf!4v1777369119568!5m2!1sfr!2sbf" 
+                                width="100%" 
+                                height="280" 
+                                style="border:0;" 
+                                allowfullscreen="" 
+                                loading="lazy" 
+                                referrerpolicy="no-referrer-when-downgrade">
+                            </iframe>
                         </div>
+                        <p style="margin-top: 12px; font-size: 0.85rem;">
+                            📍 Secteur 44, Pissy - Près du lycée de Pissy
+                        </p>
                     </div>
                 </div>
             </div>
@@ -829,7 +855,7 @@
     <div class="container">
         <div class="footer-grid">
             <div><h4 style="color: #1D8B5D;">Clinique WENDTOIN</h4><p>📍 Pissy, Ouagadougou<br>📞 79 09 55 32</p></div>
-            <div><h4 style="color: #1D8B5D;">🚨 Urgences 24/24</h4><p><strong style="font-size: 1.2rem;">79 09 55 32</strong></p></div>
+            <div><h4 style="color: #1D8B5D;">🚨 Urgences 24/24</h4><p><strong style="font-size: 1.2rem;"><a href="tel:79095532" style="color:#1D8B5D; text-decoration:none;">79 09 55 32</a></strong></p></div>
             <div><h4 style="color: #1D8B5D;">Horaires consultations</h4><p>Lun-Ven : 7h30-19h30<br>Sam : 7h30-12h</p></div>
             <div><h4 style="color: #1D8B5D;">Liens rapides</h4><p><a href="#rdv">Prendre RDV</a><br><a href="#services">Nos services</a></p></div>
         </div>
@@ -865,20 +891,20 @@
         mobileBtn.addEventListener('click', (e) => {
             e.stopPropagation();
             navMenu.classList.toggle('show');
-            mobileBtn.textContent = navMenu.classList.contains('show') ? '✕' : '☰';
+            mobileBtn.innerHTML = navMenu.classList.contains('show') ? '✕' : '☰';
         });
         
         navMenu.querySelectorAll('a').forEach(link => {
             link.addEventListener('click', () => {
                 navMenu.classList.remove('show');
-                if (mobileBtn) mobileBtn.textContent = '☰';
+                if (mobileBtn) mobileBtn.innerHTML = '☰';
             });
         });
         
         document.addEventListener('click', (e) => {
             if (!mobileBtn.contains(e.target) && !navMenu.contains(e.target)) {
                 navMenu.classList.remove('show');
-                if (mobileBtn) mobileBtn.textContent = '☰';
+                if (mobileBtn) mobileBtn.innerHTML = '☰';
             }
         });
     }
