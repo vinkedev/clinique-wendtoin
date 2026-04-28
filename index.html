@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes, viewport-fit=cover">
     <title>Clinique WENDTOIN – Urgences 24h/24 à Ouagadougou</title>
-    <meta name="description" content="Clinique privée à Pissy, Ouagadougou. Urgences médicales et chirurgicales 24h/24, 7j/7. 6 services de soins spécialisés.">
+    <meta name="description" content="Clinique privée à Cissin, Ouagadougou. Urgences médicales et chirurgicales 24h/24, 7j/7. 6 services de soins spécialisés.">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <style>
@@ -271,6 +271,29 @@
             color: #0077A4;
         }
 
+        /* WhatsApp flottant */
+        .whatsapp-float {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background: #25D366;
+            width: 55px;
+            height: 55px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 28px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+            z-index: 999;
+            transition: transform 0.3s ease;
+        }
+
+        .whatsapp-float:hover {
+            transform: scale(1.1);
+        }
+
         /* ========== SECTIONS ========== */
         section {
             padding: 50px 0;
@@ -299,7 +322,6 @@
             border-radius: 4px;
         }
 
-        /* Titre présentation */
         .presentation-title {
             text-align: center;
             color: #0077A4;
@@ -493,6 +515,17 @@
             box-shadow: 0 10px 20px rgba(0,0,0,0.1);
         }
 
+        /* Badge assurance */
+        .assurance-badge {
+            display: inline-block;
+            background: #e6f7f0;
+            padding: 5px 12px;
+            border-radius: 50px;
+            font-size: 0.75rem;
+            margin: 3px;
+            color: #1D8B5D;
+        }
+
         /* ========== FOOTER ========== */
         footer {
             background: #0f172a;
@@ -619,6 +652,11 @@
 </head>
 <body>
 
+<!-- WhatsApp Flottant -->
+<a href="https://wa.me/22651000647" class="whatsapp-float" target="_blank">
+    <i class="fab fa-whatsapp"></i>
+</a>
+
 <header>
     <div class="header-container">
         <div class="logo">
@@ -652,13 +690,13 @@
                 <p class="hero-slogan">Urgences médicales et chirurgicales assurées par des généralistes et spécialistes 24h/24 – 7j/7</p>
                 <div class="hero-buttons">
                     <a href="#rdv" class="btn btn-primary">📅 Prendre rendez-vous</a>
-                    <a href="tel:79095532" class="btn btn-outline">🆘 Urgence 24/24</a>
+                    <a href="tel:51000647" class="btn btn-outline">🆘 Urgence 24/24</a>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- PRÉSENTATION + VUE EXTÉRIEURE DE LA CLINIQUE -->
+    <!-- PRÉSENTATION + VUE EXTÉRIEURE -->
     <section class="bg-light">
         <div class="container">
             <div class="presentation-grid">
@@ -666,10 +704,15 @@
                     <h2 class="presentation-title">Bienvenue à la Clinique WENDTOIN</h2>
                     <p>Ouverte depuis <strong>janvier 2016</strong>, la Clinique WENDTOIN est un établissement privé qui place le patient au cœur de ses priorités.</p>
                     <p style="margin-top: 15px;">En plus des <strong>soins standards</strong> (consultations générales, spécialités, vaccinations), nous assurons les <strong>urgences médicales et chirurgicales</strong> 24h/24 et 7j/7 grâce à une équipe de médecins généralistes et spécialistes dédiés.</p>
-                    <p style="margin-top: 15px;">Située à <strong>Pissy, Ouagadougou</strong>, notre clinique vous accueille dans un environnement moderne et sécurisé.</p>
+                    <p style="margin-top: 15px;">Située au <strong>Boulevard des Tensoba, Secteur n°25, Cissin, Ouagadougou</strong>, notre clinique vous accueille dans un environnement moderne et sécurisé.</p>
+                    <!-- Infos légales -->
+                    <div style="margin-top: 20px; display: flex; flex-wrap: wrap; gap: 10px;">
+                        <span class="assurance-badge">🏥 RCCM: BF-OUA-01-2024-M-04165</span>
+                        <span class="assurance-badge">📄 IFU: 00180415T</span>
+                    </div>
                 </div>
                 <div class="image-wrapper animate-on-scroll">
-                    <img src="wendtoin/vue_wendtoin.jpg" alt="Vue extérieure de la Clinique WENDTOIN à Pissy, Ouagadougou" class="clinic-image" onerror="this.src='https://placehold.co/600x400/0077A4/white?text=Clinique+WENDTOIN'">
+                    <img src="wendtoin/vue_wendtoin.jpg" alt="Vue extérieure de la Clinique WENDTOIN" class="clinic-image" onerror="this.src='https://placehold.co/600x400/0077A4/white?text=Clinique+WENDTOIN'">
                 </div>
             </div>
         </div>
@@ -684,7 +727,7 @@
         </div>
     </div>
 
-    <!-- SERVICES : 6 SERVICES PRINCIPAUX -->
+    <!-- SERVICES -->
     <section id="services" class="bg-white">
         <div class="container">
             <h2 class="section-title animate-on-scroll">Nos 6 services de soins</h2>
@@ -741,7 +784,7 @@
             <h2 class="section-title animate-on-scroll">Prendre rendez-vous</h2>
             <div class="rdv-grid">
                 <div class="info-box animate-on-scroll">
-                    <h3>Formulaire de rendez-vous</h3>
+                    <h3>📅 Formulaire de rendez-vous</h3>
                     <form id="rdvForm">
                         <div class="form-group"><input type="text" placeholder="Nom complet" required></div>
                         <div class="form-group"><input type="tel" placeholder="Téléphone" required></div>
@@ -757,22 +800,26 @@
                             </select>
                         </div>
                         <div class="form-group"><textarea rows="2" placeholder="Motif de la consultation"></textarea></div>
-                        <button type="submit" class="btn btn-primary" style="width:100%">Envoyer la demande</button>
+                        <button type="submit" class="btn btn-primary" style="width:100%">📨 Envoyer la demande</button>
                         <p id="formMessage" style="margin-top: 16px;"></p>
                     </form>
+                    <p style="margin-top: 15px; text-align: center; font-size: 0.85rem;">
+                        ou contactez-nous directement sur <strong style="color:#25D366;">WhatsApp</strong> au <a href="https://wa.me/22651000647" style="color:#1D8B5D;">51 00 06 47</a>
+                    </p>
                 </div>
                 <div>
                     <div class="info-box animate-on-scroll">
                         <h3>📅 Horaires d'ouverture</h3>
                         <p><strong>Consultations :</strong><br>Lundi – Vendredi : 7h30 – 19h30<br>Samedi : 7h30 – 12h00</p>
-                    </div>
-                    <div class="info-box animate-on-scroll">
-                        <h3>🚨 Urgences 24/24 – 7j/7</h3>
-                        <p>Téléphone : <strong style="color:#1D8B5D; font-size:1.2rem;">79 09 55 32</strong><br>Sans rendez-vous, prise en charge immédiate.</p>
+                        <p style="margin-top: 10px;"><strong>🚨 Urgences 24/24 – 7j/7</strong><br>Sans rendez-vous, prise en charge immédiate.</p>
                     </div>
                     <div class="info-box animate-on-scroll">
                         <h3>🏛️ Assurances acceptées</h3>
-                        <p>CNSS, mutuelles de santé, Inami Burkina, assurances privées.</p>
+                        <p>CNSS, Inami Burkina, mutuelles de santé, assurances privées.<br>Nous consulter pour plus d'informations.</p>
+                    </div>
+                    <div class="info-box animate-on-scroll">
+                        <h3>💰 Paiement</h3>
+                        <p>Espèces, virement bancaire<br>Compte Orabank : <strong>062140903001-39</strong></p>
                     </div>
                 </div>
             </div>
@@ -784,9 +831,9 @@
         <div class="container">
             <h2 class="section-title animate-on-scroll">📰 Actualités</h2>
             <div class="cards-grid">
-                <div class="card animate-on-scroll"><div class="card-header"><div class="card-icon">🩺</div><span class="badge-category">Santé</span></div><div class="card-title">Campagne de vaccination gratuite</div><div class="card-content"><p class="card-text">Vaccination contre la fièvre typhoïde à la clinique. Venez nombreux du 10 au 20 avril !</p></div><div class="card-footer"><span>📅 01/04/2026</span><span>🔖 Prévention</span></div></div>
-                <div class="card animate-on-scroll"><div class="card-header"><div class="card-icon">📰</div><span class="badge-category">Information</span></div><div class="card-title">Nouveau spécialiste en cardiologie</div><div class="card-content"><p class="card-text">Le Dr Fatimata Zongo rejoint notre équipe de cardiologie. Prenez rendez-vous dès maintenant.</p></div><div class="card-footer"><span>📅 25/03/2026</span><span>🔖 Cardiologie</span></div></div>
-                <div class="card animate-on-scroll"><div class="card-header"><div class="card-icon">🎉</div><span class="badge-category">Événement</span></div><div class="card-title">Journée portes ouvertes</div><div class="card-content"><p class="card-text">Visitez la clinique et rencontrez nos médecins le 15 avril de 9h à 16h. Entrée libre !</p></div><div class="card-footer"><span>📅 10/04/2026</span><span>🔖 Visite</span></div></div>
+                <div class="card animate-on-scroll"><div class="card-header"><div class="card-icon">🩺</div><span class="badge-category">Santé</span></div><div class="card-title">Campagne de vaccination</div><div class="card-content"><p class="card-text">Vaccination contre la fièvre typhoïde à la clinique. Venez nombreux !</p></div><div class="card-footer"><span>📅 Avril 2026</span><span>🔖 Prévention</span></div></div>
+                <div class="card animate-on-scroll"><div class="card-header"><div class="card-icon">📰</div><span class="badge-category">Information</span></div><div class="card-title">Nouveau spécialiste en cardiologie</div><div class="card-content"><p class="card-text">Le Dr Fatimata Zongo rejoint notre équipe. Prenez rendez-vous.</p></div><div class="card-footer"><span>📅 Mars 2026</span><span>🔖 Cardiologie</span></div></div>
+                <div class="card animate-on-scroll"><div class="card-header"><div class="card-icon">🎉</div><span class="badge-category">Événement</span></div><div class="card-title">Journée portes ouvertes</div><div class="card-content"><p class="card-text">Visitez la clinique et rencontrez nos médecins. Entrée libre !</p></div><div class="card-footer"><span>📅 À venir</span><span>🔖 Visite</span></div></div>
             </div>
         </div>
     </section>
@@ -796,14 +843,12 @@
         <div class="container">
             <h2 class="section-title animate-on-scroll">⭐ Ce que nos patients disent</h2>
             <div class="cards-grid">
-                <div class="card animate-on-scroll"><div class="card-header"><div class="stars">★★★★★</div><span class="badge-category">Patient vérifié</span></div><div class="card-title">Marie K.</div><div class="card-content"><p class="card-text">"Accueil parfait, urgences rapides. Je recommande vivement cette clinique."</p></div><div class="card-footer"><span>📅 15/03/2026</span><span>👍 Recommandé</span></div></div>
-                <div class="card animate-on-scroll"><div class="card-header"><div class="stars">★★★★★</div><span class="badge-category">Patient vérifié</span></div><div class="card-title">Issa O.</div><div class="card-content"><p class="card-text">"Clinique propre et médecins à l'écoute. Service d'urgence très réactif."</p></div><div class="card-footer"><span>📅 10/03/2026</span><span>👍 Recommandé</span></div></div>
-                <div class="card animate-on-scroll"><div class="card-header"><div class="stars">★★★★☆</div><span class="badge-category">Patient vérifié</span></div><div class="card-title">Amina T.</div><div class="card-content"><p class="card-text">"Très bonne prise en charge, personnel sympathique. Je reviendrai."</p></div><div class="card-footer"><span>📅 05/03/2026</span><span>👍 Satisfaite</span></div></div>
+                <div class="card animate-on-scroll"><div class="card-header"><div class="stars">★★★★★</div><span class="badge-category">Patient</span></div><div class="card-title">Marie K.</div><div class="card-content"><p class="card-text">"Accueil parfait, urgences rapides. Je recommande vivement."</p></div></div>
+                <div class="card animate-on-scroll"><div class="card-header"><div class="stars">★★★★★</div><span class="badge-category">Patient</span></div><div class="card-title">Issa O.</div><div class="card-content"><p class="card-text">"Clinique propre, médecins à l'écoute. Service d'urgence très réactif."</p></div></div>
+                <div class="card animate-on-scroll"><div class="card-header"><div class="stars">★★★★☆</div><span class="badge-category">Patient</span></div><div class="card-title">Amina T.</div><div class="card-content"><p class="card-text">"Très bonne prise en charge, personnel sympathique."</p></div></div>
             </div>
-            <div style="text-align: center; margin-top: 35px; display: flex; justify-content: center; gap: 25px; flex-wrap: wrap;">
-                <div><i class="fas fa-star" style="color: #f39c12;"></i> <strong>4.8/5</strong> (48 avis)</div>
-                <div><i class="fas fa-smile" style="color: #1D8B5D;"></i> <strong>98%</strong> de satisfaction</div>
-                <div><i class="fas fa-calendar-check" style="color: #0077A4;"></i> <strong>500+</strong> consultations/mois</div>
+            <div style="text-align: center; margin-top: 35px;">
+                <a href="https://wa.me/22651000647" style="color:#1D8B5D;">📝 Laissez-nous un avis sur WhatsApp</a>
             </div>
         </div>
     </section>
@@ -816,15 +861,29 @@
                 <div>
                     <div class="info-box animate-on-scroll">
                         <h3>📍 Adresse</h3>
-                        <p>Pissy, Ouagadougou<br>Burkina Faso</p>
+                        <p>Boulevard des Tensoba, Secteur n°25<br>Cissin, Ouagadougou<br>Burkina Faso</p>
+                        <p style="margin-top: 10px;">📬 11 BP 1104 CMS Ouagadougou 11</p>
                     </div>
                     <div class="info-box animate-on-scroll">
                         <h3>📞 Téléphone</h3>
-                        <p><strong>Urgences 24/24 :</strong> <span style="color:#1D8B5D; font-size:1.1rem;">79 09 55 32</span><br><strong>Standard :</strong> 79 09 55 32</p>
+                        <p>
+                            <strong>🚨 Urgences 24/24 :</strong><br>
+                            <a href="tel:51000647" style="color:#1D8B5D; font-size:1.2rem; text-decoration:none;">51 00 06 47</a><br>
+                            <strong>📞 Standard :</strong> <a href="tel:78365657" style="color:#1D8B5D;">78 36 56 57</a>
+                        </p>
+                    </div>
+                    <div class="info-box animate-on-scroll">
+                        <h3>💬 WhatsApp</h3>
+                        <p>
+                            <a href="https://wa.me/22651000647" style="color:#25D366; font-size:1.1rem;">
+                                <i class="fab fa-whatsapp"></i> 51 00 06 47
+                            </a><br>
+                            Pour rendez-vous et questions rapides
+                        </p>
                     </div>
                     <div class="info-box animate-on-scroll">
                         <h3>📧 Email</h3>
-                        <p>contact@cliniquewendtoin.bf</p>
+                        <p><a href="mailto:clinwend@gmail.com">clinwend@gmail.com</a></p>
                     </div>
                 </div>
                 <div>
@@ -842,7 +901,7 @@
                             </iframe>
                         </div>
                         <p style="margin-top: 12px; font-size: 0.85rem;">
-                            📍 Secteur 44, Pissy - Près du lycée de Pissy
+                            📍 Boulevard des Tensoba, Secteur 25, Cissin
                         </p>
                     </div>
                 </div>
@@ -854,12 +913,28 @@
 <footer>
     <div class="container">
         <div class="footer-grid">
-            <div><h4 style="color: #1D8B5D;">Clinique WENDTOIN</h4><p>📍 Pissy, Ouagadougou<br>📞 79 09 55 32</p></div>
-            <div><h4 style="color: #1D8B5D;">🚨 Urgences 24/24</h4><p><strong style="font-size: 1.2rem;"><a href="tel:79095532" style="color:#1D8B5D; text-decoration:none;">79 09 55 32</a></strong></p></div>
-            <div><h4 style="color: #1D8B5D;">Horaires consultations</h4><p>Lun-Ven : 7h30-19h30<br>Sam : 7h30-12h</p></div>
-            <div><h4 style="color: #1D8B5D;">Liens rapides</h4><p><a href="#rdv">Prendre RDV</a><br><a href="#services">Nos services</a></p></div>
+            <div>
+                <h4 style="color: #1D8B5D;">Clinique WENDTOIN</h4>
+                <p>📍 Boulevard des Tensoba, Secteur 25<br>Cissin, Ouagadougou<br>📞 <a href="tel:51000647" style="color:#1D8B5D;">51 00 06 47</a><br>📧 clinwend@gmail.com</p>
+            </div>
+            <div>
+                <h4 style="color: #1D8B5D;">🚨 Urgences 24/24</h4>
+                <p><strong style="font-size: 1.2rem;"><a href="tel:51000647" style="color:#1D8B5D; text-decoration:none;">51 00 06 47</a></strong></p>
+                <p style="margin-top: 10px;"><i class="fab fa-whatsapp"></i> WhatsApp : <a href="https://wa.me/22651000647" style="color:#1D8B5D;">51 00 06 47</a></p>
+            </div>
+            <div>
+                <h4 style="color: #1D8B5D;">Horaires consultations</h4>
+                <p>Lun-Ven : 7h30-19h30<br>Sam : 7h30-12h</p>
+            </div>
+            <div>
+                <h4 style="color: #1D8B5D;">Liens rapides</h4>
+                <p><a href="#rdv">Prendre RDV</a><br><a href="#services">Nos services</a><br><a href="#contact">Nous trouver</a></p>
+            </div>
         </div>
-        <div style="text-align:center; margin-top: 40px; padding-top: 20px; border-top: 1px solid #334155;">&copy; 2026 Clinique WENDTOIN – Tous droits réservés</div>
+        <div style="text-align:center; margin-top: 40px; padding-top: 20px; border-top: 1px solid #334155; font-size:0.8rem;">
+            <p>RCCM: BF-OUA-01-2024-M-04165 | IFU: 00180415T</p>
+            <p>&copy; 2026 Clinique WENDTOIN – Tous droits réservés</p>
+        </div>
     </div>
 </footer>
 
@@ -915,7 +990,7 @@
             e.preventDefault();
             const msgDiv = document.getElementById('formMessage');
             if (msgDiv) {
-                msgDiv.innerHTML = '✅ Demande envoyée. Nous vous recontacterons rapidement.';
+                msgDiv.innerHTML = '✅ Demande envoyée. Nous vous recontacterons rapidement sur WhatsApp ou téléphone.';
                 msgDiv.style.color = '#1D8B5D';
             }
             e.target.reset();
