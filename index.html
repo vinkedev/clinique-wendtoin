@@ -553,6 +553,7 @@
             vertical-align: middle;
         }
 
+        /* ========== GALERIE STYLES ========== */
         .gallery-grid {
             display: grid;
             grid-template-columns: 1fr;
@@ -595,7 +596,6 @@
             box-shadow: 0 5px 15px rgba(0,0,0,0.08);
             cursor: pointer;
         }
-        /* Style unifié pour toutes les images de la galerie (mobile + desktop) */
         .gallery-scroll-item img {
             width: 100%;
             height: 220px;
@@ -746,7 +746,7 @@
             }
         }
 
-        /* Mobile : la version desktop (grille) est cachée, le carrousel horizontal apparaît */
+        /* ========== MOBILE : HAUTEUR DES IMAGES À 300PX ========== */
         @media (max-width: 768px) {
             .container {
                 padding: 0 16px;
@@ -766,16 +766,17 @@
                 padding-left: 16px;
                 padding-right: 16px;
             }
-            /* Masquer la grille classique et afficher le scroll horizontal */
+            /* Masquer la grille classique */
             .gallery-grid {
                 display: none;
             }
+            /* Afficher le scroll horizontal */
             .gallery-scroll {
                 display: block;
             }
-            /* Hauteur uniformisée pour les images du carrousel mobile */
+            /* HAUTEUR DES IMAGES SUR MOBILE : 300PX */
             .gallery-scroll-item img {
-                height: 220px;
+                height: 300px;
                 width: 100%;
                 object-fit: cover;
             }
@@ -979,7 +980,7 @@
     <section id="galerie" class="bg-light">
         <div class="container">
             <h2 class="section-title animate-on-scroll">📸 Notre clinique en images</h2>
-            <!-- Version Desktop / Tablette : grille fixe -->
+            <!-- Version Desktop : grille d'images -->
             <div class="gallery-grid">
                 <div class="gallery-item"><img src="wendtoin/chirigie.jpg" alt="Bloc opératoire"></div>
                 <div class="gallery-item"><img src="wendtoin/chirurgie2.jpg" alt="Chirurgie"></div>
@@ -997,7 +998,7 @@
                 <div class="gallery-item"><img src="wendtoin/im6.jpg" alt="Clinique WENDTOIN"></div>
                 <div class="gallery-item"><img src="wendtoin/im7.jpg" alt="Clinique WENDTOIN"></div>
             </div>
-            <!-- Version Mobile : Scroll horizontal avec hauteur fixe (220px) déjà assurée dans le CSS -->
+            <!-- Version Mobile : carrousel horizontal avec hauteur 300px -->
             <div class="gallery-scroll">
                 <div class="gallery-scroll-wrapper">
                     <div class="gallery-scroll-item"><img src="wendtoin/chirigie.jpg" alt="Chirurgie"></div>
