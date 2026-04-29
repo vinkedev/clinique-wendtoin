@@ -271,29 +271,6 @@
             color: #0077A4;
         }
 
-        /* WhatsApp flottant */
-        .whatsapp-float {
-            position: fixed;
-            bottom: 20px;
-            right: 20px;
-            background: #25D366;
-            width: 55px;
-            height: 55px;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: white;
-            font-size: 28px;
-            box-shadow: 0 4px 10px rgba(0,0,0,0.3);
-            z-index: 999;
-            transition: transform 0.3s ease;
-        }
-
-        .whatsapp-float:hover {
-            transform: scale(1.1);
-        }
-
         /* ========== SECTIONS ========== */
         section {
             padding: 60px 0;
@@ -391,17 +368,6 @@
         .card-text {
             color: #334155;
             font-size: 0.9rem;
-        }
-
-        .card-footer {
-            padding: 12px 20px 20px 20px;
-            border-top: 1px solid #f0f4f9;
-            display: flex;
-            justify-content: space-between;
-            font-size: 0.75rem;
-            color: #6b7a93;
-            flex-wrap: wrap;
-            gap: 8px;
         }
 
         .stars {
@@ -526,11 +492,11 @@
             color: #1D8B5D;
         }
 
-        /* Bouton WhatsApp RDV */
-        .btn-whatsapp {
-            background: #25D366;
+        /* Bouton RDV aux couleurs clinique */
+        .btn-rdv {
+            background: #1D8B5D;
             color: white;
-            padding: 12px 20px;
+            padding: 14px 20px;
             border-radius: 50px;
             text-decoration: none;
             display: inline-block;
@@ -540,9 +506,10 @@
             transition: all 0.3s ease;
             border: none;
             cursor: pointer;
+            font-size: 1rem;
         }
-        .btn-whatsapp:hover {
-            background: #128C7E;
+        .btn-rdv:hover {
+            background: #146b48;
             transform: translateY(-2px);
         }
 
@@ -567,19 +534,12 @@
             height: 220px;
             object-fit: cover;
         }
-        .gallery-item p {
-            padding: 12px;
-            text-align: center;
-            font-weight: 500;
-            color: #1e293b;
-        }
         
         /* Version mobile (défilement horizontal) */
         .gallery-scroll {
             display: none;
             overflow-x: auto;
             scroll-snap-type: x mandatory;
-            gap: 15px;
             padding-bottom: 10px;
         }
         .gallery-scroll-wrapper {
@@ -598,12 +558,6 @@
             width: 100%;
             height: 180px;
             object-fit: cover;
-        }
-        .gallery-scroll-item p {
-            padding: 10px;
-            text-align: center;
-            font-size: 0.85rem;
-            font-weight: 500;
         }
 
         /* ========== FOOTER ========== */
@@ -710,7 +664,7 @@
                 font-size: 2.7rem;
             }
             .gallery-grid {
-                grid-template-columns: repeat(3, 1fr);
+                grid-template-columns: repeat(4, 1fr);
             }
         }
 
@@ -729,7 +683,7 @@
                 margin: 5px auto;
                 text-align: center;
             }
-            .card-header, .card-title, .card-content, .card-footer {
+            .card-header, .card-title, .card-content {
                 padding-left: 16px;
                 padding-right: 16px;
             }
@@ -746,11 +700,6 @@
     </style>
 </head>
 <body>
-
-<!-- WhatsApp Flottant -->
-<a href="https://wa.me/22651000647" class="whatsapp-float" target="_blank">
-    <i class="fab fa-whatsapp"></i>
-</a>
 
 <header>
     <div class="header-container">
@@ -791,7 +740,7 @@
         </div>
     </section>
 
-    <!-- PRÉSENTATION + VUE EXTÉRIEURE -->
+    <!-- PRÉSENTATION -->
     <section class="bg-light">
         <div class="container">
             <div class="presentation-grid">
@@ -800,14 +749,13 @@
                     <p>Ouverte depuis <strong>janvier 2016</strong>, la Clinique WENDTOIN est un établissement privé qui place le patient au cœur de ses priorités.</p>
                     <p style="margin-top: 15px;">En plus des <strong>soins standards</strong> (consultations générales, spécialités, vaccinations), nous assurons les <strong>urgences médicales et chirurgicales</strong> 24h/24 et 7j/7 grâce à une équipe de médecins généralistes et spécialistes dédiés.</p>
                     <p style="margin-top: 15px;">Située au <strong>Boulevard des Tensoba, Secteur n°25, Cissin, Ouagadougou</strong>, notre clinique vous accueille dans un environnement moderne et sécurisé.</p>
-                    <!-- Infos légales -->
                     <div style="margin-top: 20px; display: flex; flex-wrap: wrap; gap: 10px;">
                         <span class="assurance-badge">🏥 RCCM: BF-OUA-01-2024-M-04165</span>
                         <span class="assurance-badge">📄 IFU: 00180415T</span>
                     </div>
                 </div>
                 <div class="image-wrapper animate-on-scroll">
-                    <img src="wendtoin/vue_wendtoin.jpg" alt="Vue extérieure de la Clinique WENDTOIN" class="clinic-image" onerror="this.src='https://placehold.co/600x400/0077A4/white?text=Clinique+WENDTOIN'">
+                    <img src="wendtoin/vue_wendtoin.jpg" alt="Clinique WENDTOIN" class="clinic-image" onerror="this.src='https://placehold.co/600x400/0077A4/white?text=Clinique+WENDTOIN'">
                 </div>
             </div>
         </div>
@@ -850,7 +798,7 @@
                 <div class="card animate-on-scroll">
                     <div class="card-header"><div class="card-icon">🦴</div><span class="badge-category">Chirurgie</span></div>
                     <div class="card-title">Chirurgie générale</div>
-                    <div class="card-content"><p class="card-text">Bloc opératoire moderne, chirurgie programmée et d’urgence (appendicite, hernie, traumatologie).</p></div>
+                    <div class="card-content"><p class="card-text">Bloc opératoire moderne, chirurgie programmée et d'urgence (appendicite, hernie, traumatologie).</p></div>
                 </div>
                 <div class="card animate-on-scroll">
                     <div class="card-header"><div class="card-icon">🧠</div><span class="badge-category">Spécialiste</span></div>
@@ -869,18 +817,51 @@
                 <p style="color:#1D8B5D;">👨‍⚕️ Une équipe de <strong>plus de 40 médecins spécialistes</strong> à votre service 24h/24</p>
             </div>
             <div class="cards-grid">
-                <div class="card animate-on-scroll"><div class="card-header"><div class="card-icon">👩‍⚕️</div><span class="badge-category">Médecine Interne</span></div><div class="card-title">Dr TARHOU Lionelle</div><div class="card-content"><p class="card-text">Médecine Interne - Diabétologie</p></div></div>
-                <div class="card animate-on-scroll"><div class="card-header"><div class="card-icon">👨‍⚕️</div><span class="badge-category">Médecine Interne</span></div><div class="card-title">Dr SALOU Rodrigue</div><div class="card-content"><p class="card-text">Médecine Interne - Diabétologie</p></div></div>
-                <div class="card animate-on-scroll"><div class="card-header"><div class="card-icon">👨‍⚕️</div><span class="badge-category">Pneumologie</span></div><div class="card-title">Pr OUEDRAOGO Sosthène</div><div class="card-content"><p class="card-text">Pneumologie</p></div></div>
-                <div class="card animate-on-scroll"><div class="card-header"><div class="card-icon">👨‍⚕️</div><span class="badge-category">Chirurgie</span></div><div class="card-title">Pr GILBERT Bonkoungou</div><div class="card-content"><p class="card-text">Chirurgie Générale</p></div></div>
-                <div class="card animate-on-scroll"><div class="card-header"><div class="card-icon">👨‍⚕️</div><span class="badge-category">Cardiologie</span></div><div class="card-title">Dr SORY Drissa</div><div class="card-content"><p class="card-text">Cardiologie</p></div></div>
-                <div class="card animate-on-scroll"><div class="card-header"><div class="card-icon">👨‍⚕️</div><span class="badge-category">Gynécologie</span></div><div class="card-title">Dr DIMZOURE Said</div><div class="card-content"><p class="card-text">Gynécologie - Obstétrique</p></div></div>
+                <!-- Pr GILBERT - Avec photo (en premier) -->
+                <div class="card animate-on-scroll">
+                    <div class="card-header">
+                        <img src="wendtoin/pr_gilbert.jpg" alt="Pr Gilbert Bonkoungou" style="width:60px; height:60px; border-radius:50%; object-fit:cover;">
+                        <span class="badge-category">Chirurgie</span>
+                    </div>
+                    <div class="card-title">Pr GILBERT Bonkoungou</div>
+                    <div class="card-content"><p class="card-text">Chirurgie Générale</p></div>
+                </div>
+                
+                <div class="card animate-on-scroll">
+                    <div class="card-header"><div class="card-icon">👩‍⚕️</div><span class="badge-category">Médecine Interne</span></div>
+                    <div class="card-title">Dr TARHOU Lionelle</div>
+                    <div class="card-content"><p class="card-text">Médecine Interne - Diabétologie</p></div>
+                </div>
+                
+                <div class="card animate-on-scroll">
+                    <div class="card-header"><div class="card-icon">👨‍⚕️</div><span class="badge-category">Médecine Interne</span></div>
+                    <div class="card-title">Dr SALOU Rodrigue</div>
+                    <div class="card-content"><p class="card-text">Médecine Interne - Diabétologie</p></div>
+                </div>
+                
+                <div class="card animate-on-scroll">
+                    <div class="card-header"><div class="card-icon">👨‍⚕️</div><span class="badge-category">Pneumologie</span></div>
+                    <div class="card-title">Pr OUEDRAOGO Sosthène</div>
+                    <div class="card-content"><p class="card-text">Pneumologie</p></div>
+                </div>
+                
+                <div class="card animate-on-scroll">
+                    <div class="card-header"><div class="card-icon">👨‍⚕️</div><span class="badge-category">Cardiologie</span></div>
+                    <div class="card-title">Dr SORY Drissa</div>
+                    <div class="card-content"><p class="card-text">Cardiologie</p></div>
+                </div>
+                
+                <div class="card animate-on-scroll">
+                    <div class="card-header"><div class="card-icon">👨‍⚕️</div><span class="badge-category">Gynécologie</span></div>
+                    <div class="card-title">Dr DIMZOURE Said</div>
+                    <div class="card-content"><p class="card-text">Gynécologie - Obstétrique</p></div>
+                </div>
             </div>
             <p style="text-align:center; margin-top:30px; color:#64748b;">+ 35 autres médecins spécialistes vous accueillent à la Clinique WENDTOIN</p>
         </div>
     </section>
 
-    <!-- RENDEZ-VOUS - UNIQUEMENT WHATSAPP AVEC INFOS AUTO -->
+    <!-- RENDEZ-VOUS - Formulaire simplifié -->
     <section id="rdv" class="bg-white">
         <div class="container">
             <h2 class="section-title animate-on-scroll">Prendre rendez-vous</h2>
@@ -890,12 +871,6 @@
                     <form id="whatsappForm">
                         <div class="form-group">
                             <input type="text" id="nom" placeholder="Nom complet" required>
-                        </div>
-                        <div class="form-group">
-                            <input type="tel" id="tel" placeholder="Téléphone" required>
-                        </div>
-                        <div class="form-group">
-                            <input type="date" id="date" placeholder="Date souhaitée">
                         </div>
                         <div class="form-group">
                             <select id="service">
@@ -909,14 +884,14 @@
                             </select>
                         </div>
                         <div class="form-group">
-                            <textarea id="motif" rows="2" placeholder="Motif de la consultation (optionnel)"></textarea>
+                            <textarea id="motif" rows="3" placeholder="Décrivez votre besoin (date souhaitée, horaire, etc.)"></textarea>
                         </div>
-                        <button type="submit" class="btn-whatsapp" style="display:flex; align-items:center; justify-content:center; gap:10px; width:100%;">
-                            <i class="fab fa-whatsapp"></i> Envoyer la demande sur WhatsApp
+                        <button type="submit" class="btn-rdv">
+                            📅 Envoyer la demande
                         </button>
                     </form>
                     <p style="font-size:0.7rem; text-align:center; margin-top:15px; color:#64748b;">
-                        📱 Cliquez sur le bouton, vérifiez les informations et envoyez sur WhatsApp
+                        📱 Vous serez redirigé vers WhatsApp pour confirmer l'envoi
                     </p>
                 </div>
                 <div>
@@ -924,13 +899,6 @@
                         <h3>📅 Horaires d'ouverture</h3>
                         <p><strong>Consultations :</strong><br>Lundi – Vendredi : 7h30 – 19h30<br>Samedi : 7h30 – 12h00</p>
                         <p style="margin-top:10px;"><strong>🚨 Urgences 24/24 – 7j/7</strong><br>Sans rendez-vous, prise en charge immédiate.</p>
-                    </div>
-                    <div class="info-box animate-on-scroll">
-                        <h3>💬 Contact direct WhatsApp</h3>
-                        <p>Ou écrivez-nous directement :</p>
-                        <a href="https://wa.me/22651000647" class="btn-whatsapp" style="display:block; text-align:center; margin-top:10px;">
-                            <i class="fab fa-whatsapp"></i> Écrire sur WhatsApp
-                        </a>
                     </div>
                     <div class="info-box animate-on-scroll">
                         <h3>🏛️ Assurances acceptées</h3>
@@ -945,66 +913,34 @@
         </div>
     </section>
 
-    <!-- GALERIE PHOTOS - VERSION ROW -->
+    <!-- GALERIE PHOTOS -->
     <section id="galerie" class="bg-light">
         <div class="container">
             <h2 class="section-title animate-on-scroll">📸 Notre clinique en images</h2>
             
             <!-- Version desktop : grille -->
             <div class="gallery-grid">
-                <div class="gallery-item">
-                    <img src="wendtoin/chirurgie1.jpg" alt="Bloc opératoire" onerror="this.src='https://placehold.co/400x250/0077A4/white?text=Bloc+op%C3%A9ratoire'">
-                    <p>🩺 Bloc opératoire moderne</p>
-                </div>
-                <div class="gallery-item">
-                    <img src="wendtoin/chirurgie2.jpg" alt="Équipe chirurgicale" onerror="this.src='https://placehold.co/400x250/1D8B5D/white?text=%C3%89quipe+chirurgicale'">
-                    <p>👨‍⚕️ Notre équipe chirurgicale</p>
-                </div>
-                <div class="gallery-item">
-                    <img src="wendtoin/salle_attente.jpg" alt="Salle d'attente" onerror="this.src='https://placehold.co/400x250/0077A4/white?text=Salle+d%27attente'">
-                    <p>🏥 Accueil et salle d'attente</p>
-                </div>
-                <div class="gallery-item">
-                    <img src="wendtoin/consultation.jpg" alt="Salle de consultation" onerror="this.src='https://placehold.co/400x250/1D8B5D/white?text=Salle+de+consultation'">
-                    <p>🩺 Salles de consultation modernes</p>
-                </div>
-                <div class="gallery-item">
-                    <img src="wendtoin/equipe.jpg" alt="Équipe médicale" onerror="this.src='https://placehold.co/400x250/0077A4/white?text=%C3%89quipe+m%C3%A9dicale'">
-                    <p>👩‍⚕️ Une équipe à votre écoute</p>
-                </div>
-                <div class="gallery-item">
-                    <img src="wendtoin/facade.jpg" alt="Façade clinique" onerror="this.src='https://placehold.co/400x250/1D8B5D/white?text=Fa%C3%A7ade+Clinique'">
-                    <p>📍 Boulevard des Tensoba, Cissin</p>
-                </div>
+                <div class="gallery-item"><img src="wendtoin/chirigie.jpg" alt="Bloc opératoire"></div>
+                <div class="gallery-item"><img src="wendtoin/chirurgie2.jpg" alt="Chirurgie"></div>
+                <div class="gallery-item"><img src="wendtoin/equipe2.jpg" alt="Équipe médicale"></div>
+                <div class="gallery-item"><img src="wendtoin/team.jpg" alt="Notre équipe"></div>
+                <div class="gallery-item"><img src="wendtoin/ambulance.jpg" alt="Ambulance 24h/24"></div>
+                <div class="gallery-item"><img src="wendtoin/appreil.jpg" alt="Matériel médical"></div>
+                <div class="gallery-item"><img src="wendtoin/appreil2_neuromonotoring.jpg" alt="Neuromonitoring"></div>
+                <div class="gallery-item"><img src="wendtoin/pr_gilbert.jpg" alt="Pr Gilbert"></div>
             </div>
             
             <!-- Version mobile : défilement horizontal -->
             <div class="gallery-scroll">
                 <div class="gallery-scroll-wrapper">
-                    <div class="gallery-scroll-item">
-                        <img src="wendtoin/chirurgie1.jpg" alt="Bloc opératoire" onerror="this.src='https://placehold.co/300x200/0077A4/white?text=Bloc'">
-                        <p>🩺 Bloc opératoire</p>
-                    </div>
-                    <div class="gallery-scroll-item">
-                        <img src="wendtoin/chirurgie2.jpg" alt="Équipe chirurgicale" onerror="this.src='https://placehold.co/300x200/1D8B5D/white?text=%C3%89quipe'">
-                        <p>👨‍⚕️ Équipe chirurgicale</p>
-                    </div>
-                    <div class="gallery-scroll-item">
-                        <img src="wendtoin/salle_attente.jpg" alt="Salle d'attente" onerror="this.src='https://placehold.co/300x200/0077A4/white?text=Salle'">
-                        <p>🏥 Salle d'attente</p>
-                    </div>
-                    <div class="gallery-scroll-item">
-                        <img src="wendtoin/consultation.jpg" alt="Consultation" onerror="this.src='https://placehold.co/300x200/1D8B5D/white?text=Consultation'">
-                        <p>🩺 Consultation</p>
-                    </div>
-                    <div class="gallery-scroll-item">
-                        <img src="wendtoin/equipe.jpg" alt="Équipe médicale" onerror="this.src='https://placehold.co/300x200/0077A4/white?text=%C3%89quipe'">
-                        <p>👩‍⚕️ Équipe médicale</p>
-                    </div>
-                    <div class="gallery-scroll-item">
-                        <img src="wendtoin/facade.jpg" alt="Façade" onerror="this.src='https://placehold.co/300x200/1D8B5D/white?text=Fa%C3%A7ade'">
-                        <p>📍 Façade clinique</p>
-                    </div>
+                    <div class="gallery-scroll-item"><img src="wendtoin/chirigie.jpg" alt="Chirurgie"></div>
+                    <div class="gallery-scroll-item"><img src="wendtoin/chirurgie2.jpg" alt="Chirurgie"></div>
+                    <div class="gallery-scroll-item"><img src="wendtoin/equipe2.jpg" alt="Équipe"></div>
+                    <div class="gallery-scroll-item"><img src="wendtoin/team.jpg" alt="Team"></div>
+                    <div class="gallery-scroll-item"><img src="wendtoin/ambulance.jpg" alt="Ambulance"></div>
+                    <div class="gallery-scroll-item"><img src="wendtoin/appreil.jpg" alt="Appareil"></div>
+                    <div class="gallery-scroll-item"><img src="wendtoin/appreil2_neuromonotoring.jpg" alt="Monitoring"></div>
+                    <div class="gallery-scroll-item"><img src="wendtoin/pr_gilbert.jpg" alt="Pr Gilbert"></div>
                 </div>
             </div>
         </div>
@@ -1015,17 +951,14 @@
         <div class="container">
             <h2 class="section-title animate-on-scroll">⭐ Ce que nos patients disent</h2>
             <div class="cards-grid">
-                <div class="card animate-on-scroll"><div class="card-header"><div class="stars">★★★★★</div><span class="badge-category">Patient vérifié</span></div><div class="card-title">Marie K.</div><div class="card-content"><p class="card-text">"Accueil parfait, urgences rapides. Je recommande vivement cette clinique."</p></div></div>
-                <div class="card animate-on-scroll"><div class="card-header"><div class="stars">★★★★★</div><span class="badge-category">Patient vérifié</span></div><div class="card-title">Issa O.</div><div class="card-content"><p class="card-text">"Clinique propre et médecins à l'écoute. Service d'urgence très réactif."</p></div></div>
-                <div class="card animate-on-scroll"><div class="card-header"><div class="stars">★★★★☆</div><span class="badge-category">Patient vérifié</span></div><div class="card-title">Amina T.</div><div class="card-content"><p class="card-text">"Très bonne prise en charge, personnel sympathique. Je reviendrai."</p></div></div>
-            </div>
-            <div style="text-align:center; margin-top:35px;">
-                <a href="https://wa.me/22651000647" style="color:#1D8B5D;">📝 Laissez-nous un avis sur WhatsApp</a>
+                <div class="card animate-on-scroll"><div class="card-header"><div class="stars">★★★★★</div><span class="badge-category">Patient</span></div><div class="card-title">Marie K.</div><div class="card-content"><p class="card-text">"Accueil parfait, urgences rapides. Je recommande vivement cette clinique."</p></div></div>
+                <div class="card animate-on-scroll"><div class="card-header"><div class="stars">★★★★★</div><span class="badge-category">Patient</span></div><div class="card-title">Issa O.</div><div class="card-content"><p class="card-text">"Clinique propre et médecins à l'écoute. Service d'urgence très réactif."</p></div></div>
+                <div class="card animate-on-scroll"><div class="card-header"><div class="stars">★★★★☆</div><span class="badge-category">Patient</span></div><div class="card-title">Amina T.</div><div class="card-content"><p class="card-text">"Très bonne prise en charge, personnel sympathique. Je reviendrai."</p></div></div>
             </div>
         </div>
     </section>
 
-    <!-- CONTACT AVEC GOOGLE MAPS -->
+    <!-- CONTACT -->
     <section id="contact" class="bg-light">
         <div class="container">
             <h2 class="section-title animate-on-scroll">Contact & localisation</h2>
@@ -1059,13 +992,10 @@
                                 height="280" 
                                 style="border:0;" 
                                 allowfullscreen="" 
-                                loading="lazy" 
-                                referrerpolicy="no-referrer-when-downgrade">
+                                loading="lazy">
                             </iframe>
                         </div>
-                        <p style="margin-top: 12px; font-size: 0.85rem;">
-                            📍 Boulevard des Tensoba, Secteur 25, Cissin
-                        </p>
+                        <p style="margin-top: 12px; font-size: 0.85rem;">📍 Boulevard des Tensoba, Secteur 25, Cissin</p>
                     </div>
                 </div>
             </div>
@@ -1082,7 +1012,7 @@
             </div>
             <div>
                 <h4 style="color: #1D8B5D;">🚨 Urgences 24/24</h4>
-                <p><strong style="font-size: 1.2rem;"><a href="tel:51000647" style="color:#1D8B5D; text-decoration:none;">51 00 06 47</a></strong></p>
+                <p><strong><a href="tel:51000647" style="color:#1D8B5D;">51 00 06 47</a></strong></p>
                 <p style="margin-top: 10px;"><i class="fab fa-whatsapp"></i> WhatsApp : <a href="https://wa.me/22651000647" style="color:#1D8B5D;">51 00 06 47</a></p>
             </div>
             <div>
@@ -1150,53 +1080,38 @@
         });
     }
     
-    // Formulaire WhatsApp avec auto-remplissage
+    // Formulaire WhatsApp
     const whatsappForm = document.getElementById('whatsappForm');
     
     if (whatsappForm) {
         whatsappForm.addEventListener('submit', function(e) {
             e.preventDefault();
             
-            // Récupérer les valeurs
             const nom = document.getElementById('nom').value;
-            const tel = document.getElementById('tel').value;
-            const date = document.getElementById('date').value;
             const service = document.getElementById('service').value;
             const motif = document.getElementById('motif').value;
             
-            // Vérifier que les champs obligatoires sont remplis
-            if (!nom || !tel) {
-                alert('Veuillez remplir votre nom et votre téléphone');
+            if (!nom) {
+                alert('Veuillez remplir votre nom');
                 return;
             }
             
-            // Construire le message WhatsApp
             let message = `Bonjour Clinique WENDTOIN,%0A%0A`;
-            message += `📋 *Nouvelle demande de rendez-vous*%0A%0A`;
+            message += `📋 *Demande de rendez-vous*%0A%0A`;
             message += `👤 *Nom :* ${nom}%0A`;
-            message += `📞 *Téléphone :* ${tel}%0A`;
-            if (date) message += `📅 *Date souhaitée :* ${date}%0A`;
             message += `🩺 *Service :* ${service}%0A`;
-            if (motif) message += `📝 *Motif :* ${motif}%0A`;
+            if (motif) message += `📝 *Message :* ${motif}%0A`;
             message += `%0AMerci de me confirmer un créneau.`;
             
-            // Créer le lien WhatsApp
             const whatsappUrl = `https://wa.me/22651000647?text=${message}`;
-            
-            // Ouvrir WhatsApp dans un nouvel onglet
             window.open(whatsappUrl, '_blank');
-            
-            // Réinitialiser le formulaire
             whatsappForm.reset();
             
-            // Afficher un message de confirmation
             const btn = document.querySelector('#whatsappForm button');
             const originalText = btn.innerHTML;
             btn.innerHTML = '✅ Redirection vers WhatsApp...';
-            btn.style.background = '#128C7E';
             setTimeout(() => {
                 btn.innerHTML = originalText;
-                btn.style.background = '#25D366';
             }, 3000);
         });
     }
