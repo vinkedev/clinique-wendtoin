@@ -526,6 +526,24 @@
             color: #1D8B5D;
         }
 
+        /* Bouton WhatsApp RDV */
+        .btn-whatsapp {
+            background: #25D366;
+            color: white;
+            padding: 12px 20px;
+            border-radius: 50px;
+            text-decoration: none;
+            display: inline-block;
+            width: 100%;
+            text-align: center;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+        .btn-whatsapp:hover {
+            background: #128C7E;
+            transform: translateY(-2px);
+        }
+
         /* ========== GALERIE ========== */
         .gallery-grid {
             display: grid;
@@ -860,20 +878,20 @@
         </div>
     </section>
 
-    <!-- RENDEZ-VOUS -->
+    <!-- RENDEZ-VOUS - Option 3 : Email + WhatsApp -->
     <section id="rdv" class="bg-white">
         <div class="container">
             <h2 class="section-title animate-on-scroll">Prendre rendez-vous</h2>
             <div class="rdv-grid">
                 <div class="info-box animate-on-scroll">
                     <h3>📅 Formulaire de rendez-vous</h3>
-                    <form id="rdvForm">
-                        <div class="form-group"><input type="text" placeholder="Nom complet" required></div>
-                        <div class="form-group"><input type="tel" placeholder="Téléphone" required></div>
-                        <div class="form-group"><input type="email" placeholder="Email"></div>
-                        <div class="form-group"><input type="date"></div>
+                    <form action="https://formspree.io/f/clinwend@gmail.com" method="POST">
+                        <div class="form-group"><input type="text" name="nom" placeholder="Nom complet" required></div>
+                        <div class="form-group"><input type="tel" name="tel" placeholder="Téléphone" required></div>
+                        <div class="form-group"><input type="email" name="email" placeholder="Email"></div>
+                        <div class="form-group"><input type="date" name="date"></div>
                         <div class="form-group">
-                            <select>
+                            <select name="service">
                                 <option>Consultation générale</option>
                                 <option>Cardiologie</option>
                                 <option>Gynécologie</option>
@@ -882,13 +900,10 @@
                                 <option>Neurologie</option>
                             </select>
                         </div>
-                        <div class="form-group"><textarea rows="2" placeholder="Motif de la consultation"></textarea></div>
-                        <button type="submit" class="btn btn-primary" style="width:100%">📨 Envoyer la demande</button>
-                        <p id="formMessage" style="margin-top: 16px;"></p>
+                        <div class="form-group"><textarea name="motif" rows="2" placeholder="Motif de la consultation"></textarea></div>
+                        <button type="submit" class="btn btn-primary" style="width:100%">📨 Envoyer par email</button>
+                        <p style="font-size:0.7rem; text-align:center; margin-top:10px; color:#64748b;">Votre demande sera envoyée à clinwend@gmail.com</p>
                     </form>
-                    <p style="margin-top:15px; text-align:center; font-size:0.85rem;">
-                        ou contactez-nous directement sur <strong style="color:#25D366;">WhatsApp</strong> au <a href="https://wa.me/22651000647" style="color:#1D8B5D;">51 00 06 47</a>
-                    </p>
                 </div>
                 <div>
                     <div class="info-box animate-on-scroll">
@@ -897,8 +912,16 @@
                         <p style="margin-top:10px;"><strong>🚨 Urgences 24/24 – 7j/7</strong><br>Sans rendez-vous, prise en charge immédiate.</p>
                     </div>
                     <div class="info-box animate-on-scroll">
+                        <h3>💬 Rendez-vous par WhatsApp</h3>
+                        <p>Cliquez sur le lien ci-dessous, envoyez votre nom et le motif :</p>
+                        <a href="https://wa.me/22651000647?text=Bonjour%20Clinique%20WENDTOIN%2C%0A%0AJe%20souhaite%20prendre%20rendez-vous%20pour%20une%20consultation%20:%0A%0A👤%20Nom%20:%20%0A📞%20Téléphone%20:%20%0A🩺%20Service%20:%20%0A📅%20Date%20souhaitée%20:%20%0A%0AMerci%20de%20me%20confirmer%20un%20créneau." 
+                           class="btn-whatsapp">
+                            <i class="fab fa-whatsapp"></i> Prendre RDV sur WhatsApp
+                        </a>
+                    </div>
+                    <div class="info-box animate-on-scroll">
                         <h3>🏛️ Assurances acceptées</h3>
-                        <p>CNSS, Inami Burkina, mutuelles de santé, assurances privées.<br>Nous consulter pour plus d'informations.</p>
+                        <p>CNSS, Inami Burkina, mutuelles de santé, assurances privées.</p>
                     </div>
                     <div class="info-box animate-on-scroll">
                         <h3>💰 Paiement</h3>
@@ -1111,23 +1134,6 @@
                 navMenu.classList.remove('show');
                 if (mobileBtn) mobileBtn.innerHTML = '☰';
             }
-        });
-    }
-    
-    // Formulaire RDV
-    const rdvForm = document.getElementById('rdvForm');
-    if (rdvForm) {
-        rdvForm.addEventListener('submit', (e) => {
-            e.preventDefault();
-            const msgDiv = document.getElementById('formMessage');
-            if (msgDiv) {
-                msgDiv.innerHTML = '✅ Demande envoyée. Nous vous recontacterons rapidement sur WhatsApp ou téléphone.';
-                msgDiv.style.color = '#1D8B5D';
-            }
-            e.target.reset();
-            setTimeout(() => { 
-                if (msgDiv) msgDiv.innerHTML = ''; 
-            }, 5000);
         });
     }
 </script>
