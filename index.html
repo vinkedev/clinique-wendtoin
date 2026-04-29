@@ -535,7 +535,7 @@
             object-fit: cover;
         }
         
-        /* Version mobile (défilement horizontal) */
+        /* Version mobile (défilement horizontal) - IMAGES AGRANDIES */
         .gallery-scroll {
             display: none;
             overflow-x: auto;
@@ -547,7 +547,7 @@
             gap: 15px;
         }
         .gallery-scroll-item {
-            flex: 0 0 280px;
+            flex: 0 0 320px;
             scroll-snap-align: start;
             background: white;
             border-radius: 20px;
@@ -556,7 +556,7 @@
         }
         .gallery-scroll-item img {
             width: 100%;
-            height: 180px;
+            height: 220px;
             object-fit: cover;
         }
 
@@ -696,6 +696,7 @@
             .gallery-scroll-wrapper {
                 display: flex;
             }
+            /* Les images sont déjà agrandies dans la classe .gallery-scroll-item plus haut */
         }
     </style>
 </head>
@@ -913,7 +914,7 @@
         </div>
     </section>
 
-    <!-- GALERIE PHOTOS -->
+    <!-- GALERIE PHOTOS - IMAGES AGRANDIES SUR MOBILE -->
     <section id="galerie" class="bg-light">
         <div class="container">
             <h2 class="section-title animate-on-scroll">📸 Notre clinique en images</h2>
@@ -930,7 +931,7 @@
                 <div class="gallery-item"><img src="wendtoin/pr_gilbert.jpg" alt="Pr Gilbert"></div>
             </div>
             
-            <!-- Version mobile : défilement horizontal -->
+            <!-- Version mobile : défilement horizontal - IMAGES AGRANDIES 320x220 -->
             <div class="gallery-scroll">
                 <div class="gallery-scroll-wrapper">
                     <div class="gallery-scroll-item"><img src="wendtoin/chirigie.jpg" alt="Chirurgie"></div>
