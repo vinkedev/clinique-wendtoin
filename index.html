@@ -538,6 +538,8 @@
             text-align: center;
             font-weight: 600;
             transition: all 0.3s ease;
+            border: none;
+            cursor: pointer;
         }
         .btn-whatsapp:hover {
             background: #128C7E;
@@ -878,32 +880,44 @@
         </div>
     </section>
 
-    <!-- RENDEZ-VOUS - Option 3 : Email + WhatsApp -->
+    <!-- RENDEZ-VOUS - UNIQUEMENT WHATSAPP AVEC INFOS AUTO -->
     <section id="rdv" class="bg-white">
         <div class="container">
             <h2 class="section-title animate-on-scroll">Prendre rendez-vous</h2>
             <div class="rdv-grid">
                 <div class="info-box animate-on-scroll">
                     <h3>📅 Formulaire de rendez-vous</h3>
-                    <form action="https://formspree.io/f/clinwend@gmail.com" method="POST">
-                        <div class="form-group"><input type="text" name="nom" placeholder="Nom complet" required></div>
-                        <div class="form-group"><input type="tel" name="tel" placeholder="Téléphone" required></div>
-                        <div class="form-group"><input type="email" name="email" placeholder="Email"></div>
-                        <div class="form-group"><input type="date" name="date"></div>
+                    <form id="whatsappForm">
                         <div class="form-group">
-                            <select name="service">
+                            <input type="text" id="nom" placeholder="Nom complet" required>
+                        </div>
+                        <div class="form-group">
+                            <input type="tel" id="tel" placeholder="Téléphone" required>
+                        </div>
+                        <div class="form-group">
+                            <input type="date" id="date" placeholder="Date souhaitée">
+                        </div>
+                        <div class="form-group">
+                            <select id="service">
                                 <option>Consultation générale</option>
                                 <option>Cardiologie</option>
-                                <option>Gynécologie</option>
+                                <option>Gynécologie - Obstétrique</option>
                                 <option>Pédiatrie</option>
                                 <option>Chirurgie générale</option>
                                 <option>Neurologie</option>
+                                <option>Médecine interne</option>
                             </select>
                         </div>
-                        <div class="form-group"><textarea name="motif" rows="2" placeholder="Motif de la consultation"></textarea></div>
-                        <button type="submit" class="btn btn-primary" style="width:100%">📨 Envoyer par email</button>
-                        <p style="font-size:0.7rem; text-align:center; margin-top:10px; color:#64748b;">Votre demande sera envoyée à clinwend@gmail.com</p>
+                        <div class="form-group">
+                            <textarea id="motif" rows="2" placeholder="Motif de la consultation (optionnel)"></textarea>
+                        </div>
+                        <button type="submit" class="btn-whatsapp" style="display:flex; align-items:center; justify-content:center; gap:10px; width:100%;">
+                            <i class="fab fa-whatsapp"></i> Envoyer la demande sur WhatsApp
+                        </button>
                     </form>
+                    <p style="font-size:0.7rem; text-align:center; margin-top:15px; color:#64748b;">
+                        📱 Cliquez sur le bouton, vérifiez les informations et envoyez sur WhatsApp
+                    </p>
                 </div>
                 <div>
                     <div class="info-box animate-on-scroll">
@@ -912,11 +926,10 @@
                         <p style="margin-top:10px;"><strong>🚨 Urgences 24/24 – 7j/7</strong><br>Sans rendez-vous, prise en charge immédiate.</p>
                     </div>
                     <div class="info-box animate-on-scroll">
-                        <h3>💬 Rendez-vous par WhatsApp</h3>
-                        <p>Cliquez sur le lien ci-dessous, envoyez votre nom et le motif :</p>
-                        <a href="https://wa.me/22651000647?text=Bonjour%20Clinique%20WENDTOIN%2C%0A%0AJe%20souhaite%20prendre%20rendez-vous%20pour%20une%20consultation%20:%0A%0A👤%20Nom%20:%20%0A📞%20Téléphone%20:%20%0A🩺%20Service%20:%20%0A📅%20Date%20souhaitée%20:%20%0A%0AMerci%20de%20me%20confirmer%20un%20créneau." 
-                           class="btn-whatsapp">
-                            <i class="fab fa-whatsapp"></i> Prendre RDV sur WhatsApp
+                        <h3>💬 Contact direct WhatsApp</h3>
+                        <p>Ou écrivez-nous directement :</p>
+                        <a href="https://wa.me/22651000647" class="btn-whatsapp" style="display:block; text-align:center; margin-top:10px;">
+                            <i class="fab fa-whatsapp"></i> Écrire sur WhatsApp
                         </a>
                     </div>
                     <div class="info-box animate-on-scroll">
@@ -1134,6 +1147,57 @@
                 navMenu.classList.remove('show');
                 if (mobileBtn) mobileBtn.innerHTML = '☰';
             }
+        });
+    }
+    
+    // Formulaire WhatsApp avec auto-remplissage
+    const whatsappForm = document.getElementById('whatsappForm');
+    
+    if (whatsappForm) {
+        whatsappForm.addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            // Récupérer les valeurs
+            const nom = document.getElementById('nom').value;
+            const tel = document.getElementById('tel').value;
+            const date = document.getElementById('date').value;
+            const service = document.getElementById('service').value;
+            const motif = document.getElementById('motif').value;
+            
+            // Vérifier que les champs obligatoires sont remplis
+            if (!nom || !tel) {
+                alert('Veuillez remplir votre nom et votre téléphone');
+                return;
+            }
+            
+            // Construire le message WhatsApp
+            let message = `Bonjour Clinique WENDTOIN,%0A%0A`;
+            message += `📋 *Nouvelle demande de rendez-vous*%0A%0A`;
+            message += `👤 *Nom :* ${nom}%0A`;
+            message += `📞 *Téléphone :* ${tel}%0A`;
+            if (date) message += `📅 *Date souhaitée :* ${date}%0A`;
+            message += `🩺 *Service :* ${service}%0A`;
+            if (motif) message += `📝 *Motif :* ${motif}%0A`;
+            message += `%0AMerci de me confirmer un créneau.`;
+            
+            // Créer le lien WhatsApp
+            const whatsappUrl = `https://wa.me/22651000647?text=${message}`;
+            
+            // Ouvrir WhatsApp dans un nouvel onglet
+            window.open(whatsappUrl, '_blank');
+            
+            // Réinitialiser le formulaire
+            whatsappForm.reset();
+            
+            // Afficher un message de confirmation
+            const btn = document.querySelector('#whatsappForm button');
+            const originalText = btn.innerHTML;
+            btn.innerHTML = '✅ Redirection vers WhatsApp...';
+            btn.style.background = '#128C7E';
+            setTimeout(() => {
+                btn.innerHTML = originalText;
+                btn.style.background = '#25D366';
+            }, 3000);
         });
     }
 </script>
