@@ -34,34 +34,18 @@
             padding: 0 20px;
         }
 
-        /* ========== ANIMATIONS PRINCIPALES ========== */
+        /* ========== ANIMATIONS ========== */
         @keyframes fadeInUp {
-            from {
-                opacity: 0;
-                transform: translateY(35px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
+            from { opacity: 0; transform: translateY(35px); }
+            to { opacity: 1; transform: translateY(0); }
         }
 
         @keyframes pulse {
-            0% {
-                transform: scale(1);
-                box-shadow: 0 0 0 0 rgba(29, 139, 93, 0.6);
-            }
-            70% {
-                transform: scale(1.03);
-                box-shadow: 0 0 0 12px rgba(29, 139, 93, 0);
-            }
-            100% {
-                transform: scale(1);
-                box-shadow: 0 0 0 0 rgba(29, 139, 93, 0);
-            }
+            0% { transform: scale(1); box-shadow: 0 0 0 0 rgba(29, 139, 93, 0.6); }
+            70% { transform: scale(1.03); box-shadow: 0 0 0 12px rgba(29, 139, 93, 0); }
+            100% { transform: scale(1); box-shadow: 0 0 0 0 rgba(29, 139, 93, 0); }
         }
 
-        /* Animation pulsation rouge pour urgence */
         @keyframes pulse-red {
             0% { box-shadow: 0 0 0 0 rgba(220, 53, 69, 0.6); }
             70% { box-shadow: 0 0 0 12px rgba(220, 53, 69, 0); }
@@ -78,38 +62,27 @@
             to { transform: rotate(360deg); }
         }
 
-        /* Animation fade + scale pour les images */
         @keyframes fadeScale {
-            from {
-                opacity: 0;
-                transform: scale(0.95);
-            }
-            to {
-                opacity: 1;
-                transform: scale(1);
-            }
+            from { opacity: 0; transform: scale(0.95); }
+            to { opacity: 1; transform: scale(1); }
         }
 
-        /* Animation shake pour erreur formulaire */
         @keyframes shake {
             0%, 100% { transform: translateX(0); }
             25% { transform: translateX(-6px); }
             75% { transform: translateX(6px); }
         }
 
-        /* Animation float pour bouton urgence */
         @keyframes float {
             0% { transform: translateY(0px); }
             50% { transform: translateY(-6px); }
             100% { transform: translateY(0px); }
         }
 
-        /* Animation spin pour loading */
         @keyframes spin {
             to { transform: rotate(360deg); }
         }
 
-        /* Animation apparition image au scroll */
         .image-visible {
             animation: fadeScale 0.6s ease forwards;
         }
@@ -125,7 +98,6 @@
             transform: translateY(0);
         }
 
-        /* Badge urgence avec pulsation rouge */
         .urgences-badge {
             display: inline-block;
             background: #dc3545;
@@ -138,7 +110,6 @@
             animation: pulse-red 2s infinite;
         }
 
-        /* ========== HEADER ========== */
         header {
             background: white;
             box-shadow: 0 2px 20px rgba(0,0,0,0.05);
@@ -229,7 +200,6 @@
             display: block;
             font-size: 24px;
             cursor: pointer;
-            transition: transform 0.3s ease;
             background: none;
             border: none;
             width: 40px;
@@ -239,7 +209,6 @@
             justify-content: center;
         }
 
-        /* ========== HERO ========== */
         .hero {
             position: relative;
             background: linear-gradient(135deg, #0077A4 0%, #005a7c 100%);
@@ -330,7 +299,6 @@
             transform: translateY(-3px);
         }
 
-        /* ========== SECTIONS ========== */
         section {
             padding: 60px 0;
         }
@@ -371,7 +339,6 @@
             }
         }
 
-        /* ========== CARTES ========== */
         .cards-grid {
             display: grid;
             grid-template-columns: 1fr;
@@ -440,7 +407,6 @@
             font-size: 0.9rem;
         }
 
-        /* ========== STATS ========== */
         .stats {
             background: #0077A4;
             color: white;
@@ -476,7 +442,6 @@
             font-weight: 800;
         }
 
-        /* ========== FORMULAIRES ========== */
         .form-group {
             margin-bottom: 18px;
         }
@@ -550,16 +515,6 @@
             box-shadow: 0 10px 20px rgba(0,0,0,0.1);
         }
 
-        .assurance-badge {
-            display: inline-block;
-            background: #e6f7f0;
-            padding: 5px 12px;
-            border-radius: 50px;
-            font-size: 0.75rem;
-            margin: 3px;
-            color: #1D8B5D;
-        }
-
         .btn-rdv {
             background: #1D8B5D;
             color: white;
@@ -598,7 +553,6 @@
             vertical-align: middle;
         }
 
-        /* ========== GALERIE ========== */
         .gallery-grid {
             display: grid;
             grid-template-columns: 1fr;
@@ -633,7 +587,7 @@
             gap: 12px;
         }
         .gallery-scroll-item {
-            flex: 0 0 360px;
+            flex: 0 0 280px;
             scroll-snap-align: start;
             background: white;
             border-radius: 20px;
@@ -643,7 +597,7 @@
         }
         .gallery-scroll-item img {
             width: 100%;
-            height: 300px;
+            height: 220px;
             object-fit: cover;
             display: block;
         }
@@ -685,7 +639,6 @@
             color: #1D8B5D;
         }
 
-        /* ========== FOOTER ========== */
         footer {
             background: #0f172a;
             color: #cbd5e1;
@@ -710,7 +663,6 @@
             color: #1D8B5D;
         }
 
-        /* ========== RESPONSIVE ========== */
         @media (min-width: 640px) {
             .cards-grid {
                 grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
@@ -867,7 +819,7 @@
                 <div class="animate-on-scroll">
                     <h2 class="presentation-title">Bienvenue à la Clinique WENDTOIN</h2>
                     <p>Ouverte depuis <strong>janvier 2016</strong>, la Clinique WENDTOIN est un établissement privé qui place le patient au cœur de ses priorités.</p>
-                    <p style="margin-top: 15px;">En plus des <strong>soins standards</strong> (consultations générales, spécialités, vaccinations), nous assurons les <strong>urgences médicales et chirurgicales</strong> 24h/24 et 7j/7 grâce à une équipe de médecins généralistes et spécialistes dédiés.</p>
+                    <p style="margin-top: 15px;">En plus des <strong>soins standards</strong> (consultations générales, spécialités, vaccinations), nous assurons les <strong>urgences médicales et chirurgicales</strong> 24h/24 et 7j/7 grâce à une équipe de 40 médecins généralistes et spécialistes dédiés.</p>
                     <p style="margin-top: 15px;">Située au <strong>Boulevard des Tensoba, Secteur n°25, Cissin, Ouagadougou</strong>, notre clinique vous accueille dans un environnement moderne et sécurisé.</p>
                 </div>
                 <div class="image-wrapper animate-on-scroll">
@@ -881,7 +833,7 @@
         <div class="container stats-container">
             <div class="animate-on-scroll"><span class="stat-number" id="stat-years">0</span><br>années d'existence</div>
             <div class="animate-on-scroll"><span class="stat-number" id="stat-urgences">24/24</span><br>Service d'urgence</div>
-            <div class="animate-on-scroll"><span class="stat-number" id="stat-doctors">0</span><br>Médecins spécialistes</div>
+            <div class="animate-on-scroll"><span class="stat-number" id="stat-doctors">0</span><br>Médecins (généralistes + spécialistes)</div>
         </div>
     </div>
 
@@ -927,7 +879,7 @@
         <div class="container">
             <h2 class="section-title animate-on-scroll">Notre équipe médicale</h2>
             <div style="text-align:center; margin-bottom:30px; background:#e6f7f0; padding:15px; border-radius:20px;">
-                <p style="color:#1D8B5D;">👨‍⚕️ Une équipe de <strong>plus de 40 médecins spécialistes</strong> à votre service 24h/24</p>
+                <p style="color:#1D8B5D;">👨‍⚕️ Une équipe de <strong>40 médecins généralistes et spécialistes</strong> à votre service 24h/24</p>
             </div>
             <div class="cards-grid">
                 <div class="card animate-on-scroll">
@@ -964,7 +916,7 @@
                     <div class="card-content"><p class="card-text">Gynécologie - Obstétrique</p></div>
                 </div>
             </div>
-            <p style="text-align:center; margin-top:30px; color:#64748b;">+ 35 autres médecins spécialistes vous accueillent à la Clinique WENDTOIN</p>
+            <p style="text-align:center; margin-top:30px; color:#64748b;">+ 34 autres médecins généralistes et spécialistes composent notre équipe (total 40 praticiens)</p>
         </div>
     </section>
 
@@ -990,7 +942,7 @@
                             </select>
                         </div>
                         <div class="form-group">
-                            <textarea id="motif" rows="3" placeholder="Décrivez votre besoin (date souhaitée, horaire, etc.)"></textarea>
+                            <textarea id="motif" rows="3" placeholder="Date souhaitée et horaire de préférence"></textarea>
                         </div>
                         <button type="submit" class="btn-rdv" id="submitRdvBtn">
                             📅 Envoyer la demande
@@ -1145,7 +1097,6 @@
 </footer>
 
 <script>
-    // Animations au scroll
     const animateElements = document.querySelectorAll('.animate-on-scroll');
     const checkVisibility = () => {
         animateElements.forEach(el => {
@@ -1160,14 +1111,12 @@
     window.addEventListener('load', checkVisibility);
     window.addEventListener('resize', checkVisibility);
     
-    // Header scrolled
     window.addEventListener('scroll', () => {
         const header = document.querySelector('header');
         if (window.scrollY > 50) header.classList.add('scrolled');
         else header.classList.remove('scrolled');
     });
     
-    // Menu mobile
     const mobileBtn = document.querySelector('.mobile-menu-btn');
     const navMenu = document.getElementById('navMenu');
     
@@ -1193,7 +1142,6 @@
         });
     }
     
-    // ANIMATION COMPTEUR
     function animateCounter(element, start, end, duration, isText = false) {
         let startTime = null;
         if (isText && element.innerText !== "24/24") {
@@ -1215,7 +1163,6 @@
         requestAnimationFrame(update);
     }
     
-    // Observer pour les compteurs
     const statObserver = new IntersectionObserver((entries) => {
         entries.forEach(entry => {
             if (entry.isIntersecting) {
@@ -1235,7 +1182,6 @@
     const statsContainer = document.querySelector('.stats-container');
     if (statsContainer) statObserver.observe(statsContainer);
     
-    // Animation des images au scroll
     const imagesToAnimate = document.querySelectorAll('.clinic-image, .gallery-item img, .gallery-scroll-item img');
     const imageObserver = new IntersectionObserver((entries) => {
         entries.forEach(entry => {
@@ -1247,7 +1193,6 @@
     }, { threshold: 0.2 });
     imagesToAnimate.forEach(img => imageObserver.observe(img));
     
-    // Formulaire WhatsApp avec effet de chargement
     const whatsappForm = document.getElementById('whatsappForm');
     const submitBtn = document.getElementById('submitRdvBtn');
     
@@ -1268,13 +1213,12 @@
             const motif = document.getElementById('motif').value;
             
             let message = `Bonjour Clinique WENDTOIN,%0A%0A`;
-            message += `📋 *Demande de rendez-vous*%0A%0A`;
-            message += `👤 *Nom :* ${nom.value.trim()}%0A`;
-            message += `🩺 *Service :* ${service}%0A`;
-            if (motif) message += `📝 *Message :* ${motif}%0A`;
+            message += `📋 Demande de rendez-vous%0A%0A`;
+            message += `👤 Nom : ${nom.value.trim()}%0A`;
+            message += `🩺 Service : ${service}%0A`;
+            if (motif) message += `📝 Message : ${motif}%0A`;
             message += `%0AMerci de me confirmer un créneau.`;
             
-            // Effet de chargement sur le bouton
             submitBtn.classList.add('btn-loading');
             const originalText = submitBtn.innerHTML;
             submitBtn.innerHTML = '📅 Envoi en cours...';
@@ -1289,7 +1233,6 @@
         });
     }
     
-    // ZOOM SUR IMAGE AU CLIC
     const modal = document.getElementById('imageModal');
     const modalImg = document.getElementById('modalImage');
     const closeModal = document.querySelector('.close-modal');
