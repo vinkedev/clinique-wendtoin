@@ -83,11 +83,6 @@
             to { transform: rotate(360deg); }
         }
 
-        @keyframes blinkCursor {
-            0%, 100% { opacity: 1; }
-            50% { opacity: 0; }
-        }
-
         .image-visible {
             animation: fadeScale 0.6s ease forwards;
         }
@@ -261,24 +256,7 @@
             font-size: 1.6rem;
         }
 
-        /* ===== STYLES POUR LE TEXTE ANIMÉ (OPTION 1) ===== */
-        .typed-container {
-            font-size: 1.2rem;
-            min-height: 4rem;
-            margin: 0.5rem auto 1.5rem auto;
-            font-weight: 500;
-            color: rgba(255, 255, 255, 0.95);
-        }
-
-        .cursor {
-            display: inline-block;
-            width: 3px;
-            margin-left: 4px;
-            background-color: #fff;
-            animation: blinkCursor 0.8s step-end infinite;
-        }
-
-        /* ===== STYLES POUR LES PARTICULES MÉDICALES (OPTION 4) ===== */
+        /* ===== STYLES POUR LES PARTICULES MÉDICALES ===== */
         #medicalParticles {
             position: absolute;
             top: 0;
@@ -296,7 +274,7 @@
 
         .hero-slogan {
             font-size: 1rem;
-            margin-bottom: 20px;
+            margin-bottom: 30px;
             opacity: 0.96;
             padding: 0 10px;
         }
@@ -702,15 +680,6 @@
             color: #1D8B5D;
         }
 
-        /* Responsive adjustments for typed text */
-        @media (max-width: 768px) {
-            .typed-container {
-                font-size: 1rem;
-                min-height: 5rem;
-                padding: 0 10px;
-            }
-        }
-
         @media (min-width: 640px) {
             .cards-grid {
                 grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
@@ -858,18 +827,14 @@
         <div class="container">
             <div class="hero-content">
                 <h2>Votre santé, notre priorité <span>24h/24</span></h2>
-                <!-- TEXTE ANIMÉ (OPTION 1) -->
-                <div class="typed-container">
-                    <span class="typed-text"></span>
-                    <span class="cursor">|</span>
-                </div>
+                <p class="hero-slogan">Urgences médicales et chirurgicales assurées par des généralistes et spécialistes 24h/24 – 7j/7</p>
                 <div class="hero-buttons">
                     <a href="#rdv" class="btn btn-primary">📅 Prendre rendez-vous</a>
                     <a href="tel:51000647" class="btn btn-outline">🆘 Urgence 24/24 <span class="urgences-badge">URGENCE</span></a>
                 </div>
             </div>
         </div>
-        <!-- CANVAS POUR LES PARTICULES MÉDICALES (OPTION 4) -->
+        <!-- CANVAS POUR LES PARTICULES MÉDICALES -->
         <canvas id="medicalParticles"></canvas>
     </section>
 
@@ -1318,54 +1283,7 @@
         }
     });
 
-    // ===== OPTION 1 : TEXTE ANIMÉ (MACHINE À ÉCRIRE) =====
-    const phrases = [
-        "🩺 Prise en charge immédiate 24h/24",
-        "👨‍⚕️ Plus de 40 spécialistes à votre service",
-        "🚑 Ambulances équipées disponibles immédiatement",
-        "🏥 Environnement moderne & sécurisé",
-        "💊 Matériel médical de dernière génération"
-    ];
-
-    let i = 0;
-    let j = 0;
-    let currentPhrase = [];
-    let isDeleting = false;
-    let isEnd = false;
-
-    function typeEffect() {
-        const typedSpan = document.querySelector('.typed-text');
-        if (!typedSpan) return;
-
-        if (isDeleting === false && !isEnd) {
-            if (j < phrases[i].length) {
-                currentPhrase.push(phrases[i][j]);
-                typedSpan.innerHTML = currentPhrase.join('');
-                j++;
-                setTimeout(typeEffect, 70);
-            } else {
-                isEnd = true;
-                setTimeout(typeEffect, 2000);
-            }
-        } else if (isDeleting === true) {
-            if (currentPhrase.length > 0) {
-                currentPhrase.pop();
-                typedSpan.innerHTML = currentPhrase.join('');
-                setTimeout(typeEffect, 40);
-            } else {
-                isDeleting = false;
-                isEnd = false;
-                i = (i + 1) % phrases.length;
-                j = 0;
-                setTimeout(typeEffect, 300);
-            }
-        } else if (isEnd === true && isDeleting === false) {
-            isDeleting = true;
-            setTimeout(typeEffect, 100);
-        }
-    }
-
-    // ===== OPTION 4 : PARTICULES MÉDICALES DISCÈTES =====
+    // ===== PARTICULES MÉDICALES DISCÈTES =====
     function initMedicalParticles() {
         const canvas = document.getElementById('medicalParticles');
         if (!canvas) return;
@@ -1460,13 +1378,9 @@
         }
     }
 
-    // Démarrer les animations au chargement de la page
-    window.addEventListener('load', function() {
-        setTimeout(typeEffect, 500);
-        if (document.getElementById('medicalParticles')) {
-            initMedicalParticles();
-        }
-    });
+    if (document.getElementById('medicalParticles')) {
+        initMedicalParticles();
+    }
 </script>
 </body>
 </html>
