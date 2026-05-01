@@ -34,7 +34,6 @@
             padding: 0 20px;
         }
 
-        /* ========== ANIMATIONS ========== */
         @keyframes fadeInUp {
             from { opacity: 0; transform: translateY(35px); }
             to { opacity: 1; transform: translateY(0); }
@@ -256,7 +255,6 @@
             font-size: 1.6rem;
         }
 
-        /* ===== STYLES POUR LES PARTICULES MÉDICALES ===== */
         #medicalParticles {
             position: absolute;
             top: 0;
@@ -399,6 +397,15 @@
             border-radius: 50px;
             font-size: 0.7rem;
             font-weight: 700;
+        }
+
+        .badge-specialty {
+            background: linear-gradient(135deg, #e0f2fe, #bae6fd);
+            color: #0369a1;
+            padding: 4px 10px;
+            border-radius: 50px;
+            font-size: 0.65rem;
+            font-weight: 600;
         }
 
         .card-title {
@@ -569,7 +576,6 @@
             vertical-align: middle;
         }
 
-        /* ========== GALERIE STYLES ========== */
         .gallery-grid {
             display: grid;
             grid-template-columns: 1fr;
@@ -680,6 +686,92 @@
             color: #1D8B5D;
         }
 
+        .specialty-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 20px;
+            margin-top: 20px;
+        }
+
+        .specialty-item {
+            background: #f8fafc;
+            border-radius: 16px;
+            padding: 15px 20px;
+            border-left: 4px solid #1D8B5D;
+            transition: all 0.3s ease;
+        }
+        .specialty-item:hover {
+            background: white;
+            box-shadow: 0 6px 20px rgba(0,0,0,0.08);
+            transform: translateX(5px);
+        }
+        .specialty-item strong {
+            color: #0077A4;
+            display: block;
+            margin-bottom: 6px;
+            font-size: 1rem;
+        }
+        .specialty-item p {
+            color: #475569;
+            font-size: 0.85rem;
+            margin: 0;
+        }
+
+        .pole-card {
+            background: linear-gradient(135deg, #f0f9ff 0%, #e6f7f0 100%);
+            border-radius: 24px;
+            padding: 25px;
+            margin-bottom: 30px;
+            transition: transform 0.3s;
+        }
+        .pole-card:hover {
+            transform: translateY(-5px);
+        }
+        .pole-card h3 {
+            color: #0077A4;
+            font-size: 1.4rem;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            border-bottom: 2px solid #1D8B5D;
+            padding-bottom: 10px;
+        }
+        .pole-card .pole-icon {
+            font-size: 2rem;
+        }
+        .pole-list {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 12px;
+            margin-top: 15px;
+        }
+        .pole-tag {
+            background: white;
+            padding: 6px 16px;
+            border-radius: 40px;
+            font-size: 0.85rem;
+            font-weight: 500;
+            color: #1e293b;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+            transition: all 0.2s;
+        }
+        .pole-tag:hover {
+            background: #1D8B5D;
+            color: white;
+            transform: translateY(-2px);
+        }
+
+        .badge-247 {
+            background: #dc3545;
+            color: white;
+            padding: 3px 10px;
+            border-radius: 20px;
+            font-size: 0.7rem;
+            font-weight: bold;
+            margin-left: 10px;
+        }
+
         @media (min-width: 640px) {
             .cards-grid {
                 grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
@@ -762,7 +854,6 @@
             }
         }
 
-        /* ========== MOBILE : HAUTEUR DES IMAGES À 300PX ========== */
         @media (max-width: 768px) {
             .container {
                 padding: 0 16px;
@@ -793,6 +884,9 @@
                 width: 100%;
                 object-fit: cover;
             }
+            .pole-card h3 {
+                font-size: 1.2rem;
+            }
         }
     </style>
 </head>
@@ -811,10 +905,10 @@
             <ul id="navMenu">
                 <li><a href="#accueil">Accueil</a></li>
                 <li><a href="#services">Services</a></li>
+                <li><a href="#specialites">Spécialités</a></li>
+                <li><a href="#poles">Pôles techniques</a></li>
                 <li><a href="#equipe">Équipe</a></li>
                 <li><a href="#rdv">Rendez-vous</a></li>
-                <li><a href="#galerie">Galerie</a></li>
-                <li><a href="#temoignages">Avis</a></li>
                 <li><a href="#contact">Contact</a></li>
             </ul>
         </nav>
@@ -834,7 +928,6 @@
                 </div>
             </div>
         </div>
-        <!-- CANVAS POUR LES PARTICULES MÉDICALES -->
         <canvas id="medicalParticles"></canvas>
     </section>
 
@@ -900,6 +993,64 @@
         </div>
     </section>
 
+    <section id="specialites" class="bg-light">
+        <div class="container">
+            <h2 class="section-title animate-on-scroll">🏥 Nos spécialités médicales</h2>
+            <div class="specialty-grid">
+                <div class="specialty-item"><strong>📡 Radiologie</strong><p>Radiographie standard, Échographie, Scanner</p></div>
+                <div class="specialty-item"><strong>🔬 Dermatologie</strong><p>Peeling, PRP, traitements esthétiques et médicaux</p></div>
+                <div class="specialty-item"><strong>🩻 Gastro-entérologie</strong><p>Explorations digestives, endoscopies</p></div>
+                <div class="specialty-item"><strong>⚕️ Neurologie & Imagerie</strong><p>Consultations neurologiques, EEG, imagerie avancée</p></div>
+                <div class="specialty-item"><strong>🌿 Allergologie</strong><p>Tests allergologiques, désensibilisation</p></div>
+                <div class="specialty-item"><strong>💪 Kinésithérapie</strong><p>Rééducation fonctionnelle, thérapies manuelles</p></div>
+                <div class="specialty-item"><strong>⚕️ Cancérologie</strong><p>Oncologie médicale, suivi personnalisé</p></div>
+                <div class="specialty-item"><strong>🩺 Urologie</strong><p>Consultations et explorations urologiques</p></div>
+                <div class="specialty-item"><strong>🦴 Orthopédie - Traumatologie</strong><p>Prise en charge des fractures, chirurgie orthopédique</p></div>
+                <div class="specialty-item"><strong>👂 ORL</strong><p>Oto-rhino-laryngologie, audiométrie</p></div>
+                <div class="specialty-item"><strong>🦷 Rhumatologie</strong><p>Maladies osseuses et articulaires, ostéoporose</p></div>
+                <div class="specialty-item"><strong>🌬️ Pneumologie</strong><p>Explorations respiratoires, asthme, BPCO</p></div>
+            </div>
+        </div>
+    </section>
+
+    <section id="poles" class="bg-white">
+        <div class="container">
+            <h2 class="section-title animate-on-scroll">🔬 Pôles spécialisés & techniques</h2>
+            
+            <div class="pole-card animate-on-scroll">
+                <h3><span class="pole-icon">🏥</span> Pôle Chirurgie <span class="badge-247">Chirurgie programmée & d'urgence</span></h3>
+                <div class="pole-list">
+                    <span class="pole-tag">Chirurgie viscérale</span>
+                    <span class="pole-tag">Chirurgie plastique (silhouette)</span>
+                    <span class="pole-tag">Chirurgie de l'obésité</span>
+                    <span class="pole-tag">Chirurgie thoracique et vasculaire</span>
+                    <span class="pole-tag">Chirurgie endocrinienne et métabolique</span>
+                    <span class="pole-tag">Chirurgie laparoscopique</span>
+                </div>
+            </div>
+
+            <div class="pole-card animate-on-scroll">
+                <h3><span class="pole-icon">🔬</span> Laboratoire d'Anatomie-Pathologie</h3>
+                <div class="pole-list">
+                    <span class="pole-tag">Anatomie pathologique</span>
+                    <span class="pole-tag">Cytologie</span>
+                    <span class="pole-tag">Immuno-histochimie</span>
+                </div>
+                <p style="margin-top: 15px; color: #475569; font-size: 0.9rem;">📋 Analyses précises pour le diagnostic des cancers et pathologies tissulaires.</p>
+            </div>
+
+            <div class="pole-card animate-on-scroll">
+                <h3><span class="pole-icon">🩸</span> Néphrologie & Hémodialyse <span class="badge-247">24h/24 - 7j/7</span></h3>
+                <div class="pole-list">
+                    <span class="pole-tag">Pose de cathéter tunnelisé</span>
+                    <span class="pole-tag">Hémodialyse 24h/24</span>
+                    <span class="pole-tag">Suivi néphrologique complet</span>
+                </div>
+                <p style="margin-top: 15px; color: #475569; font-size: 0.9rem;">🩸 Service d'hémodialyse disponible 24 heures sur 24, 7 jours sur 7, avec prise en charge complète des patients insuffisants rénaux.</p>
+            </div>
+        </div>
+    </section>
+
     <section id="equipe" class="bg-light">
         <div class="container">
             <h2 class="section-title animate-on-scroll">Notre équipe médicale</h2>
@@ -909,7 +1060,7 @@
             <div class="cards-grid">
                 <div class="card animate-on-scroll">
                     <div class="card-header">
-                        <img src="wendtoin/pr_gilbert.jpg" alt="Pr Gilbert Bonkoungou" style="width:60px; height:60px; border-radius:50%; object-fit:cover;">
+                        <img src="wendtoin/pr_gilbert.jpg" alt="Pr Gilbert Bonkoungou" style="width:60px; height:60px; border-radius:50%; object-fit:cover;" onerror="this.src='https://placehold.co/60x60/0077A4/white?text=GB'">
                         <span class="badge-category">Chirurgie</span>
                     </div>
                     <div class="card-title">Pr GILBERT Bonkoungou</div>
@@ -964,6 +1115,13 @@
                                 <option>Chirurgie générale</option>
                                 <option>Neurologie</option>
                                 <option>Médecine interne</option>
+                                <option>Dermatologie</option>
+                                <option>Gastro-entérologie</option>
+                                <option>Pneumologie</option>
+                                <option>Néphrologie - Hémodialyse</option>
+                                <option>ORL</option>
+                                <option>Orthopédie</option>
+                                <option>Kinésithérapie</option>
                             </select>
                         </div>
                         <div class="form-group">
@@ -982,70 +1140,13 @@
                         <h3>📅 Horaires d'ouverture</h3>
                         <p><strong>Consultations :</strong><br>Lundi – Vendredi : 7h30 – 19h30<br>Samedi : 7h30 – 12h00</p>
                         <p style="margin-top:10px;"><strong>🚨 Urgences 24/24 – 7j/7</strong><br>Sans rendez-vous, prise en charge immédiate.</p>
+                        <p style="margin-top:10px;"><strong>🩸 Hémodialyse :</strong><br>24h/24 et 7j/7</p>
                     </div>
                     <div class="info-box animate-on-scroll">
                         <h3>🏛️ Assurances acceptées</h3>
                         <p>CNSS, Inami Burkina, mutuelles de santé, assurances privées.</p>
                     </div>
                 </div>
-            </div>
-        </div>
-    </section>
-
-    <section id="galerie" class="bg-light">
-        <div class="container">
-            <h2 class="section-title animate-on-scroll">📸 Notre clinique en images</h2>
-            <div class="gallery-grid">
-                <div class="gallery-item"><img src="wendtoin/chirigie.jpg" alt="Bloc opératoire"></div>
-                <div class="gallery-item"><img src="wendtoin/chirurgie2.jpg" alt="Chirurgie"></div>
-                <div class="gallery-item"><img src="wendtoin/equipe2.jpg" alt="Équipe médicale"></div>
-                <div class="gallery-item"><img src="wendtoin/team.jpg" alt="Notre équipe"></div>
-                <div class="gallery-item"><img src="wendtoin/ambulance.jpg" alt="Ambulance 24h/24"></div>
-                <div class="gallery-item"><img src="wendtoin/appreil.jpg" alt="Matériel médical"></div>
-                <div class="gallery-item"><img src="wendtoin/appreil2_neuromonotoring.jpg" alt="Neuromonitoring"></div>
-                <div class="gallery-item"><img src="wendtoin/pr_gilbert.jpg" alt="Pr Gilbert"></div>
-                <div class="gallery-item"><img src="wendtoin/im1.jpg" alt="Clinique WENDTOIN"></div>
-                <div class="gallery-item"><img src="wendtoin/im2.jpg" alt="Clinique WENDTOIN"></div>
-                <div class="gallery-item"><img src="wendtoin/im3.jpg" alt="Clinique WENDTOIN"></div>
-                <div class="gallery-item"><img src="wendtoin/im4.jpg" alt="Clinique WENDTOIN"></div>
-                <div class="gallery-item"><img src="wendtoin/im5.jpg" alt="Clinique WENDTOIN"></div>
-                <div class="gallery-item"><img src="wendtoin/im6.jpg" alt="Clinique WENDTOIN"></div>
-                <div class="gallery-item"><img src="wendtoin/im7.jpg" alt="Clinique WENDTOIN"></div>
-            </div>
-            <div class="gallery-scroll">
-                <div class="gallery-scroll-wrapper">
-                    <div class="gallery-scroll-item"><img src="wendtoin/chirigie.jpg" alt="Chirurgie"></div>
-                    <div class="gallery-scroll-item"><img src="wendtoin/chirurgie2.jpg" alt="Chirurgie"></div>
-                    <div class="gallery-scroll-item"><img src="wendtoin/equipe2.jpg" alt="Équipe"></div>
-                    <div class="gallery-scroll-item"><img src="wendtoin/team.jpg" alt="Team"></div>
-                    <div class="gallery-scroll-item"><img src="wendtoin/ambulance.jpg" alt="Ambulance"></div>
-                    <div class="gallery-scroll-item"><img src="wendtoin/appreil.jpg" alt="Appareil"></div>
-                    <div class="gallery-scroll-item"><img src="wendtoin/appreil2_neuromonotoring.jpg" alt="Monitoring"></div>
-                    <div class="gallery-scroll-item"><img src="wendtoin/pr_gilbert.jpg" alt="Pr Gilbert"></div>
-                    <div class="gallery-scroll-item"><img src="wendtoin/im1.jpg" alt="Clinique"></div>
-                    <div class="gallery-scroll-item"><img src="wendtoin/im2.jpg" alt="Clinique"></div>
-                    <div class="gallery-scroll-item"><img src="wendtoin/im3.jpg" alt="Clinique"></div>
-                    <div class="gallery-scroll-item"><img src="wendtoin/im4.jpg" alt="Clinique"></div>
-                    <div class="gallery-scroll-item"><img src="wendtoin/im5.jpg" alt="Clinique"></div>
-                    <div class="gallery-scroll-item"><img src="wendtoin/im6.jpg" alt="Clinique"></div>
-                    <div class="gallery-scroll-item"><img src="wendtoin/im7.jpg" alt="Clinique"></div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <div id="imageModal" class="modal">
-        <span class="close-modal">&times;</span>
-        <img class="modal-content" id="modalImage">
-    </div>
-
-    <section id="temoignages" class="bg-white">
-        <div class="container">
-            <h2 class="section-title animate-on-scroll">⭐ Ce que nos patients disent</h2>
-            <div class="cards-grid">
-                <div class="card animate-on-scroll"><div class="card-header"><div class="stars">★★★★★</div><span class="badge-category">Patient</span></div><div class="card-title">Marie K.</div><div class="card-content"><p class="card-text">"Accueil parfait, urgences rapides. Je recommande vivement cette clinique."</p></div></div>
-                <div class="card animate-on-scroll"><div class="card-header"><div class="stars">★★★★★</div><span class="badge-category">Patient</span></div><div class="card-title">Issa O.</div><div class="card-content"><p class="card-text">"Clinique propre et médecins à l'écoute. Service d'urgence très réactif."</p></div></div>
-                <div class="card animate-on-scroll"><div class="card-header"><div class="stars">★★★★☆</div><span class="badge-category">Patient</span></div><div class="card-title">Amina T.</div><div class="card-content"><p class="card-text">"Très bonne prise en charge, personnel sympathique. Je reviendrai."</p></div></div>
             </div>
         </div>
     </section>
@@ -1109,10 +1210,11 @@
             <div>
                 <h4 style="color: #1D8B5D;">Horaires consultations</h4>
                 <p>Lun-Ven : 7h30-19h30<br>Sam : 7h30-12h</p>
+                <p><strong>Hémodialyse :</strong> 24h/24</p>
             </div>
             <div>
                 <h4 style="color: #1D8B5D;">Liens rapides</h4>
-                <p><a href="#rdv">Prendre RDV</a><br><a href="#services">Nos services</a><br><a href="#contact">Nous trouver</a></p>
+                <p><a href="#rdv">Prendre RDV</a><br><a href="#services">Nos services</a><br><a href="#specialites">Spécialités</a><br><a href="#poles">Pôles techniques</a><br><a href="#contact">Nous trouver</a></p>
             </div>
         </div>
         <div style="text-align:center; margin-top: 40px; padding-top: 20px; border-top: 1px solid #334155; font-size:0.8rem;">
@@ -1167,22 +1269,14 @@
         });
     }
     
-    function animateCounter(element, start, end, duration, isText = false) {
+    function animateCounter(element, start, end, duration) {
         let startTime = null;
-        if (isText && element.innerText !== "24/24") {
-            element.innerText = start;
-        } else if (!isText) {
-            element.innerText = start;
-        }
+        element.innerText = start;
         function update(currentTime) {
             if (!startTime) startTime = currentTime;
             const progress = Math.min((currentTime - startTime) / duration, 1);
             const value = Math.floor(progress * (end - start) + start);
-            if (!isText) {
-                element.innerText = value;
-            } else {
-                if (value <= end) element.innerText = value;
-            }
+            element.innerText = value;
             if (progress < 1) requestAnimationFrame(update);
         }
         requestAnimationFrame(update);
@@ -1194,7 +1288,7 @@
                 const yearsEl = document.getElementById('stat-years');
                 const doctorsEl = document.getElementById('stat-doctors');
                 if (yearsEl && yearsEl.innerText === "0") {
-                    animateCounter(yearsEl, 0, 9, 1500);
+                    animateCounter(yearsEl, 0, 10, 1500);
                 }
                 if (doctorsEl && doctorsEl.innerText === "0") {
                     animateCounter(doctorsEl, 0, 40, 1800);
@@ -1207,7 +1301,7 @@
     const statsContainer = document.querySelector('.stats-container');
     if (statsContainer) statObserver.observe(statsContainer);
     
-    const imagesToAnimate = document.querySelectorAll('.clinic-image, .gallery-item img, .gallery-scroll-item img');
+    const imagesToAnimate = document.querySelectorAll('.clinic-image');
     const imageObserver = new IntersectionObserver((entries) => {
         entries.forEach(entry => {
             if (entry.isIntersecting) {
@@ -1258,32 +1352,6 @@
         });
     }
     
-    const modal = document.getElementById('imageModal');
-    const modalImg = document.getElementById('modalImage');
-    const closeModal = document.querySelector('.close-modal');
-    
-    const galleryImages = document.querySelectorAll('.gallery-item img, .gallery-scroll-item img');
-    
-    galleryImages.forEach(img => {
-        img.addEventListener('click', function(e) {
-            e.stopPropagation();
-            modal.style.display = 'block';
-            modalImg.src = this.src;
-            modalImg.alt = this.alt;
-        });
-    });
-    
-    closeModal.addEventListener('click', function() {
-        modal.style.display = 'none';
-    });
-    
-    modal.addEventListener('click', function(e) {
-        if (e.target === modal) {
-            modal.style.display = 'none';
-        }
-    });
-
-    // ===== PARTICULES MÉDICALES DISCÈTES =====
     function initMedicalParticles() {
         const canvas = document.getElementById('medicalParticles');
         if (!canvas) return;
@@ -1300,7 +1368,7 @@
             canvas.height = rect.height;
         }
 
-        const medicalIcons = ['⚕️', '❤️', '🏥', '💊', '🩺', '💉', '🩻'];
+        const medicalIcons = ['⚕️', '❤️', '🏥', '💊', '🩺', '💉', '🩻', '🧬', '🔬', '📋'];
 
         class MedicalParticle {
             constructor(canvasWidth, canvasHeight) {
