@@ -1368,7 +1368,8 @@
             canvas.height = rect.height;
         }
 
-        const medicalIcons = ['⚕️', '❤️', '🏥', '💊', '🩺', '💉', '🩻', '🧬', '🔬', '📋'];
+        // Suppression de l'icône 🩻 (radiographie/squelette) qui ressemble à une tête de mort
+        const medicalIcons = ['⚕️', '❤️', '🏥', '💊', '🩺', '💉', '🧬', '🔬', '📋'];
 
         class MedicalParticle {
             constructor(canvasWidth, canvasHeight) {
