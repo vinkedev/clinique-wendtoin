@@ -81,10 +81,6 @@
             to { transform: rotate(360deg); }
         }
 
-        .image-visible {
-            animation: fadeScale 0.6s ease forwards;
-        }
-
         .animate-on-scroll {
             opacity: 0;
             transform: translateY(35px);
@@ -640,6 +636,95 @@
             margin-left: 10px;
         }
 
+        /* Équipe */
+        .team-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+            margin-top: 20px;
+        }
+        .team-card {
+            background: white;
+            border-radius: 24px;
+            overflow: hidden;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.08);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            text-align: center;
+        }
+        .team-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 20px 35px rgba(0,0,0,0.12);
+        }
+        .team-image {
+            width: 100%;
+            aspect-ratio: 1 / 1;
+            object-fit: cover;
+        }
+        .team-info {
+            padding: 20px;
+        }
+        .team-name {
+            font-size: 1.2rem;
+            font-weight: 700;
+            color: #0077A4;
+            margin-bottom: 5px;
+        }
+        .team-position {
+            color: #1D8B5D;
+            font-weight: 600;
+            font-size: 0.85rem;
+            margin-bottom: 10px;
+        }
+        .team-desc {
+            color: #475569;
+            font-size: 0.85rem;
+            line-height: 1.5;
+        }
+
+        /* Vidéo */
+        .video-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 25px;
+            margin-top: 20px;
+        }
+        .video-card {
+            background: white;
+            border-radius: 24px;
+            overflow: hidden;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.08);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            cursor: pointer;
+            text-align: center;
+        }
+        .video-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 35px rgba(0,0,0,0.12);
+        }
+        .video-thumbnail {
+            width: 100%;
+            aspect-ratio: 16 / 9;
+            object-fit: cover;
+            background: #1e293b;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 3rem;
+        }
+        .video-info {
+            padding: 15px;
+        }
+        .video-title {
+            font-weight: 600;
+            color: #1e293b;
+            margin-bottom: 5px;
+        }
+        .video-date {
+            font-size: 0.7rem;
+            color: #64748b;
+        }
+
         footer {
             background: #0f172a;
             color: #cbd5e1;
@@ -870,6 +955,8 @@
                 <li><a href="#specialites">Spécialités</a></li>
                 <li><a href="#poles">Pôles techniques</a></li>
                 <li><a href="#rdv">Rendez-vous</a></li>
+                <li><a href="#equipe">Notre équipe</a></li>
+                <li><a href="#video">Vidéos</a></li>
                 <li><a href="#contact">Contact</a></li>
             </ul>
         </nav>
@@ -912,7 +999,7 @@
         <div class="container stats-container">
             <div class="animate-on-scroll"><span class="stat-number" id="stat-years">0</span><br>années d'existence</div>
             <div class="animate-on-scroll"><span class="stat-number">24/24</span><br>Service d'urgence</div>
-            <div class="animate-on-scroll"><span class="stat-number" id="stat-doctors">0</span><br>Médecins (généralistes + spécialistes)</div>
+            <div class="animate-on-scroll"><span class="stat-number" id="stat-doctors">0</span><br>Médecins</div>
         </div>
     </div>
 
@@ -921,10 +1008,10 @@
             <h2 class="section-title animate-on-scroll">Nos services de soins</h2>
             <div class="cards-grid">
                 <div class="card animate-on-scroll"><div class="card-header"><span class="badge-category">Urgence 24/24</span></div><div class="card-title">Médecine d'urgence</div><div class="card-content"><p class="card-text">Prise en charge immédiate 24h/24, 7j/7. Équipe dédiée aux accidents, détresses respiratoires, douleurs aiguës et pathologies urgentes.</p></div></div>
-                <div class="card animate-on-scroll"><div class="card-header"><span class="badge-category">Consultation</span></div><div class="card-title">Consultations générales</div><div class="card-content"><p class="card-text">Médecine générale, suivi des maladies chroniques (diabète, HTA), certificats médicaux et vaccinations. RDV ou sans RDV.</p></div></div>
+                <div class="card animate-on-scroll"><div class="card-header"><span class="badge-category">Consultation</span></div><div class="card-title">Consultations générales</div><div class="card-content"><p class="card-text">Médecine générale, suivi des maladies chroniques, certificats médicaux et vaccinations.</p></div></div>
                 <div class="card animate-on-scroll"><div class="card-header"><span class="badge-category">Spécialiste</span></div><div class="card-title">Cardiologie</div><div class="card-content"><p class="card-text">Explorations cardiaques complètes : ECG, échocardiographie, Holter tensionnel et suivi personnalisé.</p></div></div>
                 <div class="card animate-on-scroll"><div class="card-header"><span class="badge-category">Spécialiste</span></div><div class="card-title">Gynécologie - Obstétrique</div><div class="card-content"><p class="card-text">Suivi grossesse, consultations gynécologiques, accouchements.</p></div></div>
-                <div class="card animate-on-scroll"><div class="card-header"><span class="badge-category">Chirurgie</span></div><div class="card-title">Chirurgie générale</div><div class="card-content"><p class="card-text">Bloc opératoire moderne, chirurgie programmée et d'urgence (appendicite, hernie, traumatologie).</p></div></div>
+                <div class="card animate-on-scroll"><div class="card-header"><span class="badge-category">Chirurgie</span></div><div class="card-title">Chirurgie générale</div><div class="card-content"><p class="card-text">Bloc opératoire moderne, chirurgie programmée et d'urgence.</p></div></div>
                 <div class="card animate-on-scroll"><div class="card-header"><span class="badge-category">Spécialiste</span></div><div class="card-title">Neurologie & Imagerie</div><div class="card-content"><p class="card-text">Consultations neurologiques, électroencéphalogramme, échographies, radios et scanner.</p></div></div>
             </div>
         </div>
@@ -935,17 +1022,17 @@
             <h2 class="section-title animate-on-scroll">Nos spécialités médicales</h2>
             <div class="specialty-grid">
                 <div class="specialty-item"><strong>Radiologie</strong><p>Radiographie standard, Échographie, Scanner</p></div>
-                <div class="specialty-item"><strong>Dermatologie / Allergologie</strong><p>Dermatologie médicale et allergologie</p></div>
+                <div class="specialty-item"><strong>Dermatologie</strong><p>Dermatologie médicale et allergologie</p></div>
                 <div class="specialty-item"><strong>Gastro-entérologie</strong><p>Explorations digestives, endoscopies</p></div>
                 <div class="specialty-item"><strong>Neurologie</strong><p>Consultations et explorations neurologiques</p></div>
                 <div class="specialty-item"><strong>Kinésithérapie</strong><p>Rééducation fonctionnelle, thérapies manuelles</p></div>
                 <div class="specialty-item"><strong>Cancérologie</strong><p>Oncologie médicale, suivi personnalisé</p></div>
                 <div class="specialty-item"><strong>Urologie</strong><p>Prise en charge des maladies urinaires</p></div>
-                <div class="specialty-item"><strong>Orthopédie - Traumatologie</strong><p>Traumatologie et chirurgie orthopédique</p></div>
+                <div class="specialty-item"><strong>Orthopédie</strong><p>Traumatologie et chirurgie orthopédique</p></div>
                 <div class="specialty-item"><strong>ORL</strong><p>Consultations ORL</p></div>
                 <div class="specialty-item"><strong>Rhumatologie</strong><p>Maladies des os et des articulations</p></div>
                 <div class="specialty-item"><strong>Pneumologie</strong><p>Maladies respiratoires</p></div>
-                <div class="specialty-item"><strong>Néphrologie / Dialyse</strong><p>Maladies des reins et dialyse</p></div>
+                <div class="specialty-item"><strong>Néphrologie</strong><p>Maladies des reins et dialyse</p></div>
                 <div class="specialty-item"><strong>Psychiatrie</strong><p>Santé mentale</p></div>
                 <div class="specialty-item"><strong>Pédiatrie</strong><p>Santé de l'enfant</p></div>
                 <div class="specialty-item"><strong>Chirurgie Pédiatrique</strong><p>Chirurgie de l'enfant</p></div>
@@ -972,7 +1059,7 @@
                 </div>
             </div>
             <div class="pole-card animate-on-scroll"><h3>Laboratoire d'Anatomie-Pathologie</h3><div class="pole-list"><span class="pole-tag">Anatomie pathologique</span><span class="pole-tag">Cytologie</span><span class="pole-tag">Immuno-histochimie</span></div><p style="margin-top: 15px; color: #475569; font-size: 0.9rem;">Analyses précises pour le diagnostic des cancers et pathologies tissulaires.</p></div>
-            <div class="pole-card animate-on-scroll"><h3>Centre d'Hémodialyse <span class="badge-247">24h/24 - 7j/7</span></h3><div class="pole-list"><span class="pole-tag">Hémodialyse 24h/24</span><span class="pole-tag">Pose de cathéter tunnelisé</span><span class="pole-tag">Prise en charge dialyse</span></div><p style="margin-top: 15px; color: #475569; font-size: 0.9rem;">Service d'hémodialyse disponible 24 heures sur 24, 7 jours sur 7, avec prise en charge complète des patients insuffisants rénaux.</p></div>
+            <div class="pole-card animate-on-scroll"><h3>Centre d'Hémodialyse <span class="badge-247">24h/24 - 7j/7</span></h3><div class="pole-list"><span class="pole-tag">Hémodialyse 24h/24</span><span class="pole-tag">Pose de cathéter tunnelisé</span><span class="pole-tag">Prise en charge dialyse</span></div><p style="margin-top: 15px; color: #475569; font-size: 0.9rem;">Service d'hémodialyse disponible 24 heures sur 24, 7 jours sur 7.</p></div>
             <div class="pole-card animate-on-scroll"><h3>Imagerie Médicale</h3><div class="pole-list"><span class="pole-tag">Échographie</span><span class="pole-tag">Radios</span><span class="pole-tag">Scanner</span></div></div>
         </div>
     </section>
@@ -981,8 +1068,28 @@
         <div class="container">
             <h2 class="section-title animate-on-scroll">Prendre rendez-vous</h2>
             <div class="rdv-grid">
-                <div class="info-box animate-on-scroll"><h3>Formulaire de rendez-vous</h3><form id="whatsappForm"><div class="form-group"><input type="text" id="nom" placeholder="Nom complet" required></div><div class="form-group"><select id="service"><option>Consultation générale</option><option>Cardiologie</option><option>Gynécologie - Obstétrique</option><option>Pédiatrie</option><option>Chirurgie générale</option><option>Neurologie</option><option>Médecine interne</option><option>Dermatologie</option><option>Pneumologie</option><option>Néphrologie</option><option>ORL</option><option>Orthopédie</option><option>Rhumatologie</option><option>Urologie</option></select></div><div class="form-group"><textarea id="motif" rows="3" placeholder="Date souhaitée et horaire de préférence"></textarea></div><button type="submit" class="btn-rdv" id="submitRdvBtn">Envoyer la demande</button></form><p style="font-size:0.7rem; text-align:center; margin-top:15px;">Vous serez redirigé vers WhatsApp pour confirmer l'envoi</p></div>
-                <div><div class="info-box animate-on-scroll"><h3>Horaires d'ouverture</h3><p><strong>Consultations :</strong><br>Lundi – Vendredi : 7h30 – 19h30<br>Samedi : 7h30 – 12h00</p><p style="margin-top:10px;"><strong>Urgences 24/24 – 7j/7</strong><br>Sans rendez-vous, prise en charge immédiate.</p><p style="margin-top:10px;"><strong>Hémodialyse :</strong><br>24h/24 et 7j/7</p></div><div class="info-box animate-on-scroll"><h3>Assurances acceptées</h3><p><strong>Assurances partenaires :</strong> ASCOMA, GA, MAADO, MUTAB, MUPOL, OLEA, MCI, SONAR, SUNU, UAB, VISTA.<br><strong>Autres :</strong> CNSS, Inami Burkina, mutuelles de santé, assurances privées.</p></div></div>
+                <div class="info-box animate-on-scroll"><h3>Formulaire de rendez-vous</h3><form id="whatsappForm"><div class="form-group"><input type="text" id="nom" placeholder="Nom complet" required></div><div class="form-group"><select id="service"><option>Consultation générale</option><option>Cardiologie</option><option>Gynécologie - Obstétrique</option><option>Pédiatrie</option><option>Chirurgie générale</option><option>Neurologie</option><option>Médecine interne</option><option>Dermatologie</option><option>Pneumologie</option><option>Néphrologie</option><option>ORL</option><option>Orthopédie</option><option>Rhumatologie</option><option>Urologie</option></select></div><div class="form-group"><textarea id="motif" rows="3" placeholder="Date souhaitée et horaire de préférence"></textarea></div><button type="submit" class="btn-rdv" id="submitRdvBtn">Envoyer la demande</button></form><p style="font-size:0.7rem; text-align:center; margin-top:15px;">Vous serez redirigé vers WhatsApp</p></div>
+                <div><div class="info-box animate-on-scroll"><h3>Horaires d'ouverture</h3><p><strong>Consultations :</strong><br>Lundi – Vendredi : 7h30 – 19h30<br>Samedi : 7h30 – 12h00</p><p style="margin-top:10px;"><strong>Urgences 24/24 – 7j/7</strong><br>Sans rendez-vous, prise en charge immédiate.</p><p style="margin-top:10px;"><strong>Hémodialyse :</strong><br>24h/24 et 7j/7</p></div><div class="info-box animate-on-scroll"><h3>Assurances acceptées</h3><p><strong>Partenaires :</strong> ASCOMA, GA, MAADO, MUTAB, MUPOL, OLEA, MCI, SONAR, SUNU, UAB, VISTA.<br><strong>Autres :</strong> CNSS, Inami Burkina, mutuelles.</p></div></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- SECTION NOTRE ÉQUIPE -->
+    <section id="equipe" class="bg-light">
+        <div class="container">
+            <h2 class="section-title animate-on-scroll">Notre équipe</h2>
+            <div class="team-grid" id="teamGrid">
+                <!-- Les 4 membres seront insérés ici par JavaScript -->
+            </div>
+        </div>
+    </section>
+
+    <!-- SECTION VIDÉO -->
+    <section id="video" class="bg-white">
+        <div class="container">
+            <h2 class="section-title animate-on-scroll">Vidéos</h2>
+            <div class="video-grid" id="videoGrid">
+                <!-- Les vidéos seront insérées ici par JavaScript -->
             </div>
         </div>
     </section>
@@ -992,18 +1099,75 @@
     </section>
 </main>
 
-<footer><div class="container"><div class="footer-grid"><div><h4 style="color: #1D8B5D;">Clinique WENDTOIN</h4><p>Boulevard des Tensoba, Secteur 25<br>Cissin, Ouagadougou<br>📞 <a href="tel:51000647" style="color:#1D8B5D;">51 00 06 47</a><br>📧 clinwend@gmail.com</p></div><div><h4 style="color: #1D8B5D;">Urgences 24/24</h4><p><strong><a href="tel:51000647" style="color:#1D8B5D;">51 00 06 47</a></strong></p><p>WhatsApp : <a href="https://wa.me/22651000647" style="color:#1D8B5D;">51 00 06 47</a></p></div><div><h4 style="color: #1D8B5D;">Horaires consultations</h4><p>Lun-Ven : 7h30-19h30<br>Sam : 7h30-12h</p><p><strong>Hémodialyse :</strong> 24h/24</p></div><div><h4 style="color: #1D8B5D;">Liens rapides</h4><p><a href="#rdv">Prendre RDV</a><br><a href="#services">Nos services</a><br><a href="#specialites">Spécialités</a><br><a href="#poles">Pôles techniques</a><br><a href="#contact">Nous trouver</a></p></div></div><div style="text-align:center; margin-top:40px; padding-top:20px; border-top:1px solid #334155;"><p>&copy; 2026 Clinique WENDTOIN – Tous droits réservés</p></div></div></footer>
+<footer><div class="container"><div class="footer-grid"><div><h4 style="color: #1D8B5D;">Clinique WENDTOIN</h4><p>Boulevard des Tensoba, Secteur 25<br>Cissin, Ouagadougou<br>📞 <a href="tel:51000647" style="color:#1D8B5D;">51 00 06 47</a><br>📧 clinwend@gmail.com</p></div><div><h4 style="color: #1D8B5D;">Urgences 24/24</h4><p><strong><a href="tel:51000647" style="color:#1D8B5D;">51 00 06 47</a></strong></p><p>WhatsApp : <a href="https://wa.me/22651000647" style="color:#1D8B5D;">51 00 06 47</a></p></div><div><h4 style="color: #1D8B5D;">Horaires consultations</h4><p>Lun-Ven : 7h30-19h30<br>Sam : 7h30-12h</p><p><strong>Hémodialyse :</strong> 24h/24</p></div><div><h4 style="color: #1D8B5D;">Liens rapides</h4><p><a href="#rdv">Prendre RDV</a><br><a href="#services">Nos services</a><br><a href="#specialites">Spécialités</a><br><a href="#poles">Pôles techniques</a><br><a href="#equipe">Notre équipe</a><br><a href="#contact">Nous trouver</a></p></div></div><div style="text-align:center; margin-top:40px; padding-top:20px; border-top:1px solid #334155;"><p>&copy; 2026 Clinique WENDTOIN – Tous droits réservés</p></div></div></footer>
 
 <div id="surgeryModal" class="modal"><div class="modal-content"><span class="close-modal">&times;</span><div class="modal-header"><h3><span id="modalTitle">Chirurgie</span></h3></div><div class="modal-body" id="modalBody"><p>Chargement...</p></div></div></div>
 
 <script>
+    // DONNÉES DE L'ÉQUIPE (à remplacer par les vraies informations)
+    const teamMembers = [
+        { name: "Dr Nom Prenom", position: "Directeur Médical", desc: "Spécialiste en chirurgie générale.", image: "images/docteur1.jpg" },
+        { name: "Dr Nom Prenom", position: "Chef du service Urgences", desc: "Expert en médecine d'urgence.", image: "images/docteur2.jpg" },
+        { name: "Dr Nom Prenom", position: "Pédiatre", desc: "Prise en charge des enfants.", image: "images/docteur3.jpg" },
+        { name: "Dr Nom Prenom", position: "Gynécologue", desc: "Suivi grossesse et gynécologie.", image: "images/docteur4.jpg" }
+    ];
+
+    // DONNÉES DES VIDÉOS (liens Facebook)
+    const videos = [
+        { title: "Présentation de la clinique", date: "2025", url: "https://www.facebook.com/votrepage/videos/1" },
+        { title: "Service d'urgence 24/24", date: "2025", url: "https://www.facebook.com/votrepage/videos/2" },
+        { title: "Notre plateau technique", date: "2024", url: "https://www.facebook.com/votrepage/videos/3" },
+        { title: "Témoignage patient", date: "2024", url: "https://www.facebook.com/votrepage/videos/4" }
+    ];
+
+    // Remplir la section équipe
+    const teamGrid = document.getElementById('teamGrid');
+    if (teamGrid) {
+        teamMembers.forEach(member => {
+            const card = document.createElement('div');
+            card.className = 'team-card animate-on-scroll';
+            card.innerHTML = `
+                <img src="${member.image}" alt="${member.name}" class="team-image" onerror="this.src='https://placehold.co/400x400/0077A4/white?text=Dr'">
+                <div class="team-info">
+                    <div class="team-name">${member.name}</div>
+                    <div class="team-position">${member.position}</div>
+                    <div class="team-desc">${member.desc}</div>
+                </div>
+            `;
+            teamGrid.appendChild(card);
+        });
+    }
+
+    // Remplir la section vidéo
+    const videoGrid = document.getElementById('videoGrid');
+    if (videoGrid) {
+        videos.forEach(video => {
+            const card = document.createElement('div');
+            card.className = 'video-card animate-on-scroll';
+            card.addEventListener('click', () => {
+                window.open(video.url, '_blank', 'noopener,noreferrer');
+            });
+            card.innerHTML = `
+                <div class="video-thumbnail">
+                    ▶️
+                </div>
+                <div class="video-info">
+                    <div class="video-title">${video.title}</div>
+                    <div class="video-date">${video.date}</div>
+                </div>
+            `;
+            videoGrid.appendChild(card);
+        });
+    }
+
+    // MODAL chirurgie (inchangé)
     const surgeryDetails = {
-        'viscérale': { title: 'Chirurgie Générale / Digestive', content: '<p><strong>Chirurgie générale et digestive</strong> prend en charge les pathologies des organes de l\'abdomen.</p><ul><li>Hernies et Éventrations : cure de hernie inguinale, ombilicale, incisionnelle</li><li>Pathologies des organes : Œsophage, Estomac, Intestins, Rate, Vésicule biliaire</li><li>Autres : Reflux gastro-œsophagien, Appendicite, Pathologies utérines, Affections anales</li></ul><div class="info-note">Pr Gilbert Bonkoungou - Chirurgien référent</div>' },
+        'viscérale': { title: 'Chirurgie Générale / Digestive', content: '<p><strong>Chirurgie générale et digestive</strong> prend en charge les pathologies des organes de l\'abdomen.</p><ul><li>Hernies et Éventrations</li><li>Pathologies des organes : Œsophage, Estomac, Intestins, Rate, Vésicule biliaire</li><li>Appendicite, Pathologies utérines, Affections anales</li></ul><div class="info-note">Pr Gilbert Bonkoungou - Chirurgien référent</div>' },
         'plastique': { title: 'Chirurgie Plastique / De l\'obésité', content: '<p><strong>Chirurgie plastique et de l\'obésité</strong> comprend :</p><ul><li>Chirurgie plastique : Plastie des seins, Liposuccion, Abdominoplastie, BBL</li><li>Chirurgie de l\'obésité : Sleeve gastrectomie, Bypass gastrique, Ballon intragastrique</li></ul><div class="info-note">Consultation préalable obligatoire</div>' },
         'cancers': { title: 'Chirurgie des Cancers', content: '<p><strong>Chirurgie oncologique</strong> prend en charge les tumeurs solides.</p><ul><li>Cancers digestifs (côlon, estomac, pancréas, foie)</li><li>Cancers gynécologiques et urologiques</li><li>Cancers thyroïdiens et surrénaliens</li><li>Tumeurs du sein</li></ul><div class="info-note">Prise en charge multidisciplinaire</div>' },
         'vasculaire': { title: 'Chirurgie Vasculaire', content: '<p><strong>Chirurgie vasculaire</strong> traite les pathologies des vaisseaux sanguins.</p><ul><li>Varices (stripping, laser endoveineux, sclérothérapie)</li><li>Fistules pour dialyse (confection et entretien)</li><li>Pathologies carotidiennes (prévention AVC)</li><li>Artériopathie oblitérante des membres</li></ul><div class="info-note">Urgences vasculaires 24h/24</div>' },
         'thoracique': { title: 'Chirurgie Thoracique', content: '<p><strong>Chirurgie thoracique</strong> prend en charge les affections du thorax.</p><ul><li>Pathologies pulmonaires (cancer, nodules, pneumothorax)</li><li>Chirurgie de la thyroïde (goître, hyperthyroïdie, nodules)</li><li>Médiastin (tumeurs thymiques, péricardectomie)</li><li>Paroi thoracique</li></ul><div class="info-note">Techniques vidéo-assistées (VATS)</div>' },
-        'laparoscopique': { title: 'Techniques de Vidéo-Chirurgie', content: '<p><strong>Chirurgie mini-invasive</strong> révolutionne la prise en charge chirurgicale.</p><ul><li>Laparoscopie : interventions par petites incisions, moins de douleurs, cicatrices réduites</li><li>Hystéroscopie : exploration et chirurgie de l\'utérus par voie naturelle</li></ul><div class="info-note">Pr Gilbert Bonkoungou - Pionnier de la laparoscopie au Burkina Faso</div>' }
+        'laparoscopique': { title: 'Techniques de Vidéo-Chirurgie', content: '<p><strong>Chirurgie mini-invasive</strong> révolutionne la prise en charge chirurgicale.</p><ul><li>Laparoscopie : interventions par petites incisions</li><li>Hystéroscopie : exploration et chirurgie de l\'utérus par voie naturelle</li></ul><div class="info-note">Pr Gilbert Bonkoungou - Pionnier de la laparoscopie</div>' }
     };
     const modal = document.getElementById('surgeryModal');
     const modalTitle = document.getElementById('modalTitle');
@@ -1026,7 +1190,7 @@
     window.addEventListener('click', (e) => { if (e.target === modal) closeModal(); });
     document.addEventListener('keydown', (e) => { if (e.key === 'Escape' && modal.style.display === 'flex') closeModal(); });
     
-    // Animations & autres scripts
+    // Animations
     const animateElements = document.querySelectorAll('.animate-on-scroll');
     const checkVisibility = () => { animateElements.forEach(el => { if (el.getBoundingClientRect().top < window.innerHeight - 80) el.classList.add('visible'); }); };
     window.addEventListener('scroll', checkVisibility);
