@@ -424,12 +424,6 @@
             font-size: 0.9rem;
         }
 
-        .stars {
-            color: #f7b731;
-            letter-spacing: 2px;
-            font-size: 0.9rem;
-        }
-
         .stats {
             background: #0077A4;
             color: white;
@@ -576,173 +570,6 @@
             vertical-align: middle;
         }
 
-        .gallery-grid {
-            display: grid;
-            grid-template-columns: 1fr;
-            gap: 25px;
-        }
-        .gallery-item {
-            background: white;
-            border-radius: 20px;
-            overflow: hidden;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.08);
-            transition: transform 0.3s;
-            cursor: pointer;
-        }
-        .gallery-item:hover {
-            transform: translateY(-5px);
-        }
-        .gallery-item img {
-            width: 100%;
-            height: 220px;
-            object-fit: cover;
-            display: block;
-        }
-        
-        .gallery-scroll {
-            display: none;
-            overflow-x: auto;
-            scroll-snap-type: x mandatory;
-            padding-bottom: 10px;
-        }
-        .gallery-scroll-wrapper {
-            display: flex;
-            gap: 12px;
-        }
-        .gallery-scroll-item {
-            flex: 0 0 280px;
-            scroll-snap-align: start;
-            background: white;
-            border-radius: 20px;
-            overflow: hidden;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.08);
-            cursor: pointer;
-        }
-        .gallery-scroll-item img {
-            width: 100%;
-            height: 220px;
-            object-fit: cover;
-            display: block;
-        }
-
-        /* MODAL STYLES */
-        .modal {
-            display: none;
-            position: fixed;
-            z-index: 9999;
-            left: 0;
-            top: 0;
-            width: 100%;
-            height: 100%;
-            background-color: rgba(0,0,0,0.85);
-            cursor: pointer;
-            backdrop-filter: blur(5px);
-            align-items: center;
-            justify-content: center;
-        }
-        .modal-content {
-            background: white;
-            margin: auto;
-            display: block;
-            width: 90%;
-            max-width: 550px;
-            border-radius: 28px;
-            position: relative;
-            cursor: default;
-            animation: fadeScale 0.3s ease;
-            max-height: 85vh;
-            overflow-y: auto;
-        }
-        .modal-header {
-            background: linear-gradient(135deg, #0077A4, #1D8B5D);
-            padding: 20px 25px;
-            border-radius: 28px 28px 0 0;
-            color: white;
-        }
-        .modal-header h3 {
-            font-size: 1.5rem;
-            margin: 0;
-            display: flex;
-            align-items: center;
-            gap: 12px;
-        }
-        .modal-header .modal-icon {
-            font-size: 2rem;
-        }
-        .modal-body {
-            padding: 25px;
-        }
-        .modal-body p {
-            margin-bottom: 15px;
-            color: #334155;
-            line-height: 1.7;
-        }
-        .modal-body ul {
-            margin: 15px 0;
-            padding-left: 25px;
-        }
-        .modal-body li {
-            margin: 8px 0;
-            color: #475569;
-        }
-        .modal-body .info-note {
-            background: #e6f7f0;
-            padding: 15px;
-            border-radius: 16px;
-            margin-top: 20px;
-            border-left: 4px solid #1D8B5D;
-        }
-        .modal-body .info-note i {
-            color: #1D8B5D;
-            margin-right: 8px;
-        }
-        .close-modal {
-            position: absolute;
-            top: 15px;
-            right: 20px;
-            color: white;
-            font-size: 32px;
-            font-weight: bold;
-            cursor: pointer;
-            z-index: 10000;
-            background: rgba(0,0,0,0.3);
-            width: 36px;
-            height: 36px;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            transition: all 0.2s;
-        }
-        .close-modal:hover {
-            background: #dc3545;
-            transform: scale(1.1);
-        }
-
-        footer {
-            background: #0f172a;
-            color: #cbd5e1;
-            padding: 45px 0 30px;
-        }
-
-        .footer-grid {
-            display: grid;
-            grid-template-columns: 1fr;
-            gap: 30px;
-            text-align: center;
-        }
-
-        .footer-grid a {
-            color: #cbd5e1;
-            text-decoration: none;
-            transition: all 0.3s ease;
-            display: inline-block;
-        }
-
-        .footer-grid a:hover {
-            color: #1D8B5D;
-        }
-
         .specialty-grid {
             display: grid;
             grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
@@ -837,6 +664,138 @@
             margin-left: 10px;
         }
 
+        /* MODAL STYLES */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 9999;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0,0,0,0.85);
+            cursor: pointer;
+            backdrop-filter: blur(5px);
+            align-items: center;
+            justify-content: center;
+        }
+        .modal-content {
+            background: white;
+            margin: auto;
+            display: block;
+            width: 90%;
+            max-width: 550px;
+            border-radius: 28px;
+            position: relative;
+            cursor: default;
+            animation: fadeScale 0.3s ease;
+            max-height: 85vh;
+            overflow-y: auto;
+        }
+        .modal-header {
+            background: linear-gradient(135deg, #0077A4, #1D8B5D);
+            padding: 20px 25px;
+            border-radius: 28px 28px 0 0;
+            color: white;
+            position: sticky;
+            top: 0;
+            z-index: 1;
+        }
+        .modal-header h3 {
+            font-size: 1.5rem;
+            margin: 0;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+        .modal-header .modal-icon {
+            font-size: 2rem;
+        }
+        .modal-body {
+            padding: 25px;
+        }
+        .modal-body p {
+            margin-bottom: 15px;
+            color: #334155;
+            line-height: 1.7;
+        }
+        .modal-body ul {
+            margin: 15px 0;
+            padding-left: 25px;
+        }
+        .modal-body li {
+            margin: 8px 0;
+            color: #475569;
+        }
+        .modal-body .info-note {
+            background: #e6f7f0;
+            padding: 15px;
+            border-radius: 16px;
+            margin-top: 20px;
+            border-left: 4px solid #1D8B5D;
+        }
+        .modal-body .info-note i {
+            color: #1D8B5D;
+            margin-right: 8px;
+        }
+        .sub-section {
+            margin-top: 20px;
+            padding-top: 10px;
+            border-top: 1px solid #e2e8f0;
+        }
+        .sub-section-title {
+            font-weight: 700;
+            color: #0077A4;
+            margin-bottom: 10px;
+            font-size: 1rem;
+        }
+        .close-modal {
+            position: absolute;
+            top: 15px;
+            right: 20px;
+            color: white;
+            font-size: 32px;
+            font-weight: bold;
+            cursor: pointer;
+            z-index: 10000;
+            background: rgba(0,0,0,0.3);
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.2s;
+        }
+        .close-modal:hover {
+            background: #dc3545;
+            transform: scale(1.1);
+        }
+
+        footer {
+            background: #0f172a;
+            color: #cbd5e1;
+            padding: 45px 0 30px;
+        }
+
+        .footer-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 30px;
+            text-align: center;
+        }
+
+        .footer-grid a {
+            color: #cbd5e1;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            display: inline-block;
+        }
+
+        .footer-grid a:hover {
+            color: #1D8B5D;
+        }
+
         @media (min-width: 640px) {
             .cards-grid {
                 grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
@@ -846,9 +805,6 @@
             }
             .section-title {
                 font-size: 2rem;
-            }
-            .gallery-grid {
-                grid-template-columns: repeat(2, 1fr);
             }
         }
 
@@ -914,9 +870,6 @@
             .stat-number {
                 font-size: 2.7rem;
             }
-            .gallery-grid {
-                grid-template-columns: repeat(4, 1fr);
-            }
         }
 
         @media (max-width: 768px) {
@@ -937,17 +890,6 @@
             .card-header, .card-title, .card-content {
                 padding-left: 16px;
                 padding-right: 16px;
-            }
-            .gallery-grid {
-                display: none;
-            }
-            .gallery-scroll {
-                display: block;
-            }
-            .gallery-scroll-item img {
-                height: 300px;
-                width: 100%;
-                object-fit: cover;
             }
             .pole-card h3 {
                 font-size: 1.2rem;
@@ -1091,11 +1033,11 @@
                 <h3><span class="pole-icon">🏥</span> Pôle Chirurgie <span class="badge-247">Chirurgie programmée & d'urgence</span></h3>
                 <div class="pole-list" id="surgeryPoleList">
                     <span class="pole-tag" data-surgery="viscérale"><i class="fas fa-stethoscope"></i> Chirurgie viscérale</span>
-                    <span class="pole-tag" data-surgery="plastique"><i class="fas fa-hand-sparkles"></i> Chirurgie plastique (silhouette)</span>
+                    <span class="pole-tag" data-surgery="plastique"><i class="fas fa-hand-sparkles"></i> Chirurgie plastique et esthétique</span>
                     <span class="pole-tag" data-surgery="obesite"><i class="fas fa-weight-scale"></i> Chirurgie de l'obésité</span>
                     <span class="pole-tag" data-surgery="thoracique"><i class="fas fa-lungs"></i> Chirurgie thoracique et vasculaire</span>
-                    <span class="pole-tag" data-surgery="endocrinienne"><i class="fas fa-thyroid"></i> Chirurgie endocrinienne et métabolique</span>
-                    <span class="pole-tag" data-surgery="laparoscopique"><i class="fas fa-microscope"></i> Chirurgie laparoscopique</span>
+                    <span class="pole-tag" data-surgery="endocrinienne"><i class="fas fa-thyroid"></i> Chirurgie endocrinienne</span>
+                    <span class="pole-tag" data-surgery="laparoscopique"><i class="fas fa-microscope"></i> Techniques de vidéo-chirurgie</span>
                 </div>
             </div>
 
@@ -1134,7 +1076,7 @@
                         <span class="badge-category">Chirurgie</span>
                     </div>
                     <div class="card-title">Pr GILBERT Bonkoungou</div>
-                    <div class="card-content"><p class="card-text">Chirurgie Générale</p></div>
+                    <div class="card-content"><p class="card-text">Chirurgie Générale - Pionnier de la laparoscopie</p></div>
                 </div>
                 <div class="card animate-on-scroll">
                     <div class="card-header"><div class="card-icon">👩‍⚕️</div><span class="badge-category">Médecine Interne</span></div>
@@ -1313,27 +1255,28 @@
             title: '🏥 Chirurgie Viscérale',
             icon: '🏥',
             content: `
-                <p><strong><i class="fas fa-stethoscope"></i> La chirurgie viscérale</strong> traite les organes de l'abdomen et du pelvis.</p>
+                <p><strong><i class="fas fa-stethoscope"></i> La chirurgie viscérale</strong> prend en charge les pathologies des organes de l'abdomen et du pelvis.</p>
                 <ul>
-                    <li><strong>Pathologies prises en charge :</strong> hernies (inguinales, ombilicales, ventrales), calculs biliaires (vésicule biliaire), appendicite, occlusions intestinales</li>
-                    <li><strong>Organes traités :</strong> foie, pancréas, rate, estomac, intestin grêle, côlon, rectum, vessie, prostate</li>
-                    <li><strong>Interventions courantes :</strong> cholécystectomie (ablation de la vésicule), cure de hernie, colectomie (ablation d'une partie du côlon)</li>
-                    <li><strong>Techniques :</strong> chirurgie ouverte et mini-invasive (cœlioscopie)</li>
+                    <li><strong>Hernies et Éventrations</strong> : cure de hernie inguinale, ombilicale, incisionnelle et éventrations complexes</li>
+                    <li><strong>Pathologies des organes</strong> : Œsophage, Estomac, Intestins, Rate, Vésicule biliaire</li>
+                    <li><strong>Autres prises en charge</strong> : Reflux gastro-œsophagien, Appendicite, Pathologies utérines, Affections anales</li>
                 </ul>
                 <div class="info-note">
-                    <i class="fas fa-clock"></i> Durée moyenne d'hospitalisation : 2 à 7 jours selon l'intervention
+                    <i class="fas fa-clock"></i> Interventions réalisées par voie ouverte ou cœlioscopique selon les indications
                 </div>
             `
         },
         'plastique': {
-            title: '✨ Chirurgie Plastique (Silhouette)',
+            title: '✨ Chirurgie Plastique et Esthétique',
             icon: '✨',
             content: `
-                <p><strong><i class="fas fa-hand-sparkles"></i> La chirurgie plastique esthétique et reconstructrice</strong> vise à améliorer ou restaurer l'apparence corporelle.</p>
+                <p><strong><i class="fas fa-hand-sparkles"></i> La chirurgie plastique et esthétique</strong> vise à améliorer, restaurer ou embellir l'apparence corporelle.</p>
                 <ul>
-                    <li><strong>Chirurgie esthétique :</strong> liposuccion (retrait des graisses localisées), abdominoplastie (ventre plat), lifting des bras ou des cuisses, augmentation mammaire, réduction mammaire</li>
-                    <li><strong>Chirurgie reconstructrice :</strong> reconstruction mammaire après cancer, traitement des séquelles de brûlures, cicatrices disgracieuses</li>
-                    <li><strong>Chirurgie de la silhouette :</strong> taille, hanches, selle (fessier)</li>
+                    <li><strong>Plastie des seins</strong> : augmentation mammaire, réduction mammaire, lifting mammaire</li>
+                    <li><strong>Liposuccion</strong> : retrait des graisses localisées (ventre, hanches, cuisses, bras)</li>
+                    <li><strong>Plastie de l'abdomen (Abdominoplastie)</strong> : ventre plat,切除 des excès cutanés après grossesse ou perte de poids</li>
+                    <li><strong>BBL (Brazilian Butt Lift)</strong> : remodelage des fesses par lipogreffe</li>
+                    <li><strong>Chirurgie de l'obésité</strong> : prise en charge chirurgicale des patients obèses (sleeve, bypass)</li>
                 </ul>
                 <div class="info-note">
                     <i class="fas fa-calendar-check"></i> Consultation préalable obligatoire pour définir vos attentes et les résultats possibles
@@ -1347,17 +1290,17 @@
                 <p><strong><i class="fas fa-weight-scale"></i> La chirurgie bariatrique</strong> est indiquée pour les patients souffrant d'obésité sévère (IMC ≥ 40 ou IMC ≥ 35 avec comorbidités).</p>
                 <ul>
                     <li><strong>Techniques pratiquées :</strong>
-                        <ul style="margin-top: 5px;">
-                            <li><strong>Anneau gastrique ajustable</strong> (moins fréquent aujourd'hui)</li>
-                            <li><strong>Sleeve gastrectomie</strong> (réduction de l'estomac en tube) - technique la plus courante</li>
-                            <li><strong>Bypass gastrique</strong> (dérivation) · <strong>Ballon intragastrique</strong> (temporaire)</li>
+                        <ul style="margin-top: 8px;">
+                            <li><strong>Sleeve gastrectomie</strong> : réduction de l'estomac en tube - technique la plus courante</li>
+                            <li><strong>Bypass gastrique</strong> : dérivation pour une perte de poids durable</li>
+                            <li><strong>Ballon intragastrique</strong> : solution temporaire et non invasive</li>
                         </ul>
                     </li>
                     <li><strong>Avantages :</strong> perte de poids significative (50-70% de l'excès de poids), amélioration du diabète, apnée du sommeil, hypertension</li>
                     <li><strong>Suivi :</strong> équipe multidisciplinaire (chirurgien, nutritionniste, psychologue, endocrinologue)</li>
                 </ul>
                 <div class="info-note">
-                    <i class="fas fa-heartbeat"></i> Résultats prouvés sur la réduction des risques cardiovasculaires et du diabète de type 2
+                    <i class="fas fa-heartbeat"></i> La chirurgie de l'obésité est également proposée dans le cadre de la chirurgie plastique post-perte de poids
                 </div>
             `
         },
@@ -1365,32 +1308,28 @@
             title: '🫁 Chirurgie Thoracique et Vasculaire',
             icon: '🫁',
             content: `
-                <p><strong><i class="fas fa-lungs"></i> La chirurgie thoracique</strong> traite les affections du thorax (poumons, médiastin, plèvre, paroi thoracique).</p>
+                <p><strong><i class="fas fa-lungs"></i> La chirurgie thoracique et vasculaire</strong> traite les affections du thorax et des vaisseaux sanguins.</p>
                 <ul>
-                    <li><strong>Pathologies pulmonaires :</strong> cancer du poumon, nodules pulmonaires, pneumothorax (poumon affaissé), bronchectasies, emphysème</li>
-                    <li><strong>Chirurgie vasculaire thoracique :</strong> anévrismes de l'aorte thoracique, pontages, syndromes du défilé thoracique</li>
-                    <li><strong>Médiastin :</strong> tumeurs du médiastin (thymome, lymphomes), péricardectomie</li>
-                </ul>
-                <p style="margin-top: 15px;"><strong>Pathologies vasculaires périphériques :</strong></p>
-                <ul>
-                    <li>Insuffisance veineuse (varices, jambes lourdes) · Artériopathie oblitérante des membres inférieurs (AOMI)</li>
-                    <li>Anévrismes de l'aorte abdominale · Sténoses carotidiennes (prévention AVC)</li>
+                    <li><strong>Pathologies veineuses</strong> : Varices ( stripping, laser endoveineux, sclérothérapie)</li>
+                    <li><strong>Chirurgie de la Thyroïde</strong> : Goître, Hyperthyroïdie, nodules thyroïdiens, cancer thyroïdien → thyroïdectomie</li>
+                    <li><strong>Fistules pour dialyse</strong> : confection et entretien des abords vasculaires pour les patients dialysés (Fistule artério-veineuse)</li>
+                    <li><strong>Pathologies carotidiennes</strong> : Sténose carotidienne (prévention des AVC) → endartériectomie carotidienne</li>
                 </ul>
                 <div class="info-note">
-                    <i class="fas fa-microscope"></i> Techniques mini-invasives : thoracoscopie vidéo-assistée (VATS) pour une récupération plus rapide
+                    <i class="fas fa-microscope"></i> Intervention de la thyroïde réalisée avec des techniques de précision pour préserver les nerfs récurrents et les parathyroïdes
                 </div>
             `
         },
         'endocrinienne': {
-            title: '🧬 Chirurgie Endocrinienne et Métabolique',
+            title: '🧬 Chirurgie Endocrinienne',
             icon: '🧬',
             content: `
-                <p><strong><i class="fas fa-thyroid"></i> La chirurgie endocrinienne</strong> concerne les glandes à sécrétion endocrine (thyroïde, parathyroïdes, surrénales, pancréas endocrine).</p>
+                <p><strong><i class="fas fa-thyroid"></i> La chirurgie endocrinienne</strong> concerne les glandes à sécrétion endocrine.</p>
                 <ul>
-                    <li><strong>Thyroïde :</strong> nodules thyroïdiens, goitres, cancer de la thyroïde, hyperthyroïdie (Basedow) → thyroïdectomie totale ou subtotale</li>
-                    <li><strong>Parathyroïdes :</strong> hyperparathyroïdie primitive (calculs rénaux récidivants, ostéoporose sévère) → parathyroïdectomie</li>
-                    <li><strong>Surrénales :</strong> tumeurs surrénaliennes (phéochromocytome, adénome, cancer)</li>
-                    <li><strong>Chirurgie métabolique :</strong> prise en charge chirurgicale de certaines obésités sévères avec retentissement métabolique</li>
+                    <li><strong>Thyroïde</strong> : goîtres (nodules thyroïdiens, goitre multihétéronodulaire), hyperthyroïdie (maladie de Basedow), cancer de la thyroïde → thyroïdectomie totale ou subtotale</li>
+                    <li><strong>Parathyroïdes</strong> : hyperparathyroïdie primaire (calculs rénaux récidivants, ostéoporose) → parathyroïdectomie</li>
+                    <li><strong>Surrénales</strong> : tumeurs surrénaliennes (phéochromocytome, adénome, incidentalome)</li>
+                    <li><strong>Panneaux métaboliques</strong> : tumeurs endocrines du pancréas (insulinome, gastrinome)</li>
                 </ul>
                 <div class="info-note">
                     <i class="fas fa-vial"></i> Bilan hormonal systématique avant toute intervention pour personnaliser la prise en charge
@@ -1398,24 +1337,32 @@
             `
         },
         'laparoscopique': {
-            title: '🔬 Chirurgie Laparoscopique',
+            title: '🔬 Techniques de Vidéo-Chirurgie',
             icon: '🔬',
             content: `
-                <p><strong><i class="fas fa-microscope"></i> La chirurgie laparoscopique (mini-invasive ou cœlioscopie)</strong> est une technique chirurgicale où les interventions sont réalisées par de petites incisions (0,5 à 1,5 cm).</p>
+                <p><strong><i class="fas fa-microscope"></i> La chirurgie mini-invasive (vidéo-chirurgie)</strong> révolutionne la prise en charge chirurgicale.</p>
                 <ul>
-                    <li><strong>Avantages par rapport à la chirurgie ouverte :</strong>
+                    <li><strong>Chirurgie laparoscopique (cœlioscopie)</strong> :
                         <ul style="margin-top: 5px;">
+                            <li>✓ Interventions par petites incisions (0,5 à 1,5 cm)</li>
                             <li>✓ Moins de douleurs post-opératoires</li>
                             <li>✓ Cicatrices plus petites et plus esthétiques</li>
-                            <li>✓ Hospitalisation plus courte (2-4 jours contre 5-10 jours)</li>
+                            <li>✓ Hospitalisation plus courte (2-4 jours)</li>
                             <li>✓ Retour plus rapide aux activités normales</li>
                             <li>✓ Moins de risques d'infection et d'éventration</li>
                         </ul>
                     </li>
-                    <li><strong>Interventions courantes :</strong> cholécystectomie (vésicule biliaire), appendicectomie, cures de hernie, colectomie, chirurgie de l'obésité (sleeve, bypass), lysis des adhérences</li>
+                    <li><strong>Hystéroscopie</strong> :
+                        <ul style="margin-top: 5px;">
+                            <li>✓ Exploration et chirurgie de l'utérus par voie naturelle</li>
+                            <li>✓ Diagnostic des polypes, fibromes, malformations utérines</li>
+                            <li>✓ Interventions : résection de polypes, myomectomie hystéroscopique</li>
+                            <li>✓ Sans incision, récupération immédiate</li>
+                        </ul>
+                    </li>
                 </ul>
                 <div class="info-note">
-                    <i class="fas fa-trophy"></i> Le Pr Gilbert Bonkoungou est pionnier de cette technique au Burkina Faso depuis 2005
+                    <i class="fas fa-trophy"></i> Le Pr Gilbert Bonkoungou est pionnier de la laparoscopie au Burkina Faso depuis 2005
                 </div>
             `
         }
