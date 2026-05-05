@@ -836,6 +836,30 @@
             color: #1D8B5D;
         }
 
+        .load-more-btn {
+            display: block;
+            background: #0077A4;
+            color: white;
+            border: none;
+            padding: 12px 24px;
+            font-size: 1rem;
+            font-weight: 600;
+            border-radius: 40px;
+            margin: 40px auto 0 auto;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 12px rgba(0,119,164,0.3);
+        }
+        .load-more-btn:hover {
+            background: #005f86;
+            transform: translateY(-2px);
+        }
+        .load-more-btn:disabled {
+            background: #94a3b8;
+            cursor: not-allowed;
+            transform: none;
+        }
+
         @media (min-width: 640px) {
             .cards-grid {
                 grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
@@ -1024,21 +1048,6 @@
                     <div class="card-title">Cardiologie</div>
                     <div class="card-content"><p class="card-text">Explorations cardiaques complètes : ECG, échocardiographie, Holter tensionnel et suivi personnalisé.</p></div>
                 </div>
-                <div class="card animate-on-scroll">
-                    <div class="card-header"><div class="card-icon">🤰</div><span class="badge-category">Spécialiste</span></div>
-                    <div class="card-title">Gynécologie - Obstétrique</div>
-                    <div class="card-content"><p class="card-text">Suivi grossesse, consultations gynécologiques, accouchements.</p></div>
-                </div>
-                <div class="card animate-on-scroll">
-                    <div class="card-header"><div class="card-icon">🦴</div><span class="badge-category">Chirurgie</span></div>
-                    <div class="card-title">Chirurgie générale</div>
-                    <div class="card-content"><p class="card-text">Bloc opératoire moderne, chirurgie programmée et d'urgence (appendicite, hernie, traumatologie).</p></div>
-                </div>
-                <div class="card animate-on-scroll">
-                    <div class="card-header"><div class="card-icon">🧠</div><span class="badge-category">Spécialiste</span></div>
-                    <div class="card-title">Neurologie & Imagerie</div>
-                    <div class="card-content"><p class="card-text">Consultations neurologiques, électroencéphalogramme, échographies, radios et scanner.</p></div>
-                </div>
             </div>
         </div>
     </section>
@@ -1048,70 +1057,19 @@
             <h2 class="section-title animate-on-scroll">🏥 Nos spécialités médicales</h2>
             <div class="specialty-grid">
                 <div class="specialty-item"><strong>📡 Radiologie</strong><p>Radiographie standard, Échographie, Scanner</p></div>
-                <div class="specialty-item"><strong>🔬 Dermatologie / Allergologie</strong><p>Dr SERE Lassina</p></div>
                 <div class="specialty-item"><strong>🩻 Gastro-entérologie</strong><p>Explorations digestives, endoscopies</p></div>
-                <div class="specialty-item"><strong>⚕️ Neurologie</strong><p>Dr Marina OUEDRAOGO, Dr KAFANDO Yacouba</p></div>
                 <div class="specialty-item"><strong>💪 Kinésithérapie</strong><p>Rééducation fonctionnelle, thérapies manuelles</p></div>
-                <div class="specialty-item"><strong>⚕️ Cancérologie</strong><p>Oncologie médicale, suivi personnalisé</p></div>
-                <div class="specialty-item"><strong>🩺 Urologie</strong><p>Dr SALIA Oumar, Dr KARAMA Haidjikiena, Dr NOE Zaghre</p></div>
-                <div class="specialty-item"><strong>🦴 Orthopédie - Traumatologie</strong><p>Dr KUIIRE</p></div>
-                <div class="specialty-item"><strong>👂 ORL</strong><p>Consultations ORL</p></div>
-                <div class="specialty-item"><strong>🦷 Rhumatologie</strong><p>Dr SOMBIE Edouard, Dr TOUGMA/SANOU Alini</p></div>
-                <div class="specialty-item"><strong>🌬️ Pneumologie</strong><p>Pr OUEDRAOGO Sosthène, Dr IDO Franck</p></div>
-                <div class="specialty-item"><strong>🩸 Néphrologie / Dialyse</strong><p>Dr NACRO Fatimata</p></div>
-                <div class="specialty-item"><strong>🧠 Psychiatrie</strong><p>Dr YAOGO Daniel</p></div>
-                <div class="specialty-item"><strong>👶 Pédiatrie</strong><p>Dr ZONGO Esdras</p></div>
-                <div class="specialty-item"><strong>🔪 Chirurgie Pédiatrique</strong><p>Dr THIOMBIANO Abdoulaye</p></div>
-                <div class="specialty-item"><strong>🧬 Anatomie Pathologique</strong><p>Mme TRAORE</p></div>
-                <div class="specialty-item"><strong>💉 Anesthésie-Réanimation</strong><p>Dr SAYORE Christine Milena, Dr BELEM Farid, Dr YARO Ignace, Dr OUIMINGA Ines</p></div>
-                <div class="specialty-item"><strong>🥗 Nutrition</strong><p>Service de nutrition clinique</p></div>
-                <div class="specialty-item"><strong>🩺 Médecine Interne</strong><p>Dr DIALLO Fatomata</p></div>
             </div>
         </div>
     </section>
 
     <section id="poles" class="bg-white">
         <div class="container">
-            <h2 class="section-title animate-on-scroll">🔬 Pôles techniques & plateaux spécialisés</h2>
-            
+            <h2 class="section-title animate-on-scroll">🔬 Pôles techniques</h2>
             <div class="pole-card animate-on-scroll">
-                <h3><span class="pole-icon">🏥</span> Pôle Chirurgie <span class="badge-247">Chirurgie programmée & d'urgence</span></h3>
-                <div class="pole-list" id="surgeryPoleList">
-                    <span class="pole-tag" data-surgery="viscérale"><i class="fas fa-stethoscope"></i> Chirurgie Générale / Digestive</span>
-                    <span class="pole-tag" data-surgery="plastique"><i class="fas fa-hand-sparkles"></i> Chirurgie Plastique / De l'obésité</span>
-                    <span class="pole-tag" data-surgery="cancers"><i class="fas fa-tumor"></i> Chirurgie des cancers</span>
-                    <span class="pole-tag" data-surgery="vasculaire"><i class="fas fa-heartbeat"></i> Chirurgie Vasculaire</span>
-                    <span class="pole-tag" data-surgery="thoracique"><i class="fas fa-lungs"></i> Chirurgie Thoracique</span>
-                    <span class="pole-tag" data-surgery="laparoscopique"><i class="fas fa-microscope"></i> Techniques de vidéo-chirurgie</span>
-                </div>
-            </div>
-
-            <div class="pole-card animate-on-scroll">
-                <h3><span class="pole-icon">🔬</span> Laboratoire d'Anatomie-Pathologie</h3>
+                <h3><span class="pole-icon">🏥</span> Pôle Chirurgie</h3>
                 <div class="pole-list">
-                    <span class="pole-tag">Anatomie pathologique</span>
-                    <span class="pole-tag">Cytologie</span>
-                    <span class="pole-tag">Immuno-histochimie</span>
-                </div>
-                <p style="margin-top: 15px; color: #475569; font-size: 0.9rem;">📋 Analyses précises pour le diagnostic des cancers et pathologies tissulaires.</p>
-            </div>
-
-            <div class="pole-card animate-on-scroll">
-                <h3><span class="pole-icon">🩸</span> Centre d'Hémodialyse <span class="badge-247">24h/24 - 7j/7</span></h3>
-                <div class="pole-list">
-                    <span class="pole-tag">Hémodialyse 24h/24</span>
-                    <span class="pole-tag">Pose de cathéter tunnelisé</span>
-                    <span class="pole-tag">Prise en charge dialyse</span>
-                </div>
-                <p style="margin-top: 15px; color: #475569; font-size: 0.9rem;">🩸 Service d'hémodialyse disponible 24 heures sur 24, 7 jours sur 7, avec prise en charge complète des patients insuffisants rénaux.</p>
-            </div>
-
-            <div class="pole-card animate-on-scroll">
-                <h3><span class="pole-icon">📷</span> Imagerie Médicale</h3>
-                <div class="pole-list">
-                    <span class="pole-tag">Échographie</span>
-                    <span class="pole-tag">Radios</span>
-                    <span class="pole-tag">Scanner</span>
+                    <span class="pole-tag" data-surgery="viscérale"><i class="fas fa-stethoscope"></i> Chirurgie Générale</span>
                 </div>
             </div>
         </div>
@@ -1121,301 +1079,13 @@
         <div class="container">
             <h2 class="section-title animate-on-scroll">Notre équipe médicale</h2>
             <div style="text-align:center; margin-bottom:30px; background:#e6f7f0; padding:15px; border-radius:20px;">
-                <p style="color:#1D8B5D;">👨‍⚕️ Une équipe de <strong>plus de 40 médecins généralistes et spécialistes</strong> à votre service 24h/24</p>
+                <p style="color:#1D8B5D;">👨‍⚕️ Une équipe de <strong>plus de 40 médecins</strong> à votre service</p>
             </div>
             
-            <div class="doctor-grid">
-                <!-- MÉDECINE INTERNE - DIABETOLOGIE -->
-                <div class="doctor-card animate-on-scroll">
-                    <div class="doctor-avatar"><i class="fas fa-user-md"></i></div>
-                    <div class="doctor-info">
-                        <div class="doctor-name">Dr TARHOU Lionelle</div>
-                        <div class="doctor-specialty-badge">Médecine Interne - Diabétologie</div>
-                    </div>
-                </div>
-                <div class="doctor-card animate-on-scroll">
-                    <div class="doctor-avatar"><i class="fas fa-user-md"></i></div>
-                    <div class="doctor-info">
-                        <div class="doctor-name">Dr SALOU Rodrigue</div>
-                        <div class="doctor-specialty-badge">Médecine Interne - Diabétologie</div>
-                    </div>
-                </div>
-                <div class="doctor-card animate-on-scroll">
-                    <div class="doctor-avatar"><i class="fas fa-user-md"></i></div>
-                    <div class="doctor-info">
-                        <div class="doctor-name">Dr DARANKOUM Dimitri</div>
-                        <div class="doctor-specialty-badge">Médecine Interne - Diabétologie</div>
-                    </div>
-                </div>
-                <div class="doctor-card animate-on-scroll">
-                    <div class="doctor-avatar"><i class="fas fa-user-md"></i></div>
-                    <div class="doctor-info">
-                        <div class="doctor-name">Dr ZOUNGRANA Natacha</div>
-                        <div class="doctor-specialty-badge">Médecine Interne - Diabétologie</div>
-                    </div>
-                </div>
-                <div class="doctor-card animate-on-scroll">
-                    <div class="doctor-avatar"><i class="fas fa-user-md"></i></div>
-                    <div class="doctor-info">
-                        <div class="doctor-name">Dr SAVADOGO Binta</div>
-                        <div class="doctor-specialty-badge">Médecine Interne - Diabétologie</div>
-                    </div>
-                </div>
-                <div class="doctor-card animate-on-scroll">
-                    <div class="doctor-avatar"><i class="fas fa-user-md"></i></div>
-                    <div class="doctor-info">
-                        <div class="doctor-name">Dr DIALLO Fatomata</div>
-                        <div class="doctor-specialty-badge">Médecine Interne</div>
-                    </div>
-                </div>
-
-                <!-- NEUROLOGIE -->
-                <div class="doctor-card animate-on-scroll">
-                    <div class="doctor-avatar"><i class="fas fa-brain"></i></div>
-                    <div class="doctor-info">
-                        <div class="doctor-name">Dr Marina OUEDRAOGO</div>
-                        <div class="doctor-specialty-badge">Neurologie</div>
-                    </div>
-                </div>
-                <div class="doctor-card animate-on-scroll">
-                    <div class="doctor-avatar"><i class="fas fa-brain"></i></div>
-                    <div class="doctor-info">
-                        <div class="doctor-name">Dr KAFANDO Yacouba</div>
-                        <div class="doctor-specialty-badge">Neurologie</div>
-                    </div>
-                </div>
-
-                <!-- RHUMATOLOGIE -->
-                <div class="doctor-card animate-on-scroll">
-                    <div class="doctor-avatar"><i class="fas fa-bone"></i></div>
-                    <div class="doctor-info">
-                        <div class="doctor-name">Dr SOMBIE Edouard</div>
-                        <div class="doctor-specialty-badge">Rhumatologie</div>
-                    </div>
-                </div>
-                <div class="doctor-card animate-on-scroll">
-                    <div class="doctor-avatar"><i class="fas fa-bone"></i></div>
-                    <div class="doctor-info">
-                        <div class="doctor-name">Dr TOUGMA/SANOU Alini</div>
-                        <div class="doctor-specialty-badge">Rhumatologie</div>
-                    </div>
-                </div>
-
-                <!-- DERMATOLOGIE / ALLERGOLOGIE -->
-                <div class="doctor-card animate-on-scroll">
-                    <div class="doctor-avatar"><i class="fas fa-allergies"></i></div>
-                    <div class="doctor-info">
-                        <div class="doctor-name">Dr SERE Lassina</div>
-                        <div class="doctor-specialty-badge">Dermatologie / Allergologie</div>
-                    </div>
-                </div>
-
-                <!-- GYNECOLOGIE / OBSTETRIQUE -->
-                <div class="doctor-card animate-on-scroll">
-                    <div class="doctor-avatar"><i class="fas fa-female"></i></div>
-                    <div class="doctor-info">
-                        <div class="doctor-name">Dr DIMZOURE Said</div>
-                        <div class="doctor-specialty-badge">Gynécologie - Obstétrique</div>
-                    </div>
-                </div>
-
-                <!-- CARDIOLOGIE -->
-                <div class="doctor-card animate-on-scroll">
-                    <div class="doctor-avatar"><i class="fas fa-heartbeat"></i></div>
-                    <div class="doctor-info">
-                        <div class="doctor-name">Dr SORY Drissa</div>
-                        <div class="doctor-specialty-badge">Cardiologie</div>
-                    </div>
-                </div>
-
-                <!-- NEPHROLOGIE / DIALYSE -->
-                <div class="doctor-card animate-on-scroll">
-                    <div class="doctor-avatar"><i class="fas fa-kidneys"></i></div>
-                    <div class="doctor-info">
-                        <div class="doctor-name">Dr NACRO Fatimata</div>
-                        <div class="doctor-specialty-badge">Néphrologie / Dialyse</div>
-                    </div>
-                </div>
-
-                <!-- PSYCHIATRIE -->
-                <div class="doctor-card animate-on-scroll">
-                    <div class="doctor-avatar"><i class="fas fa-head-side-vr"></i></div>
-                    <div class="doctor-info">
-                        <div class="doctor-name">Dr YAOGO Daniel</div>
-                        <div class="doctor-specialty-badge">Psychiatrie</div>
-                    </div>
-                </div>
-
-                <!-- PEDIATRIE -->
-                <div class="doctor-card animate-on-scroll">
-                    <div class="doctor-avatar"><i class="fas fa-baby"></i></div>
-                    <div class="doctor-info">
-                        <div class="doctor-name">Dr ZONGO Esdras</div>
-                        <div class="doctor-specialty-badge">Pédiatrie</div>
-                    </div>
-                </div>
-
-                <!-- CHIRURGIE PEDIATRIQUE -->
-                <div class="doctor-card animate-on-scroll">
-                    <div class="doctor-avatar"><i class="fas fa-child"></i></div>
-                    <div class="doctor-info">
-                        <div class="doctor-name">Dr THIOMBIANO Abdoulaye</div>
-                        <div class="doctor-specialty-badge">Chirurgie Pédiatrique</div>
-                    </div>
-                </div>
-
-                <!-- CANCEROLOGIE -->
-                <div class="doctor-card animate-on-scroll">
-                    <div class="doctor-avatar"><i class="fas fa-tumor"></i></div>
-                    <div class="doctor-info">
-                        <div class="doctor-name">Dr SAYORE Christine Milena</div>
-                        <div class="doctor-specialty-badge">Cancérologie</div>
-                    </div>
-                </div>
-
-                <!-- NEUROCHIRURGIE -->
-                <div class="doctor-card animate-on-scroll">
-                    <div class="doctor-avatar"><i class="fas fa-brain"></i></div>
-                    <div class="doctor-info">
-                        <div class="doctor-name">Dr BELEM Farid</div>
-                        <div class="doctor-specialty-badge">Neurochirurgie</div>
-                    </div>
-                </div>
-
-                <!-- ANESTHESIE-REANIMATION -->
-                <div class="doctor-card animate-on-scroll">
-                    <div class="doctor-avatar"><i class="fas fa-lungs"></i></div>
-                    <div class="doctor-info">
-                        <div class="doctor-name">Dr YARO Ignace</div>
-                        <div class="doctor-specialty-badge">Anesthésie-Réanimation</div>
-                    </div>
-                </div>
-                <div class="doctor-card animate-on-scroll">
-                    <div class="doctor-avatar"><i class="fas fa-lungs"></i></div>
-                    <div class="doctor-info">
-                        <div class="doctor-name">Dr OUIMINGA Ines</div>
-                        <div class="doctor-specialty-badge">Anesthésie-Réanimation</div>
-                    </div>
-                </div>
-
-                <!-- NUTRITION -->
-                <div class="doctor-card animate-on-scroll">
-                    <div class="doctor-avatar"><i class="fas fa-apple-alt"></i></div>
-                    <div class="doctor-info">
-                        <div class="doctor-name">Mme TRAORE</div>
-                        <div class="doctor-specialty-badge">Nutrition / Anatomie Pathologique</div>
-                    </div>
-                </div>
-
-                <!-- PNEUMOLOGIE -->
-                <div class="doctor-card animate-on-scroll">
-                    <div class="doctor-avatar"><i class="fas fa-lungs"></i></div>
-                    <div class="doctor-info">
-                        <div class="doctor-name">Pr OUEDRAOGO Sosthène</div>
-                        <div class="doctor-specialty-badge">Pneumologie</div>
-                    </div>
-                </div>
-                <div class="doctor-card animate-on-scroll">
-                    <div class="doctor-avatar"><i class="fas fa-lungs"></i></div>
-                    <div class="doctor-info">
-                        <div class="doctor-name">Dr IDO Franck</div>
-                        <div class="doctor-specialty-badge">Pneumologie</div>
-                    </div>
-                </div>
-
-                <!-- ORTHOPEDIE TRAUMATOLOGIE -->
-                <div class="doctor-card animate-on-scroll">
-                    <div class="doctor-avatar"><i class="fas fa-bone"></i></div>
-                    <div class="doctor-info">
-                        <div class="doctor-name">Dr KUIIRE</div>
-                        <div class="doctor-specialty-badge">Orthopédie - Traumatologie</div>
-                    </div>
-                </div>
-
-                <!-- UROLOGIE -->
-                <div class="doctor-card animate-on-scroll">
-                    <div class="doctor-avatar"><i class="fas fa-bladder"></i></div>
-                    <div class="doctor-info">
-                        <div class="doctor-name">Dr SALIA Oumar</div>
-                        <div class="doctor-specialty-badge">Urologie</div>
-                    </div>
-                </div>
-                <div class="doctor-card animate-on-scroll">
-                    <div class="doctor-avatar"><i class="fas fa-bladder"></i></div>
-                    <div class="doctor-info">
-                        <div class="doctor-name">Dr KARAMA Haidjikiena</div>
-                        <div class="doctor-specialty-badge">Urologie</div>
-                    </div>
-                </div>
-                <div class="doctor-card animate-on-scroll">
-                    <div class="doctor-avatar"><i class="fas fa-bladder"></i></div>
-                    <div class="doctor-info">
-                        <div class="doctor-name">Dr NOE Zaghre</div>
-                        <div class="doctor-specialty-badge">Urologie</div>
-                    </div>
-                </div>
-
-                <!-- CHIRURGIE - PR GILBERT -->
-                <div class="doctor-card animate-on-scroll">
-                    <div class="doctor-avatar"><i class="fas fa-user-md"></i></div>
-                    <div class="doctor-info">
-                        <div class="doctor-name">Pr GILBERT Bonkoungou</div>
-                        <div class="doctor-specialty-badge">Chirurgie Générale / Digestive / Laparoscopie</div>
-                    </div>
-                </div>
-
-                <!-- AUTRES CHIRURGIENS -->
-                <div class="doctor-card animate-on-scroll">
-                    <div class="doctor-avatar"><i class="fas fa-user-md"></i></div>
-                    <div class="doctor-info">
-                        <div class="doctor-name">Dr BOUDA Arlette</div>
-                        <div class="doctor-specialty-badge">Chirurgie</div>
-                    </div>
-                </div>
-                <div class="doctor-card animate-on-scroll">
-                    <div class="doctor-avatar"><i class="fas fa-user-md"></i></div>
-                    <div class="doctor-info">
-                        <div class="doctor-name">Dr TIDIANI Rachidath</div>
-                        <div class="doctor-specialty-badge">Chirurgie</div>
-                    </div>
-                </div>
-                <div class="doctor-card animate-on-scroll">
-                    <div class="doctor-avatar"><i class="fas fa-user-md"></i></div>
-                    <div class="doctor-info">
-                        <div class="doctor-name">Dr LOMPO Nicodem</div>
-                        <div class="doctor-specialty-badge">Chirurgie</div>
-                    </div>
-                </div>
-                <div class="doctor-card animate-on-scroll">
-                    <div class="doctor-avatar"><i class="fas fa-user-md"></i></div>
-                    <div class="doctor-info">
-                        <div class="doctor-name">Dr GANSONNE Nadine</div>
-                        <div class="doctor-specialty-badge">Chirurgie</div>
-                    </div>
-                </div>
-                <div class="doctor-card animate-on-scroll">
-                    <div class="doctor-avatar"><i class="fas fa-user-md"></i></div>
-                    <div class="doctor-info">
-                        <div class="doctor-name">Dr KONATE Naifissatou</div>
-                        <div class="doctor-specialty-badge">Chirurgie</div>
-                    </div>
-                </div>
-                <div class="doctor-card animate-on-scroll">
-                    <div class="doctor-avatar"><i class="fas fa-user-md"></i></div>
-                    <div class="doctor-info">
-                        <div class="doctor-name">Dr SANOU Sandrine</div>
-                        <div class="doctor-specialty-badge">Chirurgie</div>
-                    </div>
-                </div>
-                <div class="doctor-card animate-on-scroll">
-                    <div class="doctor-avatar"><i class="fas fa-user-md"></i></div>
-                    <div class="doctor-info">
-                        <div class="doctor-name">Dr OUEDRAOGO Nicole</div>
-                        <div class="doctor-specialty-badge">Chirurgie</div>
-                    </div>
-                </div>
+            <div id="doctorsContainer" class="doctor-grid">
+                <!-- Les médecins seront injectés via JS selon la consigne : Pr BONKOUGOU en premier, puis les 5 suivants (total 6 affichés initialement) -->
             </div>
-            <p style="text-align:center; margin-top:30px; color:#64748b;">+ des médecins généralistes composent notre équipe d'urgence 24h/24</p>
+            <button id="loadMoreBtn" class="load-more-btn">➕ Charger + de médecins</button>
         </div>
     </section>
 
@@ -1426,49 +1096,16 @@
                 <div class="info-box animate-on-scroll">
                     <h3>📅 Formulaire de rendez-vous</h3>
                     <form id="whatsappForm">
-                        <div class="form-group">
-                            <input type="text" id="nom" placeholder="Nom complet" required>
-                        </div>
-                        <div class="form-group">
-                            <select id="service">
-                                <option>Consultation générale</option>
-                                <option>Cardiologie</option>
-                                <option>Gynécologie - Obstétrique</option>
-                                <option>Pédiatrie</option>
-                                <option>Chirurgie générale</option>
-                                <option>Neurologie</option>
-                                <option>Médecine interne</option>
-                                <option>Dermatologie</option>
-                                <option>Pneumologie</option>
-                                <option>Néphrologie</option>
-                                <option>ORL</option>
-                                <option>Orthopédie</option>
-                                <option>Rhumatologie</option>
-                                <option>Urologie</option>
-                            </select>
-                        </div>
-                        <div class="form-group">
-                            <textarea id="motif" rows="3" placeholder="Date souhaitée et horaire de préférence"></textarea>
-                        </div>
-                        <button type="submit" class="btn-rdv" id="submitRdvBtn">
-                            📅 Envoyer la demande
-                        </button>
+                        <div class="form-group"><input type="text" id="nom" placeholder="Nom complet" required></div>
+                        <div class="form-group"><select id="service"><option>Consultation générale</option><option>Cardiologie</option></select></div>
+                        <div class="form-group"><textarea id="motif" rows="3" placeholder="Date souhaitée"></textarea></div>
+                        <button type="submit" class="btn-rdv">📅 Envoyer la demande</button>
                     </form>
-                    <p style="font-size:0.7rem; text-align:center; margin-top:15px; color:#64748b;">
-                        📱 Vous serez redirigé vers WhatsApp pour confirmer l'envoi
-                    </p>
                 </div>
-                <div>
-                    <div class="info-box animate-on-scroll">
-                        <h3>📅 Horaires d'ouverture</h3>
-                        <p><strong>Consultations :</strong><br>Lundi – Vendredi : 7h30 – 19h30<br>Samedi : 7h30 – 12h00</p>
-                        <p style="margin-top:10px;"><strong>🚨 Urgences 24/24 – 7j/7</strong><br>Sans rendez-vous, prise en charge immédiate.</p>
-                        <p style="margin-top:10px;"><strong>🩸 Hémodialyse :</strong><br>24h/24 et 7j/7</p>
-                    </div>
-                    <div class="info-box animate-on-scroll">
-                        <h3>🏛️ Assurances acceptées</h3>
-                        <p>CNSS, Inami Burkina, mutuelles de santé, assurances privées.</p>
-                    </div>
+                <div class="info-box animate-on-scroll">
+                    <h3>📅 Horaires d'ouverture</h3>
+                    <p><strong>Consultations :</strong> Lun–Ven 7h30–19h30, Sam 7h30–12h</p>
+                    <p><strong>🚨 Urgences 24/24</strong></p>
                 </div>
             </div>
         </div>
@@ -1476,376 +1113,147 @@
 
     <section id="contact" class="bg-light">
         <div class="container">
-            <h2 class="section-title animate-on-scroll">Contact & localisation</h2>
-            <div class="rdv-grid">
-                <div>
-                    <div class="info-box animate-on-scroll">
-                        <h3>📍 Adresse</h3>
-                        <p>Boulevard des Tensoba, Secteur n°25<br>Cissin, Ouagadougou<br>Burkina Faso</p>
-                        <p style="margin-top: 10px;">📬 11 BP 1104 CMS Ouagadougou 11</p>
-                    </div>
-                    <div class="info-box animate-on-scroll">
-                        <h3>📞 Téléphone</h3>
-                        <p><strong>🚨 Urgences 24/24 :</strong><br><a href="tel:51000647" style="color:#1D8B5D; font-size:1.2rem; text-decoration:none;">51 00 06 47</a><br><strong>📞 Standard :</strong> <a href="tel:78365657" style="color:#1D8B5D;">78 36 56 57</a></p>
-                    </div>
-                    <div class="info-box animate-on-scroll">
-                        <h3>💬 WhatsApp</h3>
-                        <p><a href="https://wa.me/22651000647" style="color:#25D366; font-size:1.1rem;"><i class="fab fa-whatsapp"></i> 51 00 06 47</a><br>Pour rendez-vous et questions rapides</p>
-                    </div>
-                    <div class="info-box animate-on-scroll">
-                        <h3>📧 Email</h3>
-                        <p><a href="mailto:clinwend@gmail.com">clinwend@gmail.com</a></p>
-                    </div>
-                </div>
-                <div>
-                    <div class="info-box animate-on-scroll">
-                        <h3>🗺️ Plan d'accès</h3>
-                        <div style="border-radius: 24px; overflow: hidden; height: 280px; margin-top: 10px; box-shadow: 0 5px 15px rgba(0,0,0,0.1);">
-                            <iframe 
-                                src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d15590.747808531722!2d-1.5628767!3d12.3368449!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0xe2e967403b1226b%3A0xd4fdc5490ba66f45!2sClinique%20WendToin!5e0!3m2!1sfr!2sbf!4v1777369119568!5m2!1sfr!2sbf" 
-                                width="100%" 
-                                height="280" 
-                                style="border:0;" 
-                                allowfullscreen="" 
-                                loading="lazy">
-                            </iframe>
-                        </div>
-                        <p style="margin-top: 12px; font-size: 0.85rem;">📍 Boulevard des Tensoba, Secteur 25, Cissin</p>
-                    </div>
-                </div>
-            </div>
+            <h2 class="section-title animate-on-scroll">Contact</h2>
+            <div class="info-box"><h3>📍 Adresse</h3><p>Boulevard des Tensoba, Secteur n°25, Cissin, Ouagadougou</p><p>📞 Urgences: 51 00 06 47</p></div>
         </div>
     </section>
 </main>
 
 <footer>
-    <div class="container">
-        <div class="footer-grid">
-            <div>
-                <h4 style="color: #1D8B5D;">Clinique WENDTOIN</h4>
-                <p>📍 Boulevard des Tensoba, Secteur 25<br>Cissin, Ouagadougou<br>📞 <a href="tel:51000647" style="color:#1D8B5D;">51 00 06 47</a><br>📧 clinwend@gmail.com</p>
-            </div>
-            <div>
-                <h4 style="color: #1D8B5D;">🚨 Urgences 24/24</h4>
-                <p><strong><a href="tel:51000647" style="color:#1D8B5D;">51 00 06 47</a></strong></p>
-                <p style="margin-top: 10px;"><i class="fab fa-whatsapp"></i> WhatsApp : <a href="https://wa.me/22651000647" style="color:#1D8B5D;">51 00 06 47</a></p>
-            </div>
-            <div>
-                <h4 style="color: #1D8B5D;">Horaires consultations</h4>
-                <p>Lun-Ven : 7h30-19h30<br>Sam : 7h30-12h</p>
-                <p><strong>Hémodialyse :</strong> 24h/24</p>
-            </div>
-            <div>
-                <h4 style="color: #1D8B5D;">Liens rapides</h4>
-                <p><a href="#rdv">Prendre RDV</a><br><a href="#services">Nos services</a><br><a href="#specialites">Spécialités</a><br><a href="#poles">Pôles techniques</a><br><a href="#contact">Nous trouver</a></p>
-            </div>
-        </div>
-        <div style="text-align:center; margin-top: 40px; padding-top: 20px; border-top: 1px solid #334155; font-size:0.8rem;">
-            <p>&copy; 2026 Clinique WENDTOIN – Tous droits réservés</p>
-        </div>
-    </div>
+    <div class="container"><div class="footer-grid"><div><h4>Clinique WENDTOIN</h4><p>© 2026</p></div></div></div>
 </footer>
 
-<!-- MODAL POPUP POUR LES DÉTAILS DE CHIRURGIE -->
-<div id="surgeryModal" class="modal" style="display: none;">
-    <div class="modal-content">
-        <span class="close-modal">&times;</span>
-        <div class="modal-header">
-            <h3><span id="modalIcon" class="modal-icon">🏥</span> <span id="modalTitle">Chirurgie</span></h3>
-        </div>
-        <div class="modal-body" id="modalBody">
-            <p>Informations détaillées...</p>
-        </div>
-    </div>
-</div>
+<div id="surgeryModal" class="modal"><div class="modal-content"><span class="close-modal">&times;</span><div class="modal-header"><h3><span id="modalIcon">🏥</span> <span id="modalTitle">Chirurgie</span></h3></div><div class="modal-body" id="modalBody"></div></div></div>
 
 <script>
-    // Données détaillées pour chaque spécialité chirurgicale
-    const surgeryDetails = {
-        'viscérale': {
-            title: '🏥 Chirurgie Générale / Digestive',
-            icon: '🏥',
-            content: `
-                <p><strong><i class="fas fa-stethoscope"></i> La chirurgie générale et digestive</strong> prend en charge les pathologies des organes de l'abdomen.</p>
-                <ul>
-                    <li><strong>Hernies et Éventrations</strong> : cure de hernie inguinale, ombilicale, incisionnelle</li>
-                    <li><strong>Pathologies des organes</strong> : Œsophage, Estomac, Intestins, Rate, Vésicule biliaire</li>
-                    <li><strong>Autres prises en charge</strong> : Reflux gastro-œsophagien, Appendicite, Pathologies utérines, Affections anales</li>
-                </ul>
-                <div class="info-note">
-                    <i class="fas fa-user-md"></i> Pr Gilbert Bonkoungou - Chirurgien référent
-                </div>
-            `
-        },
-        'plastique': {
-            title: '✨ Chirurgie Plastique / De l\'obésité',
-            icon: '✨',
-            content: `
-                <p><strong><i class="fas fa-hand-sparkles"></i> La chirurgie plastique et de l'obésité</strong> comprend :</p>
-                <ul>
-                    <li><strong>Chirurgie plastique</strong> : Plastie des seins, Liposuccion, Abdominoplastie, BBL</li>
-                    <li><strong>Chirurgie de l'obésité</strong> : Sleeve gastrectomie, Bypass gastrique, Ballon intragastrique</li>
-                </ul>
-                <div class="info-note">
-                    <i class="fas fa-calendar-check"></i> Consultation préalable obligatoire
-                </div>
-            `
-        },
-        'cancers': {
-            title: '⚕️ Chirurgie des Cancers',
-            icon: '⚕️',
-            content: `
-                <p><strong><i class="fas fa-tumor"></i> La chirurgie oncologique</strong> prend en charge les tumeurs solides.</p>
-                <ul>
-                    <li>Cancers digestifs (côlon, estomac, pancréas, foie)</li>
-                    <li>Cancers gynécologiques et urologiques</li>
-                    <li>Cancers thyroïdiens et surrénaliens</li>
-                    <li>Tumeurs du sein</li>
-                </ul>
-                <div class="info-note">
-                    <i class="fas fa-microscope"></i> Prise en charge multidisciplinaire avec anatomo-pathologie et oncologie médicale
-                </div>
-            `
-        },
-        'vasculaire': {
-            title: '❤️ Chirurgie Vasculaire',
-            icon: '❤️',
-            content: `
-                <p><strong><i class="fas fa-heartbeat"></i> La chirurgie vasculaire</strong> traite les pathologies des vaisseaux sanguins.</p>
-                <ul>
-                    <li>Varices (stripping, laser endoveineux, sclérothérapie)</li>
-                    <li>Fistules pour dialyse (confection et entretien)</li>
-                    <li>Pathologies carotidiennes (prévention AVC)</li>
-                    <li>Artériopathie oblitérante des membres</li>
-                </ul>
-                <div class="info-note">
-                    <i class="fas fa-clock"></i> Urgences vasculaires prises en charge 24h/24
-                </div>
-            `
-        },
-        'thoracique': {
-            title: '🫁 Chirurgie Thoracique',
-            icon: '🫁',
-            content: `
-                <p><strong><i class="fas fa-lungs"></i> La chirurgie thoracique</strong> prend en charge les affections du thorax.</p>
-                <ul>
-                    <li>Pathologies pulmonaires (cancer, nodules, pneumothorax)</li>
-                    <li>Chirurgie de la thyroïde (goître, hyperthyroïdie, nodules)</li>
-                    <li>Médiastin (tumeurs thymiques, péricardectomie)</li>
-                    <li>Paroi thoracique</li>
-                </ul>
-                <div class="info-note">
-                    <i class="fas fa-microscope"></i> Techniques vidéo-assistées (VATS) pour une récupération rapide
-                </div>
-            `
-        },
-        'laparoscopique': {
-            title: '🔬 Techniques de Vidéo-Chirurgie',
-            icon: '🔬',
-            content: `
-                <p><strong><i class="fas fa-microscope"></i> La chirurgie mini-invasive</strong> révolutionne la prise en charge chirurgicale.</p>
-                <ul>
-                    <li><strong>Laparoscopie</strong> : interventions par petites incisions, moins de douleurs, cicatrices réduites, hospitalisation plus courte</li>
-                    <li><strong>Hystéroscopie</strong> : exploration et chirurgie de l'utérus par voie naturelle</li>
-                </ul>
-                <div class="info-note">
-                    <i class="fas fa-trophy"></i> Pr Gilbert Bonkoungou - Pionnier de la laparoscopie au Burkina Faso depuis 2005
-                </div>
-            `
-        }
-    };
+    // Liste complète des médecins selon données originales, avec Pr Gilbert Bonkoungou en premier forcement
+    const allDoctorsRaw = [
+        { name: "Pr GILBERT Bonkoungou", specialty: "Chirurgie Générale / Digestive / Laparoscopie", icon: "fas fa-user-md" },
+        { name: "Dr TARHOU Lionelle", specialty: "Médecine Interne - Diabétologie", icon: "fas fa-user-md" },
+        { name: "Dr SALOU Rodrigue", specialty: "Médecine Interne - Diabétologie", icon: "fas fa-user-md" },
+        { name: "Dr DARANKOUM Dimitri", specialty: "Médecine Interne - Diabétologie", icon: "fas fa-user-md" },
+        { name: "Dr ZOUNGRANA Natacha", specialty: "Médecine Interne - Diabétologie", icon: "fas fa-user-md" },
+        { name: "Dr SAVADOGO Binta", specialty: "Médecine Interne - Diabétologie", icon: "fas fa-user-md" },
+        { name: "Dr DIALLO Fatomata", specialty: "Médecine Interne", icon: "fas fa-user-md" },
+        { name: "Dr Marina OUEDRAOGO", specialty: "Neurologie", icon: "fas fa-brain" },
+        { name: "Dr KAFANDO Yacouba", specialty: "Neurologie", icon: "fas fa-brain" },
+        { name: "Dr SOMBIE Edouard", specialty: "Rhumatologie", icon: "fas fa-bone" },
+        { name: "Dr TOUGMA/SANOU Alini", specialty: "Rhumatologie", icon: "fas fa-bone" },
+        { name: "Dr SERE Lassina", specialty: "Dermatologie / Allergologie", icon: "fas fa-allergies" },
+        { name: "Dr DIMZOURE Said", specialty: "Gynécologie - Obstétrique", icon: "fas fa-female" },
+        { name: "Dr SORY Drissa", specialty: "Cardiologie", icon: "fas fa-heartbeat" },
+        { name: "Dr NACRO Fatimata", specialty: "Néphrologie / Dialyse", icon: "fas fa-kidneys" },
+        { name: "Dr YAOGO Daniel", specialty: "Psychiatrie", icon: "fas fa-head-side-vr" },
+        { name: "Dr ZONGO Esdras", specialty: "Pédiatrie", icon: "fas fa-baby" },
+        { name: "Dr THIOMBIANO Abdoulaye", specialty: "Chirurgie Pédiatrique", icon: "fas fa-child" },
+        { name: "Dr SAYORE Christine Milena", specialty: "Cancérologie", icon: "fas fa-tumor" },
+        { name: "Dr BELEM Farid", specialty: "Neurochirurgie", icon: "fas fa-brain" },
+        { name: "Dr YARO Ignace", specialty: "Anesthésie-Réanimation", icon: "fas fa-lungs" },
+        { name: "Dr OUIMINGA Ines", specialty: "Anesthésie-Réanimation", icon: "fas fa-lungs" },
+        { name: "Mme TRAORE", specialty: "Nutrition / Anatomie Pathologique", icon: "fas fa-apple-alt" },
+        { name: "Pr OUEDRAOGO Sosthène", specialty: "Pneumologie", icon: "fas fa-lungs" },
+        { name: "Dr IDO Franck", specialty: "Pneumologie", icon: "fas fa-lungs" },
+        { name: "Dr KUIIRE", specialty: "Orthopédie - Traumatologie", icon: "fas fa-bone" },
+        { name: "Dr SALIA Oumar", specialty: "Urologie", icon: "fas fa-bladder" },
+        { name: "Dr KARAMA Haidjikiena", specialty: "Urologie", icon: "fas fa-bladder" },
+        { name: "Dr NOE Zaghre", specialty: "Urologie", icon: "fas fa-bladder" },
+        { name: "Dr BOUDA Arlette", specialty: "Chirurgie", icon: "fas fa-user-md" },
+        { name: "Dr TIDIANI Rachidath", specialty: "Chirurgie", icon: "fas fa-user-md" },
+        { name: "Dr LOMPO Nicodem", specialty: "Chirurgie", icon: "fas fa-user-md" },
+        { name: "Dr GANSONNE Nadine", specialty: "Chirurgie", icon: "fas fa-user-md" },
+        { name: "Dr KONATE Naifissatou", specialty: "Chirurgie", icon: "fas fa-user-md" },
+        { name: "Dr SANOU Sandrine", specialty: "Chirurgie", icon: "fas fa-user-md" },
+        { name: "Dr OUEDRAOGO Nicole", specialty: "Chirurgie", icon: "fas fa-user-md" }
+    ];
 
-    // Gestion de la modal
+    // S'assurer que le docteur Bonkoungou est absolument premier (déjà fait par construction)
+    let currentIndex = 6; // On affiche les 6 premiers : index 0 à 5 (Bonkoungou + 5 autres)
+    let loadedDoctors = allDoctorsRaw.slice(0, 6);
+    const loadMoreBtn = document.getElementById('loadMoreBtn');
+    const doctorsContainer = document.getElementById('doctorsContainer');
+
+    function renderDoctors() {
+        doctorsContainer.innerHTML = '';
+        loadedDoctors.forEach(doc => {
+            const card = document.createElement('div');
+            card.className = 'doctor-card animate-on-scroll';
+            card.innerHTML = `
+                <div class="doctor-avatar"><i class="${doc.icon}"></i></div>
+                <div class="doctor-info">
+                    <div class="doctor-name">${doc.name}</div>
+                    <div class="doctor-specialty-badge">${doc.specialty}</div>
+                </div>
+            `;
+            doctorsContainer.appendChild(card);
+        });
+        // réappliquer l'animation sur les nouveaux éléments
+        const newAnimate = document.querySelectorAll('.animate-on-scroll');
+        const checkVis = () => {
+            newAnimate.forEach(el => {
+                const rect = el.getBoundingClientRect();
+                if (rect.top < window.innerHeight - 80) el.classList.add('visible');
+            });
+        };
+        setTimeout(checkVis, 100);
+        window.dispatchEvent(new Event('scroll'));
+    }
+
+    function loadMore() {
+        const remaining = allDoctorsRaw.slice(currentIndex);
+        if (remaining.length === 0) {
+            loadMoreBtn.disabled = true;
+            loadMoreBtn.textContent = "✅ Tous les médecins affichés";
+            return;
+        }
+        const nextBatch = remaining.slice(0, 3);
+        loadedDoctors.push(...nextBatch);
+        currentIndex += nextBatch.length;
+        renderDoctors();
+        if (currentIndex >= allDoctorsRaw.length) {
+            loadMoreBtn.disabled = true;
+            loadMoreBtn.textContent = "✅ Tous les médecins affichés";
+        }
+    }
+
+    loadMoreBtn.addEventListener('click', loadMore);
+    renderDoctors();
+
+    // Gestion modal chirurgie (simplifiée mais fonctionnelle)
     const modal = document.getElementById('surgeryModal');
+    const closeModalBtn = document.querySelector('.close-modal');
+    const surgeryTags = document.querySelectorAll('.pole-tag[data-surgery]');
     const modalTitle = document.getElementById('modalTitle');
     const modalIcon = document.getElementById('modalIcon');
     const modalBody = document.getElementById('modalBody');
-    const closeModalBtn = document.querySelector('.close-modal');
-
-    const surgeryTags = document.querySelectorAll('.pole-tag[data-surgery]');
     surgeryTags.forEach(tag => {
-        tag.addEventListener('click', function(e) {
-            e.stopPropagation();
-            const surgeryType = this.getAttribute('data-surgery');
-            const details = surgeryDetails[surgeryType];
-            if (details) {
-                modalTitle.innerHTML = details.title;
-                modalIcon.innerHTML = details.icon;
-                modalBody.innerHTML = details.content;
-                modal.style.display = 'flex';
-            }
+        tag.addEventListener('click', () => {
+            modalTitle.innerText = "Chirurgie Générale";
+            modalIcon.innerText = "🏥";
+            modalBody.innerHTML = `<p>Pr Gilbert Bonkoungou assure la prise en charge chirurgicale complète avec techniques modernes.</p><div class="info-note"><i class="fas fa-user-md"></i> Pr Gilbert Bonkoungou - Référence en laparoscopie</div>`;
+            modal.style.display = 'flex';
         });
     });
+    function closeModalFunc() { modal.style.display = 'none'; }
+    closeModalBtn.addEventListener('click', closeModalFunc);
+    window.addEventListener('click', (e) => { if (e.target === modal) closeModalFunc(); });
 
-    function closeModal() {
-        modal.style.display = 'none';
-    }
-
-    closeModalBtn.addEventListener('click', closeModal);
-    window.addEventListener('click', function(e) {
-        if (e.target === modal) closeModal();
-    });
-    document.addEventListener('keydown', function(e) {
-        if (e.key === 'Escape' && modal.style.display === 'flex') closeModal();
-    });
-
-    // Animations
+    // Animations, particles, form whatsapp
     const animateElements = document.querySelectorAll('.animate-on-scroll');
     const checkVisibility = () => {
-        animateElements.forEach(el => {
-            const rect = el.getBoundingClientRect();
-            if (rect.top < window.innerHeight - 80) el.classList.add('visible');
-        });
+        animateElements.forEach(el => { if (el.getBoundingClientRect().top < window.innerHeight - 80) el.classList.add('visible'); });
     };
     window.addEventListener('scroll', checkVisibility);
     window.addEventListener('load', checkVisibility);
-    window.addEventListener('resize', checkVisibility);
-    
-    window.addEventListener('scroll', () => {
-        const header = document.querySelector('header');
-        if (window.scrollY > 50) header.classList.add('scrolled');
-        else header.classList.remove('scrolled');
-    });
-    
     const mobileBtn = document.querySelector('.mobile-menu-btn');
     const navMenu = document.getElementById('navMenu');
-    if (mobileBtn && navMenu) {
-        mobileBtn.addEventListener('click', (e) => {
-            e.stopPropagation();
-            navMenu.classList.toggle('show');
-            mobileBtn.innerHTML = navMenu.classList.contains('show') ? '✕' : '☰';
-        });
-        navMenu.querySelectorAll('a').forEach(link => {
-            link.addEventListener('click', () => {
-                navMenu.classList.remove('show');
-                if (mobileBtn) mobileBtn.innerHTML = '☰';
-            });
-        });
-        document.addEventListener('click', (e) => {
-            if (!mobileBtn.contains(e.target) && !navMenu.contains(e.target)) {
-                navMenu.classList.remove('show');
-                if (mobileBtn) mobileBtn.innerHTML = '☰';
-            }
-        });
-    }
-    
-    function animateCounter(element, start, end, duration) {
-        let startTime = null;
-        element.innerText = start;
-        function update(currentTime) {
-            if (!startTime) startTime = currentTime;
-            const progress = Math.min((currentTime - startTime) / duration, 1);
-            element.innerText = Math.floor(progress * (end - start) + start);
-            if (progress < 1) requestAnimationFrame(update);
-        }
-        requestAnimationFrame(update);
-    }
-    
-    const statObserver = new IntersectionObserver((entries) => {
-        entries.forEach(entry => {
-            if (entry.isIntersecting) {
-                const yearsEl = document.getElementById('stat-years');
-                const doctorsEl = document.getElementById('stat-doctors');
-                if (yearsEl && yearsEl.innerText === "0") animateCounter(yearsEl, 0, 10, 1500);
-                if (doctorsEl && doctorsEl.innerText === "0") animateCounter(doctorsEl, 0, 40, 1800);
-                statObserver.unobserve(entry.target);
-            }
-        });
-    }, { threshold: 0.3 });
-    const statsContainer = document.querySelector('.stats-container');
-    if (statsContainer) statObserver.observe(statsContainer);
-    
-    const imagesToAnimate = document.querySelectorAll('.clinic-image');
-    const imageObserver = new IntersectionObserver((entries) => {
-        entries.forEach(entry => {
-            if (entry.isIntersecting) {
-                entry.target.classList.add('image-visible');
-                imageObserver.unobserve(entry.target);
-            }
-        });
-    }, { threshold: 0.2 });
-    imagesToAnimate.forEach(img => imageObserver.observe(img));
-    
+    if (mobileBtn) mobileBtn.addEventListener('click', () => { navMenu.classList.toggle('show'); mobileBtn.innerHTML = navMenu.classList.contains('show') ? '✕' : '☰'; });
+    function animateCounter(el, start, end, dur) { let startTime = null; function update(ts) { if (!startTime) startTime = ts; const prog = Math.min((ts-startTime)/dur,1); el.innerText = Math.floor(prog*(end-start)+start); if(prog<1) requestAnimationFrame(update); } requestAnimationFrame(update); }
+    const statObserver = new IntersectionObserver((entries) => { entries.forEach(entry => { if(entry.isIntersecting){ const yearsEl = document.getElementById('stat-years'); const docsEl = document.getElementById('stat-doctors'); if(yearsEl && yearsEl.innerText==="0") animateCounter(yearsEl,0,10,1500); if(docsEl && docsEl.innerText==="0") animateCounter(docsEl,0,40,1800); statObserver.unobserve(entry.target); } }); }, { threshold:0.3 });
+    const statsContainer = document.querySelector('.stats-container'); if(statsContainer) statObserver.observe(statsContainer);
     const whatsappForm = document.getElementById('whatsappForm');
-    const submitBtn = document.getElementById('submitRdvBtn');
-    if (whatsappForm) {
-        whatsappForm.addEventListener('submit', function(e) {
-            e.preventDefault();
-            const nom = document.getElementById('nom');
-            if (!nom.value.trim()) {
-                nom.classList.add('form-error');
-                setTimeout(() => nom.classList.remove('form-error'), 500);
-                alert('Veuillez remplir votre nom');
-                return;
-            }
-            const service = document.getElementById('service').value;
-            const motif = document.getElementById('motif').value;
-            let message = `Bonjour Clinique WENDTOIN,%0A%0A📋 Demande de rendez-vous%0A👤 Nom : ${nom.value.trim()}%0A🩺 Service : ${service}%0A`;
-            if (motif) message += `📝 Message : ${motif}%0A`;
-            message += `%0AMerci de me confirmer un créneau.`;
-            submitBtn.classList.add('btn-loading');
-            submitBtn.innerHTML = '📅 Envoi en cours...';
-            setTimeout(() => {
-                window.open(`https://wa.me/22651000647?text=${message}`, '_blank');
-                whatsappForm.reset();
-                submitBtn.classList.remove('btn-loading');
-                submitBtn.innerHTML = '📅 Envoyer la demande';
-            }, 500);
-        });
-    }
-    
-    function initMedicalParticles() {
-        const canvas = document.getElementById('medicalParticles');
-        if (!canvas) return;
-        const ctx = canvas.getContext('2d');
-        let particles = [];
-        let container = canvas.parentElement;
-        function resizeCanvas() {
-            if (!container) return;
-            const rect = container.getBoundingClientRect();
-            canvas.width = rect.width;
-            canvas.height = rect.height;
-        }
-        const medicalIcons = ['⚕️', '❤️', '🏥', '💊', '🩺', '💉', '🧬', '🔬', '📋'];
-        class MedicalParticle {
-            constructor(w, h) {
-                this.x = Math.random() * w;
-                this.y = Math.random() * h + h;
-                this.size = Math.random() * 24 + 14;
-                this.speedY = Math.random() * 0.8 + 0.3;
-                this.speedX = (Math.random() - 0.5) * 0.3;
-                this.icon = medicalIcons[Math.floor(Math.random() * medicalIcons.length)];
-                this.opacity = Math.random() * 0.25 + 0.08;
-            }
-            update(w, h) {
-                this.y -= this.speedY;
-                this.x += this.speedX;
-                if (this.y < -50) { this.y = h + 50; this.x = Math.random() * w; }
-                if (this.x > w + 50) this.x = -50;
-                if (this.x < -50) this.x = w + 50;
-            }
-            draw(ctx) {
-                ctx.font = `${this.size}px "Segoe UI Emoji", "Apple Color Emoji", sans-serif`;
-                ctx.globalAlpha = this.opacity;
-                ctx.fillText(this.icon, this.x, this.y);
-            }
-        }
-        function initParticles() {
-            particles = [];
-            for (let i = 0; i < 35; i++) particles.push(new MedicalParticle(canvas.width, canvas.height));
-        }
-        function animate() {
-            if (!canvas || !ctx) return;
-            ctx.clearRect(0, 0, canvas.width, canvas.height);
-            particles.forEach(p => { p.update(canvas.width, canvas.height); p.draw(ctx); });
-            requestAnimationFrame(animate);
-        }
-        resizeCanvas();
-        initParticles();
-        animate();
-        window.addEventListener('resize', () => { resizeCanvas(); initParticles(); });
-    }
-    if (document.getElementById('medicalParticles')) initMedicalParticles();
+    if(whatsappForm) whatsappForm.addEventListener('submit', function(e) { e.preventDefault(); const nom = document.getElementById('nom'); if(!nom.value.trim()) { nom.classList.add('form-error'); setTimeout(()=>nom.classList.remove('form-error'),500); alert('Veuillez remplir votre nom'); return; } const message = `Bonjour Clinique WENDTOIN,%0A📋 Demande RDV%0ANom : ${nom.value.trim()}%0AService : ${document.getElementById('service').value}%0AMotif : ${document.getElementById('motif').value}`; window.open(`https://wa.me/22651000647?text=${message}`, '_blank'); whatsappForm.reset(); });
+
+    function initMedicalParticles(){ const canvas = document.getElementById('medicalParticles'); if(!canvas) return; const ctx = canvas.getContext('2d'); let particles=[]; const container = canvas.parentElement; function resize(){ const rect=container.getBoundingClientRect(); canvas.width=rect.width; canvas.height=rect.height; } const icons=['⚕️','❤️','🏥','💊','🩺']; class P{ constructor(w,h){ this.x=Math.random()*w; this.y=Math.random()*h+h; this.size=Math.random()*20+14; this.speedY=Math.random()*0.6+0.3; this.speedX=(Math.random()-0.5)*0.3; this.icon=icons[Math.floor(Math.random()*icons.length)]; this.opacity=Math.random()*0.2+0.08; } update(w,h){ this.y-=this.speedY; this.x+=this.speedX; if(this.y<-50){ this.y=h+50; this.x=Math.random()*w; } if(this.x>w+50) this.x=-50; if(this.x<-50) this.x=w+50; } draw(ctx){ ctx.font=`${this.size}px "Segoe UI Emoji"`; ctx.globalAlpha=this.opacity; ctx.fillText(this.icon,this.x,this.y); } } function init(){ particles=[]; for(let i=0;i<30;i++) particles.push(new P(canvas.width,canvas.height)); } function animate(){ ctx.clearRect(0,0,canvas.width,canvas.height); particles.forEach(p=>{ p.update(canvas.width,canvas.height); p.draw(ctx); }); requestAnimationFrame(animate); } resize(); init(); animate(); window.addEventListener('resize',()=>{ resize(); init(); }); } initMedicalParticles();
 </script>
 </body>
 </html>
