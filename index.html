@@ -625,6 +625,7 @@
             display: block;
         }
 
+        /* MODAL STYLES */
         .modal {
             display: none;
             position: fixed;
@@ -633,33 +634,89 @@
             top: 0;
             width: 100%;
             height: 100%;
-            background-color: rgba(0,0,0,0.9);
+            background-color: rgba(0,0,0,0.85);
             cursor: pointer;
+            backdrop-filter: blur(5px);
+            align-items: center;
+            justify-content: center;
         }
         .modal-content {
+            background: white;
             margin: auto;
             display: block;
             width: 90%;
-            max-width: 90%;
-            max-height: 90%;
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            border-radius: 10px;
+            max-width: 550px;
+            border-radius: 28px;
+            position: relative;
+            cursor: default;
+            animation: fadeScale 0.3s ease;
+            max-height: 85vh;
+            overflow-y: auto;
+        }
+        .modal-header {
+            background: linear-gradient(135deg, #0077A4, #1D8B5D);
+            padding: 20px 25px;
+            border-radius: 28px 28px 0 0;
+            color: white;
+        }
+        .modal-header h3 {
+            font-size: 1.5rem;
+            margin: 0;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+        .modal-header .modal-icon {
+            font-size: 2rem;
+        }
+        .modal-body {
+            padding: 25px;
+        }
+        .modal-body p {
+            margin-bottom: 15px;
+            color: #334155;
+            line-height: 1.7;
+        }
+        .modal-body ul {
+            margin: 15px 0;
+            padding-left: 25px;
+        }
+        .modal-body li {
+            margin: 8px 0;
+            color: #475569;
+        }
+        .modal-body .info-note {
+            background: #e6f7f0;
+            padding: 15px;
+            border-radius: 16px;
+            margin-top: 20px;
+            border-left: 4px solid #1D8B5D;
+        }
+        .modal-body .info-note i {
+            color: #1D8B5D;
+            margin-right: 8px;
         }
         .close-modal {
             position: absolute;
-            top: 20px;
-            right: 35px;
-            color: #fff;
-            font-size: 40px;
+            top: 15px;
+            right: 20px;
+            color: white;
+            font-size: 32px;
             font-weight: bold;
             cursor: pointer;
             z-index: 10000;
+            background: rgba(0,0,0,0.3);
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.2s;
         }
         .close-modal:hover {
-            color: #1D8B5D;
+            background: #dc3545;
+            transform: scale(1.1);
         }
 
         footer {
@@ -755,11 +812,19 @@
             color: #1e293b;
             box-shadow: 0 1px 3px rgba(0,0,0,0.1);
             transition: all 0.2s;
+            cursor: pointer;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
         }
         .pole-tag:hover {
             background: #1D8B5D;
             color: white;
             transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(29,139,93,0.3);
+        }
+        .pole-tag i {
+            font-size: 0.8rem;
         }
 
         .badge-247 {
@@ -886,6 +951,10 @@
             }
             .pole-card h3 {
                 font-size: 1.2rem;
+            }
+            .pole-tag {
+                font-size: 0.75rem;
+                padding: 5px 12px;
             }
         }
     </style>
@@ -1020,13 +1089,13 @@
             
             <div class="pole-card animate-on-scroll">
                 <h3><span class="pole-icon">🏥</span> Pôle Chirurgie <span class="badge-247">Chirurgie programmée & d'urgence</span></h3>
-                <div class="pole-list">
-                    <span class="pole-tag">Chirurgie viscérale</span>
-                    <span class="pole-tag">Chirurgie plastique (silhouette)</span>
-                    <span class="pole-tag">Chirurgie de l'obésité</span>
-                    <span class="pole-tag">Chirurgie thoracique et vasculaire</span>
-                    <span class="pole-tag">Chirurgie endocrinienne et métabolique</span>
-                    <span class="pole-tag">Chirurgie laparoscopique</span>
+                <div class="pole-list" id="surgeryPoleList">
+                    <span class="pole-tag" data-surgery="viscérale"><i class="fas fa-stethoscope"></i> Chirurgie viscérale</span>
+                    <span class="pole-tag" data-surgery="plastique"><i class="fas fa-hand-sparkles"></i> Chirurgie plastique (silhouette)</span>
+                    <span class="pole-tag" data-surgery="obesite"><i class="fas fa-weight-scale"></i> Chirurgie de l'obésité</span>
+                    <span class="pole-tag" data-surgery="thoracique"><i class="fas fa-lungs"></i> Chirurgie thoracique et vasculaire</span>
+                    <span class="pole-tag" data-surgery="endocrinienne"><i class="fas fa-thyroid"></i> Chirurgie endocrinienne et métabolique</span>
+                    <span class="pole-tag" data-surgery="laparoscopique"><i class="fas fa-microscope"></i> Chirurgie laparoscopique</span>
                 </div>
             </div>
 
@@ -1224,7 +1293,175 @@
     </div>
 </footer>
 
+<!-- MODAL POPUP POUR LES DÉTAILS DE CHIRURGIE -->
+<div id="surgeryModal" class="modal" style="display: none;">
+    <div class="modal-content">
+        <span class="close-modal">&times;</span>
+        <div class="modal-header">
+            <h3><span id="modalIcon" class="modal-icon">🏥</span> <span id="modalTitle">Chirurgie</span></h3>
+        </div>
+        <div class="modal-body" id="modalBody">
+            <p>Informations détaillées...</p>
+        </div>
+    </div>
+</div>
+
 <script>
+    // Données détaillées pour chaque spécialité chirurgicale (fournies par le docteur)
+    const surgeryDetails = {
+        'viscérale': {
+            title: '🏥 Chirurgie Viscérale',
+            icon: '🏥',
+            content: `
+                <p><strong><i class="fas fa-stethoscope"></i> La chirurgie viscérale</strong> traite les organes de l'abdomen et du pelvis.</p>
+                <ul>
+                    <li><strong>Pathologies prises en charge :</strong> hernies (inguinales, ombilicales, ventrales), calculs biliaires (vésicule biliaire), appendicite, occlusions intestinales</li>
+                    <li><strong>Organes traités :</strong> foie, pancréas, rate, estomac, intestin grêle, côlon, rectum, vessie, prostate</li>
+                    <li><strong>Interventions courantes :</strong> cholécystectomie (ablation de la vésicule), cure de hernie, colectomie (ablation d'une partie du côlon)</li>
+                    <li><strong>Techniques :</strong> chirurgie ouverte et mini-invasive (cœlioscopie)</li>
+                </ul>
+                <div class="info-note">
+                    <i class="fas fa-clock"></i> Durée moyenne d'hospitalisation : 2 à 7 jours selon l'intervention
+                </div>
+            `
+        },
+        'plastique': {
+            title: '✨ Chirurgie Plastique (Silhouette)',
+            icon: '✨',
+            content: `
+                <p><strong><i class="fas fa-hand-sparkles"></i> La chirurgie plastique esthétique et reconstructrice</strong> vise à améliorer ou restaurer l'apparence corporelle.</p>
+                <ul>
+                    <li><strong>Chirurgie esthétique :</strong> liposuccion (retrait des graisses localisées), abdominoplastie (ventre plat), lifting des bras ou des cuisses, augmentation mammaire, réduction mammaire</li>
+                    <li><strong>Chirurgie reconstructrice :</strong> reconstruction mammaire après cancer, traitement des séquelles de brûlures, cicatrices disgracieuses</li>
+                    <li><strong>Chirurgie de la silhouette :</strong> taille, hanches, selle (fessier)</li>
+                </ul>
+                <div class="info-note">
+                    <i class="fas fa-calendar-check"></i> Consultation préalable obligatoire pour définir vos attentes et les résultats possibles
+                </div>
+            `
+        },
+        'obesite': {
+            title: '⚖️ Chirurgie de l\'Obésité',
+            icon: '⚖️',
+            content: `
+                <p><strong><i class="fas fa-weight-scale"></i> La chirurgie bariatrique</strong> est indiquée pour les patients souffrant d'obésité sévère (IMC ≥ 40 ou IMC ≥ 35 avec comorbidités).</p>
+                <ul>
+                    <li><strong>Techniques pratiquées :</strong>
+                        <ul style="margin-top: 5px;">
+                            <li><strong>Anneau gastrique ajustable</strong> (moins fréquent aujourd'hui)</li>
+                            <li><strong>Sleeve gastrectomie</strong> (réduction de l'estomac en tube) - technique la plus courante</li>
+                            <li><strong>Bypass gastrique</strong> (dérivation) · <strong>Ballon intragastrique</strong> (temporaire)</li>
+                        </ul>
+                    </li>
+                    <li><strong>Avantages :</strong> perte de poids significative (50-70% de l'excès de poids), amélioration du diabète, apnée du sommeil, hypertension</li>
+                    <li><strong>Suivi :</strong> équipe multidisciplinaire (chirurgien, nutritionniste, psychologue, endocrinologue)</li>
+                </ul>
+                <div class="info-note">
+                    <i class="fas fa-heartbeat"></i> Résultats prouvés sur la réduction des risques cardiovasculaires et du diabète de type 2
+                </div>
+            `
+        },
+        'thoracique': {
+            title: '🫁 Chirurgie Thoracique et Vasculaire',
+            icon: '🫁',
+            content: `
+                <p><strong><i class="fas fa-lungs"></i> La chirurgie thoracique</strong> traite les affections du thorax (poumons, médiastin, plèvre, paroi thoracique).</p>
+                <ul>
+                    <li><strong>Pathologies pulmonaires :</strong> cancer du poumon, nodules pulmonaires, pneumothorax (poumon affaissé), bronchectasies, emphysème</li>
+                    <li><strong>Chirurgie vasculaire thoracique :</strong> anévrismes de l'aorte thoracique, pontages, syndromes du défilé thoracique</li>
+                    <li><strong>Médiastin :</strong> tumeurs du médiastin (thymome, lymphomes), péricardectomie</li>
+                </ul>
+                <p style="margin-top: 15px;"><strong>Pathologies vasculaires périphériques :</strong></p>
+                <ul>
+                    <li>Insuffisance veineuse (varices, jambes lourdes) · Artériopathie oblitérante des membres inférieurs (AOMI)</li>
+                    <li>Anévrismes de l'aorte abdominale · Sténoses carotidiennes (prévention AVC)</li>
+                </ul>
+                <div class="info-note">
+                    <i class="fas fa-microscope"></i> Techniques mini-invasives : thoracoscopie vidéo-assistée (VATS) pour une récupération plus rapide
+                </div>
+            `
+        },
+        'endocrinienne': {
+            title: '🧬 Chirurgie Endocrinienne et Métabolique',
+            icon: '🧬',
+            content: `
+                <p><strong><i class="fas fa-thyroid"></i> La chirurgie endocrinienne</strong> concerne les glandes à sécrétion endocrine (thyroïde, parathyroïdes, surrénales, pancréas endocrine).</p>
+                <ul>
+                    <li><strong>Thyroïde :</strong> nodules thyroïdiens, goitres, cancer de la thyroïde, hyperthyroïdie (Basedow) → thyroïdectomie totale ou subtotale</li>
+                    <li><strong>Parathyroïdes :</strong> hyperparathyroïdie primitive (calculs rénaux récidivants, ostéoporose sévère) → parathyroïdectomie</li>
+                    <li><strong>Surrénales :</strong> tumeurs surrénaliennes (phéochromocytome, adénome, cancer)</li>
+                    <li><strong>Chirurgie métabolique :</strong> prise en charge chirurgicale de certaines obésités sévères avec retentissement métabolique</li>
+                </ul>
+                <div class="info-note">
+                    <i class="fas fa-vial"></i> Bilan hormonal systématique avant toute intervention pour personnaliser la prise en charge
+                </div>
+            `
+        },
+        'laparoscopique': {
+            title: '🔬 Chirurgie Laparoscopique',
+            icon: '🔬',
+            content: `
+                <p><strong><i class="fas fa-microscope"></i> La chirurgie laparoscopique (mini-invasive ou cœlioscopie)</strong> est une technique chirurgicale où les interventions sont réalisées par de petites incisions (0,5 à 1,5 cm).</p>
+                <ul>
+                    <li><strong>Avantages par rapport à la chirurgie ouverte :</strong>
+                        <ul style="margin-top: 5px;">
+                            <li>✓ Moins de douleurs post-opératoires</li>
+                            <li>✓ Cicatrices plus petites et plus esthétiques</li>
+                            <li>✓ Hospitalisation plus courte (2-4 jours contre 5-10 jours)</li>
+                            <li>✓ Retour plus rapide aux activités normales</li>
+                            <li>✓ Moins de risques d'infection et d'éventration</li>
+                        </ul>
+                    </li>
+                    <li><strong>Interventions courantes :</strong> cholécystectomie (vésicule biliaire), appendicectomie, cures de hernie, colectomie, chirurgie de l'obésité (sleeve, bypass), lysis des adhérences</li>
+                </ul>
+                <div class="info-note">
+                    <i class="fas fa-trophy"></i> Le Pr Gilbert Bonkoungou est pionnier de cette technique au Burkina Faso depuis 2005
+                </div>
+            `
+        }
+    };
+
+    // Gestion de la modal
+    const modal = document.getElementById('surgeryModal');
+    const modalTitle = document.getElementById('modalTitle');
+    const modalIcon = document.getElementById('modalIcon');
+    const modalBody = document.getElementById('modalBody');
+    const closeModalBtn = document.querySelector('.close-modal');
+
+    // Ajouter les écouteurs de clic sur chaque tag de chirurgie
+    const surgeryTags = document.querySelectorAll('.pole-tag[data-surgery]');
+    surgeryTags.forEach(tag => {
+        tag.addEventListener('click', function(e) {
+            e.stopPropagation();
+            const surgeryType = this.getAttribute('data-surgery');
+            const details = surgeryDetails[surgeryType];
+            if (details) {
+                modalTitle.innerHTML = details.title;
+                modalIcon.innerHTML = details.icon;
+                modalBody.innerHTML = details.content;
+                modal.style.display = 'flex';
+            }
+        });
+    });
+
+    // Fermer la modal
+    function closeModal() {
+        modal.style.display = 'none';
+    }
+
+    closeModalBtn.addEventListener('click', closeModal);
+    window.addEventListener('click', function(e) {
+        if (e.target === modal) {
+            closeModal();
+        }
+    });
+    document.addEventListener('keydown', function(e) {
+        if (e.key === 'Escape' && modal.style.display === 'flex') {
+            closeModal();
+        }
+    });
+
+    // Animations et autres scripts existants
     const animateElements = document.querySelectorAll('.animate-on-scroll');
     const checkVisibility = () => {
         animateElements.forEach(el => {
@@ -1369,7 +1606,6 @@
             canvas.height = rect.height;
         }
 
-        // Suppression de l'icône 🩻 (radiographie/squelette)
         const medicalIcons = ['⚕️', '❤️', '🏥', '💊', '🩺', '💉', '🧬', '🔬', '📋'];
 
         class MedicalParticle {
