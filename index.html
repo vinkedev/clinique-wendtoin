@@ -636,7 +636,6 @@
             margin-left: 10px;
         }
 
-        /* Équipe */
         .team-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
@@ -659,6 +658,7 @@
             width: 100%;
             aspect-ratio: 1 / 1;
             object-fit: cover;
+            background: #e2e8f0;
         }
         .team-info {
             padding: 20px;
@@ -681,7 +681,6 @@
             line-height: 1.5;
         }
 
-        /* Vidéo */
         .video-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
@@ -704,7 +703,6 @@
         .video-thumbnail {
             width: 100%;
             aspect-ratio: 16 / 9;
-            object-fit: cover;
             background: #1e293b;
             display: flex;
             align-items: center;
@@ -749,7 +747,6 @@
             color: #1D8B5D;
         }
 
-        /* MODAL STYLES */
         .modal {
             display: none;
             position: fixed;
@@ -942,7 +939,7 @@
 <header>
     <div class="header-container">
         <div class="logo">
-            <img src="wendtoin/logo_wendtoin.jpg" alt="Logo Clinique WENDTOIN" onerror="this.src='https://placehold.co/55x55/0077A4/white?text=W'">
+            <img src="cliniquewendtoin/logo_wendtoin.jpg" alt="Logo Clinique WENDTOIN" onerror="this.src='https://placehold.co/55x55/0077A4/white?text=W'">
             <div class="logo-text">
                 <h1>Clinique WENDTOIN</h1>
                 <p>Depuis janvier 2016</p>
@@ -989,7 +986,7 @@
                     <p style="margin-top: 15px;">Située au <strong>Boulevard des Tensoba, Secteur n°25, Cissin, Ouagadougou</strong>, notre clinique vous accueille dans un environnement moderne et sécurisé.</p>
                 </div>
                 <div class="image-wrapper animate-on-scroll">
-                    <img src="wendtoin/vue_wendtoin.jpg" alt="Clinique WENDTOIN" class="clinic-image" onerror="this.src='https://placehold.co/600x400/0077A4/white?text=Clinique+WENDTOIN'">
+                    <img src="cliniquewendtoin/vue_wendtoin.jpg" alt="Clinique WENDTOIN" class="clinic-image" onerror="this.src='https://placehold.co/600x400/0077A4/white?text=Clinique+WENDTOIN'">
                 </div>
             </div>
         </div>
@@ -1079,7 +1076,7 @@
         <div class="container">
             <h2 class="section-title animate-on-scroll">Notre équipe</h2>
             <div class="team-grid" id="teamGrid">
-                <!-- Les 4 membres seront insérés ici par JavaScript -->
+                <!-- Les membres seront chargés dynamiquement -->
             </div>
         </div>
     </section>
@@ -1089,7 +1086,7 @@
         <div class="container">
             <h2 class="section-title animate-on-scroll">Vidéos</h2>
             <div class="video-grid" id="videoGrid">
-                <!-- Les vidéos seront insérées ici par JavaScript -->
+                <!-- Les vidéos seront chargées dynamiquement -->
             </div>
         </div>
     </section>
@@ -1099,20 +1096,40 @@
     </section>
 </main>
 
-<footer><div class="container"><div class="footer-grid"><div><h4 style="color: #1D8B5D;">Clinique WENDTOIN</h4><p>Boulevard des Tensoba, Secteur 25<br>Cissin, Ouagadougou<br>📞 <a href="tel:51000647" style="color:#1D8B5D;">51 00 06 47</a><br>📧 clinwend@gmail.com</p></div><div><h4 style="color: #1D8B5D;">Urgences 24/24</h4><p><strong><a href="tel:51000647" style="color:#1D8B5D;">51 00 06 47</a></strong></p><p>WhatsApp : <a href="https://wa.me/22651000647" style="color:#1D8B5D;">51 00 06 47</a></p></div><div><h4 style="color: #1D8B5D;">Horaires consultations</h4><p>Lun-Ven : 7h30-19h30<br>Sam : 7h30-12h</p><p><strong>Hémodialyse :</strong> 24h/24</p></div><div><h4 style="color: #1D8B5D;">Liens rapides</h4><p><a href="#rdv">Prendre RDV</a><br><a href="#services">Nos services</a><br><a href="#specialites">Spécialités</a><br><a href="#poles">Pôles techniques</a><br><a href="#equipe">Notre équipe</a><br><a href="#contact">Nous trouver</a></p></div></div><div style="text-align:center; margin-top:40px; padding-top:20px; border-top:1px solid #334155;"><p>&copy; 2026 Clinique WENDTOIN – Tous droits réservés</p></div></div></footer>
+<footer><div class="container"><div class="footer-grid"><div><h4 style="color: #1D8B5D;">Clinique WENDTOIN</h4><p>Boulevard des Tensoba, Secteur 25<br>Cissin, Ouagadougou<br>Tél: <a href="tel:51000647" style="color:#1D8B5D;">51 00 06 47</a><br>Email: clinwend@gmail.com</p></div><div><h4 style="color: #1D8B5D;">Urgences 24/24</h4><p><strong><a href="tel:51000647" style="color:#1D8B5D;">51 00 06 47</a></strong></p><p>WhatsApp : <a href="https://wa.me/22651000647" style="color:#1D8B5D;">51 00 06 47</a></p></div><div><h4 style="color: #1D8B5D;">Horaires consultations</h4><p>Lun-Ven : 7h30-19h30<br>Sam : 7h30-12h</p><p><strong>Hémodialyse :</strong> 24h/24</p></div><div><h4 style="color: #1D8B5D;">Liens rapides</h4><p><a href="#rdv">Prendre RDV</a><br><a href="#services">Nos services</a><br><a href="#specialites">Spécialités</a><br><a href="#poles">Pôles techniques</a><br><a href="#equipe">Notre équipe</a><br><a href="#contact">Nous trouver</a></p></div></div><div style="text-align:center; margin-top:40px; padding-top:20px; border-top:1px solid #334155;"><p>&copy; 2026 Clinique WENDTOIN – Tous droits réservés</p></div></div></footer>
 
 <div id="surgeryModal" class="modal"><div class="modal-content"><span class="close-modal">&times;</span><div class="modal-header"><h3><span id="modalTitle">Chirurgie</span></h3></div><div class="modal-body" id="modalBody"><p>Chargement...</p></div></div></div>
 
 <script>
-    // DONNÉES DE L'ÉQUIPE (à remplacer par les vraies informations)
+    // DONNÉES DE L'ÉQUIPE (avec chemins des images)
     const teamMembers = [
-        { name: "Dr Nom Prenom", position: "Directeur Médical", desc: "Spécialiste en chirurgie générale.", image: "images/docteur1.jpg" },
-        { name: "Dr Nom Prenom", position: "Chef du service Urgences", desc: "Expert en médecine d'urgence.", image: "images/docteur2.jpg" },
-        { name: "Dr Nom Prenom", position: "Pédiatre", desc: "Prise en charge des enfants.", image: "images/docteur3.jpg" },
-        { name: "Dr Nom Prenom", position: "Gynécologue", desc: "Suivi grossesse et gynécologie.", image: "images/docteur4.jpg" }
+        { 
+            name: "Pr Gilbert BONKOUGOU", 
+            position: "Directeur Général", 
+            desc: "Professeur agrégé en chirurgie générale. Pionnier de la laparoscopie au Burkina Faso.", 
+            image: "cliniquewendtoin/pr_gilbert.jpeg" 
+        },
+        { 
+            name: "Lionelle TIAHOUN", 
+            position: "Médecin généraliste", 
+            desc: "Prise en charge des consultations générales et des urgences.", 
+            image: "cliniquewendtoin/Lionelle.jpeg" 
+        },
+        { 
+            name: "Agnès COMPAORE", 
+            position: "Surveillante générale", 
+            desc: "Surveillante d'unité de soins. Coordination des équipes soignantes.", 
+            image: "https://placehold.co/400x400/0077A4/white?text=Dr+Avatar" 
+        },
+        { 
+            name: "Absetou KABORE", 
+            position: "Secrétaire", 
+            desc: "Accueil, gestion des rendez-vous et administration.", 
+            image: "https://placehold.co/400x400/1D8B5D/white?text=Avatar" 
+        }
     ];
 
-    // DONNÉES DES VIDÉOS (liens Facebook)
+    // DONNÉES DES VIDÉOS (à remplacer par vos liens Facebook)
     const videos = [
         { title: "Présentation de la clinique", date: "2025", url: "https://www.facebook.com/votrepage/videos/1" },
         { title: "Service d'urgence 24/24", date: "2025", url: "https://www.facebook.com/votrepage/videos/2" },
@@ -1127,7 +1144,7 @@
             const card = document.createElement('div');
             card.className = 'team-card animate-on-scroll';
             card.innerHTML = `
-                <img src="${member.image}" alt="${member.name}" class="team-image" onerror="this.src='https://placehold.co/400x400/0077A4/white?text=Dr'">
+                <img src="${member.image}" alt="${member.name}" class="team-image" onerror="this.src='https://placehold.co/400x400/0077A4/white?text=Photo'">
                 <div class="team-info">
                     <div class="team-name">${member.name}</div>
                     <div class="team-position">${member.position}</div>
@@ -1160,14 +1177,14 @@
         });
     }
 
-    // MODAL chirurgie (inchangé)
+    // MODAL chirurgie
     const surgeryDetails = {
-        'viscérale': { title: 'Chirurgie Générale / Digestive', content: '<p><strong>Chirurgie générale et digestive</strong> prend en charge les pathologies des organes de l\'abdomen.</p><ul><li>Hernies et Éventrations</li><li>Pathologies des organes : Œsophage, Estomac, Intestins, Rate, Vésicule biliaire</li><li>Appendicite, Pathologies utérines, Affections anales</li></ul><div class="info-note">Pr Gilbert Bonkoungou - Chirurgien référent</div>' },
+        'viscérale': { title: 'Chirurgie Générale / Digestive', content: '<p><strong>Chirurgie générale et digestive</strong> prend en charge les pathologies des organes de l\'abdomen.</p><ul><li>Hernies et Éventrations</li><li>Pathologies des organes : Œsophage, Estomac, Intestins, Rate, Vésicule biliaire</li><li>Appendicite, Pathologies utérines, Affections anales</li></ul><div class="info-note">Pr Gilbert BONKOUGOU - Chirurgien référent</div>' },
         'plastique': { title: 'Chirurgie Plastique / De l\'obésité', content: '<p><strong>Chirurgie plastique et de l\'obésité</strong> comprend :</p><ul><li>Chirurgie plastique : Plastie des seins, Liposuccion, Abdominoplastie, BBL</li><li>Chirurgie de l\'obésité : Sleeve gastrectomie, Bypass gastrique, Ballon intragastrique</li></ul><div class="info-note">Consultation préalable obligatoire</div>' },
         'cancers': { title: 'Chirurgie des Cancers', content: '<p><strong>Chirurgie oncologique</strong> prend en charge les tumeurs solides.</p><ul><li>Cancers digestifs (côlon, estomac, pancréas, foie)</li><li>Cancers gynécologiques et urologiques</li><li>Cancers thyroïdiens et surrénaliens</li><li>Tumeurs du sein</li></ul><div class="info-note">Prise en charge multidisciplinaire</div>' },
         'vasculaire': { title: 'Chirurgie Vasculaire', content: '<p><strong>Chirurgie vasculaire</strong> traite les pathologies des vaisseaux sanguins.</p><ul><li>Varices (stripping, laser endoveineux, sclérothérapie)</li><li>Fistules pour dialyse (confection et entretien)</li><li>Pathologies carotidiennes (prévention AVC)</li><li>Artériopathie oblitérante des membres</li></ul><div class="info-note">Urgences vasculaires 24h/24</div>' },
         'thoracique': { title: 'Chirurgie Thoracique', content: '<p><strong>Chirurgie thoracique</strong> prend en charge les affections du thorax.</p><ul><li>Pathologies pulmonaires (cancer, nodules, pneumothorax)</li><li>Chirurgie de la thyroïde (goître, hyperthyroïdie, nodules)</li><li>Médiastin (tumeurs thymiques, péricardectomie)</li><li>Paroi thoracique</li></ul><div class="info-note">Techniques vidéo-assistées (VATS)</div>' },
-        'laparoscopique': { title: 'Techniques de Vidéo-Chirurgie', content: '<p><strong>Chirurgie mini-invasive</strong> révolutionne la prise en charge chirurgicale.</p><ul><li>Laparoscopie : interventions par petites incisions</li><li>Hystéroscopie : exploration et chirurgie de l\'utérus par voie naturelle</li></ul><div class="info-note">Pr Gilbert Bonkoungou - Pionnier de la laparoscopie</div>' }
+        'laparoscopique': { title: 'Techniques de Vidéo-Chirurgie', content: '<p><strong>Chirurgie mini-invasive</strong> révolutionne la prise en charge chirurgicale.</p><ul><li>Laparoscopie : interventions par petites incisions</li><li>Hystéroscopie : exploration et chirurgie de l\'utérus par voie naturelle</li></ul><div class="info-note">Pr Gilbert BONKOUGOU - Pionnier de la laparoscopie</div>' }
     };
     const modal = document.getElementById('surgeryModal');
     const modalTitle = document.getElementById('modalTitle');
