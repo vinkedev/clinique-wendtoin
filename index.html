@@ -1358,68 +1358,45 @@
         { title: "Dr Nadia TOE/ROUAMBA - Lombalgie (maux de reins)", desc: "Spécialiste en Rhumatologie explique les causes diverses", url: "https://web.facebook.com/reel/929689517848124" }
     ];
 
-    let visibleVideos = 4;
-    const videoGrid = document.getElementById('videoGrid');
-    const showMoreBtn = document.getElementById('showMoreVideos');
+let visibleVideos = 4;
+const videoGrid = document.getElementById('videoGrid');
+const showMoreBtn = document.getElementById('showMoreVideos');
 
-    function displayVideos() {
-        if (!videoGrid) return;
-        
-        // Vider la grille
-        videoGrid.innerHTML = '';
-        
-        // Afficher uniquement les 'visibleVideos' premières vidéos
-        const videosToShow = allVideos.slice(0, visibleVideos);
-        
-        videosToShow.forEach(video => {
-            const card = document.createElement('div');
-            card.className = 'video-card animate-on-scroll';
-            
-            // Ouvrir le lien au clic
-            card.addEventListener('click', () => {
-                window.open(video.url, '_blank', 'noopener,noreferrer');
-            });
-            
-            card.innerHTML = `
-                <div class="video-thumbnail">▶️</div>
-                <div class="video-info">
-                    <div class="video-title">${video.title}</div>
-                    <div class="video-date">${video.desc}</div>
-                </div>
-            `;
-            videoGrid.appendChild(card);
+function displayVideos() {
+    if (!videoGrid) return;
+    videoGrid.innerHTML = '';
+    const videosToShow = allVideos.slice(0, visibleVideos);
+    videosToShow.forEach(video => {
+        const card = document.createElement('div');
+        card.className = 'video-card';
+        card.style.opacity = '1'; // ← pas d'animation pour les cartes dynamiques
+        card.style.transform = 'none';
+        card.addEventListener('click', () => {
+            window.open(video.url, '_blank', 'noopener,noreferrer');
         });
-        
-        // Cacher ou montrer le bouton
-        if (visibleVideos >= allVideos.length) {
-            showMoreBtn.style.display = 'none';
-        } else {
-            showMoreBtn.style.display = 'inline-block';
-        }
-    }
-    
-    // Fonction pour charger plus de vidéos
-    function loadMoreVideos() {
-        visibleVideos += 4;
-        if (visibleVideos > allVideos.length) {
-            visibleVideos = allVideos.length;
-        }
-        displayVideos();
-    }
-    
-    // Supprimer l'ancien écouteur et en ajouter un nouveau proprement
+        card.innerHTML = `
+            <div class="video-thumbnail">▶️</div>
+            <div class="video-info">
+                <div class="video-title">${video.title}</div>
+                <div class="video-date">${video.desc}</div>
+            </div>
+        `;
+        videoGrid.appendChild(card);
+    });
+
     if (showMoreBtn) {
-        // Enlever tous les anciens écouteurs
-        const newBtn = showMoreBtn.cloneNode(true);
-        showMoreBtn.parentNode.replaceChild(newBtn, showMoreBtn);
-        const freshBtn = document.getElementById('showMoreVideos');
-        if (freshBtn) {
-            freshBtn.addEventListener('click', loadMoreVideos);
-        }
+        showMoreBtn.style.display = visibleVideos >= allVideos.length ? 'none' : 'inline-block';
     }
-    
-    // Initialiser l'affichage
-    displayVideos();
+}
+
+if (showMoreBtn) {
+    showMoreBtn.addEventListener('click', () => {
+        visibleVideos = Math.min(visibleVideos + 4, allVideos.length);
+        displayVideos();
+    });
+}
+
+displayVideos();
 
     // ==================== MODAL CHIRURGIE (DÉTAILS COMPLETS) ====================
     const surgeryDetails = {
