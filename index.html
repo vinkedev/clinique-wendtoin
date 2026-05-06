@@ -146,7 +146,7 @@
             animation: pulse-red 2s infinite;
         }
 
-        /* ========== HEADER GLASSMORPHISM ========== */
+        /* ========== HEADER GLASSMORPHISM - POLICE NORMALE ========== */
         header {
             background: white;
             box-shadow: 0 2px 20px rgba(0,0,0,0.05);
@@ -167,26 +167,26 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
-            padding: 6px 16px;
+            padding: 8px 20px;
             max-width: 1280px;
             margin: 0 auto;
-            gap: 8px;
+            gap: 15px;
         }
 
         .logo {
             display: flex;
             align-items: center;
-            gap: 6px;
+            gap: 10px;
             flex-shrink: 0;
         }
 
         .logo img {
-            height: 35px;
+            height: 42px;
             width: auto;
         }
 
         .logo-text h1 {
-            font-size: 0.85rem;
+            font-size: 1rem;
             font-weight: 700;
             background: linear-gradient(135deg, #0077A4 0%, #1D8B5D 100%);
             -webkit-background-clip: text;
@@ -196,7 +196,7 @@
         }
 
         .logo-text p {
-            font-size: 0.45rem;
+            font-size: 0.55rem;
             color: #64748b;
             letter-spacing: 0.3px;
         }
@@ -211,7 +211,7 @@
             background: white;
             padding: 15px;
             box-shadow: 0 20px 30px rgba(0,0,0,0.1);
-            gap: 10px;
+            gap: 12px;
             border-radius: 0 0 20px 20px;
             list-style: none;
             z-index: 999;
@@ -227,8 +227,8 @@
             font-weight: 500;
             transition: all 0.3s ease;
             display: block;
-            padding: 6px 0;
-            font-size: 0.85rem;
+            padding: 8px 0;
+            font-size: 0.95rem;
         }
 
         nav a:hover {
@@ -238,12 +238,12 @@
 
         .mobile-menu-btn {
             display: block;
-            font-size: 22px;
+            font-size: 24px;
             cursor: pointer;
             background: none;
             border: none;
-            width: 36px;
-            height: 36px;
+            width: 40px;
+            height: 40px;
             display: flex;
             align-items: center;
             justify-content: center;
@@ -1143,23 +1143,23 @@
                 background: transparent;
                 box-shadow: none;
                 padding: 0;
-                gap: 20px;
+                gap: 25px;
             }
             nav a {
                 padding: 0;
-                font-size: 0.9rem;
+                font-size: 0.95rem;
             }
             .header-container {
                 padding: 8px 24px;
             }
             .logo img {
-                height: 42px;
+                height: 48px;
             }
             .logo-text h1 {
-                font-size: 1rem;
+                font-size: 1.1rem;
             }
             .logo-text p {
-                font-size: 0.55rem;
+                font-size: 0.6rem;
             }
             .hero-content h2 {
                 font-size: 2.5rem;
@@ -1230,7 +1230,7 @@
 <header>
     <div class="header-container">
         <div class="logo">
-            <img src="cliniquewendtoin/logo_wendtoin.jpg" alt="Logo Clinique WENDTOIN" onerror="this.src='https://placehold.co/45x45/0077A4/white?text=W'">
+            <img src="cliniquewendtoin/logo_wendtoin.jpg" alt="Logo Clinique WENDTOIN" onerror="this.src='https://placehold.co/50x50/0077A4/white?text=W'">
             <div class="logo-text">
                 <h1>Clinique WENDTOIN</h1>
                 <p>Depuis janvier 2016</p>
@@ -1405,7 +1405,7 @@
 </div>
 
 <script>
-    // ==================== ÉQUIPE (avec Dr ajouté pour Lionelle) ====================
+    // ==================== ÉQUIPE ====================
     const teamMembers = [
         { name: "Pr Gilbert BONKOUGOU", position: "Directeur Général", desc: "Professeur agrégé en chirurgie générale. Pionnier de la laparoscopie.", image: "cliniquewendtoin/pr_gilbert.jpeg" },
         { name: "Dr Lionelle TIAHOUN", position: "Médecin généraliste", desc: "Prise en charge des consultations générales et des urgences.", image: "cliniquewendtoin/Lionelle.jpg" },
@@ -1540,7 +1540,7 @@
             if (entry.isIntersecting) {
                 setTimeout(() => {
                     entry.target.classList.add('visible');
-                }, index * 60); // Délai progressif
+                }, index * 60);
                 improvedObserver.unobserve(entry.target);
             }
         });
