@@ -1209,7 +1209,8 @@
                     <span class="pole-tag" data-surgery="plastique">Chirurgie Plastique / De l'obésité</span>
                     <span class="pole-tag" data-surgery="vasculaire">Chirurgie Vasculaire</span>
                     <span class="pole-tag" data-surgery="thoracique">Chirurgie Thoracique</span>
-                    <span class="pole-tag" data-surgery="laparoscopique"> vidéo-chirurgie</span>
+                    <span class="pole-tag" data-surgery="endocrinienne">Chirurgie endocrinienne et métabolique : Thyroïde, parathyroïde, surrénale</span>
+                    <span class="pole-tag" data-surgery="laparoscopique">Vidéo-chirurgie : Laparoscopie : Vésicule biliaire, appendice, annexes, chirurgie gynécologique, reflux, achalasie, obésité. Thoracoscopie : Pneumothorax, pleurésie, biopsie.</span>
                 </div>
             </div>
             <div class="pole-card animate-on-scroll"><h3>Laboratoire d'Anatomie-Pathologie</h3><div class="pole-list"><span class="pole-tag">Anatomie pathologique</span><span class="pole-tag">Cytologie</span><span class="pole-tag">Immuno-histochimie</span></div><p style="margin-top: 12px; color: #475569; font-size: 0.85rem;">Analyses précises pour le diagnostic des cancers et pathologies tissulaires.</p></div>
@@ -1223,7 +1224,7 @@
             <h2 class="section-title animate-on-scroll">Prendre rendez-vous</h2>
             <div class="rdv-grid">
                 <div class="info-box animate-on-scroll"><h3>Formulaire de rendez-vous</h3><form id="whatsappForm"><div class="form-group"><input type="text" id="nom" placeholder="Nom complet" required></div><div class="form-group"><select id="service"><option>Consultation générale</option><option>Cardiologie</option><option>Gynécologie - Obstétrique</option><option>Pédiatrie</option><option>Chirurgie générale</option><option>Neurologie</option><option>Médecine interne</option><option>Dermatologie</option><option>Pneumologie</option><option>Néphrologie</option><option>ORL</option><option>Orthopédie</option><option>Rhumatologie</option><option>Urologie</option></select></div><div class="form-group"><textarea id="motif" rows="3" placeholder="Date souhaitée et horaire de préférence"></textarea></div><button type="submit" class="btn-rdv" id="submitRdvBtn">Envoyer la demande</button></form><p style="font-size:0.65rem; text-align:center; margin-top:12px;">Vous serez redirigé vers WhatsApp</p></div>
-                <div><div class="info-box animate-on-scroll"><h3>Horaires d'ouverture</h3><p><strong>Consultations :</strong><br>Lundi – Vendredi : 7h30 – 19h30<br>Samedi : 7h30 – 12h00</p><p style="margin-top:8px;"><strong>Urgences 24/24 – 7j/7</strong><br>Sans rendez-vous, prise en charge immédiate.</p><p><strong>Hémodialyse :</strong> 24h/24 et 7j/7</p></div><div class="info-box animate-on-scroll"><h3>Assurances acceptées</h3><p><strong>Partenaires :</strong> ASCOMA, GA, MAADO, MUTAB, MUPOL, OLEA, MCI, SONAR, SUNU, UAB, VISTA.<br><strong>Autres :</strong> CNSS, Inami Burkina, mutuelles.</p></div></div>
+                <div><div class="info-box animate-on-scroll"><h3>Horaires d'ouverture</h3><p><strong>Consultations :</strong><br>Lundi – Vendredi : 7h30 – 19h30<br>Samedi : 7h30 – 12h00</p><p style="margin-top:8px;"><strong>Urgences 24/24 – 7j/7</strong><br>Sans rendez-vous, prise en charge immédiate.</p><p><strong>Hémodialyse :</strong> 24h/24 et 7j/7</p></div><div class="info-box animate-on-scroll"><h3>Assurances acceptées</h3><p><strong>Partenaires :</strong> ASCOMA, GA, MAADO, MUTAB, MUPOL, OLEA, MCI, SONAR, SUNU, UAB, VISTA.<br><strong>Autres :</strong> CNSS, Inami Burkina, mutuelles.<br><strong>Assurances :</strong> DAYO, VIMSO, CNAMU</p></div></div>
             </div>
         </div>
     </section>
@@ -1343,8 +1344,7 @@
         if (e.target === imageModal) imageModal.style.display = 'none'; 
     });
 
-    // ==================== VIDÉOS ====================
-        // ==================== VIDÉOS (VERSION CORRIGÉE) ====================
+    // ==================== VIDÉOS (VERSION CORRIGÉE) ====================
     const allVideos = [
         { title: "Pr Gilbert BONKOUGOU - Maladie hémorroïdaire", desc: "Les hémorroïdes expliquées par le Pr Gilbert BONKOUGOU", url: "https://web.facebook.com/reel/645204957720787" },
         { title: "Unité de dialyse - Clinique WENDTOIN", desc: "Prise en charge des insuffisances rénales aiguës et chroniques", url: "https://web.facebook.com/reel/879902179764068" },
@@ -1368,7 +1368,7 @@ function displayVideos() {
     videosToShow.forEach(video => {
         const card = document.createElement('div');
         card.className = 'video-card';
-        card.style.opacity = '1'; // ← pas d'animation pour les cartes dynamiques
+        card.style.opacity = '1';
         card.style.transform = 'none';
         card.addEventListener('click', () => {
             window.open(video.url, '_blank', 'noopener,noreferrer');
@@ -1419,9 +1419,13 @@ displayVideos();
             title: 'Chirurgie Thoracique', 
             content: '<p><strong>Chirurgie thoracique</strong> prend en charge les affections du thorax.</p><ul><li>Pathologies pulmonaires (cancer, nodules, pneumothorax)</li><li>Médiastin (tumeurs thymiques, péricardectomie)</li><li>Paroi thoracique</li></ul><div class="info-note">Techniques vidéo-assistées (VATS)</div>' 
         },
+        'endocrinienne': { 
+            title: 'Chirurgie endocrinienne et métabolique', 
+            content: '<p><strong>Chirurgie endocrinienne et métabolique</strong> prend en charge les pathologies des glandes endocrines.</p><ul><li>Thyroïde : goitres, nodules, cancers thyroïdiens</li><li>Parathyroïde : hyperparathyroïdie</li><li>Surrénale : tumeurs surrénaliennes, phéochromocytome</li></ul><div class="info-note">Prise en charge spécialisée des pathologies endocriniennes</div>' 
+        },
         'laparoscopique': { 
             title: 'Vidéo-Chirurgie', 
-            content: '<p><strong>Chirurgie mini-invasive</strong> .</p><div class="info-note">Pr Gilbert BONKOUGOU - Pionnier de la laparoscopie</div>' 
+            content: '<p><strong>Chirurgie mini-invasive</strong>.</p><ul><li><strong>Laparoscopie :</strong> Vésicule biliaire, appendice, annexes, chirurgie gynécologique, reflux, achalasie, obésité.</li><li><strong>Thoracoscopie :</strong> Pneumothorax, pleurésie, biopsie.</li></ul><div class="info-note">Pr Gilbert BONKOUGOU - Pionnier de la laparoscopie</div>' 
         }
     };
     
