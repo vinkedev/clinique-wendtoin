@@ -309,6 +309,23 @@
             transform: translateY(-3px);
         }
 
+        .btn-secondary {
+            background: #0077A4;
+            color: white;
+            padding: 12px 28px;
+            border-radius: 50px;
+            border: none;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-size: 1rem;
+        }
+
+        .btn-secondary:hover {
+            background: #005a7c;
+            transform: translateY(-2px);
+        }
+
         section {
             padding: 60px 0;
         }
@@ -858,6 +875,7 @@
             font-weight: 600;
             color: #1e293b;
             margin-bottom: 5px;
+            font-size: 0.9rem;
         }
         .video-date {
             font-size: 0.7rem;
@@ -1236,8 +1254,11 @@
     <!-- SECTION VIDÉO -->
     <section id="video" class="bg-white">
         <div class="container">
-            <h2 class="section-title animate-on-scroll">Vidéos</h2>
+            <h2 class="section-title animate-on-scroll">Nos vidéos éducatives</h2>
             <div class="video-grid" id="videoGrid"></div>
+            <div style="text-align: center; margin-top: 40px;">
+                <button id="showMoreVideos" class="btn-secondary">Afficher plus de vidéos</button>
+            </div>
         </div>
     </section>
 
@@ -1257,7 +1278,7 @@
 </div>
 
 <script>
-    // DONNÉES DE L'ÉQUIPE
+    // ==================== SECTION ÉQUIPE ====================
     const teamMembers = [
         { 
             name: "Pr Gilbert BONKOUGOU", 
@@ -1285,31 +1306,6 @@
         }
     ];
 
-    // DONNÉES DES IMAGES DE LA CLINIQUE (12 images)
-    const galleryImages = [
-        "cliniquewendtoin/Im1.jpeg",
-        "cliniquewendtoin/Im3.jpeg",
-        "cliniquewendtoin/Im4.jpeg",
-        "cliniquewendtoin/Im5.jpeg",
-        "cliniquewendtoin/Im7.jpeg",
-        "cliniquewendtoin/Im8.jpeg",
-        "cliniquewendtoin/Im9.jpeg",
-        "cliniquewendtoin/Im10.jpeg",
-        "cliniquewendtoin/Im11.jpeg",
-        "cliniquewendtoin/Im12.jpeg",
-        "cliniquewendtoin/Im13.jpeg",
-        "cliniquewendtoin/Im14.jpeg"
-    ];
-
-    // DONNÉES DES VIDÉOS
-    const videos = [
-        { title: "Présentation de la clinique", date: "2025", url: "https://www.facebook.com/votrepage/videos/1" },
-        { title: "Service d'urgence 24/24", date: "2025", url: "https://www.facebook.com/votrepage/videos/2" },
-        { title: "Notre plateau technique", date: "2024", url: "https://www.facebook.com/votrepage/videos/3" },
-        { title: "Témoignage patient", date: "2024", url: "https://www.facebook.com/votrepage/videos/4" }
-    ];
-
-    // Remplir la section équipe
     const teamGrid = document.getElementById('teamGrid');
     if (teamGrid) {
         teamMembers.forEach(member => {
@@ -1327,7 +1323,22 @@
         });
     }
 
-    // Remplir la galerie photos
+    // ==================== SECTION GALERIE PHOTO ====================
+    const galleryImages = [
+        "cliniquewendtoin/Im1.jpeg",
+        "cliniquewendtoin/Im3.jpeg",
+        "cliniquewendtoin/Im4.jpeg",
+        "cliniquewendtoin/Im5.jpeg",
+        "cliniquewendtoin/Im7.jpeg",
+        "cliniquewendtoin/Im8.jpeg",
+        "cliniquewendtoin/Im9.jpeg",
+        "cliniquewendtoin/Im10.jpeg",
+        "cliniquewendtoin/Im11.jpeg",
+        "cliniquewendtoin/Im12.jpeg",
+        "cliniquewendtoin/Im13.jpeg",
+        "cliniquewendtoin/Im14.jpeg"
+    ];
+
     const galleryGrid = document.getElementById('galleryGrid');
     const imageModal = document.getElementById('imageModal');
     const modalImage = document.getElementById('modalImage');
@@ -1346,7 +1357,6 @@
         });
     }
 
-    // Fermer la modale image
     if (closeImageModal) {
         closeImageModal.addEventListener('click', () => {
             imageModal.style.display = 'none';
@@ -1358,10 +1368,66 @@
         }
     });
 
-    // Remplir la section vidéo
+    // ==================== SECTION VIDÉOS ====================
+    const allVideos = [
+        {
+            title: "Pr Gilbert BONKOUGOU - Maladie hémorroïdaire",
+            desc: "Les hémorroïdes expliquées par le Pr Gilbert BONKOUGOU",
+            url: "https://web.facebook.com/reel/645204957720787"
+        },
+        {
+            title: "Unité de dialyse - Clinique WENDTOIN",
+            desc: "Prise en charge des insuffisances rénales aiguës et chroniques",
+            url: "https://web.facebook.com/reel/879902179764068"
+        },
+        {
+            title: "Neuro monitoring - Thyroïdectomie sécurisée",
+            desc: "Recherche du nerf récurrent lors de la chirurgie thyroïdienne",
+            url: "https://web.facebook.com/reel/1608565729972155"
+        },
+        {
+            title: "Chirurgie de l'obésité - Sleeve gastrectomie",
+            desc: "Opération classique donnant d'excellents résultats pour la perte de poids",
+            url: "https://web.facebook.com/reel/2537992576496661"
+        },
+        {
+            title: "Pr Gilbert BONKOUGOU - Varices des membres inférieurs",
+            desc: "Prise en charge des varices",
+            url: "https://web.facebook.com/reel/1634296984276574"
+        },
+        {
+            title: "Obésité : un réel problème de santé",
+            desc: "Liens avec diabète, douleurs articulaires, hypertension, maladies respiratoires",
+            url: "https://web.facebook.com/reel/1662097440846319"
+        },
+        {
+            title: "Dr Natacha OUEDRAOGO - Accident vasculaire cérébral (AVC)",
+            desc: "Neurologue, elle nous parle de cette maladie qui fait peur",
+            url: "https://web.facebook.com/reel/610483310353530"
+        },
+        {
+            title: "Dr Marcel Kuiré - L'asthme",
+            desc: "Maladie respiratoire fréquente qui peut être grave si non diagnostiquée",
+            url: "https://web.facebook.com/reel/743148739906723"
+        },
+        {
+            title: "Dr Nadia TOE/ROUAMBA - Lombalgie (maux de reins)",
+            desc: "Spécialiste en Rhumatologie explique les causes diverses",
+            url: "https://web.facebook.com/reel/929689517848124"
+        }
+    ];
+
+    let visibleVideos = 4;
     const videoGrid = document.getElementById('videoGrid');
-    if (videoGrid) {
-        videos.forEach(video => {
+    const showMoreBtn = document.getElementById('showMoreVideos');
+
+    function displayVideos() {
+        if (!videoGrid) return;
+        
+        videoGrid.innerHTML = '';
+        const videosToShow = allVideos.slice(0, visibleVideos);
+        
+        videosToShow.forEach(video => {
             const card = document.createElement('div');
             card.className = 'video-card animate-on-scroll';
             card.addEventListener('click', () => {
@@ -1373,14 +1439,29 @@
                 </div>
                 <div class="video-info">
                     <div class="video-title">${video.title}</div>
-                    <div class="video-date">${video.date}</div>
+                    <div class="video-date">${video.desc}</div>
                 </div>
             `;
             videoGrid.appendChild(card);
         });
+        
+        if (visibleVideos >= allVideos.length) {
+            showMoreBtn.style.display = 'none';
+        } else {
+            showMoreBtn.style.display = 'inline-block';
+        }
     }
 
-    // MODAL chirurgie
+    if (showMoreBtn) {
+        showMoreBtn.addEventListener('click', () => {
+            visibleVideos += 4;
+            displayVideos();
+        });
+    }
+
+    displayVideos();
+
+    // ==================== MODAL CHIRURGIE ====================
     const surgeryDetails = {
         'viscérale': { title: 'Chirurgie Générale / Digestive', content: '<p><strong>Chirurgie générale et digestive</strong> prend en charge les pathologies des organes de l\'abdomen.</p><ul><li>Hernies et Éventrations</li><li>Pathologies des organes : Œsophage, Estomac, Intestins, Rate, Vésicule biliaire</li><li>Appendicite, Pathologies utérines, Affections anales</li></ul><div class="info-note">Pr Gilbert BONKOUGOU - Chirurgien référent</div>' },
         'plastique': { title: 'Chirurgie Plastique / De l\'obésité', content: '<p><strong>Chirurgie plastique et de l\'obésité</strong> comprend :</p><ul><li>Chirurgie plastique : Plastie des seins, Liposuccion, Abdominoplastie, BBL</li><li>Chirurgie de l\'obésité : Sleeve gastrectomie, Bypass gastrique, Ballon intragastrique</li></ul><div class="info-note">Consultation préalable obligatoire</div>' },
@@ -1410,7 +1491,7 @@
     window.addEventListener('click', (e) => { if (e.target === modal) closeModal(); });
     document.addEventListener('keydown', (e) => { if (e.key === 'Escape' && modal.style.display === 'flex') closeModal(); });
     
-    // Animations
+    // ==================== ANIMATIONS ====================
     const animateElements = document.querySelectorAll('.animate-on-scroll');
     const checkVisibility = () => { animateElements.forEach(el => { if (el.getBoundingClientRect().top < window.innerHeight - 80) el.classList.add('visible'); }); };
     window.addEventListener('scroll', checkVisibility);
