@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+ <!DOCTYPE html>
 <html lang="fr">
 <head>
     <meta charset="UTF-8">
@@ -33,7 +33,6 @@
             padding: 0 20px;
         }
 
-        /* Animations */
         @keyframes fadeInUp {
             from { opacity: 0; transform: translateY(35px); }
             to { opacity: 1; transform: translateY(0); }
@@ -56,19 +55,30 @@
             100% { background-position: 1440px 100%; }
         }
 
+        @keyframes rotateBg {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+
+        @keyframes fadeScale {
+            from { opacity: 0; transform: scale(0.95); }
+            to { opacity: 1; transform: scale(1); }
+        }
+
+        @keyframes shake {
+            0%, 100% { transform: translateX(0); }
+            25% { transform: translateX(-6px); }
+            75% { transform: translateX(6px); }
+        }
+
         @keyframes float {
             0% { transform: translateY(0px); }
-            50% { transform: translateY(-8px); }
+            50% { transform: translateY(-6px); }
             100% { transform: translateY(0px); }
         }
 
         @keyframes spin {
             to { transform: rotate(360deg); }
-        }
-
-        @keyframes shimmer {
-            0% { background-position: -200% 0; }
-            100% { background-position: 200% 0; }
         }
 
         .animate-on-scroll {
@@ -82,7 +92,6 @@
             transform: translateY(0);
         }
 
-        /* Badges */
         .urgences-badge {
             display: inline-block;
             background: #dc3545;
@@ -95,17 +104,6 @@
             animation: pulse-red 2s infinite;
         }
 
-        .badge-247 {
-            background: #dc3545;
-            color: white;
-            padding: 3px 10px;
-            border-radius: 20px;
-            font-size: 0.7rem;
-            font-weight: bold;
-            margin-left: 10px;
-        }
-
-        /* Header */
         header {
             background: white;
             box-shadow: 0 2px 20px rgba(0,0,0,0.05);
@@ -169,6 +167,7 @@
             padding: 20px;
             box-shadow: 0 20px 30px rgba(0,0,0,0.1);
             gap: 15px;
+            border-radius: 0 0 20px 20px;
             list-style: none;
             z-index: 999;
         }
@@ -205,7 +204,6 @@
             font-weight: bold;
         }
 
-        /* Hero Section */
         .hero {
             position: relative;
             background: linear-gradient(135deg, #0077A4 0%, #005a7c 100%);
@@ -253,6 +251,21 @@
             font-size: 1.6rem;
         }
 
+        #medicalParticles {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 1;
+        }
+
+        .hero .container {
+            position: relative;
+            z-index: 2;
+        }
+
         .hero-slogan {
             font-size: 1rem;
             margin-bottom: 30px;
@@ -260,7 +273,6 @@
             padding: 0 10px;
         }
 
-        /* Buttons */
         .btn {
             display: inline-block;
             padding: 12px 24px;
@@ -295,6 +307,207 @@
             color: #0077A4;
             animation: none;
             transform: translateY(-3px);
+        }
+
+        section {
+            padding: 60px 0;
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 1.8rem;
+            margin-bottom: 45px;
+            color: #0077A4;
+            font-weight: 700;
+            position: relative;
+            display: block;
+            width: 100%;
+        }
+
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: -12px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 60px;
+            height: 3px;
+            background: linear-gradient(90deg, #0077A4, #1D8B5D);
+            border-radius: 4px;
+        }
+
+        .presentation-title {
+            text-align: center;
+            color: #0077A4;
+            margin-bottom: 20px;
+            font-size: 1.6rem;
+        }
+
+        @media (min-width: 768px) {
+            .presentation-title {
+                text-align: left;
+            }
+        }
+
+        .cards-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 25px;
+        }
+
+        .card {
+            background: white;
+            border-radius: 24px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.06);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            overflow: hidden;
+        }
+
+        .card:hover {
+            transform: translateY(-8px) scale(1.02);
+            box-shadow: 0 20px 35px rgba(0,0,0,0.15);
+        }
+
+        .card-header {
+            padding: 20px 20px 10px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+
+        .badge-category {
+            background: linear-gradient(135deg, #e6f7f0, #d1f0e4);
+            color: #1D8B5D;
+            padding: 5px 12px;
+            border-radius: 50px;
+            font-size: 0.7rem;
+            font-weight: 700;
+        }
+
+        .card-title {
+            font-size: 1rem;
+            font-weight: 700;
+            margin: 10px 20px 5px 20px;
+            color: #0f172a;
+        }
+
+        .card-content {
+            padding: 0 20px 15px 20px;
+        }
+
+        .card-text {
+            color: #334155;
+            font-size: 0.85rem;
+        }
+
+        .stats {
+            background: #0077A4;
+            color: white;
+            padding: 50px 0;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .stats::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, transparent 70%);
+            animation: rotateBg 22s linear infinite;
+        }
+
+        .stats-container {
+            display: flex;
+            justify-content: space-around;
+            text-align: center;
+            flex-wrap: wrap;
+            gap: 30px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .stat-number {
+            display: block;
+            font-size: 2rem;
+            font-weight: 800;
+        }
+
+        .form-group {
+            margin-bottom: 18px;
+        }
+
+        input, select, textarea {
+            width: 100%;
+            padding: 12px 16px;
+            border: 1px solid #e2e8f0;
+            border-radius: 20px;
+            font-family: inherit;
+            font-size: 0.95rem;
+            transition: all 0.3s ease;
+        }
+
+        input:focus, select:focus, textarea:focus {
+            outline: none;
+            border-color: #1D8B5D;
+            box-shadow: 0 0 0 3px rgba(29,139,93,0.1);
+        }
+
+        .form-error {
+            animation: shake 0.3s ease-in-out;
+            border-color: #dc3545 !important;
+        }
+
+        .rdv-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 30px;
+        }
+
+        .info-box {
+            background: white;
+            padding: 20px;
+            border-radius: 24px;
+            margin-bottom: 20px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.04);
+        }
+
+        .info-box h3 {
+            color: #0077A4;
+            margin-bottom: 12px;
+            font-size: 1.2rem;
+        }
+
+        .presentation-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 30px;
+            align-items: center;
+        }
+
+        .clinic-image {
+            width: 100%;
+            height: 100%;
+            min-height: 250px;
+            object-fit: cover;
+            border-radius: 28px;
+            box-shadow: 0 15px 30px rgba(0,0,0,0.15);
+            transition: transform 0.4s ease;
+        }
+
+        .clinic-image:hover {
+            transform: scale(1.02);
+        }
+
+        .image-wrapper {
+            background: linear-gradient(135deg, #0077A4, #1D8B5D);
+            border-radius: 28px;
+            padding: 5px;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.1);
         }
 
         .btn-rdv {
@@ -335,304 +548,43 @@
             vertical-align: middle;
         }
 
-        /* Sections */
-        section {
-            padding: 60px 0;
-        }
-
-        .section-title {
-            text-align: center;
-            font-size: 1.8rem;
-            margin-bottom: 50px;
-            color: #0077A4;
-            font-weight: 700;
-            position: relative;
-            display: block;
-            width: 100%;
-        }
-
-        .section-title::after {
-            content: '';
-            position: absolute;
-            bottom: -15px;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 70px;
-            height: 3px;
-            background: linear-gradient(90deg, #0077A4, #1D8B5D);
-            border-radius: 4px;
-        }
-
-        .presentation-title {
-            text-align: center;
-            color: #0077A4;
-            margin-bottom: 20px;
-            font-size: 1.6rem;
-        }
-
-        /* CARDS REDESIGNÉES - plus modernes et responsives */
-        .cards-grid {
-            display: grid;
-            grid-template-columns: 1fr;
-            gap: 30px;
-        }
-
-        .card {
-            background: white;
-            border-radius: 28px;
-            box-shadow: 0 12px 30px rgba(0,0,0,0.08);
-            transition: all 0.4s cubic-bezier(0.2, 0.9, 0.4, 1.1);
-            overflow: hidden;
-            position: relative;
-            border: 1px solid rgba(0,119,164,0.1);
-        }
-
-        .card::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            height: 4px;
-            background: linear-gradient(90deg, #0077A4, #1D8B5D);
-            transform: scaleX(0);
-            transition: transform 0.4s ease;
-        }
-
-        .card:hover::before {
-            transform: scaleX(1);
-        }
-
-        .card:hover {
-            transform: translateY(-10px);
-            box-shadow: 0 25px 45px rgba(0,0,0,0.15);
-        }
-
-        .card-header {
-            padding: 25px 25px 15px 25px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            flex-wrap: wrap;
-            gap: 12px;
-        }
-
-        .badge-category {
-            background: linear-gradient(135deg, #e6f7f0, #d1f0e4);
-            color: #1D8B5D;
-            padding: 6px 14px;
-            border-radius: 50px;
-            font-size: 0.75rem;
-            font-weight: 700;
-            letter-spacing: 0.5px;
-        }
-
-        .card-icon {
-            font-size: 2rem;
-        }
-
-        .card-title {
-            font-size: 1.25rem;
-            font-weight: 700;
-            margin: 0 25px 8px 25px;
-            color: #0f172a;
-        }
-
-        .card-content {
-            padding: 0 25px 25px 25px;
-        }
-
-        .card-text {
-            color: #475569;
-            font-size: 0.9rem;
-            line-height: 1.6;
-        }
-
-        /* Team Cards Redesign */
-        .team-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 35px;
-            margin-top: 20px;
-        }
-        .team-card {
-            background: white;
-            border-radius: 28px;
-            overflow: hidden;
-            box-shadow: 0 12px 28px rgba(0,0,0,0.08);
-            transition: all 0.4s ease;
-            text-align: center;
-            border: 1px solid rgba(0,119,164,0.1);
-        }
-        .team-card:hover {
-            transform: translateY(-10px);
-            box-shadow: 0 25px 40px rgba(0,0,0,0.15);
-        }
-        .team-image {
-            width: 100%;
-            aspect-ratio: 1 / 1;
-            object-fit: cover;
-            transition: transform 0.5s ease;
-        }
-        .team-card:hover .team-image {
-            transform: scale(1.02);
-        }
-        .team-info {
-            padding: 22px 20px 25px;
-        }
-        .team-name {
-            font-size: 1.2rem;
-            font-weight: 800;
-            color: #0077A4;
-            margin-bottom: 6px;
-        }
-        .team-position {
-            color: #1D8B5D;
-            font-weight: 600;
-            font-size: 0.85rem;
-            margin-bottom: 12px;
-            letter-spacing: 0.3px;
-        }
-        .team-desc {
-            color: #475569;
-            font-size: 0.85rem;
-            line-height: 1.5;
-        }
-
-        /* Stats */
-        .stats {
-            background: #0077A4;
-            color: white;
-            padding: 60px 0;
-            position: relative;
-            overflow: hidden;
-        }
-        .stats-container {
-            display: flex;
-            justify-content: space-between;
-            text-align: center;
-            flex-wrap: wrap;
-            gap: 35px;
-            position: relative;
-            z-index: 1;
-        }
-        .stat-number {
-            display: block;
-            font-size: 2.5rem;
-            font-weight: 800;
-            margin-bottom: 8px;
-        }
-
-        /* Form */
-        .form-group {
-            margin-bottom: 20px;
-        }
-        input, select, textarea {
-            width: 100%;
-            padding: 14px 18px;
-            border: 1px solid #e2e8f0;
-            border-radius: 24px;
-            font-family: inherit;
-            font-size: 0.95rem;
-            transition: all 0.3s ease;
-            background: #fefefe;
-        }
-        input:focus, select:focus, textarea:focus {
-            outline: none;
-            border-color: #1D8B5D;
-            box-shadow: 0 0 0 4px rgba(29,139,93,0.1);
-        }
-        .form-error {
-            animation: shake 0.3s ease-in-out;
-            border-color: #dc3545 !important;
-        }
-        @keyframes shake {
-            0%, 100% { transform: translateX(0); }
-            25% { transform: translateX(-6px); }
-            75% { transform: translateX(6px); }
-        }
-
-        /* Grids */
-        .rdv-grid {
-            display: grid;
-            grid-template-columns: 1fr;
-            gap: 40px;
-        }
-        .info-box {
-            background: white;
-            padding: 25px;
-            border-radius: 28px;
-            margin-bottom: 20px;
-            box-shadow: 0 8px 20px rgba(0,0,0,0.04);
-            transition: transform 0.3s ease;
-        }
-        .info-box:hover {
-            transform: translateY(-5px);
-        }
-        .info-box h3 {
-            color: #0077A4;
-            margin-bottom: 15px;
-            font-size: 1.3rem;
-        }
-        .presentation-grid {
-            display: grid;
-            grid-template-columns: 1fr;
-            gap: 35px;
-            align-items: center;
-        }
-        .clinic-image {
-            width: 100%;
-            height: 100%;
-            min-height: 280px;
-            object-fit: cover;
-            border-radius: 32px;
-            box-shadow: 0 15px 30px rgba(0,0,0,0.15);
-            transition: transform 0.4s ease;
-        }
-        .clinic-image:hover {
-            transform: scale(1.02);
-        }
-        .image-wrapper {
-            background: linear-gradient(135deg, #0077A4, #1D8B5D);
-            border-radius: 32px;
-            padding: 5px;
-            box-shadow: 0 10px 20px rgba(0,0,0,0.1);
-        }
-
-        /* Specialties */
         .specialty-grid {
             display: grid;
             grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
             gap: 20px;
             margin-top: 20px;
         }
+
         .specialty-item {
             background: #f8fafc;
-            border-radius: 20px;
-            padding: 18px 22px;
+            border-radius: 16px;
+            padding: 15px 20px;
             border-left: 4px solid #1D8B5D;
             transition: all 0.3s ease;
         }
         .specialty-item:hover {
             background: white;
-            box-shadow: 0 8px 20px rgba(0,0,0,0.08);
-            transform: translateX(6px);
+            box-shadow: 0 6px 20px rgba(0,0,0,0.08);
+            transform: translateX(5px);
         }
         .specialty-item strong {
             color: #0077A4;
             display: block;
-            margin-bottom: 8px;
+            margin-bottom: 6px;
             font-size: 1rem;
         }
+        .specialty-item p {
+            color: #475569;
+            font-size: 0.85rem;
+            margin: 0;
+        }
 
-        /* Poles */
         .pole-card {
             background: linear-gradient(135deg, #f0f9ff 0%, #e6f7f0 100%);
-            border-radius: 28px;
-            padding: 30px;
+            border-radius: 24px;
+            padding: 25px;
             margin-bottom: 30px;
             transition: transform 0.3s;
-            border: 1px solid rgba(29,139,93,0.2);
         }
         .pole-card:hover {
             transform: translateY(-5px);
@@ -644,9 +596,8 @@
             display: flex;
             align-items: center;
             gap: 12px;
-            flex-wrap: wrap;
             border-bottom: 2px solid #1D8B5D;
-            padding-bottom: 12px;
+            padding-bottom: 10px;
         }
         .pole-list {
             display: flex;
@@ -656,12 +607,12 @@
         }
         .pole-tag {
             background: white;
-            padding: 8px 18px;
-            border-radius: 50px;
+            padding: 6px 16px;
+            border-radius: 40px;
             font-size: 0.85rem;
             font-weight: 500;
             color: #1e293b;
-            box-shadow: 0 2px 6px rgba(0,0,0,0.08);
+            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
             transition: all 0.2s;
             cursor: pointer;
             display: inline-flex;
@@ -672,75 +623,130 @@
             background: #1D8B5D;
             color: white;
             transform: translateY(-2px);
-            box-shadow: 0 6px 14px rgba(29,139,93,0.3);
+            box-shadow: 0 4px 12px rgba(29,139,93,0.3);
         }
 
-        /* Videos */
+        .badge-247 {
+            background: #dc3545;
+            color: white;
+            padding: 3px 10px;
+            border-radius: 20px;
+            font-size: 0.7rem;
+            font-weight: bold;
+            margin-left: 10px;
+        }
+
+        .team-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+            margin-top: 20px;
+        }
+        .team-card {
+            background: white;
+            border-radius: 24px;
+            overflow: hidden;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.08);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            text-align: center;
+        }
+        .team-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 20px 35px rgba(0,0,0,0.12);
+        }
+        .team-image {
+            width: 100%;
+            aspect-ratio: 1 / 1;
+            object-fit: cover;
+            background: #e2e8f0;
+        }
+        .team-info {
+            padding: 20px;
+        }
+        .team-name {
+            font-size: 1.2rem;
+            font-weight: 700;
+            color: #0077A4;
+            margin-bottom: 5px;
+        }
+        .team-position {
+            color: #1D8B5D;
+            font-weight: 600;
+            font-size: 0.85rem;
+            margin-bottom: 10px;
+        }
+        .team-desc {
+            color: #475569;
+            font-size: 0.85rem;
+            line-height: 1.5;
+        }
+
         .video-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 30px;
+            gap: 25px;
             margin-top: 20px;
         }
         .video-card {
             background: white;
-            border-radius: 28px;
+            border-radius: 24px;
             overflow: hidden;
-            box-shadow: 0 12px 28px rgba(0,0,0,0.08);
-            transition: all 0.3s ease;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.08);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
             cursor: pointer;
             text-align: center;
         }
         .video-card:hover {
-            transform: translateY(-8px);
-            box-shadow: 0 20px 35px rgba(0,0,0,0.15);
+            transform: translateY(-5px);
+            box-shadow: 0 20px 35px rgba(0,0,0,0.12);
         }
         .video-thumbnail {
             width: 100%;
             aspect-ratio: 16 / 9;
-            background: linear-gradient(135deg, #0077A4, #1D8B5D);
+            background: #1e293b;
             display: flex;
             align-items: center;
             justify-content: center;
             color: white;
             font-size: 3rem;
-            transition: transform 0.3s;
-        }
-        .video-card:hover .video-thumbnail {
-            transform: scale(1.02);
         }
         .video-info {
-            padding: 18px;
+            padding: 15px;
         }
         .video-title {
-            font-weight: 700;
+            font-weight: 600;
             color: #1e293b;
-            margin-bottom: 6px;
-            font-size: 1rem;
+            margin-bottom: 5px;
+        }
+        .video-date {
+            font-size: 0.7rem;
+            color: #64748b;
         }
 
-        /* Footer */
         footer {
             background: #0f172a;
             color: #cbd5e1;
-            padding: 50px 0 30px;
+            padding: 45px 0 30px;
         }
+
         .footer-grid {
             display: grid;
             grid-template-columns: 1fr;
-            gap: 35px;
+            gap: 30px;
             text-align: center;
         }
+
         .footer-grid a {
             color: #cbd5e1;
             text-decoration: none;
             transition: all 0.3s ease;
+            display: inline-block;
         }
+
         .footer-grid a:hover {
             color: #1D8B5D;
         }
 
-        /* Modal */
         .modal {
             display: none;
             position: fixed;
@@ -761,21 +767,17 @@
             display: block;
             width: 90%;
             max-width: 600px;
-            border-radius: 32px;
+            border-radius: 28px;
             position: relative;
             cursor: default;
             animation: fadeScale 0.3s ease;
             max-height: 85vh;
             overflow-y: auto;
         }
-        @keyframes fadeScale {
-            from { opacity: 0; transform: scale(0.95); }
-            to { opacity: 1; transform: scale(1); }
-        }
         .modal-header {
             background: linear-gradient(135deg, #0077A4, #1D8B5D);
-            padding: 22px 25px;
-            border-radius: 32px 32px 0 0;
+            padding: 20px 25px;
+            border-radius: 28px 28px 0 0;
             color: white;
             position: sticky;
             top: 0;
@@ -786,12 +788,25 @@
             margin: 0;
         }
         .modal-body {
-            padding: 28px;
+            padding: 25px;
+        }
+        .modal-body p {
+            margin-bottom: 15px;
+            color: #334155;
+            line-height: 1.7;
+        }
+        .modal-body ul {
+            margin: 15px 0;
+            padding-left: 25px;
+        }
+        .modal-body li {
+            margin: 8px 0;
+            color: #475569;
         }
         .modal-body .info-note {
             background: #e6f7f0;
-            padding: 18px;
-            border-radius: 20px;
+            padding: 15px;
+            border-radius: 16px;
             margin-top: 20px;
             border-left: 4px solid #1D8B5D;
         }
@@ -803,9 +818,10 @@
             font-size: 32px;
             font-weight: bold;
             cursor: pointer;
+            z-index: 10000;
             background: rgba(0,0,0,0.3);
-            width: 38px;
-            height: 38px;
+            width: 36px;
+            height: 36px;
             border-radius: 50%;
             display: flex;
             align-items: center;
@@ -817,31 +833,15 @@
             transform: scale(1.1);
         }
 
-        /* Responsive */
         @media (min-width: 640px) {
             .cards-grid {
-                grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+                grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
             }
             .hero-content h2 {
                 font-size: 2.2rem;
             }
             .section-title {
                 font-size: 2rem;
-            }
-        }
-
-        @media (min-width: 768px) {
-            .presentation-title {
-                text-align: left;
-            }
-            .hero-buttons {
-                display: flex;
-                justify-content: center;
-                gap: 20px;
-            }
-            .btn {
-                width: auto;
-                margin: 0;
             }
         }
 
@@ -856,7 +856,7 @@
                 background: transparent;
                 box-shadow: none;
                 padding: 0;
-                gap: 32px;
+                gap: 28px;
             }
             nav a {
                 padding: 0;
@@ -870,11 +870,18 @@
             .logo-text h1 {
                 font-size: 1.4rem;
             }
+            .logo-text p {
+                font-size: 0.65rem;
+            }
             .hero-content h2 {
                 font-size: 3rem;
             }
             .hero-slogan {
                 font-size: 1.2rem;
+            }
+            .btn {
+                padding: 14px 38px;
+                font-size: 1rem;
             }
             section {
                 padding: 80px 0;
@@ -895,23 +902,22 @@
                 text-align: left;
             }
             .stats-container {
-                justify-content: space-around;
-                gap: 50px;
+                gap: 40px;
             }
             .stat-number {
-                font-size: 3rem;
+                font-size: 2.7rem;
             }
         }
 
         @media (max-width: 768px) {
             .container {
-                padding: 0 18px;
+                padding: 0 16px;
             }
             .hero-buttons {
                 display: flex;
                 flex-direction: column;
                 align-items: center;
-                gap: 12px;
+                gap: 10px;
             }
             .btn {
                 width: 90%;
@@ -923,7 +929,7 @@
             }
             .pole-tag {
                 font-size: 0.75rem;
-                padding: 6px 14px;
+                padding: 5px 12px;
             }
         }
     </style>
@@ -998,12 +1004,12 @@
         <div class="container">
             <h2 class="section-title animate-on-scroll">Nos services de soins</h2>
             <div class="cards-grid">
-                <div class="card animate-on-scroll"><div class="card-header"><span class="badge-category">Urgence 24/24</span><div class="card-icon">🚨</div></div><div class="card-title">Médecine d'urgence</div><div class="card-content"><p class="card-text">Prise en charge immédiate 24h/24, 7j/7. Équipe dédiée aux accidents, détresses respiratoires, douleurs aiguës et pathologies urgentes.</p></div></div>
-                <div class="card animate-on-scroll"><div class="card-header"><span class="badge-category">Consultation</span><div class="card-icon">🩺</div></div><div class="card-title">Consultations générales</div><div class="card-content"><p class="card-text">Médecine générale, suivi des maladies chroniques, certificats médicaux et vaccinations.</p></div></div>
-                <div class="card animate-on-scroll"><div class="card-header"><span class="badge-category">Spécialiste</span><div class="card-icon">❤️</div></div><div class="card-title">Cardiologie</div><div class="card-content"><p class="card-text">Explorations cardiaques complètes : ECG, échocardiographie, Holter tensionnel et suivi personnalisé.</p></div></div>
-                <div class="card animate-on-scroll"><div class="card-header"><span class="badge-category">Spécialiste</span><div class="card-icon">🤰</div></div><div class="card-title">Gynécologie - Obstétrique</div><div class="card-content"><p class="card-text">Suivi grossesse, consultations gynécologiques, accouchements.</p></div></div>
-                <div class="card animate-on-scroll"><div class="card-header"><span class="badge-category">Chirurgie</span><div class="card-icon">🔪</div></div><div class="card-title">Chirurgie générale</div><div class="card-content"><p class="card-text">Bloc opératoire moderne, chirurgie programmée et d'urgence.</p></div></div>
-                <div class="card animate-on-scroll"><div class="card-header"><span class="badge-category">Spécialiste</span><div class="card-icon">🧠</div></div><div class="card-title">Neurologie & Imagerie</div><div class="card-content"><p class="card-text">Consultations neurologiques, électroencéphalogramme, échographies, radios et scanner.</p></div></div>
+                <div class="card animate-on-scroll"><div class="card-header"><span class="badge-category">Urgence 24/24</span></div><div class="card-title">Médecine d'urgence</div><div class="card-content"><p class="card-text">Prise en charge immédiate 24h/24, 7j/7. Équipe dédiée aux accidents, détresses respiratoires, douleurs aiguës et pathologies urgentes.</p></div></div>
+                <div class="card animate-on-scroll"><div class="card-header"><span class="badge-category">Consultation</span></div><div class="card-title">Consultations générales</div><div class="card-content"><p class="card-text">Médecine générale, suivi des maladies chroniques, certificats médicaux et vaccinations.</p></div></div>
+                <div class="card animate-on-scroll"><div class="card-header"><span class="badge-category">Spécialiste</span></div><div class="card-title">Cardiologie</div><div class="card-content"><p class="card-text">Explorations cardiaques complètes : ECG, échocardiographie, Holter tensionnel et suivi personnalisé.</p></div></div>
+                <div class="card animate-on-scroll"><div class="card-header"><span class="badge-category">Spécialiste</span></div><div class="card-title">Gynécologie - Obstétrique</div><div class="card-content"><p class="card-text">Suivi grossesse, consultations gynécologiques, accouchements.</p></div></div>
+                <div class="card animate-on-scroll"><div class="card-header"><span class="badge-category">Chirurgie</span></div><div class="card-title">Chirurgie générale</div><div class="card-content"><p class="card-text">Bloc opératoire moderne, chirurgie programmée et d'urgence.</p></div></div>
+                <div class="card animate-on-scroll"><div class="card-header"><span class="badge-category">Spécialiste</span></div><div class="card-title">Neurologie & Imagerie</div><div class="card-content"><p class="card-text">Consultations neurologiques, électroencéphalogramme, échographies, radios et scanner.</p></div></div>
             </div>
         </div>
     </section>
@@ -1024,6 +1030,13 @@
                 <div class="specialty-item"><strong>Rhumatologie</strong><p>Maladies des os et des articulations</p></div>
                 <div class="specialty-item"><strong>Pneumologie</strong><p>Maladies respiratoires</p></div>
                 <div class="specialty-item"><strong>Néphrologie</strong><p>Maladies des reins et dialyse</p></div>
+                <div class="specialty-item"><strong>Psychiatrie</strong><p>Santé mentale</p></div>
+                <div class="specialty-item"><strong>Pédiatrie</strong><p>Santé de l'enfant</p></div>
+                <div class="specialty-item"><strong>Chirurgie Pédiatrique</strong><p>Chirurgie de l'enfant</p></div>
+                <div class="specialty-item"><strong>Anatomie Pathologique</strong><p>Analyses microscopiques de tissus</p></div>
+                <div class="specialty-item"><strong>Anesthésie-Réanimation</strong><p>Anesthésie et soins intensifs</p></div>
+                <div class="specialty-item"><strong>Nutrition</strong><p>Service de nutrition clinique</p></div>
+                <div class="specialty-item"><strong>Médecine Interne</strong><p>Pathologies adultes complexes</p></div>
             </div>
         </div>
     </section>
@@ -1042,8 +1055,8 @@
                     <span class="pole-tag" data-surgery="laparoscopique">Techniques de vidéo-chirurgie</span>
                 </div>
             </div>
-            <div class="pole-card animate-on-scroll"><h3>Laboratoire d'Anatomie-Pathologie</h3><div class="pole-list"><span class="pole-tag">Anatomie pathologique</span><span class="pole-tag">Cytologie</span><span class="pole-tag">Immuno-histochimie</span></div><p style="margin-top: 15px; color: #475569;">Analyses précises pour le diagnostic des cancers et pathologies tissulaires.</p></div>
-            <div class="pole-card animate-on-scroll"><h3>Centre d'Hémodialyse <span class="badge-247">24h/24 - 7j/7</span></h3><div class="pole-list"><span class="pole-tag">Hémodialyse 24h/24</span><span class="pole-tag">Pose de cathéter tunnelisé</span></div><p style="margin-top: 15px; color: #475569;">Service d'hémodialyse disponible 24 heures sur 24, 7 jours sur 7.</p></div>
+            <div class="pole-card animate-on-scroll"><h3>Laboratoire d'Anatomie-Pathologie</h3><div class="pole-list"><span class="pole-tag">Anatomie pathologique</span><span class="pole-tag">Cytologie</span><span class="pole-tag">Immuno-histochimie</span></div><p style="margin-top: 15px; color: #475569; font-size: 0.9rem;">Analyses précises pour le diagnostic des cancers et pathologies tissulaires.</p></div>
+            <div class="pole-card animate-on-scroll"><h3>Centre d'Hémodialyse <span class="badge-247">24h/24 - 7j/7</span></h3><div class="pole-list"><span class="pole-tag">Hémodialyse 24h/24</span><span class="pole-tag">Pose de cathéter tunnelisé</span><span class="pole-tag">Prise en charge dialyse</span></div><p style="margin-top: 15px; color: #475569; font-size: 0.9rem;">Service d'hémodialyse disponible 24 heures sur 24, 7 jours sur 7.</p></div>
             <div class="pole-card animate-on-scroll"><h3>Imagerie Médicale</h3><div class="pole-list"><span class="pole-tag">Échographie</span><span class="pole-tag">Radios</span><span class="pole-tag">Scanner</span></div></div>
         </div>
     </section>
@@ -1052,83 +1065,134 @@
         <div class="container">
             <h2 class="section-title animate-on-scroll">Prendre rendez-vous</h2>
             <div class="rdv-grid">
-                <div class="info-box animate-on-scroll"><h3>Formulaire de rendez-vous</h3><form id="whatsappForm"><div class="form-group"><input type="text" id="nom" placeholder="Nom complet" required></div><div class="form-group"><select id="service"><option>Consultation générale</option><option>Cardiologie</option><option>Gynécologie - Obstétrique</option><option>Pédiatrie</option><option>Chirurgie générale</option><option>Neurologie</option></select></div><div class="form-group"><textarea id="motif" rows="3" placeholder="Date souhaitée et horaire de préférence"></textarea></div><button type="submit" class="btn-rdv" id="submitRdvBtn">Envoyer la demande</button></form><p style="font-size:0.7rem; text-align:center; margin-top:15px;">Vous serez redirigé vers WhatsApp</p></div>
-                <div><div class="info-box animate-on-scroll"><h3>Horaires d'ouverture</h3><p><strong>Consultations :</strong><br>Lundi – Vendredi : 7h30 – 19h30<br>Samedi : 7h30 – 12h00</p><p style="margin-top:10px;"><strong>Urgences 24/24 – 7j/7</strong><br>Sans rendez-vous, prise en charge immédiate.</p></div><div class="info-box animate-on-scroll"><h3>Assurances acceptées</h3><p><strong>Partenaires :</strong> ASCOMA, GA, MAADO, MUTAB, MUPOL, OLEA, MCI, SONAR, SUNU, UAB, VISTA.</p></div></div>
+                <div class="info-box animate-on-scroll"><h3>Formulaire de rendez-vous</h3><form id="whatsappForm"><div class="form-group"><input type="text" id="nom" placeholder="Nom complet" required></div><div class="form-group"><select id="service"><option>Consultation générale</option><option>Cardiologie</option><option>Gynécologie - Obstétrique</option><option>Pédiatrie</option><option>Chirurgie générale</option><option>Neurologie</option><option>Médecine interne</option><option>Dermatologie</option><option>Pneumologie</option><option>Néphrologie</option><option>ORL</option><option>Orthopédie</option><option>Rhumatologie</option><option>Urologie</option></select></div><div class="form-group"><textarea id="motif" rows="3" placeholder="Date souhaitée et horaire de préférence"></textarea></div><button type="submit" class="btn-rdv" id="submitRdvBtn">Envoyer la demande</button></form><p style="font-size:0.7rem; text-align:center; margin-top:15px;">Vous serez redirigé vers WhatsApp</p></div>
+                <div><div class="info-box animate-on-scroll"><h3>Horaires d'ouverture</h3><p><strong>Consultations :</strong><br>Lundi – Vendredi : 7h30 – 19h30<br>Samedi : 7h30 – 12h00</p><p style="margin-top:10px;"><strong>Urgences 24/24 – 7j/7</strong><br>Sans rendez-vous, prise en charge immédiate.</p><p style="margin-top:10px;"><strong>Hémodialyse :</strong><br>24h/24 et 7j/7</p></div><div class="info-box animate-on-scroll"><h3>Assurances acceptées</h3><p><strong>Partenaires :</strong> ASCOMA, GA, MAADO, MUTAB, MUPOL, OLEA, MCI, SONAR, SUNU, UAB, VISTA.<br><strong>Autres :</strong> CNSS, Inami Burkina, mutuelles.</p></div></div>
             </div>
         </div>
     </section>
 
+    <!-- SECTION NOTRE ÉQUIPE -->
     <section id="equipe" class="bg-light">
         <div class="container">
             <h2 class="section-title animate-on-scroll">Notre équipe</h2>
-            <div class="team-grid" id="teamGrid"></div>
+            <div class="team-grid" id="teamGrid">
+                <!-- Les membres seront chargés dynamiquement -->
+            </div>
         </div>
     </section>
 
+    <!-- SECTION VIDÉO -->
     <section id="video" class="bg-white">
         <div class="container">
             <h2 class="section-title animate-on-scroll">Vidéos</h2>
-            <div class="video-grid" id="videoGrid"></div>
+            <div class="video-grid" id="videoGrid">
+                <!-- Les vidéos seront chargées dynamiquement -->
+            </div>
         </div>
     </section>
 
     <section id="contact" class="bg-light">
-        <div class="container"><h2 class="section-title animate-on-scroll">Contact & localisation</h2><div class="rdv-grid"><div><div class="info-box animate-on-scroll"><h3>Adresse</h3><p>Boulevard des Tensoba, Secteur n°25<br>Cissin, Ouagadougou<br>Burkina Faso</p></div><div class="info-box animate-on-scroll"><h3>Téléphone</h3><p><strong>Urgences 24/24 :</strong><br><a href="tel:51000647" style="color:#1D8B5D; font-size:1.2rem;">51 00 06 47</a><br><strong>Standard :</strong> <a href="tel:78365657" style="color:#1D8B5D;">78 36 56 57</a></p></div><div class="info-box animate-on-scroll"><h3>WhatsApp</h3><p><a href="https://wa.me/22651000647" style="color:#25D366;">51 00 06 47</a></p></div></div><div><div class="info-box animate-on-scroll"><h3>Plan d'accès</h3><div style="border-radius: 24px; overflow: hidden; height: 280px;"><iframe src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d15590.747808531722!2d-1.5628767!3d12.3368449!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0xe2e967403b1226b%3A0xd4fdc5490ba66f45!2sClinique%20WendToin!5e0!3m2!1sfr!2sbf!4v1777369119568!5m2!1sfr!2sbf" width="100%" height="280" style="border:0;" allowfullscreen="" loading="lazy"></iframe></div></div></div></div></div>
+        <div class="container"><h2 class="section-title animate-on-scroll">Contact & localisation</h2><div class="rdv-grid"><div><div class="info-box animate-on-scroll"><h3>Adresse</h3><p>Boulevard des Tensoba, Secteur n°25<br>Cissin, Ouagadougou<br>Burkina Faso</p><p>11 BP 1104 CMS Ouagadougou 11</p></div><div class="info-box animate-on-scroll"><h3>Téléphone</h3><p><strong>Urgences 24/24 :</strong><br><a href="tel:51000647" style="color:#1D8B5D; font-size:1.2rem; text-decoration:none;">51 00 06 47</a><br><strong>Standard :</strong> <a href="tel:78365657" style="color:#1D8B5D;">78 36 56 57</a></p></div><div class="info-box animate-on-scroll"><h3>WhatsApp</h3><p><a href="https://wa.me/22651000647" style="color:#25D366;">51 00 06 47</a><br>Pour rendez-vous et questions rapides</p></div><div class="info-box animate-on-scroll"><h3>Email</h3><p><a href="mailto:clinwend@gmail.com">clinwend@gmail.com</a></p></div></div><div><div class="info-box animate-on-scroll"><h3>Plan d'accès</h3><div style="border-radius: 24px; overflow: hidden; height: 280px;"><iframe src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d15590.747808531722!2d-1.5628767!3d12.3368449!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0xe2e967403b1226b%3A0xd4fdc5490ba66f45!2sClinique%20WendToin!5e0!3m2!1sfr!2sbf!4v1777369119568!5m2!1sfr!2sbf" width="100%" height="280" style="border:0;" allowfullscreen="" loading="lazy"></iframe></div><p style="margin-top:12px;">Boulevard des Tensoba, Secteur 25, Cissin</p></div></div></div></div>
     </section>
 </main>
 
-<footer><div class="container"><div class="footer-grid"><div><h4 style="color: #1D8B5D;">Clinique WENDTOIN</h4><p>Boulevard des Tensoba, Secteur 25<br>Cissin, Ouagadougou<br>Tél: <a href="tel:51000647">51 00 06 47</a><br>Email: clinwend@gmail.com</p></div><div><h4 style="color: #1D8B5D;">Urgences 24/24</h4><p><strong><a href="tel:51000647">51 00 06 47</a></strong></p><p>WhatsApp : <a href="https://wa.me/22651000647">51 00 06 47</a></p></div><div><h4 style="color: #1D8B5D;">Horaires consultations</h4><p>Lun-Ven : 7h30-19h30<br>Sam : 7h30-12h</p></div><div><h4 style="color: #1D8B5D;">Liens rapides</h4><p><a href="#rdv">Prendre RDV</a><br><a href="#services">Nos services</a><br><a href="#specialites">Spécialités</a><br><a href="#equipe">Notre équipe</a></p></div></div><div style="text-align:center; margin-top:40px; padding-top:20px; border-top:1px solid #334155;"><p>&copy; 2026 Clinique WENDTOIN – Tous droits réservés</p></div></div></footer>
+<footer><div class="container"><div class="footer-grid"><div><h4 style="color: #1D8B5D;">Clinique WENDTOIN</h4><p>Boulevard des Tensoba, Secteur 25<br>Cissin, Ouagadougou<br>Tél: <a href="tel:51000647" style="color:#1D8B5D;">51 00 06 47</a><br>Email: clinwend@gmail.com</p></div><div><h4 style="color: #1D8B5D;">Urgences 24/24</h4><p><strong><a href="tel:51000647" style="color:#1D8B5D;">51 00 06 47</a></strong></p><p>WhatsApp : <a href="https://wa.me/22651000647" style="color:#1D8B5D;">51 00 06 47</a></p></div><div><h4 style="color: #1D8B5D;">Horaires consultations</h4><p>Lun-Ven : 7h30-19h30<br>Sam : 7h30-12h</p><p><strong>Hémodialyse :</strong> 24h/24</p></div><div><h4 style="color: #1D8B5D;">Liens rapides</h4><p><a href="#rdv">Prendre RDV</a><br><a href="#services">Nos services</a><br><a href="#specialites">Spécialités</a><br><a href="#poles">Pôles techniques</a><br><a href="#equipe">Notre équipe</a><br><a href="#contact">Nous trouver</a></p></div></div><div style="text-align:center; margin-top:40px; padding-top:20px; border-top:1px solid #334155;"><p>&copy; 2026 Clinique WENDTOIN – Tous droits réservés</p></div></div></footer>
 
 <div id="surgeryModal" class="modal"><div class="modal-content"><span class="close-modal">&times;</span><div class="modal-header"><h3><span id="modalTitle">Chirurgie</span></h3></div><div class="modal-body" id="modalBody"><p>Chargement...</p></div></div></div>
 
 <script>
+    // DONNÉES DE L'ÉQUIPE (avec chemins des images)
     const teamMembers = [
-        { name: "Pr Gilbert BONKOUGOU", position: "Directeur Général", desc: "Professeur agrégé en chirurgie générale. Pionnier de la laparoscopie au Burkina Faso.", image: "cliniquewendtoin/pr_gilbert.jpeg" },
-        { name: "Lionelle TIAHOUN", position: "Médecin généraliste", desc: "Prise en charge des consultations générales et des urgences.", image: "cliniquewendtoin/Lionelle.jpeg" },
-        { name: "Agnès COMPAORE", position: "Surveillante générale", desc: "Coordination des équipes soignantes.", image: "https://placehold.co/400x400/0077A4/white?text=Photo" },
-        { name: "Absetou KABORE", position: "Secrétaire", desc: "Accueil, gestion des rendez-vous et administration.", image: "https://placehold.co/400x400/1D8B5D/white?text=Photo" }
+        { 
+            name: "Pr Gilbert BONKOUGOU", 
+            position: "Directeur Général", 
+            desc: "Professeur agrégé en chirurgie générale. Pionnier de la laparoscopie au Burkina Faso.", 
+            image: "cliniquewendtoin/pr_gilbert.jpeg" 
+        },
+        { 
+            name: "Lionelle TIAHOUN", 
+            position: "Médecin généraliste", 
+            desc: "Prise en charge des consultations générales et des urgences.", 
+            image: "cliniquewendtoin/Lionelle.jpeg" 
+        },
+        { 
+            name: "Agnès COMPAORE", 
+            position: "Surveillante générale", 
+            desc: "Surveillante d'unité de soins. Coordination des équipes soignantes.", 
+            image: "https://placehold.co/400x400/0077A4/white?text=Dr+Avatar" 
+        },
+        { 
+            name: "Absetou KABORE", 
+            position: "Secrétaire", 
+            desc: "Accueil, gestion des rendez-vous et administration.", 
+            image: "https://placehold.co/400x400/1D8B5D/white?text=Avatar" 
+        }
     ];
+
+    // DONNÉES DES VIDÉOS (à remplacer par vos liens Facebook)
     const videos = [
         { title: "Présentation de la clinique", date: "2025", url: "https://www.facebook.com/votrepage/videos/1" },
         { title: "Service d'urgence 24/24", date: "2025", url: "https://www.facebook.com/votrepage/videos/2" },
-        { title: "Notre plateau technique", date: "2024", url: "https://www.facebook.com/votrepage/videos/3" }
+        { title: "Notre plateau technique", date: "2024", url: "https://www.facebook.com/votrepage/videos/3" },
+        { title: "Témoignage patient", date: "2024", url: "https://www.facebook.com/votrepage/videos/4" }
     ];
 
+    // Remplir la section équipe
     const teamGrid = document.getElementById('teamGrid');
     if (teamGrid) {
         teamMembers.forEach(member => {
             const card = document.createElement('div');
             card.className = 'team-card animate-on-scroll';
-            card.innerHTML = `<img src="${member.image}" alt="${member.name}" class="team-image" onerror="this.src='https://placehold.co/400x400/0077A4/white?text=Photo'"><div class="team-info"><div class="team-name">${member.name}</div><div class="team-position">${member.position}</div><div class="team-desc">${member.desc}</div></div>`;
+            card.innerHTML = `
+                <img src="${member.image}" alt="${member.name}" class="team-image" onerror="this.src='https://placehold.co/400x400/0077A4/white?text=Photo'">
+                <div class="team-info">
+                    <div class="team-name">${member.name}</div>
+                    <div class="team-position">${member.position}</div>
+                    <div class="team-desc">${member.desc}</div>
+                </div>
+            `;
             teamGrid.appendChild(card);
         });
     }
 
+    // Remplir la section vidéo
     const videoGrid = document.getElementById('videoGrid');
     if (videoGrid) {
         videos.forEach(video => {
             const card = document.createElement('div');
             card.className = 'video-card animate-on-scroll';
-            card.addEventListener('click', () => window.open(video.url, '_blank'));
-            card.innerHTML = `<div class="video-thumbnail">▶️</div><div class="video-info"><div class="video-title">${video.title}</div><div class="video-date">${video.date}</div></div>`;
+            card.addEventListener('click', () => {
+                window.open(video.url, '_blank', 'noopener,noreferrer');
+            });
+            card.innerHTML = `
+                <div class="video-thumbnail">
+                    ▶️
+                </div>
+                <div class="video-info">
+                    <div class="video-title">${video.title}</div>
+                    <div class="video-date">${video.date}</div>
+                </div>
+            `;
             videoGrid.appendChild(card);
         });
     }
 
+    // MODAL chirurgie
     const surgeryDetails = {
-        'viscérale': { title: 'Chirurgie Générale / Digestive', content: '<p><strong>Chirurgie générale et digestive</strong> prend en charge les pathologies des organes de l\'abdomen.</p><ul><li>Hernies et Éventrations</li><li>Pathologies des organes</li></ul><div class="info-note">Pr Gilbert BONKOUGOU - Chirurgien référent</div>' },
-        'plastique': { title: 'Chirurgie Plastique', content: '<p>Chirurgie plastique et de l\'obésité.</p><div class="info-note">Consultation préalable obligatoire</div>' },
-        'cancers': { title: 'Chirurgie des Cancers', content: '<p>Chirurgie oncologique.</p>' },
-        'vasculaire': { title: 'Chirurgie Vasculaire', content: '<p>Traitement des pathologies des vaisseaux sanguins.</p>' },
-        'thoracique': { title: 'Chirurgie Thoracique', content: '<p>Affections du thorax.</p>' },
-        'laparoscopique': { title: 'Vidéo-Chirurgie', content: '<p>Chirurgie mini-invasive.</p>' }
+        'viscérale': { title: 'Chirurgie Générale / Digestive', content: '<p><strong>Chirurgie générale et digestive</strong> prend en charge les pathologies des organes de l\'abdomen.</p><ul><li>Hernies et Éventrations</li><li>Pathologies des organes : Œsophage, Estomac, Intestins, Rate, Vésicule biliaire</li><li>Appendicite, Pathologies utérines, Affections anales</li></ul><div class="info-note">Pr Gilbert BONKOUGOU - Chirurgien référent</div>' },
+        'plastique': { title: 'Chirurgie Plastique / De l\'obésité', content: '<p><strong>Chirurgie plastique et de l\'obésité</strong> comprend :</p><ul><li>Chirurgie plastique : Plastie des seins, Liposuccion, Abdominoplastie, BBL</li><li>Chirurgie de l\'obésité : Sleeve gastrectomie, Bypass gastrique, Ballon intragastrique</li></ul><div class="info-note">Consultation préalable obligatoire</div>' },
+        'cancers': { title: 'Chirurgie des Cancers', content: '<p><strong>Chirurgie oncologique</strong> prend en charge les tumeurs solides.</p><ul><li>Cancers digestifs (côlon, estomac, pancréas, foie)</li><li>Cancers gynécologiques et urologiques</li><li>Cancers thyroïdiens et surrénaliens</li><li>Tumeurs du sein</li></ul><div class="info-note">Prise en charge multidisciplinaire</div>' },
+        'vasculaire': { title: 'Chirurgie Vasculaire', content: '<p><strong>Chirurgie vasculaire</strong> traite les pathologies des vaisseaux sanguins.</p><ul><li>Varices (stripping, laser endoveineux, sclérothérapie)</li><li>Fistules pour dialyse (confection et entretien)</li><li>Pathologies carotidiennes (prévention AVC)</li><li>Artériopathie oblitérante des membres</li></ul><div class="info-note">Urgences vasculaires 24h/24</div>' },
+        'thoracique': { title: 'Chirurgie Thoracique', content: '<p><strong>Chirurgie thoracique</strong> prend en charge les affections du thorax.</p><ul><li>Pathologies pulmonaires (cancer, nodules, pneumothorax)</li><li>Chirurgie de la thyroïde (goître, hyperthyroïdie, nodules)</li><li>Médiastin (tumeurs thymiques, péricardectomie)</li><li>Paroi thoracique</li></ul><div class="info-note">Techniques vidéo-assistées (VATS)</div>' },
+        'laparoscopique': { title: 'Techniques de Vidéo-Chirurgie', content: '<p><strong>Chirurgie mini-invasive</strong> révolutionne la prise en charge chirurgicale.</p><ul><li>Laparoscopie : interventions par petites incisions</li><li>Hystéroscopie : exploration et chirurgie de l\'utérus par voie naturelle</li></ul><div class="info-note">Pr Gilbert BONKOUGOU - Pionnier de la laparoscopie</div>' }
     };
     const modal = document.getElementById('surgeryModal');
     const modalTitle = document.getElementById('modalTitle');
     const modalBody = document.getElementById('modalBody');
     const closeModalBtn = document.querySelector('.close-modal');
     document.querySelectorAll('.pole-tag[data-surgery]').forEach(tag => {
-        tag.addEventListener('click', () => {
+        tag.addEventListener('click', (e) => {
+            e.stopPropagation();
             const key = tag.getAttribute('data-surgery');
             const detail = surgeryDetails[key];
             if (detail) {
@@ -1138,29 +1202,34 @@
             }
         });
     });
-    const closeModal = () => modal.style.display = 'none';
+    const closeModal = () => { modal.style.display = 'none'; };
     closeModalBtn.addEventListener('click', closeModal);
     window.addEventListener('click', (e) => { if (e.target === modal) closeModal(); });
-
+    document.addEventListener('keydown', (e) => { if (e.key === 'Escape' && modal.style.display === 'flex') closeModal(); });
+    
+    // Animations
     const animateElements = document.querySelectorAll('.animate-on-scroll');
     const checkVisibility = () => { animateElements.forEach(el => { if (el.getBoundingClientRect().top < window.innerHeight - 80) el.classList.add('visible'); }); };
     window.addEventListener('scroll', checkVisibility);
     window.addEventListener('load', checkVisibility);
-    window.addEventListener('scroll', () => document.querySelector('header').classList.toggle('scrolled', window.scrollY > 50));
-
+    window.addEventListener('scroll', () => { document.querySelector('header').classList.toggle('scrolled', window.scrollY > 50); });
+    
     const mobileBtn = document.querySelector('.mobile-menu-btn');
     const navMenu = document.getElementById('navMenu');
     if (mobileBtn && navMenu) {
         mobileBtn.addEventListener('click', (e) => { e.stopPropagation(); navMenu.classList.toggle('show'); mobileBtn.innerHTML = navMenu.classList.contains('show') ? '✕' : '☰'; });
-        navMenu.querySelectorAll('a').forEach(link => link.addEventListener('click', () => { navMenu.classList.remove('show'); mobileBtn.innerHTML = '☰'; }));
+        navMenu.querySelectorAll('a').forEach(link => link.addEventListener('click', () => { navMenu.classList.remove('show'); if (mobileBtn) mobileBtn.innerHTML = '☰'; }));
+        document.addEventListener('click', (e) => { if (!mobileBtn.contains(e.target) && !navMenu.contains(e.target)) { navMenu.classList.remove('show'); if (mobileBtn) mobileBtn.innerHTML = '☰'; } });
     }
-
+    
     function animateCounter(el, start, end, duration) { let startTime = null; el.innerText = start; function update(now) { if (!startTime) startTime = now; const p = Math.min((now - startTime) / duration, 1); el.innerText = Math.floor(p * (end - start) + start); if (p < 1) requestAnimationFrame(update); } requestAnimationFrame(update); }
     const statObserver = new IntersectionObserver((entries) => { entries.forEach(e => { if (e.isIntersecting) { const yEl = document.getElementById('stat-years'), dEl = document.getElementById('stat-doctors'); if (yEl && yEl.innerText === "0") animateCounter(yEl, 0, 10, 1500); if (dEl && dEl.innerText === "0") animateCounter(dEl, 0, 40, 1800); statObserver.unobserve(e.target); } }); }, { threshold: 0.3 });
     const statsContainer = document.querySelector('.stats-container'); if (statsContainer) statObserver.observe(statsContainer);
-
+    
     const whatsappForm = document.getElementById('whatsappForm');
-    if (whatsappForm) whatsappForm.addEventListener('submit', function(e) { e.preventDefault(); const nom = document.getElementById('nom'); if (!nom.value.trim()) { nom.classList.add('form-error'); setTimeout(() => nom.classList.remove('form-error'), 500); alert('Veuillez remplir votre nom'); return; } const service = document.getElementById('service').value; const motif = document.getElementById('motif').value; let message = `Bonjour Clinique WENDTOIN,%0A Demande de rendez-vous%0A Nom : ${nom.value.trim()}%0A Service : ${service}%0A`; if (motif) message += ` Message : ${motif}%0A`; const btn = document.getElementById('submitRdvBtn'); btn.classList.add('btn-loading'); btn.innerHTML = 'Envoi...'; setTimeout(() => { window.open(`https://wa.me/22651000647?text=${message}`, '_blank'); whatsappForm.reset(); btn.classList.remove('btn-loading'); btn.innerHTML = 'Envoyer la demande'; }, 500); });
+    if (whatsappForm) whatsappForm.addEventListener('submit', function(e) { e.preventDefault(); const nom = document.getElementById('nom'); if (!nom.value.trim()) { nom.classList.add('form-error'); setTimeout(() => nom.classList.remove('form-error'), 500); alert('Veuillez remplir votre nom'); return; } const service = document.getElementById('service').value; const motif = document.getElementById('motif').value; let message = `Bonjour Clinique WENDTOIN,%0A%0A Demande de rendez-vous%0A Nom : ${nom.value.trim()}%0A Service : ${service}%0A`; if (motif) message += ` Message : ${motif}%0A`; message += `%0AMerci de me confirmer un créneau.`; const btn = document.getElementById('submitRdvBtn'); btn.classList.add('btn-loading'); btn.innerHTML = 'Envoi en cours...'; setTimeout(() => { window.open(`https://wa.me/22651000647?text=${message}`, '_blank'); whatsappForm.reset(); btn.classList.remove('btn-loading'); btn.innerHTML = 'Envoyer la demande'; }, 500); });
+    
+    function initMedicalParticles() { const canvas = document.getElementById('medicalParticles'); if (!canvas) return; const ctx = canvas.getContext('2d'); let particles = []; const container = canvas.parentElement; const resizeCanvas = () => { const rect = container.getBoundingClientRect(); canvas.width = rect.width; canvas.height = rect.height; }; class Particle { constructor(w, h) { this.x = Math.random() * w; this.y = Math.random() * h + h; this.size = Math.random() * 24 + 14; this.speedY = Math.random() * 0.8 + 0.3; this.speedX = (Math.random() - 0.5) * 0.3; this.opacity = Math.random() * 0.25 + 0.08; } update(w, h) { this.y -= this.speedY; this.x += this.speedX; if (this.y + 50 < 0) { this.y = h + 50; this.x = Math.random() * w; } if (this.x > w + 50) this.x = -50; if (this.x < -50) this.x = w + 50; } draw(ctx) { ctx.globalAlpha = this.opacity; } } function init() { particles = []; for (let i=0; i<35; i++) particles.push(new Particle(canvas.width, canvas.height)); } function animate() { if (!canvas || !ctx) return; ctx.clearRect(0, 0, canvas.width, canvas.height); particles.forEach(p => { p.update(canvas.width, canvas.height); p.draw(ctx); }); requestAnimationFrame(animate); } resizeCanvas(); init(); animate(); window.addEventListener('resize', () => { resizeCanvas(); init(); }); } if (document.getElementById('medicalParticles')) initMedicalParticles();
 </script>
 </body>
 </html>
