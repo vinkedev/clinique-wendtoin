@@ -920,6 +920,7 @@
             color: #1D8B5D;
         }
 
+        /* MODAL STYLES */
         .modal {
             display: none;
             position: fixed;
@@ -954,10 +955,12 @@
             color: white;
             position: sticky;
             top: 0;
+            z-index: 1;
         }
         .modal-header h3 {
             font-size: 1.3rem;
             margin: 0;
+            padding-right: 30px;
         }
         .modal-body {
             padding: 20px;
@@ -999,9 +1002,12 @@
             display: flex;
             align-items: center;
             justify-content: center;
+            transition: all 0.2s ease;
+            z-index: 2;
         }
         .close-modal:hover {
             background: #dc3545;
+            transform: scale(1.05);
         }
 
         @media (min-width: 640px) {
@@ -1197,7 +1203,7 @@
         <div class="container">
             <h2 class="section-title animate-on-scroll">Pôles techniques & plateaux spécialisés</h2>
             <div class="pole-card animate-on-scroll">
-                <h3>Pôle Chirurgie <span class="badge-247">Chirurgie programmée & d'urgence</span></h3>
+                <h3>Pôle Chirurgie <span class="badge-247">Chirurgie programmée et urgence</span></h3>
                 <div class="pole-list">
                     <span class="pole-tag" data-surgery="viscérale">Chirurgie Générale / Digestive</span>
                     <span class="pole-tag" data-surgery="plastique">Chirurgie Plastique / De l'obésité</span>
@@ -1257,8 +1263,20 @@
 
 <footer><div class="container"><div class="footer-grid"><div><h4 style="color: #1D8B5D;">Clinique WENDTOIN</h4><p>Boulevard des Tensoba, Secteur 25<br>Cissin, Ouagadougou<br>Tél: <a href="tel:51000647" style="color:#1D8B5D;">51 00 06 47</a><br>Email: clinwend@gmail.com</p></div><div><h4 style="color: #1D8B5D;">Urgences 24/24</h4><p><strong><a href="tel:51000647" style="color:#1D8B5D;">51 00 06 47</a></strong></p><p>WhatsApp : <a href="https://wa.me/22651000647" style="color:#1D8B5D;">51 00 06 47</a></p></div><div><h4 style="color: #1D8B5D;">Horaires consultations</h4><p>Lun-Ven : 7h30-19h30<br>Sam : 7h30-12h</p><p><strong>Hémodialyse :</strong> 24h/24</p></div><div><h4 style="color: #1D8B5D;">Liens rapides</h4><p><a href="#rdv">Prendre RDV</a><br><a href="#equipe">Notre équipe</a><br><a href="#gallery">Galerie</a><br><a href="#video">Vidéos</a><br><a href="#contact">Nous trouver</a></p></div></div><div style="text-align:center; margin-top:30px; padding-top:15px; border-top:1px solid #334155;"><p>&copy; 2026 Clinique WENDTOIN – Tous droits réservés</p></div></div></footer>
 
-<div id="surgeryModal" class="modal"><div class="modal-content"><span class="close-modal">&times;</span><div class="modal-header"><h3><span id="modalTitle">Chirurgie</span></h3></div><div class="modal-body" id="modalBody"><p>Chargement...</p></div></div></div>
+<!-- MODAL CHIRURGIE avec croix de fermeture -->
+<div id="surgeryModal" class="modal">
+    <div class="modal-content">
+        <span class="close-modal">&times;</span>
+        <div class="modal-header">
+            <h3 id="modalTitle">Chirurgie</h3>
+        </div>
+        <div class="modal-body" id="modalBody">
+            <p>Chargement des détails...</p>
+        </div>
+    </div>
+</div>
 
+<!-- MODAL IMAGE avec croix de fermeture -->
 <div id="imageModal" class="image-modal">
     <span class="close-image-modal">✕</span>
     <img id="modalImage" src="" alt="Agrandissement">
@@ -1308,12 +1326,23 @@
             const item = document.createElement('div');
             item.className = 'gallery-item animate-on-scroll';
             item.innerHTML = `<img src="${imgSrc}" alt="Clinique WENDTOIN" class="gallery-img" onerror="this.src='https://placehold.co/400x300/0077A4/white?text=Photo'">`;
-            item.addEventListener('click', () => { modalImage.src = imgSrc; imageModal.style.display = 'flex'; });
+            item.addEventListener('click', () => { 
+                modalImage.src = imgSrc; 
+                imageModal.style.display = 'flex'; 
+            });
             galleryGrid.appendChild(item);
         });
     }
-    if (closeImageModal) closeImageModal.addEventListener('click', () => { imageModal.style.display = 'none'; });
-    window.addEventListener('click', (e) => { if (e.target === imageModal) imageModal.style.display = 'none'; });
+    
+    // Fermeture modal image
+    if (closeImageModal) {
+        closeImageModal.addEventListener('click', () => { 
+            imageModal.style.display = 'none'; 
+        });
+    }
+    window.addEventListener('click', (e) => { 
+        if (e.target === imageModal) imageModal.style.display = 'none'; 
+    });
 
     // ==================== VIDÉOS ====================
     const allVideos = [
@@ -1340,8 +1369,10 @@
         videosToShow.forEach(video => {
             const card = document.createElement('div');
             card.className = 'video-card animate-on-scroll';
-            card.addEventListener('click', () => { window.open(video.url, '_blank', 'noopener,noreferrer'); });
-            card.innerHTML = `<div class="video-thumbnail">▶️</div><div class="video-info"><div class="video-title">${video.title}</div><div class="video-date">${video.desc}</div></div>`;
+            card.addEventListener('click', () => { 
+                window.open(video.url, '_blank', 'noopener,noreferrer'); 
+            });
+            card.innerHTML = `<div class="video-thumbnail">▶️</div><div class="video-info"><div class="video-title">${escapeHtml(video.title)}</div><div class="video-date">${escapeHtml(video.desc)}</div></div>`;
             videoGrid.appendChild(card);
         });
         
@@ -1353,8 +1384,18 @@
             }
         }
     }
+    
+    function escapeHtml(str) {
+        if (!str) return '';
+        return str.replace(/[&<>]/g, function(m) {
+            if (m === '&') return '&amp;';
+            if (m === '<') return '&lt;';
+            if (m === '>') return '&gt;';
+            return m;
+        });
+    }
 
-    // Nettoyage et recréation du bouton pour éviter les doublons d'écouteurs
+    // Gestion du bouton "Afficher plus"
     if (showMoreBtn) {
         const newBtn = showMoreBtn.cloneNode(true);
         showMoreBtn.parentNode.replaceChild(newBtn, showMoreBtn);
@@ -1362,6 +1403,7 @@
         if (showMoreBtn) {
             showMoreBtn.addEventListener('click', function() {
                 visibleVideos += 4;
+                if (visibleVideos > allVideos.length) visibleVideos = allVideos.length;
                 displayVideos();
             });
         }
@@ -1401,6 +1443,7 @@
     const modalBody = document.getElementById('modalBody');
     const closeModalBtn = document.querySelector('.close-modal');
     
+    // Ajout des écouteurs pour chaque tag de chirurgie
     document.querySelectorAll('.pole-tag[data-surgery]').forEach(tag => {
         tag.addEventListener('click', (e) => {
             e.stopPropagation();
@@ -1414,10 +1457,22 @@
         });
     });
     
-    const closeModal = () => { modal.style.display = 'none'; };
-    if (closeModalBtn) closeModalBtn.addEventListener('click', closeModal);
-    window.addEventListener('click', (e) => { if (e.target === modal) closeModal(); });
-    document.addEventListener('keydown', (e) => { if (e.key === 'Escape' && modal.style.display === 'flex') closeModal(); });
+    // Fermeture de la modal chirurgie
+    const closeSurgeryModal = () => { 
+        modal.style.display = 'none'; 
+    };
+    
+    if (closeModalBtn) {
+        closeModalBtn.addEventListener('click', closeSurgeryModal);
+    }
+    
+    window.addEventListener('click', (e) => { 
+        if (e.target === modal) closeSurgeryModal(); 
+    });
+    
+    document.addEventListener('keydown', (e) => { 
+        if (e.key === 'Escape' && modal.style.display === 'flex') closeSurgeryModal(); 
+    });
     
     // ==================== ANIMATIONS ====================
     const animateElements = document.querySelectorAll('.animate-on-scroll');
@@ -1443,22 +1498,130 @@
     const mobileBtn = document.querySelector('.mobile-menu-btn');
     const navMenu = document.getElementById('navMenu');
     if (mobileBtn && navMenu) {
-        mobileBtn.addEventListener('click', (e) => { e.stopPropagation(); navMenu.classList.toggle('show'); mobileBtn.innerHTML = navMenu.classList.contains('show') ? '✕' : '☰'; });
-        navMenu.querySelectorAll('a').forEach(link => link.addEventListener('click', () => { navMenu.classList.remove('show'); if (mobileBtn) mobileBtn.innerHTML = '☰'; }));
-        document.addEventListener('click', (e) => { if (!mobileBtn.contains(e.target) && !navMenu.contains(e.target)) { navMenu.classList.remove('show'); if (mobileBtn) mobileBtn.innerHTML = '☰'; } });
+        mobileBtn.addEventListener('click', (e) => { 
+            e.stopPropagation(); 
+            navMenu.classList.toggle('show'); 
+            mobileBtn.innerHTML = navMenu.classList.contains('show') ? '✕' : '☰'; 
+        });
+        navMenu.querySelectorAll('a').forEach(link => link.addEventListener('click', () => { 
+            navMenu.classList.remove('show'); 
+            if (mobileBtn) mobileBtn.innerHTML = '☰'; 
+        }));
+        document.addEventListener('click', (e) => { 
+            if (!mobileBtn.contains(e.target) && !navMenu.contains(e.target)) { 
+                navMenu.classList.remove('show'); 
+                if (mobileBtn) mobileBtn.innerHTML = '☰'; 
+            } 
+        });
     }
     
     // Compteurs stats
-    function animateCounter(el, start, end, duration) { let startTime = null; el.innerText = start; function update(now) { if (!startTime) startTime = now; const p = Math.min((now - startTime) / duration, 1); el.innerText = Math.floor(p * (end - start) + start); if (p < 1) requestAnimationFrame(update); } requestAnimationFrame(update); }
-    const statObserver = new IntersectionObserver((entries) => { entries.forEach(e => { if (e.isIntersecting) { const yEl = document.getElementById('stat-years'), dEl = document.getElementById('stat-doctors'); if (yEl && yEl.innerText === "0") animateCounter(yEl, 0, 10, 1500); if (dEl && dEl.innerText === "0") animateCounter(dEl, 0, 40, 1800); statObserver.unobserve(e.target); } }); }, { threshold: 0.3 });
-    const statsContainer = document.querySelector('.stats-container'); if (statsContainer) statObserver.observe(statsContainer);
+    function animateCounter(el, start, end, duration) { 
+        let startTime = null; 
+        el.innerText = start; 
+        function update(now) { 
+            if (!startTime) startTime = now; 
+            const p = Math.min((now - startTime) / duration, 1); 
+            el.innerText = Math.floor(p * (end - start) + start); 
+            if (p < 1) requestAnimationFrame(update); 
+        } 
+        requestAnimationFrame(update); 
+    }
+    
+    const statObserver = new IntersectionObserver((entries) => { 
+        entries.forEach(e => { 
+            if (e.isIntersecting) { 
+                const yEl = document.getElementById('stat-years'), dEl = document.getElementById('stat-doctors'); 
+                if (yEl && yEl.innerText === "0") animateCounter(yEl, 0, 10, 1500); 
+                if (dEl && dEl.innerText === "0") animateCounter(dEl, 0, 40, 1800); 
+                statObserver.unobserve(e.target); 
+            } 
+        }); 
+    }, { threshold: 0.3 });
+    
+    const statsContainer = document.querySelector('.stats-container'); 
+    if (statsContainer) statObserver.observe(statsContainer);
     
     // Formulaire WhatsApp
     const whatsappForm = document.getElementById('whatsappForm');
-    if (whatsappForm) whatsappForm.addEventListener('submit', function(e) { e.preventDefault(); const nom = document.getElementById('nom'); if (!nom.value.trim()) { nom.classList.add('form-error'); setTimeout(() => nom.classList.remove('form-error'), 500); alert('Veuillez remplir votre nom'); return; } const service = document.getElementById('service').value; const motif = document.getElementById('motif').value; let message = `Bonjour Clinique WENDTOIN,%0A%0A Demande de rendez-vous%0A Nom : ${nom.value.trim()}%0A Service : ${service}%0A`; if (motif) message += ` Message : ${motif}%0A`; message += `%0AMerci de me confirmer un créneau.`; const btn = document.getElementById('submitRdvBtn'); btn.classList.add('btn-loading'); btn.innerHTML = 'Envoi en cours...'; setTimeout(() => { window.open(`https://wa.me/22651000647?text=${message}`, '_blank'); whatsappForm.reset(); btn.classList.remove('btn-loading'); btn.innerHTML = 'Envoyer la demande'; }, 500); });
+    if (whatsappForm) {
+        whatsappForm.addEventListener('submit', function(e) { 
+            e.preventDefault(); 
+            const nom = document.getElementById('nom'); 
+            if (!nom.value.trim()) { 
+                nom.classList.add('form-error'); 
+                setTimeout(() => nom.classList.remove('form-error'), 500); 
+                alert('Veuillez remplir votre nom'); 
+                return; 
+            } 
+            const service = document.getElementById('service').value; 
+            const motif = document.getElementById('motif').value; 
+            let message = `Bonjour Clinique WENDTOIN,%0A%0A Demande de rendez-vous%0A Nom : ${encodeURIComponent(nom.value.trim())}%0A Service : ${encodeURIComponent(service)}%0A`; 
+            if (motif) message += ` Message : ${encodeURIComponent(motif)}%0A`; 
+            message += `%0AMerci de me confirmer un créneau.`; 
+            const btn = document.getElementById('submitRdvBtn'); 
+            btn.classList.add('btn-loading'); 
+            btn.innerHTML = 'Envoi en cours...'; 
+            setTimeout(() => { 
+                window.open(`https://wa.me/22651000647?text=${message}`, '_blank'); 
+                whatsappForm.reset(); 
+                btn.classList.remove('btn-loading'); 
+                btn.innerHTML = 'Envoyer la demande'; 
+            }, 500); 
+        });
+    }
     
     // Particules médicales
-    function initMedicalParticles() { const canvas = document.getElementById('medicalParticles'); if (!canvas) return; const ctx = canvas.getContext('2d'); let particles = []; const container = canvas.parentElement; const resizeCanvas = () => { const rect = container.getBoundingClientRect(); canvas.width = rect.width; canvas.height = rect.height; }; class Particle { constructor(w, h) { this.x = Math.random() * w; this.y = Math.random() * h + h; this.size = Math.random() * 20 + 10; this.speedY = Math.random() * 0.6 + 0.2; this.speedX = (Math.random() - 0.5) * 0.2; this.opacity = Math.random() * 0.2 + 0.05; } update(w, h) { this.y -= this.speedY; this.x += this.speedX; if (this.y + 40 < 0) { this.y = h + 40; this.x = Math.random() * w; } if (this.x > w + 40) this.x = -40; if (this.x < -40) this.x = w + 40; } draw(ctx) { ctx.globalAlpha = this.opacity; } } function init() { particles = []; for (let i=0; i<30; i++) particles.push(new Particle(canvas.width, canvas.height)); } function animate() { if (!canvas || !ctx) return; ctx.clearRect(0, 0, canvas.width, canvas.height); particles.forEach(p => { p.update(canvas.width, canvas.height); p.draw(ctx); }); requestAnimationFrame(animate); } resizeCanvas(); init(); animate(); window.addEventListener('resize', () => { resizeCanvas(); init(); }); } if (document.getElementById('medicalParticles')) initMedicalParticles();
+    function initMedicalParticles() { 
+        const canvas = document.getElementById('medicalParticles'); 
+        if (!canvas) return; 
+        const ctx = canvas.getContext('2d'); 
+        let particles = []; 
+        const container = canvas.parentElement; 
+        const resizeCanvas = () => { 
+            const rect = container.getBoundingClientRect(); 
+            canvas.width = rect.width; 
+            canvas.height = rect.height; 
+        }; 
+        class Particle { 
+            constructor(w, h) { 
+                this.x = Math.random() * w; 
+                this.y = Math.random() * h + h; 
+                this.size = Math.random() * 20 + 10; 
+                this.speedY = Math.random() * 0.6 + 0.2; 
+                this.speedX = (Math.random() - 0.5) * 0.2; 
+                this.opacity = Math.random() * 0.2 + 0.05; 
+            } 
+            update(w, h) { 
+                this.y -= this.speedY; 
+                this.x += this.speedX; 
+                if (this.y + 40 < 0) { 
+                    this.y = h + 40; 
+                    this.x = Math.random() * w; 
+                } 
+                if (this.x > w + 40) this.x = -40; 
+                if (this.x < -40) this.x = w + 40; 
+            } 
+        } 
+        function init() { 
+            particles = []; 
+            for (let i=0; i<30; i++) particles.push(new Particle(canvas.width, canvas.height)); 
+        } 
+        function animate() { 
+            if (!canvas || !ctx) return; 
+            ctx.clearRect(0, 0, canvas.width, canvas.height); 
+            particles.forEach(p => { p.update(canvas.width, canvas.height); }); 
+            requestAnimationFrame(animate); 
+        } 
+        resizeCanvas(); 
+        init(); 
+        animate(); 
+        window.addEventListener('resize', () => { 
+            resizeCanvas(); 
+            init(); 
+        }); 
+    } 
+    if (document.getElementById('medicalParticles')) initMedicalParticles();
 </script>
 </body>
 </html>
