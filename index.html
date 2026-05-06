@@ -660,7 +660,6 @@
             box-shadow: 0 20px 35px rgba(0,0,0,0.12);
         }
 
-        /* IMAGE : PLUS DE RECADRAGE, ON AFFICHE L'IMAGE ENTIÈRE */
         .team-image {
             width: 100%;
             height: auto;
@@ -692,6 +691,135 @@
             color: #475569;
             font-size: 0.85rem;
             line-height: 1.5;
+        }
+
+        /* GALERIE PHOTO - SCROLL HORIZONTAL SUR MOBILE */
+        .gallery-section {
+            background: #f8fafc;
+        }
+
+        .gallery-title {
+            text-align: center;
+            font-size: 1.8rem;
+            margin-bottom: 30px;
+            color: #0077A4;
+            font-weight: 700;
+            position: relative;
+        }
+
+        .gallery-title::after {
+            content: '';
+            position: absolute;
+            bottom: -12px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 60px;
+            height: 3px;
+            background: linear-gradient(90deg, #0077A4, #1D8B5D);
+            border-radius: 4px;
+        }
+
+        /* Version desktop : grille classique */
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 24px;
+        }
+
+        /* Version mobile : scroll horizontal */
+        @media (max-width: 768px) {
+            .gallery-grid {
+                display: flex;
+                overflow-x: auto;
+                scroll-snap-type: x mandatory;
+                gap: 16px;
+                padding-bottom: 20px;
+                scrollbar-width: thin;
+                -webkit-overflow-scrolling: touch;
+            }
+
+            .gallery-grid::-webkit-scrollbar {
+                height: 6px;
+            }
+
+            .gallery-grid::-webkit-scrollbar-track {
+                background: #e2e8f0;
+                border-radius: 10px;
+            }
+
+            .gallery-grid::-webkit-scrollbar-thumb {
+                background: #1D8B5D;
+                border-radius: 10px;
+            }
+
+            .gallery-item {
+                flex: 0 0 75%;
+                scroll-snap-align: start;
+                min-width: 250px;
+            }
+        }
+
+        .gallery-item {
+            background: white;
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.08);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            cursor: pointer;
+        }
+
+        .gallery-item:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 35px rgba(0,0,0,0.12);
+        }
+
+        .gallery-img {
+            width: 100%;
+            aspect-ratio: 4 / 3;
+            object-fit: cover;
+            display: block;
+            transition: transform 0.3s ease;
+        }
+
+        .gallery-item:hover .gallery-img {
+            transform: scale(1.02);
+        }
+
+        /* MODALE POUR AGRANDIR LES IMAGES */
+        .image-modal {
+            display: none;
+            position: fixed;
+            z-index: 10000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0,0,0,0.9);
+            cursor: pointer;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .image-modal img {
+            max-width: 90%;
+            max-height: 90%;
+            object-fit: contain;
+            border-radius: 12px;
+        }
+
+        .close-image-modal {
+            position: absolute;
+            top: 20px;
+            right: 35px;
+            color: white;
+            font-size: 40px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        .close-image-modal:hover {
+            color: #1D8B5D;
         }
 
         .video-grid {
@@ -920,6 +1048,10 @@
             .stat-number {
                 font-size: 2.7rem;
             }
+            /* Desktop : grille normale */
+            .gallery-grid {
+                grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            }
         }
 
         @media (max-width: 768px) {
@@ -966,6 +1098,7 @@
                 <li><a href="#poles">Pôles techniques</a></li>
                 <li><a href="#rdv">Rendez-vous</a></li>
                 <li><a href="#equipe">Notre équipe</a></li>
+                <li><a href="#gallery">Galerie</a></li>
                 <li><a href="#video">Vidéos</a></li>
                 <li><a href="#contact">Contact</a></li>
             </ul>
@@ -1092,6 +1225,14 @@
         </div>
     </section>
 
+    <!-- SECTION GALERIE PHOTO Notre clinique en images -->
+    <section id="gallery" class="gallery-section">
+        <div class="container">
+            <h2 class="gallery-title animate-on-scroll">Notre clinique en images</h2>
+            <div class="gallery-grid" id="galleryGrid"></div>
+        </div>
+    </section>
+
     <!-- SECTION VIDÉO -->
     <section id="video" class="bg-white">
         <div class="container">
@@ -1105,12 +1246,18 @@
     </section>
 </main>
 
-<footer><div class="container"><div class="footer-grid"><div><h4 style="color: #1D8B5D;">Clinique WENDTOIN</h4><p>Boulevard des Tensoba, Secteur 25<br>Cissin, Ouagadougou<br>Tél: <a href="tel:51000647" style="color:#1D8B5D;">51 00 06 47</a><br>Email: clinwend@gmail.com</p></div><div><h4 style="color: #1D8B5D;">Urgences 24/24</h4><p><strong><a href="tel:51000647" style="color:#1D8B5D;">51 00 06 47</a></strong></p><p>WhatsApp : <a href="https://wa.me/22651000647" style="color:#1D8B5D;">51 00 06 47</a></p></div><div><h4 style="color: #1D8B5D;">Horaires consultations</h4><p>Lun-Ven : 7h30-19h30<br>Sam : 7h30-12h</p><p><strong>Hémodialyse :</strong> 24h/24</p></div><div><h4 style="color: #1D8B5D;">Liens rapides</h4><p><a href="#rdv">Prendre RDV</a><br><a href="#services">Nos services</a><br><a href="#specialites">Spécialités</a><br><a href="#poles">Pôles techniques</a><br><a href="#equipe">Notre équipe</a><br><a href="#contact">Nous trouver</a></p></div></div><div style="text-align:center; margin-top:40px; padding-top:20px; border-top:1px solid #334155;"><p>&copy; 2026 Clinique WENDTOIN – Tous droits réservés</p></div></div></footer>
+<footer><div class="container"><div class="footer-grid"><div><h4 style="color: #1D8B5D;">Clinique WENDTOIN</h4><p>Boulevard des Tensoba, Secteur 25<br>Cissin, Ouagadougou<br>Tél: <a href="tel:51000647" style="color:#1D8B5D;">51 00 06 47</a><br>Email: clinwend@gmail.com</p></div><div><h4 style="color: #1D8B5D;">Urgences 24/24</h4><p><strong><a href="tel:51000647" style="color:#1D8B5D;">51 00 06 47</a></strong></p><p>WhatsApp : <a href="https://wa.me/22651000647" style="color:#1D8B5D;">51 00 06 47</a></p></div><div><h4 style="color: #1D8B5D;">Horaires consultations</h4><p>Lun-Ven : 7h30-19h30<br>Sam : 7h30-12h</p><p><strong>Hémodialyse :</strong> 24h/24</p></div><div><h4 style="color: #1D8B5D;">Liens rapides</h4><p><a href="#rdv">Prendre RDV</a><br><a href="#services">Nos services</a><br><a href="#specialites">Spécialités</a><br><a href="#poles">Pôles techniques</a><br><a href="#equipe">Notre équipe</a><br><a href="#gallery">Galerie</a><br><a href="#contact">Nous trouver</a></p></div></div><div style="text-align:center; margin-top:40px; padding-top:20px; border-top:1px solid #334155;"><p>&copy; 2026 Clinique WENDTOIN – Tous droits réservés</p></div></div></footer>
 
 <div id="surgeryModal" class="modal"><div class="modal-content"><span class="close-modal">&times;</span><div class="modal-header"><h3><span id="modalTitle">Chirurgie</span></h3></div><div class="modal-body" id="modalBody"><p>Chargement...</p></div></div></div>
 
+<!-- MODALE POUR LES IMAGES DE LA GALERIE -->
+<div id="imageModal" class="image-modal">
+    <span class="close-image-modal">&times;</span>
+    <img id="modalImage" src="" alt="Agrandissement">
+</div>
+
 <script>
-    // DONNÉES DE L'ÉQUIPE (chemins des images)
+    // DONNÉES DE L'ÉQUIPE
     const teamMembers = [
         { 
             name: "Pr Gilbert BONKOUGOU", 
@@ -1138,6 +1285,22 @@
         }
     ];
 
+    // DONNÉES DES IMAGES DE LA CLINIQUE (12 images)
+    const galleryImages = [
+        "cliniquewendtoin/Im1.jpeg",
+        "cliniquewendtoin/Im3.jpeg",
+        "cliniquewendtoin/Im4.jpeg",
+        "cliniquewendtoin/Im5.jpeg",
+        "cliniquewendtoin/Im7.jpeg",
+        "cliniquewendtoin/Im8.jpeg",
+        "cliniquewendtoin/Im9.jpeg",
+        "cliniquewendtoin/Im10.jpeg",
+        "cliniquewendtoin/Im11.jpeg",
+        "cliniquewendtoin/Im12.jpeg",
+        "cliniquewendtoin/Im13.jpeg",
+        "cliniquewendtoin/Im14.jpeg"
+    ];
+
     // DONNÉES DES VIDÉOS
     const videos = [
         { title: "Présentation de la clinique", date: "2025", url: "https://www.facebook.com/votrepage/videos/1" },
@@ -1163,6 +1326,37 @@
             teamGrid.appendChild(card);
         });
     }
+
+    // Remplir la galerie photos
+    const galleryGrid = document.getElementById('galleryGrid');
+    const imageModal = document.getElementById('imageModal');
+    const modalImage = document.getElementById('modalImage');
+    const closeImageModal = document.querySelector('.close-image-modal');
+
+    if (galleryGrid) {
+        galleryImages.forEach(imgSrc => {
+            const item = document.createElement('div');
+            item.className = 'gallery-item animate-on-scroll';
+            item.innerHTML = `<img src="${imgSrc}" alt="Clinique WENDTOIN" class="gallery-img" onerror="this.src='https://placehold.co/400x300/0077A4/white?text=Photo'">`;
+            item.addEventListener('click', () => {
+                modalImage.src = imgSrc;
+                imageModal.style.display = 'flex';
+            });
+            galleryGrid.appendChild(item);
+        });
+    }
+
+    // Fermer la modale image
+    if (closeImageModal) {
+        closeImageModal.addEventListener('click', () => {
+            imageModal.style.display = 'none';
+        });
+    }
+    window.addEventListener('click', (e) => {
+        if (e.target === imageModal) {
+            imageModal.style.display = 'none';
+        }
+    });
 
     // Remplir la section vidéo
     const videoGrid = document.getElementById('videoGrid');
