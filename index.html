@@ -1345,6 +1345,7 @@
     });
 
     // ==================== VIDÉOS ====================
+        // ==================== VIDÉOS (VERSION CORRIGÉE) ====================
     const allVideos = [
         { title: "Pr Gilbert BONKOUGOU - Maladie hémorroïdaire", desc: "Les hémorroïdes expliquées par le Pr Gilbert BONKOUGOU", url: "https://web.facebook.com/reel/645204957720787" },
         { title: "Unité de dialyse - Clinique WENDTOIN", desc: "Prise en charge des insuffisances rénales aiguës et chroniques", url: "https://web.facebook.com/reel/879902179764068" },
@@ -1359,55 +1360,65 @@
 
     let visibleVideos = 4;
     const videoGrid = document.getElementById('videoGrid');
-    let showMoreBtn = document.getElementById('showMoreVideos');
+    const showMoreBtn = document.getElementById('showMoreVideos');
 
     function displayVideos() {
         if (!videoGrid) return;
+        
+        // Vider la grille
         videoGrid.innerHTML = '';
+        
+        // Afficher uniquement les 'visibleVideos' premières vidéos
         const videosToShow = allVideos.slice(0, visibleVideos);
         
         videosToShow.forEach(video => {
             const card = document.createElement('div');
             card.className = 'video-card animate-on-scroll';
-            card.addEventListener('click', () => { 
-                window.open(video.url, '_blank', 'noopener,noreferrer'); 
+            
+            // Ouvrir le lien au clic
+            card.addEventListener('click', () => {
+                window.open(video.url, '_blank', 'noopener,noreferrer');
             });
-            card.innerHTML = `<div class="video-thumbnail">▶️</div><div class="video-info"><div class="video-title">${escapeHtml(video.title)}</div><div class="video-date">${escapeHtml(video.desc)}</div></div>`;
+            
+            card.innerHTML = `
+                <div class="video-thumbnail">▶️</div>
+                <div class="video-info">
+                    <div class="video-title">${video.title}</div>
+                    <div class="video-date">${video.desc}</div>
+                </div>
+            `;
             videoGrid.appendChild(card);
         });
         
-        if (showMoreBtn) {
-            if (visibleVideos >= allVideos.length) {
-                showMoreBtn.style.display = 'none';
-            } else {
-                showMoreBtn.style.display = 'inline-block';
-            }
+        // Cacher ou montrer le bouton
+        if (visibleVideos >= allVideos.length) {
+            showMoreBtn.style.display = 'none';
+        } else {
+            showMoreBtn.style.display = 'inline-block';
         }
     }
     
-    function escapeHtml(str) {
-        if (!str) return '';
-        return str.replace(/[&<>]/g, function(m) {
-            if (m === '&') return '&amp;';
-            if (m === '<') return '&lt;';
-            if (m === '>') return '&gt;';
-            return m;
-        });
+    // Fonction pour charger plus de vidéos
+    function loadMoreVideos() {
+        visibleVideos += 4;
+        if (visibleVideos > allVideos.length) {
+            visibleVideos = allVideos.length;
+        }
+        displayVideos();
     }
-
-    // Gestion du bouton "Afficher plus"
+    
+    // Supprimer l'ancien écouteur et en ajouter un nouveau proprement
     if (showMoreBtn) {
+        // Enlever tous les anciens écouteurs
         const newBtn = showMoreBtn.cloneNode(true);
         showMoreBtn.parentNode.replaceChild(newBtn, showMoreBtn);
-        showMoreBtn = document.getElementById('showMoreVideos');
-        if (showMoreBtn) {
-            showMoreBtn.addEventListener('click', function() {
-                visibleVideos += 4;
-                if (visibleVideos > allVideos.length) visibleVideos = allVideos.length;
-                displayVideos();
-            });
+        const freshBtn = document.getElementById('showMoreVideos');
+        if (freshBtn) {
+            freshBtn.addEventListener('click', loadMoreVideos);
         }
     }
+    
+    // Initialiser l'affichage
     displayVideos();
 
     // ==================== MODAL CHIRURGIE (DÉTAILS COMPLETS) ====================
