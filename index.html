@@ -34,7 +34,6 @@
             padding: 0 20px;
         }
 
-        /* ========== ANIMATIONS EXISTANTES ========== */
         @keyframes fadeInUp {
             from { opacity: 0; transform: translateY(35px); }
             to { opacity: 1; transform: translateY(0); }
@@ -83,19 +82,6 @@
             to { transform: rotate(360deg); }
         }
 
-        /* ========== NOUVELLES ANIMATIONS ========== */
-        @keyframes shimmer {
-            0% { left: -100%; }
-            100% { left: 200%; }
-        }
-
-        @keyframes borderGlow {
-            0% { border-color: #1D8B5D; box-shadow: 0 0 0 0 rgba(29,139,93,0.3); }
-            50% { border-color: #0077A4; box-shadow: 0 0 0 6px rgba(29,139,93,0.1); }
-            100% { border-color: #1D8B5D; box-shadow: 0 0 0 0 rgba(29,139,93,0.3); }
-        }
-
-        /* ========== SCROLL ANIMATION AMÉLIORÉE ========== */
         .animate-on-scroll {
             opacity: 0;
             transform: translateY(35px);
@@ -107,7 +93,6 @@
             transform: translateY(0);
         }
 
-        /* ========== TOOLTIPS ========== */
         [data-tooltip] {
             position: relative;
             cursor: pointer;
@@ -128,7 +113,6 @@
             pointer-events: none;
             transition: opacity 0.3s ease;
             z-index: 100;
-            font-weight: normal;
         }
         [data-tooltip]:hover::before {
             opacity: 1;
@@ -146,7 +130,7 @@
             animation: pulse-red 2s infinite;
         }
 
-        /* ========== HEADER GLASSMORPHISM - POLICE NORMALE ========== */
+        /* ========== HEADER ========== */
         header {
             background: white;
             box-shadow: 0 2px 20px rgba(0,0,0,0.05);
@@ -308,19 +292,13 @@
             z-index: 1;
         }
 
-        .hero .container {
-            position: relative;
-            z-index: 2;
-        }
-
         .hero-slogan {
             font-size: 0.9rem;
             margin-bottom: 25px;
             opacity: 0.96;
-            padding: 0 10px;
         }
 
-        /* ========== BOUTONS AVEC SHIMMER ========== */
+        /* ========== BOUTONS ========== */
         .btn {
             display: inline-block;
             padding: 10px 20px;
@@ -328,7 +306,7 @@
             text-decoration: none;
             font-weight: 600;
             margin: 6px;
-            transition: all 0.4s cubic-bezier(0.2, 0.9, 0.4, 1.1);
+            transition: all 0.4s ease;
             font-size: 0.85rem;
             position: relative;
             overflow: hidden;
@@ -338,22 +316,6 @@
             background: #1D8B5D;
             color: white;
             box-shadow: 0 6px 18px rgba(29,139,93,0.35);
-        }
-
-        .btn-primary::after {
-            content: '';
-            position: absolute;
-            top: -50%;
-            left: -100%;
-            width: 60%;
-            height: 200%;
-            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
-            transform: rotate(25deg);
-            transition: left 0.5s ease;
-        }
-
-        .btn-primary:hover::after {
-            left: 150%;
         }
 
         .btn-primary:hover {
@@ -403,8 +365,6 @@
             color: #0077A4;
             font-weight: 700;
             position: relative;
-            display: block;
-            width: 100%;
         }
 
         .section-title::after {
@@ -432,10 +392,18 @@
             }
         }
 
+        /* ========== SERVICES : 3 PAR LIGNE ========== */
         .cards-grid {
             display: grid;
             grid-template-columns: 1fr;
             gap: 20px;
+        }
+
+        @media (min-width: 768px) {
+            .cards-grid {
+                grid-template-columns: repeat(3, 1fr);
+                gap: 25px;
+            }
         }
 
         .card {
@@ -447,7 +415,7 @@
         }
 
         .card:hover {
-            transform: translateY(-8px) scale(1.02);
+            transform: translateY(-8px);
             box-shadow: 0 20px 35px rgba(0,0,0,0.15);
         }
 
@@ -580,7 +548,6 @@
 
         .clinic-image {
             width: 100%;
-            height: 100%;
             min-height: 220px;
             object-fit: cover;
             border-radius: 28px;
@@ -604,7 +571,6 @@
             color: white;
             padding: 12px 18px;
             border-radius: 50px;
-            text-decoration: none;
             display: inline-block;
             width: 100%;
             text-align: center;
@@ -613,24 +579,6 @@
             border: none;
             cursor: pointer;
             font-size: 0.9rem;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .btn-rdv::after {
-            content: '';
-            position: absolute;
-            top: -50%;
-            left: -100%;
-            width: 60%;
-            height: 200%;
-            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
-            transform: rotate(25deg);
-            transition: left 0.5s ease;
-        }
-
-        .btn-rdv:hover::after {
-            left: 150%;
         }
 
         .btn-rdv:hover {
@@ -692,27 +640,11 @@
             border-radius: 24px;
             padding: 20px;
             margin-bottom: 25px;
-            transition: transform 0.4s cubic-bezier(0.2, 0.9, 0.4, 1.1), box-shadow 0.3s ease;
-            position: relative;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
         }
         .pole-card:hover {
-            transform: translateY(-8px);
-            box-shadow: 0 20px 35px -12px rgba(0,0,0,0.2);
-        }
-        .pole-card::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            height: 4px;
-            background: linear-gradient(90deg, #0077A4, #1D8B5D);
-            border-radius: 24px 24px 0 0;
-            transform: scaleX(0);
-            transition: transform 0.4s ease;
-        }
-        .pole-card:hover::before {
-            transform: scaleX(1);
+            transform: translateY(-5px);
+            box-shadow: 0 20px 35px rgba(0,0,0,0.15);
         }
         .pole-card h3 {
             color: #0077A4;
@@ -740,15 +672,11 @@
             box-shadow: 0 1px 3px rgba(0,0,0,0.1);
             transition: all 0.2s;
             cursor: pointer;
-            display: inline-flex;
-            align-items: center;
-            gap: 5px;
         }
         .pole-tag:hover {
             background: #1D8B5D;
             color: white;
             transform: translateY(-2px);
-            box-shadow: 0 4px 12px rgba(29,139,93,0.3);
         }
 
         .badge-247 {
@@ -761,7 +689,7 @@
             margin-left: 8px;
         }
 
-        /* ========== SECTION ÉQUIPE AMÉLIORÉE ========== */
+        /* ========== ÉQUIPE ========== */
         .team-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
@@ -774,13 +702,13 @@
             border-radius: 24px;
             overflow: hidden;
             box-shadow: 0 10px 25px rgba(0,0,0,0.08);
-            transition: transform 0.4s cubic-bezier(0.2, 0.9, 0.4, 1.1), box-shadow 0.3s ease;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
             text-align: center;
         }
 
         .team-card:hover {
-            transform: translateY(-10px);
-            box-shadow: 0 25px 40px rgba(0,0,0,0.15);
+            transform: translateY(-8px);
+            box-shadow: 0 20px 35px rgba(0,0,0,0.15);
         }
 
         .team-image {
@@ -789,11 +717,6 @@
             object-fit: cover;
             object-position: center 20%;
             background: linear-gradient(145deg, #f0f9ff, #e0f0e8);
-            transition: transform 0.5s ease;
-        }
-
-        .team-card:hover .team-image {
-            transform: scale(1.03);
         }
 
         .team-info {
@@ -812,7 +735,6 @@
             font-weight: 600;
             font-size: 0.8rem;
             margin-bottom: 10px;
-            letter-spacing: 0.3px;
         }
 
         .team-desc {
@@ -860,24 +782,7 @@
                 scroll-snap-type: x mandatory;
                 gap: 14px;
                 padding-bottom: 15px;
-                scrollbar-width: thin;
-                -webkit-overflow-scrolling: touch;
             }
-
-            .gallery-grid::-webkit-scrollbar {
-                height: 5px;
-            }
-
-            .gallery-grid::-webkit-scrollbar-track {
-                background: #e2e8f0;
-                border-radius: 10px;
-            }
-
-            .gallery-grid::-webkit-scrollbar-thumb {
-                background: #1D8B5D;
-                border-radius: 10px;
-            }
-
             .gallery-item {
                 flex: 0 0 70%;
                 scroll-snap-align: start;
@@ -890,13 +795,12 @@
             border-radius: 20px;
             overflow: hidden;
             box-shadow: 0 10px 25px rgba(0,0,0,0.08);
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            transition: transform 0.3s ease;
             cursor: pointer;
         }
 
         .gallery-item:hover {
             transform: translateY(-5px);
-            box-shadow: 0 20px 35px rgba(0,0,0,0.12);
         }
 
         .gallery-img {
@@ -904,14 +808,8 @@
             aspect-ratio: 4 / 3;
             object-fit: cover;
             display: block;
-            transition: transform 0.4s ease;
         }
 
-        .gallery-item:hover .gallery-img {
-            transform: scale(1.03);
-        }
-
-        /* MODALE IMAGE AVEC ZOOM */
         .image-modal {
             display: none;
             position: fixed;
@@ -931,7 +829,6 @@
             max-height: 90%;
             object-fit: contain;
             border-radius: 12px;
-            animation: fadeScale 0.35s cubic-bezier(0.2, 0.9, 0.4, 1.1);
         }
 
         .close-image-modal {
@@ -942,7 +839,6 @@
             font-size: 36px;
             font-weight: bold;
             cursor: pointer;
-            transition: 0.3s;
             background: rgba(0,0,0,0.5);
             width: 45px;
             height: 45px;
@@ -955,14 +851,13 @@
         .close-image-modal:hover {
             color: #1D8B5D;
             background: white;
-            transform: rotate(90deg);
         }
 
         /* ========== VIDÉOS ========== */
         .video-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-            gap: 20px;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 25px;
             margin-top: 20px;
         }
         .video-card {
@@ -970,7 +865,7 @@
             border-radius: 24px;
             overflow: hidden;
             box-shadow: 0 10px 25px rgba(0,0,0,0.08);
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            transition: transform 0.3s ease;
             cursor: pointer;
             text-align: center;
         }
@@ -987,10 +882,6 @@
             justify-content: center;
             color: white;
             font-size: 2.8rem;
-            transition: transform 0.3s ease;
-        }
-        .video-card:hover .video-thumbnail {
-            transform: scale(1.02);
         }
         .video-info {
             padding: 12px;
@@ -1023,12 +914,10 @@
             color: #cbd5e1;
             text-decoration: none;
             transition: all 0.3s ease;
-            display: inline-block;
         }
 
         .footer-grid a:hover {
             color: #1D8B5D;
-            transform: translateX(3px);
         }
 
         .modal {
@@ -1065,7 +954,6 @@
             color: white;
             position: sticky;
             top: 0;
-            z-index: 1;
         }
         .modal-header h3 {
             font-size: 1.3rem;
@@ -1104,7 +992,6 @@
             font-size: 28px;
             font-weight: bold;
             cursor: pointer;
-            z-index: 10000;
             background: rgba(0,0,0,0.3);
             width: 32px;
             height: 32px;
@@ -1112,18 +999,12 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            transition: all 0.2s;
         }
         .close-modal:hover {
             background: #dc3545;
-            transform: scale(1.1);
         }
 
-        /* ========== RESPONSIVE ========== */
         @media (min-width: 640px) {
-            .cards-grid {
-                grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            }
             .hero-content h2 {
                 font-size: 2rem;
             }
@@ -1149,18 +1030,6 @@
                 padding: 0;
                 font-size: 0.95rem;
             }
-            .header-container {
-                padding: 8px 24px;
-            }
-            .logo img {
-                height: 48px;
-            }
-            .logo-text h1 {
-                font-size: 1.1rem;
-            }
-            .logo-text p {
-                font-size: 0.6rem;
-            }
             .hero-content h2 {
                 font-size: 2.5rem;
             }
@@ -1170,12 +1039,6 @@
             .btn {
                 padding: 12px 32px;
                 font-size: 0.95rem;
-            }
-            section {
-                padding: 65px 0;
-            }
-            .section-title {
-                font-size: 2rem;
             }
             .rdv-grid {
                 grid-template-columns: 1fr 1fr;
@@ -1194,9 +1057,6 @@
             }
             .stat-number {
                 font-size: 2.3rem;
-            }
-            .gallery-grid {
-                grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
             }
         }
 
@@ -1311,44 +1171,44 @@
             <h2 class="section-title animate-on-scroll">Nos spécialités médicales</h2>
             <div class="specialty-grid">
                 <div class="specialty-item"><strong>Radiologie</strong><p>Radiographie, Échographie, Scanner</p></div>
-                <div class="specialty-item"><strong>Dermatologie</strong><p>Dermatologie médicale</p></div>
-                <div class="specialty-item"><strong>Gastro-entérologie</strong><p>Explorations digestives</p></div>
-                <div class="specialty-item"><strong>Neurologie</strong><p>Consultations neurologiques</p></div>
-                <div class="specialty-item"><strong>Kinésithérapie</strong><p>Rééducation fonctionnelle</p></div>
-                <div class="specialty-item"><strong>Cancérologie</strong><p>Oncologie médicale</p></div>
-                <div class="specialty-item"><strong>Urologie</strong><p>Maladies urinaires</p></div>
-                <div class="specialty-item"><strong>Orthopédie</strong><p>Traumatologie</p></div>
+                <div class="specialty-item"><strong>Dermatologie</strong><p>Dermatologie médicale et allergologie</p></div>
+                <div class="specialty-item"><strong>Gastro-entérologie</strong><p>Explorations digestives, endoscopies</p></div>
+                <div class="specialty-item"><strong>Neurologie</strong><p>Consultations et explorations neurologiques</p></div>
+                <div class="specialty-item"><strong>Kinésithérapie</strong><p>Rééducation fonctionnelle, thérapies manuelles</p></div>
+                <div class="specialty-item"><strong>Cancérologie</strong><p>Oncologie médicale, suivi personnalisé</p></div>
+                <div class="specialty-item"><strong>Urologie</strong><p>Prise en charge des maladies urinaires</p></div>
+                <div class="specialty-item"><strong>Orthopédie</strong><p>Traumatologie et chirurgie orthopédique</p></div>
                 <div class="specialty-item"><strong>ORL</strong><p>Consultations ORL</p></div>
-                <div class="specialty-item"><strong>Rhumatologie</strong><p>Maladies os et articulations</p></div>
+                <div class="specialty-item"><strong>Rhumatologie</strong><p>Maladies des os et des articulations</p></div>
                 <div class="specialty-item"><strong>Pneumologie</strong><p>Maladies respiratoires</p></div>
-                <div class="specialty-item"><strong>Néphrologie</strong><p>Maladies des reins</p></div>
+                <div class="specialty-item"><strong>Néphrologie</strong><p>Maladies des reins et dialyse</p></div>
                 <div class="specialty-item"><strong>Psychiatrie</strong><p>Santé mentale</p></div>
                 <div class="specialty-item"><strong>Pédiatrie</strong><p>Santé de l'enfant</p></div>
-                <div class="specialty-item"><strong>Chirurgie Pédiatrique</strong><p>Chirurgie enfant</p></div>
-                <div class="specialty-item"><strong>Anatomie Pathologique</strong><p>Analyses tissulaires</p></div>
-                <div class="specialty-item"><strong>Anesthésie-Réanimation</strong><p>Soins intensifs</p></div>
-                <div class="specialty-item"><strong>Nutrition</strong><p>Nutrition clinique</p></div>
-                <div class="specialty-item"><strong>Médecine Interne</strong><p>Pathologies complexes</p></div>
+                <div class="specialty-item"><strong>Chirurgie Pédiatrique</strong><p>Chirurgie de l'enfant</p></div>
+                <div class="specialty-item"><strong>Anatomie Pathologique</strong><p>Analyses microscopiques de tissus</p></div>
+                <div class="specialty-item"><strong>Anesthésie-Réanimation</strong><p>Anesthésie et soins intensifs</p></div>
+                <div class="specialty-item"><strong>Nutrition</strong><p>Service de nutrition clinique</p></div>
+                <div class="specialty-item"><strong>Médecine Interne</strong><p>Pathologies adultes complexes</p></div>
             </div>
         </div>
     </section>
 
     <section id="poles" class="bg-white">
         <div class="container">
-            <h2 class="section-title animate-on-scroll">Pôles techniques</h2>
+            <h2 class="section-title animate-on-scroll">Pôles techniques & plateaux spécialisés</h2>
             <div class="pole-card animate-on-scroll">
-                <h3>Pôle Chirurgie <span class="badge-247">Urgence & programmé</span></h3>
+                <h3>Pôle Chirurgie <span class="badge-247">Chirurgie programmée & d'urgence</span></h3>
                 <div class="pole-list">
-                    <span class="pole-tag" data-surgery="viscérale">Chirurgie Générale</span>
-                    <span class="pole-tag" data-surgery="plastique">Chirurgie Plastique</span>
+                    <span class="pole-tag" data-surgery="viscérale">Chirurgie Générale / Digestive</span>
+                    <span class="pole-tag" data-surgery="plastique">Chirurgie Plastique / De l'obésité</span>
                     <span class="pole-tag" data-surgery="cancers">Chirurgie des cancers</span>
                     <span class="pole-tag" data-surgery="vasculaire">Chirurgie Vasculaire</span>
                     <span class="pole-tag" data-surgery="thoracique">Chirurgie Thoracique</span>
-                    <span class="pole-tag" data-surgery="laparoscopique">Vidéo-chirurgie</span>
+                    <span class="pole-tag" data-surgery="laparoscopique">Techniques de vidéo-chirurgie</span>
                 </div>
             </div>
-            <div class="pole-card animate-on-scroll"><h3>Laboratoire d'Anatomie-Pathologie</h3><div class="pole-list"><span class="pole-tag">Anatomie pathologique</span><span class="pole-tag">Cytologie</span><span class="pole-tag">Immuno-histochimie</span></div><p style="margin-top: 12px; color: #475569; font-size: 0.85rem;">Analyses pour diagnostic des cancers.</p></div>
-            <div class="pole-card animate-on-scroll"><h3>Centre d'Hémodialyse <span class="badge-247">24h/24</span></h3><div class="pole-list"><span class="pole-tag">Hémodialyse 24h/24</span><span class="pole-tag">Pose de cathéter</span><span class="pole-tag">Prise en charge dialyse</span></div><p style="margin-top: 12px; color: #475569; font-size: 0.85rem;">Service disponible 24h/24, 7j/7.</p></div>
+            <div class="pole-card animate-on-scroll"><h3>Laboratoire d'Anatomie-Pathologie</h3><div class="pole-list"><span class="pole-tag">Anatomie pathologique</span><span class="pole-tag">Cytologie</span><span class="pole-tag">Immuno-histochimie</span></div><p style="margin-top: 12px; color: #475569; font-size: 0.85rem;">Analyses précises pour le diagnostic des cancers et pathologies tissulaires.</p></div>
+            <div class="pole-card animate-on-scroll"><h3>Centre d'Hémodialyse <span class="badge-247">24h/24 - 7j/7</span></h3><div class="pole-list"><span class="pole-tag">Hémodialyse 24h/24</span><span class="pole-tag">Pose de cathéter tunnelisé</span><span class="pole-tag">Prise en charge dialyse</span></div><p style="margin-top: 12px; color: #475569; font-size: 0.85rem;">Service d'hémodialyse disponible 24 heures sur 24, 7 jours sur 7.</p></div>
             <div class="pole-card animate-on-scroll"><h3>Imagerie Médicale</h3><div class="pole-list"><span class="pole-tag">Échographie</span><span class="pole-tag">Radios</span><span class="pole-tag">Scanner</span></div></div>
         </div>
     </section>
@@ -1357,8 +1217,8 @@
         <div class="container">
             <h2 class="section-title animate-on-scroll">Prendre rendez-vous</h2>
             <div class="rdv-grid">
-                <div class="info-box animate-on-scroll"><h3>Formulaire de rendez-vous</h3><form id="whatsappForm"><div class="form-group"><input type="text" id="nom" placeholder="Nom complet" required></div><div class="form-group"><select id="service"><option>Consultation générale</option><option>Cardiologie</option><option>Gynécologie</option><option>Pédiatrie</option><option>Chirurgie générale</option><option>Neurologie</option><option>Médecine interne</option><option>Dermatologie</option><option>Pneumologie</option><option>Néphrologie</option><option>ORL</option><option>Orthopédie</option><option>Rhumatologie</option><option>Urologie</option></select></div><div class="form-group"><textarea id="motif" rows="3" placeholder="Date et horaire souhaités"></textarea></div><button type="submit" class="btn-rdv" id="submitRdvBtn">Envoyer la demande</button></form><p style="font-size:0.65rem; text-align:center; margin-top:12px;">Redirection vers WhatsApp</p></div>
-                <div><div class="info-box animate-on-scroll"><h3>Horaires</h3><p><strong>Consultations :</strong><br>Lun-Ven : 7h30 – 19h30<br>Sam : 7h30 – 12h00</p><p style="margin-top:8px;"><strong>Urgences 24/24</strong><br>Sans rendez-vous</p><p><strong>Hémodialyse :</strong> 24h/24</p></div><div class="info-box animate-on-scroll"><h3>Assurances</h3><p>ASCOMA, GA, MAADO, MUTAB, MUPOL, OLEA, MCI, SONAR, SUNU, UAB, VISTA, CNSS, Inami Burkina.</p></div></div>
+                <div class="info-box animate-on-scroll"><h3>Formulaire de rendez-vous</h3><form id="whatsappForm"><div class="form-group"><input type="text" id="nom" placeholder="Nom complet" required></div><div class="form-group"><select id="service"><option>Consultation générale</option><option>Cardiologie</option><option>Gynécologie - Obstétrique</option><option>Pédiatrie</option><option>Chirurgie générale</option><option>Neurologie</option><option>Médecine interne</option><option>Dermatologie</option><option>Pneumologie</option><option>Néphrologie</option><option>ORL</option><option>Orthopédie</option><option>Rhumatologie</option><option>Urologie</option></select></div><div class="form-group"><textarea id="motif" rows="3" placeholder="Date souhaitée et horaire de préférence"></textarea></div><button type="submit" class="btn-rdv" id="submitRdvBtn">Envoyer la demande</button></form><p style="font-size:0.65rem; text-align:center; margin-top:12px;">Vous serez redirigé vers WhatsApp</p></div>
+                <div><div class="info-box animate-on-scroll"><h3>Horaires d'ouverture</h3><p><strong>Consultations :</strong><br>Lundi – Vendredi : 7h30 – 19h30<br>Samedi : 7h30 – 12h00</p><p style="margin-top:8px;"><strong>Urgences 24/24 – 7j/7</strong><br>Sans rendez-vous, prise en charge immédiate.</p><p><strong>Hémodialyse :</strong> 24h/24 et 7j/7</p></div><div class="info-box animate-on-scroll"><h3>Assurances acceptées</h3><p><strong>Partenaires :</strong> ASCOMA, GA, MAADO, MUTAB, MUPOL, OLEA, MCI, SONAR, SUNU, UAB, VISTA.<br><strong>Autres :</strong> CNSS, Inami Burkina, mutuelles.</p></div></div>
             </div>
         </div>
     </section>
@@ -1391,11 +1251,11 @@
     </section>
 
     <section id="contact" class="bg-light">
-        <div class="container"><h2 class="section-title animate-on-scroll">Contact & localisation</h2><div class="rdv-grid"><div><div class="info-box animate-on-scroll"><h3>Adresse</h3><p>Boulevard des Tensoba, Secteur n°25<br>Cissin, Ouagadougou<br>Burkina Faso</p><p>11 BP 1104 CMS Ouagadougou 11</p></div><div class="info-box animate-on-scroll"><h3>Téléphone</h3><p><strong>Urgences 24/24 :</strong><br><a href="tel:51000647" style="color:#1D8B5D; font-size:1.1rem; text-decoration:none;" data-tooltip="Appel gratuit 24h/24">51 00 06 47</a><br><strong>Standard :</strong> <a href="tel:78365657" style="color:#1D8B5D;" data-tooltip="Appel standard">78 36 56 57</a></p></div><div class="info-box animate-on-scroll"><h3>WhatsApp</h3><p><a href="https://wa.me/22651000647" style="color:#25D366;" data-tooltip="Cliquez pour envoyer un message">51 00 06 47</a><br>Rendez-vous et questions</p></div><div class="info-box animate-on-scroll"><h3>Email</h3><p><a href="mailto:clinwend@gmail.com">clinwend@gmail.com</a></p></div></div><div><div class="info-box animate-on-scroll"><h3>Plan d'accès</h3><div style="border-radius: 24px; overflow: hidden; height: 260px;"><iframe src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d15590.747808531722!2d-1.5628767!3d12.3368449!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0xe2e967403b1226b%3A0xd4fdc5490ba66f45!2sClinique%20WendToin!5e0!3m2!1sfr!2sbf!4v1777369119568!5m2!1sfr!2sbf" width="100%" height="260" style="border:0;" allowfullscreen="" loading="lazy"></iframe></div><p style="margin-top:10px;">Boulevard des Tensoba, Secteur 25, Cissin</p></div></div></div></div>
+        <div class="container"><h2 class="section-title animate-on-scroll">Contact & localisation</h2><div class="rdv-grid"><div><div class="info-box animate-on-scroll"><h3>Adresse</h3><p>Boulevard des Tensoba, Secteur n°25<br>Cissin, Ouagadougou<br>Burkina Faso</p><p>11 BP 1104 CMS Ouagadougou 11</p></div><div class="info-box animate-on-scroll"><h3>Téléphone</h3><p><strong>Urgences 24/24 :</strong><br><a href="tel:51000647" style="color:#1D8B5D; font-size:1.1rem; text-decoration:none;">51 00 06 47</a><br><strong>Standard :</strong> <a href="tel:78365657" style="color:#1D8B5D;">78 36 56 57</a></p></div><div class="info-box animate-on-scroll"><h3>WhatsApp</h3><p><a href="https://wa.me/22651000647" style="color:#25D366;">51 00 06 47</a><br>Pour rendez-vous et questions rapides</p></div><div class="info-box animate-on-scroll"><h3>Email</h3><p><a href="mailto:clinwend@gmail.com">clinwend@gmail.com</a></p></div></div><div><div class="info-box animate-on-scroll"><h3>Plan d'accès</h3><div style="border-radius: 24px; overflow: hidden; height: 260px;"><iframe src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d15590.747808531722!2d-1.5628767!3d12.3368449!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0xe2e967403b1226b%3A0xd4fdc5490ba66f45!2sClinique%20WendToin!5e0!3m2!1sfr!2sbf!4v1777369119568!5m2!1sfr!2sbf" width="100%" height="260" style="border:0;" allowfullscreen="" loading="lazy"></iframe></div><p style="margin-top:10px;">Boulevard des Tensoba, Secteur 25, Cissin</p></div></div></div></div>
     </section>
 </main>
 
-<footer><div class="container"><div class="footer-grid"><div><h4 style="color: #1D8B5D;">Clinique WENDTOIN</h4><p>Boulevard des Tensoba, Secteur 25<br>Cissin, Ouagadougou<br>Tél: <a href="tel:51000647" style="color:#1D8B5D;">51 00 06 47</a><br>Email: clinwend@gmail.com</p></div><div><h4 style="color: #1D8B5D;">Urgences 24/24</h4><p><strong><a href="tel:51000647" style="color:#1D8B5D;">51 00 06 47</a></strong></p><p>WhatsApp : <a href="https://wa.me/22651000647" style="color:#1D8B5D;">51 00 06 47</a></p></div><div><h4 style="color: #1D8B5D;">Horaires</h4><p>Lun-Ven : 7h30-19h30<br>Sam : 7h30-12h</p><p><strong>Hémodialyse :</strong> 24h/24</p></div><div><h4 style="color: #1D8B5D;">Liens</h4><p><a href="#rdv">Prendre RDV</a><br><a href="#equipe">Notre équipe</a><br><a href="#gallery">Galerie</a><br><a href="#video">Vidéos</a><br><a href="#contact">Nous trouver</a></p></div></div><div style="text-align:center; margin-top:30px; padding-top:15px; border-top:1px solid #334155;"><p>&copy; 2026 Clinique WENDTOIN – Tous droits réservés</p></div></div></footer>
+<footer><div class="container"><div class="footer-grid"><div><h4 style="color: #1D8B5D;">Clinique WENDTOIN</h4><p>Boulevard des Tensoba, Secteur 25<br>Cissin, Ouagadougou<br>Tél: <a href="tel:51000647" style="color:#1D8B5D;">51 00 06 47</a><br>Email: clinwend@gmail.com</p></div><div><h4 style="color: #1D8B5D;">Urgences 24/24</h4><p><strong><a href="tel:51000647" style="color:#1D8B5D;">51 00 06 47</a></strong></p><p>WhatsApp : <a href="https://wa.me/22651000647" style="color:#1D8B5D;">51 00 06 47</a></p></div><div><h4 style="color: #1D8B5D;">Horaires consultations</h4><p>Lun-Ven : 7h30-19h30<br>Sam : 7h30-12h</p><p><strong>Hémodialyse :</strong> 24h/24</p></div><div><h4 style="color: #1D8B5D;">Liens rapides</h4><p><a href="#rdv">Prendre RDV</a><br><a href="#equipe">Notre équipe</a><br><a href="#gallery">Galerie</a><br><a href="#video">Vidéos</a><br><a href="#contact">Nous trouver</a></p></div></div><div style="text-align:center; margin-top:30px; padding-top:15px; border-top:1px solid #334155;"><p>&copy; 2026 Clinique WENDTOIN – Tous droits réservés</p></div></div></footer>
 
 <div id="surgeryModal" class="modal"><div class="modal-content"><span class="close-modal">&times;</span><div class="modal-header"><h3><span id="modalTitle">Chirurgie</span></h3></div><div class="modal-body" id="modalBody"><p>Chargement...</p></div></div></div>
 
@@ -1407,10 +1267,10 @@
 <script>
     // ==================== ÉQUIPE ====================
     const teamMembers = [
-        { name: "Pr Gilbert BONKOUGOU", position: "Directeur Général", desc: "Professeur agrégé en chirurgie générale. Pionnier de la laparoscopie.", image: "cliniquewendtoin/pr_gilbert.jpeg" },
+        { name: "Pr Gilbert BONKOUGOU", position: "Directeur Général", desc: "Professeur agrégé en chirurgie générale. Pionnier de la laparoscopie au Burkina Faso.", image: "cliniquewendtoin/pr_gilbert.jpeg" },
         { name: "Dr Lionelle TIAHOUN", position: "Médecin généraliste", desc: "Prise en charge des consultations générales et des urgences.", image: "cliniquewendtoin/Lionelle.jpg" },
-        { name: "Agnès COMPAORE", position: "Surveillante générale", desc: "Coordination des équipes soignantes.", image: "https://placehold.co/400x400/0077A4/white?text=Agn%C3%A8s" },
-        { name: "Absetou KABORE", position: "Secrétaire", desc: "Accueil, gestion des rendez-vous.", image: "https://placehold.co/400x400/1D8B5D/white?text=Absetou" }
+        { name: "Agnès COMPAORE", position: "Surveillante générale", desc: "Surveillante d'unité de soins. Coordination des équipes soignantes.", image: "https://placehold.co/400x400/0077A4/white?text=Agn%C3%A8s" },
+        { name: "Absetou KABORE", position: "Secrétaire", desc: "Accueil, gestion des rendez-vous et administration.", image: "https://placehold.co/400x400/1D8B5D/white?text=Absetou" }
     ];
 
     const teamGrid = document.getElementById('teamGrid');
@@ -1447,7 +1307,7 @@
         galleryImages.forEach(imgSrc => {
             const item = document.createElement('div');
             item.className = 'gallery-item animate-on-scroll';
-            item.innerHTML = `<img src="${imgSrc}" alt="Clinique" class="gallery-img" onerror="this.src='https://placehold.co/400x300/0077A4/white?text=Photo'">`;
+            item.innerHTML = `<img src="${imgSrc}" alt="Clinique WENDTOIN" class="gallery-img" onerror="this.src='https://placehold.co/400x300/0077A4/white?text=Photo'">`;
             item.addEventListener('click', () => { modalImage.src = imgSrc; imageModal.style.display = 'flex'; });
             galleryGrid.appendChild(item);
         });
@@ -1457,20 +1317,20 @@
 
     // ==================== VIDÉOS ====================
     const allVideos = [
-        { title: "Pr Gilbert - Maladie hémorroïdaire", desc: "Les hémorroïdes expliquées", url: "https://web.facebook.com/reel/645204957720787" },
-        { title: "Unité de dialyse", desc: "Prise en charge insuffisance rénale", url: "https://web.facebook.com/reel/879902179764068" },
-        { title: "Neuro monitoring thyroïdien", desc: "Sécurité lors de thyroïdectomie", url: "https://web.facebook.com/reel/1608565729972155" },
-        { title: "Chirurgie de l'obésité", desc: "Sleeve gastrectomie", url: "https://web.facebook.com/reel/2537992576496661" },
-        { title: "Pr Gilbert - Varices", desc: "Varices membres inférieurs", url: "https://web.facebook.com/reel/1634296984276574" },
-        { title: "Obésité et santé", desc: "Liens avec diabète, hypertension", url: "https://web.facebook.com/reel/1662097440846319" },
-        { title: "Dr Natacha - AVC", desc: "Accident vasculaire cérébral", url: "https://web.facebook.com/reel/610483310353530" },
-        { title: "Dr Marcel - Asthme", desc: "Maladie respiratoire", url: "https://web.facebook.com/reel/743148739906723" },
-        { title: "Dr Nadia - Lombalgie", desc: "Maux de reins", url: "https://web.facebook.com/reel/929689517848124" }
+        { title: "Pr Gilbert BONKOUGOU - Maladie hémorroïdaire", desc: "Les hémorroïdes expliquées par le Pr Gilbert BONKOUGOU", url: "https://web.facebook.com/reel/645204957720787" },
+        { title: "Unité de dialyse - Clinique WENDTOIN", desc: "Prise en charge des insuffisances rénales aiguës et chroniques", url: "https://web.facebook.com/reel/879902179764068" },
+        { title: "Neuro monitoring - Thyroïdectomie sécurisée", desc: "Recherche du nerf récurrent lors de la chirurgie thyroïdienne", url: "https://web.facebook.com/reel/1608565729972155" },
+        { title: "Chirurgie de l'obésité - Sleeve gastrectomie", desc: "Opération classique donnant d'excellents résultats pour la perte de poids", url: "https://web.facebook.com/reel/2537992576496661" },
+        { title: "Pr Gilbert BONKOUGOU - Varices des membres inférieurs", desc: "Prise en charge des varices", url: "https://web.facebook.com/reel/1634296984276574" },
+        { title: "Obésité : un réel problème de santé", desc: "Liens avec diabète, douleurs articulaires, hypertension, maladies respiratoires", url: "https://web.facebook.com/reel/1662097440846319" },
+        { title: "Dr Natacha OUEDRAOGO - Accident vasculaire cérébral (AVC)", desc: "Neurologue, elle nous parle de cette maladie qui fait peur", url: "https://web.facebook.com/reel/610483310353530" },
+        { title: "Dr Marcel Kuiré - L'asthme", desc: "Maladie respiratoire fréquente qui peut être grave si non diagnostiquée", url: "https://web.facebook.com/reel/743148739906723" },
+        { title: "Dr Nadia TOE/ROUAMBA - Lombalgie (maux de reins)", desc: "Spécialiste en Rhumatologie explique les causes diverses", url: "https://web.facebook.com/reel/929689517848124" }
     ];
 
     let visibleVideos = 4;
     const videoGrid = document.getElementById('videoGrid');
-    const showMoreBtn = document.getElementById('showMoreVideos');
+    let showMoreBtn = document.getElementById('showMoreVideos');
 
     function displayVideos() {
         if (!videoGrid) return;
@@ -1494,12 +1354,13 @@
         }
     }
 
+    // Nettoyage et recréation du bouton pour éviter les doublons d'écouteurs
     if (showMoreBtn) {
         const newBtn = showMoreBtn.cloneNode(true);
         showMoreBtn.parentNode.replaceChild(newBtn, showMoreBtn);
-        const finalBtn = document.getElementById('showMoreVideos');
-        if (finalBtn) {
-            finalBtn.addEventListener('click', () => {
+        showMoreBtn = document.getElementById('showMoreVideos');
+        if (showMoreBtn) {
+            showMoreBtn.addEventListener('click', function() {
                 visibleVideos += 4;
                 displayVideos();
             });
@@ -1507,48 +1368,73 @@
     }
     displayVideos();
 
-    // ==================== MODAL CHIRURGIE ====================
+    // ==================== MODAL CHIRURGIE (DÉTAILS COMPLETS) ====================
     const surgeryDetails = {
-        'viscérale': { title: 'Chirurgie Générale', content: '<p>Hernies, appendicite, pathologies digestives.</p><div class="info-note">Pr Gilbert BONKOUGOU</div>' },
-        'plastique': { title: 'Chirurgie Plastique', content: '<p>Liposuccion, abdominoplastie, chirurgie obésité.</p>' },
-        'cancers': { title: 'Chirurgie des Cancers', content: '<p>Tumeurs digestives, gynécologiques, urologiques.</p>' },
-        'vasculaire': { title: 'Chirurgie Vasculaire', content: '<p>Varices, fistules pour dialyse.</p>' },
-        'thoracique': { title: 'Chirurgie Thoracique', content: '<p>Pathologies pulmonaires, thyroïde.</p>' },
-        'laparoscopique': { title: 'Vidéo-chirurgie', content: '<p>Chirurgie mini-invasive.</p>' }
+        'viscérale': { 
+            title: 'Chirurgie Générale / Digestive', 
+            content: '<p><strong>Chirurgie générale et digestive</strong> prend en charge les pathologies des organes de l\'abdomen.</p><ul><li>Hernies et Éventrations</li><li>Pathologies des organes : Œsophage, Estomac, Intestins, Rate, Vésicule biliaire</li><li>Appendicite, Pathologies utérines, Affections anales</li></ul><div class="info-note">Pr Gilbert BONKOUGOU - Chirurgien référent</div>' 
+        },
+        'plastique': { 
+            title: 'Chirurgie Plastique / De l\'obésité', 
+            content: '<p><strong>Chirurgie plastique et de l\'obésité</strong> comprend :</p><ul><li>Chirurgie plastique : Plastie des seins, Liposuccion, Abdominoplastie, BBL</li><li>Chirurgie de l\'obésité : Sleeve gastrectomie, Bypass gastrique, Ballon intragastrique</li></ul><div class="info-note">Consultation préalable obligatoire</div>' 
+        },
+        'cancers': { 
+            title: 'Chirurgie des Cancers', 
+            content: '<p><strong>Chirurgie oncologique</strong> prend en charge les tumeurs solides.</p><ul><li>Cancers digestifs (côlon, estomac, pancréas, foie)</li><li>Cancers gynécologiques et urologiques</li><li>Cancers thyroïdiens et surrénaliens</li><li>Tumeurs du sein</li></ul><div class="info-note">Prise en charge multidisciplinaire</div>' 
+        },
+        'vasculaire': { 
+            title: 'Chirurgie Vasculaire', 
+            content: '<p><strong>Chirurgie vasculaire</strong> traite les pathologies des vaisseaux sanguins.</p><ul><li>Varices (stripping, laser endoveineux, sclérothérapie)</li><li>Fistules pour dialyse (confection et entretien)</li><li>Pathologies carotidiennes (prévention AVC)</li><li>Artériopathie oblitérante des membres</li></ul><div class="info-note">Urgences vasculaires 24h/24</div>' 
+        },
+        'thoracique': { 
+            title: 'Chirurgie Thoracique', 
+            content: '<p><strong>Chirurgie thoracique</strong> prend en charge les affections du thorax.</p><ul><li>Pathologies pulmonaires (cancer, nodules, pneumothorax)</li><li>Chirurgie de la thyroïde (goître, hyperthyroïdie, nodules)</li><li>Médiastin (tumeurs thymiques, péricardectomie)</li><li>Paroi thoracique</li></ul><div class="info-note">Techniques vidéo-assistées (VATS)</div>' 
+        },
+        'laparoscopique': { 
+            title: 'Techniques de Vidéo-Chirurgie', 
+            content: '<p><strong>Chirurgie mini-invasive</strong> révolutionne la prise en charge chirurgicale.</p><ul><li>Laparoscopie : interventions par petites incisions</li><li>Hystéroscopie : exploration et chirurgie de l\'utérus par voie naturelle</li></ul><div class="info-note">Pr Gilbert BONKOUGOU - Pionnier de la laparoscopie</div>' 
+        }
     };
+    
     const modal = document.getElementById('surgeryModal');
     const modalTitle = document.getElementById('modalTitle');
     const modalBody = document.getElementById('modalBody');
     const closeModalBtn = document.querySelector('.close-modal');
+    
     document.querySelectorAll('.pole-tag[data-surgery]').forEach(tag => {
         tag.addEventListener('click', (e) => {
             e.stopPropagation();
-            const detail = surgeryDetails[tag.getAttribute('data-surgery')];
-            if (detail) { modalTitle.innerHTML = detail.title; modalBody.innerHTML = detail.content; modal.style.display = 'flex'; }
+            const key = tag.getAttribute('data-surgery');
+            const detail = surgeryDetails[key];
+            if (detail) {
+                modalTitle.innerHTML = detail.title;
+                modalBody.innerHTML = detail.content;
+                modal.style.display = 'flex';
+            }
         });
     });
+    
     const closeModal = () => { modal.style.display = 'none'; };
     if (closeModalBtn) closeModalBtn.addEventListener('click', closeModal);
     window.addEventListener('click', (e) => { if (e.target === modal) closeModal(); });
     document.addEventListener('keydown', (e) => { if (e.key === 'Escape' && modal.style.display === 'flex') closeModal(); });
     
-    // ==================== ANIMATIONS AMÉLIORÉES AU SCROLL ====================
+    // ==================== ANIMATIONS ====================
     const animateElements = document.querySelectorAll('.animate-on-scroll');
     
-    const improvedObserver = new IntersectionObserver((entries) => {
+    const observer = new IntersectionObserver((entries) => {
         entries.forEach((entry, index) => {
             if (entry.isIntersecting) {
                 setTimeout(() => {
                     entry.target.classList.add('visible');
                 }, index * 60);
-                improvedObserver.unobserve(entry.target);
+                observer.unobserve(entry.target);
             }
         });
     }, { threshold: 0.15, rootMargin: '0px 0px -50px 0px' });
     
-    animateElements.forEach(el => improvedObserver.observe(el));
+    animateElements.forEach(el => observer.observe(el));
     
-    // Header scrolled effect
     window.addEventListener('scroll', () => { 
         document.querySelector('header')?.classList.toggle('scrolled', window.scrollY > 50); 
     });
@@ -1569,7 +1455,7 @@
     
     // Formulaire WhatsApp
     const whatsappForm = document.getElementById('whatsappForm');
-    if (whatsappForm) whatsappForm.addEventListener('submit', function(e) { e.preventDefault(); const nom = document.getElementById('nom'); if (!nom.value.trim()) { nom.classList.add('form-error'); setTimeout(() => nom.classList.remove('form-error'), 500); alert('Veuillez remplir votre nom'); return; } const service = document.getElementById('service').value; const motif = document.getElementById('motif').value; let message = `Bonjour Clinique WENDTOIN,%0A%0A Demande RDV%0A Nom : ${nom.value.trim()}%0A Service : ${service}%0A`; if (motif) message += ` Message : ${motif}%0A`; message += `%0AMerci.`; const btn = document.getElementById('submitRdvBtn'); btn.classList.add('btn-loading'); btn.innerHTML = 'Envoi...'; setTimeout(() => { window.open(`https://wa.me/22651000647?text=${message}`, '_blank'); whatsappForm.reset(); btn.classList.remove('btn-loading'); btn.innerHTML = 'Envoyer la demande'; }, 500); });
+    if (whatsappForm) whatsappForm.addEventListener('submit', function(e) { e.preventDefault(); const nom = document.getElementById('nom'); if (!nom.value.trim()) { nom.classList.add('form-error'); setTimeout(() => nom.classList.remove('form-error'), 500); alert('Veuillez remplir votre nom'); return; } const service = document.getElementById('service').value; const motif = document.getElementById('motif').value; let message = `Bonjour Clinique WENDTOIN,%0A%0A Demande de rendez-vous%0A Nom : ${nom.value.trim()}%0A Service : ${service}%0A`; if (motif) message += ` Message : ${motif}%0A`; message += `%0AMerci de me confirmer un créneau.`; const btn = document.getElementById('submitRdvBtn'); btn.classList.add('btn-loading'); btn.innerHTML = 'Envoi en cours...'; setTimeout(() => { window.open(`https://wa.me/22651000647?text=${message}`, '_blank'); whatsappForm.reset(); btn.classList.remove('btn-loading'); btn.innerHTML = 'Envoyer la demande'; }, 500); });
     
     // Particules médicales
     function initMedicalParticles() { const canvas = document.getElementById('medicalParticles'); if (!canvas) return; const ctx = canvas.getContext('2d'); let particles = []; const container = canvas.parentElement; const resizeCanvas = () => { const rect = container.getBoundingClientRect(); canvas.width = rect.width; canvas.height = rect.height; }; class Particle { constructor(w, h) { this.x = Math.random() * w; this.y = Math.random() * h + h; this.size = Math.random() * 20 + 10; this.speedY = Math.random() * 0.6 + 0.2; this.speedX = (Math.random() - 0.5) * 0.2; this.opacity = Math.random() * 0.2 + 0.05; } update(w, h) { this.y -= this.speedY; this.x += this.speedX; if (this.y + 40 < 0) { this.y = h + 40; this.x = Math.random() * w; } if (this.x > w + 40) this.x = -40; if (this.x < -40) this.x = w + 40; } draw(ctx) { ctx.globalAlpha = this.opacity; } } function init() { particles = []; for (let i=0; i<30; i++) particles.push(new Particle(canvas.width, canvas.height)); } function animate() { if (!canvas || !ctx) return; ctx.clearRect(0, 0, canvas.width, canvas.height); particles.forEach(p => { p.update(canvas.width, canvas.height); p.draw(ctx); }); requestAnimationFrame(animate); } resizeCanvas(); init(); animate(); window.addEventListener('resize', () => { resizeCanvas(); init(); }); } if (document.getElementById('medicalParticles')) initMedicalParticles();
