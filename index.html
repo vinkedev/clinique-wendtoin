@@ -150,10 +150,9 @@
         }
 
         header.scrolled {
-            background: rgba(255, 255, 255, 0.92);
+            background: rgba(255, 255, 255, 0.95);
             backdrop-filter: blur(12px);
             box-shadow: 0 8px 30px rgba(0,0,0,0.12);
-            border-bottom: 1px solid rgba(29, 139, 93, 0.2);
         }
 
         .header-container {
@@ -289,7 +288,7 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background: rgba(0, 0, 0, 0.3);
+            background: rgba(0, 0, 0, 0.4);
             z-index: 1;
         }
 
@@ -445,6 +444,7 @@
 
         section {
             padding: 50px 0;
+            background: white;
         }
 
         .section-title {
@@ -499,6 +499,7 @@
             box-shadow: 0 10px 30px rgba(0,0,0,0.06);
             transition: transform 0.3s ease, box-shadow 0.3s ease;
             overflow: hidden;
+            border: 1px solid #eef2f6;
         }
 
         .card:hover {
@@ -607,12 +608,12 @@
         }
 
         .info-box {
-            background: white;
+            background: #f8fafc;
             padding: 18px;
             border-radius: 24px;
             margin-bottom: 15px;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.04);
             transition: transform 0.3s ease, box-shadow 0.3s ease;
+            border: 1px solid #eef2f6;
         }
 
         .info-box:hover {
@@ -699,7 +700,7 @@
         }
 
         .specialty-item {
-            background: white;
+            background: #f8fafc;
             border-radius: 16px;
             padding: 12px 16px;
             border-left: 4px solid;
@@ -707,6 +708,7 @@
             cursor: pointer;
         }
         .specialty-item:hover {
+            background: white;
             box-shadow: 0 8px 20px rgba(0,0,0,0.1);
             transform: translateX(5px);
         }
@@ -718,6 +720,7 @@
         .specialty-item p {
             font-size: 0.8rem;
             margin: 0;
+            color: #475569;
         }
 
         .badge-247 {
@@ -739,12 +742,13 @@
         }
 
         .team-card {
-            background: white;
+            background: #f8fafc;
             border-radius: 24px;
             overflow: hidden;
             box-shadow: 0 10px 25px rgba(0,0,0,0.08);
             transition: transform 0.3s ease, box-shadow 0.3s ease;
             text-align: center;
+            border: 1px solid #eef2f6;
         }
 
         .team-card:hover {
@@ -786,7 +790,7 @@
 
         /* ========== GALERIE ========== */
         .gallery-section {
-            background: #f8fafc;
+            background: white;
         }
 
         .gallery-title {
@@ -832,12 +836,13 @@
         }
 
         .gallery-item {
-            background: white;
+            background: #f8fafc;
             border-radius: 20px;
             overflow: hidden;
             box-shadow: 0 10px 25px rgba(0,0,0,0.08);
             transition: transform 0.3s ease;
             cursor: pointer;
+            border: 1px solid #eef2f6;
         }
 
         .gallery-item:hover {
@@ -907,13 +912,14 @@
             margin-top: 20px;
         }
         .video-card {
-            background: white;
+            background: #f8fafc;
             border-radius: 24px;
             overflow: hidden;
             box-shadow: 0 10px 25px rgba(0,0,0,0.08);
             transition: transform 0.3s ease;
             cursor: pointer;
             text-align: center;
+            border: 1px solid #eef2f6;
         }
         .video-card:hover {
             transform: translateY(-6px);
@@ -1128,154 +1134,92 @@
             }
         }
 
-        /* ========== IDENTITÉ VISUELLE PAR SECTION ========== */
-        /* ===== SPÉCIALITÉS MÉDICALES — Bleu clair ===== */
-        #specialites {
-            background: linear-gradient(135deg, #f0f9ff 0%, #e6f4ff 100%);
-        }
-        #specialites .specialty-item {
-            background: white;
-            border-left-color: #0077A4;
-            box-shadow: 0 4px 12px rgba(0,119,164,0.08);
-        }
-        #specialites .specialty-item:hover {
-            border-left-color: #005a7c;
-            box-shadow: 0 8px 20px rgba(0,119,164,0.15);
-        }
-        #specialites .specialty-item strong {
-            color: #0077A4;
-        }
+        /* ========== IDENTITÉ VISUELLE PAR SECTION (fonds blancs, couleurs d'accent) ========== */
+        /* Spécialités médicales — Bleu */
         #specialites .section-title {
             color: #0077A4;
         }
         #specialites .section-title::after {
             background: linear-gradient(90deg, #0077A4, #00b4d8);
         }
+        #specialites .specialty-item {
+            border-left-color: #0077A4;
+        }
+        #specialites .specialty-item strong {
+            color: #0077A4;
+        }
 
-        /* ===== SPÉCIALITÉS CHIRURGICALES — Vert foncé ===== */
-        #specialites-chirurgicales {
-            background: linear-gradient(135deg, #f0faf5 0%, #e6f7ee 100%);
-        }
-        #specialites-chirurgicales .specialty-item {
-            background: white;
-            border-left-color: #1D8B5D;
-            box-shadow: 0 4px 12px rgba(29,139,93,0.08);
-        }
-        #specialites-chirurgicales .specialty-item:hover {
-            border-left-color: #146b48;
-            box-shadow: 0 8px 20px rgba(29,139,93,0.18);
-            transform: translateX(6px);
-        }
-        #specialites-chirurgicales .specialty-item strong {
-            color: #1D8B5D;
-        }
+        /* Spécialités chirurgicales — Vert */
         #specialites-chirurgicales .section-title {
             color: #1D8B5D;
         }
         #specialites-chirurgicales .section-title::after {
             background: linear-gradient(90deg, #1D8B5D, #52c41a);
         }
+        #specialites-chirurgicales .specialty-item {
+            border-left-color: #1D8B5D;
+        }
+        #specialites-chirurgicales .specialty-item strong {
+            color: #1D8B5D;
+        }
 
-        /* ===== GYNÉCOLOGIE — Rose doux ===== */
-        #gynecologie {
-            background: linear-gradient(135deg, #fff0f6 0%, #ffe6f0 100%);
-        }
-        #gynecologie .specialty-item {
-            background: white;
-            border-left-color: #e83e8c;
-            box-shadow: 0 4px 12px rgba(232,62,140,0.08);
-        }
-        #gynecologie .specialty-item:hover {
-            border-left-color: #c0256e;
-            box-shadow: 0 8px 20px rgba(232,62,140,0.15);
-        }
-        #gynecologie .specialty-item strong {
-            color: #e83e8c;
-        }
+        /* Gynécologie — Rose */
         #gynecologie .section-title {
             color: #e83e8c;
         }
         #gynecologie .section-title::after {
             background: linear-gradient(90deg, #e83e8c, #ff69b4);
         }
+        #gynecologie .specialty-item {
+            border-left-color: #e83e8c;
+        }
+        #gynecologie .specialty-item strong {
+            color: #e83e8c;
+        }
 
-        /* ===== EXPLORATIONS — Violet laboratoire ===== */
-        #explorations {
-            background: linear-gradient(135deg, #f5f0ff 0%, #ede6ff 100%);
-        }
-        #explorations .specialty-item {
-            background: white;
-            border-left-color: #6f42c1;
-            box-shadow: 0 4px 12px rgba(111,66,193,0.08);
-        }
-        #explorations .specialty-item:hover {
-            border-left-color: #5a2d9e;
-            box-shadow: 0 8px 20px rgba(111,66,193,0.15);
-        }
-        #explorations .specialty-item strong {
-            color: #6f42c1;
-        }
+        /* Explorations — Violet */
         #explorations .section-title {
             color: #6f42c1;
         }
         #explorations .section-title::after {
             background: linear-gradient(90deg, #6f42c1, #a855f7);
         }
+        #explorations .specialty-item {
+            border-left-color: #6f42c1;
+        }
+        #explorations .specialty-item strong {
+            color: #6f42c1;
+        }
 
-        /* ===== IMAGERIE — Orange technique ===== */
-        #imagerie {
-            background: linear-gradient(135deg, #fff8f0 0%, #fff0e0 100%);
-        }
-        #imagerie .specialty-item {
-            background: white;
-            border-left-color: #fd7e14;
-            box-shadow: 0 4px 12px rgba(253,126,20,0.08);
-        }
-        #imagerie .specialty-item:hover {
-            border-left-color: #dc6a00;
-            box-shadow: 0 8px 20px rgba(253,126,20,0.15);
-        }
-        #imagerie .specialty-item strong {
-            color: #fd7e14;
-        }
+        /* Imagerie — Orange */
         #imagerie .section-title {
             color: #fd7e14;
         }
         #imagerie .section-title::after {
             background: linear-gradient(90deg, #fd7e14, #ffc107);
         }
-
-        /* ===== ÉQUIPEMENTS — Gris premium ===== */
-        #poles {
-            background: linear-gradient(135deg, #1e293b 0%, #0f172a 100%);
+        #imagerie .specialty-item {
+            border-left-color: #fd7e14;
         }
+        #imagerie .specialty-item strong {
+            color: #fd7e14;
+        }
+
+        /* Équipements spécialisés — Gris premium */
         #poles .section-title {
-            color: white;
+            color: #1e293b;
         }
         #poles .section-title::after {
             background: linear-gradient(90deg, #1D8B5D, #0077A4);
         }
         #poles .specialty-item {
-            background: rgba(255,255,255,0.08);
             border-left-color: #1D8B5D;
-            backdrop-filter: blur(10px);
-            border-top: 1px solid rgba(255,255,255,0.1);
-        }
-        #poles .specialty-item:hover {
-            background: rgba(255,255,255,0.15);
-            box-shadow: 0 8px 25px rgba(0,0,0,0.3);
-            transform: translateX(6px);
         }
         #poles .specialty-item strong {
-            color: white;
-            font-size: 1rem;
-        }
-        #poles .specialty-item p {
-            color: rgba(255,255,255,0.7);
+            color: #1D8B5D;
         }
         #poles .badge-247 {
             background: #1D8B5D;
-            animation: pulse-red 2s infinite;
         }
     </style>
 </head>
@@ -1327,7 +1271,7 @@
         <div id="sliderProgress" class="slider-progress"></div>
     </section>
 
-    <section class="bg-light">
+    <section class="presentation-section">
         <div class="container">
             <div class="presentation-grid">
                 <div class="animate-on-scroll">
@@ -1351,7 +1295,7 @@
         </div>
     </div>
 
-    <section id="services" class="bg-white">
+    <section id="services">
         <div class="container">
             <h2 class="section-title animate-on-scroll">Nos services de soins</h2>
             <div class="cards-grid">
@@ -1387,7 +1331,7 @@
     </section>
 
     <!-- ========== SPÉCIALITÉS MÉDICALES ========== -->
-    <section id="specialites" class="bg-light">
+    <section id="specialites">
         <div class="container">
             <h2 class="section-title animate-on-scroll">Spécialités médicales</h2>
             <div class="specialty-grid">
@@ -1412,7 +1356,7 @@
     </section>
 
     <!-- ========== SPÉCIALITÉS CHIRURGICALES ========== -->
-    <section id="specialites-chirurgicales" class="bg-white">
+    <section id="specialites-chirurgicales">
         <div class="container">
             <h2 class="section-title animate-on-scroll">Spécialités chirurgicales</h2>
             <div class="specialty-grid">
@@ -1431,7 +1375,7 @@
     </section>
 
     <!-- ========== GYNÉCOLOGIE - OBSTÉTRIQUE ========== -->
-    <section id="gynecologie" class="bg-light">
+    <section id="gynecologie">
         <div class="container">
             <h2 class="section-title animate-on-scroll">Gynécologie - Obstétrique</h2>
             <div class="specialty-grid">
@@ -1445,7 +1389,7 @@
     </section>
 
     <!-- ========== EXPLORATIONS ========== -->
-    <section id="explorations" class="bg-white">
+    <section id="explorations">
         <div class="container">
             <h2 class="section-title animate-on-scroll">Explorations</h2>
             <div class="specialty-grid">
@@ -1456,7 +1400,7 @@
     </section>
 
     <!-- ========== IMAGERIE ========== -->
-    <section id="imagerie" class="bg-light">
+    <section id="imagerie">
         <div class="container">
             <h2 class="section-title animate-on-scroll">Imagerie</h2>
             <div class="specialty-grid">
@@ -1468,7 +1412,7 @@
     </section>
 
     <!-- ========== ÉQUIPEMENTS SPÉCIALISÉS ========== -->
-    <section id="poles" class="bg-white">
+    <section id="poles">
         <div class="container">
             <h2 class="section-title animate-on-scroll">Équipements spécialisés</h2>
             <div class="specialty-grid">
@@ -1478,7 +1422,7 @@
         </div>
     </section>
 
-    <section id="rdv" class="bg-light">
+    <section id="rdv">
         <div class="container">
             <h2 class="section-title animate-on-scroll">Prendre rendez-vous</h2>
             <div class="rdv-grid">
@@ -1488,7 +1432,7 @@
         </div>
     </section>
 
-    <section id="equipe" class="bg-white">
+    <section id="equipe">
         <div class="container">
             <h2 class="section-title animate-on-scroll">Notre équipe</h2>
             <div class="team-grid" id="teamGrid"></div>
@@ -1502,7 +1446,7 @@
         </div>
     </section>
 
-    <section id="video" class="bg-white">
+    <section id="video">
         <div class="container">
             <h2 class="section-title animate-on-scroll">Nos vidéos éducatives</h2>
             <div class="video-grid" id="videoGrid"></div>
@@ -1512,7 +1456,7 @@
         </div>
     </section>
 
-    <section id="contact" class="bg-light">
+    <section id="contact">
         <div class="container"><h2 class="section-title animate-on-scroll">Contact & localisation</h2><div class="rdv-grid"><div><div class="info-box animate-on-scroll"><h3>Adresse</h3><p>Boulevard des Tensoba, Secteur n°25<br>Cissin, Ouagadougou<br>Burkina Faso</p><p>11 BP 1104 CMS Ouagadougou 11</p></div><div class="info-box animate-on-scroll"><h3>Téléphone</h3><p><strong>Urgences 24/24 :</strong><br><a href="tel:51000647" style="color:#1D8B5D; font-size:1.1rem; text-decoration:none;">51 00 06 47</a><br><strong>Standard :</strong> <a href="tel:78365657" style="color:#1D8B5D;">78 36 56 57</a></p></div><div class="info-box animate-on-scroll"><h3>WhatsApp</h3><p><a href="https://wa.me/22651000647" style="color:#25D366;">51 00 06 47</a><br>Pour rendez-vous et questions rapides</p></div><div class="info-box animate-on-scroll"><h3>Email</h3><p><a href="mailto:clinwend@gmail.com">clinwend@gmail.com</a></p></div></div><div><div class="info-box animate-on-scroll"><h3>Plan d'accès</h3><div style="border-radius: 24px; overflow: hidden; height: 260px;"><iframe src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d15590.747808531722!2d-1.5628767!3d12.3368449!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0xe2e967403b1226b%3A0xd4fdc5490ba66f45!2sClinique%20WendToin!5e0!3m2!1sfr!2sbf!4v1777369119568!5m2!1sfr!2sbf" width="100%" height="260" style="border:0;" allowfullscreen="" loading="lazy"></iframe></div><p style="margin-top:10px;">Boulevard des Tensoba, Secteur 25, Cissin</p></div></div></div></div>
     </section>
 </main>
