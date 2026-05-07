@@ -39,6 +39,11 @@
             to { opacity: 1; transform: translateY(0); }
         }
 
+        @keyframes fadeText {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
         @keyframes pulse {
             0% { transform: scale(1); box-shadow: 0 0 0 0 rgba(29, 139, 93, 0.6); }
             70% { transform: scale(1.03); box-shadow: 0 0 0 12px rgba(29, 139, 93, 0); }
@@ -91,6 +96,11 @@
         .animate-on-scroll.visible {
             opacity: 1;
             transform: translateY(0);
+        }
+
+        /* Animation pour le texte du slider */
+        .hero-text-animate {
+            animation: fadeText 0.5s ease-out forwards;
         }
 
         [data-tooltip] {
@@ -247,6 +257,12 @@
             background: #0a2a36;
         }
 
+        @media (max-width: 768px) {
+            .hero {
+                min-height: 480px;
+            }
+        }
+
         .slideshow-container {
             position: absolute;
             top: 0;
@@ -275,7 +291,6 @@
             z-index: 1;
         }
 
-        /* Overlay sombre pour lisibilité texte */
         .hero-overlay {
             position: absolute;
             top: 0;
@@ -291,13 +306,32 @@
             z-index: 10;
             max-width: 800px;
             margin: 0 auto;
-            padding: 80px 20px;
-            animation: fadeInUp 0.9s ease-out;
-            backdrop-filter: blur(2px);
+            padding: 60px 20px;
+        }
+
+        @media (max-width: 768px) {
+            .hero-content {
+                padding: 40px 16px;
+            }
+            .hero-content h2 {
+                font-size: 1.3rem !important;
+                margin-bottom: 8px;
+            }
+            .hero-tagline {
+                font-size: 0.85rem !important;
+            }
+            .hero-description {
+                font-size: 0.75rem !important;
+                margin-bottom: 15px;
+            }
+            .btn {
+                padding: 8px 16px;
+                font-size: 0.75rem;
+            }
         }
 
         .hero-content h2 {
-            font-size: 2rem;
+            font-size: 2.2rem;
             margin-bottom: 15px;
             font-weight: 800;
             line-height: 1.2;
@@ -322,7 +356,6 @@
             text-shadow: 0 1px 4px rgba(0,0,0,0.3);
         }
 
-        /* indicateurs / dots */
         .slider-dots {
             position: absolute;
             bottom: 20px;
@@ -352,7 +385,6 @@
             border-radius: 20px;
         }
 
-        /* flèches navigation (optionnel) */
         .prev, .next {
             position: absolute;
             top: 50%;
@@ -378,10 +410,10 @@
         .next { right: 15px; }
 
         @media (max-width: 768px) {
-            .hero-content h2 { font-size: 1.5rem; }
-            .hero-description { font-size: 0.85rem; }
-            .prev, .next { padding: 8px 14px; font-size: 18px; }
-            .slider-dots { bottom: 12px; }
+            .prev, .next { padding: 6px 12px; font-size: 16px; }
+            .slider-dots { bottom: 10px; gap: 8px; }
+            .dot { width: 8px; height: 8px; }
+            .dot.active { width: 20px; }
         }
 
         /* ========== BOUTONS ========== */
@@ -423,7 +455,6 @@
             transform: translateY(-3px);
         }
 
-        /* reste des sections (identique à votre design) */
         .btn-secondary {
             background: #0077A4;
             color: white;
@@ -461,19 +492,55 @@
         .btn-rdv { background: #1D8B5D; color: white; padding: 12px 18px; border-radius: 50px; display: inline-block; width: 100%; text-align: center; font-weight: 600; border: none; cursor: pointer; font-size: 0.9rem; }
         .specialty-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 15px; margin-top: 15px; }
         .specialty-item { background: #f8fafc; border-radius: 16px; padding: 12px 16px; border-left: 4px solid #1D8B5D; transition: all 0.3s ease; }
-        .pole-card { background: linear-gradient(135deg, #f0f9ff 0%, #e6f7f0 100%); border-radius: 24px; padding: 20px; margin-bottom: 25px; }
-        .pole-tag { background: white; padding: 5px 12px; border-radius: 40px; font-size: 0.75rem; font-weight: 500; display: inline-block; margin: 4px; cursor: pointer; }
-        .team-grid, .gallery-grid, .video-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 28px; margin-top: 25px; }
-        .team-card { background: white; border-radius: 24px; overflow: hidden; text-align: center; }
+        .pole-card { background: linear-gradient(135deg, #f0f9ff 0%, #e6f7f0 100%); border-radius: 24px; padding: 20px; margin-bottom: 25px; transition: transform 0.3s ease, box-shadow 0.3s ease; }
+        .pole-card:hover { transform: translateY(-5px); box-shadow: 0 20px 35px rgba(0,0,0,0.15); }
+        .pole-card h3 { color: #0077A4; font-size: 1.2rem; margin-bottom: 15px; display: flex; align-items: center; gap: 10px; border-bottom: 2px solid #1D8B5D; padding-bottom: 8px; flex-wrap: wrap; }
+        .pole-list { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 12px; }
+        .pole-tag { background: white; padding: 5px 12px; border-radius: 40px; font-size: 0.75rem; font-weight: 500; color: #1e293b; box-shadow: 0 1px 3px rgba(0,0,0,0.1); transition: all 0.2s; cursor: pointer; display: inline-block; margin: 4px; }
+        .pole-tag:hover { background: #1D8B5D; color: white; transform: translateY(-2px); }
+        .badge-247 { background: #dc3545; color: white; padding: 2px 8px; border-radius: 20px; font-size: 0.6rem; font-weight: bold; margin-left: 8px; }
+        .team-grid, .gallery-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 28px; margin-top: 25px; }
+        .team-card { background: white; border-radius: 24px; overflow: hidden; text-align: center; box-shadow: 0 10px 25px rgba(0,0,0,0.08); transition: transform 0.3s ease; }
+        .team-card:hover { transform: translateY(-8px); }
         .team-image { width: 100%; aspect-ratio: 1 / 1; object-fit: cover; }
-        .gallery-item { border-radius: 20px; overflow: hidden; cursor: pointer; transition: 0.3s; }
+        .team-info { padding: 20px; }
+        .team-name { font-size: 1.15rem; font-weight: 700; color: #0077A4; margin-bottom: 5px; }
+        .team-position { color: #1D8B5D; font-weight: 600; font-size: 0.8rem; }
+        .gallery-item { border-radius: 20px; overflow: hidden; cursor: pointer; transition: 0.3s; box-shadow: 0 10px 25px rgba(0,0,0,0.08); }
+        .gallery-item:hover { transform: translateY(-5px); }
         .gallery-img { width: 100%; aspect-ratio: 4/3; object-fit: cover; }
-        .video-card { background: white; border-radius: 24px; overflow: hidden; cursor: pointer; text-align: center; }
+        
+        /* Vidéos */
+        .video-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 25px; margin-top: 20px; }
+        .video-card { background: white; border-radius: 24px; overflow: hidden; box-shadow: 0 10px 25px rgba(0,0,0,0.08); transition: transform 0.3s ease; cursor: pointer; text-align: center; }
+        .video-card:hover { transform: translateY(-6px); box-shadow: 0 20px 35px rgba(0,0,0,0.12); }
+        .video-thumbnail { width: 100%; aspect-ratio: 16 / 9; background: linear-gradient(145deg, #1e293b, #0f172a); display: flex; align-items: center; justify-content: center; color: white; font-size: 2.8rem; }
+        .video-info { padding: 12px; }
+        .video-title { font-weight: 600; color: #1e293b; margin-bottom: 4px; font-size: 0.85rem; }
+        .video-date { font-size: 0.65rem; color: #64748b; }
+        
         footer { background: #0f172a; color: #cbd5e1; padding: 35px 0 25px; }
         .footer-grid { display: grid; grid-template-columns: 1fr; gap: 25px; text-align: center; }
-        @media (min-width: 1024px) { .mobile-menu-btn { display: none; } nav ul { display: flex !important; flex-direction: row; position: static; background: transparent; box-shadow: none; padding: 0; gap: 25px; } nav a { padding: 0; } .rdv-grid { grid-template-columns: 1fr 1fr; gap: 45px; } .presentation-grid { grid-template-columns: 1fr 1fr; gap: 50px; } .footer-grid { grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); text-align: left; } }
+        .footer-grid a { color: #cbd5e1; text-decoration: none; transition: all 0.3s ease; }
+        .footer-grid a:hover { color: #1D8B5D; }
         .image-modal { display: none; position: fixed; z-index: 10000; left: 0; top: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.92); align-items: center; justify-content: center; }
         .close-image-modal { position: absolute; top: 20px; right: 35px; color: white; font-size: 36px; cursor: pointer; }
+        
+        @media (min-width: 1024px) { 
+            .mobile-menu-btn { display: none; } 
+            nav ul { display: flex !important; flex-direction: row; position: static; background: transparent; box-shadow: none; padding: 0; gap: 25px; } 
+            nav a { padding: 0; } 
+            .rdv-grid { grid-template-columns: 1fr 1fr; gap: 45px; } 
+            .presentation-grid { grid-template-columns: 1fr 1fr; gap: 50px; } 
+            .footer-grid { grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); text-align: left; } 
+        }
+        
+        .form-group { margin-bottom: 15px; }
+        input, select, textarea { width: 100%; padding: 10px 14px; border: 1px solid #e2e8f0; border-radius: 20px; font-family: inherit; font-size: 0.9rem; }
+        input:focus, select:focus, textarea:focus { outline: none; border-color: #1D8B5D; }
+        .form-error { animation: shake 0.3s ease-in-out; border-color: #dc3545 !important; }
+        .btn-loading { position: relative; pointer-events: none; opacity: 0.8; }
+        .btn-loading::after { content: ''; display: inline-block; width: 16px; height: 16px; border: 2px solid white; border-top-color: transparent; border-radius: 50%; animation: spin 0.6s linear infinite; margin-left: 8px; vertical-align: middle; }
     </style>
 </head>
 <body>
@@ -492,9 +559,11 @@
                 <li><a href="#accueil">Accueil</a></li>
                 <li><a href="#services">Services</a></li>
                 <li><a href="#specialites">Spécialités</a></li>
+                <li><a href="#poles">Pôles</a></li>
                 <li><a href="#rdv">RDV</a></li>
                 <li><a href="#equipe">Équipe</a></li>
                 <li><a href="#gallery">Galerie</a></li>
+                <li><a href="#video">Vidéos</a></li>
                 <li><a href="#contact">Contact</a></li>
             </ul>
         </nav>
@@ -503,11 +572,9 @@
 </header>
 
 <main>
-    <!-- SLIDER HERO avec images et texte dynamique -->
+    <!-- SLIDER HERO avec images et texte dynamique + animation fondu -->
     <section id="accueil" class="hero">
-        <div class="slideshow-container" id="heroSlider">
-            <!-- Slides injectés via JS mais on laisse structure prête -->
-        </div>
+        <div class="slideshow-container" id="heroSlider"></div>
         <div class="hero-overlay"></div>
         <div class="container" style="position: relative; z-index: 10; width: 100%;">
             <div class="hero-content" id="dynamicHeroText">
@@ -525,52 +592,84 @@
         <div class="slider-dots" id="sliderDots"></div>
     </section>
 
-    <!-- Le reste du contenu original de la clinique (préservé) -->
+    <!-- Présentation -->
     <section class="bg-light"><div class="container"><div class="presentation-grid"><div class="animate-on-scroll"><h2 class="presentation-title">Bienvenue à la Clinique WENDTOIN</h2><p>Ouverte depuis <strong>janvier 2016</strong>, la Clinique WENDTOIN est un établissement privé qui place le patient au cœur de ses priorités.</p><p style="margin-top:12px;">En plus des <strong>soins standards</strong> (consultations générales, spécialités, vaccinations), nous assurons les <strong>urgences médicales et chirurgicales</strong> 24h/24 et 7j/7 grâce à une équipe de 40 médecins généralistes et spécialistes dédiés.</p><p style="margin-top:12px;">Située au <strong>Boulevard des Tensoba, Secteur n°25, Cissin, Ouagadougou</strong>, notre clinique vous accueille dans un environnement moderne et sécurisé.</p></div><div class="image-wrapper animate-on-scroll"><img src="cliniquewendtoin/vue_wendtoin.jpg" alt="Clinique WENDTOIN" class="clinic-image" onerror="this.src='https://placehold.co/600x400/0077A4/white?text=Clinique+WENDTOIN'"></div></div></div></section>
 
+    <!-- Statistiques -->
     <div class="stats"><div class="container stats-container"><div class="animate-on-scroll"><span class="stat-number" id="stat-years">0</span><br>années d'existence</div><div class="animate-on-scroll"><span class="stat-number">24/24</span><br>Service d'urgence</div><div class="animate-on-scroll"><span class="stat-number" id="stat-doctors">0</span><br>Médecins</div></div></div>
 
-    <section id="services" class="bg-white"><div class="container"><h2 class="section-title animate-on-scroll">Nos services de soins</h2><div class="cards-grid"><div class="card animate-on-scroll"><div class="card-header"><span class="badge-category">Urgence 24/24</span></div><div class="card-title">Médecine d'urgence</div><div class="card-content"><p class="card-text">Prise en charge immédiate 24h/24, 7j/7. Équipe dédiée aux accidents, détresses respiratoires, douleurs aiguës.</p></div></div><div class="card animate-on-scroll"><div class="card-header"><span class="badge-category">Consultation</span></div><div class="card-title">Consultations générales</div><div class="card-content"><p class="card-text">Médecine générale, suivi des maladies chroniques, certificats médicaux et vaccinations.</p></div></div><div class="card animate-on-scroll"><div class="card-header"><span class="badge-category">Spécialiste</span></div><div class="card-title">Cardiologie</div><div class="card-content"><p class="card-text">Explorations cardiaques complètes : ECG, échocardiographie, Holter tensionnel.</p></div></div></div></div></section>
+    <!-- Services -->
+    <section id="services" class="bg-white"><div class="container"><h2 class="section-title animate-on-scroll">Nos services de soins</h2><div class="cards-grid"><div class="card animate-on-scroll"><div class="card-header"><span class="badge-category">Urgence 24/24</span></div><div class="card-title">Médecine d'urgence</div><div class="card-content"><p class="card-text">Prise en charge immédiate 24h/24, 7j/7. Équipe dédiée aux accidents, détresses respiratoires, douleurs aiguës.</p></div></div><div class="card animate-on-scroll"><div class="card-header"><span class="badge-category">Consultation</span></div><div class="card-title">Consultations générales</div><div class="card-content"><p class="card-text">Médecine générale, suivi des maladies chroniques, certificats médicaux et vaccinations.</p></div></div><div class="card animate-on-scroll"><div class="card-header"><span class="badge-category">Spécialiste</span></div><div class="card-title">Cardiologie</div><div class="card-content"><p class="card-text">Explorations cardiaques complètes : ECG, échocardiographie, Holter tensionnel.</p></div></div><div class="card animate-on-scroll"><div class="card-header"><span class="badge-category">Spécialiste</span></div><div class="card-title">Gynécologie - Obstétrique</div><div class="card-content"><p class="card-text">Suivi grossesse, consultations gynécologiques, accouchements.</p></div></div><div class="card animate-on-scroll"><div class="card-header"><span class="badge-category">Chirurgie</span></div><div class="card-title">Chirurgie générale</div><div class="card-content"><p class="card-text">Bloc opératoire moderne, chirurgie programmée et d'urgence.</p></div></div><div class="card animate-on-scroll"><div class="card-header"><span class="badge-category">Spécialiste</span></div><div class="card-title">Neurologie & Imagerie</div><div class="card-content"><p class="card-text">Explorations neurologiques et imagerie médicale.</p></div></div></div></div></section>
 
-    <section id="specialites" class="bg-light"><div class="container"><h2 class="section-title animate-on-scroll">Nos spécialités médicales</h2><div class="specialty-grid"><div class="specialty-item"><strong>Radiologie</strong><p>Radiographie, Échographie, Scanner</p></div><div class="specialty-item"><strong>Dermatologie</strong><p>Dermatologie médicale</p></div><div class="specialty-item"><strong>Neurologie</strong></div><div class="specialty-item"><strong>Kinésithérapie</strong><p>Rééducation fonctionnelle</p></div><div class="specialty-item"><strong>Pédiatrie</strong><p>Santé de l'enfant</p></div><div class="specialty-item"><strong>Orthopédie</strong><p>Traumatologie</p></div></div></div></section>
+    <!-- Spécialités -->
+    <section id="specialites" class="bg-light"><div class="container"><h2 class="section-title animate-on-scroll">Nos spécialités médicales</h2><div class="specialty-grid"><div class="specialty-item"><strong>Radiologie</strong><p>Radiographie, Échographie, Scanner</p></div><div class="specialty-item"><strong>Dermatologie</strong><p>Dermatologie médicale et allergologie</p></div><div class="specialty-item"><strong>Gastro-entérologie</strong><p>Explorations digestives, endoscopies</p></div><div class="specialty-item"><strong>Neurologie</strong><p>Explorations neurologiques</p></div><div class="specialty-item"><strong>Kinésithérapie</strong><p>Rééducation fonctionnelle, thérapies manuelles</p></div><div class="specialty-item"><strong>Urologie</strong><p>Prise en charge des maladies urinaires</p></div><div class="specialty-item"><strong>Orthopédie</strong><p>Traumatologie et chirurgie orthopédique</p></div><div class="specialty-item"><strong>ORL</strong><p>Consultations ORL</p></div><div class="specialty-item"><strong>Pédiatrie</strong><p>Santé de l'enfant</p></div><div class="specialty-item"><strong>Psychiatrie</strong><p>Santé mentale</p></div></div></div></section>
 
-    <section id="rdv" class="bg-white"><div class="container"><h2 class="section-title animate-on-scroll">Prendre rendez-vous</h2><div class="rdv-grid"><div class="info-box animate-on-scroll"><h3>Formulaire de rendez-vous</h3><form id="whatsappForm"><div class="form-group"><input type="text" id="nom" placeholder="Nom complet" required></div><div class="form-group"><select id="service"><option>Consultation générale</option><option>Cardiologie</option><option>Pédiatrie</option></select></div><div class="form-group"><textarea id="motif" rows="3" placeholder="Date souhaitée"></textarea></div><button type="submit" class="btn-rdv">Envoyer la demande</button></form></div><div><div class="info-box animate-on-scroll"><h3>Horaires</h3><p>Lundi – Vendredi : 7h30 – 19h30<br>Samedi : 7h30 – 12h00</p><p><strong>Urgences 24/24 – 7j/7</strong></p></div></div></div></div></section>
+    <!-- SECTION PÔLES (restaurée) -->
+    <section id="poles" class="bg-white">
+        <div class="container">
+            <h2 class="section-title animate-on-scroll">Pôles techniques & plateaux spécialisés</h2>
+            <div class="pole-card animate-on-scroll">
+                <h3>Pôle Chirurgie <span class="badge-247">Chirurgie programmée et urgence</span></h3>
+                <div class="pole-list">
+                    <span class="pole-tag" data-surgery="viscérale">Chirurgie Générale / Digestive</span>
+                    <span class="pole-tag" data-surgery="plastique">Chirurgie Plastique / De l'obésité</span>
+                    <span class="pole-tag" data-surgery="vasculaire">Chirurgie Vasculaire</span>
+                    <span class="pole-tag" data-surgery="thoracique">Chirurgie Thoracique</span>
+                    <span class="pole-tag" data-surgery="laparoscopique">Vidéo-chirurgie</span>
+                </div>
+            </div>
+            <div class="pole-card animate-on-scroll">
+                <h3>Laboratoire d'Anatomie-Pathologie</h3>
+                <div class="pole-list"><span class="pole-tag">Anatomie pathologique</span><span class="pole-tag">Cytologie</span><span class="pole-tag">Immuno-histochimie</span></div>
+                <p style="margin-top: 12px; color: #475569; font-size: 0.85rem;">Analyses précises pour le diagnostic des cancers et pathologies tissulaires.</p>
+            </div>
+            <div class="pole-card animate-on-scroll">
+                <h3>Centre d'Hémodialyse <span class="badge-247">24h/24 - 7j/7</span></h3>
+                <div class="pole-list"><span class="pole-tag">Hémodialyse 24h/24</span><span class="pole-tag">Pose de cathéter tunnelisé</span><span class="pole-tag">Prise en charge dialyse</span></div>
+                <p style="margin-top: 12px; color: #475569; font-size: 0.85rem;">Service d'hémodialyse disponible 24 heures sur 24, 7 jours sur 7.</p>
+            </div>
+            <div class="pole-card animate-on-scroll">
+                <h3>Imagerie Médicale</h3>
+                <div class="pole-list"><span class="pole-tag">Échographie</span><span class="pole-tag">Radios</span><span class="pole-tag">Scanner</span></div>
+            </div>
+        </div>
+    </section>
 
+    <!-- Rendez-vous -->
+    <section id="rdv" class="bg-white"><div class="container"><h2 class="section-title animate-on-scroll">Prendre rendez-vous</h2><div class="rdv-grid"><div class="info-box animate-on-scroll"><h3>Formulaire de rendez-vous</h3><form id="whatsappForm"><div class="form-group"><input type="text" id="nom" placeholder="Nom complet" required></div><div class="form-group"><select id="service"><option>Consultation générale</option><option>Cardiologie</option><option>Gynécologie - Obstétrique</option><option>Pédiatrie</option><option>Chirurgie générale</option><option>Neurologie</option><option>Médecine interne</option><option>Dermatologie</option></select></div><div class="form-group"><textarea id="motif" rows="3" placeholder="Date souhaitée et horaire de préférence"></textarea></div><button type="submit" class="btn-rdv" id="submitRdvBtn">Envoyer la demande</button></form><p style="font-size:0.65rem; text-align:center; margin-top:12px;">Vous serez redirigé vers WhatsApp</p></div><div><div class="info-box animate-on-scroll"><h3>Horaires d'ouverture</h3><p><strong>Consultations :</strong><br>Lundi – Vendredi : 7h30 – 19h30<br>Samedi : 7h30 – 12h00</p><p style="margin-top:8px;"><strong>Urgences 24/24 – 7j/7</strong><br>Sans rendez-vous, prise en charge immédiate.</p><p><strong>Hémodialyse :</strong> 24h/24 et 7j/7</p></div><div class="info-box animate-on-scroll"><h3>Assurances acceptées</h3><p><strong>Partenaires :</strong> ASCOMA, GA, MAADO, MUTAB, MUPOL, OLEA, MCI, SONAR, SUNU, UAB, VISTA.<br><strong>Autres :</strong> CNSS, Inami Burkina, mutuelles.</p></div></div></div></div></section>
+
+    <!-- Équipe -->
     <section id="equipe" class="bg-light"><div class="container"><h2 class="section-title animate-on-scroll">Notre équipe</h2><div class="team-grid" id="teamGrid"></div></div></section>
-    <section id="gallery" class="gallery-section"><div class="container"><h2 class="gallery-title animate-on-scroll">Galerie</h2><div class="gallery-grid" id="galleryGrid"></div></div></section>
-    <section id="contact" class="bg-light"><div class="container"><h2 class="section-title animate-on-scroll">Contact</h2><div class="rdv-grid"><div><div class="info-box"><h3>Adresse</h3><p>Boulevard des Tensoba, Secteur n°25, Cissin, Ouagadougou</p><p><strong>Tél Urgences:</strong> <a href="tel:51000647">51 00 06 47</a></p></div></div><div><div class="info-box"><iframe src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d15590.747808531722!2d-1.5628767!3d12.3368449!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0xe2e967403b1226b%3A0xd4fdc5490ba66f45!2sClinique%20WendToin!5e0!3m2!1sfr!2sbf!4v1777369119568!5m2!1sfr!2sbf" width="100%" height="260" style="border:0;"></iframe></div></div></div></div></section>
+
+    <!-- Galerie -->
+    <section id="gallery" class="gallery-section"><div class="container"><h2 class="section-title animate-on-scroll">Notre clinique en images</h2><div class="gallery-grid" id="galleryGrid"></div></div></section>
+
+    <!-- SECTION VIDÉOS (restaurée) -->
+    <section id="video" class="bg-white">
+        <div class="container">
+            <h2 class="section-title animate-on-scroll">Nos vidéos éducatives</h2>
+            <div class="video-grid" id="videoGrid"></div>
+            <div style="text-align: center; margin-top: 35px;">
+                <button id="showMoreVideos" class="btn-secondary">Afficher plus de vidéos</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact -->
+    <section id="contact" class="bg-light"><div class="container"><h2 class="section-title animate-on-scroll">Contact & localisation</h2><div class="rdv-grid"><div><div class="info-box animate-on-scroll"><h3>Adresse</h3><p>Boulevard des Tensoba, Secteur n°25<br>Cissin, Ouagadougou<br>Burkina Faso</p></div><div class="info-box animate-on-scroll"><h3>Téléphone</h3><p><strong>Urgences 24/24 :</strong><br><a href="tel:51000647" style="color:#1D8B5D; font-size:1.1rem; text-decoration:none;">51 00 06 47</a><br><strong>Standard :</strong> <a href="tel:78365657" style="color:#1D8B5D;">78 36 56 57</a></p></div><div class="info-box animate-on-scroll"><h3>WhatsApp</h3><p><a href="https://wa.me/22651000647" style="color:#25D366;">51 00 06 47</a><br>Pour rendez-vous et questions rapides</p></div></div><div><div class="info-box animate-on-scroll"><h3>Plan d'accès</h3><div style="border-radius: 24px; overflow: hidden; height: 260px;"><iframe src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d15590.747808531722!2d-1.5628767!3d12.3368449!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0xe2e967403b1226b%3A0xd4fdc5490ba66f45!2sClinique%20WendToin!5e0!3m2!1sfr!2sbf!4v1777369119568!5m2!1sfr!2sbf" width="100%" height="260" style="border:0;" allowfullscreen="" loading="lazy"></iframe></div></div></div></div></div></section>
 </main>
-<footer><div class="container"><div class="footer-grid"><div><h4>Clinique WENDTOIN</h4><p>Tel: <a href="tel:51000647">51 00 06 47</a></p></div></div></div></footer>
+
+<footer><div class="container"><div class="footer-grid"><div><h4 style="color: #1D8B5D;">Clinique WENDTOIN</h4><p>Boulevard des Tensoba, Secteur 25<br>Cissin, Ouagadougou<br>Tél: <a href="tel:51000647" style="color:#1D8B5D;">51 00 06 47</a><br>Email: clinwend@gmail.com</p></div><div><h4 style="color: #1D8B5D;">Urgences 24/24</h4><p><strong><a href="tel:51000647" style="color:#1D8B5D;">51 00 06 47</a></strong></p><p>WhatsApp : <a href="https://wa.me/22651000647" style="color:#1D8B5D;">51 00 06 47</a></p></div><div><h4 style="color: #1D8B5D;">Horaires consultations</h4><p>Lun-Ven : 7h30-19h30<br>Sam : 7h30-12h</p><p><strong>Hémodialyse :</strong> 24h/24</p></div><div><h4 style="color: #1D8B5D;">Liens rapides</h4><p><a href="#rdv">Prendre RDV</a><br><a href="#equipe">Notre équipe</a><br><a href="#gallery">Galerie</a><br><a href="#video">Vidéos</a><br><a href="#contact">Nous trouver</a></p></div></div><div style="text-align:center; margin-top:30px; padding-top:15px; border-top:1px solid #334155;"><p>&copy; 2026 Clinique WENDTOIN – Tous droits réservés</p></div></div></footer>
 
 <div id="imageModal" class="image-modal"><span class="close-image-modal">✕</span><img id="modalImage" src=""></div>
 
 <script>
-    // ---------- SLIDER AVEC IMAGES ET TEXTES DYNAMIQUES ----------
+    // ==================== SLIDER AVEC FONDU TEXTE ====================
     const slidesData = [
-        {
-            image: "https://images.unsplash.com/photo-1504813184591-01572f98c85f?w=1600&h=900&fit=crop", // urgence médicale
-            title: "Urgences 24h/24 & 7j/7",
-            tagline: "Service d'urgence toujours disponible",
-            desc: "Prise en charge immédiate des accidents, douleurs aiguës et détresses vitales par nos équipes spécialisées."
-        },
-        {
-            image: "https://images.unsplash.com/photo-1519494026892-80bbd2d6fd0d?w=1600&h=900&fit=crop", // bloc opératoire moderne
-            title: "Chirurgie moderne & sécurisée",
-            tagline: "Blocs opératoires de pointe",
-            desc: "Chirurgie générale, viscérale, laparoscopique et traumatologie avec matériel de dernière génération."
-        },
-        {
-            image: "https://images.unsplash.com/photo-1579684385127-1ef15d508118?w=1600&h=900&fit=crop", // hémodialyse
-            title: "Centre d'Hémodialyse 24/24",
-            tagline: "Dialyse jour et nuit",
-            desc: "Prise en charge complète de l'insuffisance rénale, service disponible 24 heures sur 24, 7j/7."
-        },
-        {
-            image: "https://images.unsplash.com/photo-1581056771107-24ca5f033842?w=1600&h=900&fit=crop", // équipe médicale
-            title: "Plus de 40 spécialistes",
-            tagline: "Expertise multidisciplinaire",
-            desc: "Cardiologues, neurologues, pédiatres, gynécologues et bien d'autres à votre service."
-        }
+        { image: "https://images.unsplash.com/photo-1504813184591-01572f98c85f?w=1600&h=900&fit=crop", title: "Urgences 24h/24 & 7j/7", tagline: "Service d'urgence toujours disponible", desc: "Prise en charge immédiate des accidents, douleurs aiguës et détresses vitales par nos équipes spécialisées." },
+        { image: "https://images.unsplash.com/photo-1519494026892-80bbd2d6fd0d?w=1600&h=900&fit=crop", title: "Chirurgie moderne & sécurisée", tagline: "Blocs opératoires de pointe", desc: "Chirurgie générale, viscérale, laparoscopique et traumatologie avec matériel de dernière génération." },
+        { image: "https://images.unsplash.com/photo-1579684385127-1ef15d508118?w=1600&h=900&fit=crop", title: "Centre d'Hémodialyse 24/24", tagline: "Dialyse jour et nuit", desc: "Prise en charge complète de l'insuffisance rénale, service disponible 24 heures sur 24, 7j/7." },
+        { image: "https://images.unsplash.com/photo-1581056771107-24ca5f033842?w=1600&h=900&fit=crop", title: "Plus de 40 spécialistes", tagline: "Expertise multidisciplinaire", desc: "Cardiologues, neurologues, pédiatres, gynécologues et bien d'autres à votre service." }
     ];
 
     let currentSlide = 0;
@@ -580,6 +679,18 @@
     const titleEl = document.getElementById('slideTitle');
     const taglineEl = document.getElementById('slideTagline');
     const descEl = document.getElementById('slideDesc');
+
+    function animateTextElements() {
+        // Ajouter classe d'animation puis retirer après
+        titleEl.classList.remove('hero-text-animate');
+        taglineEl.classList.remove('hero-text-animate');
+        descEl.classList.remove('hero-text-animate');
+        // Force reflow
+        void titleEl.offsetWidth;
+        titleEl.classList.add('hero-text-animate');
+        taglineEl.classList.add('hero-text-animate');
+        descEl.classList.add('hero-text-animate');
+    }
 
     function createSlides() {
         if (!sliderContainer) return;
@@ -611,85 +722,77 @@
             if (idx === currentSlide) slide.classList.add('active');
             else slide.classList.remove('active');
         });
-        // Mise à jour du texte
         const data = slidesData[currentSlide];
-        if (titleEl) titleEl.innerText = data.title;
-        if (taglineEl) taglineEl.innerText = data.tagline;
-        if (descEl) descEl.innerText = data.desc;
-        
-        // Mise à jour des dots actifs
+        titleEl.innerText = data.title;
+        taglineEl.innerText = data.tagline;
+        descEl.innerText = data.desc;
+        animateTextElements();
         document.querySelectorAll('.dot').forEach((dot, i) => {
             if (i === currentSlide) dot.classList.add('active');
             else dot.classList.remove('active');
         });
     }
 
-    function nextSlide() {
-        currentSlide = (currentSlide + 1) % slidesData.length;
-        updateTextAndActive();
-        resetAutoSlide();
-    }
+    function nextSlide() { currentSlide = (currentSlide + 1) % slidesData.length; updateTextAndActive(); resetAutoSlide(); }
+    function prevSlide() { currentSlide = (currentSlide - 1 + slidesData.length) % slidesData.length; updateTextAndActive(); resetAutoSlide(); }
+    function goToSlide(index) { currentSlide = index; updateTextAndActive(); resetAutoSlide(); }
+    function resetAutoSlide() { if (slideInterval) clearInterval(slideInterval); slideInterval = setInterval(nextSlide, 5500); }
 
-    function prevSlide() {
-        currentSlide = (currentSlide - 1 + slidesData.length) % slidesData.length;
-        updateTextAndActive();
-        resetAutoSlide();
-    }
+    function initSlider() { createSlides(); updateDots(); updateTextAndActive(); resetAutoSlide(); document.querySelector('.prev')?.addEventListener('click', prevSlide); document.querySelector('.next')?.addEventListener('click', nextSlide); const heroSection = document.querySelector('.hero'); if(heroSection){ heroSection.addEventListener('mouseenter',()=>{if(slideInterval)clearInterval(slideInterval);}); heroSection.addEventListener('mouseleave',()=>{slideInterval=setInterval(nextSlide,5500);}); } }
+    initSlider();
 
-    function goToSlide(index) {
-        currentSlide = index;
-        updateTextAndActive();
-        resetAutoSlide();
-    }
-
-    function resetAutoSlide() {
-        if (slideInterval) clearInterval(slideInterval);
-        slideInterval = setInterval(nextSlide, 5500);
-    }
-
-    function initSlider() {
-        createSlides();
-        updateDots();
-        updateTextAndActive();
-        resetAutoSlide();
-        // Événements flèches
-        const prevBtn = document.querySelector('.prev');
-        const nextBtn = document.querySelector('.next');
-        if (prevBtn) prevBtn.addEventListener('click', prevSlide);
-        if (nextBtn) nextBtn.addEventListener('click', nextSlide);
-        // Pause auto sur hover
-        const heroSection = document.querySelector('.hero');
-        if (heroSection) {
-            heroSection.addEventListener('mouseenter', () => { if (slideInterval) clearInterval(slideInterval); });
-            heroSection.addEventListener('mouseleave', () => { slideInterval = setInterval(nextSlide, 5500); });
-        }
-    }
-
-    // ========== DONNÉES STATIQUES (équipe, galerie, etc) ==========
+    // ==================== DONNÉES STATIQUES ====================
     const teamMembers = [
         { name: "Pr Gilbert BONKOUGOU", position: "Directeur Général", desc: "Professeur agrégé en chirurgie générale.", image: "cliniquewendtoin/pr_gilbert.jpeg" },
-        { name: "Dr Lionelle TIAHOUN", position: "Médecin généraliste", desc: "Prise en charge des consultations générales.", image: "cliniquewendtoin/Lionelle.jpg" }
+        { name: "Dr Lionelle TIAHOUN", position: "Médecin généraliste", desc: "Prise en charge des consultations générales et des urgences.", image: "cliniquewendtoin/Lionelle.jpg" },
+        { name: "Agnès COMPAORE", position: "Surveillante générale", desc: "Surveillante d'unité de soins. Coordination des équipes soignantes.", image: "https://placehold.co/400x400/0077A4/white?text=Agn%C3%A8s" }
     ];
-    const galleryImages = ["cliniquewendtoin/Im1.jpeg","cliniquewendtoin/Im3.jpeg","cliniquewendtoin/Im4.jpeg","cliniquewendtoin/Im5.jpeg"];
-    const teamGrid = document.getElementById('teamGrid');
-    if (teamGrid) teamMembers.forEach(m => { const card = document.createElement('div'); card.className = 'team-card'; card.innerHTML = `<img src="${m.image}" class="team-image" onerror="this.src='https://placehold.co/400x400'"><div class="team-info"><div class="team-name">${m.name}</div><div class="team-position">${m.position}</div><div class="team-desc">${m.desc}</div></div>`; teamGrid.appendChild(card); });
-    const galleryGrid = document.getElementById('galleryGrid');
-    if (galleryGrid) galleryImages.forEach(img => { const item = document.createElement('div'); item.className = 'gallery-item'; item.innerHTML = `<img src="${img}" class="gallery-img" onerror="this.src='https://placehold.co/400x300'">`; item.addEventListener('click', () => { document.getElementById('modalImage').src = img; document.getElementById('imageModal').style.display = 'flex'; }); galleryGrid.appendChild(item); });
-    document.querySelector('.close-image-modal')?.addEventListener('click', () => { document.getElementById('imageModal').style.display = 'none'; });
-    window.addEventListener('click', (e) => { if (e.target === document.getElementById('imageModal')) document.getElementById('imageModal').style.display = 'none'; });
+    const galleryImages = ["cliniquewendtoin/Im1.jpeg","cliniquewendtoin/Im3.jpeg","cliniquewendtoin/Im4.jpeg","cliniquewendtoin/Im5.jpeg","cliniquewendtoin/Im7.jpeg","cliniquewendtoin/Im8.jpeg"];
 
-    // Animations et compteurs
+    const teamGridEl = document.getElementById('teamGrid');
+    if(teamGridEl) teamMembers.forEach(m => { const card = document.createElement('div'); card.className = 'team-card animate-on-scroll'; card.innerHTML = `<img src="${m.image}" alt="${m.name}" class="team-image" onerror="this.src='https://placehold.co/400x400'"><div class="team-info"><div class="team-name">${m.name}</div><div class="team-position">${m.position}</div><div class="team-desc">${m.desc}</div></div>`; teamGridEl.appendChild(card); });
+
+    const galleryGrid = document.getElementById('galleryGrid');
+    const modalImg = document.getElementById('modalImage');
+    const imageModal = document.getElementById('imageModal');
+    if(galleryGrid) galleryImages.forEach(img => { const item = document.createElement('div'); item.className = 'gallery-item animate-on-scroll'; item.innerHTML = `<img src="${img}" class="gallery-img" onerror="this.src='https://placehold.co/400x300'">`; item.addEventListener('click', () => { modalImg.src = img; imageModal.style.display = 'flex'; }); galleryGrid.appendChild(item); });
+    document.querySelector('.close-image-modal')?.addEventListener('click', () => { imageModal.style.display = 'none'; });
+    window.addEventListener('click', (e) => { if(e.target === imageModal) imageModal.style.display = 'none'; });
+
+    // ==================== VIDÉOS ====================
+    const allVideos = [
+        { title: "Pr Gilbert BONKOUGOU - Maladie hémorroïdaire", desc: "Les hémorroïdes expliquées par le Pr Gilbert BONKOUGOU", url: "https://web.facebook.com/reel/645204957720787" },
+        { title: "Unité de dialyse - Clinique WENDTOIN", desc: "Prise en charge des insuffisances rénales aiguës et chroniques", url: "https://web.facebook.com/reel/879902179764068" },
+        { title: "Neuro monitoring - Thyroïdectomie sécurisée", desc: "Recherche du nerf récurrent lors de la chirurgie thyroïdienne", url: "https://web.facebook.com/reel/1608565729972155" },
+        { title: "Chirurgie de l'obésité - Sleeve gastrectomie", desc: "Opération classique donnant d'excellents résultats", url: "https://web.facebook.com/reel/2537992576496661" }
+    ];
+    let visibleVideos = 2;
+    const videoGrid = document.getElementById('videoGrid');
+    const showMoreBtn = document.getElementById('showMoreVideos');
+    function displayVideos() { if(!videoGrid) return; videoGrid.innerHTML = ''; const toShow = allVideos.slice(0, visibleVideos); toShow.forEach(video => { const card = document.createElement('div'); card.className = 'video-card'; card.addEventListener('click', () => window.open(video.url, '_blank')); card.innerHTML = `<div class="video-thumbnail">▶️</div><div class="video-info"><div class="video-title">${video.title}</div><div class="video-date">${video.desc}</div></div>`; videoGrid.appendChild(card); }); if(showMoreBtn) showMoreBtn.style.display = visibleVideos >= allVideos.length ? 'none' : 'inline-block'; }
+    if(showMoreBtn) showMoreBtn.addEventListener('click', () => { visibleVideos = Math.min(visibleVideos + 2, allVideos.length); displayVideos(); });
+    displayVideos();
+
+    // ==================== ANIMATIONS & FORMULAIRES ====================
     const animateElements = document.querySelectorAll('.animate-on-scroll');
-    const observer = new IntersectionObserver((entries) => { entries.forEach((entry, idx) => { if (entry.isIntersecting) { setTimeout(() => entry.target.classList.add('visible'), idx * 60); observer.unobserve(entry.target); } }); }, { threshold: 0.15 });
-    animateElements.forEach(el => observer.observe(el));
-    function animateCounter(el, start, end, duration) { let startTime = null; el.innerText = start; function update(now) { if (!startTime) startTime = now; const p = Math.min((now - startTime) / duration, 1); el.innerText = Math.floor(p * (end - start) + start); if (p < 1) requestAnimationFrame(update); } requestAnimationFrame(update); }
-    const statObserver = new IntersectionObserver((entries) => { entries.forEach(e => { if (e.isIntersecting) { const yEl = document.getElementById('stat-years'), dEl = document.getElementById('stat-doctors'); if (yEl && yEl.innerText === "0") animateCounter(yEl, 0, 10, 1500); if (dEl && dEl.innerText === "0") animateCounter(dEl, 0, 40, 1800); statObserver.unobserve(e.target); } }); }, { threshold: 0.3 });
-    const statsContainer = document.querySelector('.stats-container'); if (statsContainer) statObserver.observe(statsContainer);
+    const observerAnim = new IntersectionObserver((entries) => { entries.forEach((entry, idx) => { if(entry.isIntersecting) { setTimeout(() => entry.target.classList.add('visible'), idx * 60); observerAnim.unobserve(entry.target); } }); }, { threshold: 0.15 });
+    animateElements.forEach(el => observerAnim.observe(el));
+    
+    function animateCounter(el, start, end, duration) { let startTime = null; el.innerText = start; function update(now) { if(!startTime) startTime = now; const p = Math.min((now-startTime)/duration,1); el.innerText = Math.floor(p*(end-start)+start); if(p<1) requestAnimationFrame(update); } requestAnimationFrame(update); }
+    const statObserver2 = new IntersectionObserver((entries) => { entries.forEach(e => { if(e.isIntersecting){ const yEl = document.getElementById('stat-years'), dEl = document.getElementById('stat-doctors'); if(yEl && yEl.innerText === "0") animateCounter(yEl,0,10,1500); if(dEl && dEl.innerText === "0") animateCounter(dEl,0,40,1800); statObserver2.unobserve(e.target); } }); }, { threshold:0.3 });
+    const statsContainerEl = document.querySelector('.stats-container'); if(statsContainerEl) statObserver2.observe(statsContainerEl);
+    
     document.querySelector('.mobile-menu-btn')?.addEventListener('click', () => { document.getElementById('navMenu')?.classList.toggle('show'); });
     window.addEventListener('scroll', () => { document.querySelector('header')?.classList.toggle('scrolled', window.scrollY > 50); });
-    document.getElementById('whatsappForm')?.addEventListener('submit', function(e) { e.preventDefault(); const nom = document.getElementById('nom'); if(!nom.value.trim()){ nom.classList.add('form-error'); setTimeout(() => nom.classList.remove('form-error'),500); alert('Veuillez remplir votre nom'); return; } const service = document.getElementById('service').value; const motif = document.getElementById('motif').value; let message = `Bonjour Clinique WENDTOIN,%0A%0A Demande rendez-vous%0A Nom : ${encodeURIComponent(nom.value.trim())}%0A Service : ${encodeURIComponent(service)}%0A`; if(motif) message += ` Message : ${encodeURIComponent(motif)}%0A`; window.open(`https://wa.me/22651000647?text=${message}`, '_blank'); this.reset(); });
-
-    initSlider();
+    
+    document.getElementById('whatsappForm')?.addEventListener('submit', function(e) { e.preventDefault(); const nom = document.getElementById('nom'); if(!nom.value.trim()){ nom.classList.add('form-error'); setTimeout(() => nom.classList.remove('form-error'),500); alert('Veuillez remplir votre nom'); return; } const service = document.getElementById('service').value; const motif = document.getElementById('motif').value; let message = `Bonjour Clinique WENDTOIN,%0A%0A Demande de rendez-vous%0A Nom : ${encodeURIComponent(nom.value.trim())}%0A Service : ${encodeURIComponent(service)}%0A`; if(motif) message += ` Message : ${encodeURIComponent(motif)}%0A`; window.open(`https://wa.me/22651000647?text=${message}`, '_blank'); this.reset(); });
+    
+    // Modal chirurgie simple
+    const surgeryDetails = { 'viscérale': { title: 'Chirurgie Générale / Digestive', content: '<p><strong>Chirurgie générale et digestive</strong> prend en charge les pathologies des organes de l\'abdomen.</p><ul><li>Hernies et Éventrations</li><li>Pathologies des organes</li></ul>' }, 'plastique': { title: 'Chirurgie Plastique', content: '<p>Chirurgie plastique et de l\'obésité</p>' }, 'vasculaire': { title: 'Chirurgie Vasculaire', content: '<p>Traitement des varices, fistules pour dialyse</p>' }, 'thoracique': { title: 'Chirurgie Thoracique', content: '<p>Pathologies pulmonaires et médiastinales</p>' }, 'laparoscopique': { title: 'Vidéo-Chirurgie', content: '<p>Chirurgie mini-invasive</p>' } };
+    const modalSurge = document.createElement('div'); modalSurge.id = 'surgeryModal'; modalSurge.className = 'image-modal'; modalSurge.style.display = 'none'; modalSurge.innerHTML = '<div style="background:white; border-radius:24px; max-width:500px; margin:auto; padding:20px; position:relative;"><span id="closeSurgeryModal" style="position:absolute; top:10px; right:20px; font-size:28px; cursor:pointer;">&times;</span><h3 id="surgeryModalTitle"></h3><div id="surgeryModalBody"></div></div>'; document.body.appendChild(modalSurge);
+    document.querySelectorAll('.pole-tag[data-surgery]').forEach(tag => { tag.addEventListener('click', () => { const key = tag.getAttribute('data-surgery'); const detail = surgeryDetails[key]; if(detail){ document.getElementById('surgeryModalTitle').innerText = detail.title; document.getElementById('surgeryModalBody').innerHTML = detail.content; modalSurge.style.display = 'flex'; } }); });
+    document.getElementById('closeSurgeryModal')?.addEventListener('click', () => { modalSurge.style.display = 'none'; });
+    window.addEventListener('click', (e) => { if(e.target === modalSurge) modalSurge.style.display = 'none'; });
 </script>
 </body>
 </html>
