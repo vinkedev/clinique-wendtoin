@@ -444,21 +444,6 @@
             transform: translateY(-2px);
         }
 
-        .btn-danger {
-            background: #dc3545;
-            color: white;
-        }
-        .btn-danger:hover {
-            background: #b02a37;
-        }
-        .btn-warning {
-            background: #ffc107;
-            color: #1e293b;
-        }
-        .btn-warning:hover {
-            background: #e0a800;
-        }
-
         section {
             padding: 50px 0;
             background: white;
@@ -496,6 +481,7 @@
             }
         }
 
+        /* ========== SERVICES : 3 PAR LIGNE ========== */
         .cards-grid {
             display: grid;
             grid-template-columns: 1fr;
@@ -557,7 +543,7 @@
             font-size: 0.8rem;
         }
 
-        /* ACTUALITÉS */
+        /* ========== ACTUALITÉS ========== */
         .actualites-grid {
             display: grid;
             grid-template-columns: 1fr;
@@ -578,6 +564,7 @@
             box-shadow: 0 10px 30px rgba(0,0,0,0.08);
             transition: transform 0.3s ease, box-shadow 0.3s ease;
             border: 1px solid #eef2f6;
+            position: relative;
         }
 
         .actu-card:hover {
@@ -594,7 +581,12 @@
             align-items: center;
             justify-content: center;
             color: white;
-            font-size: 3rem;
+            font-size: 2rem;
+        }
+        .actu-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
         }
 
         .actu-content {
@@ -619,6 +611,45 @@
             font-size: 0.85rem;
             color: #64748b;
             line-height: 1.5;
+        }
+
+        .admin-controls {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            display: flex;
+            gap: 8px;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+            z-index: 10;
+        }
+        .actu-card:hover .admin-controls {
+            opacity: 1;
+        }
+        .admin-btn {
+            background: white;
+            border: none;
+            border-radius: 50%;
+            width: 32px;
+            height: 32px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            font-size: 14px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+            transition: all 0.2s ease;
+        }
+        .admin-btn.edit {
+            background: #0077A4;
+            color: white;
+        }
+        .admin-btn.delete {
+            background: #dc3545;
+            color: white;
+        }
+        .admin-btn:hover {
+            transform: scale(1.1);
         }
 
         .stats {
@@ -786,7 +817,6 @@
             border-left: 4px solid;
             transition: all 0.3s ease;
             cursor: pointer;
-            position: relative;
         }
         .specialty-item:hover {
             background: white;
@@ -804,45 +834,6 @@
             color: #475569;
         }
 
-        .admin-controls {
-            position: absolute;
-            top: 5px;
-            right: 5px;
-            display: flex;
-            gap: 5px;
-            opacity: 0;
-            transition: opacity 0.3s ease;
-        }
-        .specialty-item:hover .admin-controls,
-        .actu-card:hover .admin-controls {
-            opacity: 1;
-        }
-        .admin-btn {
-            background: white;
-            border: none;
-            border-radius: 50%;
-            width: 28px;
-            height: 28px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            cursor: pointer;
-            font-size: 12px;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.2);
-            transition: all 0.2s ease;
-        }
-        .admin-btn.edit {
-            background: #0077A4;
-            color: white;
-        }
-        .admin-btn.delete {
-            background: #dc3545;
-            color: white;
-        }
-        .admin-btn:hover {
-            transform: scale(1.1);
-        }
-
         .badge-247 {
             background: #dc3545;
             color: white;
@@ -853,6 +844,7 @@
             margin-left: 8px;
         }
 
+        /* ========== ÉQUIPE ========== */
         .team-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
@@ -907,6 +899,7 @@
             line-height: 1.45;
         }
 
+        /* ========== GALERIE ========== */
         .gallery-section {
             background: white;
         }
@@ -1022,6 +1015,7 @@
             background: white;
         }
 
+        /* ========== VIDÉOS ========== */
         .video-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
@@ -1089,6 +1083,7 @@
             color: #1D8B5D;
         }
 
+        /* MODAL STYLES */
         .modal {
             display: none;
             position: fixed;
@@ -1179,13 +1174,10 @@
         }
 
         /* Admin Panel */
-        .admin-panel {
+        .admin-panel-btn {
             position: fixed;
             bottom: 20px;
             right: 20px;
-            z-index: 10000;
-        }
-        .admin-panel-btn {
             background: #1D8B5D;
             color: white;
             border: none;
@@ -1194,6 +1186,7 @@
             cursor: pointer;
             font-weight: 600;
             box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+            z-index: 10000;
             transition: all 0.3s ease;
         }
         .admin-panel-btn:hover {
@@ -1219,7 +1212,7 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background: white;
+            background: #f8fafc;
             z-index: 10002;
             overflow-y: auto;
             padding: 80px 20px 20px;
@@ -1310,6 +1303,7 @@
             }
         }
 
+        /* ========== IDENTITÉ VISUELLE PAR SECTION ========== */
         #specialites .section-title {
             color: #0077A4;
         }
@@ -1498,6 +1492,7 @@
         </div>
     </section>
 
+    <!-- ========== SECTION ACTUALITÉS DYNAMIQUE ========== -->
     <section id="actualites">
         <div class="container">
             <h2 class="section-title animate-on-scroll">Actualités</h2>
@@ -1505,45 +1500,95 @@
         </div>
     </section>
 
+    <!-- ========== SPÉCIALITÉS MÉDICALES ========== -->
     <section id="specialites">
         <div class="container">
             <h2 class="section-title animate-on-scroll">Spécialités médicales</h2>
-            <div class="specialty-grid" id="specialitesMedicalesGrid"></div>
+            <div class="specialty-grid">
+                <div class="specialty-item"><strong>Dermatologie</strong><p>Dermatologie médicale et allergologie</p></div>
+                <div class="specialty-item"><strong>Gastro-entérologie</strong><p>Explorations digestives, endoscopies</p></div>
+                <div class="specialty-item"><strong>Neurologie</strong><p>Prise en charge des maladies neurologiques</p></div>
+                <div class="specialty-item"><strong>Kinésithérapie</strong><p>Rééducation fonctionnelle, thérapies manuelles</p></div>
+                <div class="specialty-item"><strong>Cancérologie</strong><p>Oncologie médicale, suivi personnalisé</p></div>
+                <div class="specialty-item"><strong>Urologie</strong><p>Prise en charge des maladies urinaires</p></div>
+                <div class="specialty-item"><strong>ORL</strong><p>Consultations ORL</p></div>
+                <div class="specialty-item"><strong>Rhumatologie</strong><p>Maladies des os et des articulations</p></div>
+                <div class="specialty-item"><strong>Pneumologie</strong><p>Maladies respiratoires</p></div>
+                <div class="specialty-item"><strong>Néphrologie</strong><p>Maladies des reins et dialyse</p></div>
+                <div class="specialty-item"><strong>Psychiatrie</strong><p>Santé mentale</p></div>
+                <div class="specialty-item"><strong>Pédiatrie</strong><p>Santé de l'enfant</p></div>
+                <div class="specialty-item"><strong>Anatomie Pathologique</strong><p>Analyses microscopiques de tissus</p></div>
+                <div class="specialty-item"><strong>Anesthésie-Réanimation</strong><p>Anesthésie pour actes chirurgicaux</p></div>
+                <div class="specialty-item"><strong>Nutrition et Diététique</strong><p>Conseils nutritionnels personnalisés</p></div>
+                <div class="specialty-item"><strong>Médecine interne et diabétologie</strong><p>Prise en charge du diabète</p></div>
+            </div>
         </div>
     </section>
 
+    <!-- ========== SPÉCIALITÉS CHIRURGICALES ========== -->
     <section id="specialites-chirurgicales">
         <div class="container">
             <h2 class="section-title animate-on-scroll">Spécialités chirurgicales</h2>
-            <div class="specialty-grid" id="specialitesChirurgicalesGrid"></div>
+            <div class="specialty-grid">
+                <div class="specialty-item" data-surgery="viscérale"><strong>Chirurgie Générale / Digestive</strong><p>Hernies, Appendicite, Pathologies abdominales</p></div>
+                <div class="specialty-item" data-surgery="plastique"><strong>Chirurgie Plastique / De l'obésité</strong><p>Plastie, Liposuccion, Sleeve gastrectomie</p></div>
+                <div class="specialty-item" data-surgery="vasculaire"><strong>Chirurgie Vasculaire</strong><p>Varices, Fistules pour dialyse, Artériopathie</p></div>
+                <div class="specialty-item" data-surgery="thoracique"><strong>Chirurgie Thoracique</strong><p>Pathologies pulmonaires, Médiastin, VATS</p></div>
+                <div class="specialty-item" data-surgery="laparoscopique"><strong>Vidéo-chirurgie Laparoscopique</strong><p>Chirurgie mini-invasive par laparoscopie</p></div>
+                <div class="specialty-item"><strong>Urologie</strong><p>Prise en charge chirurgicale des voies urinaires</p></div>
+                <div class="specialty-item"><strong>Chirurgie pédiatrique</strong><p>Interventions chirurgicales adaptées aux enfants</p></div>
+                <div class="specialty-item"><strong>Chirurgie maxillo-faciale</strong><p>Chirurgie de la face, des mâchoires et du cou</p></div>
+                <div class="specialty-item"><strong>Neurochirurgie</strong><p>Chirurgie du système nerveux central et périphérique</p></div>
+                <div class="specialty-item"><strong>Chirurgie des cancers</strong><p>Prise en charge chirurgicale des tumeurs cancéreuses</p></div>
+            </div>
         </div>
     </section>
 
+    <!-- ========== GYNÉCOLOGIE - OBSTÉTRIQUE ========== -->
     <section id="gynecologie">
         <div class="container">
             <h2 class="section-title animate-on-scroll">Gynécologie - Obstétrique</h2>
-            <div class="specialty-grid" id="gynecologieGrid"></div>
+            <div class="specialty-grid">
+                <div class="specialty-item"><strong>Consultation + Suivi de grossesse</strong><p>Suivi médical complet pendant la grossesse</p></div>
+                <div class="specialty-item"><strong>Accouchement</strong><p>Accompagnement et prise en charge de l'accouchement</p></div>
+                <div class="specialty-item"><strong>Césarienne</strong><p>Intervention chirurgicale pour accouchement par voie haute</p></div>
+                <div class="specialty-item"><strong>Dépistage</strong><p>Dépistage prénatal et des maladies gynécologiques</p></div>
+                <div class="specialty-item"><strong>Contraception</strong><p>Conseil et pose de différents moyens contraceptifs</p></div>
+            </div>
         </div>
     </section>
 
+    <!-- ========== EXPLORATIONS ========== -->
     <section id="explorations">
         <div class="container">
             <h2 class="section-title animate-on-scroll">Explorations</h2>
-            <div class="specialty-grid" id="explorationsGrid"></div>
+            <div class="specialty-grid">
+                <div class="specialty-item"><strong>Laboratoire d'analyses médicales</strong><p>Hématologie, Parasitologie, Biochimie</p></div>
+                <div class="specialty-item"><strong>Laboratoire d'anatomie pathologique</strong><p>Analyse de prélèvements (biopsies, etc.)</p></div>
+            </div>
         </div>
     </section>
 
+    <!-- ========== IMAGERIE ========== -->
     <section id="imagerie">
         <div class="container">
             <h2 class="section-title animate-on-scroll">Imagerie</h2>
-            <div class="specialty-grid" id="imagerieGrid"></div>
+            <div class="specialty-grid">
+                <div class="specialty-item"><strong>Radiologie standard</strong><p></p></div>
+                <div class="specialty-item"><strong>Scanner</strong><p></p></div>
+                <div class="specialty-item"><strong>Échographie</strong><p></p></div>
+            </div>
         </div>
     </section>
 
+    <!-- ========== ÉQUIPEMENTS SPÉCIALISÉS ========== -->
     <section id="poles">
         <div class="container">
             <h2 class="section-title animate-on-scroll">Équipements spécialisés</h2>
-            <div class="specialty-grid" id="equipementsGrid"></div>
+            <div class="specialty-grid">
+                <div class="specialty-item"><strong>🔬 Laboratoire d'Anatomie-Pathologie</strong><p>Analyses précises pour le diagnostic des cancers et pathologies tissulaires</p></div>
+                <div class="specialty-item"><strong>💧 Centre d'Hémodialyse <span class="badge-247">24h/24 - 7j/7</span></strong><p>Service d'hémodialyse disponible 24 heures sur 24, 7 jours sur 7</p></div>
+            </div>
         </div>
     </section>
 
@@ -1594,20 +1639,25 @@
     // ==================== SUPABASE CONFIGURATION ====================
     const SUPABASE_URL = 'https://otdiywrvzappbmjfkkyi.supabase.co';
     const SUPABASE_ANON_KEY = 'sb_publishable_tn6FW9OxsqNdKMg9uCuB5A_gZICo-Jy';
-    const supabase = supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
-
+    const supabaseClient = supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
     let isAdmin = false;
 
-    // ==================== CHARGEMENT DES DONNÉES ====================
+    // ==================== CHARGEMENT DES ACTUALITÉS ====================
     async function loadActualites() {
-        const { data, error } = await supabase.from('actualites').select('*').order('id', { ascending: false });
+        const { data, error } = await supabaseClient.from('actualites').select('*').order('id', { ascending: false });
         if (error) { console.error(error); return; }
         const container = document.getElementById('actualitesGrid');
         if (!container) return;
+        
+        if (data.length === 0 && !isAdmin) {
+            container.innerHTML = '<div style="text-align:center; padding:40px;">Aucune actualité pour le moment</div>';
+            return;
+        }
+        
         container.innerHTML = data.map(actu => `
             <div class="actu-card animate-on-scroll" data-id="${actu.id}">
                 ${isAdmin ? `<div class="admin-controls"><button class="admin-btn edit" onclick="editActualite(${actu.id})">✏️</button><button class="admin-btn delete" onclick="deleteActualite(${actu.id})">🗑️</button></div>` : ''}
-                <div class="actu-image">${actu.image_emoji || '📰'}</div>
+                <div class="actu-image">${actu.image_url ? `<img src="${actu.image_url}" alt="${actu.titre}">` : '📰'}</div>
                 <div class="actu-content">
                     <div class="actu-date">${actu.date || ''}</div>
                     <div class="actu-title">${actu.titre}</div>
@@ -1617,154 +1667,95 @@
         `).join('');
     }
 
-    async function loadSpecialites(table, containerId, colorClass) {
-        const { data, error } = await supabase.from(table).select('*').order('ordre', { ascending: true });
-        if (error) { console.error(error); return; }
-        const container = document.getElementById(containerId);
-        if (!container) return;
-        container.innerHTML = data.map(item => `
-            <div class="specialty-item" data-id="${item.id}">
-                ${isAdmin ? `<div class="admin-controls"><button class="admin-btn edit" onclick="editSpecialite('${table}', ${item.id})">✏️</button><button class="admin-btn delete" onclick="deleteSpecialite('${table}', ${item.id})">🗑️</button></div>` : ''}
-                <strong>${item.titre}</strong>
-                <p>${item.description || ''}</p>
-            </div>
-        `).join('');
-    }
-
-    async function loadImagerie() {
-        const { data, error } = await supabase.from('imagerie').select('*').order('ordre', { ascending: true });
-        if (error) { console.error(error); return; }
-        const container = document.getElementById('imagerieGrid');
-        if (!container) return;
-        container.innerHTML = data.map(item => `
-            <div class="specialty-item" data-id="${item.id}">
-                ${isAdmin ? `<div class="admin-controls"><button class="admin-btn edit" onclick="editSpecialite('imagerie', ${item.id})">✏️</button><button class="admin-btn delete" onclick="deleteSpecialite('imagerie', ${item.id})">🗑️</button></div>` : ''}
-                <strong>${item.titre}</strong>
-                <p></p>
-            </div>
-        `).join('');
-    }
-
-    async function loadEquipements() {
-        const { data, error } = await supabase.from('equipements').select('*').order('ordre', { ascending: true });
-        if (error) { console.error(error); return; }
-        const container = document.getElementById('equipementsGrid');
-        if (!container) return;
-        container.innerHTML = data.map(item => `
-            <div class="specialty-item" data-id="${item.id}">
-                ${isAdmin ? `<div class="admin-controls"><button class="admin-btn edit" onclick="editEquipement(${item.id})">✏️</button><button class="admin-btn delete" onclick="deleteEquipement(${item.id})">🗑️</button></div>` : ''}
-                <strong>${item.titre} ${item.badge ? `<span class="badge-247">${item.badge}</span>` : ''}</strong>
-                <p>${item.description || ''}</p>
-            </div>
-        `).join('');
-    }
-
-    function loadAllData() {
-        loadActualites();
-        loadSpecialites('specialites_medicales', 'specialitesMedicalesGrid');
-        loadSpecialites('specialites_chirurgicales', 'specialitesChirurgicalesGrid');
-        loadSpecialites('gynecologie', 'gynecologieGrid');
-        loadSpecialites('explorations', 'explorationsGrid');
-        loadImagerie();
-        loadEquipements();
-    }
-
     // ==================== CRUD ACTUALITÉS ====================
+    async function uploadImage(file) {
+        const fileExt = file.name.split('.').pop();
+        const fileName = `${Date.now()}.${fileExt}`;
+        const { data, error } = await supabaseClient.storage.from('actualites').upload(fileName, file);
+        if (error) { throw error; }
+        const { data: { publicUrl } } = supabaseClient.storage.from('actualites').getPublicUrl(fileName);
+        return publicUrl;
+    }
+
     async function addActualite() {
         const titre = prompt('Titre de l\'actualité :');
         if (!titre) return;
         const description = prompt('Description :');
         const date = prompt('Date (ex: 15 Mars 2026) :');
-        const emoji = prompt('Emoji (ex: 🏥, 👨‍⚕️, 🩺) :', '📰');
-        const { error } = await supabase.from('actualites').insert([{ titre, description, date, image_emoji: emoji }]);
-        if (error) alert('Erreur: ' + error.message);
-        else loadActualites();
+        
+        let imageUrl = null;
+        const hasImage = confirm('Voulez-vous ajouter une image ?');
+        if (hasImage) {
+            const input = document.createElement('input');
+            input.type = 'file';
+            input.accept = 'image/*';
+            input.onchange = async (e) => {
+                const file = e.target.files[0];
+                if (file) {
+                    try {
+                        imageUrl = await uploadImage(file);
+                        const { error } = await supabaseClient.from('actualites').insert([{ titre, description, date, image_url: imageUrl }]);
+                        if (error) alert('Erreur: ' + error.message);
+                        else loadActualites();
+                    } catch(err) { alert('Erreur upload: ' + err.message); }
+                }
+            };
+            input.click();
+        } else {
+            const { error } = await supabaseClient.from('actualites').insert([{ titre, description, date, image_url: null }]);
+            if (error) alert('Erreur: ' + error.message);
+            else loadActualites();
+        }
     }
 
     async function editActualite(id) {
-        const { data } = await supabase.from('actualites').select('*').eq('id', id).single();
+        const { data } = await supabaseClient.from('actualites').select('*').eq('id', id).single();
         if (!data) return;
+        
         const titre = prompt('Nouveau titre :', data.titre);
         if (!titre) return;
         const description = prompt('Nouvelle description :', data.description);
         const date = prompt('Nouvelle date :', data.date);
-        const emoji = prompt('Nouvel emoji :', data.image_emoji);
-        const { error } = await supabase.from('actualites').update({ titre, description, date, image_emoji: emoji }).eq('id', id);
-        if (error) alert('Erreur: ' + error.message);
-        else loadActualites();
+        
+        let imageUrl = data.image_url;
+        const changeImage = confirm('Voulez-vous changer l\'image ?');
+        if (changeImage) {
+            const input = document.createElement('input');
+            input.type = 'file';
+            input.accept = 'image/*';
+            input.onchange = async (e) => {
+                const file = e.target.files[0];
+                if (file) {
+                    try {
+                        if (data.image_url) {
+                            const oldPath = data.image_url.split('/').pop();
+                            await supabaseClient.storage.from('actualites').remove([oldPath]);
+                        }
+                        imageUrl = await uploadImage(file);
+                        const { error } = await supabaseClient.from('actualites').update({ titre, description, date, image_url: imageUrl }).eq('id', id);
+                        if (error) alert('Erreur: ' + error.message);
+                        else loadActualites();
+                    } catch(err) { alert('Erreur upload: ' + err.message); }
+                }
+            };
+            input.click();
+        } else {
+            const { error } = await supabaseClient.from('actualites').update({ titre, description, date, image_url: imageUrl }).eq('id', id);
+            if (error) alert('Erreur: ' + error.message);
+            else loadActualites();
+        }
     }
 
     async function deleteActualite(id) {
         if (!confirm('Supprimer cette actualité ?')) return;
-        const { error } = await supabase.from('actualites').delete().eq('id', id);
+        const { data } = await supabaseClient.from('actualites').select('image_url').eq('id', id).single();
+        if (data && data.image_url) {
+            const oldPath = data.image_url.split('/').pop();
+            await supabaseClient.storage.from('actualites').remove([oldPath]);
+        }
+        const { error } = await supabaseClient.from('actualites').delete().eq('id', id);
         if (error) alert('Erreur: ' + error.message);
         else loadActualites();
-    }
-
-    // ==================== CRUD SPÉCIALITÉS ====================
-    async function addSpecialite(table) {
-        const titre = prompt('Nom de la spécialité :');
-        if (!titre) return;
-        const description = prompt('Description :');
-        const { data, error } = await supabase.from(table).insert([{ titre, description }]);
-        if (error) alert('Erreur: ' + error.message);
-        else {
-            if (table === 'imagerie') loadImagerie();
-            else loadSpecialites(table, getContainerId(table));
-        }
-    }
-
-    async function editSpecialite(table, id) {
-        let { data } = await supabase.from(table).select('*').eq('id', id).single();
-        if (!data) return;
-        const titre = prompt('Nouveau titre :', data.titre);
-        if (!titre) return;
-        const description = prompt('Nouvelle description :', data.description);
-        const { error } = await supabase.from(table).update({ titre, description }).eq('id', id);
-        if (error) alert('Erreur: ' + error.message);
-        else {
-            if (table === 'imagerie') loadImagerie();
-            else loadSpecialites(table, getContainerId(table));
-        }
-    }
-
-    async function deleteSpecialite(table, id) {
-        if (!confirm('Supprimer cette spécialité ?')) return;
-        const { error } = await supabase.from(table).delete().eq('id', id);
-        if (error) alert('Erreur: ' + error.message);
-        else {
-            if (table === 'imagerie') loadImagerie();
-            else loadSpecialites(table, getContainerId(table));
-        }
-    }
-
-    async function editEquipement(id) {
-        let { data } = await supabase.from('equipements').select('*').eq('id', id).single();
-        if (!data) return;
-        const titre = prompt('Nouveau titre :', data.titre);
-        if (!titre) return;
-        const description = prompt('Nouvelle description :', data.description);
-        const badge = prompt('Badge (ex: 24h/24 - 7j/7) :', data.badge || '');
-        const { error } = await supabase.from('equipements').update({ titre, description, badge }).eq('id', id);
-        if (error) alert('Erreur: ' + error.message);
-        else loadEquipements();
-    }
-
-    async function deleteEquipement(id) {
-        if (!confirm('Supprimer cet équipement ?')) return;
-        const { error } = await supabase.from('equipements').delete().eq('id', id);
-        if (error) alert('Erreur: ' + error.message);
-        else loadEquipements();
-    }
-
-    function getContainerId(table) {
-        const map = {
-            'specialites_medicales': 'specialitesMedicalesGrid',
-            'specialites_chirurgicales': 'specialitesChirurgicalesGrid',
-            'gynecologie': 'gynecologieGrid',
-            'explorations': 'explorationsGrid'
-        };
-        return map[table];
     }
 
     // ==================== ADMIN PANEL ====================
@@ -1781,27 +1772,27 @@
     });
 
     function showAdminLogin() {
-        const modal = document.createElement('div');
-        modal.className = 'admin-login-modal';
-        modal.innerHTML = `
+        const modalDiv = document.createElement('div');
+        modalDiv.className = 'admin-login-modal';
+        modalDiv.innerHTML = `
             <h3 style="margin-bottom:20px; color:#0077A4;">Accès Administrateur</h3>
             <input type="password" id="adminPassword" placeholder="Mot de passe" style="width:100%; padding:12px; border-radius:12px; border:1px solid #e2e8f0; margin-bottom:15px;">
             <button id="loginBtn" style="width:100%; padding:12px; background:#1D8B5D; color:white; border:none; border-radius:12px; cursor:pointer;">Se connecter</button>
             <button id="closeLoginBtn" style="width:100%; margin-top:10px; padding:10px; background:#e2e8f0; border:none; border-radius:12px; cursor:pointer;">Fermer</button>
         `;
-        document.body.appendChild(modal);
+        document.body.appendChild(modalDiv);
         document.getElementById('loginBtn').onclick = () => {
             const pwd = document.getElementById('adminPassword').value;
             if (pwd === 'admin123') {
                 isAdmin = true;
-                modal.remove();
+                modalDiv.remove();
                 showAdminDashboard();
-                loadAllData();
+                loadActualites();
             } else {
                 alert('Mot de passe incorrect');
             }
         };
-        document.getElementById('closeLoginBtn').onclick = () => modal.remove();
+        document.getElementById('closeLoginBtn').onclick = () => modalDiv.remove();
     }
 
     function showAdminDashboard() {
@@ -1809,43 +1800,25 @@
         dashboard.className = 'admin-dashboard';
         dashboard.innerHTML = `
             <div class="admin-dashboard-header">
-                <h3>Panel d'administration</h3>
+                <h3>Panel d'administration - Actualités</h3>
                 <button id="closeDashboard" style="background:white; color:#1D8B5D; border:none; border-radius:50px; padding:8px 16px; cursor:pointer;">Fermer</button>
             </div>
             <div class="container" style="margin-top:80px;">
-                <h3 style="color:#0077A4; margin-bottom:20px;">Actualités</h3>
-                <button onclick="addActualite()" style="background:#1D8B5D; color:white; border:none; border-radius:50px; padding:10px 20px; margin-bottom:20px; cursor:pointer;">+ Ajouter une actualité</button>
-                
-                <h3 style="color:#0077A4; margin:30px 0 20px;">Spécialités Médicales</h3>
-                <button onclick="addSpecialite('specialites_medicales')" style="background:#0077A4; color:white; border:none; border-radius:50px; padding:10px 20px; margin-bottom:20px; cursor:pointer;">+ Ajouter</button>
-                
-                <h3 style="color:#1D8B5D; margin:30px 0 20px;">Spécialités Chirurgicales</h3>
-                <button onclick="addSpecialite('specialites_chirurgicales')" style="background:#1D8B5D; color:white; border:none; border-radius:50px; padding:10px 20px; margin-bottom:20px; cursor:pointer;">+ Ajouter</button>
-                
-                <h3 style="color:#e83e8c; margin:30px 0 20px;">Gynécologie</h3>
-                <button onclick="addSpecialite('gynecologie')" style="background:#e83e8c; color:white; border:none; border-radius:50px; padding:10px 20px; margin-bottom:20px; cursor:pointer;">+ Ajouter</button>
-                
-                <h3 style="color:#6f42c1; margin:30px 0 20px;">Explorations</h3>
-                <button onclick="addSpecialite('explorations')" style="background:#6f42c1; color:white; border:none; border-radius:50px; padding:10px 20px; margin-bottom:20px; cursor:pointer;">+ Ajouter</button>
-                
-                <h3 style="color:#fd7e14; margin:30px 0 20px;">Imagerie</h3>
-                <button onclick="addSpecialite('imagerie')" style="background:#fd7e14; color:white; border:none; border-radius:50px; padding:10px 20px; margin-bottom:20px; cursor:pointer;">+ Ajouter</button>
-                
-                <h3 style="color:#1e293b; margin:30px 0 20px;">Équipements spécialisés</h3>
-                <button onclick="addSpecialite('equipements')" style="background:#1e293b; color:white; border:none; border-radius:50px; padding:10px 20px; margin-bottom:20px; cursor:pointer;">+ Ajouter</button>
-                
-                <p style="margin-top:30px; color:#64748b;">Pour modifier/supprimer : survolez les éléments sur le site</p>
+                <button onclick="addActualite()" style="background:#1D8B5D; color:white; border:none; border-radius:50px; padding:12px 24px; margin-bottom:20px; cursor:pointer; font-size:1rem;">➕ Ajouter une actualité</button>
+                <p style="color:#64748b; margin-top:10px;">Pour modifier ou supprimer : survolez les actualités sur le site et cliquez sur ✏️ ou 🗑️</p>
+                <hr style="margin:30px 0;">
+                <p><strong>💡 Astuce :</strong> Pour ajouter une image, choisissez "Oui" quand le système vous le demande.</p>
             </div>
         `;
         document.body.appendChild(dashboard);
         document.getElementById('closeDashboard').onclick = () => {
             isAdmin = false;
             dashboard.remove();
-            loadAllData();
+            loadActualites();
         };
     }
 
-    // ==================== SLIDER ET AUTRES ====================
+    // ==================== SLIDER HERO ====================
     const slides = [
         { image: "slide/churigie.jpeg", titre: "Chirurgie moderne", badge: "& sécurisée", text: "Blocs opératoires de pointe, chirurgie programmée et d'urgence 24h/24", lien: "#specialites-chirurgicales", labelBtn: "Voir nos spécialités chirurgicales" },
         { image: "slide/dialyse.jpg", titre: "Centre d'Hémodialyse", badge: "24h/24", text: "Prise en charge complète de l'insuffisance rénale, disponible nuit et jour, 7j/7", lien: "#poles", labelBtn: "Découvrir le service dialyse" },
@@ -1916,12 +1889,14 @@
     heroSection.addEventListener('mouseenter', () => { if (autoInterval) clearInterval(autoInterval); });
     heroSection.addEventListener('mouseleave', () => { autoInterval = setInterval(nextSlide, 3000); });
 
+    // ==================== ÉQUIPE STATIQUE ====================
     const teamMembers = [
         { name: "Pr Gilbert BONKOUGOU", position: "Directeur Général", desc: "Professeur agrégé en chirurgie générale.", image: "cliniquewendtoin/pr_gilbert.jpeg" },
         { name: "Dr Lionelle TIAHOUN", position: "Médecin généraliste", desc: "Prise en charge des consultations générales et des urgences.", image: "cliniquewendtoin/Lionelle.jpg" },
         { name: "Absetou KABORE", position: "Secrétaire", desc: "Accueil, gestion des rendez-vous et administration.", image: "slide/secretaire.jpeg" },
         { name: "Agnès COMPAORE", position: "Surveillante générale", desc: "Surveillante d'unité de soins. Coordination des équipes soignantes.", image: "https://placehold.co/400x400/0077A4/white?text=Agn%C3%A8s" }
     ];
+
     const teamGrid = document.getElementById('teamGrid');
     if (teamGrid) {
         teamMembers.forEach(member => {
@@ -1932,7 +1907,14 @@
         });
     }
 
-    const galleryImages = ["cliniquewendtoin/Im1.jpeg", "cliniquewendtoin/Im3.jpeg", "cliniquewendtoin/Im4.jpeg", "cliniquewendtoin/Im5.jpeg", "cliniquewendtoin/Im7.jpeg", "cliniquewendtoin/Im8.jpeg", "cliniquewendtoin/Im9.jpeg", "cliniquewendtoin/Im10.jpeg", "cliniquewendtoin/Im11.jpeg", "cliniquewendtoin/Im12.jpeg", "cliniquewendtoin/Im13.jpeg", "cliniquewendtoin/Im14.jpeg"];
+    // ==================== GALERIE ====================
+    const galleryImages = [
+        "cliniquewendtoin/Im1.jpeg", "cliniquewendtoin/Im3.jpeg", "cliniquewendtoin/Im4.jpeg",
+        "cliniquewendtoin/Im5.jpeg", "cliniquewendtoin/Im7.jpeg", "cliniquewendtoin/Im8.jpeg",
+        "cliniquewendtoin/Im9.jpeg", "cliniquewendtoin/Im10.jpeg", "cliniquewendtoin/Im11.jpeg",
+        "cliniquewendtoin/Im12.jpeg", "cliniquewendtoin/Im13.jpeg", "cliniquewendtoin/Im14.jpeg"
+    ];
+
     const galleryGridEl = document.getElementById('galleryGrid');
     const imageModal = document.getElementById('imageModal');
     const modalImage = document.getElementById('modalImage');
@@ -1949,6 +1931,7 @@
     if (closeImageModal) closeImageModal.addEventListener('click', () => { imageModal.style.display = 'none'; });
     window.addEventListener('click', (e) => { if (e.target === imageModal) imageModal.style.display = 'none'; });
 
+    // ==================== VIDÉOS ====================
     const allVideos = [
         { title: "Pr Gilbert BONKOUGOU - Maladie hémorroïdaire", desc: "Les hémorroïdes expliquées par le Pr Gilbert BONKOUGOU", url: "https://web.facebook.com/reel/645204957720787" },
         { title: "Unité de dialyse - Clinique WENDTOIN", desc: "Prise en charge des insuffisances rénales aiguës et chroniques", url: "https://web.facebook.com/reel/879902179764068" },
@@ -1960,6 +1943,7 @@
         { title: "Dr Marcel Kuiré - L'asthme", desc: "Maladie respiratoire fréquente qui peut être grave si non diagnostiquée", url: "https://web.facebook.com/reel/743148739906723" },
         { title: "Dr Nadia TOE/ROUAMBA - Lombalgie (maux de reins)", desc: "Spécialiste en Rhumatologie explique les causes diverses", url: "https://web.facebook.com/reel/929689517848124" }
     ];
+
     let visibleVideos = 4;
     const videoGridEl = document.getElementById('videoGrid');
     const showMoreBtn = document.getElementById('showMoreVideos');
@@ -1979,6 +1963,7 @@
     if (showMoreBtn) showMoreBtn.addEventListener('click', () => { visibleVideos = Math.min(visibleVideos + 4, allVideos.length); displayVideos(); });
     displayVideos();
 
+    // ==================== MODALES POUR CHIRURGIE ====================
     const surgeryDetails = {
         'viscérale': { title: 'Chirurgie Générale / Digestive', content: '<p><strong>Chirurgie générale et digestive</strong> prend en charge les pathologies des organes de l\'abdomen.</p><ul><li>Hernies et Éventrations</li><li>Pathologies des organes : Œsophage, Estomac, Intestins, Rate, Vésicule biliaire</li><li>Appendicite, Pathologies utérines, Affections anales</li></ul><div class="info-note">Pr Gilbert BONKOUGOU - Chirurgien référent</div>' },
         'plastique': { title: 'Chirurgie Plastique / De l\'obésité', content: '<p><strong>Chirurgie plastique et de l\'obésité</strong> comprend :</p><ul><li>Chirurgie plastique : Plastie des seins, Liposuccion, Abdominoplastie, BBL</li><li>Chirurgie de l\'obésité : Sleeve gastrectomie, By-pass gastrique</li></ul><div class="info-note">Consultation préalable obligatoire</div>' },
@@ -1986,6 +1971,7 @@
         'thoracique': { title: 'Chirurgie Thoracique', content: '<p><strong>Chirurgie thoracique</strong> prend en charge les affections du thorax.</p><ul><li>Pathologies pulmonaires (cancer, nodules, pneumothorax)</li><li>Médiastin (tumeurs thymiques, péricardectomie)</li><li>Paroi thoracique</li></ul><div class="info-note">Techniques vidéo-assistées (VATS)</div>' },
         'laparoscopique': { title: 'Vidéo-Chirurgie Laparoscopique', content: '<p><strong>Chirurgie mini-invasive</strong> par laparoscopie.</p><ul><li>Chirurgie de la vésicule biliaire</li><li>Chirurgie des hernies</li><li>Chirurgie colorectale</li><li>Chirurgie de l\'obésité</li></ul><div class="info-note">Pr Gilbert BONKOUGOU - Pionnier de la laparoscopie</div>' }
     };
+    
     let modalElement = document.getElementById('surgeryModal');
     if (!modalElement) {
         const newModal = document.createElement('div');
@@ -1995,9 +1981,11 @@
         document.body.appendChild(newModal);
         modalElement = newModal;
     }
+    
     const modalTitleElem = document.getElementById('modalTitle');
     const modalBodyElem = document.getElementById('modalBody');
     const closeModalBtn = document.querySelector('#surgeryModal .close-modal');
+    
     document.querySelectorAll('.specialty-item[data-surgery]').forEach(item => {
         item.addEventListener('click', (e) => {
             e.stopPropagation();
@@ -2010,18 +1998,22 @@
             }
         });
     });
+    
     const closeModal = () => { if (modalElement) modalElement.style.display = 'none'; };
     if (closeModalBtn) closeModalBtn.addEventListener('click', closeModal);
     window.addEventListener('click', (e) => { if (e.target === modalElement) closeModal(); });
     document.addEventListener('keydown', (e) => { if (e.key === 'Escape' && modalElement && modalElement.style.display === 'flex') closeModal(); });
 
+    // ==================== ANIMATIONS AU SCROLL ====================
     const animateElements = document.querySelectorAll('.animate-on-scroll');
     const observer = new IntersectionObserver((entries) => {
         entries.forEach((entry, index) => { if (entry.isIntersecting) { setTimeout(() => { entry.target.classList.add('visible'); }, index * 60); observer.unobserve(entry.target); } });
     }, { threshold: 0.15, rootMargin: '0px 0px -50px 0px' });
     animateElements.forEach(el => observer.observe(el));
+    
     window.addEventListener('scroll', () => { document.querySelector('header')?.classList.toggle('scrolled', window.scrollY > 50); });
-
+    
+    // ==================== MENU MOBILE ====================
     const mobileBtn = document.querySelector('.mobile-menu-btn');
     const navMenu = document.getElementById('navMenu');
     if (mobileBtn && navMenu) {
@@ -2029,25 +2021,52 @@
         navMenu.querySelectorAll('a').forEach(link => link.addEventListener('click', () => { navMenu.classList.remove('show'); if (mobileBtn) mobileBtn.innerHTML = '☰'; }));
         document.addEventListener('click', (e) => { if (!mobileBtn.contains(e.target) && !navMenu.contains(e.target)) { navMenu.classList.remove('show'); if (mobileBtn) mobileBtn.innerHTML = '☰'; } });
     }
-
-    function animateCounter(el, start, end, duration) {
-        let startTime = null;
-        el.innerText = start;
+    
+    // ==================== COMPTEURS STATISTIQUES ====================
+    function animateCounter(el, start, end, duration) { 
+        let startTime = null; 
+        el.innerText = start; 
         function update(now) { if (!startTime) startTime = now; const p = Math.min((now - startTime) / duration, 1); el.innerText = Math.floor(p * (end - start) + start); if (p < 1) requestAnimationFrame(update); }
         requestAnimationFrame(update);
     }
-    const statObserver = new IntersectionObserver((entries) => {
+    
+    const statObserver = new IntersectionObserver((entries) => { 
         entries.forEach(e => { if (e.isIntersecting) { const yEl = document.getElementById('stat-years'), dEl = document.getElementById('stat-doctors'); if (yEl && yEl.innerText === "0") animateCounter(yEl, 0, 10, 1500); if (dEl && dEl.innerText === "0") animateCounter(dEl, 0, 40, 1800); statObserver.unobserve(e.target); } });
     }, { threshold: 0.3 });
-    const statsContainerEl = document.querySelector('.stats-container');
+    const statsContainerEl = document.querySelector('.stats-container'); 
     if (statsContainerEl) statObserver.observe(statsContainerEl);
-
+    
+    // ==================== FORMULAIRE WHATSAPP ====================
     const whatsappForm = document.getElementById('whatsappForm');
     if (whatsappForm) {
-        whatsappForm.addEventListener('submit', function(e) { e.preventDefault(); const nom = document.getElementById('nom'); if (!nom.value.trim()) { nom.classList.add('form-error'); setTimeout(() => nom.classList.remove('form-error'), 500); alert('Veuillez remplir votre nom'); return; } const service = document.getElementById('service').value; const motif = document.getElementById('motif').value; let message = `Bonjour Clinique WENDTOIN,%0A%0A Demande de rendez-vous%0A Nom : ${encodeURIComponent(nom.value.trim())}%0A Service : ${encodeURIComponent(service)}%0A`; if (motif) message += ` Message : ${encodeURIComponent(motif)}%0A`; message += `%0AMerci de me confirmer un créneau.`; const btn = document.getElementById('submitRdvBtn'); btn.classList.add('btn-loading'); btn.innerHTML = 'Envoi en cours...'; setTimeout(() => { window.open(`https://wa.me/22651000647?text=${message}`, '_blank'); whatsappForm.reset(); btn.classList.remove('btn-loading'); btn.innerHTML = 'Envoyer la demande'; }, 500); });
+        whatsappForm.addEventListener('submit', function(e) { 
+            e.preventDefault(); 
+            const nom = document.getElementById('nom'); 
+            if (!nom.value.trim()) { 
+                nom.classList.add('form-error'); 
+                setTimeout(() => nom.classList.remove('form-error'), 500); 
+                alert('Veuillez remplir votre nom'); 
+                return; 
+            } 
+            const service = document.getElementById('service').value; 
+            const motif = document.getElementById('motif').value; 
+            let message = `Bonjour Clinique WENDTOIN,%0A%0A Demande de rendez-vous%0A Nom : ${encodeURIComponent(nom.value.trim())}%0A Service : ${encodeURIComponent(service)}%0A`; 
+            if (motif) message += ` Message : ${encodeURIComponent(motif)}%0A`; 
+            message += `%0AMerci de me confirmer un créneau.`; 
+            const btn = document.getElementById('submitRdvBtn'); 
+            btn.classList.add('btn-loading'); 
+            btn.innerHTML = 'Envoi en cours...'; 
+            setTimeout(() => { 
+                window.open(`https://wa.me/22651000647?text=${message}`, '_blank'); 
+                whatsappForm.reset(); 
+                btn.classList.remove('btn-loading'); 
+                btn.innerHTML = 'Envoyer la demande'; 
+            }, 500); 
+        });
     }
 
-    loadAllData();
+    // ==================== CHARGEMENT INITIAL ====================
+    loadActualites();
 </script>
 </body>
 </html>
