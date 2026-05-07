@@ -526,7 +526,7 @@
         }
 
         .card-title {
-            font-size: 0.95rem;
+            font-size: 1rem;
             font-weight: 700;
             margin: 8px 20px 5px 20px;
             color: #0f172a;
@@ -539,6 +539,70 @@
         .card-text {
             color: #334155;
             font-size: 0.8rem;
+        }
+
+        /* ========== ACTUALITÉS ========== */
+        .actualites-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 25px;
+            margin-top: 20px;
+        }
+
+        @media (min-width: 768px) {
+            .actualites-grid {
+                grid-template-columns: repeat(3, 1fr);
+            }
+        }
+
+        .actu-card {
+            background: white;
+            border-radius: 24px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.08);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            border: 1px solid #eef2f6;
+        }
+
+        .actu-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 35px rgba(0,0,0,0.12);
+        }
+
+        .actu-image {
+            width: 100%;
+            height: 180px;
+            object-fit: cover;
+            background: linear-gradient(135deg, #0077A4, #1D8B5D);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 2rem;
+        }
+
+        .actu-content {
+            padding: 20px;
+        }
+
+        .actu-date {
+            font-size: 0.7rem;
+            color: #1D8B5D;
+            font-weight: 600;
+            margin-bottom: 8px;
+        }
+
+        .actu-title {
+            font-size: 1.1rem;
+            font-weight: 700;
+            color: #1e293b;
+            margin-bottom: 10px;
+        }
+
+        .actu-desc {
+            font-size: 0.85rem;
+            color: #64748b;
+            line-height: 1.5;
         }
 
         .stats {
@@ -1134,8 +1198,7 @@
             }
         }
 
-        /* ========== IDENTITÉ VISUELLE PAR SECTION (fonds blancs, couleurs d'accent) ========== */
-        /* Spécialités médicales — Bleu */
+        /* ========== IDENTITÉ VISUELLE PAR SECTION ========== */
         #specialites .section-title {
             color: #0077A4;
         }
@@ -1149,7 +1212,6 @@
             color: #0077A4;
         }
 
-        /* Spécialités chirurgicales — Vert */
         #specialites-chirurgicales .section-title {
             color: #1D8B5D;
         }
@@ -1163,7 +1225,6 @@
             color: #1D8B5D;
         }
 
-        /* Gynécologie — Rose */
         #gynecologie .section-title {
             color: #e83e8c;
         }
@@ -1177,7 +1238,6 @@
             color: #e83e8c;
         }
 
-        /* Explorations — Violet */
         #explorations .section-title {
             color: #6f42c1;
         }
@@ -1191,7 +1251,6 @@
             color: #6f42c1;
         }
 
-        /* Imagerie — Orange */
         #imagerie .section-title {
             color: #fd7e14;
         }
@@ -1205,7 +1264,6 @@
             color: #fd7e14;
         }
 
-        /* Équipements spécialisés — Gris premium */
         #poles .section-title {
             color: #1e293b;
         }
@@ -1251,7 +1309,6 @@
 </header>
 
 <main>
-    <!-- SECTION HERO AVEC SLIDER -->
     <section id="accueil" class="hero">
         <div class="hero-slides" id="heroSlides"></div>
         <div class="hero-overlay"></div>
@@ -1319,11 +1376,44 @@
                 </div>
                 <div class="card animate-on-scroll">
                     <div class="card-header">
-                        <span class="badge-category">Spécialiste</span>
+                        <span class="badge-category">Hospitalisation</span>
                     </div>
                     <div class="card-title">Hospitalisation</div>
                     <div class="card-content">
-                        <p class="card-text">Hospitalisation complète en médecine et chirurgie avec équipements modernes.</p>
+                        <p class="card-text">Hospitalisation complète en médecine et chirurgie avec équipements modernes et chambres confortables.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ========== SECTION ACTUALITÉS ========== -->
+    <section id="actualites">
+        <div class="container">
+            <h2 class="section-title animate-on-scroll">Actualités</h2>
+            <div class="actualites-grid">
+                <div class="actu-card animate-on-scroll">
+                    <div class="actu-image">🏥</div>
+                    <div class="actu-content">
+                        <div class="actu-date">15 Mars 2026</div>
+                        <div class="actu-title">Nouveau bloc opératoire</div>
+                        <div class="actu-desc">La Clinique WENDTOIN inaugure son nouveau bloc opératoire ultra-moderne équipé des dernières technologies chirurgicales.</div>
+                    </div>
+                </div>
+                <div class="actu-card animate-on-scroll">
+                    <div class="actu-image">👨‍⚕️</div>
+                    <div class="actu-content">
+                        <div class="actu-date">1er Février 2026</div>
+                        <div class="actu-title">Arrivée de nouveaux spécialistes</div>
+                        <div class="actu-desc">Deux nouveaux neurochirurgiens et un chirurgien maxillo-facial rejoignent notre équipe médicale.</div>
+                    </div>
+                </div>
+                <div class="actu-card animate-on-scroll">
+                    <div class="actu-image">🩺</div>
+                    <div class="actu-content">
+                        <div class="actu-date">10 Janvier 2026</div>
+                        <div class="actu-title">Campagne de dépistage gratuit</div>
+                        <div class="actu-desc">La clinique organise une campagne de dépistage du diabète et de l'hypertension tout le mois de février.</div>
                     </div>
                 </div>
             </div>
@@ -1399,14 +1489,14 @@
         </div>
     </section>
 
-    <!-- ========== IMAGERIE ========== -->
+    <!-- ========== IMAGERIE (sans descriptions) ========== -->
     <section id="imagerie">
         <div class="container">
             <h2 class="section-title animate-on-scroll">Imagerie</h2>
             <div class="specialty-grid">
-                <div class="specialty-item"><strong>Radiologie standard</strong><p>Radiographies conventionnelles</p></div>
-                <div class="specialty-item"><strong>Scanner</strong><p>Tomodensitométrie pour diagnostics précis</p></div>
-                <div class="specialty-item"><strong>Échographie</strong><p>Échographies abdominales, pelviennes, obstétricales</p></div>
+                <div class="specialty-item"><strong>Radiologie standard</strong><p></p></div>
+                <div class="specialty-item"><strong>Scanner</strong><p></p></div>
+                <div class="specialty-item"><strong>Échographie</strong><p></p></div>
             </div>
         </div>
     </section>
