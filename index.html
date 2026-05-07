@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes, viewport-fit=cover">
     <title>Clinique WENDTOIN – Urgences 24h/24 à Ouagadougou</title>
     <meta name="description" content="Clinique privée à Cissin, Ouagadougou. Urgences médicales et chirurgicales 24h/24, 7j/7. Plus de 40 spécialistes.">
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     <style>
         * {
             margin: 0;
@@ -174,12 +174,13 @@
         }
 
         .logo img {
-            height: 42px;
+            height: 50px;
             width: auto;
         }
 
         .logo-text h1 {
-            font-size: 1rem;
+            font-family: 'Poppins', sans-serif;
+            font-size: 1.2rem;
             font-weight: 700;
             background: linear-gradient(135deg, #0077A4 0%, #1D8B5D 100%);
             -webkit-background-clip: text;
@@ -189,9 +190,10 @@
         }
 
         .logo-text p {
-            font-size: 0.55rem;
+            font-family: 'Poppins', sans-serif;
+            font-size: 0.6rem;
             color: #64748b;
-            letter-spacing: 0.3px;
+            letter-spacing: 0.5px;
         }
 
         nav ul {
@@ -449,7 +451,6 @@
             text-align: center;
             font-size: 1.6rem;
             margin-bottom: 35px;
-            color: #0077A4;
             font-weight: 700;
             position: relative;
         }
@@ -462,7 +463,6 @@
             transform: translateX(-50%);
             width: 50px;
             height: 3px;
-            background: linear-gradient(90deg, #0077A4, #1D8B5D);
             border-radius: 4px;
         }
 
@@ -699,26 +699,23 @@
         }
 
         .specialty-item {
-            background: #f8fafc;
+            background: white;
             border-radius: 16px;
             padding: 12px 16px;
-            border-left: 4px solid #1D8B5D;
+            border-left: 4px solid;
             transition: all 0.3s ease;
             cursor: pointer;
         }
         .specialty-item:hover {
-            background: white;
-            box-shadow: 0 6px 20px rgba(0,0,0,0.08);
+            box-shadow: 0 8px 20px rgba(0,0,0,0.1);
             transform: translateX(5px);
         }
         .specialty-item strong {
-            color: #0077A4;
             display: block;
             margin-bottom: 4px;
             font-size: 0.9rem;
         }
         .specialty-item p {
-            color: #475569;
             font-size: 0.8rem;
             margin: 0;
         }
@@ -1130,6 +1127,156 @@
                 text-align: center;
             }
         }
+
+        /* ========== IDENTITÉ VISUELLE PAR SECTION ========== */
+        /* ===== SPÉCIALITÉS MÉDICALES — Bleu clair ===== */
+        #specialites {
+            background: linear-gradient(135deg, #f0f9ff 0%, #e6f4ff 100%);
+        }
+        #specialites .specialty-item {
+            background: white;
+            border-left-color: #0077A4;
+            box-shadow: 0 4px 12px rgba(0,119,164,0.08);
+        }
+        #specialites .specialty-item:hover {
+            border-left-color: #005a7c;
+            box-shadow: 0 8px 20px rgba(0,119,164,0.15);
+        }
+        #specialites .specialty-item strong {
+            color: #0077A4;
+        }
+        #specialites .section-title {
+            color: #0077A4;
+        }
+        #specialites .section-title::after {
+            background: linear-gradient(90deg, #0077A4, #00b4d8);
+        }
+
+        /* ===== SPÉCIALITÉS CHIRURGICALES — Vert foncé ===== */
+        #specialites-chirurgicales {
+            background: linear-gradient(135deg, #f0faf5 0%, #e6f7ee 100%);
+        }
+        #specialites-chirurgicales .specialty-item {
+            background: white;
+            border-left-color: #1D8B5D;
+            box-shadow: 0 4px 12px rgba(29,139,93,0.08);
+        }
+        #specialites-chirurgicales .specialty-item:hover {
+            border-left-color: #146b48;
+            box-shadow: 0 8px 20px rgba(29,139,93,0.18);
+            transform: translateX(6px);
+        }
+        #specialites-chirurgicales .specialty-item strong {
+            color: #1D8B5D;
+        }
+        #specialites-chirurgicales .section-title {
+            color: #1D8B5D;
+        }
+        #specialites-chirurgicales .section-title::after {
+            background: linear-gradient(90deg, #1D8B5D, #52c41a);
+        }
+
+        /* ===== GYNÉCOLOGIE — Rose doux ===== */
+        #gynecologie {
+            background: linear-gradient(135deg, #fff0f6 0%, #ffe6f0 100%);
+        }
+        #gynecologie .specialty-item {
+            background: white;
+            border-left-color: #e83e8c;
+            box-shadow: 0 4px 12px rgba(232,62,140,0.08);
+        }
+        #gynecologie .specialty-item:hover {
+            border-left-color: #c0256e;
+            box-shadow: 0 8px 20px rgba(232,62,140,0.15);
+        }
+        #gynecologie .specialty-item strong {
+            color: #e83e8c;
+        }
+        #gynecologie .section-title {
+            color: #e83e8c;
+        }
+        #gynecologie .section-title::after {
+            background: linear-gradient(90deg, #e83e8c, #ff69b4);
+        }
+
+        /* ===== EXPLORATIONS — Violet laboratoire ===== */
+        #explorations {
+            background: linear-gradient(135deg, #f5f0ff 0%, #ede6ff 100%);
+        }
+        #explorations .specialty-item {
+            background: white;
+            border-left-color: #6f42c1;
+            box-shadow: 0 4px 12px rgba(111,66,193,0.08);
+        }
+        #explorations .specialty-item:hover {
+            border-left-color: #5a2d9e;
+            box-shadow: 0 8px 20px rgba(111,66,193,0.15);
+        }
+        #explorations .specialty-item strong {
+            color: #6f42c1;
+        }
+        #explorations .section-title {
+            color: #6f42c1;
+        }
+        #explorations .section-title::after {
+            background: linear-gradient(90deg, #6f42c1, #a855f7);
+        }
+
+        /* ===== IMAGERIE — Orange technique ===== */
+        #imagerie {
+            background: linear-gradient(135deg, #fff8f0 0%, #fff0e0 100%);
+        }
+        #imagerie .specialty-item {
+            background: white;
+            border-left-color: #fd7e14;
+            box-shadow: 0 4px 12px rgba(253,126,20,0.08);
+        }
+        #imagerie .specialty-item:hover {
+            border-left-color: #dc6a00;
+            box-shadow: 0 8px 20px rgba(253,126,20,0.15);
+        }
+        #imagerie .specialty-item strong {
+            color: #fd7e14;
+        }
+        #imagerie .section-title {
+            color: #fd7e14;
+        }
+        #imagerie .section-title::after {
+            background: linear-gradient(90deg, #fd7e14, #ffc107);
+        }
+
+        /* ===== ÉQUIPEMENTS — Gris premium ===== */
+        #poles {
+            background: linear-gradient(135deg, #1e293b 0%, #0f172a 100%);
+        }
+        #poles .section-title {
+            color: white;
+        }
+        #poles .section-title::after {
+            background: linear-gradient(90deg, #1D8B5D, #0077A4);
+        }
+        #poles .specialty-item {
+            background: rgba(255,255,255,0.08);
+            border-left-color: #1D8B5D;
+            backdrop-filter: blur(10px);
+            border-top: 1px solid rgba(255,255,255,0.1);
+        }
+        #poles .specialty-item:hover {
+            background: rgba(255,255,255,0.15);
+            box-shadow: 0 8px 25px rgba(0,0,0,0.3);
+            transform: translateX(6px);
+        }
+        #poles .specialty-item strong {
+            color: white;
+            font-size: 1rem;
+        }
+        #poles .specialty-item p {
+            color: rgba(255,255,255,0.7);
+        }
+        #poles .badge-247 {
+            background: #1D8B5D;
+            animation: pulse-red 2s infinite;
+        }
     </style>
 </head>
 <body>
@@ -1147,12 +1294,7 @@
             <ul id="navMenu">
                 <li><a href="#accueil">Accueil</a></li>
                 <li><a href="#services">Services</a></li>
-                <li><a href="#specialites">Spécialités médicales</a></li>
-                <li><a href="#specialites-chirurgicales">Spécialités chirurgicales</a></li>
-                <li><a href="#gynecologie">Gynécologie</a></li>
-                <li><a href="#explorations">Explorations</a></li>
-                <li><a href="#imagerie">Imagerie</a></li>
-                <li><a href="#poles">Pôles</a></li>
+                <li><a href="#specialites">Spécialités</a></li>
                 <li><a href="#rdv">RDV</a></li>
                 <li><a href="#equipe">Équipe</a></li>
                 <li><a href="#gallery">Galerie</a></li>
@@ -1244,7 +1386,7 @@
         </div>
     </section>
 
-    <!-- ========== SPÉCIALITÉS MÉDICALES (sans Radiologie, Orthopédie, Chirurgie pédiatrique) ========== -->
+    <!-- ========== SPÉCIALITÉS MÉDICALES ========== -->
     <section id="specialites" class="bg-light">
         <div class="container">
             <h2 class="section-title animate-on-scroll">Spécialités médicales</h2>
@@ -1269,18 +1411,16 @@
         </div>
     </section>
 
-    <!-- ========== NOS SPÉCIALITÉS CHIRURGICALES (remplace l'ancienne section Pôle technique) ========== -->
+    <!-- ========== SPÉCIALITÉS CHIRURGICALES ========== -->
     <section id="specialites-chirurgicales" class="bg-white">
         <div class="container">
-            <h2 class="section-title animate-on-scroll">Nos spécialités chirurgicales</h2>
+            <h2 class="section-title animate-on-scroll">Spécialités chirurgicales</h2>
             <div class="specialty-grid">
-                <!-- Ancien Pôle Chirurgie (avec modales) -->
                 <div class="specialty-item" data-surgery="viscérale"><strong>Chirurgie Générale / Digestive</strong><p>Hernies, Appendicite, Pathologies abdominales</p></div>
                 <div class="specialty-item" data-surgery="plastique"><strong>Chirurgie Plastique / De l'obésité</strong><p>Plastie, Liposuccion, Sleeve gastrectomie</p></div>
                 <div class="specialty-item" data-surgery="vasculaire"><strong>Chirurgie Vasculaire</strong><p>Varices, Fistules pour dialyse, Artériopathie</p></div>
                 <div class="specialty-item" data-surgery="thoracique"><strong>Chirurgie Thoracique</strong><p>Pathologies pulmonaires, Médiastin, VATS</p></div>
                 <div class="specialty-item" data-surgery="laparoscopique"><strong>Vidéo-chirurgie Laparoscopique</strong><p>Chirurgie mini-invasive par laparoscopie</p></div>
-                <!-- Nouvelles spécialités ajoutées -->
                 <div class="specialty-item"><strong>Urologie</strong><p>Prise en charge chirurgicale des voies urinaires</p></div>
                 <div class="specialty-item"><strong>Chirurgie pédiatrique</strong><p>Interventions chirurgicales adaptées aux enfants</p></div>
                 <div class="specialty-item"><strong>Chirurgie maxillo-faciale</strong><p>Chirurgie de la face, des mâchoires et du cou</p></div>
@@ -1327,7 +1467,7 @@
         </div>
     </section>
 
-    <!-- ========== SECTIONS CONSERVÉES : LABORATOIRE D'ANATOMIE-PATHOLOGIE ET CENTRE D'HÉMODIALYSE ========== -->
+    <!-- ========== ÉQUIPEMENTS SPÉCIALISÉS ========== -->
     <section id="poles" class="bg-white">
         <div class="container">
             <h2 class="section-title animate-on-scroll">Équipements spécialisés</h2>
