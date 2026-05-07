@@ -441,25 +441,6 @@
             transform: translateY(-2px);
         }
 
-        .btn-slide {
-            display: inline-block;
-            padding: 12px 28px;
-            border-radius: 60px;
-            text-decoration: none;
-            font-weight: 600;
-            transition: all 0.4s ease;
-            font-size: 0.9rem;
-            background: #1D8B5D;
-            color: white;
-            border: none;
-            cursor: pointer;
-        }
-
-        .btn-slide:hover {
-            background: #146b48;
-            transform: translateY(-3px);
-        }
-
         section {
             padding: 50px 0;
         }
@@ -710,6 +691,7 @@
             vertical-align: middle;
         }
 
+        /* Style unifié pour toutes les grilles de spécialités */
         .specialty-grid {
             display: grid;
             grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
@@ -739,50 +721,6 @@
             color: #475569;
             font-size: 0.8rem;
             margin: 0;
-        }
-
-        .pole-card {
-            background: linear-gradient(135deg, #f0f9ff 0%, #e6f7f0 100%);
-            border-radius: 24px;
-            padding: 20px;
-            margin-bottom: 25px;
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
-        }
-        .pole-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 20px 35px rgba(0,0,0,0.15);
-        }
-        .pole-card h3 {
-            color: #0077A4;
-            font-size: 1.2rem;
-            margin-bottom: 15px;
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            border-bottom: 2px solid #1D8B5D;
-            padding-bottom: 8px;
-        }
-        .pole-list {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 10px;
-            margin-top: 12px;
-        }
-        .pole-tag {
-            background: white;
-            padding: 5px 12px;
-            border-radius: 40px;
-            font-size: 0.75rem;
-            font-weight: 500;
-            color: #1e293b;
-            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
-            transition: all 0.2s;
-            cursor: pointer;
-        }
-        .pole-tag:hover {
-            background: #1D8B5D;
-            color: white;
-            transform: translateY(-2px);
         }
 
         .badge-247 {
@@ -1031,96 +969,6 @@
             color: #1D8B5D;
         }
 
-        /* MODAL STYLES */
-        .modal {
-            display: none;
-            position: fixed;
-            z-index: 9999;
-            left: 0;
-            top: 0;
-            width: 100%;
-            height: 100%;
-            background-color: rgba(0,0,0,0.85);
-            cursor: pointer;
-            backdrop-filter: blur(5px);
-            align-items: center;
-            justify-content: center;
-        }
-        .modal-content {
-            background: white;
-            margin: auto;
-            display: block;
-            width: 90%;
-            max-width: 550px;
-            border-radius: 28px;
-            position: relative;
-            cursor: default;
-            animation: fadeScale 0.3s ease;
-            max-height: 85vh;
-            overflow-y: auto;
-        }
-        .modal-header {
-            background: linear-gradient(135deg, #0077A4, #1D8B5D);
-            padding: 15px 20px;
-            border-radius: 28px 28px 0 0;
-            color: white;
-            position: sticky;
-            top: 0;
-            z-index: 1;
-        }
-        .modal-header h3 {
-            font-size: 1.3rem;
-            margin: 0;
-            padding-right: 30px;
-        }
-        .modal-body {
-            padding: 20px;
-        }
-        .modal-body p {
-            margin-bottom: 12px;
-            color: #334155;
-            line-height: 1.6;
-            font-size: 0.9rem;
-        }
-        .modal-body ul {
-            margin: 12px 0;
-            padding-left: 20px;
-        }
-        .modal-body li {
-            margin: 6px 0;
-            color: #475569;
-            font-size: 0.85rem;
-        }
-        .modal-body .info-note {
-            background: #e6f7f0;
-            padding: 12px;
-            border-radius: 16px;
-            margin-top: 15px;
-            border-left: 4px solid #1D8B5D;
-        }
-        .close-modal {
-            position: absolute;
-            top: 12px;
-            right: 18px;
-            color: white;
-            font-size: 28px;
-            font-weight: bold;
-            cursor: pointer;
-            background: rgba(0,0,0,0.3);
-            width: 32px;
-            height: 32px;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            transition: all 0.2s ease;
-            z-index: 2;
-        }
-        .close-modal:hover {
-            background: #dc3545;
-            transform: scale(1.05);
-        }
-
         @media (min-width: 640px) {
             .hero-content h2 {
                 font-size: 2rem;
@@ -1191,13 +1039,6 @@
                 margin: 4px auto;
                 text-align: center;
             }
-            .pole-card h3 {
-                font-size: 1.1rem;
-            }
-            .pole-tag {
-                font-size: 0.7rem;
-                padding: 4px 10px;
-            }
         }
     </style>
 </head>
@@ -1218,7 +1059,9 @@
                 <li><a href="#services">Services</a></li>
                 <li><a href="#specialites">Spécialités</a></li>
                 <li><a href="#specialites-chirurgicales">Chirurgie</a></li>
-                <li><a href="#poles">Pôles</a></li>
+                <li><a href="#gynecologie">Gynécologie</a></li>
+                <li><a href="#explorations">Explorations</a></li>
+                <li><a href="#imagerie">Imagerie</a></li>
                 <li><a href="#rdv">RDV</a></li>
                 <li><a href="#equipe">Équipe</a></li>
                 <li><a href="#gallery">Galerie</a></li>
@@ -1310,14 +1153,14 @@
         </div>
     </section>
 
-    <!-- ========== SECTION SPÉCIALITÉS MÉDICALES (modifiée : Radiologie, Orthopédie, Chirurgie pédiatrique supprimées) ========== -->
+    <!-- ========== SECTION SPÉCIALITÉS MÉDICALES ========== -->
     <section id="specialites" class="bg-light">
         <div class="container">
             <h2 class="section-title animate-on-scroll">Spécialités médicales</h2>
             <div class="specialty-grid">
                 <div class="specialty-item"><strong>Dermatologie</strong><p>Dermatologie médicale et allergologie</p></div>
                 <div class="specialty-item"><strong>Gastro-entérologie</strong><p>Explorations digestives, endoscopies</p></div>
-                <div class="specialty-item"><strong>Neurologie</strong></div>
+                <div class="specialty-item"><strong>Neurologie</strong><p>Prise en charge des maladies neurologiques</p></div>
                 <div class="specialty-item"><strong>Kinésithérapie</strong><p>Rééducation fonctionnelle, thérapies manuelles</p></div>
                 <div class="specialty-item"><strong>Cancérologie</strong><p>Oncologie médicale, suivi personnalisé</p></div>
                 <div class="specialty-item"><strong>Urologie</strong><p>Prise en charge des maladies urinaires</p></div>
@@ -1328,93 +1171,77 @@
                 <div class="specialty-item"><strong>Psychiatrie</strong><p>Santé mentale</p></div>
                 <div class="specialty-item"><strong>Pédiatrie</strong><p>Santé de l'enfant</p></div>
                 <div class="specialty-item"><strong>Anatomie Pathologique</strong><p>Analyses microscopiques de tissus</p></div>
-                <div class="specialty-item"><strong>Anesthésie-Réanimation</strong></div>
-                <div class="specialty-item"><strong>Nutrition et Diététique</strong></div>
-                <div class="specialty-item"><strong>Médecine interne et diabétologie</strong></div>
+                <div class="specialty-item"><strong>Anesthésie-Réanimation</strong><p>Anesthésie pour actes chirurgicaux</p></div>
+                <div class="specialty-item"><strong>Nutrition et Diététique</strong><p>Conseils nutritionnels personnalisés</p></div>
+                <div class="specialty-item"><strong>Médecine interne et diabétologie</strong><p>Prise en charge du diabète</p></div>
             </div>
         </div>
     </section>
 
-    <!-- ========== NOUVELLE SECTION : NOS SPÉCIALITÉS CHIRURGICALES ========== -->
+    <!-- ========== SECTION SPÉCIALITÉS CHIRURGICALES ========== -->
     <section id="specialites-chirurgicales" class="bg-white">
         <div class="container">
-            <h2 class="section-title animate-on-scroll">Nos spécialités chirurgicales</h2>
-
-            <!-- Bloc 1 : Spécialités chirurgicales principales -->
-            <div class="pole-card animate-on-scroll">
-                <h3>👨‍⚕️ Spécialités chirurgicales</h3>
-                <div class="pole-list">
-                    <span class="pole-tag">Urologie</span>
-                    <span class="pole-tag">Chirurgie pédiatrique</span>
-                    <span class="pole-tag">Chirurgie maxillo-faciale</span>
-                    <span class="pole-tag">Neurochirurgie</span>
-                    <span class="pole-tag">Chirurgie des cancers</span>
-                </div>
-            </div>
-
-            <!-- Bloc 2 : Gynécologie - Obstétrique (détaillé) -->
-            <div class="pole-card animate-on-scroll">
-                <h3>👶 Gynécologie - Obstétrique</h3>
-                <div class="pole-list">
-                    <span class="pole-tag">Consultation + Suivi de grossesse</span>
-                    <span class="pole-tag">Accouchement</span>
-                    <span class="pole-tag">Césarienne</span>
-                    <span class="pole-tag">Dépistage</span>
-                    <span class="pole-tag">Contraception</span>
-                </div>
-            </div>
-
-            <!-- Bloc 3 : Explorations -->
-            <div class="pole-card animate-on-scroll">
-                <h3>🔬 Explorations</h3>
-                <div class="pole-list">
-                    <span class="pole-tag">Laboratoire d'analyses médicales : Hématologie, Parasitologie, Biochimie</span>
-                    <span class="pole-tag">Laboratoire d'anatomie pathologique : Analyse de prélèvements (biopsies, etc.)</span>
-                </div>
-            </div>
-
-            <!-- Bloc 4 : Imagerie -->
-            <div class="pole-card animate-on-scroll">
-                <h3>🖥️ Imagerie</h3>
-                <div class="pole-list">
-                    <span class="pole-tag">Radiologie standard</span>
-                    <span class="pole-tag">Scanner</span>
-                    <span class="pole-tag">Échographie</span>
-                </div>
+            <h2 class="section-title animate-on-scroll">Spécialités chirurgicales</h2>
+            <div class="specialty-grid">
+                <div class="specialty-item"><strong>Urologie</strong><p>Prise en charge chirurgicale des voies urinaires et de l'appareil génital masculin</p></div>
+                <div class="specialty-item"><strong>Chirurgie pédiatrique</strong><p>Interventions chirurgicales adaptées aux enfants</p></div>
+                <div class="specialty-item"><strong>Chirurgie maxillo-faciale</strong><p>Chirurgie de la face, des mâchoires et du cou</p></div>
+                <div class="specialty-item"><strong>Neurochirurgie</strong><p>Chirurgie du système nerveux central et périphérique</p></div>
+                <div class="specialty-item"><strong>Chirurgie des cancers</strong><p>Prise en charge chirurgicale des tumeurs cancéreuses</p></div>
             </div>
         </div>
     </section>
 
-    <!-- ========== SECTIONS PÔLES (Laboratoire d'Anatomie-Pathologie et Centre d'Hémodialyse conservés) ========== -->
-    <section id="poles" class="bg-light">
+    <!-- ========== SECTION GYNÉCOLOGIE - OBSTÉTRIQUE ========== -->
+    <section id="gynecologie" class="bg-light">
         <div class="container">
-            <h2 class="section-title animate-on-scroll">Pôles spécialisés</h2>
-            
-            <!-- Laboratoire d'Anatomie-Pathologie (intact) -->
-            <div class="pole-card animate-on-scroll">
-                <h3>🔬 Laboratoire d'Anatomie-Pathologie</h3>
-                <div class="pole-list">
-                    <span class="pole-tag">Anatomie pathologique</span>
-                    <span class="pole-tag">Cytologie</span>
-                    <span class="pole-tag">Immuno-histochimie</span>
-                </div>
-                <p style="margin-top: 12px; color: #475569; font-size: 0.85rem;">Analyses précises pour le diagnostic des cancers et pathologies tissulaires.</p>
-            </div>
-
-            <!-- Centre d'Hémodialyse (intact) -->
-            <div class="pole-card animate-on-scroll">
-                <h3>💧 Centre d'Hémodialyse <span class="badge-247">24h/24 - 7j/7</span></h3>
-                <div class="pole-list">
-                    <span class="pole-tag">Hémodialyse 24h/24</span>
-                    <span class="pole-tag">Pose de cathéter tunnelisé</span>
-                    <span class="pole-tag">Prise en charge dialyse</span>
-                </div>
-                <p style="margin-top: 12px; color: #475569; font-size: 0.85rem;">Service d'hémodialyse disponible 24 heures sur 24, 7 jours sur 7.</p>
+            <h2 class="section-title animate-on-scroll">Gynécologie - Obstétrique</h2>
+            <div class="specialty-grid">
+                <div class="specialty-item"><strong>Consultation + Suivi de grossesse</strong><p>Suivi médical complet pendant la grossesse</p></div>
+                <div class="specialty-item"><strong>Accouchement</strong><p>Accompagnement et prise en charge de l'accouchement</p></div>
+                <div class="specialty-item"><strong>Césarienne</strong><p>Intervention chirurgicale pour accouchement par voie haute</p></div>
+                <div class="specialty-item"><strong>Dépistage</strong><p>Dépistage prénatal et des maladies gynécologiques</p></div>
+                <div class="specialty-item"><strong>Contraception</strong><p>Conseil et pose de différents moyens contraceptifs</p></div>
             </div>
         </div>
     </section>
 
-    <section id="rdv" class="bg-white">
+    <!-- ========== SECTION EXPLORATIONS ========== -->
+    <section id="explorations" class="bg-white">
+        <div class="container">
+            <h2 class="section-title animate-on-scroll">Explorations</h2>
+            <div class="specialty-grid">
+                <div class="specialty-item"><strong>Laboratoire d'analyses médicales</strong><p>Hématologie, Parasitologie, Biochimie</p></div>
+                <div class="specialty-item"><strong>Laboratoire d'anatomie pathologique</strong><p>Analyse de prélèvements (biopsies, etc.)</p></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ========== SECTION IMAGERIE ========== -->
+    <section id="imagerie" class="bg-light">
+        <div class="container">
+            <h2 class="section-title animate-on-scroll">Imagerie</h2>
+            <div class="specialty-grid">
+                <div class="specialty-item"><strong>Radiologie standard</strong><p>Radiographies conventionnelles</p></div>
+                <div class="specialty-item"><strong>Scanner</strong><p>Tomodensitométrie pour diagnostics précis</p></div>
+                <div class="specialty-item"><strong>Échographie</strong><p>Échographies abdominales, pelviennes, obstétricales</p></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ========== SECTIONS CONSERVÉES : LABORATOIRE D'ANATOMIE-PATHOLOGIE ET CENTRE D'HÉMODIALYSE ========== -->
+    <section id="poles" class="bg-white">
+        <div class="container">
+            <h2 class="section-title animate-on-scroll">Équipements spécialisés</h2>
+            
+            <div class="specialty-grid">
+                <div class="specialty-item"><strong>🔬 Laboratoire d'Anatomie-Pathologie</strong><p>Analyses précises pour le diagnostic des cancers et pathologies tissulaires</p></div>
+                <div class="specialty-item"><strong>💧 Centre d'Hémodialyse <span class="badge-247">24h/24 - 7j/7</span></strong><p>Service d'hémodialyse disponible 24 heures sur 24, 7 jours sur 7</p></div>
+            </div>
+        </div>
+    </section>
+
+    <section id="rdv" class="bg-light">
         <div class="container">
             <h2 class="section-title animate-on-scroll">Prendre rendez-vous</h2>
             <div class="rdv-grid">
@@ -1424,7 +1251,7 @@
         </div>
     </section>
 
-    <section id="equipe" class="bg-light">
+    <section id="equipe" class="bg-white">
         <div class="container">
             <h2 class="section-title animate-on-scroll">Notre équipe</h2>
             <div class="team-grid" id="teamGrid"></div>
