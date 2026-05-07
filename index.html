@@ -1279,9 +1279,11 @@
             <h2 class="section-title animate-on-scroll">Nos services de soins</h2>
             <div class="cards-grid">
                 <div class="card animate-on-scroll"><div class="card-header"><span class="badge-category">Urgence 24/24</span></div><div class="card-title">Médecine d'urgence</div><div class="card-content"><p class="card-text">Prise en charge immédiate 24h/24, 7j/7. Équipe dédiée aux accidents, détresses respiratoires, douleurs aiguës.</p></div></div>
-                <div class="card animate-on-scroll"><div class="card-header"><span class="badge-category">Consultation</span></div><div class="card-title">Consultations de medecine générales</div><div class="card-content"><p class="card-text">Médecine générale, suivi des maladies chroniques, certificats médicaux et vaccinations.</p></div></div>
-                <div class="card animate-on-scroll"><div class="card-header"><span class="badge-category">Spécialiste</span></div><div class="card-title">Hospitalisation </div><div class="card-content"></div></div>
-                
+                <div class="card animate-on-scroll"><div class="card-header"><span class="badge-category">Consultation</span></div><div class="card-title">Consultations générales</div><div class="card-content"><p class="card-text">Médecine générale, suivi des maladies chroniques, certificats médicaux et vaccinations.</p></div></div>
+                <div class="card animate-on-scroll"><div class="card-header"><span class="badge-category">Spécialiste</span></div><div class="card-title">Cardiologie</div><div class="card-content"><p class="card-text">Explorations cardiaques complètes : ECG, échocardiographie, Holter tensionnel.</p></div></div>
+                <div class="card animate-on-scroll"><div class="card-header"><span class="badge-category">Spécialiste</span></div><div class="card-title">Gynécologie - Obstétrique</div><div class="card-content"><p class="card-text">Suivi grossesse, consultations gynécologiques, accouchements.</p></div></div>
+                <div class="card animate-on-scroll"><div class="card-header"><span class="badge-category">Chirurgie</span></div><div class="card-title">Chirurgie générale</div><div class="card-content"><p class="card-text">Bloc opératoire moderne, chirurgie programmée et d'urgence.</p></div></div>
+                <div class="card animate-on-scroll"><div class="card-header"><span class="badge-category">Spécialiste</span></div><div class="card-title">Neurologie & Imagerie</div></div>
             </div>
         </div>
     </section>
@@ -1376,7 +1378,7 @@
 <div id="imageModal" class="image-modal"><span class="close-image-modal">✕</span><img id="modalImage" src=""></div>
 
 <script>
-    // ==================== SLIDER HERO AVEC BADGES PERSONNALISÉS ET BOUTONS PAR SLIDE ====================
+    // ==================== SLIDER HERO ====================
     const slides = [
         { 
             image: "slide/churigie.jpeg",
@@ -1472,17 +1474,14 @@
         void titleEl.offsetWidth;
         void dynamicText.offsetWidth;
         
-        // Utilisation du badge personnalisé pour chaque slide
         titleEl.innerHTML = slides[currentIndex].titre + ' <span>' + slides[currentIndex].badge + '</span>';
         dynamicText.textContent = slides[currentIndex].text;
         
-        // Mise à jour des boutons
         updateButtons();
         
         titleEl.classList.add('text-animate');
         dynamicText.classList.add('text-animate');
         
-        // Redémarrer la barre de progression
         startProgressBar();
     }
 
@@ -1522,12 +1521,13 @@
     heroSection.addEventListener('mouseenter', () => { if (autoInterval) clearInterval(autoInterval); });
     heroSection.addEventListener('mouseleave', () => { autoInterval = setInterval(nextSlide, 3000); });
 
-    // ==================== ÉQUIPE ====================
+    // ==================== ÉQUIPE (avec ordre modifié) ====================
+    // Ordre des cartes : Pr Gilbert, Dr Lionelle, Secrétaire, Surveillante (en dernier)
     const teamMembers = [
         { name: "Pr Gilbert BONKOUGOU", position: "Directeur Général", desc: "Professeur agrégé en chirurgie générale.", image: "cliniquewendtoin/pr_gilbert.jpeg" },
         { name: "Dr Lionelle TIAHOUN", position: "Médecin généraliste", desc: "Prise en charge des consultations générales et des urgences.", image: "cliniquewendtoin/Lionelle.jpg" },
-        { name: "Agnès COMPAORE", position: "Surveillante générale", desc: "Surveillante d'unité de soins. Coordination des équipes soignantes.", image: "https://placehold.co/400x400/0077A4/white?text=Agn%C3%A8s" },
-        { name: "Absetou KABORE", position: "Secrétaire", desc: "Accueil, gestion des rendez-vous et administration.", image: "https://placehold.co/400x400/1D8B5D/white?text=Absetou" }
+        { name: "Absetou KABORE", position: "Secrétaire", desc: "Accueil, gestion des rendez-vous et administration.", image: "slide/secretaire.jpeg" },
+        { name: "Agnès COMPAORE", position: "Surveillante générale", desc: "Surveillante d'unité de soins. Coordination des équipes soignantes.", image: "https://placehold.co/400x400/0077A4/white?text=Agn%C3%A8s" }
     ];
 
     const teamGrid = document.getElementById('teamGrid');
