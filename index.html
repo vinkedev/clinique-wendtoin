@@ -56,11 +56,6 @@
             100% { box-shadow: 0 0 0 0 rgba(220, 53, 69, 0); }
         }
 
-        @keyframes waveMove {
-            0% { background-position: 0 100%; }
-            100% { background-position: 1440px 100%; }
-        }
-
         @keyframes rotateBg {
             from { transform: rotate(0deg); }
             to { transform: rotate(360deg); }
@@ -243,7 +238,7 @@
             font-weight: bold;
         }
 
-        /* ========== HERO SLIDER ========== */
+        /* ========== HERO SLIDER (sans flèches) ========== */
         .hero {
             position: relative;
             min-height: 400px;
@@ -347,26 +342,6 @@
             width: 28px;
             border-radius: 20px;
         }
-
-        .slider-prev, .slider-next {
-            position: absolute;
-            top: 50%;
-            transform: translateY(-50%);
-            background: rgba(0,0,0,0.4);
-            color: white;
-            padding: 10px 15px;
-            cursor: pointer;
-            font-size: 20px;
-            border-radius: 50%;
-            transition: 0.3s;
-            z-index: 15;
-            border: none;
-        }
-        .slider-prev:hover, .slider-next:hover {
-            background: #1D8B5D;
-        }
-        .slider-prev { left: 15px; }
-        .slider-next { right: 15px; }
 
         /* ========== BOUTONS ========== */
         .btn {
@@ -1190,7 +1165,7 @@
 </header>
 
 <main>
-    <!-- SECTION HERO AVEC SLIDER -->
+    <!-- SECTION HERO AVEC SLIDER (sans flèches, vitesse 3s) -->
     <section id="accueil" class="hero">
         <div class="hero-slides" id="heroSlides">
             <!-- Slides injectés par JS -->
@@ -1206,8 +1181,6 @@
                 </div>
             </div>
         </div>
-        <button class="slider-prev" id="sliderPrev">❮</button>
-        <button class="slider-next" id="sliderNext">❯</button>
         <div class="slider-dots" id="sliderDots"></div>
     </section>
 
@@ -1340,27 +1313,27 @@
 <div id="imageModal" class="image-modal"><span class="close-image-modal">✕</span><img id="modalImage" src=""></div>
 
 <script>
-    // ==================== SLIDER HERO ====================
+    // ==================== SLIDER HERO (images locales, sans flèches, vitesse 3 secondes) ====================
     const slides = [
         { 
-            image: "https://images.unsplash.com/photo-1504813184591-01572f98c85f?w=1600&h=600&fit=crop",
-            titre: "Urgences 24h/24 & 7j/7",
-            text: "Prise en charge immédiate des accidents, douleurs aiguës et détresses vitales"
-        },
-        { 
-            image: "https://images.unsplash.com/photo-1519494026892-80bbd2d6fd0d?w=1600&h=600&fit=crop",
+            image: "slide/churigie.jpeg",
             titre: "Chirurgie moderne & sécurisée",
             text: "Blocs opératoires de pointe, chirurgie programmée et d'urgence"
         },
         { 
-            image: "https://images.unsplash.com/photo-1579684385127-1ef15d508118?w=1600&h=600&fit=crop",
+            image: "slide/dialyse.jpg",
             titre: "Centre d'Hémodialyse 24h/24",
             text: "Prise en charge complète de l'insuffisance rénale, disponible nuit et jour"
         },
         { 
-            image: "https://images.unsplash.com/photo-1581056771107-24ca5f033842?w=1600&h=600&fit=crop",
+            image: "slide/equipe_specialiste.jpg",
             titre: "Plus de 40 spécialistes",
             text: "Cardiologues, neurologues, pédiatres, gynécologues à votre service"
+        },
+        { 
+            image: "slide/urgence.jpeg",
+            titre: "Urgences 24h/24 & 7j/7",
+            text: "Prise en charge immédiate des accidents, douleurs aiguës et détresses vitales"
         }
     ];
 
@@ -1429,15 +1402,9 @@
         resetAutoPlay();
     }
 
-    function prevSlide() {
-        currentIndex = (currentIndex - 1 + slides.length) % slides.length;
-        updateSlidesAndText();
-        resetAutoPlay();
-    }
-
     function resetAutoPlay() {
         if (autoInterval) clearInterval(autoInterval);
-        autoInterval = setInterval(nextSlide, 5000);
+        autoInterval = setInterval(nextSlide, 3000); // 3 secondes
     }
 
     // Initialisation
@@ -1446,13 +1413,10 @@
     updateSlidesAndText();
     resetAutoPlay();
 
-    document.getElementById('sliderPrev').addEventListener('click', prevSlide);
-    document.getElementById('sliderNext').addEventListener('click', nextSlide);
-
     // Pause au survol
     const heroSection = document.querySelector('.hero');
     heroSection.addEventListener('mouseenter', () => { if (autoInterval) clearInterval(autoInterval); });
-    heroSection.addEventListener('mouseleave', () => { autoInterval = setInterval(nextSlide, 5000); });
+    heroSection.addEventListener('mouseleave', () => { autoInterval = setInterval(nextSlide, 3000); });
 
     // ==================== TOUT LE RESTE (100% TON CODE ORIGINAL) ====================
     const teamMembers = [
