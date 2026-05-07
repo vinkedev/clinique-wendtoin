@@ -39,6 +39,11 @@
             to { opacity: 1; transform: translateY(0); }
         }
 
+        @keyframes fadeInDown {
+            from { opacity: 0; transform: translateY(-15px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
         @keyframes pulse {
             0% { transform: scale(1); box-shadow: 0 0 0 0 rgba(29, 139, 93, 0.6); }
             70% { transform: scale(1.03); box-shadow: 0 0 0 12px rgba(29, 139, 93, 0); }
@@ -80,6 +85,10 @@
 
         @keyframes spin {
             to { transform: rotate(360deg); }
+        }
+
+        #heroTitle, #heroDynamicText {
+            animation: fadeInDown 0.6s ease-out;
         }
 
         .animate-on-scroll {
@@ -1181,7 +1190,7 @@
 </header>
 
 <main>
-    <!-- SECTION HERO AVEC SLIDER (UNIQUEMENT CE QUI CHANGE) -->
+    <!-- SECTION HERO AVEC SLIDER -->
     <section id="accueil" class="hero">
         <div class="hero-slides" id="heroSlides">
             <!-- Slides injectés par JS -->
@@ -1189,7 +1198,7 @@
         <div class="hero-overlay"></div>
         <div class="container">
             <div class="hero-content">
-                <h2>Votre santé, notre priorité <span>24h/24</span></h2>
+                <h2 id="heroTitle">Votre santé, notre priorité <span>24h/24</span></h2>
                 <p class="hero-slogan" id="heroDynamicText">Urgences médicales et chirurgicales 24h/24 – 7j/7</p>
                 <div class="hero-buttons">
                     <a href="#rdv" class="btn btn-primary">Prendre rendez-vous</a>
@@ -1202,7 +1211,7 @@
         <div class="slider-dots" id="sliderDots"></div>
     </section>
 
-    <!-- LE RESTE EST STRICTEMENT IDENTIQUE À TON ORIGINAL -->
+    <!-- LE RESTE EST STRICTEMENT IDENTIQUE À L'ORIGINAL -->
     <section class="bg-light">
         <div class="container">
             <div class="presentation-grid">
@@ -1333,10 +1342,26 @@
 <script>
     // ==================== SLIDER HERO ====================
     const slides = [
-        { image: "https://images.unsplash.com/photo-1504813184591-01572f98c85f?w=1600&h=600&fit=crop", text: "Urgences médicales et chirurgicales 24h/24 - 7j/7" },
-        { image: "https://images.unsplash.com/photo-1519494026892-80bbd2d6fd0d?w=1600&h=600&fit=crop", text: "Blocs opératoires modernes et équipements de pointe" },
-        { image: "https://images.unsplash.com/photo-1579684385127-1ef15d508118?w=1600&h=600&fit=crop", text: "Centre d'hémodialyse disponible 24h/24 - 7j/7" },
-        { image: "https://images.unsplash.com/photo-1581056771107-24ca5f033842?w=1600&h=600&fit=crop", text: "Plus de 40 spécialistes à votre service" }
+        { 
+            image: "https://images.unsplash.com/photo-1504813184591-01572f98c85f?w=1600&h=600&fit=crop",
+            titre: "Urgences 24h/24 & 7j/7",
+            text: "Prise en charge immédiate des accidents, douleurs aiguës et détresses vitales"
+        },
+        { 
+            image: "https://images.unsplash.com/photo-1519494026892-80bbd2d6fd0d?w=1600&h=600&fit=crop",
+            titre: "Chirurgie moderne & sécurisée",
+            text: "Blocs opératoires de pointe, chirurgie programmée et d'urgence"
+        },
+        { 
+            image: "https://images.unsplash.com/photo-1579684385127-1ef15d508118?w=1600&h=600&fit=crop",
+            titre: "Centre d'Hémodialyse 24h/24",
+            text: "Prise en charge complète de l'insuffisance rénale, disponible nuit et jour"
+        },
+        { 
+            image: "https://images.unsplash.com/photo-1581056771107-24ca5f033842?w=1600&h=600&fit=crop",
+            titre: "Plus de 40 spécialistes",
+            text: "Cardiologues, neurologues, pédiatres, gynécologues à votre service"
+        }
     ];
 
     let currentIndex = 0;
@@ -1344,6 +1369,7 @@
     const slidesContainer = document.getElementById('heroSlides');
     const dotsContainer = document.getElementById('sliderDots');
     const dynamicText = document.getElementById('heroDynamicText');
+    const titleEl = document.getElementById('heroTitle');
 
     function createSlides() {
         slidesContainer.innerHTML = '';
@@ -1373,6 +1399,7 @@
         document.querySelectorAll('.dot').forEach((dot, i) => {
             dot.classList.toggle('active', i === currentIndex);
         });
+        if (titleEl) titleEl.innerHTML = slides[currentIndex].titre + ' <span>24h/24</span>';
         dynamicText.textContent = slides[currentIndex].text;
     }
 
