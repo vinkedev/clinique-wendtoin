@@ -6,6 +6,7 @@
     <title>Clinique WENDTOIN – Urgences 24h/24 à Ouagadougou</title>
     <meta name="description" content="Clinique privée à Cissin, Ouagadougou. Urgences médicales et chirurgicales 24h/24, 7j/7. Plus de 40 spécialistes.">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
     <style>
         * {
             margin: 0;
@@ -170,6 +171,7 @@
             align-items: center;
             gap: 10px;
             flex-shrink: 0;
+            cursor: pointer;
         }
 
         .logo img {
@@ -442,6 +444,21 @@
             transform: translateY(-2px);
         }
 
+        .btn-danger {
+            background: #dc3545;
+            color: white;
+        }
+        .btn-danger:hover {
+            background: #b02a37;
+        }
+        .btn-warning {
+            background: #ffc107;
+            color: #1e293b;
+        }
+        .btn-warning:hover {
+            background: #e0a800;
+        }
+
         section {
             padding: 50px 0;
             background: white;
@@ -479,7 +496,6 @@
             }
         }
 
-        /* ========== SERVICES : 3 PAR LIGNE ========== */
         .cards-grid {
             display: grid;
             grid-template-columns: 1fr;
@@ -541,7 +557,7 @@
             font-size: 0.8rem;
         }
 
-        /* ========== ACTUALITÉS ========== */
+        /* ACTUALITÉS */
         .actualites-grid {
             display: grid;
             grid-template-columns: 1fr;
@@ -578,7 +594,7 @@
             align-items: center;
             justify-content: center;
             color: white;
-            font-size: 2rem;
+            font-size: 3rem;
         }
 
         .actu-content {
@@ -770,6 +786,7 @@
             border-left: 4px solid;
             transition: all 0.3s ease;
             cursor: pointer;
+            position: relative;
         }
         .specialty-item:hover {
             background: white;
@@ -787,6 +804,45 @@
             color: #475569;
         }
 
+        .admin-controls {
+            position: absolute;
+            top: 5px;
+            right: 5px;
+            display: flex;
+            gap: 5px;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+        .specialty-item:hover .admin-controls,
+        .actu-card:hover .admin-controls {
+            opacity: 1;
+        }
+        .admin-btn {
+            background: white;
+            border: none;
+            border-radius: 50%;
+            width: 28px;
+            height: 28px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            font-size: 12px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+            transition: all 0.2s ease;
+        }
+        .admin-btn.edit {
+            background: #0077A4;
+            color: white;
+        }
+        .admin-btn.delete {
+            background: #dc3545;
+            color: white;
+        }
+        .admin-btn:hover {
+            transform: scale(1.1);
+        }
+
         .badge-247 {
             background: #dc3545;
             color: white;
@@ -797,7 +853,6 @@
             margin-left: 8px;
         }
 
-        /* ========== ÉQUIPE ========== */
         .team-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
@@ -852,7 +907,6 @@
             line-height: 1.45;
         }
 
-        /* ========== GALERIE ========== */
         .gallery-section {
             background: white;
         }
@@ -968,7 +1022,6 @@
             background: white;
         }
 
-        /* ========== VIDÉOS ========== */
         .video-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
@@ -1036,7 +1089,6 @@
             color: #1D8B5D;
         }
 
-        /* MODAL STYLES */
         .modal {
             display: none;
             position: fixed;
@@ -1126,6 +1178,66 @@
             transform: scale(1.05);
         }
 
+        /* Admin Panel */
+        .admin-panel {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            z-index: 10000;
+        }
+        .admin-panel-btn {
+            background: #1D8B5D;
+            color: white;
+            border: none;
+            border-radius: 50px;
+            padding: 12px 20px;
+            cursor: pointer;
+            font-weight: 600;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+            transition: all 0.3s ease;
+        }
+        .admin-panel-btn:hover {
+            background: #146b48;
+            transform: scale(1.05);
+        }
+        .admin-login-modal {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: white;
+            padding: 30px;
+            border-radius: 24px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.2);
+            z-index: 10001;
+            width: 90%;
+            max-width: 400px;
+        }
+        .admin-dashboard {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: white;
+            z-index: 10002;
+            overflow-y: auto;
+            padding: 80px 20px 20px;
+        }
+        .admin-dashboard-header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            background: #1D8B5D;
+            color: white;
+            padding: 15px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            z-index: 10003;
+        }
+
         @media (min-width: 640px) {
             .hero-content h2 {
                 font-size: 2rem;
@@ -1198,7 +1310,6 @@
             }
         }
 
-        /* ========== IDENTITÉ VISUELLE PAR SECTION ========== */
         #specialites .section-title {
             color: #0077A4;
         }
@@ -1285,7 +1396,7 @@
 
 <header>
     <div class="header-container">
-        <div class="logo">
+        <div class="logo" id="secretLogo">
             <img src="cliniquewendtoin/logo_wendtoin.jpg" alt="Logo Clinique WENDTOIN" onerror="this.src='https://placehold.co/50x50/0077A4/white?text=W'">
             <div class="logo-text">
                 <h1>Clinique WENDTOIN</h1>
@@ -1387,128 +1498,52 @@
         </div>
     </section>
 
-    <!-- ========== SECTION ACTUALITÉS ========== -->
     <section id="actualites">
         <div class="container">
             <h2 class="section-title animate-on-scroll">Actualités</h2>
-            <div class="actualites-grid">
-                <div class="actu-card animate-on-scroll">
-                    <div class="actu-image">🏥</div>
-                    <div class="actu-content">
-                        <div class="actu-date">15 Mars 2026</div>
-                        <div class="actu-title">Nouveau bloc opératoire</div>
-                        <div class="actu-desc">La Clinique WENDTOIN inaugure son nouveau bloc opératoire ultra-moderne équipé des dernières technologies chirurgicales.</div>
-                    </div>
-                </div>
-                <div class="actu-card animate-on-scroll">
-                    <div class="actu-image">👨‍⚕️</div>
-                    <div class="actu-content">
-                        <div class="actu-date">1er Février 2026</div>
-                        <div class="actu-title">Arrivée de nouveaux spécialistes</div>
-                        <div class="actu-desc">Deux nouveaux neurochirurgiens et un chirurgien maxillo-facial rejoignent notre équipe médicale.</div>
-                    </div>
-                </div>
-                <div class="actu-card animate-on-scroll">
-                    <div class="actu-image">🩺</div>
-                    <div class="actu-content">
-                        <div class="actu-date">10 Janvier 2026</div>
-                        <div class="actu-title">Campagne de dépistage gratuit</div>
-                        <div class="actu-desc">La clinique organise une campagne de dépistage du diabète et de l'hypertension tout le mois de février.</div>
-                    </div>
-                </div>
-            </div>
+            <div class="actualites-grid" id="actualitesGrid"></div>
         </div>
     </section>
 
-    <!-- ========== SPÉCIALITÉS MÉDICALES ========== -->
     <section id="specialites">
         <div class="container">
             <h2 class="section-title animate-on-scroll">Spécialités médicales</h2>
-            <div class="specialty-grid">
-                <div class="specialty-item"><strong>Dermatologie</strong><p>Dermatologie médicale et allergologie</p></div>
-                <div class="specialty-item"><strong>Gastro-entérologie</strong><p>Explorations digestives, endoscopies</p></div>
-                <div class="specialty-item"><strong>Neurologie</strong><p>Prise en charge des maladies neurologiques</p></div>
-                <div class="specialty-item"><strong>Kinésithérapie</strong><p>Rééducation fonctionnelle, thérapies manuelles</p></div>
-                <div class="specialty-item"><strong>Cancérologie</strong><p>Oncologie médicale, suivi personnalisé</p></div>
-                <div class="specialty-item"><strong>Urologie</strong><p>Prise en charge des maladies urinaires</p></div>
-                <div class="specialty-item"><strong>ORL</strong><p>Consultations ORL</p></div>
-                <div class="specialty-item"><strong>Rhumatologie</strong><p>Maladies des os et des articulations</p></div>
-                <div class="specialty-item"><strong>Pneumologie</strong><p>Maladies respiratoires</p></div>
-                <div class="specialty-item"><strong>Néphrologie</strong><p>Maladies des reins et dialyse</p></div>
-                <div class="specialty-item"><strong>Psychiatrie</strong><p>Santé mentale</p></div>
-                <div class="specialty-item"><strong>Pédiatrie</strong><p>Santé de l'enfant</p></div>
-                <div class="specialty-item"><strong>Anatomie Pathologique</strong><p>Analyses microscopiques de tissus</p></div>
-                <div class="specialty-item"><strong>Anesthésie-Réanimation</strong><p>Anesthésie pour actes chirurgicaux</p></div>
-                <div class="specialty-item"><strong>Nutrition et Diététique</strong><p>Conseils nutritionnels personnalisés</p></div>
-                <div class="specialty-item"><strong>Médecine interne et diabétologie</strong><p>Prise en charge du diabète</p></div>
-            </div>
+            <div class="specialty-grid" id="specialitesMedicalesGrid"></div>
         </div>
     </section>
 
-    <!-- ========== SPÉCIALITÉS CHIRURGICALES ========== -->
     <section id="specialites-chirurgicales">
         <div class="container">
             <h2 class="section-title animate-on-scroll">Spécialités chirurgicales</h2>
-            <div class="specialty-grid">
-                <div class="specialty-item" data-surgery="viscérale"><strong>Chirurgie Générale / Digestive</strong><p>Hernies, Appendicite, Pathologies abdominales</p></div>
-                <div class="specialty-item" data-surgery="plastique"><strong>Chirurgie Plastique / De l'obésité</strong><p>Plastie, Liposuccion, Sleeve gastrectomie</p></div>
-                <div class="specialty-item" data-surgery="vasculaire"><strong>Chirurgie Vasculaire</strong><p>Varices, Fistules pour dialyse, Artériopathie</p></div>
-                <div class="specialty-item" data-surgery="thoracique"><strong>Chirurgie Thoracique</strong><p>Pathologies pulmonaires, Médiastin, VATS</p></div>
-                <div class="specialty-item" data-surgery="laparoscopique"><strong>Vidéo-chirurgie Laparoscopique</strong><p>Chirurgie mini-invasive par laparoscopie</p></div>
-                <div class="specialty-item"><strong>Urologie</strong><p>Prise en charge chirurgicale des voies urinaires</p></div>
-                <div class="specialty-item"><strong>Chirurgie pédiatrique</strong><p>Interventions chirurgicales adaptées aux enfants</p></div>
-                <div class="specialty-item"><strong>Chirurgie maxillo-faciale</strong><p>Chirurgie de la face, des mâchoires et du cou</p></div>
-                <div class="specialty-item"><strong>Neurochirurgie</strong><p>Chirurgie du système nerveux central et périphérique</p></div>
-                <div class="specialty-item"><strong>Chirurgie des cancers</strong><p>Prise en charge chirurgicale des tumeurs cancéreuses</p></div>
-            </div>
+            <div class="specialty-grid" id="specialitesChirurgicalesGrid"></div>
         </div>
     </section>
 
-    <!-- ========== GYNÉCOLOGIE - OBSTÉTRIQUE ========== -->
     <section id="gynecologie">
         <div class="container">
             <h2 class="section-title animate-on-scroll">Gynécologie - Obstétrique</h2>
-            <div class="specialty-grid">
-                <div class="specialty-item"><strong>Consultation + Suivi de grossesse</strong><p>Suivi médical complet pendant la grossesse</p></div>
-                <div class="specialty-item"><strong>Accouchement</strong><p>Accompagnement et prise en charge de l'accouchement</p></div>
-                <div class="specialty-item"><strong>Césarienne</strong><p>Intervention chirurgicale pour accouchement par voie haute</p></div>
-                <div class="specialty-item"><strong>Dépistage</strong><p>Dépistage prénatal et des maladies gynécologiques</p></div>
-                <div class="specialty-item"><strong>Contraception</strong><p>Conseil et pose de différents moyens contraceptifs</p></div>
-            </div>
+            <div class="specialty-grid" id="gynecologieGrid"></div>
         </div>
     </section>
 
-    <!-- ========== EXPLORATIONS ========== -->
     <section id="explorations">
         <div class="container">
             <h2 class="section-title animate-on-scroll">Explorations</h2>
-            <div class="specialty-grid">
-                <div class="specialty-item"><strong>Laboratoire d'analyses médicales</strong><p>Hématologie, Parasitologie, Biochimie</p></div>
-                <div class="specialty-item"><strong>Laboratoire d'anatomie pathologique</strong><p>Analyse de prélèvements (biopsies, etc.)</p></div>
-            </div>
+            <div class="specialty-grid" id="explorationsGrid"></div>
         </div>
     </section>
 
-    <!-- ========== IMAGERIE (sans descriptions) ========== -->
     <section id="imagerie">
         <div class="container">
             <h2 class="section-title animate-on-scroll">Imagerie</h2>
-            <div class="specialty-grid">
-                <div class="specialty-item"><strong>Radiologie standard</strong><p></p></div>
-                <div class="specialty-item"><strong>Scanner</strong><p></p></div>
-                <div class="specialty-item"><strong>Échographie</strong><p></p></div>
-            </div>
+            <div class="specialty-grid" id="imagerieGrid"></div>
         </div>
     </section>
 
-    <!-- ========== ÉQUIPEMENTS SPÉCIALISÉS ========== -->
     <section id="poles">
         <div class="container">
             <h2 class="section-title animate-on-scroll">Équipements spécialisés</h2>
-            <div class="specialty-grid">
-                <div class="specialty-item"><strong>🔬 Laboratoire d'Anatomie-Pathologie</strong><p>Analyses précises pour le diagnostic des cancers et pathologies tissulaires</p></div>
-                <div class="specialty-item"><strong>💧 Centre d'Hémodialyse <span class="badge-247">24h/24 - 7j/7</span></strong><p>Service d'hémodialyse disponible 24 heures sur 24, 7 jours sur 7</p></div>
-            </div>
+            <div class="specialty-grid" id="equipementsGrid"></div>
         </div>
     </section>
 
@@ -1556,40 +1591,266 @@
 <div id="imageModal" class="image-modal"><span class="close-image-modal">✕</span><img id="modalImage" src=""></div>
 
 <script>
-    // ==================== SLIDER HERO ====================
-    const slides = [
-        { 
-            image: "slide/churigie.jpeg",
-            titre: "Chirurgie moderne",
-            badge: "& sécurisée",
-            text: "Blocs opératoires de pointe, chirurgie programmée et d'urgence 24h/24",
-            lien: "#specialites-chirurgicales",
-            labelBtn: "Voir nos spécialités chirurgicales"
-        },
-        { 
-            image: "slide/dialyse.jpg",
-            titre: "Centre d'Hémodialyse",
-            badge: "24h/24",
-            text: "Prise en charge complète de l'insuffisance rénale, disponible nuit et jour, 7j/7",
-            lien: "#poles",
-            labelBtn: "Découvrir le service dialyse"
-        },
-        { 
-            image: "slide/equipe_specialiste.jpg",
-            titre: "Plus de 40 spécialistes",
-            badge: "à votre service",
-            text: "Cardiologues, neurologues, pédiatres, gynécologues, chirurgiens et bien plus",
-            lien: "#equipe",
-            labelBtn: "Rencontrer notre équipe"
-        },
-        { 
-            image: "slide/urgence.jpeg",
-            titre: "Urgences médicales",
-            badge: "24h/24 & 7j/7",
-            text: "Prise en charge immédiate des accidents, douleurs aiguës et détresses vitales",
-            lien: "tel:51000647",
-            labelBtn: "Appeler les urgences"
+    // ==================== SUPABASE CONFIGURATION ====================
+    const SUPABASE_URL = 'https://otdiywrvzappbmjfkkyi.supabase.co';
+    const SUPABASE_ANON_KEY = 'sb_publishable_tn6FW9OxsqNdKMg9uCuB5A_gZICo-Jy';
+    const supabase = supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+
+    let isAdmin = false;
+
+    // ==================== CHARGEMENT DES DONNÉES ====================
+    async function loadActualites() {
+        const { data, error } = await supabase.from('actualites').select('*').order('id', { ascending: false });
+        if (error) { console.error(error); return; }
+        const container = document.getElementById('actualitesGrid');
+        if (!container) return;
+        container.innerHTML = data.map(actu => `
+            <div class="actu-card animate-on-scroll" data-id="${actu.id}">
+                ${isAdmin ? `<div class="admin-controls"><button class="admin-btn edit" onclick="editActualite(${actu.id})">✏️</button><button class="admin-btn delete" onclick="deleteActualite(${actu.id})">🗑️</button></div>` : ''}
+                <div class="actu-image">${actu.image_emoji || '📰'}</div>
+                <div class="actu-content">
+                    <div class="actu-date">${actu.date || ''}</div>
+                    <div class="actu-title">${actu.titre}</div>
+                    <div class="actu-desc">${actu.description || ''}</div>
+                </div>
+            </div>
+        `).join('');
+    }
+
+    async function loadSpecialites(table, containerId, colorClass) {
+        const { data, error } = await supabase.from(table).select('*').order('ordre', { ascending: true });
+        if (error) { console.error(error); return; }
+        const container = document.getElementById(containerId);
+        if (!container) return;
+        container.innerHTML = data.map(item => `
+            <div class="specialty-item" data-id="${item.id}">
+                ${isAdmin ? `<div class="admin-controls"><button class="admin-btn edit" onclick="editSpecialite('${table}', ${item.id})">✏️</button><button class="admin-btn delete" onclick="deleteSpecialite('${table}', ${item.id})">🗑️</button></div>` : ''}
+                <strong>${item.titre}</strong>
+                <p>${item.description || ''}</p>
+            </div>
+        `).join('');
+    }
+
+    async function loadImagerie() {
+        const { data, error } = await supabase.from('imagerie').select('*').order('ordre', { ascending: true });
+        if (error) { console.error(error); return; }
+        const container = document.getElementById('imagerieGrid');
+        if (!container) return;
+        container.innerHTML = data.map(item => `
+            <div class="specialty-item" data-id="${item.id}">
+                ${isAdmin ? `<div class="admin-controls"><button class="admin-btn edit" onclick="editSpecialite('imagerie', ${item.id})">✏️</button><button class="admin-btn delete" onclick="deleteSpecialite('imagerie', ${item.id})">🗑️</button></div>` : ''}
+                <strong>${item.titre}</strong>
+                <p></p>
+            </div>
+        `).join('');
+    }
+
+    async function loadEquipements() {
+        const { data, error } = await supabase.from('equipements').select('*').order('ordre', { ascending: true });
+        if (error) { console.error(error); return; }
+        const container = document.getElementById('equipementsGrid');
+        if (!container) return;
+        container.innerHTML = data.map(item => `
+            <div class="specialty-item" data-id="${item.id}">
+                ${isAdmin ? `<div class="admin-controls"><button class="admin-btn edit" onclick="editEquipement(${item.id})">✏️</button><button class="admin-btn delete" onclick="deleteEquipement(${item.id})">🗑️</button></div>` : ''}
+                <strong>${item.titre} ${item.badge ? `<span class="badge-247">${item.badge}</span>` : ''}</strong>
+                <p>${item.description || ''}</p>
+            </div>
+        `).join('');
+    }
+
+    function loadAllData() {
+        loadActualites();
+        loadSpecialites('specialites_medicales', 'specialitesMedicalesGrid');
+        loadSpecialites('specialites_chirurgicales', 'specialitesChirurgicalesGrid');
+        loadSpecialites('gynecologie', 'gynecologieGrid');
+        loadSpecialites('explorations', 'explorationsGrid');
+        loadImagerie();
+        loadEquipements();
+    }
+
+    // ==================== CRUD ACTUALITÉS ====================
+    async function addActualite() {
+        const titre = prompt('Titre de l\'actualité :');
+        if (!titre) return;
+        const description = prompt('Description :');
+        const date = prompt('Date (ex: 15 Mars 2026) :');
+        const emoji = prompt('Emoji (ex: 🏥, 👨‍⚕️, 🩺) :', '📰');
+        const { error } = await supabase.from('actualites').insert([{ titre, description, date, image_emoji: emoji }]);
+        if (error) alert('Erreur: ' + error.message);
+        else loadActualites();
+    }
+
+    async function editActualite(id) {
+        const { data } = await supabase.from('actualites').select('*').eq('id', id).single();
+        if (!data) return;
+        const titre = prompt('Nouveau titre :', data.titre);
+        if (!titre) return;
+        const description = prompt('Nouvelle description :', data.description);
+        const date = prompt('Nouvelle date :', data.date);
+        const emoji = prompt('Nouvel emoji :', data.image_emoji);
+        const { error } = await supabase.from('actualites').update({ titre, description, date, image_emoji: emoji }).eq('id', id);
+        if (error) alert('Erreur: ' + error.message);
+        else loadActualites();
+    }
+
+    async function deleteActualite(id) {
+        if (!confirm('Supprimer cette actualité ?')) return;
+        const { error } = await supabase.from('actualites').delete().eq('id', id);
+        if (error) alert('Erreur: ' + error.message);
+        else loadActualites();
+    }
+
+    // ==================== CRUD SPÉCIALITÉS ====================
+    async function addSpecialite(table) {
+        const titre = prompt('Nom de la spécialité :');
+        if (!titre) return;
+        const description = prompt('Description :');
+        const { data, error } = await supabase.from(table).insert([{ titre, description }]);
+        if (error) alert('Erreur: ' + error.message);
+        else {
+            if (table === 'imagerie') loadImagerie();
+            else loadSpecialites(table, getContainerId(table));
         }
+    }
+
+    async function editSpecialite(table, id) {
+        let { data } = await supabase.from(table).select('*').eq('id', id).single();
+        if (!data) return;
+        const titre = prompt('Nouveau titre :', data.titre);
+        if (!titre) return;
+        const description = prompt('Nouvelle description :', data.description);
+        const { error } = await supabase.from(table).update({ titre, description }).eq('id', id);
+        if (error) alert('Erreur: ' + error.message);
+        else {
+            if (table === 'imagerie') loadImagerie();
+            else loadSpecialites(table, getContainerId(table));
+        }
+    }
+
+    async function deleteSpecialite(table, id) {
+        if (!confirm('Supprimer cette spécialité ?')) return;
+        const { error } = await supabase.from(table).delete().eq('id', id);
+        if (error) alert('Erreur: ' + error.message);
+        else {
+            if (table === 'imagerie') loadImagerie();
+            else loadSpecialites(table, getContainerId(table));
+        }
+    }
+
+    async function editEquipement(id) {
+        let { data } = await supabase.from('equipements').select('*').eq('id', id).single();
+        if (!data) return;
+        const titre = prompt('Nouveau titre :', data.titre);
+        if (!titre) return;
+        const description = prompt('Nouvelle description :', data.description);
+        const badge = prompt('Badge (ex: 24h/24 - 7j/7) :', data.badge || '');
+        const { error } = await supabase.from('equipements').update({ titre, description, badge }).eq('id', id);
+        if (error) alert('Erreur: ' + error.message);
+        else loadEquipements();
+    }
+
+    async function deleteEquipement(id) {
+        if (!confirm('Supprimer cet équipement ?')) return;
+        const { error } = await supabase.from('equipements').delete().eq('id', id);
+        if (error) alert('Erreur: ' + error.message);
+        else loadEquipements();
+    }
+
+    function getContainerId(table) {
+        const map = {
+            'specialites_medicales': 'specialitesMedicalesGrid',
+            'specialites_chirurgicales': 'specialitesChirurgicalesGrid',
+            'gynecologie': 'gynecologieGrid',
+            'explorations': 'explorationsGrid'
+        };
+        return map[table];
+    }
+
+    // ==================== ADMIN PANEL ====================
+    let clickCount = 0;
+    let clickTimeout;
+    document.getElementById('secretLogo').addEventListener('click', () => {
+        clickCount++;
+        clearTimeout(clickTimeout);
+        clickTimeout = setTimeout(() => { clickCount = 0; }, 1000);
+        if (clickCount === 5) {
+            showAdminLogin();
+            clickCount = 0;
+        }
+    });
+
+    function showAdminLogin() {
+        const modal = document.createElement('div');
+        modal.className = 'admin-login-modal';
+        modal.innerHTML = `
+            <h3 style="margin-bottom:20px; color:#0077A4;">Accès Administrateur</h3>
+            <input type="password" id="adminPassword" placeholder="Mot de passe" style="width:100%; padding:12px; border-radius:12px; border:1px solid #e2e8f0; margin-bottom:15px;">
+            <button id="loginBtn" style="width:100%; padding:12px; background:#1D8B5D; color:white; border:none; border-radius:12px; cursor:pointer;">Se connecter</button>
+            <button id="closeLoginBtn" style="width:100%; margin-top:10px; padding:10px; background:#e2e8f0; border:none; border-radius:12px; cursor:pointer;">Fermer</button>
+        `;
+        document.body.appendChild(modal);
+        document.getElementById('loginBtn').onclick = () => {
+            const pwd = document.getElementById('adminPassword').value;
+            if (pwd === 'admin123') {
+                isAdmin = true;
+                modal.remove();
+                showAdminDashboard();
+                loadAllData();
+            } else {
+                alert('Mot de passe incorrect');
+            }
+        };
+        document.getElementById('closeLoginBtn').onclick = () => modal.remove();
+    }
+
+    function showAdminDashboard() {
+        const dashboard = document.createElement('div');
+        dashboard.className = 'admin-dashboard';
+        dashboard.innerHTML = `
+            <div class="admin-dashboard-header">
+                <h3>Panel d'administration</h3>
+                <button id="closeDashboard" style="background:white; color:#1D8B5D; border:none; border-radius:50px; padding:8px 16px; cursor:pointer;">Fermer</button>
+            </div>
+            <div class="container" style="margin-top:80px;">
+                <h3 style="color:#0077A4; margin-bottom:20px;">Actualités</h3>
+                <button onclick="addActualite()" style="background:#1D8B5D; color:white; border:none; border-radius:50px; padding:10px 20px; margin-bottom:20px; cursor:pointer;">+ Ajouter une actualité</button>
+                
+                <h3 style="color:#0077A4; margin:30px 0 20px;">Spécialités Médicales</h3>
+                <button onclick="addSpecialite('specialites_medicales')" style="background:#0077A4; color:white; border:none; border-radius:50px; padding:10px 20px; margin-bottom:20px; cursor:pointer;">+ Ajouter</button>
+                
+                <h3 style="color:#1D8B5D; margin:30px 0 20px;">Spécialités Chirurgicales</h3>
+                <button onclick="addSpecialite('specialites_chirurgicales')" style="background:#1D8B5D; color:white; border:none; border-radius:50px; padding:10px 20px; margin-bottom:20px; cursor:pointer;">+ Ajouter</button>
+                
+                <h3 style="color:#e83e8c; margin:30px 0 20px;">Gynécologie</h3>
+                <button onclick="addSpecialite('gynecologie')" style="background:#e83e8c; color:white; border:none; border-radius:50px; padding:10px 20px; margin-bottom:20px; cursor:pointer;">+ Ajouter</button>
+                
+                <h3 style="color:#6f42c1; margin:30px 0 20px;">Explorations</h3>
+                <button onclick="addSpecialite('explorations')" style="background:#6f42c1; color:white; border:none; border-radius:50px; padding:10px 20px; margin-bottom:20px; cursor:pointer;">+ Ajouter</button>
+                
+                <h3 style="color:#fd7e14; margin:30px 0 20px;">Imagerie</h3>
+                <button onclick="addSpecialite('imagerie')" style="background:#fd7e14; color:white; border:none; border-radius:50px; padding:10px 20px; margin-bottom:20px; cursor:pointer;">+ Ajouter</button>
+                
+                <h3 style="color:#1e293b; margin:30px 0 20px;">Équipements spécialisés</h3>
+                <button onclick="addSpecialite('equipements')" style="background:#1e293b; color:white; border:none; border-radius:50px; padding:10px 20px; margin-bottom:20px; cursor:pointer;">+ Ajouter</button>
+                
+                <p style="margin-top:30px; color:#64748b;">Pour modifier/supprimer : survolez les éléments sur le site</p>
+            </div>
+        `;
+        document.body.appendChild(dashboard);
+        document.getElementById('closeDashboard').onclick = () => {
+            isAdmin = false;
+            dashboard.remove();
+            loadAllData();
+        };
+    }
+
+    // ==================== SLIDER ET AUTRES ====================
+    const slides = [
+        { image: "slide/churigie.jpeg", titre: "Chirurgie moderne", badge: "& sécurisée", text: "Blocs opératoires de pointe, chirurgie programmée et d'urgence 24h/24", lien: "#specialites-chirurgicales", labelBtn: "Voir nos spécialités chirurgicales" },
+        { image: "slide/dialyse.jpg", titre: "Centre d'Hémodialyse", badge: "24h/24", text: "Prise en charge complète de l'insuffisance rénale, disponible nuit et jour, 7j/7", lien: "#poles", labelBtn: "Découvrir le service dialyse" },
+        { image: "slide/equipe_specialiste.jpg", titre: "Plus de 40 spécialistes", badge: "à votre service", text: "Cardiologues, neurologues, pédiatres, gynécologues, chirurgiens et bien plus", lien: "#equipe", labelBtn: "Rencontrer notre équipe" },
+        { image: "slide/urgence.jpeg", titre: "Urgences médicales", badge: "24h/24 & 7j/7", text: "Prise en charge immédiate des accidents, douleurs aiguës et détresses vitales", lien: "tel:51000647", labelBtn: "Appeler les urgences" }
     ];
 
     let currentIndex = 0;
@@ -1623,90 +1884,44 @@
 
     function updateButtons() {
         const currentSlide = slides[currentIndex];
-        heroButtonsContainer.innerHTML = `
-            <a href="${currentSlide.lien}" class="btn btn-primary">${currentSlide.labelBtn}</a>
-            <a href="tel:51000647" class="btn btn-outline" data-tooltip="Appel gratuit 24h/24">Urgence 24/24 <span class="urgences-badge">URGENCE</span></a>
-        `;
+        heroButtonsContainer.innerHTML = `<a href="${currentSlide.lien}" class="btn btn-primary">${currentSlide.labelBtn}</a><a href="tel:51000647" class="btn btn-outline" data-tooltip="Appel gratuit 24h/24">Urgence 24/24 <span class="urgences-badge">URGENCE</span></a>`;
     }
 
     function startProgressBar() {
-        if (progressBar) {
-            progressBar.style.animation = 'none';
-            void progressBar.offsetWidth;
-            progressBar.style.animation = 'progress 3s linear';
-        }
+        if (progressBar) { progressBar.style.animation = 'none'; void progressBar.offsetWidth; progressBar.style.animation = 'progress 3s linear'; }
     }
 
     function updateSlidesAndText() {
         const allSlides = document.querySelectorAll('.hero-slide');
-        allSlides.forEach((slide, i) => {
-            slide.classList.toggle('active', i === currentIndex);
-        });
-        document.querySelectorAll('.dot').forEach((dot, i) => {
-            dot.classList.toggle('active', i === currentIndex);
-        });
-        
-        titleEl.classList.remove('text-animate');
-        dynamicText.classList.remove('text-animate');
-        
-        void titleEl.offsetWidth;
-        void dynamicText.offsetWidth;
-        
+        allSlides.forEach((slide, i) => slide.classList.toggle('active', i === currentIndex));
+        document.querySelectorAll('.dot').forEach((dot, i) => dot.classList.toggle('active', i === currentIndex));
+        titleEl.classList.remove('text-animate'); dynamicText.classList.remove('text-animate');
+        void titleEl.offsetWidth; void dynamicText.offsetWidth;
         titleEl.innerHTML = slides[currentIndex].titre + ' <span>' + slides[currentIndex].badge + '</span>';
         dynamicText.textContent = slides[currentIndex].text;
-        
         updateButtons();
-        
-        titleEl.classList.add('text-animate');
-        dynamicText.classList.add('text-animate');
-        
+        titleEl.classList.add('text-animate'); dynamicText.classList.add('text-animate');
         startProgressBar();
     }
 
-    function goToSlide(index) {
-        currentIndex = index;
-        updateSlidesAndText();
-        resetAutoPlay();
-    }
+    function goToSlide(index) { currentIndex = index; updateSlidesAndText(); resetAutoPlay(); }
+    function nextSlide() { currentIndex = (currentIndex + 1) % slides.length; updateSlidesAndText(); resetAutoPlay(); }
+    function prevSlide() { currentIndex = (currentIndex - 1 + slides.length) % slides.length; updateSlidesAndText(); resetAutoPlay(); }
+    function resetAutoPlay() { if (autoInterval) clearInterval(autoInterval); autoInterval = setInterval(nextSlide, 3000); }
 
-    function nextSlide() {
-        currentIndex = (currentIndex + 1) % slides.length;
-        updateSlidesAndText();
-        resetAutoPlay();
-    }
-
-    function prevSlide() {
-        currentIndex = (currentIndex - 1 + slides.length) % slides.length;
-        updateSlidesAndText();
-        resetAutoPlay();
-    }
-
-    function resetAutoPlay() {
-        if (autoInterval) clearInterval(autoInterval);
-        autoInterval = setInterval(nextSlide, 3000);
-    }
-
-    createSlides();
-    createDots();
-    updateSlidesAndText();
-    resetAutoPlay();
-    startProgressBar();
-
+    createSlides(); createDots(); updateSlidesAndText(); resetAutoPlay();
     document.getElementById('sliderPrev').addEventListener('click', prevSlide);
     document.getElementById('sliderNext').addEventListener('click', nextSlide);
-
     const heroSection = document.querySelector('.hero');
     heroSection.addEventListener('mouseenter', () => { if (autoInterval) clearInterval(autoInterval); });
     heroSection.addEventListener('mouseleave', () => { autoInterval = setInterval(nextSlide, 3000); });
 
-    // ==================== ÉQUIPE ====================
     const teamMembers = [
         { name: "Pr Gilbert BONKOUGOU", position: "Directeur Général", desc: "Professeur agrégé en chirurgie générale.", image: "cliniquewendtoin/pr_gilbert.jpeg" },
         { name: "Dr Lionelle TIAHOUN", position: "Médecin généraliste", desc: "Prise en charge des consultations générales et des urgences.", image: "cliniquewendtoin/Lionelle.jpg" },
         { name: "Absetou KABORE", position: "Secrétaire", desc: "Accueil, gestion des rendez-vous et administration.", image: "slide/secretaire.jpeg" },
         { name: "Agnès COMPAORE", position: "Surveillante générale", desc: "Surveillante d'unité de soins. Coordination des équipes soignantes.", image: "https://placehold.co/400x400/0077A4/white?text=Agn%C3%A8s" }
     ];
-
     const teamGrid = document.getElementById('teamGrid');
     if (teamGrid) {
         teamMembers.forEach(member => {
@@ -1717,32 +1932,23 @@
         });
     }
 
-    // ==================== GALERIE ====================
-    const galleryImages = [
-        "cliniquewendtoin/Im1.jpeg", "cliniquewendtoin/Im3.jpeg", "cliniquewendtoin/Im4.jpeg",
-        "cliniquewendtoin/Im5.jpeg", "cliniquewendtoin/Im7.jpeg", "cliniquewendtoin/Im8.jpeg",
-        "cliniquewendtoin/Im9.jpeg", "cliniquewendtoin/Im10.jpeg", "cliniquewendtoin/Im11.jpeg",
-        "cliniquewendtoin/Im12.jpeg", "cliniquewendtoin/Im13.jpeg", "cliniquewendtoin/Im14.jpeg"
-    ];
-
-    const galleryGrid = document.getElementById('galleryGrid');
+    const galleryImages = ["cliniquewendtoin/Im1.jpeg", "cliniquewendtoin/Im3.jpeg", "cliniquewendtoin/Im4.jpeg", "cliniquewendtoin/Im5.jpeg", "cliniquewendtoin/Im7.jpeg", "cliniquewendtoin/Im8.jpeg", "cliniquewendtoin/Im9.jpeg", "cliniquewendtoin/Im10.jpeg", "cliniquewendtoin/Im11.jpeg", "cliniquewendtoin/Im12.jpeg", "cliniquewendtoin/Im13.jpeg", "cliniquewendtoin/Im14.jpeg"];
+    const galleryGridEl = document.getElementById('galleryGrid');
     const imageModal = document.getElementById('imageModal');
     const modalImage = document.getElementById('modalImage');
     const closeImageModal = document.querySelector('.close-image-modal');
-
-    if (galleryGrid) {
+    if (galleryGridEl) {
         galleryImages.forEach(imgSrc => {
             const item = document.createElement('div');
             item.className = 'gallery-item animate-on-scroll';
             item.innerHTML = `<img src="${imgSrc}" alt="Clinique WENDTOIN" class="gallery-img" onerror="this.src='https://placehold.co/400x300/0077A4/white?text=Photo'">`;
             item.addEventListener('click', () => { modalImage.src = imgSrc; imageModal.style.display = 'flex'; });
-            galleryGrid.appendChild(item);
+            galleryGridEl.appendChild(item);
         });
     }
     if (closeImageModal) closeImageModal.addEventListener('click', () => { imageModal.style.display = 'none'; });
     window.addEventListener('click', (e) => { if (e.target === imageModal) imageModal.style.display = 'none'; });
 
-    // ==================== VIDÉOS ====================
     const allVideos = [
         { title: "Pr Gilbert BONKOUGOU - Maladie hémorroïdaire", desc: "Les hémorroïdes expliquées par le Pr Gilbert BONKOUGOU", url: "https://web.facebook.com/reel/645204957720787" },
         { title: "Unité de dialyse - Clinique WENDTOIN", desc: "Prise en charge des insuffisances rénales aiguës et chroniques", url: "https://web.facebook.com/reel/879902179764068" },
@@ -1754,36 +1960,25 @@
         { title: "Dr Marcel Kuiré - L'asthme", desc: "Maladie respiratoire fréquente qui peut être grave si non diagnostiquée", url: "https://web.facebook.com/reel/743148739906723" },
         { title: "Dr Nadia TOE/ROUAMBA - Lombalgie (maux de reins)", desc: "Spécialiste en Rhumatologie explique les causes diverses", url: "https://web.facebook.com/reel/929689517848124" }
     ];
-
     let visibleVideos = 4;
-    const videoGrid = document.getElementById('videoGrid');
+    const videoGridEl = document.getElementById('videoGrid');
     const showMoreBtn = document.getElementById('showMoreVideos');
-
     function displayVideos() {
-        if (!videoGrid) return;
-        videoGrid.innerHTML = '';
+        if (!videoGridEl) return;
+        videoGridEl.innerHTML = '';
         const videosToShow = allVideos.slice(0, visibleVideos);
         videosToShow.forEach(video => {
             const card = document.createElement('div');
             card.className = 'video-card';
             card.addEventListener('click', () => { window.open(video.url, '_blank', 'noopener,noreferrer'); });
             card.innerHTML = `<div class="video-thumbnail">▶️</div><div class="video-info"><div class="video-title">${video.title}</div><div class="video-date">${video.desc}</div></div>`;
-            videoGrid.appendChild(card);
+            videoGridEl.appendChild(card);
         });
-        if (showMoreBtn) {
-            showMoreBtn.style.display = visibleVideos >= allVideos.length ? 'none' : 'inline-block';
-        }
+        if (showMoreBtn) showMoreBtn.style.display = visibleVideos >= allVideos.length ? 'none' : 'inline-block';
     }
-    
-    if (showMoreBtn) {
-        showMoreBtn.addEventListener('click', () => { 
-            visibleVideos = Math.min(visibleVideos + 4, allVideos.length); 
-            displayVideos(); 
-        });
-    }
+    if (showMoreBtn) showMoreBtn.addEventListener('click', () => { visibleVideos = Math.min(visibleVideos + 4, allVideos.length); displayVideos(); });
     displayVideos();
 
-    // ==================== MODALES POUR CHIRURGIE ====================
     const surgeryDetails = {
         'viscérale': { title: 'Chirurgie Générale / Digestive', content: '<p><strong>Chirurgie générale et digestive</strong> prend en charge les pathologies des organes de l\'abdomen.</p><ul><li>Hernies et Éventrations</li><li>Pathologies des organes : Œsophage, Estomac, Intestins, Rate, Vésicule biliaire</li><li>Appendicite, Pathologies utérines, Affections anales</li></ul><div class="info-note">Pr Gilbert BONKOUGOU - Chirurgien référent</div>' },
         'plastique': { title: 'Chirurgie Plastique / De l\'obésité', content: '<p><strong>Chirurgie plastique et de l\'obésité</strong> comprend :</p><ul><li>Chirurgie plastique : Plastie des seins, Liposuccion, Abdominoplastie, BBL</li><li>Chirurgie de l\'obésité : Sleeve gastrectomie, By-pass gastrique</li></ul><div class="info-note">Consultation préalable obligatoire</div>' },
@@ -1791,7 +1986,6 @@
         'thoracique': { title: 'Chirurgie Thoracique', content: '<p><strong>Chirurgie thoracique</strong> prend en charge les affections du thorax.</p><ul><li>Pathologies pulmonaires (cancer, nodules, pneumothorax)</li><li>Médiastin (tumeurs thymiques, péricardectomie)</li><li>Paroi thoracique</li></ul><div class="info-note">Techniques vidéo-assistées (VATS)</div>' },
         'laparoscopique': { title: 'Vidéo-Chirurgie Laparoscopique', content: '<p><strong>Chirurgie mini-invasive</strong> par laparoscopie.</p><ul><li>Chirurgie de la vésicule biliaire</li><li>Chirurgie des hernies</li><li>Chirurgie colorectale</li><li>Chirurgie de l\'obésité</li></ul><div class="info-note">Pr Gilbert BONKOUGOU - Pionnier de la laparoscopie</div>' }
     };
-    
     let modalElement = document.getElementById('surgeryModal');
     if (!modalElement) {
         const newModal = document.createElement('div');
@@ -1801,11 +1995,9 @@
         document.body.appendChild(newModal);
         modalElement = newModal;
     }
-    
     const modalTitleElem = document.getElementById('modalTitle');
     const modalBodyElem = document.getElementById('modalBody');
     const closeModalBtn = document.querySelector('#surgeryModal .close-modal');
-    
     document.querySelectorAll('.specialty-item[data-surgery]').forEach(item => {
         item.addEventListener('click', (e) => {
             e.stopPropagation();
@@ -1818,27 +2010,18 @@
             }
         });
     });
-    
     const closeModal = () => { if (modalElement) modalElement.style.display = 'none'; };
     if (closeModalBtn) closeModalBtn.addEventListener('click', closeModal);
     window.addEventListener('click', (e) => { if (e.target === modalElement) closeModal(); });
     document.addEventListener('keydown', (e) => { if (e.key === 'Escape' && modalElement && modalElement.style.display === 'flex') closeModal(); });
 
-    // ==================== ANIMATIONS AU SCROLL ====================
     const animateElements = document.querySelectorAll('.animate-on-scroll');
     const observer = new IntersectionObserver((entries) => {
-        entries.forEach((entry, index) => {
-            if (entry.isIntersecting) {
-                setTimeout(() => { entry.target.classList.add('visible'); }, index * 60);
-                observer.unobserve(entry.target);
-            }
-        });
+        entries.forEach((entry, index) => { if (entry.isIntersecting) { setTimeout(() => { entry.target.classList.add('visible'); }, index * 60); observer.unobserve(entry.target); } });
     }, { threshold: 0.15, rootMargin: '0px 0px -50px 0px' });
     animateElements.forEach(el => observer.observe(el));
-    
     window.addEventListener('scroll', () => { document.querySelector('header')?.classList.toggle('scrolled', window.scrollY > 50); });
-    
-    // ==================== MENU MOBILE ====================
+
     const mobileBtn = document.querySelector('.mobile-menu-btn');
     const navMenu = document.getElementById('navMenu');
     if (mobileBtn && navMenu) {
@@ -1846,61 +2029,25 @@
         navMenu.querySelectorAll('a').forEach(link => link.addEventListener('click', () => { navMenu.classList.remove('show'); if (mobileBtn) mobileBtn.innerHTML = '☰'; }));
         document.addEventListener('click', (e) => { if (!mobileBtn.contains(e.target) && !navMenu.contains(e.target)) { navMenu.classList.remove('show'); if (mobileBtn) mobileBtn.innerHTML = '☰'; } });
     }
-    
-    // ==================== COMPTEURS STATISTIQUES ====================
-    function animateCounter(el, start, end, duration) { 
-        let startTime = null; 
-        el.innerText = start; 
-        function update(now) { 
-            if (!startTime) startTime = now; 
-            const p = Math.min((now - startTime) / duration, 1); 
-            el.innerText = Math.floor(p * (end - start) + start); 
-            if (p < 1) requestAnimationFrame(update); 
-        } 
-        requestAnimationFrame(update); 
+
+    function animateCounter(el, start, end, duration) {
+        let startTime = null;
+        el.innerText = start;
+        function update(now) { if (!startTime) startTime = now; const p = Math.min((now - startTime) / duration, 1); el.innerText = Math.floor(p * (end - start) + start); if (p < 1) requestAnimationFrame(update); }
+        requestAnimationFrame(update);
     }
-    
-    const statObserver = new IntersectionObserver((entries) => { 
-        entries.forEach(e => { 
-            if (e.isIntersecting) { 
-                const yEl = document.getElementById('stat-years'), dEl = document.getElementById('stat-doctors'); 
-                if (yEl && yEl.innerText === "0") animateCounter(yEl, 0, 10, 1500); 
-                if (dEl && dEl.innerText === "0") animateCounter(dEl, 0, 40, 1800); 
-                statObserver.unobserve(e.target); 
-            } 
-        }); 
+    const statObserver = new IntersectionObserver((entries) => {
+        entries.forEach(e => { if (e.isIntersecting) { const yEl = document.getElementById('stat-years'), dEl = document.getElementById('stat-doctors'); if (yEl && yEl.innerText === "0") animateCounter(yEl, 0, 10, 1500); if (dEl && dEl.innerText === "0") animateCounter(dEl, 0, 40, 1800); statObserver.unobserve(e.target); } });
     }, { threshold: 0.3 });
-    const statsContainerEl = document.querySelector('.stats-container'); 
+    const statsContainerEl = document.querySelector('.stats-container');
     if (statsContainerEl) statObserver.observe(statsContainerEl);
-    
-    // ==================== FORMULAIRE WHATSAPP ====================
+
     const whatsappForm = document.getElementById('whatsappForm');
     if (whatsappForm) {
-        whatsappForm.addEventListener('submit', function(e) { 
-            e.preventDefault(); 
-            const nom = document.getElementById('nom'); 
-            if (!nom.value.trim()) { 
-                nom.classList.add('form-error'); 
-                setTimeout(() => nom.classList.remove('form-error'), 500); 
-                alert('Veuillez remplir votre nom'); 
-                return; 
-            } 
-            const service = document.getElementById('service').value; 
-            const motif = document.getElementById('motif').value; 
-            let message = `Bonjour Clinique WENDTOIN,%0A%0A Demande de rendez-vous%0A Nom : ${encodeURIComponent(nom.value.trim())}%0A Service : ${encodeURIComponent(service)}%0A`; 
-            if (motif) message += ` Message : ${encodeURIComponent(motif)}%0A`; 
-            message += `%0AMerci de me confirmer un créneau.`; 
-            const btn = document.getElementById('submitRdvBtn'); 
-            btn.classList.add('btn-loading'); 
-            btn.innerHTML = 'Envoi en cours...'; 
-            setTimeout(() => { 
-                window.open(`https://wa.me/22651000647?text=${message}`, '_blank'); 
-                whatsappForm.reset(); 
-                btn.classList.remove('btn-loading'); 
-                btn.innerHTML = 'Envoyer la demande'; 
-            }, 500); 
-        });
+        whatsappForm.addEventListener('submit', function(e) { e.preventDefault(); const nom = document.getElementById('nom'); if (!nom.value.trim()) { nom.classList.add('form-error'); setTimeout(() => nom.classList.remove('form-error'), 500); alert('Veuillez remplir votre nom'); return; } const service = document.getElementById('service').value; const motif = document.getElementById('motif').value; let message = `Bonjour Clinique WENDTOIN,%0A%0A Demande de rendez-vous%0A Nom : ${encodeURIComponent(nom.value.trim())}%0A Service : ${encodeURIComponent(service)}%0A`; if (motif) message += ` Message : ${encodeURIComponent(motif)}%0A`; message += `%0AMerci de me confirmer un créneau.`; const btn = document.getElementById('submitRdvBtn'); btn.classList.add('btn-loading'); btn.innerHTML = 'Envoi en cours...'; setTimeout(() => { window.open(`https://wa.me/22651000647?text=${message}`, '_blank'); whatsappForm.reset(); btn.classList.remove('btn-loading'); btn.innerHTML = 'Envoyer la demande'; }, 500); });
     }
+
+    loadAllData();
 </script>
 </body>
 </html>
