@@ -87,8 +87,8 @@
             to { transform: rotate(360deg); }
         }
 
-        #heroTitle, #heroDynamicText {
-            animation: fadeInDown 0.6s ease-out;
+        .text-animate {
+            animation: fadeInDown 0.6s ease-out forwards;
         }
 
         .animate-on-scroll {
@@ -1399,8 +1399,22 @@
         document.querySelectorAll('.dot').forEach((dot, i) => {
             dot.classList.toggle('active', i === currentIndex);
         });
-        if (titleEl) titleEl.innerHTML = slides[currentIndex].titre + ' <span>24h/24</span>';
+        
+        // Animation du texte : enlève, force reflow, met à jour, ajoute
+        titleEl.classList.remove('text-animate');
+        dynamicText.classList.remove('text-animate');
+        
+        // Force le navigateur à voir le changement
+        void titleEl.offsetWidth;
+        void dynamicText.offsetWidth;
+        
+        // Met à jour le contenu
+        titleEl.innerHTML = slides[currentIndex].titre + ' <span>24h/24</span>';
         dynamicText.textContent = slides[currentIndex].text;
+        
+        // Relance l'animation
+        titleEl.classList.add('text-animate');
+        dynamicText.classList.add('text-animate');
     }
 
     function goToSlide(index) {
