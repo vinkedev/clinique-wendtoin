@@ -1,0 +1,548 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Administration - Clinique WENDTOIN</title>
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: 'Inter', sans-serif;
+            background: #f1f5f9;
+            color: #1e293b;
+        }
+        .login-container {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: linear-gradient(135deg, #0077A4, #1D8B5D);
+        }
+        .login-box {
+            background: white;
+            padding: 40px;
+            border-radius: 28px;
+            width: 400px;
+            max-width: 90%;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.2);
+        }
+        .login-box h2 {
+            margin-bottom: 25px;
+            color: #0077A4;
+        }
+        .login-box input {
+            width: 100%;
+            padding: 12px 15px;
+            margin-bottom: 15px;
+            border: 1px solid #e2e8f0;
+            border-radius: 12px;
+            font-size: 1rem;
+        }
+        .login-box button {
+            width: 100%;
+            padding: 12px;
+            background: #1D8B5D;
+            color: white;
+            border: none;
+            border-radius: 12px;
+            font-weight: 600;
+            cursor: pointer;
+        }
+        .error-msg {
+            color: #dc3545;
+            margin-top: 10px;
+            text-align: center;
+            font-size: 0.85rem;
+        }
+        .admin-panel {
+            display: none;
+        }
+        /* Admin layout */
+        .admin-container {
+            display: flex;
+            min-height: 100vh;
+        }
+        .sidebar {
+            width: 280px;
+            background: #0f172a;
+            color: white;
+            padding: 25px 0;
+            position: fixed;
+            height: 100vh;
+        }
+        .sidebar-header {
+            padding: 0 20px 20px;
+            border-bottom: 1px solid #334155;
+        }
+        .nav-item {
+            padding: 12px 20px;
+            margin: 5px 10px;
+            border-radius: 12px;
+            cursor: pointer;
+            transition: 0.3s;
+            font-weight: 500;
+        }
+        .nav-item:hover, .nav-item.active {
+            background: #1D8B5D;
+        }
+        .main-content {
+            flex: 1;
+            margin-left: 280px;
+            padding: 25px;
+        }
+        .top-bar {
+            background: white;
+            border-radius: 20px;
+            padding: 15px 25px;
+            margin-bottom: 25px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .panel {
+            display: none;
+        }
+        .panel.active-panel {
+            display: block;
+        }
+        table {
+            width: 100%;
+            background: white;
+            border-radius: 20px;
+            overflow: hidden;
+            border-collapse: collapse;
+        }
+        th, td {
+            padding: 12px 15px;
+            text-align: left;
+            border-bottom: 1px solid #e2e8f0;
+        }
+        th {
+            background: #f8fafc;
+            font-weight: 600;
+        }
+        .btn-add {
+            background: #1D8B5D;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 30px;
+            margin-bottom: 20px;
+            cursor: pointer;
+        }
+        .btn-edit {
+            background: #0077A4;
+            color: white;
+            border: none;
+            padding: 5px 12px;
+            border-radius: 8px;
+            margin-right: 5px;
+            cursor: pointer;
+        }
+        .btn-delete {
+            background: #dc3545;
+            color: white;
+            border: none;
+            padding: 5px 12px;
+            border-radius: 8px;
+            cursor: pointer;
+        }
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.5);
+            align-items: center;
+            justify-content: center;
+            z-index: 1000;
+        }
+        .modal-content {
+            background: white;
+            padding: 25px;
+            border-radius: 24px;
+            width: 500px;
+            max-width: 90%;
+        }
+        .modal-content input, .modal-content textarea, .modal-content select {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 15px;
+            border: 1px solid #e2e8f0;
+            border-radius: 12px;
+        }
+        .modal-buttons {
+            display: flex;
+            gap: 10px;
+            margin-top: 15px;
+        }
+        .modal-buttons button {
+            flex: 1;
+            padding: 10px;
+            border-radius: 12px;
+            cursor: pointer;
+        }
+        .btn-save {
+            background: #1D8B5D;
+            color: white;
+            border: none;
+        }
+        .btn-cancel {
+            background: #64748b;
+            color: white;
+            border: none;
+        }
+        .logout-btn {
+            background: #ef4444;
+            color: white;
+            border: none;
+            padding: 8px 20px;
+            border-radius: 30px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <!-- Login Form -->
+    <div id="loginContainer" class="login-container">
+        <div class="login-box">
+            <h2>🔐 Administration</h2>
+            <input type="password" id="adminPassword" placeholder="Mot de passe admin" autocomplete="off">
+            <button onclick="checkLogin()">Se connecter</button>
+            <div id="loginError" class="error-msg"></div>
+        </div>
+    </div>
+
+    <!-- Admin Panel -->
+    <div id="adminPanel" class="admin-panel">
+        <div class="admin-container">
+            <div class="sidebar">
+                <div class="sidebar-header">
+                    <h2>Clinique WENDTOIN</h2>
+                    <p>Espace Administration</p>
+                </div>
+                <div class="nav-item active" data-panel="actualites">
+                    <span class="emoji">📰</span> Actualités
+                </div>
+                <div class="nav-item" data-panel="specialites">
+                    <span class="emoji">🩺</span> Spécialités
+                </div>
+                <div class="nav-item" data-panel="equipe">
+                    <span class="emoji">👨‍⚕️</span> Équipe
+                </div>
+            </div>
+            <div class="main-content">
+                <div class="top-bar">
+                    <h1 id="panelTitle">Gestion des Actualités</h1>
+                    <button class="logout-btn" onclick="logout()">Déconnexion</button>
+                </div>
+
+                <!-- Actualités Panel -->
+                <div id="panelActualites" class="panel active-panel">
+                    <button class="btn-add" onclick="openActualiteModal()">+ Nouvelle actualité</button>
+                    <table id="actualitesTable">
+                        <thead>
+                            <tr><th>Titre</th><th>Date</th><th>Description</th><th>Actions</th></tr>
+                        </thead>
+                        <tbody id="actualitesList"></tbody>
+                    </table>
+                </div>
+
+                <!-- Spécialités Panel -->
+                <div id="panelSpecialites" class="panel">
+                    <button class="btn-add" onclick="openSpecialiteModal()">+ Nouvelle spécialité</button>
+                    <table id="specialitesTable">
+                        <thead><tr><th>Nom</th><th>Description</th><th>Catégorie</th><th>Actions</th></tr></thead>
+                        <tbody id="specialitesList"></tbody>
+                    </table>
+                </div>
+
+                <!-- Équipe Panel -->
+                <div id="panelEquipe" class="panel">
+                    <button class="btn-add" onclick="openMembreModal()">+ Nouveau membre</button>
+                    <table id="equipeTable">
+                        <thead><tr><th>Nom</th><th>Poste</th><th>Description</th><th>Image</th><th>Actions</th></tr></thead>
+                        <tbody id="equipeList"></tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal -->
+    <div id="crudModal" class="modal">
+        <div class="modal-content">
+            <h3 id="modalTitle">Ajouter</h3>
+            <div id="modalFields"></div>
+            <div class="modal-buttons">
+                <button class="btn-save" onclick="saveItem()">Enregistrer</button>
+                <button class="btn-cancel" onclick="closeModal()">Annuler</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Configuration Supabase - À MODIFIER AVEC VOS IDENTIFIANTS
+        const SUPABASE_URL = "https://VOTRE_PROJET.supabase.co";
+        const SUPABASE_ANON_KEY = "VOTRE_CLE_ANON";
+        
+        let supabase;
+        let currentTable = null;
+        let currentEditId = null;
+        let currentType = null;
+
+        // Mot de passe simple pour l'admin (vous pouvez changer)
+        const ADMIN_PASSWORD = "admin123";
+
+        function checkLogin() {
+            const pwd = document.getElementById('adminPassword').value;
+            if (pwd === ADMIN_PASSWORD) {
+                document.getElementById('loginContainer').style.display = 'none';
+                document.getElementById('adminPanel').style.display = 'block';
+                initSupabase();
+            } else {
+                document.getElementById('loginError').innerText = 'Mot de passe incorrect';
+            }
+        }
+
+        function logout() {
+            document.getElementById('loginContainer').style.display = 'flex';
+            document.getElementById('adminPanel').style.display = 'none';
+            document.getElementById('adminPassword').value = '';
+        }
+
+        async function initSupabase() {
+            supabase = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+            await loadActualites();
+            await loadSpecialites();
+            await loadEquipe();
+        }
+
+        // Navigation
+        document.querySelectorAll('.nav-item').forEach(item => {
+            item.addEventListener('click', () => {
+                document.querySelectorAll('.nav-item').forEach(nav => nav.classList.remove('active'));
+                item.classList.add('active');
+                const panel = item.dataset.panel;
+                document.querySelectorAll('.panel').forEach(p => p.classList.remove('active-panel'));
+                document.getElementById(`panel${panel.charAt(0).toUpperCase() + panel.slice(1)}`).classList.add('active-panel');
+                
+                const titles = { actualites: 'Gestion des Actualités', specialites: 'Gestion des Spécialités', equipe: 'Gestion de l\'Équipe' };
+                document.getElementById('panelTitle').innerText = titles[panel];
+            });
+        });
+
+        // ========== ACTUALITÉS ==========
+        async function loadActualites() {
+            const { data, error } = await supabase.from('actualites').select('*').order('date', { ascending: false });
+            if (error) { console.error(error); return; }
+            const tbody = document.getElementById('actualitesList');
+            tbody.innerHTML = '';
+            data.forEach(actu => {
+                const row = tbody.insertRow();
+                row.insertCell(0).innerText = actu.titre;
+                row.insertCell(1).innerText = actu.date;
+                row.insertCell(2).innerText = actu.description.substring(0, 50) + (actu.description.length > 50 ? '...' : '');
+                const actions = row.insertCell(3);
+                actions.innerHTML = `<button class="btn-edit" onclick="editActualite('${actu.id}')">✏️</button>
+                                    <button class="btn-delete" onclick="deleteActualite('${actu.id}')">🗑️</button>`;
+            });
+        }
+
+        function openActualiteModal(editId = null) {
+            currentType = 'actualite';
+            currentEditId = editId;
+            document.getElementById('modalTitle').innerText = editId ? 'Modifier l\'actualité' : 'Ajouter une actualité';
+            document.getElementById('modalFields').innerHTML = `
+                <input type="text" id="titre" placeholder="Titre" required>
+                <input type="date" id="date" required>
+                <textarea id="description" rows="4" placeholder="Description"></textarea>
+            `;
+            if (editId) loadActualiteData(editId);
+            document.getElementById('crudModal').style.display = 'flex';
+        }
+
+        async function loadActualiteData(id) {
+            const { data } = await supabase.from('actualites').select('*').eq('id', id).single();
+            if (data) {
+                document.getElementById('titre').value = data.titre;
+                document.getElementById('date').value = data.date;
+                document.getElementById('description').value = data.description;
+            }
+        }
+
+        async function deleteActualite(id) {
+            if (confirm('Supprimer cette actualité ?')) {
+                await supabase.from('actualites').delete().eq('id', id);
+                await loadActualites();
+            }
+        }
+
+        // ========== SPÉCIALITÉS ==========
+        async function loadSpecialites() {
+            const { data, error } = await supabase.from('specialites').select('*').order('nom');
+            if (error) { console.error(error); return; }
+            const tbody = document.getElementById('specialitesList');
+            tbody.innerHTML = '';
+            data.forEach(spec => {
+                const row = tbody.insertRow();
+                row.insertCell(0).innerText = spec.nom;
+                row.insertCell(1).innerText = spec.description || '-';
+                row.insertCell(2).innerText = spec.categorie || 'Médicale';
+                const actions = row.insertCell(3);
+                actions.innerHTML = `<button class="btn-edit" onclick="editSpecialite('${spec.id}')">✏️</button>
+                                    <button class="btn-delete" onclick="deleteSpecialite('${spec.id}')">🗑️</button>`;
+            });
+        }
+
+        function openSpecialiteModal(editId = null) {
+            currentType = 'specialite';
+            currentEditId = editId;
+            document.getElementById('modalTitle').innerText = editId ? 'Modifier la spécialité' : 'Ajouter une spécialité';
+            document.getElementById('modalFields').innerHTML = `
+                <input type="text" id="nom" placeholder="Nom de la spécialité" required>
+                <textarea id="description" rows="3" placeholder="Description"></textarea>
+                <select id="categorie">
+                    <option value="Médicale">Médicale</option>
+                    <option value="Chirurgicale">Chirurgicale</option>
+                    <option value="Exploration">Exploration</option>
+                    <option value="Imagerie">Imagerie</option>
+                </select>
+            `;
+            if (editId) loadSpecialiteData(editId);
+            document.getElementById('crudModal').style.display = 'flex';
+        }
+
+        async function loadSpecialiteData(id) {
+            const { data } = await supabase.from('specialites').select('*').eq('id', id).single();
+            if (data) {
+                document.getElementById('nom').value = data.nom;
+                document.getElementById('description').value = data.description || '';
+                document.getElementById('categorie').value = data.categorie || 'Médicale';
+            }
+        }
+
+        async function deleteSpecialite(id) {
+            if (confirm('Supprimer cette spécialité ?')) {
+                await supabase.from('specialites').delete().eq('id', id);
+                await loadSpecialites();
+            }
+        }
+
+        // ========== ÉQUIPE ==========
+        async function loadEquipe() {
+            const { data, error } = await supabase.from('equipe').select('*').order('nom');
+            if (error) { console.error(error); return; }
+            const tbody = document.getElementById('equipeList');
+            tbody.innerHTML = '';
+            data.forEach(membre => {
+                const row = tbody.insertRow();
+                row.insertCell(0).innerText = membre.nom;
+                row.insertCell(1).innerText = membre.poste;
+                row.insertCell(2).innerText = membre.description.substring(0, 40) + (membre.description.length > 40 ? '...' : '');
+                row.insertCell(3).innerHTML = membre.image ? `<img src="${membre.image}" style="width:40px;height:40px;object-fit:cover;border-radius:50%;">` : 'Aucune';
+                const actions = row.insertCell(4);
+                actions.innerHTML = `<button class="btn-edit" onclick="editMembre('${membre.id}')">✏️</button>
+                                    <button class="btn-delete" onclick="deleteMembre('${membre.id}')">🗑️</button>`;
+            });
+        }
+
+        function openMembreModal(editId = null) {
+            currentType = 'membre';
+            currentEditId = editId;
+            document.getElementById('modalTitle').innerText = editId ? 'Modifier le membre' : 'Ajouter un membre';
+            document.getElementById('modalFields').innerHTML = `
+                <input type="text" id="nom" placeholder="Nom complet" required>
+                <input type="text" id="poste" placeholder="Poste / Spécialité" required>
+                <textarea id="description" rows="3" placeholder="Description"></textarea>
+                <input type="text" id="image" placeholder="URL de l'image (optionnel)">
+            `;
+            if (editId) loadMembreData(editId);
+            document.getElementById('crudModal').style.display = 'flex';
+        }
+
+        async function loadMembreData(id) {
+            const { data } = await supabase.from('equipe').select('*').eq('id', id).single();
+            if (data) {
+                document.getElementById('nom').value = data.nom;
+                document.getElementById('poste').value = data.poste;
+                document.getElementById('description').value = data.description || '';
+                document.getElementById('image').value = data.image || '';
+            }
+        }
+
+        async function deleteMembre(id) {
+            if (confirm('Supprimer ce membre ?')) {
+                await supabase.from('equipe').delete().eq('id', id);
+                await loadEquipe();
+            }
+        }
+
+        // ========== SAUVEGARDE GÉNÉRIQUE ==========
+        async function saveItem() {
+            if (currentType === 'actualite') {
+                const titre = document.getElementById('titre').value;
+                const date = document.getElementById('date').value;
+                const description = document.getElementById('description').value;
+                if (!titre || !date) { alert('Titre et date requis'); return; }
+                if (currentEditId) {
+                    await supabase.from('actualites').update({ titre, date, description }).eq('id', currentEditId);
+                } else {
+                    await supabase.from('actualites').insert([{ titre, date, description }]);
+                }
+                await loadActualites();
+            }
+            else if (currentType === 'specialite') {
+                const nom = document.getElementById('nom').value;
+                const description = document.getElementById('description').value;
+                const categorie = document.getElementById('categorie').value;
+                if (!nom) { alert('Nom requis'); return; }
+                if (currentEditId) {
+                    await supabase.from('specialites').update({ nom, description, categorie }).eq('id', currentEditId);
+                } else {
+                    await supabase.from('specialites').insert([{ nom, description, categorie }]);
+                }
+                await loadSpecialites();
+            }
+            else if (currentType === 'membre') {
+                const nom = document.getElementById('nom').value;
+                const poste = document.getElementById('poste').value;
+                const description = document.getElementById('description').value;
+                const image = document.getElementById('image').value;
+                if (!nom || !poste) { alert('Nom et poste requis'); return; }
+                if (currentEditId) {
+                    await supabase.from('equipe').update({ nom, poste, description, image }).eq('id', currentEditId);
+                } else {
+                    await supabase.from('equipe').insert([{ nom, poste, description, image }]);
+                }
+                await loadEquipe();
+            }
+            closeModal();
+        }
+
+        function closeModal() {
+            document.getElementById('crudModal').style.display = 'none';
+            currentEditId = null;
+        }
+
+        // Exposer les fonctions globales
+        window.checkLogin = checkLogin;
+        window.logout = logout;
+        window.openActualiteModal = openActualiteModal;
+        window.editActualite = (id) => openActualiteModal(id);
+        window.deleteActualite = deleteActualite;
+        window.openSpecialiteModal = openSpecialiteModal;
+        window.editSpecialite = (id) => openSpecialiteModal(id);
+        window.deleteSpecialite = deleteSpecialite;
+        window.openMembreModal = openMembreModal;
+        window.editMembre = (id) => openMembreModal(id);
+        window.deleteMembre = deleteMembre;
+        window.saveItem = saveItem;
+        window.closeModal = closeModal;
+    </script>
+</body>
+</html>
