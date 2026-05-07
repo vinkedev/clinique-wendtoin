@@ -56,11 +56,6 @@
             100% { box-shadow: 0 0 0 0 rgba(220, 53, 69, 0); }
         }
 
-        @keyframes waveMove {
-            0% { background-position: 0 100%; }
-            100% { background-position: 1440px 100%; }
-        }
-
         @keyframes rotateBg {
             from { transform: rotate(0deg); }
             to { transform: rotate(360deg); }
@@ -85,6 +80,11 @@
 
         @keyframes spin {
             to { transform: rotate(360deg); }
+        }
+
+        @keyframes progress {
+            from { width: 0%; }
+            to { width: 100%; }
         }
 
         .text-animate {
@@ -246,7 +246,7 @@
         /* ========== HERO SLIDER ========== */
         .hero {
             position: relative;
-            min-height: 500px;  /* SEUL CHANGEMENT : 400px -> 500px */
+            min-height: 500px;
             display: flex;
             align-items: center;
             text-align: center;
@@ -287,7 +287,7 @@
             left: 0;
             width: 100%;
             height: 100%;
-           background: rgba(0, 0, 0, 0.3);
+            background: rgba(0, 0, 0, 0.3);
             z-index: 1;
         }
 
@@ -317,6 +317,13 @@
             font-size: 0.9rem;
             margin-bottom: 25px;
             opacity: 0.96;
+        }
+
+        .hero-buttons-custom {
+            display: flex;
+            gap: 15px;
+            justify-content: center;
+            flex-wrap: wrap;
         }
 
         .slider-dots {
@@ -367,6 +374,16 @@
         }
         .slider-prev { left: 15px; }
         .slider-next { right: 15px; }
+
+        .slider-progress {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            height: 4px;
+            background: #1D8B5D;
+            z-index: 20;
+            width: 0%;
+        }
 
         /* ========== BOUTONS ========== */
         .btn {
@@ -422,6 +439,25 @@
         .btn-secondary:hover {
             background: #005a7c;
             transform: translateY(-2px);
+        }
+
+        .btn-slide {
+            display: inline-block;
+            padding: 12px 28px;
+            border-radius: 60px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.4s ease;
+            font-size: 0.9rem;
+            background: #1D8B5D;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+
+        .btn-slide:hover {
+            background: #146b48;
+            transform: translateY(-3px);
         }
 
         section {
@@ -878,6 +914,11 @@
             aspect-ratio: 4 / 3;
             object-fit: cover;
             display: block;
+            transition: transform 0.5s ease;
+        }
+        
+        .gallery-item:hover .gallery-img {
+            transform: scale(1.05);
         }
 
         .image-modal {
@@ -990,7 +1031,7 @@
             color: #1D8B5D;
         }
 
-        /* MODAL STYLES pour chirurgie */
+        /* MODAL STYLES */
         .modal {
             display: none;
             position: fixed;
@@ -1140,11 +1181,10 @@
             .container {
                 padding: 0 14px;
             }
-            .hero-buttons {
-                display: flex;
+            .hero-buttons-custom {
                 flex-direction: column;
                 align-items: center;
-                gap: 8px;
+                gap: 10px;
             }
             .btn {
                 width: 90%;
@@ -1192,15 +1232,13 @@
 <main>
     <!-- SECTION HERO AVEC SLIDER -->
     <section id="accueil" class="hero">
-        <div class="hero-slides" id="heroSlides">
-            <!-- Slides injectés par JS -->
-        </div>
+        <div class="hero-slides" id="heroSlides"></div>
         <div class="hero-overlay"></div>
         <div class="container">
             <div class="hero-content">
                 <h2 id="heroTitle">Votre santé, notre priorité <span>24h/24</span></h2>
                 <p class="hero-slogan" id="heroDynamicText">Urgences médicales et chirurgicales 24h/24 – 7j/7</p>
-                <div class="hero-buttons">
+                <div class="hero-buttons-custom" id="heroButtons">
                     <a href="#rdv" class="btn btn-primary">Prendre rendez-vous</a>
                     <a href="tel:51000647" class="btn btn-outline" data-tooltip="Appel gratuit 24h/24">Urgence 24/24 <span class="urgences-badge">URGENCE</span></a>
                 </div>
@@ -1209,6 +1247,7 @@
         <button class="slider-prev" id="sliderPrev">❮</button>
         <button class="slider-next" id="sliderNext">❯</button>
         <div class="slider-dots" id="sliderDots"></div>
+        <div id="sliderProgress" class="slider-progress"></div>
     </section>
 
     <section class="bg-light">
@@ -1339,27 +1378,39 @@
 <div id="imageModal" class="image-modal"><span class="close-image-modal">✕</span><img id="modalImage" src=""></div>
 
 <script>
-    // ==================== SLIDER HERO ====================
+    // ==================== SLIDER HERO AVEC BADGES PERSONNALISÉS ET BOUTONS PAR SLIDE ====================
     const slides = [
         { 
             image: "slide/churigie.jpeg",
-            titre: "Chirurgie moderne & sécurisée",
-            text: "Blocs opératoires de pointe, chirurgie programmée et d'urgence"
+            titre: "Chirurgie moderne",
+            badge: "& sécurisée",
+            text: "Blocs opératoires de pointe, chirurgie programmée et d'urgence 24h/24",
+            lien: "#poles",
+            labelBtn: "Voir nos pôles chirurgicaux"
         },
         { 
             image: "slide/dialyse.jpg",
-            titre: "Centre d'Hémodialyse 24h/24",
-            text: "Prise en charge complète de l'insuffisance rénale, disponible nuit et jour"
+            titre: "Centre d'Hémodialyse",
+            badge: "24h/24",
+            text: "Prise en charge complète de l'insuffisance rénale, disponible nuit et jour, 7j/7",
+            lien: "#poles",
+            labelBtn: "Découvrir le service dialyse"
         },
         { 
             image: "slide/equipe_specialiste.jpg",
             titre: "Plus de 40 spécialistes",
-            text: "Cardiologues, neurologues, pédiatres, gynécologues à votre service"
+            badge: "à votre service",
+            text: "Cardiologues, neurologues, pédiatres, gynécologues, chirurgiens et bien plus",
+            lien: "#equipe",
+            labelBtn: "Rencontrer notre équipe"
         },
         { 
             image: "slide/urgence.jpeg",
-            titre: "Urgences 24h/24 & 7j/7",
-            text: "Prise en charge immédiate des accidents, douleurs aiguës et détresses vitales"
+            titre: "Urgences médicales",
+            badge: "24h/24 & 7j/7",
+            text: "Prise en charge immédiate des accidents, douleurs aiguës et détresses vitales",
+            lien: "tel:51000647",
+            labelBtn: "Appeler les urgences"
         }
     ];
 
@@ -1369,6 +1420,8 @@
     const dotsContainer = document.getElementById('sliderDots');
     const dynamicText = document.getElementById('heroDynamicText');
     const titleEl = document.getElementById('heroTitle');
+    const heroButtonsContainer = document.getElementById('heroButtons');
+    const progressBar = document.getElementById('sliderProgress');
 
     function createSlides() {
         slidesContainer.innerHTML = '';
@@ -1390,6 +1443,22 @@
         });
     }
 
+    function updateButtons() {
+        const currentSlide = slides[currentIndex];
+        heroButtonsContainer.innerHTML = `
+            <a href="${currentSlide.lien}" class="btn btn-primary">${currentSlide.labelBtn}</a>
+            <a href="tel:51000647" class="btn btn-outline" data-tooltip="Appel gratuit 24h/24">Urgence 24/24 <span class="urgences-badge">URGENCE</span></a>
+        `;
+    }
+
+    function startProgressBar() {
+        if (progressBar) {
+            progressBar.style.animation = 'none';
+            void progressBar.offsetWidth;
+            progressBar.style.animation = 'progress 3s linear';
+        }
+    }
+
     function updateSlidesAndText() {
         const allSlides = document.querySelectorAll('.hero-slide');
         allSlides.forEach((slide, i) => {
@@ -1405,11 +1474,18 @@
         void titleEl.offsetWidth;
         void dynamicText.offsetWidth;
         
-        titleEl.innerHTML = slides[currentIndex].titre + ' <span>24h/24</span>';
+        // Utilisation du badge personnalisé pour chaque slide
+        titleEl.innerHTML = slides[currentIndex].titre + ' <span>' + slides[currentIndex].badge + '</span>';
         dynamicText.textContent = slides[currentIndex].text;
+        
+        // Mise à jour des boutons
+        updateButtons();
         
         titleEl.classList.add('text-animate');
         dynamicText.classList.add('text-animate');
+        
+        // Redémarrer la barre de progression
+        startProgressBar();
     }
 
     function goToSlide(index) {
@@ -1439,6 +1515,7 @@
     createDots();
     updateSlidesAndText();
     resetAutoPlay();
+    startProgressBar();
 
     document.getElementById('sliderPrev').addEventListener('click', prevSlide);
     document.getElementById('sliderNext').addEventListener('click', nextSlide);
@@ -1490,7 +1567,7 @@
     if (closeImageModal) closeImageModal.addEventListener('click', () => { imageModal.style.display = 'none'; });
     window.addEventListener('click', (e) => { if (e.target === imageModal) imageModal.style.display = 'none'; });
 
-    // ==================== VIDÉOS (CORRIGÉ - bouton "Afficher plus" fonctionnel) ====================
+    // ==================== VIDÉOS ====================
     const allVideos = [
         { title: "Pr Gilbert BONKOUGOU - Maladie hémorroïdaire", desc: "Les hémorroïdes expliquées par le Pr Gilbert BONKOUGOU", url: "https://web.facebook.com/reel/645204957720787" },
         { title: "Unité de dialyse - Clinique WENDTOIN", desc: "Prise en charge des insuffisances rénales aiguës et chroniques", url: "https://web.facebook.com/reel/879902179764068" },
@@ -1531,7 +1608,7 @@
     }
     displayVideos();
 
-    // ==================== CHIRURGIE MODALE (CORRIGÉE - avec croix et contenu détaillé) ====================
+    // ==================== CHIRURGIE MODALE ====================
     const surgeryDetails = {
         'viscérale': { title: 'Chirurgie Générale / Digestive', content: '<p><strong>Chirurgie générale et digestive</strong> prend en charge les pathologies des organes de l\'abdomen.</p><ul><li>Hernies et Éventrations</li><li>Pathologies des organes : Œsophage, Estomac, Intestins, Rate, Vésicule biliaire</li><li>Appendicite, Pathologies utérines, Affections anales</li></ul><div class="info-note">Pr Gilbert BONKOUGOU - Chirurgien référent</div>' },
         'plastique': { title: 'Chirurgie Plastique / De l\'obésité', content: '<p><strong>Chirurgie plastique et de l\'obésité</strong> comprend :</p><ul><li>Chirurgie plastique : Plastie des seins, Liposuccion, Abdominoplastie, BBL</li><li>Chirurgie de l\'obésité : Sleeve gastrectomie, By-pass gastrique</li></ul><div class="info-note">Consultation préalable obligatoire</div>' },
@@ -1540,7 +1617,6 @@
         'laparoscopique': { title: 'Vidéo-Chirurgie Laparoscopique', content: '<p><strong>Chirurgie mini-invasive</strong> par laparoscopie.</p><ul><li>Chirurgie de la vésicule biliaire</li><li>Chirurgie des hernies</li><li>Chirurgie colorectale</li><li>Chirurgie de l\'obésité</li></ul><div class="info-note">Pr Gilbert BONKOUGOU - Pionnier de la laparoscopie</div>' }
     };
     
-    // Créer la modale si elle n'existe pas
     let modalElement2 = document.getElementById('surgeryModal');
     if (!modalElement2) {
         const newModal = document.createElement('div');
