@@ -244,7 +244,7 @@
             justify-content: center;
             font-weight: bold;
         }
-
+        
         .btn-admin-header {
             background: #1e293b;
             color: white;
@@ -1136,92 +1136,6 @@
             transform: scale(1.05);
         }
 
-        /* Admin Panel Styles */
-        .admin-panel {
-            background: #f1f5f9;
-            padding: 30px 0;
-            display: none;
-        }
-        .dashboard-tabs {
-            display: flex;
-            gap: 10px;
-            flex-wrap: wrap;
-            margin-bottom: 30px;
-            border-bottom: 2px solid #cbd5e1;
-            padding-bottom: 12px;
-        }
-        .tab-btn {
-            background: transparent;
-            border: none;
-            padding: 8px 20px;
-            font-weight: 600;
-            border-radius: 40px;
-            cursor: pointer;
-            transition: 0.2s;
-        }
-        .tab-btn.active {
-            background: #1D8B5D;
-            color: white;
-        }
-        .tab-pane {
-            display: none;
-            background: white;
-            border-radius: 28px;
-            padding: 24px;
-            margin-top: 20px;
-        }
-        .tab-pane.active {
-            display: block;
-        }
-        .form-admin input, .form-admin textarea {
-            width: 100%;
-            margin-bottom: 15px;
-            padding: 10px;
-            border-radius: 20px;
-            border: 1px solid #ccc;
-            font-family: inherit;
-        }
-        .btn-save {
-            background: #1D8B5D;
-            color: white;
-            border: none;
-            padding: 10px 20px;
-            border-radius: 40px;
-            cursor: pointer;
-            font-weight: 600;
-        }
-        .btn-danger {
-            background: #dc3545;
-        }
-        .item-list {
-            margin-top: 25px;
-            max-height: 400px;
-            overflow-y: auto;
-        }
-        .item-card {
-            background: #f8fafc;
-            padding: 12px;
-            border-radius: 20px;
-            margin-bottom: 12px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            flex-wrap: wrap;
-            gap: 10px;
-        }
-        .item-actions button {
-            margin-left: 8px;
-            background: #e2e8f0;
-            border: none;
-            padding: 5px 12px;
-            border-radius: 30px;
-            cursor: pointer;
-        }
-        .delete-btn {
-            background: #fee2e2;
-            color: #b91c1c;
-        }
-
         @media (min-width: 640px) {
             .hero-content h2 {
                 font-size: 2rem;
@@ -1421,7 +1335,7 @@
         </div>
     </section>
 
-    <!-- ========== SECTION ACTUALITÉS (DYNAMIQUE) ========== -->
+    <!-- SECTION ACTUALITÉS - DYNAMIQUE -->
     <section id="actualites">
         <div class="container">
             <h2 class="section-title animate-on-scroll">Actualités</h2>
@@ -1429,7 +1343,7 @@
         </div>
     </section>
 
-    <!-- ========== SPÉCIALITÉS MÉDICALES (DYNAMIQUE) ========== -->
+    <!-- SPÉCIALITÉS MÉDICALES - DYNAMIQUE -->
     <section id="specialites">
         <div class="container">
             <h2 class="section-title animate-on-scroll">Spécialités médicales</h2>
@@ -1437,7 +1351,7 @@
         </div>
     </section>
 
-    <!-- ========== SPÉCIALITÉS CHIRURGICALES (DYNAMIQUE) ========== -->
+    <!-- SPÉCIALITÉS CHIRURGICALES - DYNAMIQUE -->
     <section id="specialites-chirurgicales">
         <div class="container">
             <h2 class="section-title animate-on-scroll">Spécialités chirurgicales</h2>
@@ -1445,7 +1359,7 @@
         </div>
     </section>
 
-    <!-- ========== GYNÉCOLOGIE - OBSTÉTRIQUE (DYNAMIQUE) ========== -->
+    <!-- GYNÉCOLOGIE - DYNAMIQUE -->
     <section id="gynecologie">
         <div class="container">
             <h2 class="section-title animate-on-scroll">Gynécologie - Obstétrique</h2>
@@ -1453,7 +1367,7 @@
         </div>
     </section>
 
-    <!-- ========== EXPLORATIONS (DYNAMIQUE) ========== -->
+    <!-- EXPLORATIONS - DYNAMIQUE -->
     <section id="explorations">
         <div class="container">
             <h2 class="section-title animate-on-scroll">Explorations</h2>
@@ -1461,7 +1375,7 @@
         </div>
     </section>
 
-    <!-- ========== IMAGERIE (DYNAMIQUE) ========== -->
+    <!-- IMAGERIE - DYNAMIQUE -->
     <section id="imagerie">
         <div class="container">
             <h2 class="section-title animate-on-scroll">Imagerie</h2>
@@ -1469,7 +1383,7 @@
         </div>
     </section>
 
-    <!-- ========== ÉQUIPEMENTS SPÉCIALISÉS (DYNAMIQUE) ========== -->
+    <!-- ÉQUIPEMENTS - DYNAMIQUE -->
     <section id="poles">
         <div class="container">
             <h2 class="section-title animate-on-scroll">Équipements spécialisés</h2>
@@ -1487,7 +1401,7 @@
         </div>
     </section>
 
-    <!-- ========== ÉQUIPE (DYNAMIQUE) ========== -->
+    <!-- ÉQUIPE - DYNAMIQUE -->
     <section id="equipe">
         <div class="container">
             <h2 class="section-title animate-on-scroll">Notre équipe</h2>
@@ -1523,116 +1437,13 @@
 
 <!-- MODAL LOGIN -->
 <div id="loginModal" class="modal">
-    <div class="modal-card" style="background:white; max-width:400px; width:90%; border-radius:28px; padding:28px;">
-        <span class="close-login" style="float:right; font-size:24px; cursor:pointer;">&times;</span>
-        <h3 style="color:#0077A4; margin-bottom:20px;">Espace Administration</h3>
-        <input type="password" id="adminPassword" placeholder="Mot de passe" style="width:100%; padding:12px; border-radius:40px; border:1px solid #ddd; margin-bottom:20px;">
-        <button id="submitLoginBtn" style="background:#1D8B5D; color:white; border:none; padding:10px; width:100%; border-radius:40px; font-weight:bold; cursor:pointer;">Se connecter</button>
-        <div id="loginError" style="color:#dc3545; margin-top:8px; font-size:0.8rem; text-align:center;"></div>
-    </div>
-</div>
-
-<!-- DASHBOARD ADMIN -->
-<div id="adminDashboard" class="admin-panel">
-    <div class="container">
-        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px;">
-            <h2>⚙️ Administration</h2>
-            <button id="logoutAdminBtn" class="btn-save" style="background:#64748b;">Déconnexion</button>
-        </div>
-        
-        <div class="dashboard-tabs">
-            <button class="tab-btn active" data-tab="actualitesTab">📰 Actualités</button>
-            <button class="tab-btn" data-tab="specialitesMedicalesTab">🩺 Spécialités médicales</button>
-            <button class="tab-btn" data-tab="specialitesChirurgicalesTab">🔪 Spécialités chirurgicales</button>
-            <button class="tab-btn" data-tab="gynecologieTab">👶 Gynécologie</button>
-            <button class="tab-btn" data-tab="explorationsTab">🔬 Explorations</button>
-            <button class="tab-btn" data-tab="imagerieTab">📷 Imagerie</button>
-            <button class="tab-btn" data-tab="equipementsTab">⚕️ Équipements</button>
-            <button class="tab-btn" data-tab="teamTab">👥 Équipe</button>
-        </div>
-        
-        <div id="actualitesTab" class="tab-pane active">
-            <h3>➕ Ajouter une actualité</h3>
-            <div class="form-admin">
-                <input type="text" id="actuTitre" placeholder="Titre">
-                <textarea id="actuDescription" rows="2" placeholder="Description"></textarea>
-                <input type="text" id="actuDate" placeholder="Date (ex: 15 Mars 2026)">
-                <input type="text" id="actuImageUrl" placeholder="URL de l'image (optionnel)">
-                <button id="createActuBtn" class="btn-save">➕ Publier</button>
-            </div>
-            <div class="item-list"><h4>📌 Liste des actualités</h4><div id="adminActusList"></div></div>
-        </div>
-        
-        <div id="specialitesMedicalesTab" class="tab-pane">
-            <h3>➕ Ajouter une spécialité médicale</h3>
-            <div class="form-admin">
-                <input type="text" id="specMedTitre" placeholder="Nom (ex: Cardiologie)">
-                <textarea id="specMedDesc" rows="2" placeholder="Description"></textarea>
-                <button id="createSpecMedBtn" class="btn-save">Ajouter</button>
-            </div>
-            <div class="item-list"><div id="adminSpecMedList"></div></div>
-        </div>
-        
-        <div id="specialitesChirurgicalesTab" class="tab-pane">
-            <h3>➕ Ajouter une spécialité chirurgicale</h3>
-            <div class="form-admin">
-                <input type="text" id="specChirTitre" placeholder="Nom">
-                <textarea id="specChirDesc" rows="2" placeholder="Description"></textarea>
-                <button id="createSpecChirBtn" class="btn-save">Ajouter</button>
-            </div>
-            <div class="item-list"><div id="adminSpecChirList"></div></div>
-        </div>
-        
-        <div id="gynecologieTab" class="tab-pane">
-            <h3>➕ Ajouter un service gynécologie</h3>
-            <div class="form-admin">
-                <input type="text" id="gyneTitre" placeholder="Titre">
-                <textarea id="gyneDesc" rows="2" placeholder="Description"></textarea>
-                <button id="createGyneBtn" class="btn-save">Ajouter</button>
-            </div>
-            <div class="item-list"><div id="adminGyneList"></div></div>
-        </div>
-        
-        <div id="explorationsTab" class="tab-pane">
-            <h3>➕ Ajouter une exploration</h3>
-            <div class="form-admin">
-                <input type="text" id="exploTitre" placeholder="Titre">
-                <textarea id="exploDesc" rows="2" placeholder="Description"></textarea>
-                <button id="createExploBtn" class="btn-save">Ajouter</button>
-            </div>
-            <div class="item-list"><div id="adminExploList"></div></div>
-        </div>
-        
-        <div id="imagerieTab" class="tab-pane">
-            <h3>➕ Ajouter un service d'imagerie</h3>
-            <div class="form-admin">
-                <input type="text" id="imagerieTitre" placeholder="Titre (ex: Scanner, IRM, Radiologie)">
-                <button id="createImagerieBtn" class="btn-save">Ajouter</button>
-            </div>
-            <div class="item-list"><div id="adminImagerieList"></div></div>
-        </div>
-        
-        <div id="equipementsTab" class="tab-pane">
-            <h3>➕ Ajouter un équipement</h3>
-            <div class="form-admin">
-                <input type="text" id="equipTitre" placeholder="Titre">
-                <textarea id="equipDesc" rows="2" placeholder="Description"></textarea>
-                <input type="text" id="equipBadge" placeholder="Badge (optionnel: 24h/24, Urgence)">
-                <button id="createEquipBtn" class="btn-save">Ajouter</button>
-            </div>
-            <div class="item-list"><div id="adminEquipList"></div></div>
-        </div>
-        
-        <div id="teamTab" class="tab-pane">
-            <h3>➕ Ajouter un membre de l'équipe</h3>
-            <div class="form-admin">
-                <input type="text" id="memberNom" placeholder="Nom complet">
-                <input type="text" id="memberPoste" placeholder="Poste">
-                <textarea id="memberDescription" rows="2" placeholder="Description"></textarea>
-                <input type="text" id="memberImageUrl" placeholder="URL de la photo">
-                <button id="createMemberBtn" class="btn-save">👤 Ajouter le membre</button>
-            </div>
-            <div class="item-list"><h4>👥 Membres de l'équipe</h4><div id="adminTeamList"></div></div>
+    <div class="modal-content" style="max-width:400px;">
+        <span class="close-login" style="position:absolute; top:12px; right:18px; font-size:28px; cursor:pointer;">&times;</span>
+        <div class="modal-header"><h3>🔐 Espace Administration</h3></div>
+        <div class="modal-body">
+            <input type="password" id="adminPassword" placeholder="Mot de passe" style="width:100%; padding:12px; border-radius:40px; border:1px solid #ddd; margin-bottom:20px;">
+            <button id="submitLoginBtn" style="background:#1D8B5D; color:white; border:none; padding:10px; width:100%; border-radius:40px; font-weight:bold; cursor:pointer;">Se connecter</button>
+            <div id="loginError" style="color:#dc3545; margin-top:8px; font-size:0.8rem; text-align:center;"></div>
         </div>
     </div>
 </div>
@@ -1641,11 +1452,21 @@
     // ========== CONFIGURATION SUPABASE ==========
     const SUPABASE_URL = "https://otdiywrvzappbmjfkkyi.supabase.co";
     const SUPABASE_ANON_KEY = "sb_publishable_tn6FW9OxsqNdKMg9uCuB5A_gZICo-Jy";
-    const supabase = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
-    
-    const ADMIN_PASSWORD = "Wendtoin2026";
+    let supabase = null;
     let isAdmin = false;
-    
+    const ADMIN_PASSWORD = "Wendtoin2026";
+
+    // Attendre que Supabase soit chargé
+    function initSupabase() {
+        if (window.supabase) {
+            supabase = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+            loadAllPublicData();
+            checkAdminSession();
+        } else {
+            setTimeout(initSupabase, 200);
+        }
+    }
+
     // ==================== SLIDER HERO ====================
     const slides = [
         { image: "slide/churigie.jpeg", titre: "Chirurgie moderne", badge: "à votre service", text: "Blocs opératoires de pointe, chirurgie programmée et d'urgence 24h/24", lien: "#specialites-chirurgicales", labelBtn: "Voir nos spécialités chirurgicales" },
@@ -1728,283 +1549,112 @@
 
     // ==================== CHARGEMENT PUBLIC DEPUIS SUPABASE ====================
     async function loadPublicActualites() {
-        const { data, error } = await supabase.from('actualites').select('*').order('created_at', { ascending: false });
+        if (!supabase) return;
+        const { data } = await supabase.from('actualites').select('*').order('created_at', { ascending: false });
         const container = document.getElementById('actualitesList');
-        if(error) { container.innerHTML = '<p>Erreur chargement</p>'; return; }
-        if(!data?.length) { container.innerHTML = '<p>Aucune actualité</p>'; return; }
-        container.innerHTML = data.map(a => `<div class="actu-card">
-            ${a.image_url ? `<img src="${a.image_url}" alt="${escapeHtml(a.titre)}" class="actu-image" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">` : `<div class="actu-image">📢</div>`}
-            ${!a.image_url ? `<div class="actu-image" style="display:flex;">📢</div>` : ''}
-            <div class="actu-content">
-                <div class="actu-date">${escapeHtml(a.date || '')}</div>
-                <div class="actu-title">${escapeHtml(a.titre)}</div>
-                <div class="actu-desc">${escapeHtml(a.description || '')}</div>
+        if (!data?.length) { container.innerHTML = '<p>Aucune actualité</p>'; return; }
+        container.innerHTML = data.map(a => `
+            <div class="actu-card animate-on-scroll">
+                <div class="actu-image">📢</div>
+                <div class="actu-content">
+                    <div class="actu-date">${escapeHtml(a.date || '')}</div>
+                    <div class="actu-title">${escapeHtml(a.titre)}</div>
+                    <div class="actu-desc">${escapeHtml(a.description || '')}</div>
+                </div>
             </div>
-        </div>`).join('');
-        // Corriger l'affichage des images : s'assurer que la div n'apparaît pas deux fois
-        data.forEach((a, idx) => {
-            if(a.image_url) {
-                const img = document.querySelectorAll('.actu-card')[idx]?.querySelector('.actu-image');
-                if(img && img.tagName === 'IMG') {
-                    img.style.height = '180px';
-                    img.style.width = '100%';
-                    img.style.objectFit = 'cover';
-                }
-                const extraDiv = document.querySelectorAll('.actu-card')[idx]?.querySelector('.actu-image:not(img)');
-                if(extraDiv && extraDiv !== img) extraDiv.style.display = 'none';
-            }
-        });
+        `).join('');
     }
 
     async function loadPublicSpecialitesMedicales() {
-        const { data } = await supabase.from('specialites_medicales').select('*').order('ordre', { ascending: true });
+        if (!supabase) return;
+        const { data } = await supabase.from('specialites_medicales').select('*').order('ordre');
         document.getElementById('specialitesMedicalesList').innerHTML = data?.length ? data.map(s => `<div class="specialty-item"><strong>${escapeHtml(s.titre)}</strong><p>${escapeHtml(s.description || '')}</p></div>`).join('') : '<div class="specialty-item"><strong>Aucune spécialité</strong><p></p></div>';
     }
 
     async function loadPublicSpecialitesChirurgicales() {
-        const { data } = await supabase.from('specialites_chirurgicales').select('*').order('ordre', { ascending: true });
-        document.getElementById('specialitesChirurgicalesList').innerHTML = data?.length ? data.map(s => `<div class="specialty-item" data-surgery="${s.id}"><strong>${escapeHtml(s.titre)}</strong><p>${escapeHtml(s.description || '')}</p></div>`).join('') : '<div class="specialty-item"><strong>Aucune spécialité</strong><p></p></div>';
+        if (!supabase) return;
+        const { data } = await supabase.from('specialites_chirurgicales').select('*').order('ordre');
+        document.getElementById('specialitesChirurgicalesList').innerHTML = data?.length ? data.map(s => `<div class="specialty-item"><strong>${escapeHtml(s.titre)}</strong><p>${escapeHtml(s.description || '')}</p></div>`).join('') : '<div class="specialty-item"><strong>Aucune spécialité</strong><p></p></div>';
     }
 
     async function loadPublicGynecologie() {
-        const { data } = await supabase.from('gynecologie').select('*').order('ordre', { ascending: true });
+        if (!supabase) return;
+        const { data } = await supabase.from('gynecologie').select('*').order('ordre');
         document.getElementById('gynecologieList').innerHTML = data?.length ? data.map(g => `<div class="specialty-item"><strong>${escapeHtml(g.titre)}</strong><p>${escapeHtml(g.description || '')}</p></div>`).join('') : '<div class="specialty-item"><strong>Aucun service</strong><p></p></div>';
     }
 
     async function loadPublicExplorations() {
-        const { data } = await supabase.from('explorations').select('*').order('ordre', { ascending: true });
+        if (!supabase) return;
+        const { data } = await supabase.from('explorations').select('*').order('ordre');
         document.getElementById('explorationsList').innerHTML = data?.length ? data.map(e => `<div class="specialty-item"><strong>${escapeHtml(e.titre)}</strong><p>${escapeHtml(e.description || '')}</p></div>`).join('') : '<div class="specialty-item"><strong>Aucune exploration</strong><p></p></div>';
     }
 
     async function loadPublicImagerie() {
-        const { data } = await supabase.from('imagerie').select('*').order('ordre', { ascending: true });
+        if (!supabase) return;
+        const { data } = await supabase.from('imagerie').select('*').order('ordre');
         document.getElementById('imagerieList').innerHTML = data?.length ? data.map(i => `<div class="specialty-item"><strong>${escapeHtml(i.titre)}</strong><p></p></div>`).join('') : '<div class="specialty-item"><strong>Aucun service d\'imagerie</strong><p></p></div>';
     }
 
     async function loadPublicEquipements() {
-        const { data } = await supabase.from('equipements').select('*').order('ordre', { ascending: true });
+        if (!supabase) return;
+        const { data } = await supabase.from('equipements').select('*').order('ordre');
         document.getElementById('equipementsList').innerHTML = data?.length ? data.map(e => `<div class="specialty-item"><strong>${escapeHtml(e.titre)}${e.badge ? ` <span class="badge-247">${escapeHtml(e.badge)}</span>` : ''}</strong><p>${escapeHtml(e.description || '')}</p></div>`).join('') : '<div class="specialty-item"><strong>Aucun équipement</strong><p></p></div>';
     }
 
     async function loadPublicTeam() {
-        const { data, error } = await supabase.from('equipes').select('*').order('ordre', { ascending: true });
+        if (!supabase) return;
+        const { data } = await supabase.from('equipes').select('*').order('ordre');
         const container = document.getElementById('teamList');
-        if(error) { container.innerHTML = '<p>Erreur chargement équipe</p>'; return; }
-        if(!data?.length) { container.innerHTML = '<p>Aucun membre pour le moment</p>'; return; }
-        container.innerHTML = data.map(m => `<div class="team-card"><img src="${escapeHtml(m.image_url) || 'https://placehold.co/400x400/0077A4/white?text=Photo'}" alt="${escapeHtml(m.nom)}" class="team-image" onerror="this.src='https://placehold.co/400x400/0077A4/white?text=Photo'"><div class="team-info"><div class="team-name">${escapeHtml(m.nom)}</div><div class="team-position">${escapeHtml(m.poste)}</div><div class="team-desc">${escapeHtml(m.description || '')}</div></div></div>`).join('');
+        if (!data?.length) { container.innerHTML = '<p>Aucun membre pour le moment</p>'; return; }
+        container.innerHTML = data.map(m => `
+            <div class="team-card animate-on-scroll">
+                <img src="${escapeHtml(m.image_url) || 'https://placehold.co/400x400/0077A4/white?text=Photo'}" alt="${escapeHtml(m.nom)}" class="team-image" onerror="this.src='https://placehold.co/400x400/0077A4/white?text=Photo'">
+                <div class="team-info">
+                    <div class="team-name">${escapeHtml(m.nom)}</div>
+                    <div class="team-position">${escapeHtml(m.poste)}</div>
+                    <div class="team-desc">${escapeHtml(m.description || '')}</div>
+                </div>
+            </div>
+        `).join('');
     }
 
     async function loadAllPublicData() {
-        await Promise.all([loadPublicActualites(), loadPublicSpecialitesMedicales(), loadPublicSpecialitesChirurgicales(), loadPublicGynecologie(), loadPublicExplorations(), loadPublicImagerie(), loadPublicEquipements(), loadPublicTeam()]);
+        await Promise.all([
+            loadPublicActualites(), loadPublicSpecialitesMedicales(), loadPublicSpecialitesChirurgicales(),
+            loadPublicGynecologie(), loadPublicExplorations(), loadPublicImagerie(),
+            loadPublicEquipements(), loadPublicTeam()
+        ]);
     }
 
     // ==================== ADMIN LOGIN ====================
     const adminBtn = document.getElementById('adminPortalBtn');
     const loginModal = document.getElementById('loginModal');
     const submitLogin = document.getElementById('submitLoginBtn');
-    const adminDashboard = document.getElementById('adminDashboard');
-    const logoutBtn = document.getElementById('logoutAdminBtn');
+    const closeLogin = document.querySelector('.close-login');
 
     function openLoginModal() { loginModal.style.display = 'flex'; }
     function closeLoginModal() { loginModal.style.display = 'none'; document.getElementById('adminPassword').value = ''; document.getElementById('loginError').innerText = ''; }
 
     adminBtn.addEventListener('click', openLoginModal);
-    document.querySelector('.close-login')?.addEventListener('click', closeLoginModal);
-    window.addEventListener('click', (e) => { if(e.target === loginModal) closeLoginModal(); });
+    if (closeLogin) closeLogin.addEventListener('click', closeLoginModal);
+    window.addEventListener('click', (e) => { if (e.target === loginModal) closeLoginModal(); });
 
     submitLogin.addEventListener('click', () => {
-        if(document.getElementById('adminPassword').value === ADMIN_PASSWORD) {
-            isAdmin = true;
+        if (document.getElementById('adminPassword').value === ADMIN_PASSWORD) {
             sessionStorage.setItem('clinique_admin', 'true');
+            isAdmin = true;
             closeLoginModal();
-            adminDashboard.style.display = 'block';
-            loadAllAdminData();
+            window.location.href = 'admin.html';
         } else {
             document.getElementById('loginError').innerText = 'Mot de passe incorrect';
         }
     });
 
-    logoutBtn.addEventListener('click', () => {
-        sessionStorage.removeItem('clinique_admin');
-        isAdmin = false;
-        adminDashboard.style.display = 'none';
-    });
-
-    if(sessionStorage.getItem('clinique_admin') === 'true') {
-        isAdmin = true;
-        adminDashboard.style.display = 'block';
-        loadAllAdminData();
+    function checkAdminSession() {
+        if (sessionStorage.getItem('clinique_admin') === 'true') {
+            isAdmin = true;
+        }
     }
-
-    // ==================== ADMIN LOADERS ====================
-    async function loadAdminActualites() {
-        const { data } = await supabase.from('actualites').select('*').order('created_at', { ascending: false });
-        const container = document.getElementById('adminActusList');
-        if(!data?.length) { container.innerHTML = '<p>Aucune actualité</p>'; return; }
-        container.innerHTML = data.map(a => `<div class="item-card"><div><strong>${escapeHtml(a.titre)}</strong> - ${escapeHtml(a.date || '')}${a.image_url ? `<br><small>Image: ${escapeHtml(a.image_url)}</small>` : ''}</div><div class="item-actions"><button class="delete-btn" data-id="${a.id}" data-table="actualites">🗑 Supprimer</button></div></div>`).join('');
-        attachDeleteEvents();
-    }
-
-    async function loadAdminSpecMedicales() {
-        const { data } = await supabase.from('specialites_medicales').select('*').order('ordre');
-        document.getElementById('adminSpecMedList').innerHTML = data?.length ? data.map(s => `<div class="item-card"><div><strong>${escapeHtml(s.titre)}</strong><br><small>${escapeHtml(s.description || '')}</small></div><div><button class="delete-btn" data-id="${s.id}" data-table="specialites_medicales">🗑</button></div></div>`).join('') : '<p>Aucune</p>';
-        attachDeleteEvents();
-    }
-
-    async function loadAdminSpecChirurgicales() {
-        const { data } = await supabase.from('specialites_chirurgicales').select('*').order('ordre');
-        document.getElementById('adminSpecChirList').innerHTML = data?.length ? data.map(s => `<div class="item-card"><div><strong>${escapeHtml(s.titre)}</strong><br><small>${escapeHtml(s.description || '')}</small></div><div><button class="delete-btn" data-id="${s.id}" data-table="specialites_chirurgicales">🗑</button></div></div>`).join('') : '<p>Aucune</p>';
-        attachDeleteEvents();
-    }
-
-    async function loadAdminGynecologie() {
-        const { data } = await supabase.from('gynecologie').select('*').order('ordre');
-        document.getElementById('adminGyneList').innerHTML = data?.length ? data.map(g => `<div class="item-card"><div><strong>${escapeHtml(g.titre)}</strong><br><small>${escapeHtml(g.description || '')}</small></div><div><button class="delete-btn" data-id="${g.id}" data-table="gynecologie">🗑</button></div></div>`).join('') : '<p>Aucune</p>';
-        attachDeleteEvents();
-    }
-
-    async function loadAdminExplorations() {
-        const { data } = await supabase.from('explorations').select('*').order('ordre');
-        document.getElementById('adminExploList').innerHTML = data?.length ? data.map(e => `<div class="item-card"><div><strong>${escapeHtml(e.titre)}</strong><br><small>${escapeHtml(e.description || '')}</small></div><div><button class="delete-btn" data-id="${e.id}" data-table="explorations">🗑</button></div></div>`).join('') : '<p>Aucune</p>';
-        attachDeleteEvents();
-    }
-
-    async function loadAdminImagerie() {
-        const { data } = await supabase.from('imagerie').select('*').order('ordre');
-        document.getElementById('adminImagerieList').innerHTML = data?.length ? data.map(i => `<div class="item-card"><div><strong>${escapeHtml(i.titre)}</strong></div><div><button class="delete-btn" data-id="${i.id}" data-table="imagerie">🗑</button></div></div>`).join('') : '<p>Aucune</p>';
-        attachDeleteEvents();
-    }
-
-    async function loadAdminEquipements() {
-        const { data } = await supabase.from('equipements').select('*').order('ordre');
-        document.getElementById('adminEquipList').innerHTML = data?.length ? data.map(e => `<div class="item-card"><div><strong>${escapeHtml(e.titre)}</strong> ${e.badge ? `<span class="badge-247" style="background:#1D8B5D;">${escapeHtml(e.badge)}</span>` : ''}<br><small>${escapeHtml(e.description || '')}</small></div><div><button class="delete-btn" data-id="${e.id}" data-table="equipements">🗑</button></div></div>`).join('') : '<p>Aucun</p>';
-        attachDeleteEvents();
-    }
-
-    async function loadAdminTeam() {
-        const { data } = await supabase.from('equipes').select('*').order('ordre', { ascending: true });
-        const container = document.getElementById('adminTeamList');
-        if(!data?.length) { container.innerHTML = '<p>Aucun membre</p>'; return; }
-        container.innerHTML = data.map(m => `<div class="item-card"><div><strong>${escapeHtml(m.nom)}</strong><br><em>${escapeHtml(m.poste)}</em><br><small>${escapeHtml(m.description || '')}</small>${m.image_url ? `<br><small>Photo: ${escapeHtml(m.image_url)}</small>` : ''}</div><div class="item-actions"><button class="delete-btn" data-id="${m.id}" data-table="equipes">🗑 Supprimer</button></div></div>`).join('');
-        attachDeleteEvents();
-    }
-
-    function attachDeleteEvents() {
-        document.querySelectorAll('.delete-btn').forEach(btn => {
-            btn.removeEventListener('click', handleDelete);
-            btn.addEventListener('click', handleDelete);
-        });
-    }
-
-    async function handleDelete(e) {
-        const btn = e.currentTarget;
-        const id = btn.getAttribute('data-id');
-        const table = btn.getAttribute('data-table');
-        if(!confirm('Supprimer définitivement ?')) return;
-        const { error } = await supabase.from(table).delete().eq('id', id);
-        if(error) { alert('Erreur: ' + error.message); return; }
-        alert('Supprimé !');
-        loadAllAdminData();
-        loadAllPublicData();
-    }
-
-    async function loadAllAdminData() {
-        await Promise.all([loadAdminActualites(), loadAdminSpecMedicales(), loadAdminSpecChirurgicales(), loadAdminGynecologie(), loadAdminExplorations(), loadAdminImagerie(), loadAdminEquipements(), loadAdminTeam()]);
-    }
-
-    // ========== CRÉATIONS ==========
-    document.getElementById('createActuBtn')?.addEventListener('click', async () => {
-        const titre = document.getElementById('actuTitre').value.trim();
-        if(!titre) { alert('Titre requis'); return; }
-        await supabase.from('actualites').insert([{ 
-            titre, 
-            description: document.getElementById('actuDescription').value, 
-            date: document.getElementById('actuDate').value, 
-            image_url: document.getElementById('actuImageUrl').value || null 
-        }]);
-        alert('Actualité ajoutée');
-        document.getElementById('actuTitre').value = ''; 
-        document.getElementById('actuDescription').value = ''; 
-        document.getElementById('actuDate').value = ''; 
-        document.getElementById('actuImageUrl').value = '';
-        loadAllAdminData(); 
-        loadAllPublicData();
-    });
-
-    document.getElementById('createSpecMedBtn')?.addEventListener('click', async () => {
-        const titre = document.getElementById('specMedTitre').value.trim();
-        if(!titre) return alert('Titre requis');
-        await supabase.from('specialites_medicales').insert([{ titre, description: document.getElementById('specMedDesc').value, ordre: Date.now() }]);
-        alert('Ajoutée'); document.getElementById('specMedTitre').value = ''; document.getElementById('specMedDesc').value = ''; loadAllAdminData(); loadAllPublicData();
-    });
-
-    document.getElementById('createSpecChirBtn')?.addEventListener('click', async () => {
-        const titre = document.getElementById('specChirTitre').value.trim();
-        if(!titre) return alert('Titre requis');
-        await supabase.from('specialites_chirurgicales').insert([{ titre, description: document.getElementById('specChirDesc').value, ordre: Date.now() }]);
-        alert('Ajoutée'); document.getElementById('specChirTitre').value = ''; document.getElementById('specChirDesc').value = ''; loadAllAdminData(); loadAllPublicData();
-    });
-
-    document.getElementById('createGyneBtn')?.addEventListener('click', async () => {
-        const titre = document.getElementById('gyneTitre').value.trim();
-        if(!titre) return alert('Titre requis');
-        await supabase.from('gynecologie').insert([{ titre, description: document.getElementById('gyneDesc').value, ordre: Date.now() }]);
-        alert('Ajouté'); document.getElementById('gyneTitre').value = ''; document.getElementById('gyneDesc').value = ''; loadAllAdminData(); loadAllPublicData();
-    });
-
-    document.getElementById('createExploBtn')?.addEventListener('click', async () => {
-        const titre = document.getElementById('exploTitre').value.trim();
-        if(!titre) return alert('Titre requis');
-        await supabase.from('explorations').insert([{ titre, description: document.getElementById('exploDesc').value, ordre: Date.now() }]);
-        alert('Ajoutée'); document.getElementById('exploTitre').value = ''; document.getElementById('exploDesc').value = ''; loadAllAdminData(); loadAllPublicData();
-    });
-
-    document.getElementById('createImagerieBtn')?.addEventListener('click', async () => {
-        const titre = document.getElementById('imagerieTitre').value.trim();
-        if(!titre) return alert('Titre requis');
-        await supabase.from('imagerie').insert([{ titre, ordre: Date.now() }]);
-        alert('Ajouté'); document.getElementById('imagerieTitre').value = ''; loadAllAdminData(); loadAllPublicData();
-    });
-
-    document.getElementById('createEquipBtn')?.addEventListener('click', async () => {
-        const titre = document.getElementById('equipTitre').value.trim();
-        if(!titre) return alert('Titre requis');
-        await supabase.from('equipements').insert([{ titre, description: document.getElementById('equipDesc').value, badge: document.getElementById('equipBadge').value, ordre: Date.now() }]);
-        alert('Ajouté'); document.getElementById('equipTitre').value = ''; document.getElementById('equipDesc').value = ''; document.getElementById('equipBadge').value = ''; loadAllAdminData(); loadAllPublicData();
-    });
-
-    document.getElementById('createMemberBtn')?.addEventListener('click', async () => {
-        const nom = document.getElementById('memberNom').value.trim();
-        const poste = document.getElementById('memberPoste').value.trim();
-        if(!nom || !poste) { alert('Le nom et le poste sont requis'); return; }
-        await supabase.from('equipes').insert([{ 
-            nom, 
-            poste, 
-            description: document.getElementById('memberDescription').value, 
-            image_url: document.getElementById('memberImageUrl').value || null, 
-            ordre: Date.now() 
-        }]);
-        alert('Membre ajouté');
-        document.getElementById('memberNom').value = ''; 
-        document.getElementById('memberPoste').value = ''; 
-        document.getElementById('memberDescription').value = ''; 
-        document.getElementById('memberImageUrl').value = '';
-        loadAllAdminData(); 
-        loadAllPublicData();
-    });
-
-    // Tabs
-    const tabs = document.querySelectorAll('.tab-btn');
-    const panes = document.querySelectorAll('.tab-pane');
-    tabs.forEach(tab => {
-        tab.addEventListener('click', () => {
-            const targetId = tab.getAttribute('data-tab');
-            tabs.forEach(t => t.classList.remove('active'));
-            tab.classList.add('active');
-            panes.forEach(pane => pane.classList.remove('active'));
-            document.getElementById(targetId).classList.add('active');
-        });
-    });
 
     // ==================== GALERIE ====================
     const galleryImages = [
@@ -2145,9 +1795,8 @@
 
     function escapeHtml(str) { if(!str) return ''; return str.replace(/[&<>]/g, function(m){ if(m==='&') return '&amp;'; if(m==='<') return '&lt;'; if(m==='>') return '&gt;'; return m;}); }
 
-    // Chargement initial
-    loadAllPublicData();
-    if(sessionStorage.getItem('clinique_admin') === 'true') loadAllAdminData();
+    // Initialisation
+    initSupabase();
 </script>
 </body>
 </html>
