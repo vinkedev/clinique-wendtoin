@@ -171,11 +171,17 @@
             align-items: center;
             gap: 10px;
             flex-shrink: 0;
+            cursor: pointer;
         }
 
         .logo img {
             height: 50px;
             width: auto;
+            pointer-events: none;
+        }
+
+        .logo-text {
+            pointer-events: none;
         }
 
         .logo-text h1 {
@@ -243,21 +249,6 @@
             align-items: center;
             justify-content: center;
             font-weight: bold;
-        }
-        
-        .btn-admin-header {
-            background: #1e293b;
-            color: white;
-            border: none;
-            padding: 8px 16px;
-            border-radius: 40px;
-            font-weight: 600;
-            cursor: pointer;
-            font-size: 0.8rem;
-            transition: 0.3s;
-        }
-        .btn-admin-header:hover {
-            background: #1D8B5D;
         }
 
         /* ========== HERO SLIDER ========== */
@@ -1136,6 +1127,33 @@
             transform: scale(1.05);
         }
 
+        /* Style pour l'œil */
+        .password-wrapper {
+            position: relative;
+            margin-bottom: 20px;
+        }
+        .password-wrapper input {
+            width: 100%;
+            padding: 12px;
+            padding-right: 50px;
+            border-radius: 40px;
+            border: 1px solid #ddd;
+        }
+        .toggle-password {
+            position: absolute;
+            right: 15px;
+            top: 50%;
+            transform: translateY(-50%);
+            cursor: pointer;
+            font-size: 1.2rem;
+            color: #64748b;
+            background: none;
+            border: none;
+        }
+        .toggle-password:hover {
+            color: #1D8B5D;
+        }
+
         @media (min-width: 640px) {
             .hero-content h2 {
                 font-size: 2rem;
@@ -1244,7 +1262,7 @@
 
 <header>
     <div class="header-container">
-        <div class="logo">
+        <div class="logo" id="secretAdminLogo">
             <img src="cliniquewendtoin/logo_wendtoin.jpg" alt="Logo Clinique WENDTOIN" onerror="this.src='https://placehold.co/50x50/0077A4/white?text=W'">
             <div class="logo-text">
                 <h1>Clinique WENDTOIN</h1>
@@ -1263,7 +1281,6 @@
                 <li><a href="#contact">Contact</a></li>
             </ul>
         </nav>
-        <button id="adminPortalBtn" class="btn-admin-header">🔐 Admin</button>
         <button class="mobile-menu-btn" aria-label="Menu">☰</button>
     </div>
 </header>
@@ -1441,7 +1458,10 @@
         <span class="close-login" style="position:absolute; top:12px; right:18px; font-size:28px; cursor:pointer;">&times;</span>
         <div class="modal-header"><h3>🔐 Espace Administration</h3></div>
         <div class="modal-body">
-            <input type="password" id="adminPassword" placeholder="Mot de passe" style="width:100%; padding:12px; border-radius:40px; border:1px solid #ddd; margin-bottom:20px;">
+            <div class="password-wrapper">
+                <input type="password" id="adminPassword" placeholder="Mot de passe">
+                <button type="button" class="toggle-password" id="togglePassword">👁️</button>
+            </div>
             <button id="submitLoginBtn" style="background:#1D8B5D; color:white; border:none; padding:10px; width:100%; border-radius:40px; font-weight:bold; cursor:pointer;">Se connecter</button>
             <div id="loginError" style="color:#dc3545; margin-top:8px; font-size:0.8rem; text-align:center;"></div>
         </div>
@@ -1454,7 +1474,11 @@
     const SUPABASE_ANON_KEY = "sb_publishable_tn6FW9OxsqNdKMg9uCuB5A_gZICo-Jy";
     let supabaseClient = null;
     let isAdmin = false;
-    const ADMIN_PASSWORD = "Wendtoin2026";
+    const ADMIN_PASSWORD = "wendtoin2016";
+
+    // Compteur pour les clics sur le logo
+    let logoClickCount = 0;
+    let clickTimeout = null;
 
     // Attendre que Supabase soit chargé
     function initSupabase() {
@@ -1467,6 +1491,21 @@
             console.log("⏳ Attente de Supabase...");
             setTimeout(initSupabase, 200);
         }
+    }
+
+    // ==================== CLIC SECRET SUR LE LOGO ====================
+    const secretLogo = document.getElementById('secretAdminLogo');
+    if (secretLogo) {
+        secretLogo.addEventListener('click', () => {
+            logoClickCount++;
+            clearTimeout(clickTimeout);
+            clickTimeout = setTimeout(() => { logoClickCount = 0; }, 1000);
+            
+            if (logoClickCount >= 5) {
+                logoClickCount = 0;
+                openLoginModal();
+            }
+        });
     }
 
     // ==================== SLIDER HERO ====================
@@ -1626,7 +1665,6 @@
                 </div>
             </div>
         `).join('');
-        // Mettre à jour le compteur de médecins
         document.getElementById('stat-doctors').innerText = data.length;
     }
 
@@ -1639,20 +1677,29 @@
     }
 
     // ==================== ADMIN LOGIN ====================
-    const adminBtn = document.getElementById('adminPortalBtn');
     const loginModal = document.getElementById('loginModal');
     const submitLogin = document.getElementById('submitLoginBtn');
     const closeLogin = document.querySelector('.close-login');
+    const togglePasswordBtn = document.getElementById('togglePassword');
+    const adminPasswordInput = document.getElementById('adminPassword');
+
+    // Fonction pour afficher/masquer le mot de passe
+    if (togglePasswordBtn && adminPasswordInput) {
+        togglePasswordBtn.addEventListener('click', () => {
+            const type = adminPasswordInput.getAttribute('type') === 'password' ? 'text' : 'password';
+            adminPasswordInput.setAttribute('type', type);
+            togglePasswordBtn.textContent = type === 'password' ? '👁️' : '🙈';
+        });
+    }
 
     function openLoginModal() { loginModal.style.display = 'flex'; }
-    function closeLoginModal() { loginModal.style.display = 'none'; document.getElementById('adminPassword').value = ''; document.getElementById('loginError').innerText = ''; }
+    function closeLoginModal() { loginModal.style.display = 'none'; if (adminPasswordInput) adminPasswordInput.value = ''; document.getElementById('loginError').innerText = ''; }
 
-    adminBtn.addEventListener('click', openLoginModal);
     if (closeLogin) closeLogin.addEventListener('click', closeLoginModal);
     window.addEventListener('click', (e) => { if (e.target === loginModal) closeLoginModal(); });
 
     submitLogin.addEventListener('click', () => {
-        if (document.getElementById('adminPassword').value === ADMIN_PASSWORD) {
+        if (adminPasswordInput.value === ADMIN_PASSWORD) {
             sessionStorage.setItem('clinique_admin', 'true');
             isAdmin = true;
             closeLoginModal();
