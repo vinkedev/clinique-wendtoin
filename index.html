@@ -1557,7 +1557,7 @@
                 <input type="text" id="actuTitre" placeholder="Titre">
                 <textarea id="actuDescription" rows="2" placeholder="Description"></textarea>
                 <input type="text" id="actuDate" placeholder="Date (ex: 15 Mars 2026)">
-                <input type="text" id="actuEmoji" placeholder="Emoji/icône (ex: 🏥, 👨‍⚕️)">
+                <input type="text" id="actuImageUrl" placeholder="URL de l'image (optionnel)">
                 <button id="createActuBtn" class="btn-save">➕ Publier</button>
             </div>
             <div class="item-list"><h4>📌 Liste des actualités</h4><div id="adminActusList"></div></div>
@@ -1732,7 +1732,28 @@
         const container = document.getElementById('actualitesList');
         if(error) { container.innerHTML = '<p>Erreur chargement</p>'; return; }
         if(!data?.length) { container.innerHTML = '<p>Aucune actualité</p>'; return; }
-        container.innerHTML = data.map(a => `<div class="actu-card"><div class="actu-image">${escapeHtml(a.image_emoji) || '📢'}</div><div class="actu-content"><div class="actu-date">${escapeHtml(a.date || '')}</div><div class="actu-title">${escapeHtml(a.titre)}</div><div class="actu-desc">${escapeHtml(a.description || '')}</div></div></div>`).join('');
+        container.innerHTML = data.map(a => `<div class="actu-card">
+            ${a.image_url ? `<img src="${a.image_url}" alt="${escapeHtml(a.titre)}" class="actu-image" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">` : `<div class="actu-image">📢</div>`}
+            ${!a.image_url ? `<div class="actu-image" style="display:flex;">📢</div>` : ''}
+            <div class="actu-content">
+                <div class="actu-date">${escapeHtml(a.date || '')}</div>
+                <div class="actu-title">${escapeHtml(a.titre)}</div>
+                <div class="actu-desc">${escapeHtml(a.description || '')}</div>
+            </div>
+        </div>`).join('');
+        // Corriger l'affichage des images : s'assurer que la div n'apparaît pas deux fois
+        data.forEach((a, idx) => {
+            if(a.image_url) {
+                const img = document.querySelectorAll('.actu-card')[idx]?.querySelector('.actu-image');
+                if(img && img.tagName === 'IMG') {
+                    img.style.height = '180px';
+                    img.style.width = '100%';
+                    img.style.objectFit = 'cover';
+                }
+                const extraDiv = document.querySelectorAll('.actu-card')[idx]?.querySelector('.actu-image:not(img)');
+                if(extraDiv && extraDiv !== img) extraDiv.style.display = 'none';
+            }
+        });
     }
 
     async function loadPublicSpecialitesMedicales() {
@@ -1820,7 +1841,7 @@
         const { data } = await supabase.from('actualites').select('*').order('created_at', { ascending: false });
         const container = document.getElementById('adminActusList');
         if(!data?.length) { container.innerHTML = '<p>Aucune actualité</p>'; return; }
-        container.innerHTML = data.map(a => `<div class="item-card"><div><strong>${escapeHtml(a.titre)}</strong> - ${escapeHtml(a.date || '')}</div><div class="item-actions"><button class="delete-btn" data-id="${a.id}" data-table="actualites">🗑 Supprimer</button></div></div>`).join('');
+        container.innerHTML = data.map(a => `<div class="item-card"><div><strong>${escapeHtml(a.titre)}</strong> - ${escapeHtml(a.date || '')}${a.image_url ? `<br><small>Image: ${escapeHtml(a.image_url)}</small>` : ''}</div><div class="item-actions"><button class="delete-btn" data-id="${a.id}" data-table="actualites">🗑 Supprimer</button></div></div>`).join('');
         attachDeleteEvents();
     }
 
@@ -1864,7 +1885,7 @@
         const { data } = await supabase.from('equipes').select('*').order('ordre', { ascending: true });
         const container = document.getElementById('adminTeamList');
         if(!data?.length) { container.innerHTML = '<p>Aucun membre</p>'; return; }
-        container.innerHTML = data.map(m => `<div class="item-card"><div><strong>${escapeHtml(m.nom)}</strong><br><em>${escapeHtml(m.poste)}</em><br><small>${escapeHtml(m.description || '')}</small></div><div class="item-actions"><button class="delete-btn" data-id="${m.id}" data-table="equipes">🗑 Supprimer</button></div></div>`).join('');
+        container.innerHTML = data.map(m => `<div class="item-card"><div><strong>${escapeHtml(m.nom)}</strong><br><em>${escapeHtml(m.poste)}</em><br><small>${escapeHtml(m.description || '')}</small>${m.image_url ? `<br><small>Photo: ${escapeHtml(m.image_url)}</small>` : ''}</div><div class="item-actions"><button class="delete-btn" data-id="${m.id}" data-table="equipes">🗑 Supprimer</button></div></div>`).join('');
         attachDeleteEvents();
     }
 
@@ -1895,10 +1916,19 @@
     document.getElementById('createActuBtn')?.addEventListener('click', async () => {
         const titre = document.getElementById('actuTitre').value.trim();
         if(!titre) { alert('Titre requis'); return; }
-        await supabase.from('actualites').insert([{ titre, description: document.getElementById('actuDescription').value, date: document.getElementById('actuDate').value, image_emoji: document.getElementById('actuEmoji').value }]);
+        await supabase.from('actualites').insert([{ 
+            titre, 
+            description: document.getElementById('actuDescription').value, 
+            date: document.getElementById('actuDate').value, 
+            image_url: document.getElementById('actuImageUrl').value || null 
+        }]);
         alert('Actualité ajoutée');
-        document.getElementById('actuTitre').value = ''; document.getElementById('actuDescription').value = ''; document.getElementById('actuDate').value = ''; document.getElementById('actuEmoji').value = '';
-        loadAllAdminData(); loadAllPublicData();
+        document.getElementById('actuTitre').value = ''; 
+        document.getElementById('actuDescription').value = ''; 
+        document.getElementById('actuDate').value = ''; 
+        document.getElementById('actuImageUrl').value = '';
+        loadAllAdminData(); 
+        loadAllPublicData();
     });
 
     document.getElementById('createSpecMedBtn')?.addEventListener('click', async () => {
@@ -1947,10 +1977,20 @@
         const nom = document.getElementById('memberNom').value.trim();
         const poste = document.getElementById('memberPoste').value.trim();
         if(!nom || !poste) { alert('Le nom et le poste sont requis'); return; }
-        await supabase.from('equipes').insert([{ nom, poste, description: document.getElementById('memberDescription').value, image_url: document.getElementById('memberImageUrl').value, ordre: Date.now() }]);
+        await supabase.from('equipes').insert([{ 
+            nom, 
+            poste, 
+            description: document.getElementById('memberDescription').value, 
+            image_url: document.getElementById('memberImageUrl').value || null, 
+            ordre: Date.now() 
+        }]);
         alert('Membre ajouté');
-        document.getElementById('memberNom').value = ''; document.getElementById('memberPoste').value = ''; document.getElementById('memberDescription').value = ''; document.getElementById('memberImageUrl').value = '';
-        loadAllAdminData(); loadAllPublicData();
+        document.getElementById('memberNom').value = ''; 
+        document.getElementById('memberPoste').value = ''; 
+        document.getElementById('memberDescription').value = ''; 
+        document.getElementById('memberImageUrl').value = '';
+        loadAllAdminData(); 
+        loadAllPublicData();
     });
 
     // Tabs
