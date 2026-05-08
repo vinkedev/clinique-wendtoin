@@ -635,5 +635,45 @@ async function testSupabase() {
     }
 }
 </script>
+<button onclick="testSpecialites()" 
+style="position:fixed;bottom:100px;right:20px;z-index:9999;background:blue;color:white;padding:15px;border-radius:50px;border:none;font-size:16px;font-weight:bold;">
+TEST SPÉCIALITÉS
+</button>
+
+<script>
+async function testSpecialites() {
+    alert('Chargement spécialités...');
+    try {
+        // Test direct sans localStorage
+        const res = await fetch(
+            'https://otdiywrvzappbmjfkkyi.supabase.co/rest/v1/specialites_medicales?select=*',
+            { headers: { 
+                'apikey': 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im90ZGl5d3J2emFwcGJtamZra3lpIiwicm9sZSI6ImFub24iLCJpYXQiOjE3Njk2MTQyMDcsImV4cCI6MjA4NTE5MDIwN30.O5gHqJF1SCvpu19Z0OFHhQsT_ZmeIFbuEu-bpBZXXtY'
+            }}
+        );
+        const data = await res.json();
+        alert('RÉSULTAT: ' + data.length + ' spécialités trouvées');
+        
+        // Affiche la première spécialité
+        if (data.length > 0) {
+            alert('Première spécialité: ' + JSON.stringify(data[0]));
+        }
+        
+        // Tente avec ton client Supabase
+        if (typeof supabaseClient !== 'undefined' && supabaseClient) {
+            const { data: sbData, error } = await supabaseClient
+                .from('specialites_medicales')
+                .select('*')
+                .limit(1);
+            alert('Via client: ' + (error ? error.message : sbData?.length + ' ok'));
+        } else {
+            alert('supabaseClient non défini !');
+        }
+        
+    } catch(e) {
+        alert('ERREUR: ' + e.message);
+    }
+}
+</script>
 </body>
 </html>
