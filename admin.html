@@ -294,37 +294,61 @@
     </div>
 
     <script>
-        // Supabase configuration
+        // ========== CONFIGURATION SUPABASE ==========
         const SUPABASE_URL = "https://otdiywrvzappbmjfkkyi.supabase.co";
         const SUPABASE_ANON_KEY = "sb_publishable_tn6FW9OxsqNdKMg9uCuB5A_gZICo-Jy";
-        const supabase = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
-        
         const ADMIN_PASSWORD = "Wendtoin2026";
+        
+        let supabaseClient = null;
         
         // Vérifier session admin
         if (sessionStorage.getItem('clinique_admin') !== 'true') {
             window.location.href = 'index.html';
         }
 
+        // Attendre que Supabase soit chargé
+        function initAdmin() {
+            if (window.supabase) {
+                supabaseClient = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+                console.log("✅ Admin - Supabase initialisé");
+                loadAllAdminData();
+                attachEventListeners();
+            } else {
+                console.log("⏳ Admin - Attente de Supabase...");
+                setTimeout(initAdmin, 200);
+            }
+        }
+
         // Éléments DOM
         const logoutBtn = document.getElementById('logoutAdminBtn');
 
         // Déconnexion
-        logoutBtn.addEventListener('click', () => {
-            sessionStorage.removeItem('clinique_admin');
-            window.location.href = 'index.html';
-        });
+        if (logoutBtn) {
+            logoutBtn.addEventListener('click', () => {
+                sessionStorage.removeItem('clinique_admin');
+                window.location.href = 'index.html';
+            });
+        }
 
-        // Fonction d'upload d'image
-        async function uploadImage(file, folder) {
-            if (!file) return null;
+        // Fonction d'upload d'image - adaptée pour tes buckets existants
+        async function uploadImage(file, type) {
+            if (!file || !supabaseClient) return null;
             const fileExt = file.name.split('.').pop();
             const fileName = `${Date.now()}_${Math.random().toString(36).substring(2, 8)}.${fileExt}`;
-            const filePath = `${folder}/${fileName}`;
             
-            const { data, error } = await supabase.storage
-                .from('images')
-                .upload(filePath, file);
+            // Choisir le bucket selon le type
+            let bucketName = '';
+            if (type === 'actualite') {
+                bucketName = 'actualites';
+            } else if (type === 'team') {
+                bucketName = 'team';
+            } else {
+                return null;
+            }
+            
+            const { data, error } = await supabaseClient.storage
+                .from(bucketName)
+                .upload(fileName, file);
             
             if (error) {
                 console.error('Upload error:', error);
@@ -332,161 +356,194 @@
                 return null;
             }
             
-            const { data: urlData } = supabase.storage
-                .from('images')
-                .getPublicUrl(filePath);
+            const { data: urlData } = supabaseClient.storage
+                .from(bucketName)
+                .getPublicUrl(fileName);
             
             return urlData.publicUrl;
         }
 
         // Preview images
-        document.getElementById('actuImageFile')?.addEventListener('change', (e) => {
-            const file = e.target.files[0];
-            if (file) {
-                const reader = new FileReader();
-                reader.onload = (event) => {
-                    document.getElementById('actuImagePreview').innerHTML = `<img src="${event.target.result}" class="preview-img">`;
-                };
-                reader.readAsDataURL(file);
-            }
-        });
-
-        document.getElementById('memberImageFile')?.addEventListener('change', (e) => {
-            const file = e.target.files[0];
-            if (file) {
-                const reader = new FileReader();
-                reader.onload = (event) => {
-                    document.getElementById('memberImagePreview').innerHTML = `<img src="${event.target.result}" class="preview-img">`;
-                };
-                reader.readAsDataURL(file);
-            }
-        });
-
-        // Trigger file input clicks
-        document.querySelectorAll('.file-input-label')[0]?.addEventListener('click', () => {
-            document.getElementById('actuImageFile')?.click();
-        });
-        document.querySelectorAll('.file-input-label')[1]?.addEventListener('click', () => {
-            document.getElementById('memberImageFile')?.click();
-        });
-
-        // ========== CRÉATION AVEC IMAGES ==========
-        
-        // Créer actualité avec image
-        document.getElementById('createActuBtn')?.addEventListener('click', async () => {
-            const titre = document.getElementById('actuTitre').value.trim();
-            if (!titre) { alert('Titre requis'); return; }
+        function attachPreviewListeners() {
+            const actuImageFile = document.getElementById('actuImageFile');
+            const memberImageFile = document.getElementById('memberImageFile');
             
-            let imageUrl = null;
-            const imageFile = document.getElementById('actuImageFile').files[0];
-            if (imageFile) {
-                imageUrl = await uploadImage(imageFile, 'actualites');
+            if (actuImageFile) {
+                actuImageFile.addEventListener('change', (e) => {
+                    const file = e.target.files[0];
+                    if (file) {
+                        const reader = new FileReader();
+                        reader.onload = (event) => {
+                            const preview = document.getElementById('actuImagePreview');
+                            if (preview) preview.innerHTML = `<img src="${event.target.result}" class="preview-img">`;
+                        };
+                        reader.readAsDataURL(file);
+                    }
+                });
             }
             
-            await supabase.from('actualites').insert([{
-                titre,
-                description: document.getElementById('actuDescription').value,
-                date: document.getElementById('actuDate').value,
-                image_url: imageUrl
-            }]);
-            
-            alert('Actualité ajoutée');
-            document.getElementById('actuTitre').value = '';
-            document.getElementById('actuDescription').value = '';
-            document.getElementById('actuDate').value = '';
-            document.getElementById('actuImageFile').value = '';
-            document.getElementById('actuImagePreview').innerHTML = '';
-            loadAllAdminData();
-        });
-
-        // Créer membre d'équipe avec photo
-        document.getElementById('createMemberBtn')?.addEventListener('click', async () => {
-            const nom = document.getElementById('memberNom').value.trim();
-            const poste = document.getElementById('memberPoste').value.trim();
-            if (!nom || !poste) { alert('Nom et poste requis'); return; }
-            
-            let imageUrl = null;
-            const imageFile = document.getElementById('memberImageFile').files[0];
-            if (imageFile) {
-                imageUrl = await uploadImage(imageFile, 'team');
+            if (memberImageFile) {
+                memberImageFile.addEventListener('change', (e) => {
+                    const file = e.target.files[0];
+                    if (file) {
+                        const reader = new FileReader();
+                        reader.onload = (event) => {
+                            const preview = document.getElementById('memberImagePreview');
+                            if (preview) preview.innerHTML = `<img src="${event.target.result}" class="preview-img">`;
+                        };
+                        reader.readAsDataURL(file);
+                    }
+                });
             }
             
-            await supabase.from('equipes').insert([{
-                nom,
-                poste,
-                description: document.getElementById('memberDescription').value,
-                image_url: imageUrl,
-                ordre: Date.now()
-            }]);
-            
-            alert('Membre ajouté');
-            document.getElementById('memberNom').value = '';
-            document.getElementById('memberPoste').value = '';
-            document.getElementById('memberDescription').value = '';
-            document.getElementById('memberImageFile').value = '';
-            document.getElementById('memberImagePreview').innerHTML = '';
-            loadAllAdminData();
-        });
+            // Trigger file input clicks
+            const fileLabels = document.querySelectorAll('.file-input-label');
+            if (fileLabels[0]) fileLabels[0].addEventListener('click', () => document.getElementById('actuImageFile')?.click());
+            if (fileLabels[1]) fileLabels[1].addEventListener('click', () => document.getElementById('memberImageFile')?.click());
+        }
 
-        // ========== CRÉATIONS SIMPLES ==========
-        
-        document.getElementById('createSpecMedBtn')?.addEventListener('click', async () => {
-            const titre = document.getElementById('specMedTitre').value.trim();
-            if (!titre) return alert('Titre requis');
-            await supabase.from('specialites_medicales').insert([{ titre, description: document.getElementById('specMedDesc').value, ordre: Date.now() }]);
-            alert('Ajouté');
-            document.getElementById('specMedTitre').value = ''; document.getElementById('specMedDesc').value = '';
-            loadAllAdminData();
-        });
+        // ========== CRÉATIONS ==========
+        function attachCreateListeners() {
+            // Créer actualité avec image
+            document.getElementById('createActuBtn')?.addEventListener('click', async () => {
+                if (!supabaseClient) return alert('Supabase non initialisé');
+                const titre = document.getElementById('actuTitre').value.trim();
+                if (!titre) { alert('Titre requis'); return; }
+                
+                let imageUrl = null;
+                const imageFile = document.getElementById('actuImageFile').files[0];
+                if (imageFile) {
+                    imageUrl = await uploadImage(imageFile, 'actualite');
+                }
+                
+                await supabaseClient.from('actualites').insert([{
+                    titre,
+                    description: document.getElementById('actuDescription').value,
+                    date: document.getElementById('actuDate').value,
+                    image_url: imageUrl
+                }]);
+                
+                alert('Actualité ajoutée');
+                document.getElementById('actuTitre').value = '';
+                document.getElementById('actuDescription').value = '';
+                document.getElementById('actuDate').value = '';
+                document.getElementById('actuImageFile').value = '';
+                document.getElementById('actuImagePreview').innerHTML = '';
+                loadAllAdminData();
+            });
 
-        document.getElementById('createSpecChirBtn')?.addEventListener('click', async () => {
-            const titre = document.getElementById('specChirTitre').value.trim();
-            if (!titre) return alert('Titre requis');
-            await supabase.from('specialites_chirurgicales').insert([{ titre, description: document.getElementById('specChirDesc').value, ordre: Date.now() }]);
-            alert('Ajouté');
-            document.getElementById('specChirTitre').value = ''; document.getElementById('specChirDesc').value = '';
-            loadAllAdminData();
-        });
+            // Créer membre d'équipe avec photo
+            document.getElementById('createMemberBtn')?.addEventListener('click', async () => {
+                if (!supabaseClient) return alert('Supabase non initialisé');
+                const nom = document.getElementById('memberNom').value.trim();
+                const poste = document.getElementById('memberPoste').value.trim();
+                if (!nom || !poste) { alert('Nom et poste requis'); return; }
+                
+                let imageUrl = null;
+                const imageFile = document.getElementById('memberImageFile').files[0];
+                if (imageFile) {
+                    imageUrl = await uploadImage(imageFile, 'team');
+                }
+                
+                await supabaseClient.from('equipes').insert([{
+                    nom,
+                    poste,
+                    description: document.getElementById('memberDescription').value,
+                    image_url: imageUrl,
+                    ordre: Date.now()
+                }]);
+                
+                alert('Membre ajouté');
+                document.getElementById('memberNom').value = '';
+                document.getElementById('memberPoste').value = '';
+                document.getElementById('memberDescription').value = '';
+                document.getElementById('memberImageFile').value = '';
+                document.getElementById('memberImagePreview').innerHTML = '';
+                loadAllAdminData();
+            });
 
-        document.getElementById('createGyneBtn')?.addEventListener('click', async () => {
-            const titre = document.getElementById('gyneTitre').value.trim();
-            if (!titre) return alert('Titre requis');
-            await supabase.from('gynecologie').insert([{ titre, description: document.getElementById('gyneDesc').value, ordre: Date.now() }]);
-            alert('Ajouté');
-            document.getElementById('gyneTitre').value = ''; document.getElementById('gyneDesc').value = '';
-            loadAllAdminData();
-        });
+            // Spécialités médicales
+            document.getElementById('createSpecMedBtn')?.addEventListener('click', async () => {
+                if (!supabaseClient) return alert('Supabase non initialisé');
+                const titre = document.getElementById('specMedTitre').value.trim();
+                if (!titre) return alert('Titre requis');
+                await supabaseClient.from('specialites_medicales').insert([{ titre, description: document.getElementById('specMedDesc').value, ordre: Date.now() }]);
+                alert('Ajouté');
+                document.getElementById('specMedTitre').value = ''; 
+                document.getElementById('specMedDesc').value = '';
+                loadAllAdminData();
+            });
 
-        document.getElementById('createExploBtn')?.addEventListener('click', async () => {
-            const titre = document.getElementById('exploTitre').value.trim();
-            if (!titre) return alert('Titre requis');
-            await supabase.from('explorations').insert([{ titre, description: document.getElementById('exploDesc').value, ordre: Date.now() }]);
-            alert('Ajouté');
-            document.getElementById('exploTitre').value = ''; document.getElementById('exploDesc').value = '';
-            loadAllAdminData();
-        });
+            // Spécialités chirurgicales
+            document.getElementById('createSpecChirBtn')?.addEventListener('click', async () => {
+                if (!supabaseClient) return alert('Supabase non initialisé');
+                const titre = document.getElementById('specChirTitre').value.trim();
+                if (!titre) return alert('Titre requis');
+                await supabaseClient.from('specialites_chirurgicales').insert([{ titre, description: document.getElementById('specChirDesc').value, ordre: Date.now() }]);
+                alert('Ajouté');
+                document.getElementById('specChirTitre').value = ''; 
+                document.getElementById('specChirDesc').value = '';
+                loadAllAdminData();
+            });
 
-        document.getElementById('createImagerieBtn')?.addEventListener('click', async () => {
-            const titre = document.getElementById('imagerieTitre').value.trim();
-            if (!titre) return alert('Titre requis');
-            await supabase.from('imagerie').insert([{ titre, ordre: Date.now() }]);
-            alert('Ajouté');
-            document.getElementById('imagerieTitre').value = '';
-            loadAllAdminData();
-        });
+            // Gynécologie
+            document.getElementById('createGyneBtn')?.addEventListener('click', async () => {
+                if (!supabaseClient) return alert('Supabase non initialisé');
+                const titre = document.getElementById('gyneTitre').value.trim();
+                if (!titre) return alert('Titre requis');
+                await supabaseClient.from('gynecologie').insert([{ titre, description: document.getElementById('gyneDesc').value, ordre: Date.now() }]);
+                alert('Ajouté');
+                document.getElementById('gyneTitre').value = ''; 
+                document.getElementById('gyneDesc').value = '';
+                loadAllAdminData();
+            });
 
-        document.getElementById('createEquipBtn')?.addEventListener('click', async () => {
-            const titre = document.getElementById('equipTitre').value.trim();
-            if (!titre) return alert('Titre requis');
-            await supabase.from('equipements').insert([{ titre, description: document.getElementById('equipDesc').value, badge: document.getElementById('equipBadge').value, ordre: Date.now() }]);
-            alert('Ajouté');
-            document.getElementById('equipTitre').value = ''; document.getElementById('equipDesc').value = ''; document.getElementById('equipBadge').value = '';
-            loadAllAdminData();
-        });
+            // Explorations
+            document.getElementById('createExploBtn')?.addEventListener('click', async () => {
+                if (!supabaseClient) return alert('Supabase non initialisé');
+                const titre = document.getElementById('exploTitre').value.trim();
+                if (!titre) return alert('Titre requis');
+                await supabaseClient.from('explorations').insert([{ titre, description: document.getElementById('exploDesc').value, ordre: Date.now() }]);
+                alert('Ajouté');
+                document.getElementById('exploTitre').value = ''; 
+                document.getElementById('exploDesc').value = '';
+                loadAllAdminData();
+            });
+
+            // Imagerie
+            document.getElementById('createImagerieBtn')?.addEventListener('click', async () => {
+                if (!supabaseClient) return alert('Supabase non initialisé');
+                const titre = document.getElementById('imagerieTitre').value.trim();
+                if (!titre) return alert('Titre requis');
+                await supabaseClient.from('imagerie').insert([{ titre, ordre: Date.now() }]);
+                alert('Ajouté');
+                document.getElementById('imagerieTitre').value = '';
+                loadAllAdminData();
+            });
+
+            // Équipements
+            document.getElementById('createEquipBtn')?.addEventListener('click', async () => {
+                if (!supabaseClient) return alert('Supabase non initialisé');
+                const titre = document.getElementById('equipTitre').value.trim();
+                if (!titre) return alert('Titre requis');
+                await supabaseClient.from('equipements').insert([{ 
+                    titre, 
+                    description: document.getElementById('equipDesc').value, 
+                    badge: document.getElementById('equipBadge').value, 
+                    ordre: Date.now() 
+                }]);
+                alert('Ajouté');
+                document.getElementById('equipTitre').value = ''; 
+                document.getElementById('equipDesc').value = ''; 
+                document.getElementById('equipBadge').value = '';
+                loadAllAdminData();
+            });
+        }
 
         // ========== CHARGEMENT DES DONNÉES ==========
         async function loadAdminActualites() {
-            const { data } = await supabase.from('actualites').select('*').order('created_at', { ascending: false });
+            if (!supabaseClient) return;
+            const { data } = await supabaseClient.from('actualites').select('*').order('created_at', { ascending: false });
             const container = document.getElementById('adminActusList');
             if (!data?.length) { container.innerHTML = '<p>Aucune actualité</p>'; return; }
             container.innerHTML = data.map(a => `
@@ -507,7 +564,8 @@
         }
 
         async function loadAdminTeam() {
-            const { data } = await supabase.from('equipes').select('*').order('ordre', { ascending: true });
+            if (!supabaseClient) return;
+            const { data } = await supabaseClient.from('equipes').select('*').order('ordre', { ascending: true });
             const container = document.getElementById('adminTeamList');
             if (!data?.length) { container.innerHTML = '<p>Aucun membre</p>'; return; }
             container.innerHTML = data.map(m => `
@@ -527,7 +585,8 @@
         }
 
         async function loadAdminSpecMedicales() {
-            const { data } = await supabase.from('specialites_medicales').select('*').order('ordre');
+            if (!supabaseClient) return;
+            const { data } = await supabaseClient.from('specialites_medicales').select('*').order('ordre');
             const container = document.getElementById('adminSpecMedList');
             if (!data?.length) { container.innerHTML = '<p>Aucune spécialité</p>'; return; }
             container.innerHTML = data.map(s => `
@@ -541,7 +600,8 @@
         }
 
         async function loadAdminSpecChirurgicales() {
-            const { data } = await supabase.from('specialites_chirurgicales').select('*').order('ordre');
+            if (!supabaseClient) return;
+            const { data } = await supabaseClient.from('specialites_chirurgicales').select('*').order('ordre');
             const container = document.getElementById('adminSpecChirList');
             if (!data?.length) { container.innerHTML = '<p>Aucune spécialité</p>'; return; }
             container.innerHTML = data.map(s => `
@@ -555,7 +615,8 @@
         }
 
         async function loadAdminGynecologie() {
-            const { data } = await supabase.from('gynecologie').select('*').order('ordre');
+            if (!supabaseClient) return;
+            const { data } = await supabaseClient.from('gynecologie').select('*').order('ordre');
             const container = document.getElementById('adminGyneList');
             if (!data?.length) { container.innerHTML = '<p>Aucun service</p>'; return; }
             container.innerHTML = data.map(g => `
@@ -568,7 +629,8 @@
         }
 
         async function loadAdminExplorations() {
-            const { data } = await supabase.from('explorations').select('*').order('ordre');
+            if (!supabaseClient) return;
+            const { data } = await supabaseClient.from('explorations').select('*').order('ordre');
             const container = document.getElementById('adminExploList');
             if (!data?.length) { container.innerHTML = '<p>Aucune exploration</p>'; return; }
             container.innerHTML = data.map(e => `
@@ -581,7 +643,8 @@
         }
 
         async function loadAdminImagerie() {
-            const { data } = await supabase.from('imagerie').select('*').order('ordre');
+            if (!supabaseClient) return;
+            const { data } = await supabaseClient.from('imagerie').select('*').order('ordre');
             const container = document.getElementById('adminImagerieList');
             if (!data?.length) { container.innerHTML = '<p>Aucun service</p>'; return; }
             container.innerHTML = data.map(i => `
@@ -594,7 +657,8 @@
         }
 
         async function loadAdminEquipements() {
-            const { data } = await supabase.from('equipements').select('*').order('ordre');
+            if (!supabaseClient) return;
+            const { data } = await supabaseClient.from('equipements').select('*').order('ordre');
             const container = document.getElementById('adminEquipList');
             if (!data?.length) { container.innerHTML = '<p>Aucun équipement</p>'; return; }
             container.innerHTML = data.map(e => `
@@ -619,17 +683,19 @@
         }
 
         async function handleDelete(e) {
+            if (!supabaseClient) return;
             const btn = e.currentTarget;
             const id = btn.getAttribute('data-id');
             const table = btn.getAttribute('data-table');
             if (!confirm('Supprimer définitivement ?')) return;
-            const { error } = await supabase.from(table).delete().eq('id', id);
+            const { error } = await supabaseClient.from(table).delete().eq('id', id);
             if (error) { alert('Erreur: ' + error.message); return; }
             alert('Supprimé');
             loadAllAdminData();
         }
 
         async function loadAllAdminData() {
+            if (!supabaseClient) return;
             await Promise.all([
                 loadAdminActualites(),
                 loadAdminTeam(),
@@ -642,18 +708,23 @@
             ]);
         }
 
-        // Onglets
-        const tabs = document.querySelectorAll('.tab-btn');
-        const panes = document.querySelectorAll('.tab-pane');
-        tabs.forEach(tab => {
-            tab.addEventListener('click', () => {
-                const targetId = tab.getAttribute('data-tab');
-                tabs.forEach(t => t.classList.remove('active'));
-                tab.classList.add('active');
-                panes.forEach(pane => pane.classList.remove('active'));
-                document.getElementById(targetId).classList.add('active');
+        function attachEventListeners() {
+            attachPreviewListeners();
+            attachCreateListeners();
+            
+            // Onglets
+            const tabs = document.querySelectorAll('.tab-btn');
+            const panes = document.querySelectorAll('.tab-pane');
+            tabs.forEach(tab => {
+                tab.addEventListener('click', () => {
+                    const targetId = tab.getAttribute('data-tab');
+                    tabs.forEach(t => t.classList.remove('active'));
+                    tab.classList.add('active');
+                    panes.forEach(pane => pane.classList.remove('active'));
+                    document.getElementById(targetId).classList.add('active');
+                });
             });
-        });
+        }
 
         function escapeHtml(str) {
             if (!str) return '';
@@ -665,8 +736,8 @@
             });
         }
 
-        // Chargement initial
-        loadAllAdminData();
+        // Démarrer l'administration
+        initAdmin();
     </script>
 </body>
 </html>
