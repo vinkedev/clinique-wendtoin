@@ -1517,7 +1517,7 @@
             <h2 class="section-title animate-on-scroll">Prendre rendez-vous</h2>
             <div class="rdv-grid">
                 <div class="info-box animate-on-scroll"><h3>Formulaire de rendez-vous</h3><form id="whatsappForm"><div class="form-group"><input type="text" id="nom" placeholder="Nom complet" required></div><div class="form-group"><select id="service"><option>Consultation générale</option><option>Cardiologie</option><option>Gynécologie - Obstétrique</option><option>Pédiatrie</option><option>Chirurgie générale</option><option>Neurologie</option><option>Médecine interne</option><option>Dermatologie</option><option>Pneumologie</option><option>Néphrologie</option><option>ORL</option><option>Rhumatologie</option><option>Urologie</option></select></div><div class="form-group"><textarea id="motif" rows="3" placeholder="Date souhaitée et horaire de préférence"></textarea></div><button type="submit" class="btn-rdv" id="submitRdvBtn">Envoyer la demande</button></form><p style="font-size:0.65rem; text-align:center; margin-top:12px;">Vous serez redirigé vers WhatsApp</p></div>
-                <div><div class="info-box animate-on-scroll"><h3>Horaires d'ouverture</h3><p><strong>Consultations :</strong><br>Lundi – Vendredi : 7h30 – 19h30<br>Samedi : 7h30 – 12h00</p><p style="margin-top:8px;"><strong>Urgences 24/24 – 7j/7</strong><br>Sans rendez-vous, prise en charge immédiate.</p><p><strong>Hémodialyse :</strong> 24h/24 et 7j/7</p></div><div class="info-box animate-on-scroll"><h3>Assurances acceptées</h3><p><strong>Partenaires :</strong> ASCOMA, GA, MAADO, MUTAB, MUPOL, OLEA, MCI, SONAR, SUNU, UAB, VISTA.<br><strong>Autres :</strong> CNSS, Inami Burkina, mutuelles.</p></div></div>
+                <div><div class="info-box animate-on-scroll"><h3>Horaires d'ouverture</h3><p><strong>Consultations :</strong><br>Lundi – Vendredi : 7h30 – 19h30<br>Samedi : 7h30 – 12h00</p><p style="margin-top:8px;"><strong>Urgences 24/24 – 7j/7</strong><br>Sans rendez-vous, prise en charge immédiate.</p><p><strong>Hémodialyse :</strong> 24h/24 et 7j/7</p></div><div class="info-box animate-on-scroll"><h3>Assurances acceptées</h3><p><strong>Partenaires :</strong> ASCOMA, DAYO, GA, MAADO, MUTAB, MUPOL, OLEA, MCI, SONAR, SUNU, UAB, VIMSO, VISTA, CNAMU.<br><strong>Autres :</strong> CNSS, Inami Burkina, mutuelles.</p></div></div>
             </div>
         </div>
     </section>
@@ -1695,15 +1695,13 @@
     document.getElementById('sliderPrev').addEventListener('click', prevSlide);
     document.getElementById('sliderNext').addEventListener('click', nextSlide);
 
-    const heroSection = document.querySelector('.hero');
-    heroSection.addEventListener('mouseenter', () => { if (autoInterval) clearInterval(autoInterval); });
-    heroSection.addEventListener('mouseleave', () => { autoInterval = setInterval(nextSlide, 3000); });
+    // PAS DE PAUSE AU SURVOL - L'animation continue même quand la souris passe sur le slider
 
     // ==================== ÉQUIPE ====================
     const teamMembers = [
         { name: "Pr Gilbert BONKOUGOU", position: "Directeur Général", desc: "Professeur agrégé en chirurgie générale.", image: "cliniquewendtoin/pr_gilbert.jpeg" },
         { name: "Dr Lionelle TIAHOUN", position: "Médecin généraliste", desc: "Prise en charge des consultations générales et des urgences.", image: "cliniquewendtoin/Lionelle.jpg" },
-        { name: "Absetou KABORE", position: "Secrétaire", desc: "Accueil, gestion des rendez-vous et administration.", image: "slide/secretaire.jpeg" },
+        { name: "Absetou KABORE", position: "Secrétaire", desc: "Accueil, gestion des rendez-vous et administration.", image: "cliniquewendtoin/secretaire.jpeg" },
         { name: "Agnès COMPAORE", position: "Surveillante générale", desc: "Surveillante d'unité de soins. Coordination des équipes soignantes.", image: "https://placehold.co/400x400/0077A4/white?text=Agn%C3%A8s" }
     ];
 
