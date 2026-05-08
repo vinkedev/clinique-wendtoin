@@ -24,7 +24,7 @@
             font-family: 'Inter', sans-serif;
             color: #1e293b;
             line-height: 1.6;
-            background: #F8F9FA;
+            background: #F0F4F8;
             overflow-x: hidden;
         }
 
@@ -46,15 +46,15 @@
         }
 
         @keyframes pulse {
-            0% { transform: scale(1); box-shadow: 0 0 0 0 rgba(29, 139, 93, 0.6); }
-            70% { transform: scale(1.03); box-shadow: 0 0 0 12px rgba(29, 139, 93, 0); }
-            100% { transform: scale(1); box-shadow: 0 0 0 0 rgba(29, 139, 93, 0); }
+            0% { transform: scale(1); box-shadow: 0 0 0 0 rgba(0, 119, 164, 0.6); }
+            70% { transform: scale(1.03); box-shadow: 0 0 0 12px rgba(0, 119, 164, 0); }
+            100% { transform: scale(1); box-shadow: 0 0 0 0 rgba(0, 119, 164, 0); }
         }
 
-        @keyframes pulse-red {
-            0% { box-shadow: 0 0 0 0 rgba(220, 53, 69, 0.6); }
-            70% { box-shadow: 0 0 0 12px rgba(220, 53, 69, 0); }
-            100% { box-shadow: 0 0 0 0 rgba(220, 53, 69, 0); }
+        @keyframes pulse-blue {
+            0% { box-shadow: 0 0 0 0 rgba(0, 119, 164, 0.6); }
+            70% { box-shadow: 0 0 0 12px rgba(0, 119, 164, 0); }
+            100% { box-shadow: 0 0 0 0 rgba(0, 119, 164, 0); }
         }
 
         @keyframes rotateBg {
@@ -130,14 +130,14 @@
 
         .urgences-badge {
             display: inline-block;
-            background: #dc3545;
+            background: #0077A4;
             color: white;
             padding: 4px 10px;
             border-radius: 50px;
             font-size: 0.65rem;
             font-weight: 700;
             margin-left: 8px;
-            animation: pulse-red 2s infinite;
+            animation: pulse-blue 2s infinite;
         }
 
         /* ========== HEADER ========== */
@@ -188,7 +188,7 @@
             font-family: 'Poppins', sans-serif;
             font-size: 1.2rem;
             font-weight: 700;
-            background: linear-gradient(135deg, #0077A4 0%, #1D8B5D 100%);
+            background: linear-gradient(135deg, #0077A4, #005a7c);
             -webkit-background-clip: text;
             background-clip: text;
             color: transparent;
@@ -233,7 +233,7 @@
         }
 
         nav a:hover {
-            color: #1D8B5D;
+            color: #0077A4;
             transform: translateX(5px);
         }
 
@@ -295,7 +295,7 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background: rgba(0, 0, 0, 0.4);
+            background: rgba(0, 0, 0, 0.45);
             z-index: 1;
         }
 
@@ -313,7 +313,7 @@
         }
 
         .hero-content h2 span {
-            background: rgba(255,255,255,0.2);
+            background: rgba(0, 119, 164, 0.3);
             padding: 0 8px;
             border-radius: 50px;
             display: inline-block;
@@ -357,7 +357,7 @@
         }
 
         .dot.active {
-            background-color: #1D8B5D;
+            background-color: #0077A4;
             transform: scale(1.2);
             width: 28px;
             border-radius: 20px;
@@ -378,7 +378,7 @@
             border: none;
         }
         .slider-prev:hover, .slider-next:hover {
-            background: #1D8B5D;
+            background: #0077A4;
         }
         .slider-prev { left: 15px; }
         .slider-next { right: 15px; }
@@ -388,7 +388,7 @@
             bottom: 0;
             left: 0;
             height: 4px;
-            background: #1D8B5D;
+            background: #0077A4;
             z-index: 20;
             width: 0%;
         }
@@ -408,13 +408,13 @@
         }
 
         .btn-primary {
-            background: #1D8B5D;
+            background: #0077A4;
             color: white;
-            box-shadow: 0 6px 18px rgba(29,139,93,0.35);
+            box-shadow: 0 6px 18px rgba(0, 119, 164, 0.35);
         }
 
         .btn-primary:hover {
-            background: #146b48;
+            background: #005a7c;
             transform: translateY(-3px);
         }
 
@@ -460,6 +460,7 @@
             margin-bottom: 35px;
             font-weight: 700;
             position: relative;
+            color: #0077A4;
         }
 
         .section-title::after {
@@ -470,6 +471,7 @@
             transform: translateX(-50%);
             width: 50px;
             height: 3px;
+            background: linear-gradient(90deg, #0077A4, #00b4d8);
             border-radius: 4px;
         }
 
@@ -510,7 +512,7 @@
 
         .card:hover {
             transform: translateY(-8px);
-            box-shadow: 0 20px 35px rgba(0,0,0,0.15);
+            box-shadow: 0 20px 35px rgba(0,119,164,0.15);
         }
 
         .card-header {
@@ -523,8 +525,8 @@
         }
 
         .badge-category {
-            background: linear-gradient(135deg, #e6f7f0, #d1f0e4);
-            color: #1D8B5D;
+            background: linear-gradient(135deg, #e0f0ff, #cce4f5);
+            color: #0077A4;
             padding: 4px 10px;
             border-radius: 50px;
             font-size: 0.65rem;
@@ -535,7 +537,7 @@
             font-size: 1rem;
             font-weight: 700;
             margin: 8px 20px 5px 20px;
-            color: #0f172a;
+            color: #005a7c;
         }
 
         .card-content {
@@ -571,14 +573,14 @@
 
         .actu-card:hover {
             transform: translateY(-5px);
-            box-shadow: 0 20px 35px rgba(0,0,0,0.12);
+            box-shadow: 0 20px 35px rgba(0,119,164,0.12);
         }
 
         .actu-image {
             width: 100%;
             height: 180px;
             object-fit: cover;
-            background: linear-gradient(135deg, #0077A4, #1D8B5D);
+            background: linear-gradient(135deg, #0077A4, #005a7c);
             display: flex;
             align-items: center;
             justify-content: center;
@@ -592,7 +594,7 @@
 
         .actu-date {
             font-size: 0.7rem;
-            color: #1D8B5D;
+            color: #0077A4;
             font-weight: 600;
             margin-bottom: 8px;
         }
@@ -661,8 +663,8 @@
 
         input:focus, select:focus, textarea:focus {
             outline: none;
-            border-color: #1D8B5D;
-            box-shadow: 0 0 0 3px rgba(29,139,93,0.1);
+            border-color: #0077A4;
+            box-shadow: 0 0 0 3px rgba(0,119,164,0.1);
         }
 
         .form-error {
@@ -687,7 +689,7 @@
 
         .info-box:hover {
             transform: translateY(-3px);
-            box-shadow: 0 12px 25px rgba(0,0,0,0.1);
+            box-shadow: 0 12px 25px rgba(0,119,164,0.1);
         }
 
         .info-box h3 {
@@ -717,14 +719,14 @@
         }
 
         .image-wrapper {
-            background: linear-gradient(135deg, #0077A4, #1D8B5D);
+            background: linear-gradient(135deg, #0077A4, #005a7c);
             border-radius: 28px;
             padding: 5px;
             box-shadow: 0 10px 20px rgba(0,0,0,0.1);
         }
 
         .btn-rdv {
-            background: #1D8B5D;
+            background: #0077A4;
             color: white;
             padding: 12px 18px;
             border-radius: 50px;
@@ -739,7 +741,7 @@
         }
 
         .btn-rdv:hover {
-            background: #146b48;
+            background: #005a7c;
             transform: translateY(-2px);
         }
 
@@ -772,19 +774,20 @@
             background: #f8fafc;
             border-radius: 16px;
             padding: 12px 16px;
-            border-left: 4px solid;
+            border-left: 4px solid #0077A4;
             transition: all 0.3s ease;
             cursor: pointer;
         }
         .specialty-item:hover {
             background: white;
-            box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+            box-shadow: 0 8px 20px rgba(0,119,164,0.1);
             transform: translateX(5px);
         }
         .specialty-item strong {
             display: block;
             margin-bottom: 4px;
             font-size: 0.9rem;
+            color: #0077A4;
         }
         .specialty-item p {
             font-size: 0.8rem;
@@ -793,7 +796,7 @@
         }
 
         .badge-247 {
-            background: #dc3545;
+            background: #0077A4;
             color: white;
             padding: 2px 8px;
             border-radius: 20px;
@@ -821,7 +824,7 @@
 
         .team-card:hover {
             transform: translateY(-8px);
-            box-shadow: 0 20px 35px rgba(0,0,0,0.15);
+            box-shadow: 0 20px 35px rgba(0,119,164,0.15);
         }
 
         .team-image {
@@ -844,7 +847,7 @@
         }
 
         .team-position {
-            color: #1D8B5D;
+            color: #005a7c;
             font-weight: 600;
             font-size: 0.8rem;
             margin-bottom: 10px;
@@ -877,7 +880,7 @@
             transform: translateX(-50%);
             width: 50px;
             height: 3px;
-            background: linear-gradient(90deg, #0077A4, #1D8B5D);
+            background: linear-gradient(90deg, #0077A4, #00b4d8);
             border-radius: 4px;
         }
 
@@ -967,7 +970,7 @@
         }
 
         .close-image-modal:hover {
-            color: #1D8B5D;
+            color: #0077A4;
             background: white;
         }
 
@@ -989,7 +992,7 @@
         }
         .video-card:hover {
             transform: translateY(-6px);
-            box-shadow: 0 20px 35px rgba(0,0,0,0.12);
+            box-shadow: 0 20px 35px rgba(0,119,164,0.12);
         }
         .video-thumbnail {
             width: 100%;
@@ -1035,7 +1038,7 @@
         }
 
         .footer-grid a:hover {
-            color: #1D8B5D;
+            color: #0077A4;
         }
 
         .modal {
@@ -1066,7 +1069,7 @@
             overflow-y: auto;
         }
         .modal-header {
-            background: linear-gradient(135deg, #0077A4, #1D8B5D);
+            background: linear-gradient(135deg, #0077A4, #005a7c);
             padding: 15px 20px;
             border-radius: 28px 28px 0 0;
             color: white;
@@ -1102,7 +1105,7 @@
             padding: 12px;
             border-radius: 16px;
             margin-top: 15px;
-            border-left: 4px solid #1D8B5D;
+            border-left: 4px solid #0077A4;
         }
         .close-modal {
             position: absolute;
@@ -1151,7 +1154,7 @@
             border: none;
         }
         .toggle-password:hover {
-            color: #1D8B5D;
+            color: #0077A4;
         }
 
         @media (min-width: 640px) {
@@ -1226,36 +1229,42 @@
             }
         }
 
+        /* Couleurs unifiées en bleu pour toutes les sections */
         #specialites .section-title { color: #0077A4; }
         #specialites .section-title::after { background: linear-gradient(90deg, #0077A4, #00b4d8); }
         #specialites .specialty-item { border-left-color: #0077A4; }
         #specialites .specialty-item strong { color: #0077A4; }
 
-        #specialites-chirurgicales .section-title { color: #1D8B5D; }
-        #specialites-chirurgicales .section-title::after { background: linear-gradient(90deg, #1D8B5D, #52c41a); }
-        #specialites-chirurgicales .specialty-item { border-left-color: #1D8B5D; }
-        #specialites-chirurgicales .specialty-item strong { color: #1D8B5D; }
+        #specialites-chirurgicales .section-title { color: #0077A4; }
+        #specialites-chirurgicales .section-title::after { background: linear-gradient(90deg, #0077A4, #00b4d8); }
+        #specialites-chirurgicales .specialty-item { border-left-color: #0077A4; }
+        #specialites-chirurgicales .specialty-item strong { color: #0077A4; }
 
-        #gynecologie .section-title { color: #e83e8c; }
-        #gynecologie .section-title::after { background: linear-gradient(90deg, #e83e8c, #ff69b4); }
-        #gynecologie .specialty-item { border-left-color: #e83e8c; }
-        #gynecologie .specialty-item strong { color: #e83e8c; }
+        #gynecologie .section-title { color: #0077A4; }
+        #gynecologie .section-title::after { background: linear-gradient(90deg, #0077A4, #00b4d8); }
+        #gynecologie .specialty-item { border-left-color: #0077A4; }
+        #gynecologie .specialty-item strong { color: #0077A4; }
 
-        #explorations .section-title { color: #6f42c1; }
-        #explorations .section-title::after { background: linear-gradient(90deg, #6f42c1, #a855f7); }
-        #explorations .specialty-item { border-left-color: #6f42c1; }
-        #explorations .specialty-item strong { color: #6f42c1; }
+        #explorations .section-title { color: #0077A4; }
+        #explorations .section-title::after { background: linear-gradient(90deg, #0077A4, #00b4d8); }
+        #explorations .specialty-item { border-left-color: #0077A4; }
+        #explorations .specialty-item strong { color: #0077A4; }
 
-        #imagerie .section-title { color: #fd7e14; }
-        #imagerie .section-title::after { background: linear-gradient(90deg, #fd7e14, #ffc107); }
-        #imagerie .specialty-item { border-left-color: #fd7e14; }
-        #imagerie .specialty-item strong { color: #fd7e14; }
+        #imagerie .section-title { color: #0077A4; }
+        #imagerie .section-title::after { background: linear-gradient(90deg, #0077A4, #00b4d8); }
+        #imagerie .specialty-item { border-left-color: #0077A4; }
+        #imagerie .specialty-item strong { color: #0077A4; }
 
-        #poles .section-title { color: #1e293b; }
-        #poles .section-title::after { background: linear-gradient(90deg, #1D8B5D, #0077A4); }
-        #poles .specialty-item { border-left-color: #1D8B5D; }
-        #poles .specialty-item strong { color: #1D8B5D; }
-        #poles .badge-247 { background: #1D8B5D; }
+        #poles .section-title { color: #0077A4; }
+        #poles .section-title::after { background: linear-gradient(90deg, #0077A4, #00b4d8); }
+        #poles .specialty-item { border-left-color: #0077A4; }
+        #poles .specialty-item strong { color: #0077A4; }
+        #poles .badge-247 { background: #0077A4; }
+
+        hr {
+            margin: 20px 0;
+            border-color: #eef2f6;
+        }
     </style>
 </head>
 <body>
@@ -1400,10 +1409,10 @@
         </div>
     </section>
 
-    <!-- ÉQUIPEMENTS - DYNAMIQUE -->
+    <!-- Centre de Dialyse (anciennement Équipements spécialisés) -->
     <section id="poles">
         <div class="container">
-            <h2 class="section-title animate-on-scroll">Équipements spécialisés</h2>
+            <h2 class="section-title animate-on-scroll">Centre de Dialyse</h2>
             <div id="equipementsList" class="specialty-grid">Chargement...</div>
         </div>
     </section>
@@ -1444,11 +1453,11 @@
     </section>
 
     <section id="contact">
-        <div class="container"><h2 class="section-title animate-on-scroll">Contact & localisation</h2><div class="rdv-grid"><div><div class="info-box animate-on-scroll"><h3>Adresse</h3><p>Boulevard des Tensoba, Secteur n°25<br>Cissin, Ouagadougou<br>Burkina Faso</p><p>11 BP 1104 CMS Ouagadougou 11</p></div><div class="info-box animate-on-scroll"><h3>Téléphone</h3><p><strong>Urgences 24/24 :</strong><br><a href="tel:51000647" style="color:#1D8B5D; font-size:1.1rem; text-decoration:none;">51 00 06 47</a><br><strong>Standard :</strong> <a href="tel:78365657" style="color:#1D8B5D;">78 36 56 57</a></p></div><div class="info-box animate-on-scroll"><h3>WhatsApp</h3><p><a href="https://wa.me/22651000647" style="color:#25D366;">51 00 06 47</a><br>Pour rendez-vous et questions rapides</p></div><div class="info-box animate-on-scroll"><h3>Email</h3><p><a href="mailto:clinwend@gmail.com">clinwend@gmail.com</a></p></div></div><div><div class="info-box animate-on-scroll"><h3>Plan d'accès</h3><div style="border-radius: 24px; overflow: hidden; height: 260px;"><iframe src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d15590.747808531722!2d-1.5628767!3d12.3368449!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0xe2e967403b1226b%3A0xd4fdc5490ba66f45!2sClinique%20WendToin!5e0!3m2!1sfr!2sbf!4v1777369119568!5m2!1sfr!2sbf" width="100%" height="260" style="border:0;" allowfullscreen="" loading="lazy"></iframe></div><p style="margin-top:10px;">Boulevard des Tensoba, Secteur 25, Cissin</p></div></div></div></div>
+        <div class="container"><h2 class="section-title animate-on-scroll">Contact & localisation</h2><div class="rdv-grid"><div><div class="info-box animate-on-scroll"><h3>Adresse</h3><p>Boulevard des Tensoba, Secteur n°25<br>Cissin, Ouagadougou<br>Burkina Faso</p><p>11 BP 1104 CMS Ouagadougou 11</p></div><div class="info-box animate-on-scroll"><h3>Téléphone</h3><p><strong>Urgences 24/24 :</strong><br><a href="tel:51000647" style="color:#0077A4; font-size:1.1rem; text-decoration:none;">51 00 06 47</a><br><strong>Standard :</strong> <a href="tel:78365657" style="color:#0077A4;">78 36 56 57</a></p></div><div class="info-box animate-on-scroll"><h3>WhatsApp</h3><p><a href="https://wa.me/22651000647" style="color:#25D366;">51 00 06 47</a><br>Pour rendez-vous et questions rapides</p></div><div class="info-box animate-on-scroll"><h3>Email</h3><p><a href="mailto:clinwend@gmail.com">clinwend@gmail.com</a></p></div></div><div><div class="info-box animate-on-scroll"><h3>Plan d'accès</h3><div style="border-radius: 24px; overflow: hidden; height: 260px;"><iframe src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d15590.747808531722!2d-1.5628767!3d12.3368449!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0xe2e967403b1226b%3A0xd4fdc5490ba66f45!2sClinique%20WendToin!5e0!3m2!1sfr!2sbf!4v1777369119568!5m2!1sfr!2sbf" width="100%" height="260" style="border:0;" allowfullscreen="" loading="lazy"></iframe></div><p style="margin-top:10px;">Boulevard des Tensoba, Secteur 25, Cissin</p></div></div></div></div>
     </section>
 </main>
 
-<footer><div class="container"><div class="footer-grid"><div><h4 style="color: #1D8B5D;">Clinique WENDTOIN</h4><p>Boulevard des Tensoba, Secteur 25<br>Cissin, Ouagadougou<br>Tél: <a href="tel:51000647" style="color:#1D8B5D;">51 00 06 47</a><br>Email: clinwend@gmail.com</p></div><div><h4 style="color: #1D8B5D;">Urgences 24/24</h4><p><strong><a href="tel:51000647" style="color:#1D8B5D;">51 00 06 47</a></strong></p><p>WhatsApp : <a href="https://wa.me/22651000647" style="color:#1D8B5D;">51 00 06 47</a></p></div><div><h4 style="color: #1D8B5D;">Horaires consultations</h4><p>Lun-Ven : 7h30-19h30<br>Sam : 7h30-12h</p><p><strong>Hémodialyse :</strong> 24h/24</p></div><div><h4 style="color: #1D8B5D;">Liens rapides</h4><p><a href="#rdv">Prendre RDV</a><br><a href="#equipe">Notre équipe</a><br><a href="#gallery">Galerie</a><br><a href="#video">Vidéos</a><br><a href="#contact">Nous trouver</a></p></div></div><div style="text-align:center; margin-top:30px; padding-top:15px; border-top:1px solid #334155;"><p>&copy; 2026 Clinique WENDTOIN – Tous droits réservés</p></div></div></footer>
+<footer><div class="container"><div class="footer-grid"><div><h4 style="color: #0077A4;">Clinique WENDTOIN</h4><p>Boulevard des Tensoba, Secteur 25<br>Cissin, Ouagadougou<br>Tél: <a href="tel:51000647" style="color:#0077A4;">51 00 06 47</a><br>Email: clinwend@gmail.com</p></div><div><h4 style="color: #0077A4;">Urgences 24/24</h4><p><strong><a href="tel:51000647" style="color:#0077A4;">51 00 06 47</a></strong></p><p>WhatsApp : <a href="https://wa.me/22651000647" style="color:#0077A4;">51 00 06 47</a></p></div><div><h4 style="color: #0077A4;">Horaires consultations</h4><p>Lun-Ven : 7h30-19h30<br>Sam : 7h30-12h</p><p><strong>Hémodialyse :</strong> 24h/24</p></div><div><h4 style="color: #0077A4;">Liens rapides</h4><p><a href="#rdv">Prendre RDV</a><br><a href="#equipe">Notre équipe</a><br><a href="#gallery">Galerie</a><br><a href="#video">Vidéos</a><br><a href="#contact">Nous trouver</a></p></div></div><div style="text-align:center; margin-top:30px; padding-top:15px; border-top:1px solid #334155;"><p>&copy; 2026 Clinique WENDTOIN – Tous droits réservés</p></div></div></footer>
 
 <div id="imageModal" class="image-modal"><span class="close-image-modal">✕</span><img id="modalImage" src=""></div>
 
@@ -1462,7 +1471,7 @@
                 <input type="password" id="adminPassword" placeholder="Mot de passe">
                 <button type="button" class="toggle-password" id="togglePassword">👁️</button>
             </div>
-            <button id="submitLoginBtn" style="background:#1D8B5D; color:white; border:none; padding:10px; width:100%; border-radius:40px; font-weight:bold; cursor:pointer;">Se connecter</button>
+            <button id="submitLoginBtn" style="background:#0077A4; color:white; border:none; padding:10px; width:100%; border-radius:40px; font-weight:bold; cursor:pointer;">Se connecter</button>
             <div id="loginError" style="color:#dc3545; margin-top:8px; font-size:0.8rem; text-align:center;"></div>
         </div>
     </div>
