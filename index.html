@@ -450,14 +450,14 @@
         }
 
         section {
-            padding: 50px 0;
+            padding: 40px 0;
             background: white;
         }
 
         .section-title {
             text-align: center;
             font-size: 1.6rem;
-            margin-bottom: 35px;
+            margin-bottom: 25px;
             font-weight: 700;
             position: relative;
             color: #0077A4;
@@ -549,7 +549,7 @@
             font-size: 0.8rem;
         }
 
-        /* ========== ACTUALITES - HORIZONTAL SCROLL + MODAL (CORRECTION IMAGES) ========== */
+        /* ========== ACTUALITES ========== */
         .actualites-wrapper {
             position: relative;
             width: 100%;
@@ -650,7 +650,16 @@
             overflow: hidden;
         }
 
-        /* MODAL ACTUALITE - CORRECTION IMAGE */
+        .no-actu-message {
+            text-align: center;
+            padding: 40px 20px;
+            background: #f8fafc;
+            border-radius: 24px;
+            color: #64748b;
+            font-size: 1rem;
+        }
+
+        /* MODAL ACTUALITE */
         .actu-modal {
             display: none;
             position: fixed;
@@ -1373,6 +1382,9 @@
             .stat-number {
                 font-size: 2.3rem;
             }
+            section {
+                padding: 30px 0;
+            }
         }
 
         @media (max-width: 768px) {
@@ -1388,6 +1400,9 @@
                 width: 90%;
                 margin: 4px auto;
                 text-align: center;
+            }
+            section {
+                padding: 30px 0;
             }
         }
 
@@ -1532,13 +1547,11 @@
         </div>
     </section>
 
-    <!-- SECTION ACTUALITÉS - HORIZONTAL SCROLL AVEC MODAL (IMAGES CORRIGÉES) -->
+    <!-- SECTION ACTUALITÉS -->
     <section id="actualites">
         <div class="container">
             <h2 class="section-title animate-on-scroll">Actualités</h2>
-            <div class="actualites-wrapper" id="actualitesWrapper">
-                <div class="actualites-scroll" id="actualitesList">Chargement...</div>
-            </div>
+            <div id="actualitesContainer"></div>
         </div>
     </section>
 
@@ -1784,7 +1797,7 @@
     document.getElementById('sliderPrev').addEventListener('click', prevSlide);
     document.getElementById('sliderNext').addEventListener('click', nextSlide);
 
-    // ==================== CHARGEMENT PUBLIC DEPUIS SUPABASE (ACTUALITÉS AVEC IMAGES CORRIGÉES) ====================
+    // ==================== CHARGEMENT PUBLIC DEPUIS SUPABASE (ACTUALITÉS) ====================
     let actualitesData = [];
 
     async function loadPublicActualites() {
@@ -1792,11 +1805,23 @@
         const { data, error } = await supabaseClient.from('actualites').select('*').order('created_at', { ascending: false });
         if (error) { console.error("Erreur actualités:", error); return; }
         actualitesData = data || [];
-        const container = document.getElementById('actualitesList');
-        if (!actualitesData.length) { container.innerHTML = '<div class="actu-card"><div class="actu-image">📢</div><div class="actu-content"><div class="actu-title">Aucune actualité</div></div></div>'; return; }
+        const container = document.getElementById('actualitesContainer');
         
-        container.innerHTML = actualitesData.map((a, idx) => {
-            // Correction : l'image occupe tout l'espace et s'affiche correctement
+        if (!actualitesData.length) {
+            // Aucune actualité : afficher un simple message sans carte
+            container.innerHTML = '<div class="no-actu-message">📭 Aucune actualité pour le moment</div>';
+            return;
+        }
+        
+        // Affichage avec le wrapper horizontal
+        container.innerHTML = `
+            <div class="actualites-wrapper" id="actualitesWrapper">
+                <div class="actualites-scroll" id="actualitesList"></div>
+            </div>
+        `;
+        
+        const listContainer = document.getElementById('actualitesList');
+        listContainer.innerHTML = actualitesData.map((a, idx) => {
             const imageHtml = a.image_url 
                 ? `<img src="${escapeHtml(a.image_url)}" alt="${escapeHtml(a.titre)}" onerror="this.style.display='none'; this.parentElement.innerHTML='📢'">` 
                 : '<div style="font-size:3rem; display:flex; align-items:center; justify-content:center; height:100%;">📢</div>';
@@ -1936,8 +1961,6 @@
                 </div>
             </div>
         `).join('');
-        // NE PAS modifi er le compteur des médecins - on garde l'affichage "+ 40"
-        // document.getElementById('stat-doctors').innerText = data.length;  // ligne commentée
     }
 
     async function loadAllPublicData() {
@@ -2131,7 +2154,6 @@
 
     initSupabase();
     
-    // S'assurer que le compteur des médecins affiche bien "+ 40"
     const doctorStatElement = document.getElementById('stat-doctors');
     if (doctorStatElement) {
         doctorStatElement.innerText = "+ 40";
