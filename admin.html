@@ -136,72 +136,7 @@
         .item-actions { display: flex; gap: 8px; }
         .item-actions button { background: #e2e8f0; border: none; padding: 6px 14px; border-radius: 30px; cursor: pointer; }
         .item-actions .delete-btn { background: #fee2e2; color: #b91c1c; }
-        
-        .login-modal {
-            display: flex;
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0,0,0,0.8);
-            backdrop-filter: blur(6px);
-            z-index: 2000;
-            align-items: center;
-            justify-content: center;
-        }
-        .login-card {
-            background: white;
-            max-width: 380px;
-            width: 90%;
-            border-radius: 32px;
-            padding: 32px;
-            text-align: center;
-        }
-        .login-card h2 { color: #0077A4; margin-bottom: 20px; }
-        
-        /* Password field with eye icon */
-        .password-container {
-            position: relative;
-            margin-bottom: 20px;
-        }
-        .password-container input {
-            width: 100%;
-            padding: 14px;
-            padding-right: 50px;
-            border: 1px solid #e2e8f0;
-            border-radius: 60px;
-            font-size: 1rem;
-        }
-        .password-container input:focus {
-            outline: none;
-            border-color: #1D8B5D;
-            box-shadow: 0 0 0 3px rgba(29,139,93,0.1);
-        }
-        .toggle-password {
-            position: absolute;
-            right: 15px;
-            top: 50%;
-            transform: translateY(-50%);
-            cursor: pointer;
-            font-size: 1.2rem;
-            user-select: none;
-            background: transparent;
-            border: none;
-            padding: 5px;
-        }
-        
-        .login-card button {
-            background: #1D8B5D;
-            color: white;
-            border: none;
-            padding: 12px;
-            width: 100%;
-            border-radius: 60px;
-            font-weight: 700;
-            cursor: pointer;
-        }
-        .login-card .error { color: #dc3545; margin-top: 12px; }
+        .item-actions .edit-btn { background: #e0f2fe; color: #0369a1; }
         
         .stats-row { display: flex; gap: 15px; flex-wrap: wrap; margin-bottom: 20px; }
         .stat-card {
@@ -225,148 +160,134 @@
     </style>
 </head>
 <body>
-    <div id="app">
-        <div id="loginModal" class="login-modal">
-            <div class="login-card">
-                <h2>🔐 Administration</h2>
-                <div class="password-container">
-                    <input type="password" id="adminPassword" placeholder="Mot de passe" autofocus>
-                    <button type="button" class="toggle-password" id="togglePasswordBtn" tabindex="-1">👁️</button>
-                </div>
-                <button id="submitLoginBtn">Se connecter</button>
-                <div id="loginError" class="error"></div>
+    <div id="adminDashboard">
+        <div class="admin-container">
+            <div class="admin-header">
+                <div><h1>⚙️ Administration Clinique WENDTOIN</h1></div>
+                <button id="logoutAdminBtn" class="btn-logout">🔓 Déconnexion</button>
             </div>
-        </div>
 
-        <div id="adminDashboard" style="display: none;">
-            <div class="admin-container">
-                <div class="admin-header">
-                    <div><h1>⚙️ Administration Clinique WENDTOIN</h1></div>
-                    <button id="logoutAdminBtn" class="btn-logout">🔓 Déconnexion</button>
-                </div>
+            <div class="stats-row" id="statsContainer">
+                <div class="stat-card"><div class="number" id="statActus">0</div><div class="label">Actualités</div></div>
+                <div class="stat-card"><div class="number" id="statEquipe">0</div><div class="label">Membres équipe</div></div>
+                <div class="stat-card"><div class="number" id="statSpecMed">0</div><div class="label">Spécialités médicales</div></div>
+                <div class="stat-card"><div class="number" id="statSpecChir">0</div><div class="label">Spécialités chirurgicales</div></div>
+            </div>
 
-                <div class="stats-row" id="statsContainer">
-                    <div class="stat-card"><div class="number" id="statActus">0</div><div class="label">Actualités</div></div>
-                    <div class="stat-card"><div class="number" id="statEquipe">0</div><div class="label">Membres équipe</div></div>
-                    <div class="stat-card"><div class="number" id="statSpecMed">0</div><div class="label">Spécialités médicales</div></div>
-                    <div class="stat-card"><div class="number" id="statSpecChir">0</div><div class="label">Spécialités chirurgicales</div></div>
-                </div>
+            <div class="tabs">
+                <button class="tab-btn active" data-tab="actualites">📰 Actualités</button>
+                <button class="tab-btn" data-tab="specMedicales">🩺 Spécialités médicales</button>
+                <button class="tab-btn" data-tab="specChirurgicales">🔪 Spécialités chirurgicales</button>
+                <button class="tab-btn" data-tab="gynecologie">👶 Gynécologie</button>
+                <button class="tab-btn" data-tab="explorations">🔬 Explorations</button>
+                <button class="tab-btn" data-tab="imagerie">📷 Imagerie</button>
+                <button class="tab-btn" data-tab="equipements">⚕️ Équipements</button>
+                <button class="tab-btn" data-tab="equipe">👥 Équipe</button>
+            </div>
 
-                <div class="tabs">
-                    <button class="tab-btn active" data-tab="actualites">📰 Actualités</button>
-                    <button class="tab-btn" data-tab="specMedicales">🩺 Spécialités médicales</button>
-                    <button class="tab-btn" data-tab="specChirurgicales">🔪 Spécialités chirurgicales</button>
-                    <button class="tab-btn" data-tab="gynecologie">👶 Gynécologie</button>
-                    <button class="tab-btn" data-tab="explorations">🔬 Explorations</button>
-                    <button class="tab-btn" data-tab="imagerie">📷 Imagerie</button>
-                    <button class="tab-btn" data-tab="equipements">⚕️ Équipements</button>
-                    <button class="tab-btn" data-tab="equipe">👥 Équipe</button>
-                </div>
-
-                <!-- Actualités -->
-                <div id="actualites" class="tab-pane active">
-                    <div class="form-admin">
-                        <h3>➕ Ajouter une actualité</h3>
-                        <input type="text" id="actuTitre" placeholder="Titre *">
-                        <textarea id="actuDescription" rows="2" placeholder="Description"></textarea>
-                        <input type="text" id="actuDate" placeholder="Date (ex: 15 Mars 2026)">
-                        <div>
-                            <label class="file-input-label">📷 Choisir une image</label>
-                            <input type="file" id="actuImageFile" accept="image/*" style="display:none">
-                            <div id="actuImagePreview"></div>
-                        </div>
-                        <button id="createActuBtn" class="btn-save">📌 Publier</button>
+            <!-- Actualités -->
+            <div id="actualites" class="tab-pane active">
+                <div class="form-admin">
+                    <h3>➕ Ajouter une actualité</h3>
+                    <input type="text" id="actuTitre" placeholder="Titre *">
+                    <textarea id="actuDescription" rows="2" placeholder="Description"></textarea>
+                    <input type="text" id="actuDate" placeholder="Date (ex: 15 Mars 2026)">
+                    <div>
+                        <label class="file-input-label">📷 Choisir une image</label>
+                        <input type="file" id="actuImageFile" accept="image/*" style="display:none">
+                        <div id="actuImagePreview"></div>
                     </div>
-                    <div class="item-list">
-                        <h4>📋 Liste des actualités</h4>
-                        <div id="adminActusList">Chargement...</div>
-                    </div>
+                    <button id="createActuBtn" class="btn-save">📌 Publier</button>
                 </div>
-
-                <!-- Spécialités médicales -->
-                <div id="specMedicales" class="tab-pane">
-                    <div class="form-admin">
-                        <h3>➕ Ajouter une spécialité médicale</h3>
-                        <input type="text" id="specMedTitre" placeholder="Nom (ex: Cardiologie)">
-                        <textarea id="specMedDesc" rows="2" placeholder="Description"></textarea>
-                        <button id="createSpecMedBtn" class="btn-save">Ajouter</button>
-                    </div>
-                    <div class="item-list"><h4>📋 Liste des spécialités médicales</h4><div id="adminSpecMedList">Chargement...</div></div>
+                <div class="item-list">
+                    <h4>📋 Liste des actualités</h4>
+                    <div id="adminActusList">Chargement...</div>
                 </div>
+            </div>
 
-                <!-- Spécialités chirurgicales -->
-                <div id="specChirurgicales" class="tab-pane">
-                    <div class="form-admin">
-                        <h3>➕ Ajouter une spécialité chirurgicale</h3>
-                        <input type="text" id="specChirTitre" placeholder="Nom">
-                        <textarea id="specChirDesc" rows="2" placeholder="Description"></textarea>
-                        <button id="createSpecChirBtn" class="btn-save">Ajouter</button>
-                    </div>
-                    <div class="item-list"><h4>📋 Liste des spécialités chirurgicales</h4><div id="adminSpecChirList">Chargement...</div></div>
+            <!-- Spécialités médicales -->
+            <div id="specMedicales" class="tab-pane">
+                <div class="form-admin">
+                    <h3>➕ Ajouter une spécialité médicale</h3>
+                    <input type="text" id="specMedTitre" placeholder="Nom (ex: Cardiologie)">
+                    <textarea id="specMedDesc" rows="2" placeholder="Description"></textarea>
+                    <button id="createSpecMedBtn" class="btn-save">Ajouter</button>
                 </div>
+                <div class="item-list"><h4>📋 Liste des spécialités médicales</h4><div id="adminSpecMedList">Chargement...</div></div>
+            </div>
 
-                <!-- Gynécologie -->
-                <div id="gynecologie" class="tab-pane">
-                    <div class="form-admin">
-                        <h3>➕ Ajouter un service de gynécologie</h3>
-                        <input type="text" id="gyneTitre" placeholder="Titre">
-                        <textarea id="gyneDesc" rows="2" placeholder="Description"></textarea>
-                        <button id="createGyneBtn" class="btn-save">Ajouter</button>
-                    </div>
-                    <div class="item-list"><h4>📋 Liste des services</h4><div id="adminGyneList">Chargement...</div></div>
+            <!-- Spécialités chirurgicales -->
+            <div id="specChirurgicales" class="tab-pane">
+                <div class="form-admin">
+                    <h3>➕ Ajouter une spécialité chirurgicale</h3>
+                    <input type="text" id="specChirTitre" placeholder="Nom">
+                    <textarea id="specChirDesc" rows="2" placeholder="Description"></textarea>
+                    <button id="createSpecChirBtn" class="btn-save">Ajouter</button>
                 </div>
+                <div class="item-list"><h4>📋 Liste des spécialités chirurgicales</h4><div id="adminSpecChirList">Chargement...</div></div>
+            </div>
 
-                <!-- Explorations -->
-                <div id="explorations" class="tab-pane">
-                    <div class="form-admin">
-                        <h3>➕ Ajouter une exploration</h3>
-                        <input type="text" id="exploTitre" placeholder="Titre">
-                        <textarea id="exploDesc" rows="2" placeholder="Description"></textarea>
-                        <button id="createExploBtn" class="btn-save">Ajouter</button>
-                    </div>
-                    <div class="item-list"><h4>📋 Liste des explorations</h4><div id="adminExploList">Chargement...</div></div>
+            <!-- Gynécologie -->
+            <div id="gynecologie" class="tab-pane">
+                <div class="form-admin">
+                    <h3>➕ Ajouter un service de gynécologie</h3>
+                    <input type="text" id="gyneTitre" placeholder="Titre">
+                    <textarea id="gyneDesc" rows="2" placeholder="Description"></textarea>
+                    <button id="createGyneBtn" class="btn-save">Ajouter</button>
                 </div>
+                <div class="item-list"><h4>📋 Liste des services</h4><div id="adminGyneList">Chargement...</div></div>
+            </div>
 
-                <!-- Imagerie -->
-                <div id="imagerie" class="tab-pane">
-                    <div class="form-admin">
-                        <h3>➕ Ajouter un service d'imagerie</h3>
-                        <input type="text" id="imagerieTitre" placeholder="Titre (ex: Scanner, IRM)">
-                        <button id="createImagerieBtn" class="btn-save">Ajouter</button>
-                    </div>
-                    <div class="item-list"><h4>📋 Liste des services d'imagerie</h4><div id="adminImagerieList">Chargement...</div></div>
+            <!-- Explorations -->
+            <div id="explorations" class="tab-pane">
+                <div class="form-admin">
+                    <h3>➕ Ajouter une exploration</h3>
+                    <input type="text" id="exploTitre" placeholder="Titre">
+                    <textarea id="exploDesc" rows="2" placeholder="Description"></textarea>
+                    <button id="createExploBtn" class="btn-save">Ajouter</button>
                 </div>
+                <div class="item-list"><h4>📋 Liste des explorations</h4><div id="adminExploList">Chargement...</div></div>
+            </div>
 
-                <!-- Équipements -->
-                <div id="equipements" class="tab-pane">
-                    <div class="form-admin">
-                        <h3>➕ Ajouter un équipement spécialisé</h3>
-                        <input type="text" id="equipTitre" placeholder="Titre">
-                        <textarea id="equipDesc" rows="2" placeholder="Description"></textarea>
-                        <input type="text" id="equipBadge" placeholder="Badge (optionnel)">
-                        <button id="createEquipBtn" class="btn-save">Ajouter</button>
-                    </div>
-                    <div class="item-list"><h4>📋 Liste des équipements</h4><div id="adminEquipList">Chargement...</div></div>
+            <!-- Imagerie -->
+            <div id="imagerie" class="tab-pane">
+                <div class="form-admin">
+                    <h3>➕ Ajouter un service d'imagerie</h3>
+                    <input type="text" id="imagerieTitre" placeholder="Titre (ex: Scanner, IRM)">
+                    <button id="createImagerieBtn" class="btn-save">Ajouter</button>
                 </div>
+                <div class="item-list"><h4>📋 Liste des services d'imagerie</h4><div id="adminImagerieList">Chargement...</div></div>
+            </div>
 
-                <!-- Équipe avec upload d'image -->
-                <div id="equipe" class="tab-pane">
-                    <div class="form-admin">
-                        <h3>➕ Ajouter un membre de l'équipe</h3>
-                        <input type="text" id="memberNom" placeholder="Nom complet *">
-                        <input type="text" id="memberPoste" placeholder="Poste *">
-                        <textarea id="memberDescription" rows="2" placeholder="Description / Bio"></textarea>
-                        <div>
-                            <label class="file-input-label">📷 Choisir une photo</label>
-                            <input type="file" id="memberImageFile" accept="image/*" style="display:none">
-                            <div id="memberImagePreview"></div>
-                        </div>
-                        <button id="createMemberBtn" class="btn-save">👤 Ajouter</button>
+            <!-- Équipements -->
+            <div id="equipements" class="tab-pane">
+                <div class="form-admin">
+                    <h3>➕ Ajouter un équipement spécialisé</h3>
+                    <input type="text" id="equipTitre" placeholder="Titre">
+                    <textarea id="equipDesc" rows="2" placeholder="Description"></textarea>
+                    <input type="text" id="equipBadge" placeholder="Badge (optionnel: 24h/24, Urgence)">
+                    <button id="createEquipBtn" class="btn-save">Ajouter</button>
+                </div>
+                <div class="item-list"><h4>📋 Liste des équipements</h4><div id="adminEquipList">Chargement...</div></div>
+            </div>
+
+            <!-- Équipe avec upload d'image -->
+            <div id="equipe" class="tab-pane">
+                <div class="form-admin">
+                    <h3>➕ Ajouter un membre de l'équipe</h3>
+                    <input type="text" id="memberNom" placeholder="Nom complet *">
+                    <input type="text" id="memberPoste" placeholder="Poste *">
+                    <textarea id="memberDescription" rows="2" placeholder="Description / Bio"></textarea>
+                    <div>
+                        <label class="file-input-label">📷 Choisir une photo</label>
+                        <input type="file" id="memberImageFile" accept="image/*" style="display:none">
+                        <div id="memberImagePreview"></div>
                     </div>
-                    <div class="item-list">
-                        <h4>👥 Membres de l'équipe</h4>
-                        <div id="adminTeamList">Chargement...</div>
-                    </div>
+                    <button id="createMemberBtn" class="btn-save">👤 Ajouter</button>
+                </div>
+                <div class="item-list">
+                    <h4>👥 Membres de l'équipe</h4>
+                    <div id="adminTeamList">Chargement...</div>
                 </div>
             </div>
         </div>
@@ -379,66 +300,19 @@
         const supabase = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
         
         const ADMIN_PASSWORD = "Wendtoin2026";
-        let isAdmin = false;
+        
+        // Vérifier session admin
+        if (sessionStorage.getItem('clinique_admin') !== 'true') {
+            window.location.href = 'index.html';
+        }
 
         // Éléments DOM
-        const loginModal = document.getElementById('loginModal');
-        const adminDashboard = document.getElementById('adminDashboard');
-        const submitLoginBtn = document.getElementById('submitLoginBtn');
         const logoutBtn = document.getElementById('logoutAdminBtn');
-        
-        // Password toggle functionality
-        const passwordInput = document.getElementById('adminPassword');
-        const togglePasswordBtn = document.getElementById('togglePasswordBtn');
-        
-        if (togglePasswordBtn && passwordInput) {
-            togglePasswordBtn.addEventListener('click', function() {
-                const type = passwordInput.getAttribute('type') === 'password' ? 'text' : 'password';
-                passwordInput.setAttribute('type', type);
-                this.textContent = type === 'password' ? '👁️' : '🙈';
-                this.style.opacity = '0.7';
-                setTimeout(() => { this.style.opacity = '1'; }, 200);
-            });
-        }
 
-        // Vérifier session
-        if (sessionStorage.getItem('clinique_admin') === 'true') {
-            isAdmin = true;
-            loginModal.style.display = 'none';
-            adminDashboard.style.display = 'block';
-            loadAllAdminData();
-        }
-
-        // Connexion
-        submitLoginBtn.addEventListener('click', () => {
-            const pwd = document.getElementById('adminPassword');
-            if (pwd.value === ADMIN_PASSWORD) {
-                sessionStorage.setItem('clinique_admin', 'true');
-                loginModal.style.display = 'none';
-                adminDashboard.style.display = 'block';
-                loadAllAdminData();
-            } else {
-                document.getElementById('loginError').innerText = 'Mot de passe incorrect';
-                passwordInput.value = '';
-                passwordInput.focus();
-            }
-        });
-
-        // Allow Enter key to submit
-        passwordInput.addEventListener('keypress', (e) => {
-            if (e.key === 'Enter') {
-                submitLoginBtn.click();
-            }
-        });
-
+        // Déconnexion
         logoutBtn.addEventListener('click', () => {
             sessionStorage.removeItem('clinique_admin');
-            adminDashboard.style.display = 'none';
-            loginModal.style.display = 'flex';
-            passwordInput.value = '';
-            passwordInput.type = 'password';
-            if (togglePasswordBtn) togglePasswordBtn.textContent = '👁️';
-            document.getElementById('loginError').innerText = '';
+            window.location.href = 'index.html';
         });
 
         // Fonction d'upload d'image
@@ -446,10 +320,10 @@
             if (!file) return null;
             const fileExt = file.name.split('.').pop();
             const fileName = `${Date.now()}_${Math.random().toString(36).substring(2, 8)}.${fileExt}`;
-            const filePath = `${fileName}`;
+            const filePath = `${folder}/${fileName}`;
             
             const { data, error } = await supabase.storage
-                .from(folder)
+                .from('images')
                 .upload(filePath, file);
             
             if (error) {
@@ -459,7 +333,7 @@
             }
             
             const { data: urlData } = supabase.storage
-                .from(folder)
+                .from('images')
                 .getPublicUrl(filePath);
             
             return urlData.publicUrl;
@@ -489,11 +363,11 @@
         });
 
         // Trigger file input clicks
-        document.querySelectorAll('.file-input-label').forEach((label, index) => {
-            label.addEventListener('click', () => {
-                if (index === 0) document.getElementById('actuImageFile')?.click();
-                else if (index === 1) document.getElementById('memberImageFile')?.click();
-            });
+        document.querySelectorAll('.file-input-label')[0]?.addEventListener('click', () => {
+            document.getElementById('actuImageFile')?.click();
+        });
+        document.querySelectorAll('.file-input-label')[1]?.addEventListener('click', () => {
+            document.getElementById('memberImageFile')?.click();
         });
 
         // ========== CRÉATION AVEC IMAGES ==========
@@ -551,6 +425,62 @@
             document.getElementById('memberDescription').value = '';
             document.getElementById('memberImageFile').value = '';
             document.getElementById('memberImagePreview').innerHTML = '';
+            loadAllAdminData();
+        });
+
+        // ========== CRÉATIONS SIMPLES ==========
+        
+        document.getElementById('createSpecMedBtn')?.addEventListener('click', async () => {
+            const titre = document.getElementById('specMedTitre').value.trim();
+            if (!titre) return alert('Titre requis');
+            await supabase.from('specialites_medicales').insert([{ titre, description: document.getElementById('specMedDesc').value, ordre: Date.now() }]);
+            alert('Ajouté');
+            document.getElementById('specMedTitre').value = ''; document.getElementById('specMedDesc').value = '';
+            loadAllAdminData();
+        });
+
+        document.getElementById('createSpecChirBtn')?.addEventListener('click', async () => {
+            const titre = document.getElementById('specChirTitre').value.trim();
+            if (!titre) return alert('Titre requis');
+            await supabase.from('specialites_chirurgicales').insert([{ titre, description: document.getElementById('specChirDesc').value, ordre: Date.now() }]);
+            alert('Ajouté');
+            document.getElementById('specChirTitre').value = ''; document.getElementById('specChirDesc').value = '';
+            loadAllAdminData();
+        });
+
+        document.getElementById('createGyneBtn')?.addEventListener('click', async () => {
+            const titre = document.getElementById('gyneTitre').value.trim();
+            if (!titre) return alert('Titre requis');
+            await supabase.from('gynecologie').insert([{ titre, description: document.getElementById('gyneDesc').value, ordre: Date.now() }]);
+            alert('Ajouté');
+            document.getElementById('gyneTitre').value = ''; document.getElementById('gyneDesc').value = '';
+            loadAllAdminData();
+        });
+
+        document.getElementById('createExploBtn')?.addEventListener('click', async () => {
+            const titre = document.getElementById('exploTitre').value.trim();
+            if (!titre) return alert('Titre requis');
+            await supabase.from('explorations').insert([{ titre, description: document.getElementById('exploDesc').value, ordre: Date.now() }]);
+            alert('Ajouté');
+            document.getElementById('exploTitre').value = ''; document.getElementById('exploDesc').value = '';
+            loadAllAdminData();
+        });
+
+        document.getElementById('createImagerieBtn')?.addEventListener('click', async () => {
+            const titre = document.getElementById('imagerieTitre').value.trim();
+            if (!titre) return alert('Titre requis');
+            await supabase.from('imagerie').insert([{ titre, ordre: Date.now() }]);
+            alert('Ajouté');
+            document.getElementById('imagerieTitre').value = '';
+            loadAllAdminData();
+        });
+
+        document.getElementById('createEquipBtn')?.addEventListener('click', async () => {
+            const titre = document.getElementById('equipTitre').value.trim();
+            if (!titre) return alert('Titre requis');
+            await supabase.from('equipements').insert([{ titre, description: document.getElementById('equipDesc').value, badge: document.getElementById('equipBadge').value, ordre: Date.now() }]);
+            alert('Ajouté');
+            document.getElementById('equipTitre').value = ''; document.getElementById('equipDesc').value = ''; document.getElementById('equipBadge').value = '';
             loadAllAdminData();
         });
 
@@ -680,61 +610,6 @@
             attachDeleteEvents();
         }
 
-        // Autres créations simples
-        document.getElementById('createSpecMedBtn')?.addEventListener('click', async () => {
-            const titre = document.getElementById('specMedTitre').value.trim();
-            if (!titre) return alert('Titre requis');
-            await supabase.from('specialites_medicales').insert([{ titre, description: document.getElementById('specMedDesc').value, ordre: Date.now() }]);
-            alert('Ajouté');
-            document.getElementById('specMedTitre').value = ''; document.getElementById('specMedDesc').value = '';
-            loadAllAdminData();
-        });
-
-        document.getElementById('createSpecChirBtn')?.addEventListener('click', async () => {
-            const titre = document.getElementById('specChirTitre').value.trim();
-            if (!titre) return alert('Titre requis');
-            await supabase.from('specialites_chirurgicales').insert([{ titre, description: document.getElementById('specChirDesc').value, ordre: Date.now() }]);
-            alert('Ajouté');
-            document.getElementById('specChirTitre').value = ''; document.getElementById('specChirDesc').value = '';
-            loadAllAdminData();
-        });
-
-        document.getElementById('createGyneBtn')?.addEventListener('click', async () => {
-            const titre = document.getElementById('gyneTitre').value.trim();
-            if (!titre) return alert('Titre requis');
-            await supabase.from('gynecologie').insert([{ titre, description: document.getElementById('gyneDesc').value, ordre: Date.now() }]);
-            alert('Ajouté');
-            document.getElementById('gyneTitre').value = ''; document.getElementById('gyneDesc').value = '';
-            loadAllAdminData();
-        });
-
-        document.getElementById('createExploBtn')?.addEventListener('click', async () => {
-            const titre = document.getElementById('exploTitre').value.trim();
-            if (!titre) return alert('Titre requis');
-            await supabase.from('explorations').insert([{ titre, description: document.getElementById('exploDesc').value, ordre: Date.now() }]);
-            alert('Ajouté');
-            document.getElementById('exploTitre').value = ''; document.getElementById('exploDesc').value = '';
-            loadAllAdminData();
-        });
-
-        document.getElementById('createImagerieBtn')?.addEventListener('click', async () => {
-            const titre = document.getElementById('imagerieTitre').value.trim();
-            if (!titre) return alert('Titre requis');
-            await supabase.from('imagerie').insert([{ titre, ordre: Date.now() }]);
-            alert('Ajouté');
-            document.getElementById('imagerieTitre').value = '';
-            loadAllAdminData();
-        });
-
-        document.getElementById('createEquipBtn')?.addEventListener('click', async () => {
-            const titre = document.getElementById('equipTitre').value.trim();
-            if (!titre) return alert('Titre requis');
-            await supabase.from('equipements').insert([{ titre, description: document.getElementById('equipDesc').value, badge: document.getElementById('equipBadge').value, ordre: Date.now() }]);
-            alert('Ajouté');
-            document.getElementById('equipTitre').value = ''; document.getElementById('equipDesc').value = ''; document.getElementById('equipBadge').value = '';
-            loadAllAdminData();
-        });
-
         // Suppression
         function attachDeleteEvents() {
             document.querySelectorAll('.delete-btn').forEach(btn => {
@@ -789,6 +664,9 @@
                 return m;
             });
         }
+
+        // Chargement initial
+        loadAllAdminData();
     </script>
 </body>
 </html>
