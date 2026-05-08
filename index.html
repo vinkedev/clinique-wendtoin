@@ -460,6 +460,7 @@
             margin-bottom: 35px;
             font-weight: 700;
             position: relative;
+            color: #0077A4;
         }
 
         .section-title::after {
@@ -471,6 +472,7 @@
             width: 50px;
             height: 3px;
             border-radius: 4px;
+            background: linear-gradient(90deg, #0077A4, #00b4d8);
         }
 
         .presentation-title {
@@ -839,7 +841,6 @@
         .team-name {
             font-size: 1.15rem;
             font-weight: 700;
-            color: #0077A4;
             margin-bottom: 5px;
         }
 
@@ -854,6 +855,11 @@
             color: #475569;
             font-size: 0.82rem;
             line-height: 1.45;
+        }
+
+        /* Couleurs spécifiques pour la section équipe */
+        #equipe .team-name {
+            color: #0077A4;
         }
 
         .gallery-section {
@@ -1226,7 +1232,7 @@
             }
         }
 
-        /* style pour les sections à partir de "Nos services de soins" - UNIQUEMENT BLEU A PARTIR D'ICI */
+        /* style pour les sections à partir de "Nos services de soins" - BLEU UNIFORME */
         #services .section-title { color: #0077A4; }
         #services .section-title::after { background: linear-gradient(90deg, #0077A4, #00b4d8); }
         #services .badge-category { background: linear-gradient(135deg, #e0f0ff, #cce4f5); color: #0077A4; }
@@ -1262,9 +1268,19 @@
         #poles .specialty-item strong { color: #0077A4; }
         #poles .badge-247 { background: #0077A4; }
         
-        /* La section équipe garde ses couleurs d'origine */
+        /* La section équipe - titres en bleu */
+        #equipe .section-title { color: #0077A4; }
+        #equipe .section-title::after { background: linear-gradient(90deg, #0077A4, #00b4d8); }
         #equipe .team-name { color: #0077A4; }
         #equipe .team-position { color: #1D8B5D; }
+
+        /* Section vidéos - titre en bleu */
+        #video .section-title { color: #0077A4; }
+        #video .section-title::after { background: linear-gradient(90deg, #0077A4, #00b4d8); }
+
+        /* Section contact - titre en bleu */
+        #contact .section-title { color: #0077A4; }
+        #contact .section-title::after { background: linear-gradient(90deg, #0077A4, #00b4d8); }
     </style>
 </head>
 <body>
@@ -1409,7 +1425,7 @@
         </div>
     </section>
 
-    <!-- Centre de Dialyse (anciennement Équipements spécialisés) -->
+    <!-- Centre de Dialyse -->
     <section id="poles">
         <div class="container">
             <h2 class="section-title animate-on-scroll">Centre de Dialyse</h2>
@@ -1556,8 +1572,6 @@
 
     function updateButtons() {
         const currentSlide = slides[currentIndex];
-        // Le bouton de gauche (prendre rendez-vous) reste FIXE et pointe toujours vers #rdv
-        // Le bouton de droite (urgence) est DYNAMIQUE et change selon le slide
         heroButtonsContainer.innerHTML = `<a href="#rdv" class="btn btn-primary">Prendre rendez-vous</a><a href="${currentSlide.lien}" class="btn btn-outline" data-tooltip="Appel gratuit 24h/24">Urgence 24/24 <span class="urgences-badge">URGENCE</span></a>`;
     }
 
@@ -1694,7 +1708,6 @@
     const togglePasswordBtn = document.getElementById('togglePassword');
     const adminPasswordInput = document.getElementById('adminPassword');
 
-    // Fonction pour afficher/masquer le mot de passe
     if (togglePasswordBtn && adminPasswordInput) {
         togglePasswordBtn.addEventListener('click', () => {
             const type = adminPasswordInput.getAttribute('type') === 'password' ? 'text' : 'password';
