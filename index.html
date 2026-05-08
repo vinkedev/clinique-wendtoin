@@ -5,9 +5,35 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes, viewport-fit=cover">
     <title>Clinique WENDTOIN – Urgences 24h/24 à Ouagadougou</title>
     <meta name="description" content="Clinique privée à Cissin, Ouagadougou. Urgences médicales et chirurgicales 24h/24, 7j/7. Plus de 40 spécialistes.">
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    
+    <!-- Preconnect pour les domaines externes -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" crossorigin>
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="preconnect" href="https://otdiywrvzappbmjfkkyi.supabase.co" crossorigin>
+    <link rel="dns-prefetch" href="https://otdiywrvzappbmjfkkyi.supabase.co">
+    
+    <!-- Google Fonts avec display swap pour non-bloquant -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet" media="print" onload="this.media='all'">
+    <noscript>
+        <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    </noscript>
+    
     <style>
+        /* Police système fallback immédiate */
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif;
+        }
+        
+        /* Une fois les polices chargées, on applique les belles polices */
+        .fonts-loaded body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+        }
+        
+        .fonts-loaded .logo-text h1,
+        .fonts-loaded .logo-text p {
+            font-family: 'Poppins', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+        }
+        
         * {
             margin: 0;
             padding: 0;
@@ -21,7 +47,6 @@
         }
 
         body {
-            font-family: 'Inter', sans-serif;
             color: #1e293b;
             line-height: 1.6;
             background: #F8F9FA;
@@ -86,6 +111,37 @@
         @keyframes progress {
             from { width: 0%; }
             to { width: 100%; }
+        }
+        
+        @keyframes shimmer {
+            0% { background-position: 200% 0; }
+            100% { background-position: -200% 0; }
+        }
+        
+        /* Skeleton loader pour données Supabase */
+        .skeleton {
+            background: linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 50%, #f0f0f0 75%);
+            background-size: 200% 100%;
+            animation: shimmer 1.5s infinite;
+            border-radius: 8px;
+        }
+        
+        .skeleton-text {
+            height: 20px;
+            margin-bottom: 10px;
+        }
+        
+        .skeleton-title {
+            height: 24px;
+            width: 80%;
+            margin-bottom: 15px;
+        }
+        
+        .skeleton-card {
+            background: white;
+            border-radius: 24px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.06);
         }
 
         .text-animate {
@@ -185,7 +241,6 @@
         }
 
         .logo-text h1 {
-            font-family: 'Poppins', sans-serif;
             font-size: 1.2rem;
             font-weight: 700;
             background: linear-gradient(135deg, #0077A4 0%, #1D8B5D 100%);
@@ -196,7 +251,6 @@
         }
 
         .logo-text p {
-            font-family: 'Poppins', sans-serif;
             font-size: 0.6rem;
             color: #64748b;
             letter-spacing: 0.5px;
@@ -282,6 +336,7 @@
             background-position: center;
             opacity: 0;
             transition: opacity 1s ease-in-out;
+            background-color: #0077A4;
         }
 
         .hero-slide.active {
@@ -1458,7 +1513,7 @@
 <header>
     <div class="header-container">
         <div class="logo" id="secretAdminLogo">
-            <img src="cliniquewendtoin/logo_wendtoin.jpg" alt="Logo Clinique WENDTOIN" onerror="this.src='https://placehold.co/50x50/0077A4/white?text=W'">
+            <img src="cliniquewendtoin/logo_wendtoin.jpg" alt="Logo Clinique WENDTOIN" width="50" height="50" loading="eager" onerror="this.src='https://placehold.co/50x50/0077A4/white?text=W'">
             <div class="logo-text">
                 <h1>Clinique WENDTOIN</h1>
                 <p>Depuis janvier 2016</p>
@@ -1510,7 +1565,7 @@
                     <p style="margin-top: 12px;">Située au <strong>Boulevard des Tensoba, Secteur n°25, Cissin, Ouagadougou</strong>, notre clinique vous accueille dans un environnement moderne et sécurisé.</p>
                 </div>
                 <div class="image-wrapper animate-on-scroll">
-                    <img src="cliniquewendtoin/vue_wendtoin.jpg" alt="Clinique WENDTOIN" class="clinic-image" onerror="this.src='https://placehold.co/600x400/0077A4/white?text=Clinique+WENDTOIN'">
+                    <img src="cliniquewendtoin/vue_wendtoin.jpg" alt="Clinique WENDTOIN" class="clinic-image" width="600" height="400" loading="lazy" onerror="this.src='https://placehold.co/600x400/0077A4/white?text=Clinique+WENDTOIN'">
                 </div>
             </div>
         </div>
@@ -1551,7 +1606,38 @@
     <section id="actualites">
         <div class="container">
             <h2 class="section-title animate-on-scroll">Actualités</h2>
-            <div id="actualitesContainer"></div>
+            <div id="actualitesContainer">
+                <!-- Skeleton loader -->
+                <div class="actualites-scroll">
+                    <div class="actu-card skeleton-card">
+                        <div class="actu-image skeleton"></div>
+                        <div class="actu-content">
+                            <div class="skeleton skeleton-text" style="width: 40%"></div>
+                            <div class="skeleton skeleton-title"></div>
+                            <div class="skeleton skeleton-text"></div>
+                            <div class="skeleton skeleton-text" style="width: 70%"></div>
+                        </div>
+                    </div>
+                    <div class="actu-card skeleton-card">
+                        <div class="actu-image skeleton"></div>
+                        <div class="actu-content">
+                            <div class="skeleton skeleton-text" style="width: 40%"></div>
+                            <div class="skeleton skeleton-title"></div>
+                            <div class="skeleton skeleton-text"></div>
+                            <div class="skeleton skeleton-text" style="width: 70%"></div>
+                        </div>
+                    </div>
+                    <div class="actu-card skeleton-card">
+                        <div class="actu-image skeleton"></div>
+                        <div class="actu-content">
+                            <div class="skeleton skeleton-text" style="width: 40%"></div>
+                            <div class="skeleton skeleton-title"></div>
+                            <div class="skeleton skeleton-text"></div>
+                            <div class="skeleton skeleton-text" style="width: 70%"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
     </section>
 
@@ -1559,7 +1645,7 @@
     <div id="actuModal" class="actu-modal">
         <div class="actu-modal-content">
             <div class="actu-modal-header">
-                <img id="modalActuImage" src="" alt="Image actualité">
+                <img id="modalActuImage" src="" alt="Image actualité" loading="lazy">
                 <button class="actu-modal-close" id="closeActuModal">✕</button>
             </div>
             <div class="actu-modal-body">
@@ -1577,7 +1663,10 @@
     <section id="specialites">
         <div class="container">
             <h2 class="section-title animate-on-scroll">Spécialités médicales</h2>
-            <div id="specialitesMedicalesList" class="specialty-grid">Chargement...</div>
+            <div id="specialitesMedicalesList" class="specialty-grid">
+                <div class="skeleton skeleton-text" style="height: 80px; margin: 10px;"></div>
+                <div class="skeleton skeleton-text" style="height: 80px; margin: 10px;"></div>
+            </div>
         </div>
     </section>
 
@@ -1585,7 +1674,10 @@
     <section id="specialites-chirurgicales">
         <div class="container">
             <h2 class="section-title animate-on-scroll">Spécialités chirurgicales</h2>
-            <div id="specialitesChirurgicalesList" class="specialty-grid">Chargement...</div>
+            <div id="specialitesChirurgicalesList" class="specialty-grid">
+                <div class="skeleton skeleton-text" style="height: 80px; margin: 10px;"></div>
+                <div class="skeleton skeleton-text" style="height: 80px; margin: 10px;"></div>
+            </div>
         </div>
     </section>
 
@@ -1593,7 +1685,9 @@
     <section id="gynecologie">
         <div class="container">
             <h2 class="section-title animate-on-scroll">Gynécologie - Obstétrique</h2>
-            <div id="gynecologieList" class="specialty-grid">Chargement...</div>
+            <div id="gynecologieList" class="specialty-grid">
+                <div class="skeleton skeleton-text" style="height: 80px; margin: 10px;"></div>
+            </div>
         </div>
     </section>
 
@@ -1601,7 +1695,9 @@
     <section id="explorations">
         <div class="container">
             <h2 class="section-title animate-on-scroll">Explorations</h2>
-            <div id="explorationsList" class="specialty-grid">Chargement...</div>
+            <div id="explorationsList" class="specialty-grid">
+                <div class="skeleton skeleton-text" style="height: 80px; margin: 10px;"></div>
+            </div>
         </div>
     </section>
 
@@ -1609,7 +1705,9 @@
     <section id="imagerie">
         <div class="container">
             <h2 class="section-title animate-on-scroll">Imagerie</h2>
-            <div id="imagerieList" class="specialty-grid">Chargement...</div>
+            <div id="imagerieList" class="specialty-grid">
+                <div class="skeleton skeleton-text" style="height: 80px; margin: 10px;"></div>
+            </div>
         </div>
     </section>
 
@@ -1617,7 +1715,9 @@
     <section id="poles">
         <div class="container">
             <h2 class="section-title animate-on-scroll">Centre de Dialyse</h2>
-            <div id="equipementsList" class="specialty-grid">Chargement...</div>
+            <div id="equipementsList" class="specialty-grid">
+                <div class="skeleton skeleton-text" style="height: 80px; margin: 10px;"></div>
+            </div>
         </div>
     </section>
 
@@ -1635,7 +1735,16 @@
     <section id="equipe">
         <div class="container">
             <h2 class="section-title animate-on-scroll">Notre équipe</h2>
-            <div id="teamList" class="team-grid">Chargement...</div>
+            <div id="teamList" class="team-grid">
+                <div class="team-card skeleton-card">
+                    <div class="skeleton" style="aspect-ratio: 1/1; width: 100%;"></div>
+                    <div class="team-info">
+                        <div class="skeleton skeleton-text" style="width: 70%; margin: 0 auto 10px;"></div>
+                        <div class="skeleton skeleton-text" style="width: 50%; margin: 0 auto 10px;"></div>
+                        <div class="skeleton skeleton-text"></div>
+                    </div>
+                </div>
+            </div>
         </div>
     </section>
 
@@ -1681,13 +1790,32 @@
     </div>
 </div>
 
+<!-- Chargement différé de Supabase -->
 <script>
+    // Détection du chargement des polices
+    if ('fonts' in document) {
+        document.fonts.ready.then(function() {
+            document.body.classList.add('fonts-loaded');
+        });
+    } else {
+        document.body.classList.add('fonts-loaded');
+    }
+    
+    // Vérifier la connexion pour mode dégradé
+    let isSlowConnection = false;
+    if (navigator.connection) {
+        isSlowConnection = navigator.connection.effectiveType === 'slow-2g' || 
+                          navigator.connection.effectiveType === '2g' ||
+                          navigator.connection.saveData;
+    }
+    
     // ========== CONFIGURATION SUPABASE ==========
     const SUPABASE_URL = "https://otdiywrvzappbmjfkkyi.supabase.co";
     const SUPABASE_ANON_KEY = "sb_publishable_tn6FW9OxsqNdKMg9uCuB5A_gZICo-Jy";
     let supabaseClient = null;
     let isAdmin = false;
     const ADMIN_PASSWORD = "wendtoin2016";
+    let cachedData = null;
 
     let logoClickCount = 0;
     let clickTimeout = null;
@@ -1696,11 +1824,26 @@
         if (window.supabase) {
             supabaseClient = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
             console.log("✅ Supabase initialisé");
-            loadAllPublicData();
+            if (!isSlowConnection) {
+                loadAllPublicData();
+            } else {
+                console.log("Mode économie de données actif");
+                showMinimalContent();
+            }
             checkAdminSession();
         } else {
             setTimeout(initSupabase, 200);
         }
+    }
+    
+    function showMinimalContent() {
+        const containers = ['specialitesMedicalesList', 'specialitesChirurgicalesList', 'gynecologieList', 'explorationsList', 'imagerieList', 'equipementsList'];
+        containers.forEach(id => {
+            const el = document.getElementById(id);
+            if (el && el.innerHTML.includes('skeleton')) {
+                el.innerHTML = '<div class="specialty-item"><strong>Chargement différé</strong><p>Mode économie de données activé</p></div>';
+            }
+        });
     }
 
     // ==================== CLIC SECRET SUR LE LOGO ====================
@@ -1717,16 +1860,17 @@
         });
     }
 
-    // ==================== SLIDER HERO ====================
+    // ==================== SLIDER HERO OPTIMISÉ ====================
     const slides = [
-        { image: "slide/churigie.jpeg", titre: "Chirurgie moderne", badge: "à votre service", text: "Blocs opératoires de pointe, chirurgie programmée et d'urgence 24h/24", lien: "#specialites-chirurgicales", labelBtn: "Voir nos spécialités chirurgicales" },
-        { image: "slide/dialyse.jpg", titre: "Centre d'Hémodialyse", badge: "24h/24", text: "Prise en charge complète de l'insuffisance rénale, disponible nuit et jour, 7j/7", lien: "#poles", labelBtn: "Découvrir le service dialyse" },
-        { image: "slide/equipe_specialiste.jpg", titre: "Plus de 40 médecins", badge: "à votre service", text: "Cardiologues, neurologues, pédiatres, gynécologues, chirurgiens et bien plus", lien: "#equipe", labelBtn: "Rencontrer notre équipe" },
-        { image: "slide/urgence.jpeg", titre: "Urgences médicales", badge: "24h/24 & 7j/7", text: "Prise en charge immédiate des accidents, douleurs aiguës et détresses vitales", lien: "tel:51000647", labelBtn: "Appeler les urgences" }
+        { image: "slide/churigie.jpeg", titre: "Chirurgie moderne", badge: "à votre service", text: "Blocs opératoires de pointe, chirurgie programmée et d'urgence 24h/24", lien: "#specialites-chirurgicales" },
+        { image: "slide/dialyse.jpg", titre: "Centre d'Hémodialyse", badge: "24h/24", text: "Prise en charge complète de l'insuffisance rénale, disponible nuit et jour, 7j/7", lien: "#poles" },
+        { image: "slide/equipe_specialiste.jpg", titre: "Plus de 40 médecins", badge: "à votre service", text: "Cardiologues, neurologues, pédiatres, gynécologues, chirurgiens et bien plus", lien: "#equipe" },
+        { image: "slide/urgence.jpeg", titre: "Urgences médicales", badge: "24h/24 & 7j/7", text: "Prise en charge immédiate des accidents, douleurs aiguës et détresses vitales", lien: "tel:51000647" }
     ];
 
     let currentIndex = 0;
     let autoInterval;
+    let isSliderActive = true;
     const slidesContainer = document.getElementById('heroSlides');
     const dotsContainer = document.getElementById('sliderDots');
     const dynamicText = document.getElementById('heroDynamicText');
@@ -1739,7 +1883,15 @@
         slides.forEach((slide, i) => {
             const div = document.createElement('div');
             div.className = 'hero-slide' + (i === 0 ? ' active' : '');
-            div.style.backgroundImage = `url('${slide.image}')`;
+            // Ne charger que la première image immédiatement
+            if (i === 0) {
+                div.style.backgroundImage = `url('${slide.image}')`;
+            } else {
+                // Précharger les images suivantes plus tard
+                const img = new Image();
+                img.src = slide.image;
+                img.onload = () => { if (div.style.backgroundImage === 'none' || !div.style.backgroundImage) div.style.backgroundImage = `url('${slide.image}')`; };
+            }
             slidesContainer.appendChild(div);
         });
     }
@@ -1760,10 +1912,13 @@
     }
 
     function startProgressBar() {
-        if (progressBar) {
-            progressBar.style.animation = 'none';
-            void progressBar.offsetWidth;
-            progressBar.style.animation = 'progress 3s linear';
+        if (progressBar && isSliderActive) {
+            progressBar.style.transition = 'none';
+            progressBar.style.width = '0%';
+            requestAnimationFrame(() => {
+                progressBar.style.transition = 'width 3s linear';
+                progressBar.style.width = '100%';
+            });
         }
     }
 
@@ -1774,7 +1929,6 @@
         titleEl.classList.remove('text-animate');
         dynamicText.classList.remove('text-animate');
         void titleEl.offsetWidth;
-        void dynamicText.offsetWidth;
         titleEl.innerHTML = slides[currentIndex].titre + ' <span>' + slides[currentIndex].badge + '</span>';
         dynamicText.textContent = slides[currentIndex].text;
         updateButtons();
@@ -1786,34 +1940,60 @@
     function goToSlide(index) { currentIndex = index; updateSlidesAndText(); resetAutoPlay(); }
     function nextSlide() { currentIndex = (currentIndex + 1) % slides.length; updateSlidesAndText(); resetAutoPlay(); }
     function prevSlide() { currentIndex = (currentIndex - 1 + slides.length) % slides.length; updateSlidesAndText(); resetAutoPlay(); }
-    function resetAutoPlay() { if (autoInterval) clearInterval(autoInterval); autoInterval = setInterval(nextSlide, 3000); }
+    function resetAutoPlay() { if (autoInterval) clearInterval(autoInterval); if (isSliderActive) autoInterval = setInterval(nextSlide, 3000); }
 
     createSlides();
     createDots();
     updateSlidesAndText();
     resetAutoPlay();
-    startProgressBar();
 
     document.getElementById('sliderPrev').addEventListener('click', prevSlide);
     document.getElementById('sliderNext').addEventListener('click', nextSlide);
+    
+    // Pause du slider quand la page n'est pas visible
+    document.addEventListener('visibilitychange', () => {
+        isSliderActive = !document.hidden;
+        if (isSliderActive) resetAutoPlay();
+        else if (autoInterval) clearInterval(autoInterval);
+    });
 
-    // ==================== CHARGEMENT PUBLIC DEPUIS SUPABASE (ACTUALITÉS) ====================
+    // ==================== CHARGEMENT PUBLIC DEPUIS SUPABASE AVEC CACHE ====================
     let actualitesData = [];
+    
+    async function loadWithCache(table, options = {}) {
+        const cacheKey = `cache_${table}`;
+        const cacheTimeKey = `${cacheKey}_time`;
+        const cached = localStorage.getItem(cacheKey);
+        const cacheTime = localStorage.getItem(cacheTimeKey);
+        
+        // Cache valide 10 minutes
+        if (cached && cacheTime && (Date.now() - parseInt(cacheTime)) < 600000) {
+            return JSON.parse(cached);
+        }
+        
+        if (!supabaseClient) return null;
+        let query = supabaseClient.from(table).select('*');
+        if (options.orderBy) query = query.order(options.orderBy, { ascending: options.ascending !== false });
+        if (options.order) query = query.order('ordre');
+        
+        const { data, error } = await query;
+        if (error) { console.error(`Erreur ${table}:`, error); return null; }
+        
+        localStorage.setItem(cacheKey, JSON.stringify(data));
+        localStorage.setItem(cacheTimeKey, Date.now().toString());
+        return data;
+    }
 
     async function loadPublicActualites() {
-        if (!supabaseClient) return;
-        const { data, error } = await supabaseClient.from('actualites').select('*').order('created_at', { ascending: false });
-        if (error) { console.error("Erreur actualités:", error); return; }
+        const data = await loadWithCache('actualites', { orderBy: 'created_at', ascending: false });
         actualitesData = data || [];
         const container = document.getElementById('actualitesContainer');
         
         if (!actualitesData.length) {
-            // Aucune actualité : afficher un simple message sans carte
             container.innerHTML = '<div class="no-actu-message">📭 Aucune actualité pour le moment</div>';
             return;
         }
         
-        // Affichage avec le wrapper horizontal
         container.innerHTML = `
             <div class="actualites-wrapper" id="actualitesWrapper">
                 <div class="actualites-scroll" id="actualitesList"></div>
@@ -1823,7 +2003,7 @@
         const listContainer = document.getElementById('actualitesList');
         listContainer.innerHTML = actualitesData.map((a, idx) => {
             const imageHtml = a.image_url 
-                ? `<img src="${escapeHtml(a.image_url)}" alt="${escapeHtml(a.titre)}" onerror="this.style.display='none'; this.parentElement.innerHTML='📢'">` 
+                ? `<img src="${escapeHtml(a.image_url)}" alt="${escapeHtml(a.titre)}" loading="lazy" onerror="this.style.display='none'; this.parentElement.innerHTML='📢'">` 
                 : '<div style="font-size:3rem; display:flex; align-items:center; justify-content:center; height:100%;">📢</div>';
             
             return `
@@ -1847,15 +2027,78 @@
                 }
             });
         });
+    }
 
-        const wrapper = document.getElementById('actualitesWrapper');
-        if (wrapper && actualitesData.length > 0) {
-            let isDown = false, startX, scrollLeft;
-            wrapper.addEventListener('mousedown', (e) => { isDown = true; startX = e.pageX - wrapper.offsetLeft; scrollLeft = wrapper.scrollLeft; });
-            wrapper.addEventListener('mouseleave', () => isDown = false);
-            wrapper.addEventListener('mouseup', () => isDown = false);
-            wrapper.addEventListener('mousemove', (e) => { if(!isDown) return; e.preventDefault(); const x = e.pageX - wrapper.offsetLeft; const walk = (x - startX) * 2; wrapper.scrollLeft = scrollLeft - walk; });
-        }
+    async function loadPublicSpecialitesMedicales() {
+        const data = await loadWithCache('specialites_medicales', { order: true });
+        document.getElementById('specialitesMedicalesList').innerHTML = data?.length ? data.map(s => `<div class="specialty-item"><strong>${escapeHtml(s.titre)}</strong><p>${escapeHtml(s.description || '')}</p></div>`).join('') : '<div class="specialty-item"><strong>Aucune spécialité</strong><p></p></div>';
+    }
+
+    async function loadPublicSpecialitesChirurgicales() {
+        const data = await loadWithCache('specialites_chirurgicales', { order: true });
+        document.getElementById('specialitesChirurgicalesList').innerHTML = data?.length ? data.map(s => `<div class="specialty-item"><strong>${escapeHtml(s.titre)}</strong><p>${escapeHtml(s.description || '')}</p></div>`).join('') : '<div class="specialty-item"><strong>Aucune spécialité</strong><p></p></div>';
+    }
+
+    async function loadPublicGynecologie() {
+        const data = await loadWithCache('gynecologie', { order: true });
+        document.getElementById('gynecologieList').innerHTML = data?.length ? data.map(g => `<div class="specialty-item"><strong>${escapeHtml(g.titre)}</strong><p>${escapeHtml(g.description || '')}</p></div>`).join('') : '<div class="specialty-item"><strong>Aucun service</strong><p></p></div>';
+    }
+
+    async function loadPublicExplorations() {
+        const data = await loadWithCache('explorations', { order: true });
+        document.getElementById('explorationsList').innerHTML = data?.length ? data.map(e => `<div class="specialty-item"><strong>${escapeHtml(e.titre)}</strong><p>${escapeHtml(e.description || '')}</p></div>`).join('') : '<div class="specialty-item"><strong>Aucune exploration</strong><p></p></div>';
+    }
+
+    async function loadPublicImagerie() {
+        const data = await loadWithCache('imagerie', { order: true });
+        document.getElementById('imagerieList').innerHTML = data?.length ? data.map(i => `<div class="specialty-item"><strong>${escapeHtml(i.titre)}</strong><p></p></div>`).join('') : '<div class="specialty-item"><strong>Aucun service d\'imagerie</strong><p></p></div>';
+    }
+
+    async function loadPublicEquipements() {
+        const data = await loadWithCache('equipements', { order: true });
+        document.getElementById('equipementsList').innerHTML = data?.length ? data.map(e => `<div class="specialty-item"><strong>${escapeHtml(e.titre)}${e.badge ? ` <span class="badge-247">${escapeHtml(e.badge)}</span>` : ''}</strong><p>${escapeHtml(e.description || '')}</p></div>`).join('') : '<div class="specialty-item"><strong>Aucun équipement</strong><p></p></div>';
+    }
+
+    async function loadPublicTeam() {
+        const data = await loadWithCache('equipes', { order: true });
+        const container = document.getElementById('teamList');
+        if (!data?.length) { container.innerHTML = '<p>Aucun membre pour le moment</p>'; return; }
+        container.innerHTML = data.map(m => `
+            <div class="team-card">
+                <img src="${escapeHtml(m.image_url) || 'https://placehold.co/400x400/0077A4/white?text=Photo'}" alt="${escapeHtml(m.nom)}" class="team-image" loading="lazy" onerror="this.src='https://placehold.co/400x400/0077A4/white?text=Photo'">
+                <div class="team-info">
+                    <div class="team-name">${escapeHtml(m.nom)}</div>
+                    <div class="team-position">${escapeHtml(m.poste)}</div>
+                    <div class="team-desc">${escapeHtml(m.description || '')}</div>
+                </div>
+            </div>
+        `).join('');
+    }
+
+    // Chargement parallèle mais avec gestion d'erreurs
+    let dataLoaded = false;
+    
+    async function loadAllPublicData() {
+        if (dataLoaded) return;
+        dataLoaded = true;
+        
+        const results = await Promise.allSettled([
+            loadPublicActualites(),
+            loadPublicSpecialitesMedicales(),
+            loadPublicSpecialitesChirurgicales(),
+            loadPublicGynecologie(),
+            loadPublicExplorations(),
+            loadPublicImagerie(),
+            loadPublicEquipements(),
+            loadPublicTeam()
+        ]);
+        
+        // Afficher les erreurs silencieusement
+        results.forEach((result, i) => {
+            if (result.status === 'rejected') {
+                console.warn(`Erreur chargement module ${i}:`, result.reason);
+            }
+        });
     }
 
     // ==================== MODAL ACTUALITE ====================
@@ -1902,75 +2145,6 @@
         }
     });
 
-    // ========== AUTRES CHARGEMENTS ==========
-    async function loadPublicSpecialitesMedicales() {
-        if (!supabaseClient) return;
-        const { data, error } = await supabaseClient.from('specialites_medicales').select('*').order('ordre');
-        if (error) { console.error("Erreur spécialités médicales:", error); return; }
-        document.getElementById('specialitesMedicalesList').innerHTML = data?.length ? data.map(s => `<div class="specialty-item"><strong>${escapeHtml(s.titre)}</strong><p>${escapeHtml(s.description || '')}</p></div>`).join('') : '<div class="specialty-item"><strong>Aucune spécialité</strong><p></p></div>';
-    }
-
-    async function loadPublicSpecialitesChirurgicales() {
-        if (!supabaseClient) return;
-        const { data, error } = await supabaseClient.from('specialites_chirurgicales').select('*').order('ordre');
-        if (error) { console.error("Erreur spécialités chirurgicales:", error); return; }
-        document.getElementById('specialitesChirurgicalesList').innerHTML = data?.length ? data.map(s => `<div class="specialty-item"><strong>${escapeHtml(s.titre)}</strong><p>${escapeHtml(s.description || '')}</p></div>`).join('') : '<div class="specialty-item"><strong>Aucune spécialité</strong><p></p></div>';
-    }
-
-    async function loadPublicGynecologie() {
-        if (!supabaseClient) return;
-        const { data, error } = await supabaseClient.from('gynecologie').select('*').order('ordre');
-        if (error) { console.error("Erreur gynécologie:", error); return; }
-        document.getElementById('gynecologieList').innerHTML = data?.length ? data.map(g => `<div class="specialty-item"><strong>${escapeHtml(g.titre)}</strong><p>${escapeHtml(g.description || '')}</p></div>`).join('') : '<div class="specialty-item"><strong>Aucun service</strong><p></p></div>';
-    }
-
-    async function loadPublicExplorations() {
-        if (!supabaseClient) return;
-        const { data, error } = await supabaseClient.from('explorations').select('*').order('ordre');
-        if (error) { console.error("Erreur explorations:", error); return; }
-        document.getElementById('explorationsList').innerHTML = data?.length ? data.map(e => `<div class="specialty-item"><strong>${escapeHtml(e.titre)}</strong><p>${escapeHtml(e.description || '')}</p></div>`).join('') : '<div class="specialty-item"><strong>Aucune exploration</strong><p></p></div>';
-    }
-
-    async function loadPublicImagerie() {
-        if (!supabaseClient) return;
-        const { data, error } = await supabaseClient.from('imagerie').select('*').order('ordre');
-        if (error) { console.error("Erreur imagerie:", error); return; }
-        document.getElementById('imagerieList').innerHTML = data?.length ? data.map(i => `<div class="specialty-item"><strong>${escapeHtml(i.titre)}</strong><p></p></div>`).join('') : '<div class="specialty-item"><strong>Aucun service d\'imagerie</strong><p></p></div>';
-    }
-
-    async function loadPublicEquipements() {
-        if (!supabaseClient) return;
-        const { data, error } = await supabaseClient.from('equipements').select('*').order('ordre');
-        if (error) { console.error("Erreur équipements:", error); return; }
-        document.getElementById('equipementsList').innerHTML = data?.length ? data.map(e => `<div class="specialty-item"><strong>${escapeHtml(e.titre)}${e.badge ? ` <span class="badge-247">${escapeHtml(e.badge)}</span>` : ''}</strong><p>${escapeHtml(e.description || '')}</p></div>`).join('') : '<div class="specialty-item"><strong>Aucun équipement</strong><p></p></div>';
-    }
-
-    async function loadPublicTeam() {
-        if (!supabaseClient) return;
-        const { data, error } = await supabaseClient.from('equipes').select('*').order('ordre');
-        if (error) { console.error("Erreur équipe:", error); return; }
-        const container = document.getElementById('teamList');
-        if (!data?.length) { container.innerHTML = '<p>Aucun membre pour le moment</p>'; return; }
-        container.innerHTML = data.map(m => `
-            <div class="team-card">
-                <img src="${escapeHtml(m.image_url) || 'https://placehold.co/400x400/0077A4/white?text=Photo'}" alt="${escapeHtml(m.nom)}" class="team-image" onerror="this.src='https://placehold.co/400x400/0077A4/white?text=Photo'">
-                <div class="team-info">
-                    <div class="team-name">${escapeHtml(m.nom)}</div>
-                    <div class="team-position">${escapeHtml(m.poste)}</div>
-                    <div class="team-desc">${escapeHtml(m.description || '')}</div>
-                </div>
-            </div>
-        `).join('');
-    }
-
-    async function loadAllPublicData() {
-        await Promise.all([
-            loadPublicActualites(), loadPublicSpecialitesMedicales(), loadPublicSpecialitesChirurgicales(),
-            loadPublicGynecologie(), loadPublicExplorations(), loadPublicImagerie(),
-            loadPublicEquipements(), loadPublicTeam()
-        ]);
-    }
-
     // ==================== ADMIN LOGIN ====================
     const loginModal = document.getElementById('loginModal');
     const submitLogin = document.getElementById('submitLoginBtn');
@@ -2009,7 +2183,7 @@
         }
     }
 
-    // ==================== GALERIE ====================
+    // ==================== GALERIE AVEC LAZY LOADING ====================
     const galleryImages = [
         "cliniquewendtoin/Im1.jpeg", "cliniquewendtoin/Im3.jpeg", "cliniquewendtoin/Im4.jpeg",
         "cliniquewendtoin/Im5.jpeg", "cliniquewendtoin/Im7.jpeg", "cliniquewendtoin/Im8.jpeg",
@@ -2026,7 +2200,7 @@
         galleryImages.forEach(imgSrc => {
             const item = document.createElement('div');
             item.className = 'gallery-item animate-on-scroll';
-            item.innerHTML = `<img src="${imgSrc}" alt="Clinique WENDTOIN" class="gallery-img" onerror="this.src='https://placehold.co/400x300/0077A4/white?text=Photo'">`;
+            item.innerHTML = `<img src="${imgSrc}" alt="Clinique WENDTOIN" class="gallery-img" loading="lazy" decoding="async" onerror="this.src='https://placehold.co/400x300/0077A4/white?text=Photo'">`;
             item.addEventListener('click', () => { modalImage.src = imgSrc; imageModal.style.display = 'flex'; });
             galleryGrid.appendChild(item);
         });
@@ -2064,7 +2238,7 @@
             const card = document.createElement('div');
             card.className = 'video-card';
             card.addEventListener('click', () => { window.open(video.url, '_blank', 'noopener,noreferrer'); });
-            card.innerHTML = `<div class="video-thumbnail">▶️</div><div class="video-info"><div class="video-title">${video.title}</div><div class="video-date">${video.desc}</div></div>`;
+            card.innerHTML = `<div class="video-thumbnail">▶️</div><div class="video-info"><div class="video-title">${escapeHtml(video.title)}</div><div class="video-date">${escapeHtml(video.desc)}</div></div>`;
             videoGrid.appendChild(card);
         });
         if (showMoreBtn) showMoreBtn.style.display = visibleVideos >= allVideos.length ? 'none' : 'inline-block';
@@ -2152,11 +2326,20 @@
 
     function escapeHtml(str) { if(!str) return ''; return str.replace(/[&<>]/g, function(m){ if(m==='&') return '&amp;'; if(m==='<') return '&lt;'; if(m==='>') return '&gt;'; return m;}); }
 
-    initSupabase();
+    // Chargement différé de Supabase
+    const supabaseScript = document.createElement('script');
+    supabaseScript.src = 'https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2';
+    supabaseScript.async = true;
+    supabaseScript.onload = () => {
+        console.log('Supabase chargé');
+        initSupabase();
+    };
+    document.body.appendChild(supabaseScript);
     
+    // Fallback pour les statistiques
     const doctorStatElement = document.getElementById('stat-doctors');
-    if (doctorStatElement) {
-        doctorStatElement.innerText = "+ 40";
+    if (doctorStatElement && doctorStatElement.innerText === "+ 40") {
+        // Déjà bon
     }
 </script>
 </body>
