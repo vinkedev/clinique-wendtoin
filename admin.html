@@ -7,25 +7,10 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
     <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        body {
-            font-family: 'Inter', sans-serif;
-            background: #f1f5f9;
-            color: #1e293b;
-        }
-
-        .admin-container {
-            max-width: 1400px;
-            margin: 0 auto;
-            padding: 20px;
-        }
-
-        /* Header */
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Inter', sans-serif; background: #f1f5f9; color: #1e293b; }
+        .admin-container { max-width: 1400px; margin: 0 auto; padding: 20px; }
+        
         .admin-header {
             background: white;
             border-radius: 24px;
@@ -38,39 +23,10 @@
             gap: 15px;
             box-shadow: 0 2px 10px rgba(0,0,0,0.05);
         }
-
-        .admin-header h1 {
-            font-size: 1.4rem;
-            background: linear-gradient(135deg, #0077A4, #1D8B5D);
-            -webkit-background-clip: text;
-            background-clip: text;
-            color: transparent;
-        }
-
-        .admin-header .badge {
-            background: #1D8B5D;
-            color: white;
-            padding: 5px 12px;
-            border-radius: 30px;
-            font-size: 0.7rem;
-        }
-
-        .btn-logout {
-            background: #dc3545;
-            color: white;
-            border: none;
-            padding: 8px 20px;
-            border-radius: 40px;
-            cursor: pointer;
-            font-weight: 600;
-            transition: 0.3s;
-        }
-
-        .btn-logout:hover {
-            background: #b91c1c;
-        }
-
-        /* Onglets */
+        .admin-header h1 { font-size: 1.4rem; background: linear-gradient(135deg, #0077A4, #1D8B5D); -webkit-background-clip: text; background-clip: text; color: transparent; }
+        .btn-logout { background: #dc3545; color: white; border: none; padding: 8px 20px; border-radius: 40px; cursor: pointer; font-weight: 600; }
+        .btn-logout:hover { background: #b91c1c; }
+        
         .tabs {
             display: flex;
             gap: 8px;
@@ -81,7 +37,6 @@
             border-radius: 60px;
             box-shadow: 0 2px 8px rgba(0,0,0,0.05);
         }
-
         .tab-btn {
             background: transparent;
             border: none;
@@ -90,19 +45,10 @@
             border-radius: 40px;
             cursor: pointer;
             transition: 0.2s;
-            font-size: 0.85rem;
         }
-
-        .tab-btn:hover {
-            background: #e2e8f0;
-        }
-
-        .tab-btn.active {
-            background: #1D8B5D;
-            color: white;
-        }
-
-        /* Panneaux */
+        .tab-btn:hover { background: #e2e8f0; }
+        .tab-btn.active { background: #1D8B5D; color: white; }
+        
         .tab-pane {
             display: none;
             background: white;
@@ -111,34 +57,17 @@
             margin-bottom: 30px;
             box-shadow: 0 4px 15px rgba(0,0,0,0.05);
         }
-
-        .tab-pane.active {
-            display: block;
-            animation: fadeIn 0.3s ease;
-        }
-
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(10px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-
-        /* Formulaires */
+        .tab-pane.active { display: block; animation: fadeIn 0.3s ease; }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+        
         .form-admin {
             background: #f8fafc;
             padding: 20px;
             border-radius: 20px;
             margin-bottom: 30px;
         }
-
-        .form-admin h3 {
-            margin-bottom: 15px;
-            color: #0077A4;
-            font-size: 1.1rem;
-        }
-
-        .form-admin input, 
-        .form-admin textarea, 
-        .form-admin select {
+        .form-admin h3 { margin-bottom: 15px; color: #0077A4; font-size: 1.1rem; }
+        .form-admin input, .form-admin textarea {
             width: 100%;
             padding: 12px 15px;
             margin-bottom: 15px;
@@ -146,21 +75,33 @@
             border-radius: 40px;
             font-family: inherit;
             font-size: 0.9rem;
-            transition: 0.2s;
         }
-
-        .form-admin input:focus,
-        .form-admin textarea:focus {
+        .form-admin input:focus, .form-admin textarea:focus {
             outline: none;
             border-color: #1D8B5D;
             box-shadow: 0 0 0 3px rgba(29,139,93,0.1);
         }
-
-        .form-admin textarea {
-            border-radius: 20px;
-            resize: vertical;
+        .form-admin textarea { border-radius: 20px; resize: vertical; }
+        
+        .file-input-label {
+            background: #e2e8f0;
+            padding: 12px 20px;
+            border-radius: 40px;
+            cursor: pointer;
+            display: inline-block;
+            margin-bottom: 15px;
+            font-size: 0.85rem;
+            font-weight: 500;
         }
-
+        .file-input-label:hover { background: #cbd5e1; }
+        .preview-img {
+            max-width: 100px;
+            max-height: 100px;
+            border-radius: 12px;
+            margin: 10px 0;
+            object-fit: cover;
+        }
+        
         .btn-save {
             background: #1D8B5D;
             color: white;
@@ -171,31 +112,10 @@
             font-weight: 600;
             transition: 0.3s;
         }
-
-        .btn-save:hover {
-            background: #146b48;
-            transform: translateY(-2px);
-        }
-
-        .btn-danger {
-            background: #dc3545;
-        }
-
-        .btn-danger:hover {
-            background: #b91c1c;
-        }
-
-        /* Liste des éléments */
-        .item-list {
-            margin-top: 20px;
-        }
-
-        .item-list h4 {
-            margin-bottom: 15px;
-            color: #1e293b;
-            font-size: 1rem;
-        }
-
+        .btn-save:hover { background: #146b48; transform: translateY(-2px); }
+        
+        .item-list { margin-top: 20px; }
+        .item-list h4 { margin-bottom: 15px; color: #1e293b; }
         .item-card {
             background: #f8fafc;
             padding: 15px;
@@ -207,55 +127,16 @@
             flex-wrap: wrap;
             gap: 10px;
             border: 1px solid #eef2f6;
-            transition: 0.2s;
         }
-
-        .item-card:hover {
-            background: white;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.08);
-        }
-
-        .item-info {
-            flex: 1;
-        }
-
-        .item-info strong {
-            color: #0077A4;
-            font-size: 1rem;
-        }
-
-        .item-info .small {
-            font-size: 0.75rem;
-            color: #64748b;
-            margin-top: 4px;
-        }
-
-        .item-actions {
-            display: flex;
-            gap: 8px;
-        }
-
-        .item-actions button {
-            background: #e2e8f0;
-            border: none;
-            padding: 6px 14px;
-            border-radius: 30px;
-            cursor: pointer;
-            font-size: 0.75rem;
-            font-weight: 500;
-            transition: 0.2s;
-        }
-
-        .item-actions .delete-btn {
-            background: #fee2e2;
-            color: #b91c1c;
-        }
-
-        .item-actions .delete-btn:hover {
-            background: #fecaca;
-        }
-
-        /* Modal login */
+        .item-info { flex: 1; }
+        .item-info strong { color: #0077A4; }
+        .item-info .small { font-size: 0.75rem; color: #64748b; margin-top: 4px; }
+        .item-info .preview-small { width: 40px; height: 40px; border-radius: 50%; object-fit: cover; margin-right: 10px; vertical-align: middle; }
+        
+        .item-actions { display: flex; gap: 8px; }
+        .item-actions button { background: #e2e8f0; border: none; padding: 6px 14px; border-radius: 30px; cursor: pointer; }
+        .item-actions .delete-btn { background: #fee2e2; color: #b91c1c; }
+        
         .login-modal {
             display: flex;
             position: fixed;
@@ -269,7 +150,6 @@
             align-items: center;
             justify-content: center;
         }
-
         .login-card {
             background: white;
             max-width: 380px;
@@ -278,77 +158,12 @@
             padding: 32px;
             text-align: center;
         }
-
-        .login-card h2 {
-            color: #0077A4;
-            margin-bottom: 20px;
-            font-size: 1.5rem;
-        }
-
-        .login-card input {
-            width: 100%;
-            padding: 14px;
-            border: 1px solid #e2e8f0;
-            border-radius: 60px;
-            margin-bottom: 20px;
-            font-size: 1rem;
-        }
-
-        .login-card button {
-            background: #1D8B5D;
-            color: white;
-            border: none;
-            padding: 12px;
-            width: 100%;
-            border-radius: 60px;
-            font-weight: 700;
-            font-size: 1rem;
-            cursor: pointer;
-        }
-
-        .login-card .error {
-            color: #dc3545;
-            margin-top: 12px;
-            font-size: 0.8rem;
-        }
-
-        /* Loader */
-        .loader {
-            text-align: center;
-            padding: 40px;
-            color: #64748b;
-        }
-
-        /* Responsive */
-        @media (max-width: 768px) {
-            .admin-container {
-                padding: 12px;
-            }
-            .tabs {
-                border-radius: 20px;
-                overflow-x: auto;
-                flex-wrap: nowrap;
-            }
-            .tab-btn {
-                white-space: nowrap;
-            }
-            .item-card {
-                flex-direction: column;
-                align-items: flex-start;
-            }
-            .item-actions {
-                width: 100%;
-                justify-content: flex-end;
-            }
-        }
-
-        /* Stats */
-        .stats-row {
-            display: flex;
-            gap: 15px;
-            flex-wrap: wrap;
-            margin-bottom: 20px;
-        }
+        .login-card h2 { color: #0077A4; margin-bottom: 20px; }
+        .login-card input { width: 100%; padding: 14px; border: 1px solid #e2e8f0; border-radius: 60px; margin-bottom: 20px; }
+        .login-card button { background: #1D8B5D; color: white; border: none; padding: 12px; width: 100%; border-radius: 60px; font-weight: 700; cursor: pointer; }
+        .login-card .error { color: #dc3545; margin-top: 12px; }
+        
+        .stats-row { display: flex; gap: 15px; flex-wrap: wrap; margin-bottom: 20px; }
         .stat-card {
             background: linear-gradient(135deg, #0077A4, #1D8B5D);
             color: white;
@@ -357,19 +172,20 @@
             flex: 1;
             min-width: 150px;
         }
-        .stat-card .number {
-            font-size: 1.8rem;
-            font-weight: 800;
-        }
-        .stat-card .label {
-            font-size: 0.8rem;
-            opacity: 0.9;
+        .stat-card .number { font-size: 1.8rem; font-weight: 800; }
+        .stat-card .label { font-size: 0.8rem; opacity: 0.9; }
+        
+        @media (max-width: 768px) {
+            .admin-container { padding: 12px; }
+            .tabs { border-radius: 20px; overflow-x: auto; flex-wrap: nowrap; }
+            .tab-btn { white-space: nowrap; }
+            .item-card { flex-direction: column; align-items: flex-start; }
+            .item-actions { width: 100%; justify-content: flex-end; }
         }
     </style>
 </head>
 <body>
     <div id="app">
-        <!-- Modal de connexion -->
         <div id="loginModal" class="login-modal">
             <div class="login-card">
                 <h2>🔐 Administration</h2>
@@ -379,18 +195,13 @@
             </div>
         </div>
 
-        <!-- Dashboard admin (caché jusqu'à connexion) -->
         <div id="adminDashboard" style="display: none;">
             <div class="admin-container">
                 <div class="admin-header">
-                    <div>
-                        <h1>⚙️ Administration Clinique WENDTOIN</h1>
-                        <span class="badge">Gestion complète du contenu</span>
-                    </div>
+                    <div><h1>⚙️ Administration Clinique WENDTOIN</h1></div>
                     <button id="logoutAdminBtn" class="btn-logout">🔓 Déconnexion</button>
                 </div>
 
-                <!-- Stats rapides -->
                 <div class="stats-row" id="statsContainer">
                     <div class="stat-card"><div class="number" id="statActus">0</div><div class="label">Actualités</div></div>
                     <div class="stat-card"><div class="number" id="statEquipe">0</div><div class="label">Membres équipe</div></div>
@@ -398,7 +209,6 @@
                     <div class="stat-card"><div class="number" id="statSpecChir">0</div><div class="label">Spécialités chirurgicales</div></div>
                 </div>
 
-                <!-- Onglets -->
                 <div class="tabs">
                     <button class="tab-btn active" data-tab="actualites">📰 Actualités</button>
                     <button class="tab-btn" data-tab="specMedicales">🩺 Spécialités médicales</button>
@@ -410,14 +220,18 @@
                     <button class="tab-btn" data-tab="equipe">👥 Équipe</button>
                 </div>
 
-                <!-- Panneau Actualités -->
+                <!-- Actualités -->
                 <div id="actualites" class="tab-pane active">
                     <div class="form-admin">
                         <h3>➕ Ajouter une actualité</h3>
                         <input type="text" id="actuTitre" placeholder="Titre *">
                         <textarea id="actuDescription" rows="2" placeholder="Description"></textarea>
                         <input type="text" id="actuDate" placeholder="Date (ex: 15 Mars 2026)">
-                        <input type="text" id="actuEmoji" placeholder="Emoji (ex: 🏥, 👨‍⚕️, 📢)">
+                        <div>
+                            <label class="file-input-label">📷 Choisir une image</label>
+                            <input type="file" id="actuImageFile" accept="image/*" style="display:none">
+                            <div id="actuImagePreview"></div>
+                        </div>
                         <button id="createActuBtn" class="btn-save">📌 Publier</button>
                     </div>
                     <div class="item-list">
@@ -426,7 +240,7 @@
                     </div>
                 </div>
 
-                <!-- Panneau Spécialités médicales -->
+                <!-- Spécialités médicales -->
                 <div id="specMedicales" class="tab-pane">
                     <div class="form-admin">
                         <h3>➕ Ajouter une spécialité médicale</h3>
@@ -434,13 +248,10 @@
                         <textarea id="specMedDesc" rows="2" placeholder="Description"></textarea>
                         <button id="createSpecMedBtn" class="btn-save">Ajouter</button>
                     </div>
-                    <div class="item-list">
-                        <h4>📋 Liste des spécialités médicales</h4>
-                        <div id="adminSpecMedList">Chargement...</div>
-                    </div>
+                    <div class="item-list"><h4>📋 Liste des spécialités médicales</h4><div id="adminSpecMedList">Chargement...</div></div>
                 </div>
 
-                <!-- Panneau Spécialités chirurgicales -->
+                <!-- Spécialités chirurgicales -->
                 <div id="specChirurgicales" class="tab-pane">
                     <div class="form-admin">
                         <h3>➕ Ajouter une spécialité chirurgicale</h3>
@@ -448,13 +259,10 @@
                         <textarea id="specChirDesc" rows="2" placeholder="Description"></textarea>
                         <button id="createSpecChirBtn" class="btn-save">Ajouter</button>
                     </div>
-                    <div class="item-list">
-                        <h4>📋 Liste des spécialités chirurgicales</h4>
-                        <div id="adminSpecChirList">Chargement...</div>
-                    </div>
+                    <div class="item-list"><h4>📋 Liste des spécialités chirurgicales</h4><div id="adminSpecChirList">Chargement...</div></div>
                 </div>
 
-                <!-- Panneau Gynécologie -->
+                <!-- Gynécologie -->
                 <div id="gynecologie" class="tab-pane">
                     <div class="form-admin">
                         <h3>➕ Ajouter un service de gynécologie</h3>
@@ -462,13 +270,10 @@
                         <textarea id="gyneDesc" rows="2" placeholder="Description"></textarea>
                         <button id="createGyneBtn" class="btn-save">Ajouter</button>
                     </div>
-                    <div class="item-list">
-                        <h4>📋 Liste des services</h4>
-                        <div id="adminGyneList">Chargement...</div>
-                    </div>
+                    <div class="item-list"><h4>📋 Liste des services</h4><div id="adminGyneList">Chargement...</div></div>
                 </div>
 
-                <!-- Panneau Explorations -->
+                <!-- Explorations -->
                 <div id="explorations" class="tab-pane">
                     <div class="form-admin">
                         <h3>➕ Ajouter une exploration</h3>
@@ -476,48 +281,43 @@
                         <textarea id="exploDesc" rows="2" placeholder="Description"></textarea>
                         <button id="createExploBtn" class="btn-save">Ajouter</button>
                     </div>
-                    <div class="item-list">
-                        <h4>📋 Liste des explorations</h4>
-                        <div id="adminExploList">Chargement...</div>
-                    </div>
+                    <div class="item-list"><h4>📋 Liste des explorations</h4><div id="adminExploList">Chargement...</div></div>
                 </div>
 
-                <!-- Panneau Imagerie -->
+                <!-- Imagerie -->
                 <div id="imagerie" class="tab-pane">
                     <div class="form-admin">
                         <h3>➕ Ajouter un service d'imagerie</h3>
-                        <input type="text" id="imagerieTitre" placeholder="Titre (ex: Scanner, IRM, Radiologie)">
+                        <input type="text" id="imagerieTitre" placeholder="Titre (ex: Scanner, IRM)">
                         <button id="createImagerieBtn" class="btn-save">Ajouter</button>
                     </div>
-                    <div class="item-list">
-                        <h4>📋 Liste des services d'imagerie</h4>
-                        <div id="adminImagerieList">Chargement...</div>
-                    </div>
+                    <div class="item-list"><h4>📋 Liste des services d'imagerie</h4><div id="adminImagerieList">Chargement...</div></div>
                 </div>
 
-                <!-- Panneau Équipements -->
+                <!-- Équipements -->
                 <div id="equipements" class="tab-pane">
                     <div class="form-admin">
                         <h3>➕ Ajouter un équipement spécialisé</h3>
                         <input type="text" id="equipTitre" placeholder="Titre">
                         <textarea id="equipDesc" rows="2" placeholder="Description"></textarea>
-                        <input type="text" id="equipBadge" placeholder="Badge (optionnel: 24h/24, Urgence)">
+                        <input type="text" id="equipBadge" placeholder="Badge (optionnel)">
                         <button id="createEquipBtn" class="btn-save">Ajouter</button>
                     </div>
-                    <div class="item-list">
-                        <h4>📋 Liste des équipements</h4>
-                        <div id="adminEquipList">Chargement...</div>
-                    </div>
+                    <div class="item-list"><h4>📋 Liste des équipements</h4><div id="adminEquipList">Chargement...</div></div>
                 </div>
 
-                <!-- Panneau Équipe -->
+                <!-- Équipe avec upload d'image -->
                 <div id="equipe" class="tab-pane">
                     <div class="form-admin">
                         <h3>➕ Ajouter un membre de l'équipe</h3>
                         <input type="text" id="memberNom" placeholder="Nom complet *">
                         <input type="text" id="memberPoste" placeholder="Poste *">
                         <textarea id="memberDescription" rows="2" placeholder="Description / Bio"></textarea>
-                        <input type="text" id="memberImageUrl" placeholder="URL de la photo (optionnel)">
+                        <div>
+                            <label class="file-input-label">📷 Choisir une photo</label>
+                            <input type="file" id="memberImageFile" accept="image/*" style="display:none">
+                            <div id="memberImagePreview"></div>
+                        </div>
                         <button id="createMemberBtn" class="btn-save">👤 Ajouter</button>
                     </div>
                     <div class="item-list">
@@ -530,7 +330,7 @@
     </div>
 
     <script>
-        // ========== CONFIGURATION SUPABASE ==========
+        // Supabase configuration
         const SUPABASE_URL = "https://otdiywrvzappbmjfkkyi.supabase.co";
         const SUPABASE_ANON_KEY = "sb_publishable_tn6FW9OxsqNdKMg9uCuB5A_gZICo-Jy";
         const supabase = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
@@ -543,10 +343,8 @@
         const adminDashboard = document.getElementById('adminDashboard');
         const submitLoginBtn = document.getElementById('submitLoginBtn');
         const logoutBtn = document.getElementById('logoutAdminBtn');
-        const adminPassword = document.getElementById('adminPassword');
-        const loginError = document.getElementById('loginError');
 
-        // Vérifier si déjà connecté (session)
+        // Vérifier session
         if (sessionStorage.getItem('clinique_admin') === 'true') {
             isAdmin = true;
             loginModal.style.display = 'none';
@@ -556,45 +354,147 @@
 
         // Connexion
         submitLoginBtn.addEventListener('click', () => {
-            if (adminPassword.value === ADMIN_PASSWORD) {
-                isAdmin = true;
+            const pwd = document.getElementById('adminPassword');
+            if (pwd.value === ADMIN_PASSWORD) {
                 sessionStorage.setItem('clinique_admin', 'true');
                 loginModal.style.display = 'none';
                 adminDashboard.style.display = 'block';
                 loadAllAdminData();
             } else {
-                loginError.innerText = 'Mot de passe incorrect';
+                document.getElementById('loginError').innerText = 'Mot de passe incorrect';
             }
         });
 
-        // Déconnexion
         logoutBtn.addEventListener('click', () => {
             sessionStorage.removeItem('clinique_admin');
-            isAdmin = false;
             adminDashboard.style.display = 'none';
             loginModal.style.display = 'flex';
-            adminPassword.value = '';
-            loginError.innerText = '';
         });
 
-        // Enter key dans le modal
-        adminPassword.addEventListener('keypress', (e) => {
-            if (e.key === 'Enter') submitLoginBtn.click();
+        // Fonction d'upload d'image
+        async function uploadImage(file, folder) {
+            if (!file) return null;
+            const fileExt = file.name.split('.').pop();
+            const fileName = `${Date.now()}_${Math.random().toString(36).substring(2, 8)}.${fileExt}`;
+            const filePath = `${fileName}`;
+            
+            const { data, error } = await supabase.storage
+                .from(folder)
+                .upload(filePath, file);
+            
+            if (error) {
+                console.error('Upload error:', error);
+                alert('Erreur upload: ' + error.message);
+                return null;
+            }
+            
+            const { data: urlData } = supabase.storage
+                .from(folder)
+                .getPublicUrl(filePath);
+            
+            return urlData.publicUrl;
+        }
+
+        // Preview images
+        document.getElementById('actuImageFile')?.addEventListener('change', (e) => {
+            const file = e.target.files[0];
+            if (file) {
+                const reader = new FileReader();
+                reader.onload = (event) => {
+                    document.getElementById('actuImagePreview').innerHTML = `<img src="${event.target.result}" class="preview-img">`;
+                };
+                reader.readAsDataURL(file);
+            }
         });
 
-        // ========== CHARGEMENT DES DONNÉES ADMIN ==========
+        document.getElementById('memberImageFile')?.addEventListener('change', (e) => {
+            const file = e.target.files[0];
+            if (file) {
+                const reader = new FileReader();
+                reader.onload = (event) => {
+                    document.getElementById('memberImagePreview').innerHTML = `<img src="${event.target.result}" class="preview-img">`;
+                };
+                reader.readAsDataURL(file);
+            }
+        });
+
+        // Trigger file input clicks
+        document.querySelector('.file-input-label')?.addEventListener('click', () => {
+            document.getElementById('actuImageFile')?.click();
+        });
+        document.querySelectorAll('.file-input-label')[1]?.addEventListener('click', () => {
+            document.getElementById('memberImageFile')?.click();
+        });
+
+        // ========== CRÉATION AVEC IMAGES ==========
         
-        // Actualités
+        // Créer actualité avec image
+        document.getElementById('createActuBtn')?.addEventListener('click', async () => {
+            const titre = document.getElementById('actuTitre').value.trim();
+            if (!titre) { alert('Titre requis'); return; }
+            
+            let imageUrl = null;
+            const imageFile = document.getElementById('actuImageFile').files[0];
+            if (imageFile) {
+                imageUrl = await uploadImage(imageFile, 'actualites');
+            }
+            
+            await supabase.from('actualites').insert([{
+                titre,
+                description: document.getElementById('actuDescription').value,
+                date: document.getElementById('actuDate').value,
+                image_url: imageUrl
+            }]);
+            
+            alert('Actualité ajoutée');
+            document.getElementById('actuTitre').value = '';
+            document.getElementById('actuDescription').value = '';
+            document.getElementById('actuDate').value = '';
+            document.getElementById('actuImageFile').value = '';
+            document.getElementById('actuImagePreview').innerHTML = '';
+            loadAllAdminData();
+        });
+
+        // Créer membre d'équipe avec photo
+        document.getElementById('createMemberBtn')?.addEventListener('click', async () => {
+            const nom = document.getElementById('memberNom').value.trim();
+            const poste = document.getElementById('memberPoste').value.trim();
+            if (!nom || !poste) { alert('Nom et poste requis'); return; }
+            
+            let imageUrl = null;
+            const imageFile = document.getElementById('memberImageFile').files[0];
+            if (imageFile) {
+                imageUrl = await uploadImage(imageFile, 'team');
+            }
+            
+            await supabase.from('equipes').insert([{
+                nom,
+                poste,
+                description: document.getElementById('memberDescription').value,
+                image_url: imageUrl,
+                ordre: Date.now()
+            }]);
+            
+            alert('Membre ajouté');
+            document.getElementById('memberNom').value = '';
+            document.getElementById('memberPoste').value = '';
+            document.getElementById('memberDescription').value = '';
+            document.getElementById('memberImageFile').value = '';
+            document.getElementById('memberImagePreview').innerHTML = '';
+            loadAllAdminData();
+        });
+
+        // ========== CHARGEMENT DES DONNÉES ==========
         async function loadAdminActualites() {
-            const { data, error } = await supabase.from('actualites').select('*').order('created_at', { ascending: false });
+            const { data } = await supabase.from('actualites').select('*').order('created_at', { ascending: false });
             const container = document.getElementById('adminActusList');
-            if (error) { container.innerHTML = '<p>Erreur de chargement</p>'; return; }
             if (!data?.length) { container.innerHTML = '<p>Aucune actualité</p>'; return; }
             container.innerHTML = data.map(a => `
                 <div class="item-card">
                     <div class="item-info">
+                        ${a.image_url ? `<img src="${a.image_url}" class="preview-small">` : '📰'}
                         <strong>${escapeHtml(a.titre)}</strong>
-                        <div class="small">${escapeHtml(a.date || '')} ${a.image_emoji ? '· ' + a.image_emoji : ''}</div>
+                        <div class="small">${escapeHtml(a.date || '')}</div>
                         <div class="small">${escapeHtml(a.description || '')}</div>
                     </div>
                     <div class="item-actions">
@@ -606,123 +506,6 @@
             document.getElementById('statActus').innerText = data.length;
         }
 
-        // Spécialités médicales
-        async function loadAdminSpecMedicales() {
-            const { data } = await supabase.from('specialites_medicales').select('*').order('ordre', { ascending: true });
-            const container = document.getElementById('adminSpecMedList');
-            if (!data?.length) { container.innerHTML = '<p>Aucune spécialité médicale</p>'; return; }
-            container.innerHTML = data.map(s => `
-                <div class="item-card">
-                    <div class="item-info">
-                        <strong>${escapeHtml(s.titre)}</strong>
-                        <div class="small">${escapeHtml(s.description || '')}</div>
-                    </div>
-                    <div class="item-actions">
-                        <button class="delete-btn" data-id="${s.id}" data-table="specialites_medicales">🗑 Supprimer</button>
-                    </div>
-                </div>
-            `).join('');
-            attachDeleteEvents();
-            document.getElementById('statSpecMed').innerText = data.length;
-        }
-
-        // Spécialités chirurgicales
-        async function loadAdminSpecChirurgicales() {
-            const { data } = await supabase.from('specialites_chirurgicales').select('*').order('ordre', { ascending: true });
-            const container = document.getElementById('adminSpecChirList');
-            if (!data?.length) { container.innerHTML = '<p>Aucune spécialité chirurgicale</p>'; return; }
-            container.innerHTML = data.map(s => `
-                <div class="item-card">
-                    <div class="item-info">
-                        <strong>${escapeHtml(s.titre)}</strong>
-                        <div class="small">${escapeHtml(s.description || '')}</div>
-                    </div>
-                    <div class="item-actions">
-                        <button class="delete-btn" data-id="${s.id}" data-table="specialites_chirurgicales">🗑 Supprimer</button>
-                    </div>
-                </div>
-            `).join('');
-            attachDeleteEvents();
-            document.getElementById('statSpecChir').innerText = data.length;
-        }
-
-        // Gynécologie
-        async function loadAdminGynecologie() {
-            const { data } = await supabase.from('gynecologie').select('*').order('ordre', { ascending: true });
-            const container = document.getElementById('adminGyneList');
-            if (!data?.length) { container.innerHTML = '<p>Aucun service</p>'; return; }
-            container.innerHTML = data.map(g => `
-                <div class="item-card">
-                    <div class="item-info">
-                        <strong>${escapeHtml(g.titre)}</strong>
-                        <div class="small">${escapeHtml(g.description || '')}</div>
-                    </div>
-                    <div class="item-actions">
-                        <button class="delete-btn" data-id="${g.id}" data-table="gynecologie">🗑 Supprimer</button>
-                    </div>
-                </div>
-            `).join('');
-            attachDeleteEvents();
-        }
-
-        // Explorations
-        async function loadAdminExplorations() {
-            const { data } = await supabase.from('explorations').select('*').order('ordre', { ascending: true });
-            const container = document.getElementById('adminExploList');
-            if (!data?.length) { container.innerHTML = '<p>Aucune exploration</p>'; return; }
-            container.innerHTML = data.map(e => `
-                <div class="item-card">
-                    <div class="item-info">
-                        <strong>${escapeHtml(e.titre)}</strong>
-                        <div class="small">${escapeHtml(e.description || '')}</div>
-                    </div>
-                    <div class="item-actions">
-                        <button class="delete-btn" data-id="${e.id}" data-table="explorations">🗑 Supprimer</button>
-                    </div>
-                </div>
-            `).join('');
-            attachDeleteEvents();
-        }
-
-        // Imagerie
-        async function loadAdminImagerie() {
-            const { data } = await supabase.from('imagerie').select('*').order('ordre', { ascending: true });
-            const container = document.getElementById('adminImagerieList');
-            if (!data?.length) { container.innerHTML = '<p>Aucun service d\'imagerie</p>'; return; }
-            container.innerHTML = data.map(i => `
-                <div class="item-card">
-                    <div class="item-info">
-                        <strong>${escapeHtml(i.titre)}</strong>
-                    </div>
-                    <div class="item-actions">
-                        <button class="delete-btn" data-id="${i.id}" data-table="imagerie">🗑 Supprimer</button>
-                    </div>
-                </div>
-            `).join('');
-            attachDeleteEvents();
-        }
-
-        // Équipements
-        async function loadAdminEquipements() {
-            const { data } = await supabase.from('equipements').select('*').order('ordre', { ascending: true });
-            const container = document.getElementById('adminEquipList');
-            if (!data?.length) { container.innerHTML = '<p>Aucun équipement</p>'; return; }
-            container.innerHTML = data.map(e => `
-                <div class="item-card">
-                    <div class="item-info">
-                        <strong>${escapeHtml(e.titre)}</strong>
-                        ${e.badge ? `<span style="background:#1D8B5D; color:white; padding:2px 8px; border-radius:20px; font-size:0.6rem; margin-left:8px;">${escapeHtml(e.badge)}</span>` : ''}
-                        <div class="small">${escapeHtml(e.description || '')}</div>
-                    </div>
-                    <div class="item-actions">
-                        <button class="delete-btn" data-id="${e.id}" data-table="equipements">🗑 Supprimer</button>
-                    </div>
-                </div>
-            `).join('');
-            attachDeleteEvents();
-        }
-
-        // Équipe
         async function loadAdminTeam() {
             const { data } = await supabase.from('equipes').select('*').order('ordre', { ascending: true });
             const container = document.getElementById('adminTeamList');
@@ -730,9 +513,9 @@
             container.innerHTML = data.map(m => `
                 <div class="item-card">
                     <div class="item-info">
-                        <strong>${escapeHtml(m.nom)}</strong> - <em>${escapeHtml(m.poste)}</em>
+                        ${m.image_url ? `<img src="${m.image_url}" class="preview-small">` : '👤'}
+                        <strong>${escapeHtml(m.nom)}</strong> - ${escapeHtml(m.poste)}
                         <div class="small">${escapeHtml(m.description || '')}</div>
-                        ${m.image_url ? `<div class="small">📷 ${escapeHtml(m.image_url.substring(0, 50))}...</div>` : ''}
                     </div>
                     <div class="item-actions">
                         <button class="delete-btn" data-id="${m.id}" data-table="equipes">🗑 Supprimer</button>
@@ -743,67 +526,130 @@
             document.getElementById('statEquipe').innerText = data.length;
         }
 
-        // ========== CRÉATIONS ==========
-        document.getElementById('createActuBtn')?.addEventListener('click', async () => {
-            const titre = document.getElementById('actuTitre').value.trim();
-            if (!titre) { alert('Le titre est requis'); return; }
-            await supabase.from('actualites').insert([{
-                titre,
-                description: document.getElementById('actuDescription').value,
-                date: document.getElementById('actuDate').value,
-                image_emoji: document.getElementById('actuEmoji').value
-            }]);
-            alert('Actualité ajoutée');
-            document.getElementById('actuTitre').value = '';
-            document.getElementById('actuDescription').value = '';
-            document.getElementById('actuDate').value = '';
-            document.getElementById('actuEmoji').value = '';
-            loadAllAdminData();
-        });
+        async function loadAdminSpecMedicales() {
+            const { data } = await supabase.from('specialites_medicales').select('*').order('ordre');
+            const container = document.getElementById('adminSpecMedList');
+            if (!data?.length) { container.innerHTML = '<p>Aucune spécialité</p>'; return; }
+            container.innerHTML = data.map(s => `
+                <div class="item-card">
+                    <div class="item-info"><strong>${escapeHtml(s.titre)}</strong><div class="small">${escapeHtml(s.description || '')}</div></div>
+                    <div class="item-actions"><button class="delete-btn" data-id="${s.id}" data-table="specialites_medicales">🗑 Supprimer</button></div>
+                </div>
+            `).join('');
+            attachDeleteEvents();
+            document.getElementById('statSpecMed').innerText = data.length;
+        }
 
+        async function loadAdminSpecChirurgicales() {
+            const { data } = await supabase.from('specialites_chirurgicales').select('*').order('ordre');
+            const container = document.getElementById('adminSpecChirList');
+            if (!data?.length) { container.innerHTML = '<p>Aucune spécialité</p>'; return; }
+            container.innerHTML = data.map(s => `
+                <div class="item-card">
+                    <div class="item-info"><strong>${escapeHtml(s.titre)}</strong><div class="small">${escapeHtml(s.description || '')}</div></div>
+                    <div class="item-actions"><button class="delete-btn" data-id="${s.id}" data-table="specialites_chirurgicales">🗑 Supprimer</button></div>
+                </div>
+            `).join('');
+            attachDeleteEvents();
+            document.getElementById('statSpecChir').innerText = data.length;
+        }
+
+        async function loadAdminGynecologie() {
+            const { data } = await supabase.from('gynecologie').select('*').order('ordre');
+            const container = document.getElementById('adminGyneList');
+            if (!data?.length) { container.innerHTML = '<p>Aucun service</p>'; return; }
+            container.innerHTML = data.map(g => `
+                <div class="item-card">
+                    <div class="item-info"><strong>${escapeHtml(g.titre)}</strong><div class="small">${escapeHtml(g.description || '')}</div></div>
+                    <div class="item-actions"><button class="delete-btn" data-id="${g.id}" data-table="gynecologie">🗑 Supprimer</button></div>
+                </div>
+            `).join('');
+            attachDeleteEvents();
+        }
+
+        async function loadAdminExplorations() {
+            const { data } = await supabase.from('explorations').select('*').order('ordre');
+            const container = document.getElementById('adminExploList');
+            if (!data?.length) { container.innerHTML = '<p>Aucune exploration</p>'; return; }
+            container.innerHTML = data.map(e => `
+                <div class="item-card">
+                    <div class="item-info"><strong>${escapeHtml(e.titre)}</strong><div class="small">${escapeHtml(e.description || '')}</div></div>
+                    <div class="item-actions"><button class="delete-btn" data-id="${e.id}" data-table="explorations">🗑 Supprimer</button></div>
+                </div>
+            `).join('');
+            attachDeleteEvents();
+        }
+
+        async function loadAdminImagerie() {
+            const { data } = await supabase.from('imagerie').select('*').order('ordre');
+            const container = document.getElementById('adminImagerieList');
+            if (!data?.length) { container.innerHTML = '<p>Aucun service</p>'; return; }
+            container.innerHTML = data.map(i => `
+                <div class="item-card">
+                    <div class="item-info"><strong>${escapeHtml(i.titre)}</strong></div>
+                    <div class="item-actions"><button class="delete-btn" data-id="${i.id}" data-table="imagerie">🗑 Supprimer</button></div>
+                </div>
+            `).join('');
+            attachDeleteEvents();
+        }
+
+        async function loadAdminEquipements() {
+            const { data } = await supabase.from('equipements').select('*').order('ordre');
+            const container = document.getElementById('adminEquipList');
+            if (!data?.length) { container.innerHTML = '<p>Aucun équipement</p>'; return; }
+            container.innerHTML = data.map(e => `
+                <div class="item-card">
+                    <div class="item-info">
+                        <strong>${escapeHtml(e.titre)}</strong>
+                        ${e.badge ? `<span style="background:#1D8B5D; color:white; padding:2px 8px; border-radius:20px; font-size:0.6rem; margin-left:8px;">${escapeHtml(e.badge)}</span>` : ''}
+                        <div class="small">${escapeHtml(e.description || '')}</div>
+                    </div>
+                    <div class="item-actions"><button class="delete-btn" data-id="${e.id}" data-table="equipements">🗑 Supprimer</button></div>
+                </div>
+            `).join('');
+            attachDeleteEvents();
+        }
+
+        // Autres créations simples
         document.getElementById('createSpecMedBtn')?.addEventListener('click', async () => {
             const titre = document.getElementById('specMedTitre').value.trim();
-            if (!titre) { alert('Titre requis'); return; }
+            if (!titre) return alert('Titre requis');
             await supabase.from('specialites_medicales').insert([{ titre, description: document.getElementById('specMedDesc').value, ordre: Date.now() }]);
             alert('Ajouté');
-            document.getElementById('specMedTitre').value = '';
-            document.getElementById('specMedDesc').value = '';
+            document.getElementById('specMedTitre').value = ''; document.getElementById('specMedDesc').value = '';
             loadAllAdminData();
         });
 
         document.getElementById('createSpecChirBtn')?.addEventListener('click', async () => {
             const titre = document.getElementById('specChirTitre').value.trim();
-            if (!titre) { alert('Titre requis'); return; }
+            if (!titre) return alert('Titre requis');
             await supabase.from('specialites_chirurgicales').insert([{ titre, description: document.getElementById('specChirDesc').value, ordre: Date.now() }]);
             alert('Ajouté');
-            document.getElementById('specChirTitre').value = '';
-            document.getElementById('specChirDesc').value = '';
+            document.getElementById('specChirTitre').value = ''; document.getElementById('specChirDesc').value = '';
             loadAllAdminData();
         });
 
         document.getElementById('createGyneBtn')?.addEventListener('click', async () => {
             const titre = document.getElementById('gyneTitre').value.trim();
-            if (!titre) { alert('Titre requis'); return; }
+            if (!titre) return alert('Titre requis');
             await supabase.from('gynecologie').insert([{ titre, description: document.getElementById('gyneDesc').value, ordre: Date.now() }]);
             alert('Ajouté');
-            document.getElementById('gyneTitre').value = '';
-            document.getElementById('gyneDesc').value = '';
+            document.getElementById('gyneTitre').value = ''; document.getElementById('gyneDesc').value = '';
             loadAllAdminData();
         });
 
         document.getElementById('createExploBtn')?.addEventListener('click', async () => {
             const titre = document.getElementById('exploTitre').value.trim();
-            if (!titre) { alert('Titre requis'); return; }
+            if (!titre) return alert('Titre requis');
             await supabase.from('explorations').insert([{ titre, description: document.getElementById('exploDesc').value, ordre: Date.now() }]);
             alert('Ajouté');
-            document.getElementById('exploTitre').value = '';
-            document.getElementById('exploDesc').value = '';
+            document.getElementById('exploTitre').value = ''; document.getElementById('exploDesc').value = '';
             loadAllAdminData();
         });
 
         document.getElementById('createImagerieBtn')?.addEventListener('click', async () => {
             const titre = document.getElementById('imagerieTitre').value.trim();
-            if (!titre) { alert('Titre requis'); return; }
+            if (!titre) return alert('Titre requis');
             await supabase.from('imagerie').insert([{ titre, ordre: Date.now() }]);
             alert('Ajouté');
             document.getElementById('imagerieTitre').value = '';
@@ -812,40 +658,14 @@
 
         document.getElementById('createEquipBtn')?.addEventListener('click', async () => {
             const titre = document.getElementById('equipTitre').value.trim();
-            if (!titre) { alert('Titre requis'); return; }
-            await supabase.from('equipements').insert([{ 
-                titre, 
-                description: document.getElementById('equipDesc').value, 
-                badge: document.getElementById('equipBadge').value, 
-                ordre: Date.now() 
-            }]);
+            if (!titre) return alert('Titre requis');
+            await supabase.from('equipements').insert([{ titre, description: document.getElementById('equipDesc').value, badge: document.getElementById('equipBadge').value, ordre: Date.now() }]);
             alert('Ajouté');
-            document.getElementById('equipTitre').value = '';
-            document.getElementById('equipDesc').value = '';
-            document.getElementById('equipBadge').value = '';
+            document.getElementById('equipTitre').value = ''; document.getElementById('equipDesc').value = ''; document.getElementById('equipBadge').value = '';
             loadAllAdminData();
         });
 
-        document.getElementById('createMemberBtn')?.addEventListener('click', async () => {
-            const nom = document.getElementById('memberNom').value.trim();
-            const poste = document.getElementById('memberPoste').value.trim();
-            if (!nom || !poste) { alert('Le nom et le poste sont requis'); return; }
-            await supabase.from('equipes').insert([{
-                nom,
-                poste,
-                description: document.getElementById('memberDescription').value,
-                image_url: document.getElementById('memberImageUrl').value,
-                ordre: Date.now()
-            }]);
-            alert('Membre ajouté');
-            document.getElementById('memberNom').value = '';
-            document.getElementById('memberPoste').value = '';
-            document.getElementById('memberDescription').value = '';
-            document.getElementById('memberImageUrl').value = '';
-            loadAllAdminData();
-        });
-
-        // ========== SUPPRESSION ==========
+        // Suppression
         function attachDeleteEvents() {
             document.querySelectorAll('.delete-btn').forEach(btn => {
                 btn.removeEventListener('click', handleDelete);
@@ -857,31 +677,29 @@
             const btn = e.currentTarget;
             const id = btn.getAttribute('data-id');
             const table = btn.getAttribute('data-table');
-            if (!confirm('Supprimer définitivement cet élément ?')) return;
+            if (!confirm('Supprimer définitivement ?')) return;
             const { error } = await supabase.from(table).delete().eq('id', id);
             if (error) { alert('Erreur: ' + error.message); return; }
-            alert('Supprimé avec succès');
+            alert('Supprimé');
             loadAllAdminData();
         }
 
-        // ========== CHARGEMENT TOUTES LES DONNÉES ==========
         async function loadAllAdminData() {
             await Promise.all([
                 loadAdminActualites(),
+                loadAdminTeam(),
                 loadAdminSpecMedicales(),
                 loadAdminSpecChirurgicales(),
                 loadAdminGynecologie(),
                 loadAdminExplorations(),
                 loadAdminImagerie(),
-                loadAdminEquipements(),
-                loadAdminTeam()
+                loadAdminEquipements()
             ]);
         }
 
-        // ========== ONGLETS ==========
+        // Onglets
         const tabs = document.querySelectorAll('.tab-btn');
         const panes = document.querySelectorAll('.tab-pane');
-
         tabs.forEach(tab => {
             tab.addEventListener('click', () => {
                 const targetId = tab.getAttribute('data-tab');
@@ -892,7 +710,6 @@
             });
         });
 
-        // ========== UTILITAIRES ==========
         function escapeHtml(str) {
             if (!str) return '';
             return str.replace(/[&<>]/g, function(m) {
