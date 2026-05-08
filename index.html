@@ -1505,7 +1505,7 @@
         <div class="container stats-container">
             <div class="animate-on-scroll"><span class="stat-number" id="stat-years">0</span><br>années d'existence</div>
             <div class="animate-on-scroll"><span class="stat-number">24/24</span><br>Service d'urgence</div>
-            <div class="animate-on-scroll"><span class="stat-number" id="stat-doctors">0</span><br>Médecins</div>
+            <div class="animate-on-scroll"><span class="stat-number" id="stat-doctors">+ 40</span><br>Médecins</div>
         </div>
     </div>
 
@@ -1704,7 +1704,7 @@
         });
     }
 
-    // ==================== SLIDER HERO (inchangé) ====================
+    // ==================== SLIDER HERO ====================
     const slides = [
         { image: "slide/churigie.jpeg", titre: "Chirurgie moderne", badge: "à votre service", text: "Blocs opératoires de pointe, chirurgie programmée et d'urgence 24h/24", lien: "#specialites-chirurgicales", labelBtn: "Voir nos spécialités chirurgicales" },
         { image: "slide/dialyse.jpg", titre: "Centre d'Hémodialyse", badge: "24h/24", text: "Prise en charge complète de l'insuffisance rénale, disponible nuit et jour, 7j/7", lien: "#poles", labelBtn: "Découvrir le service dialyse" },
@@ -1833,7 +1833,7 @@
         }
     }
 
-    // ==================== MODAL ACTUALITE (IMAGE CORRIGÉE) ====================
+    // ==================== MODAL ACTUALITE ====================
     const actuModal = document.getElementById('actuModal');
     const modalActuImage = document.getElementById('modalActuImage');
     const modalActuDate = document.getElementById('modalActuDate');
@@ -1843,7 +1843,6 @@
 
     function openActuModal(actu) {
         currentActuForShare = actu;
-        // Image en pleine largeur/hauteur dans la modale
         modalActuImage.src = actu.image_url || 'https://placehold.co/800x400/0077A4/white?text=Actualit%C3%A9';
         modalActuImage.alt = actu.titre || '';
         modalActuDate.textContent = actu.date || '';
@@ -1878,7 +1877,7 @@
         }
     });
 
-    // ========== AUTRES CHARGEMENTS (inchangés) ==========
+    // ========== AUTRES CHARGEMENTS ==========
     async function loadPublicSpecialitesMedicales() {
         if (!supabaseClient) return;
         const { data, error } = await supabaseClient.from('specialites_medicales').select('*').order('ordre');
@@ -1937,7 +1936,8 @@
                 </div>
             </div>
         `).join('');
-        document.getElementById('stat-doctors').innerText = data.length;
+        // NE PAS modifi er le compteur des médecins - on garde l'affichage "+ 40"
+        // document.getElementById('stat-doctors').innerText = data.length;  // ligne commentée
     }
 
     async function loadAllPublicData() {
@@ -1948,7 +1948,7 @@
         ]);
     }
 
-    // ==================== ADMIN LOGIN (inchangé) ====================
+    // ==================== ADMIN LOGIN ====================
     const loginModal = document.getElementById('loginModal');
     const submitLogin = document.getElementById('submitLoginBtn');
     const closeLogin = document.querySelector('.close-login');
@@ -2012,8 +2012,7 @@
     window.addEventListener('click', (e) => { if (e.target === imageModal) imageModal.style.display = 'none'; });
 
     // ==================== VIDÉOS ====================
-        const allVideos = [
-        // === VIDÉOS EXISTANTES (9) ===
+    const allVideos = [
         { title: "Pr Gilbert BONKOUGOU - Maladie hémorroïdaire", desc: "Les hémorroïdes expliquées par le Pr Gilbert BONKOUGOU", url: "https://web.facebook.com/reel/645204957720787" },
         { title: "Unité de dialyse - Clinique WENDTOIN", desc: "Prise en charge des insuffisances rénales aiguës et chroniques", url: "https://web.facebook.com/reel/879902179764068" },
         { title: "Neuro monitoring - Thyroïdectomie sécurisée", desc: "Recherche du nerf récurrent lors de la chirurgie thyroïdienne", url: "https://web.facebook.com/reel/1608565729972155" },
@@ -2023,13 +2022,9 @@
         { title: "Dr Natacha OUEDRAOGO - Accident vasculaire cérébral (AVC)", desc: "Neurologue, elle nous parle de cette maladie qui fait peur", url: "https://web.facebook.com/reel/610483310353530" },
         { title: "Dr Marcel Kuiré - L'asthme", desc: "Maladie respiratoire fréquente qui peut être grave si non diagnostiquée", url: "https://web.facebook.com/reel/743148739906723" },
         { title: "Dr Nadia TOE/ROUAMBA - Lombalgie (maux de reins)", desc: "Spécialiste en Rhumatologie explique les causes diverses", url: "https://web.facebook.com/reel/929689517848124" },
-        
-        // === NOUVELLES VIDÉOS AVEC TITRE CONNU (3) ===
         { title: "Dr Dimitri Darankoum – Reflux gastro-œsophagien", desc: "Spécialiste en gastro-entérologie vous en dit plus sur cette maladie observée tant chez l'homme que chez la femme", url: "https://www.facebook.com/reel/262682895320909" },
         { title: "Dr Rodrigue Salou – Les ulcères d'estomac", desc: "Vous en avez entendu parler. Vous en souffrez peut-être. Le médecin spécialiste en gastro-entérologie vous en parle", url: "https://www.facebook.com/reel/464631578234706" },
         { title: "Cœlioscopie et douleurs pelviennes", desc: "Explication de la cœlioscopie pour diagnostiquer et traiter les douleurs pelviennes", url: "https://www.facebook.com/reel/285134829629359" },
-        
-        // === NOUVELLES VIDÉOS SANS TITRE (À MODIFIER PLUS TARD) ===
         { title: "Nouvelle vidéo santé 1", desc: "Titre et description à préciser", url: "https://www.facebook.com/reel/1594688714056018" },
         { title: "Nouvelle vidéo santé 2", desc: "Titre et description à préciser", url: "https://www.facebook.com/reel/171772914469537" }
     ];
@@ -2094,9 +2089,8 @@
     const statObserver = new IntersectionObserver((entries) => { 
         entries.forEach(e => { 
             if (e.isIntersecting) { 
-                const yEl = document.getElementById('stat-years'), dEl = document.getElementById('stat-doctors'); 
+                const yEl = document.getElementById('stat-years'); 
                 if (yEl && yEl.innerText === "0") animateCounter(yEl, 0, 10, 1500); 
-                if (dEl && dEl.innerText === "0") animateCounter(dEl, 0, 40, 1800); 
                 statObserver.unobserve(e.target); 
             } 
         }); 
@@ -2136,6 +2130,12 @@
     function escapeHtml(str) { if(!str) return ''; return str.replace(/[&<>]/g, function(m){ if(m==='&') return '&amp;'; if(m==='<') return '&lt;'; if(m==='>') return '&gt;'; return m;}); }
 
     initSupabase();
+    
+    // S'assurer que le compteur des médecins affiche bien "+ 40"
+    const doctorStatElement = document.getElementById('stat-doctors');
+    if (doctorStatElement) {
+        doctorStatElement.innerText = "+ 40";
+    }
 </script>
 </body>
 </html>
