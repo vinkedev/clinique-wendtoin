@@ -588,6 +588,12 @@
             font-size: 2rem;
         }
 
+        .actu-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
         .actu-content {
             padding: 20px;
         }
@@ -804,11 +810,24 @@
             margin-left: 8px;
         }
 
+        /* ========== ÉQUIPE - 4 CARDS PAR LIGNE ========== */
         .team-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+            grid-template-columns: repeat(1, 1fr);
             gap: 28px;
             margin-top: 25px;
+        }
+
+        @media (min-width: 640px) {
+            .team-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (min-width: 1024px) {
+            .team-grid {
+                grid-template-columns: repeat(4, 1fr);
+            }
         }
 
         .team-card {
@@ -1621,16 +1640,22 @@
         const container = document.getElementById('actualitesList');
         if (!data?.length) { container.innerHTML = '<p>Aucune actualité</p>'; return; }
         
-        container.innerHTML = data.map(a => `
-            <div class="actu-card">
-                <div class="actu-image">📢</div>
-                <div class="actu-content">
-                    <div class="actu-date">${escapeHtml(a.date || '')}</div>
-                    <div class="actu-title">${escapeHtml(a.titre)}</div>
-                    <div class="actu-desc">${escapeHtml(a.description || '')}</div>
+        container.innerHTML = data.map(a => {
+            const imageHtml = a.image_url 
+                ? `<img src="${escapeHtml(a.image_url)}" alt="${escapeHtml(a.titre)}" onerror="this.parentElement.innerHTML='📢'">` 
+                : '📢';
+            
+            return `
+                <div class="actu-card">
+                    <div class="actu-image">${imageHtml}</div>
+                    <div class="actu-content">
+                        <div class="actu-date">${escapeHtml(a.date || '')}</div>
+                        <div class="actu-title">${escapeHtml(a.titre)}</div>
+                        <div class="actu-desc">${escapeHtml(a.description || '')}</div>
+                    </div>
                 </div>
-            </div>
-        `).join('');
+            `;
+        }).join('');
     }
 
     async function loadPublicSpecialitesMedicales() {
