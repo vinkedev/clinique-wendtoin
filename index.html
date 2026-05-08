@@ -1452,17 +1452,19 @@
     // ========== CONFIGURATION SUPABASE ==========
     const SUPABASE_URL = "https://otdiywrvzappbmjfkkyi.supabase.co";
     const SUPABASE_ANON_KEY = "sb_publishable_tn6FW9OxsqNdKMg9uCuB5A_gZICo-Jy";
-    let supabase = null;
+    let supabaseClient = null;
     let isAdmin = false;
     const ADMIN_PASSWORD = "Wendtoin2026";
 
     // Attendre que Supabase soit chargé
     function initSupabase() {
         if (window.supabase) {
-            supabase = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+            supabaseClient = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+            console.log("✅ Supabase initialisé");
             loadAllPublicData();
             checkAdminSession();
         } else {
+            console.log("⏳ Attente de Supabase...");
             setTimeout(initSupabase, 200);
         }
     }
@@ -1549,8 +1551,9 @@
 
     // ==================== CHARGEMENT PUBLIC DEPUIS SUPABASE ====================
     async function loadPublicActualites() {
-        if (!supabase) return;
-        const { data } = await supabase.from('actualites').select('*').order('created_at', { ascending: false });
+        if (!supabaseClient) return;
+        const { data, error } = await supabaseClient.from('actualites').select('*').order('created_at', { ascending: false });
+        if (error) { console.error("Erreur actualités:", error); return; }
         const container = document.getElementById('actualitesList');
         if (!data?.length) { container.innerHTML = '<p>Aucune actualité</p>'; return; }
         container.innerHTML = data.map(a => `
@@ -1566,44 +1569,51 @@
     }
 
     async function loadPublicSpecialitesMedicales() {
-        if (!supabase) return;
-        const { data } = await supabase.from('specialites_medicales').select('*').order('ordre');
+        if (!supabaseClient) return;
+        const { data, error } = await supabaseClient.from('specialites_medicales').select('*').order('ordre');
+        if (error) { console.error("Erreur spécialités médicales:", error); return; }
         document.getElementById('specialitesMedicalesList').innerHTML = data?.length ? data.map(s => `<div class="specialty-item"><strong>${escapeHtml(s.titre)}</strong><p>${escapeHtml(s.description || '')}</p></div>`).join('') : '<div class="specialty-item"><strong>Aucune spécialité</strong><p></p></div>';
     }
 
     async function loadPublicSpecialitesChirurgicales() {
-        if (!supabase) return;
-        const { data } = await supabase.from('specialites_chirurgicales').select('*').order('ordre');
+        if (!supabaseClient) return;
+        const { data, error } = await supabaseClient.from('specialites_chirurgicales').select('*').order('ordre');
+        if (error) { console.error("Erreur spécialités chirurgicales:", error); return; }
         document.getElementById('specialitesChirurgicalesList').innerHTML = data?.length ? data.map(s => `<div class="specialty-item"><strong>${escapeHtml(s.titre)}</strong><p>${escapeHtml(s.description || '')}</p></div>`).join('') : '<div class="specialty-item"><strong>Aucune spécialité</strong><p></p></div>';
     }
 
     async function loadPublicGynecologie() {
-        if (!supabase) return;
-        const { data } = await supabase.from('gynecologie').select('*').order('ordre');
+        if (!supabaseClient) return;
+        const { data, error } = await supabaseClient.from('gynecologie').select('*').order('ordre');
+        if (error) { console.error("Erreur gynécologie:", error); return; }
         document.getElementById('gynecologieList').innerHTML = data?.length ? data.map(g => `<div class="specialty-item"><strong>${escapeHtml(g.titre)}</strong><p>${escapeHtml(g.description || '')}</p></div>`).join('') : '<div class="specialty-item"><strong>Aucun service</strong><p></p></div>';
     }
 
     async function loadPublicExplorations() {
-        if (!supabase) return;
-        const { data } = await supabase.from('explorations').select('*').order('ordre');
+        if (!supabaseClient) return;
+        const { data, error } = await supabaseClient.from('explorations').select('*').order('ordre');
+        if (error) { console.error("Erreur explorations:", error); return; }
         document.getElementById('explorationsList').innerHTML = data?.length ? data.map(e => `<div class="specialty-item"><strong>${escapeHtml(e.titre)}</strong><p>${escapeHtml(e.description || '')}</p></div>`).join('') : '<div class="specialty-item"><strong>Aucune exploration</strong><p></p></div>';
     }
 
     async function loadPublicImagerie() {
-        if (!supabase) return;
-        const { data } = await supabase.from('imagerie').select('*').order('ordre');
+        if (!supabaseClient) return;
+        const { data, error } = await supabaseClient.from('imagerie').select('*').order('ordre');
+        if (error) { console.error("Erreur imagerie:", error); return; }
         document.getElementById('imagerieList').innerHTML = data?.length ? data.map(i => `<div class="specialty-item"><strong>${escapeHtml(i.titre)}</strong><p></p></div>`).join('') : '<div class="specialty-item"><strong>Aucun service d\'imagerie</strong><p></p></div>';
     }
 
     async function loadPublicEquipements() {
-        if (!supabase) return;
-        const { data } = await supabase.from('equipements').select('*').order('ordre');
+        if (!supabaseClient) return;
+        const { data, error } = await supabaseClient.from('equipements').select('*').order('ordre');
+        if (error) { console.error("Erreur équipements:", error); return; }
         document.getElementById('equipementsList').innerHTML = data?.length ? data.map(e => `<div class="specialty-item"><strong>${escapeHtml(e.titre)}${e.badge ? ` <span class="badge-247">${escapeHtml(e.badge)}</span>` : ''}</strong><p>${escapeHtml(e.description || '')}</p></div>`).join('') : '<div class="specialty-item"><strong>Aucun équipement</strong><p></p></div>';
     }
 
     async function loadPublicTeam() {
-        if (!supabase) return;
-        const { data } = await supabase.from('equipes').select('*').order('ordre');
+        if (!supabaseClient) return;
+        const { data, error } = await supabaseClient.from('equipes').select('*').order('ordre');
+        if (error) { console.error("Erreur équipe:", error); return; }
         const container = document.getElementById('teamList');
         if (!data?.length) { container.innerHTML = '<p>Aucun membre pour le moment</p>'; return; }
         container.innerHTML = data.map(m => `
@@ -1616,6 +1626,8 @@
                 </div>
             </div>
         `).join('');
+        // Mettre à jour le compteur de médecins
+        document.getElementById('stat-doctors').innerText = data.length;
     }
 
     async function loadAllPublicData() {
