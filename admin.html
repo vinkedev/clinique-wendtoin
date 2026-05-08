@@ -150,6 +150,40 @@
         .stat-card .number { font-size: 1.8rem; font-weight: 800; }
         .stat-card .label { font-size: 0.8rem; opacity: 0.9; }
         
+        /* Modal d'édition */
+        .edit-modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.5);
+            z-index: 2000;
+            align-items: center;
+            justify-content: center;
+        }
+        .edit-modal-content {
+            background: white;
+            border-radius: 28px;
+            padding: 25px;
+            max-width: 500px;
+            width: 90%;
+            max-height: 85vh;
+            overflow-y: auto;
+        }
+        .edit-modal-content h3 { margin-bottom: 20px; color: #0077A4; }
+        .edit-modal-content input, .edit-modal-content textarea {
+            width: 100%;
+            padding: 10px 14px;
+            margin-bottom: 15px;
+            border: 1px solid #ddd;
+            border-radius: 20px;
+            font-family: inherit;
+        }
+        .edit-modal-buttons { display: flex; gap: 10px; justify-content: flex-end; margin-top: 15px; }
+        .btn-cancel { background: #64748b; color: white; border: none; padding: 8px 20px; border-radius: 40px; cursor: pointer; }
+        
         @media (max-width: 768px) {
             .admin-container { padding: 12px; }
             .tabs { border-radius: 20px; overflow-x: auto; flex-wrap: nowrap; }
@@ -293,6 +327,18 @@
         </div>
     </div>
 
+    <!-- Modal d'édition -->
+    <div id="editModal" class="edit-modal">
+        <div class="edit-modal-content">
+            <h3 id="editModalTitle">✏️ Modifier</h3>
+            <div id="editModalBody"></div>
+            <div class="edit-modal-buttons">
+                <button id="cancelEditBtn" class="btn-cancel">Annuler</button>
+                <button id="saveEditBtn" class="btn-save">💾 Enregistrer</button>
+            </div>
+        </div>
+    </div>
+
     <script>
         // ========== CONFIGURATION SUPABASE ==========
         const SUPABASE_URL = "https://otdiywrvzappbmjfkkyi.supabase.co";
@@ -300,6 +346,7 @@
         const ADMIN_PASSWORD = "Wendtoin2026";
         
         let supabaseClient = null;
+        let currentEditItem = { id: null, table: null, type: null };
         
         // Vérifier session admin
         if (sessionStorage.getItem('clinique_admin') !== 'true') {
@@ -330,13 +377,12 @@
             });
         }
 
-        // Fonction d'upload d'image - adaptée pour tes buckets existants
+        // Fonction d'upload d'image
         async function uploadImage(file, type) {
             if (!file || !supabaseClient) return null;
             const fileExt = file.name.split('.').pop();
             const fileName = `${Date.now()}_${Math.random().toString(36).substring(2, 8)}.${fileExt}`;
             
-            // Choisir le bucket selon le type
             let bucketName = '';
             if (type === 'actualite') {
                 bucketName = 'actualites';
@@ -396,7 +442,6 @@
                 });
             }
             
-            // Trigger file input clicks
             const fileLabels = document.querySelectorAll('.file-input-label');
             if (fileLabels[0]) fileLabels[0].addEventListener('click', () => document.getElementById('actuImageFile')?.click());
             if (fileLabels[1]) fileLabels[1].addEventListener('click', () => document.getElementById('memberImageFile')?.click());
@@ -404,7 +449,6 @@
 
         // ========== CRÉATIONS ==========
         function attachCreateListeners() {
-            // Créer actualité avec image
             document.getElementById('createActuBtn')?.addEventListener('click', async () => {
                 if (!supabaseClient) return alert('Supabase non initialisé');
                 const titre = document.getElementById('actuTitre').value.trim();
@@ -432,7 +476,6 @@
                 loadAllAdminData();
             });
 
-            // Créer membre d'équipe avec photo
             document.getElementById('createMemberBtn')?.addEventListener('click', async () => {
                 if (!supabaseClient) return alert('Supabase non initialisé');
                 const nom = document.getElementById('memberNom').value.trim();
@@ -462,7 +505,6 @@
                 loadAllAdminData();
             });
 
-            // Spécialités médicales
             document.getElementById('createSpecMedBtn')?.addEventListener('click', async () => {
                 if (!supabaseClient) return alert('Supabase non initialisé');
                 const titre = document.getElementById('specMedTitre').value.trim();
@@ -474,7 +516,6 @@
                 loadAllAdminData();
             });
 
-            // Spécialités chirurgicales
             document.getElementById('createSpecChirBtn')?.addEventListener('click', async () => {
                 if (!supabaseClient) return alert('Supabase non initialisé');
                 const titre = document.getElementById('specChirTitre').value.trim();
@@ -486,7 +527,6 @@
                 loadAllAdminData();
             });
 
-            // Gynécologie
             document.getElementById('createGyneBtn')?.addEventListener('click', async () => {
                 if (!supabaseClient) return alert('Supabase non initialisé');
                 const titre = document.getElementById('gyneTitre').value.trim();
@@ -498,7 +538,6 @@
                 loadAllAdminData();
             });
 
-            // Explorations
             document.getElementById('createExploBtn')?.addEventListener('click', async () => {
                 if (!supabaseClient) return alert('Supabase non initialisé');
                 const titre = document.getElementById('exploTitre').value.trim();
@@ -510,7 +549,6 @@
                 loadAllAdminData();
             });
 
-            // Imagerie
             document.getElementById('createImagerieBtn')?.addEventListener('click', async () => {
                 if (!supabaseClient) return alert('Supabase non initialisé');
                 const titre = document.getElementById('imagerieTitre').value.trim();
@@ -521,7 +559,6 @@
                 loadAllAdminData();
             });
 
-            // Équipements
             document.getElementById('createEquipBtn')?.addEventListener('click', async () => {
                 if (!supabaseClient) return alert('Supabase non initialisé');
                 const titre = document.getElementById('equipTitre').value.trim();
@@ -540,6 +577,98 @@
             });
         }
 
+        // ========== ÉDITION ==========
+        function openEditModal(id, table, itemData, type) {
+            currentEditItem = { id, table, type };
+            const modal = document.getElementById('editModal');
+            const modalTitle = document.getElementById('editModalTitle');
+            const modalBody = document.getElementById('editModalBody');
+            
+            let html = '';
+            
+            if (table === 'actualites') {
+                modalTitle.innerText = '✏️ Modifier l\'actualité';
+                html = `
+                    <input type="text" id="edit_titre" value="${escapeHtml(itemData.titre)}" placeholder="Titre">
+                    <textarea id="edit_description" rows="3" placeholder="Description">${escapeHtml(itemData.description || '')}</textarea>
+                    <input type="text" id="edit_date" value="${escapeHtml(itemData.date || '')}" placeholder="Date">
+                `;
+            } else if (table === 'equipes') {
+                modalTitle.innerText = '✏️ Modifier le membre';
+                html = `
+                    <input type="text" id="edit_nom" value="${escapeHtml(itemData.nom)}" placeholder="Nom">
+                    <input type="text" id="edit_poste" value="${escapeHtml(itemData.poste)}" placeholder="Poste">
+                    <textarea id="edit_description" rows="3" placeholder="Description">${escapeHtml(itemData.description || '')}</textarea>
+                `;
+            } else if (table === 'specialites_medicales' || table === 'specialites_chirurgicales' || table === 'gynecologie' || table === 'explorations') {
+                modalTitle.innerText = '✏️ Modifier';
+                html = `
+                    <input type="text" id="edit_titre" value="${escapeHtml(itemData.titre)}" placeholder="Titre">
+                    <textarea id="edit_description" rows="3" placeholder="Description">${escapeHtml(itemData.description || '')}</textarea>
+                `;
+            } else if (table === 'imagerie') {
+                modalTitle.innerText = '✏️ Modifier le service d\'imagerie';
+                html = `
+                    <input type="text" id="edit_titre" value="${escapeHtml(itemData.titre)}" placeholder="Titre">
+                `;
+            } else if (table === 'equipements') {
+                modalTitle.innerText = '✏️ Modifier l\'équipement';
+                html = `
+                    <input type="text" id="edit_titre" value="${escapeHtml(itemData.titre)}" placeholder="Titre">
+                    <textarea id="edit_description" rows="3" placeholder="Description">${escapeHtml(itemData.description || '')}</textarea>
+                    <input type="text" id="edit_badge" value="${escapeHtml(itemData.badge || '')}" placeholder="Badge (optionnel)">
+                `;
+            }
+            
+            modalBody.innerHTML = html;
+            modal.style.display = 'flex';
+        }
+        
+        async function saveEdit() {
+            const { id, table, type } = currentEditItem;
+            let updateData = {};
+            
+            if (table === 'actualites') {
+                updateData = {
+                    titre: document.getElementById('edit_titre').value,
+                    description: document.getElementById('edit_description').value,
+                    date: document.getElementById('edit_date').value
+                };
+            } else if (table === 'equipes') {
+                updateData = {
+                    nom: document.getElementById('edit_nom').value,
+                    poste: document.getElementById('edit_poste').value,
+                    description: document.getElementById('edit_description').value
+                };
+            } else if (table === 'specialites_medicales' || table === 'specialites_chirurgicales' || table === 'gynecologie' || table === 'explorations') {
+                updateData = {
+                    titre: document.getElementById('edit_titre').value,
+                    description: document.getElementById('edit_description').value
+                };
+            } else if (table === 'imagerie') {
+                updateData = {
+                    titre: document.getElementById('edit_titre').value
+                };
+            } else if (table === 'equipements') {
+                updateData = {
+                    titre: document.getElementById('edit_titre').value,
+                    description: document.getElementById('edit_description').value,
+                    badge: document.getElementById('edit_badge').value
+                };
+            }
+            
+            const { error } = await supabaseClient.from(table).update(updateData).eq('id', id);
+            if (error) { alert('Erreur: ' + error.message); return; }
+            alert('Modifié avec succès !');
+            document.getElementById('editModal').style.display = 'none';
+            loadAllAdminData();
+        }
+        
+        function closeEditModal() {
+            document.getElementById('editModal').style.display = 'none';
+            currentEditItem = { id: null, table: null, type: null };
+        }
+
         // ========== CHARGEMENT DES DONNÉES ==========
         async function loadAdminActualites() {
             if (!supabaseClient) return;
@@ -555,11 +684,12 @@
                         <div class="small">${escapeHtml(a.description || '')}</div>
                     </div>
                     <div class="item-actions">
+                        <button class="edit-btn" data-id="${a.id}" data-table="actualites" data-type="actualite">✏️ Modifier</button>
                         <button class="delete-btn" data-id="${a.id}" data-table="actualites">🗑 Supprimer</button>
                     </div>
                 </div>
             `).join('');
-            attachDeleteEvents();
+            attachItemEvents();
             document.getElementById('statActus').innerText = data.length;
         }
 
@@ -576,11 +706,12 @@
                         <div class="small">${escapeHtml(m.description || '')}</div>
                     </div>
                     <div class="item-actions">
+                        <button class="edit-btn" data-id="${m.id}" data-table="equipes" data-type="team">✏️ Modifier</button>
                         <button class="delete-btn" data-id="${m.id}" data-table="equipes">🗑 Supprimer</button>
                     </div>
                 </div>
             `).join('');
-            attachDeleteEvents();
+            attachItemEvents();
             document.getElementById('statEquipe').innerText = data.length;
         }
 
@@ -592,10 +723,13 @@
             container.innerHTML = data.map(s => `
                 <div class="item-card">
                     <div class="item-info"><strong>${escapeHtml(s.titre)}</strong><div class="small">${escapeHtml(s.description || '')}</div></div>
-                    <div class="item-actions"><button class="delete-btn" data-id="${s.id}" data-table="specialites_medicales">🗑 Supprimer</button></div>
+                    <div class="item-actions">
+                        <button class="edit-btn" data-id="${s.id}" data-table="specialites_medicales">✏️ Modifier</button>
+                        <button class="delete-btn" data-id="${s.id}" data-table="specialites_medicales">🗑 Supprimer</button>
+                    </div>
                 </div>
             `).join('');
-            attachDeleteEvents();
+            attachItemEvents();
             document.getElementById('statSpecMed').innerText = data.length;
         }
 
@@ -607,10 +741,13 @@
             container.innerHTML = data.map(s => `
                 <div class="item-card">
                     <div class="item-info"><strong>${escapeHtml(s.titre)}</strong><div class="small">${escapeHtml(s.description || '')}</div></div>
-                    <div class="item-actions"><button class="delete-btn" data-id="${s.id}" data-table="specialites_chirurgicales">🗑 Supprimer</button></div>
+                    <div class="item-actions">
+                        <button class="edit-btn" data-id="${s.id}" data-table="specialites_chirurgicales">✏️ Modifier</button>
+                        <button class="delete-btn" data-id="${s.id}" data-table="specialites_chirurgicales">🗑 Supprimer</button>
+                    </div>
                 </div>
             `).join('');
-            attachDeleteEvents();
+            attachItemEvents();
             document.getElementById('statSpecChir').innerText = data.length;
         }
 
@@ -622,10 +759,13 @@
             container.innerHTML = data.map(g => `
                 <div class="item-card">
                     <div class="item-info"><strong>${escapeHtml(g.titre)}</strong><div class="small">${escapeHtml(g.description || '')}</div></div>
-                    <div class="item-actions"><button class="delete-btn" data-id="${g.id}" data-table="gynecologie">🗑 Supprimer</button></div>
+                    <div class="item-actions">
+                        <button class="edit-btn" data-id="${g.id}" data-table="gynecologie">✏️ Modifier</button>
+                        <button class="delete-btn" data-id="${g.id}" data-table="gynecologie">🗑 Supprimer</button>
+                    </div>
                 </div>
             `).join('');
-            attachDeleteEvents();
+            attachItemEvents();
         }
 
         async function loadAdminExplorations() {
@@ -636,10 +776,13 @@
             container.innerHTML = data.map(e => `
                 <div class="item-card">
                     <div class="item-info"><strong>${escapeHtml(e.titre)}</strong><div class="small">${escapeHtml(e.description || '')}</div></div>
-                    <div class="item-actions"><button class="delete-btn" data-id="${e.id}" data-table="explorations">🗑 Supprimer</button></div>
+                    <div class="item-actions">
+                        <button class="edit-btn" data-id="${e.id}" data-table="explorations">✏️ Modifier</button>
+                        <button class="delete-btn" data-id="${e.id}" data-table="explorations">🗑 Supprimer</button>
+                    </div>
                 </div>
             `).join('');
-            attachDeleteEvents();
+            attachItemEvents();
         }
 
         async function loadAdminImagerie() {
@@ -650,10 +793,13 @@
             container.innerHTML = data.map(i => `
                 <div class="item-card">
                     <div class="item-info"><strong>${escapeHtml(i.titre)}</strong></div>
-                    <div class="item-actions"><button class="delete-btn" data-id="${i.id}" data-table="imagerie">🗑 Supprimer</button></div>
+                    <div class="item-actions">
+                        <button class="edit-btn" data-id="${i.id}" data-table="imagerie">✏️ Modifier</button>
+                        <button class="delete-btn" data-id="${i.id}" data-table="imagerie">🗑 Supprimer</button>
+                    </div>
                 </div>
             `).join('');
-            attachDeleteEvents();
+            attachItemEvents();
         }
 
         async function loadAdminEquipements() {
@@ -668,20 +814,42 @@
                         ${e.badge ? `<span style="background:#1D8B5D; color:white; padding:2px 8px; border-radius:20px; font-size:0.6rem; margin-left:8px;">${escapeHtml(e.badge)}</span>` : ''}
                         <div class="small">${escapeHtml(e.description || '')}</div>
                     </div>
-                    <div class="item-actions"><button class="delete-btn" data-id="${e.id}" data-table="equipements">🗑 Supprimer</button></div>
+                    <div class="item-actions">
+                        <button class="edit-btn" data-id="${e.id}" data-table="equipements">✏️ Modifier</button>
+                        <button class="delete-btn" data-id="${e.id}" data-table="equipements">🗑 Supprimer</button>
+                    </div>
                 </div>
             `).join('');
-            attachDeleteEvents();
+            attachItemEvents();
         }
 
-        // Suppression
-        function attachDeleteEvents() {
+        // Gestion des événements (éditer/supprimer)
+        function attachItemEvents() {
+            // Boutons modifier
+            document.querySelectorAll('.edit-btn').forEach(btn => {
+                btn.removeEventListener('click', handleEdit);
+                btn.addEventListener('click', handleEdit);
+            });
+            // Boutons supprimer
             document.querySelectorAll('.delete-btn').forEach(btn => {
                 btn.removeEventListener('click', handleDelete);
                 btn.addEventListener('click', handleDelete);
             });
         }
-
+        
+        async function handleEdit(e) {
+            if (!supabaseClient) return;
+            const btn = e.currentTarget;
+            const id = btn.getAttribute('data-id');
+            const table = btn.getAttribute('data-table');
+            const type = btn.getAttribute('data-type') || '';
+            
+            const { data } = await supabaseClient.from(table).select('*').eq('id', id).single();
+            if (data) {
+                openEditModal(id, table, data, type);
+            }
+        }
+        
         async function handleDelete(e) {
             if (!supabaseClient) return;
             const btn = e.currentTarget;
@@ -711,6 +879,14 @@
         function attachEventListeners() {
             attachPreviewListeners();
             attachCreateListeners();
+            
+            // Modal d'édition
+            document.getElementById('cancelEditBtn')?.addEventListener('click', closeEditModal);
+            document.getElementById('saveEditBtn')?.addEventListener('click', saveEdit);
+            window.addEventListener('click', (e) => {
+                const modal = document.getElementById('editModal');
+                if (e.target === modal) closeEditModal();
+            });
             
             // Onglets
             const tabs = document.querySelectorAll('.tab-btn');
