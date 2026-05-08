@@ -533,7 +533,37 @@
         document.querySelectorAll('.actu-card').forEach(card => { card.addEventListener('click', (e) => { e.stopPropagation(); const idx = parseInt(card.dataset.actuIdx); if (!isNaN(idx) && actualitesData[idx]) { openActuModal(actualitesData[idx]); } }); });
     }
 
-    async function loadPublicSpecialitesMedicales() { const data = await loadWithCache('specialites_medicales', { order: true }); document.getElementById('specialitesMedicalesList').innerHTML = data?.length ? data.map(s => `<div class="specialty-item"><strong>${escapeHtml(s.titre)}</strong><p>${escapeHtml(s.description || '')}</p></div>`).join('') : '<div class="specialty-item"><strong>Aucune spécialité</strong><p></p></div>'; }
+    async function loadPublicSpecialitesMedicales() {
+    // Version simple SANS cache pour tester
+    try {
+        alert('Chargement spécialités...'); // ← voir si la fonction est appelée
+        
+        const { data, error } = await supabaseClient
+            .from('specialites_medicales')
+            .select('*')
+            .order('ordre');
+        
+        if (error) {
+            alert('Erreur spécialités: ' + error.message);
+            console.error(error);
+            return;
+        }
+        
+        alert('Reçu: ' + data?.length + ' spécialités'); // ← voir si data arrive
+        
+        const container = document.getElementById('specialitesMedicalesList');
+        if (container) {
+            container.innerHTML = data?.length 
+                ? data.map(s => `<div class="specialty-item"><strong>${escapeHtml(s.titre)}</strong><p>${escapeHtml(s.description || '')}</p></div>`).join('')
+                : '<div class="specialty-item"><strong>Aucune spécialité</strong><p></p></div>';
+            alert('Affichage terminé'); // ← vérifier que l'affichage a eu lieu
+        } else {
+            alert('Container specialitesMedicalesList NON TROUVÉ !');
+        }
+    } catch(e) {
+        alert('Exception: ' + e.message);
+    }
+}
     async function loadPublicSpecialitesChirurgicales() { const data = await loadWithCache('specialites_chirurgicales', { order: true }); document.getElementById('specialitesChirurgicalesList').innerHTML = data?.length ? data.map(s => `<div class="specialty-item"><strong>${escapeHtml(s.titre)}</strong><p>${escapeHtml(s.description || '')}</p></div>`).join('') : '<div class="specialty-item"><strong>Aucune spécialité</strong><p></p></div>'; }
     async function loadPublicGynecologie() { const data = await loadWithCache('gynecologie', { order: true }); document.getElementById('gynecologieList').innerHTML = data?.length ? data.map(g => `<div class="specialty-item"><strong>${escapeHtml(g.titre)}</strong><p>${escapeHtml(g.description || '')}</p></div>`).join('') : '<div class="specialty-item"><strong>Aucun service</strong><p></p></div>'; }
     async function loadPublicExplorations() { const data = await loadWithCache('explorations', { order: true }); document.getElementById('explorationsList').innerHTML = data?.length ? data.map(e => `<div class="specialty-item"><strong>${escapeHtml(e.titre)}</strong><p>${escapeHtml(e.description || '')}</p></div>`).join('') : '<div class="specialty-item"><strong>Aucune exploration</strong><p></p></div>'; }
