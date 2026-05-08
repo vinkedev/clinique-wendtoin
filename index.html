@@ -613,5 +613,27 @@
     supabaseScript.onload = () => { console.log('Supabase chargé'); initSupabase(); };
     document.body.appendChild(supabaseScript);
 </script>
+    <button onclick="testSupabase()" 
+style="position:fixed;bottom:20px;right:20px;z-index:9999;background:red;color:white;padding:15px;border-radius:50px;border:none;font-size:16px;font-weight:bold;">
+TEST
+</button>
+
+<script>
+async function testSupabase() {
+    alert('Test démarré...');
+    try {
+        const res = await fetch(
+            'https://otdiywrvzappbmjfkkyi.supabase.co/rest/v1/actualites?select=*&limit=1',
+            { headers: { 
+                'apikey': 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im90ZGl5d3J2emFwcGJtamZra3lpIiwicm9sZSI6ImFub24iLCJpYXQiOjE3Njk2MTQyMDcsImV4cCI6MjA4NTE5MDIwN30.O5gHqJF1SCvpu19Z0OFHhQsT_ZmeIFbuEu-bpBZXXtY'
+            }}
+        );
+        const data = await res.json();
+        alert('RÉSULTAT: ' + JSON.stringify(data).substring(0, 200));
+    } catch(e) {
+        alert('ERREUR: ' + e.message);
+    }
+}
+</script>
 </body>
 </html>
