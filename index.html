@@ -549,60 +549,84 @@
             font-size: 0.8rem;
         }
 
-        .actualites-grid {
-            display: grid;
-            grid-template-columns: 1fr;
-            gap: 25px;
-            margin-top: 20px;
+        /* ========== ACTUALITES - HORIZONTAL SCROLL + MODAL ========== */
+        .actualites-wrapper {
+            position: relative;
+            width: 100%;
+            overflow-x: auto;
+            overflow-y: hidden;
+            white-space: nowrap;
+            scrollbar-width: thin;
+            scroll-snap-type: x mandatory;
+            padding: 20px 0 30px 0;
+            cursor: grab;
+            user-select: none;
+            -webkit-overflow-scrolling: touch;
         }
+        .actualites-wrapper:active { cursor: grabbing; }
+        .actualites-wrapper::-webkit-scrollbar { height: 6px; }
+        .actualites-wrapper::-webkit-scrollbar-track { background: #e2e8f0; border-radius: 10px; }
+        .actualites-wrapper::-webkit-scrollbar-thumb { background: #1D8B5D; border-radius: 10px; }
 
-        @media (min-width: 768px) {
-            .actualites-grid {
-                grid-template-columns: repeat(3, 1fr);
-            }
+        .actualites-scroll {
+            display: inline-flex;
+            gap: 25px;
+            padding: 0 20px;
         }
 
         .actu-card {
+            flex: 0 0 auto;
+            width: 300px;
             background: white;
             border-radius: 24px;
             overflow: hidden;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.08);
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            box-shadow: 0 15px 35px rgba(0,0,0,0.1);
+            transition: transform 0.4s cubic-bezier(0.2, 0.9, 0.4, 1.1), box-shadow 0.3s ease;
             border: 1px solid #eef2f6;
+            scroll-snap-align: start;
+            white-space: normal;
+            display: inline-block;
+            vertical-align: top;
+            cursor: pointer;
         }
 
         .actu-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 20px 35px rgba(0,0,0,0.12);
+            transform: translateY(-12px) scale(1.02);
+            box-shadow: 0 25px 45px rgba(0,0,0,0.2);
         }
 
         .actu-image {
             width: 100%;
             height: 180px;
-            object-fit: cover;
             background: linear-gradient(135deg, #0077A4, #1D8B5D);
             display: flex;
             align-items: center;
             justify-content: center;
-            color: white;
-            font-size: 2rem;
+            overflow: hidden;
+            position: relative;
         }
 
         .actu-image img {
             width: 100%;
             height: 100%;
             object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+
+        .actu-card:hover .actu-image img {
+            transform: scale(1.08);
         }
 
         .actu-content {
-            padding: 20px;
+            padding: 18px;
         }
 
         .actu-date {
             font-size: 0.7rem;
             color: #1D8B5D;
-            font-weight: 600;
+            font-weight: 700;
             margin-bottom: 8px;
+            letter-spacing: 0.5px;
         }
 
         .actu-title {
@@ -610,12 +634,140 @@
             font-weight: 700;
             color: #1e293b;
             margin-bottom: 10px;
+            line-height: 1.3;
         }
 
         .actu-desc {
             font-size: 0.85rem;
             color: #64748b;
             line-height: 1.5;
+            display: -webkit-box;
+            -webkit-line-clamp: 3;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+        }
+
+        /* MODAL ACTUALITE - VERSION LECTURE COMPLETE */
+        .actu-modal {
+            display: none;
+            position: fixed;
+            z-index: 10001;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0,0,0,0.85);
+            backdrop-filter: blur(8px);
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+        }
+        .actu-modal-content {
+            background: white;
+            width: 90%;
+            max-width: 700px;
+            max-height: 85vh;
+            border-radius: 28px;
+            overflow-y: auto;
+            position: relative;
+            cursor: default;
+            animation: fadeScale 0.3s ease;
+        }
+        .actu-modal-header {
+            position: relative;
+            width: 100%;
+            height: 220px;
+            background: linear-gradient(135deg, #0077A4, #1D8B5D);
+            overflow: hidden;
+            border-radius: 28px 28px 0 0;
+        }
+        .actu-modal-header img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        .actu-modal-close {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            width: 40px;
+            height: 40px;
+            background: rgba(0,0,0,0.6);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 28px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            z-index: 10;
+            border: none;
+        }
+        .actu-modal-close:hover {
+            background: #dc3545;
+            transform: scale(1.1);
+        }
+        .actu-modal-body {
+            padding: 25px;
+        }
+        .actu-modal-date {
+            font-size: 0.8rem;
+            color: #1D8B5D;
+            font-weight: 600;
+            margin-bottom: 12px;
+            display: inline-block;
+            background: #e6f7f0;
+            padding: 4px 12px;
+            border-radius: 50px;
+        }
+        .actu-modal-title {
+            font-size: 1.6rem;
+            font-weight: 700;
+            color: #1e293b;
+            margin-bottom: 20px;
+            line-height: 1.3;
+        }
+        .actu-modal-description {
+            font-size: 1rem;
+            color: #334155;
+            line-height: 1.7;
+            white-space: pre-wrap;
+        }
+        .actu-modal-description p {
+            margin-bottom: 15px;
+        }
+        .actu-modal-share {
+            margin-top: 25px;
+            padding-top: 20px;
+            border-top: 1px solid #eef2f6;
+            display: flex;
+            gap: 15px;
+            justify-content: flex-end;
+        }
+        .share-wa-btn {
+            background: #25D366;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 50px;
+            cursor: pointer;
+            font-weight: 600;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            transition: all 0.3s ease;
+        }
+        .share-wa-btn:hover {
+            background: #128C7E;
+            transform: translateY(-2px);
+        }
+
+        @media (max-width: 640px) {
+            .actu-modal-header { height: 180px; }
+            .actu-modal-title { font-size: 1.3rem; }
+            .actu-modal-body { padding: 18px; }
+            .actu-modal-description { font-size: 0.9rem; }
         }
 
         .stats {
@@ -810,7 +962,6 @@
             margin-left: 8px;
         }
 
-        /* ========== ÉQUIPE - 4 CARDS PAR LIGNE ========== */
         .team-grid {
             display: grid;
             grid-template-columns: repeat(1, 1fr);
@@ -876,7 +1027,6 @@
             line-height: 1.45;
         }
 
-        /* Couleurs spécifiques pour la section équipe */
         #equipe .team-name {
             color: #0077A4;
         }
@@ -1113,22 +1263,6 @@
             line-height: 1.6;
             font-size: 0.9rem;
         }
-        .modal-body ul {
-            margin: 12px 0;
-            padding-left: 20px;
-        }
-        .modal-body li {
-            margin: 6px 0;
-            color: #475569;
-            font-size: 0.85rem;
-        }
-        .modal-body .info-note {
-            background: #e6f7f0;
-            padding: 12px;
-            border-radius: 16px;
-            margin-top: 15px;
-            border-left: 4px solid #1D8B5D;
-        }
         .close-modal {
             position: absolute;
             top: 12px;
@@ -1152,7 +1286,6 @@
             transform: scale(1.05);
         }
 
-        /* Style pour l'œil */
         .password-wrapper {
             position: relative;
             margin-bottom: 20px;
@@ -1251,7 +1384,6 @@
             }
         }
 
-        /* style pour les sections à partir de "Nos services de soins" - BLEU UNIFORME */
         #services .section-title { color: #0077A4; }
         #services .section-title::after { background: linear-gradient(90deg, #0077A4, #00b4d8); }
         #services .badge-category { background: linear-gradient(135deg, #e0f0ff, #cce4f5); color: #0077A4; }
@@ -1287,17 +1419,14 @@
         #poles .specialty-item strong { color: #0077A4; }
         #poles .badge-247 { background: #0077A4; }
         
-        /* La section équipe - titres en bleu */
         #equipe .section-title { color: #0077A4; }
         #equipe .section-title::after { background: linear-gradient(90deg, #0077A4, #00b4d8); }
         #equipe .team-name { color: #0077A4; }
         #equipe .team-position { color: #1D8B5D; }
 
-        /* Section vidéos - titre en bleu */
         #video .section-title { color: #0077A4; }
         #video .section-title::after { background: linear-gradient(90deg, #0077A4, #00b4d8); }
 
-        /* Section contact - titre en bleu */
         #contact .section-title { color: #0077A4; }
         #contact .section-title::after { background: linear-gradient(90deg, #0077A4, #00b4d8); }
     </style>
@@ -1396,13 +1525,33 @@
         </div>
     </section>
 
-    <!-- SECTION ACTUALITÉS - DYNAMIQUE -->
+    <!-- SECTION ACTUALITÉS - HORIZONTAL SCROLL AVEC MODAL -->
     <section id="actualites">
         <div class="container">
             <h2 class="section-title animate-on-scroll">Actualités</h2>
-            <div id="actualitesList" class="actualites-grid">Chargement...</div>
+            <div class="actualites-wrapper" id="actualitesWrapper">
+                <div class="actualites-scroll" id="actualitesList">Chargement...</div>
+            </div>
         </div>
     </section>
+
+    <!-- MODAL POUR LECTURE COMPLETE D'UNE ACTUALITE -->
+    <div id="actuModal" class="actu-modal">
+        <div class="actu-modal-content">
+            <div class="actu-modal-header">
+                <img id="modalActuImage" src="" alt="Image actualité">
+                <button class="actu-modal-close" id="closeActuModal">✕</button>
+            </div>
+            <div class="actu-modal-body">
+                <div class="actu-modal-date" id="modalActuDate"></div>
+                <h2 class="actu-modal-title" id="modalActuTitle"></h2>
+                <div class="actu-modal-description" id="modalActuDesc"></div>
+                <div class="actu-modal-share">
+                    <button class="share-wa-btn" id="shareActuWa">📱 Partager sur WhatsApp</button>
+                </div>
+            </div>
+        </div>
+    </div>
 
     <!-- SPÉCIALITÉS MÉDICALES - DYNAMIQUE -->
     <section id="specialites">
@@ -1520,11 +1669,9 @@
     let isAdmin = false;
     const ADMIN_PASSWORD = "wendtoin2016";
 
-    // Compteur pour les clics sur le logo
     let logoClickCount = 0;
     let clickTimeout = null;
 
-    // Attendre que Supabase soit chargé
     function initSupabase() {
         if (window.supabase) {
             supabaseClient = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
@@ -1532,7 +1679,6 @@
             loadAllPublicData();
             checkAdminSession();
         } else {
-            console.log("⏳ Attente de Supabase...");
             setTimeout(initSupabase, 200);
         }
     }
@@ -1544,7 +1690,6 @@
             logoClickCount++;
             clearTimeout(clickTimeout);
             clickTimeout = setTimeout(() => { logoClickCount = 0; }, 1000);
-            
             if (logoClickCount >= 5) {
                 logoClickCount = 0;
                 openLoginModal();
@@ -1633,30 +1778,101 @@
     document.getElementById('sliderNext').addEventListener('click', nextSlide);
 
     // ==================== CHARGEMENT PUBLIC DEPUIS SUPABASE ====================
+    // Stockage des actualités pour la modal
+    let actualitesData = [];
+
     async function loadPublicActualites() {
         if (!supabaseClient) return;
         const { data, error } = await supabaseClient.from('actualites').select('*').order('created_at', { ascending: false });
         if (error) { console.error("Erreur actualités:", error); return; }
+        actualitesData = data || [];
         const container = document.getElementById('actualitesList');
-        if (!data?.length) { container.innerHTML = '<p>Aucune actualité</p>'; return; }
+        if (!actualitesData.length) { container.innerHTML = '<div class="actu-card"><div class="actu-image">📢</div><div class="actu-content"><div class="actu-title">Aucune actualité</div></div></div>'; return; }
         
-        container.innerHTML = data.map(a => {
+        container.innerHTML = actualitesData.map((a, idx) => {
             const imageHtml = a.image_url 
                 ? `<img src="${escapeHtml(a.image_url)}" alt="${escapeHtml(a.titre)}" onerror="this.parentElement.innerHTML='📢'">` 
-                : '📢';
+                : '<div style="font-size:3rem;">📢</div>';
             
             return `
-                <div class="actu-card">
+                <div class="actu-card" data-actu-idx="${idx}">
                     <div class="actu-image">${imageHtml}</div>
                     <div class="actu-content">
                         <div class="actu-date">${escapeHtml(a.date || '')}</div>
                         <div class="actu-title">${escapeHtml(a.titre)}</div>
-                        <div class="actu-desc">${escapeHtml(a.description || '')}</div>
+                        <div class="actu-desc">${escapeHtml(a.description || '').substring(0, 100)}${(a.description || '').length > 100 ? '...' : ''}</div>
                     </div>
                 </div>
             `;
         }).join('');
+
+        // Ajout des écouteurs de clic pour ouvrir la modal
+        document.querySelectorAll('.actu-card').forEach(card => {
+            card.addEventListener('click', (e) => {
+                e.stopPropagation();
+                const idx = parseInt(card.dataset.actuIdx);
+                if (!isNaN(idx) && actualitesData[idx]) {
+                    openActuModal(actualitesData[idx]);
+                }
+            });
+        });
+
+        // Défilement horizontal avec souris
+        const wrapper = document.getElementById('actualitesWrapper');
+        if (wrapper && actualitesData.length > 0) {
+            let isDown = false, startX, scrollLeft;
+            wrapper.addEventListener('mousedown', (e) => { isDown = true; startX = e.pageX - wrapper.offsetLeft; scrollLeft = wrapper.scrollLeft; });
+            wrapper.addEventListener('mouseleave', () => isDown = false);
+            wrapper.addEventListener('mouseup', () => isDown = false);
+            wrapper.addEventListener('mousemove', (e) => { if(!isDown) return; e.preventDefault(); const x = e.pageX - wrapper.offsetLeft; const walk = (x - startX) * 2; wrapper.scrollLeft = scrollLeft - walk; });
+        }
     }
+
+    // ==================== MODAL ACTUALITE ====================
+    const actuModal = document.getElementById('actuModal');
+    const modalActuImage = document.getElementById('modalActuImage');
+    const modalActuDate = document.getElementById('modalActuDate');
+    const modalActuTitle = document.getElementById('modalActuTitle');
+    const modalActuDesc = document.getElementById('modalActuDesc');
+    let currentActuForShare = null;
+
+    function openActuModal(actu) {
+        currentActuForShare = actu;
+        modalActuImage.src = actu.image_url || 'https://placehold.co/800x400/0077A4/white?text=Actualit%C3%A9';
+        modalActuImage.alt = actu.titre || '';
+        modalActuDate.textContent = actu.date || '';
+        modalActuTitle.textContent = actu.titre || '';
+        // Utiliser le champ contenu_complet s'il existe, sinon description
+        const fullContent = actu.contenu_complet || actu.description || '';
+        modalActuDesc.innerHTML = formatTextToHtml(fullContent);
+        actuModal.style.display = 'flex';
+        document.body.style.overflow = 'hidden';
+    }
+
+    function formatTextToHtml(text) {
+        if (!text) return '<p>Contenu non disponible</p>';
+        let html = text.replace(/\n/g, '<br>');
+        html = html.replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>');
+        return `<p>${html}</p>`;
+    }
+
+    function closeActuModal() {
+        actuModal.style.display = 'none';
+        document.body.style.overflow = '';
+        currentActuForShare = null;
+    }
+
+    document.getElementById('closeActuModal').addEventListener('click', closeActuModal);
+    actuModal.addEventListener('click', (e) => { if (e.target === actuModal) closeActuModal(); });
+    document.addEventListener('keydown', (e) => { if (e.key === 'Escape' && actuModal.style.display === 'flex') closeActuModal(); });
+
+    // Partage WhatsApp
+    document.getElementById('shareActuWa').addEventListener('click', () => {
+        if (currentActuForShare) {
+            const message = `*${currentActuForShare.titre}*\n\n${currentActuForShare.description || ''}\n\nÀ lire sur Clinique WENDTOIN`;
+            window.open(`https://wa.me/?text=${encodeURIComponent(message)}`, '_blank');
+        }
+    });
 
     async function loadPublicSpecialitesMedicales() {
         if (!supabaseClient) return;
@@ -1904,7 +2120,6 @@
 
     function escapeHtml(str) { if(!str) return ''; return str.replace(/[&<>]/g, function(m){ if(m==='&') return '&amp;'; if(m==='<') return '&lt;'; if(m==='>') return '&gt;'; return m;}); }
 
-    // Initialisation
     initSupabase();
 </script>
 </body>
