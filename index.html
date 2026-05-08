@@ -6,7 +6,7 @@
     <title>Clinique WENDTOIN – Urgences 24h/24 à Ouagadougou</title>
     <meta name="description" content="Clinique privée à Cissin, Ouagadougou. Urgences médicales et chirurgicales 24h/24, 7j/7. Plus de 40 spécialistes.">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2" defer></script>
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
     <style>
         * {
             margin: 0;
@@ -1615,32 +1615,23 @@
 
     // ==================== CHARGEMENT PUBLIC DEPUIS SUPABASE ====================
     async function loadPublicActualites() {
-    if (!supabaseClient) return;
-    const { data, error } = await supabaseClient.from('actualites').select('*').order('created_at', { ascending: false });
-    if (error) { console.error("Erreur actualités:", error); return; }
-    const container = document.getElementById('actualitesList');
-    if (!data?.length) { container.innerHTML = '<p>Aucune actualité</p>'; return; }
-    
-    console.log("Données actualités reçues:", data); // Vérifie dans la console
-    
-    container.innerHTML = data.map(a => {
-        // Sécurise chaque valeur
-        const titre = a.titre || 'Sans titre';
-        const description = a.description || '';
-        const date = a.date || 'Date non spécifiée';
+        if (!supabaseClient) return;
+        const { data, error } = await supabaseClient.from('actualites').select('*').order('created_at', { ascending: false });
+        if (error) { console.error("Erreur actualités:", error); return; }
+        const container = document.getElementById('actualitesList');
+        if (!data?.length) { container.innerHTML = '<p>Aucune actualité</p>'; return; }
         
-        return `
-            <div class="actu-card animate-on-scroll">
+        container.innerHTML = data.map(a => `
+            <div class="actu-card">
                 <div class="actu-image">📢</div>
                 <div class="actu-content">
-                    <div class="actu-date">${escapeHtml(date)}</div>
-                    <div class="actu-title">${escapeHtml(titre)}</div>
-                    <div class="actu-desc">${escapeHtml(description)}</div>
+                    <div class="actu-date">${escapeHtml(a.date || '')}</div>
+                    <div class="actu-title">${escapeHtml(a.titre)}</div>
+                    <div class="actu-desc">${escapeHtml(a.description || '')}</div>
                 </div>
             </div>
-        `;
-    }).join('');
-}
+        `).join('');
+    }
 
     async function loadPublicSpecialitesMedicales() {
         if (!supabaseClient) return;
@@ -1685,33 +1676,23 @@
     }
 
     async function loadPublicTeam() {
-    if (!supabaseClient) return;
-    const { data, error } = await supabaseClient.from('equipes').select('*').order('ordre');
-    if (error) { console.error("Erreur équipe:", error); return; }
-    const container = document.getElementById('teamList');
-    if (!data?.length) { container.innerHTML = '<p>Aucun membre pour le moment</p>'; return; }
-    
-    console.log("Données équipe reçues:", data); // Vérifie dans la console
-    
-    container.innerHTML = data.map(m => {
-        const nom = m.nom || 'Nom inconnu';
-        const poste = m.poste || '';
-        const description = m.description || '';
-        const imageUrl = m.image_url || 'https://placehold.co/400x400/0077A4/white?text=Photo';
-        
-        return `
-            <div class="team-card animate-on-scroll">
-                <img src="${escapeHtml(imageUrl)}" alt="${escapeHtml(nom)}" class="team-image" onerror="this.src='https://placehold.co/400x400/0077A4/white?text=Photo'">
+        if (!supabaseClient) return;
+        const { data, error } = await supabaseClient.from('equipes').select('*').order('ordre');
+        if (error) { console.error("Erreur équipe:", error); return; }
+        const container = document.getElementById('teamList');
+        if (!data?.length) { container.innerHTML = '<p>Aucun membre pour le moment</p>'; return; }
+        container.innerHTML = data.map(m => `
+            <div class="team-card">
+                <img src="${escapeHtml(m.image_url) || 'https://placehold.co/400x400/0077A4/white?text=Photo'}" alt="${escapeHtml(m.nom)}" class="team-image" onerror="this.src='https://placehold.co/400x400/0077A4/white?text=Photo'">
                 <div class="team-info">
-                    <div class="team-name">${escapeHtml(nom)}</div>
-                    <div class="team-position">${escapeHtml(poste)}</div>
-                    <div class="team-desc">${escapeHtml(description)}</div>
+                    <div class="team-name">${escapeHtml(m.nom)}</div>
+                    <div class="team-position">${escapeHtml(m.poste)}</div>
+                    <div class="team-desc">${escapeHtml(m.description || '')}</div>
                 </div>
             </div>
-        `;
-    }).join('');
-    document.getElementById('stat-doctors').innerText = data.length;
-}
+        `).join('');
+        document.getElementById('stat-doctors').innerText = data.length;
+    }
 
     async function loadAllPublicData() {
         await Promise.all([
