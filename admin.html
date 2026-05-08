@@ -493,7 +493,7 @@
                     poste,
                     description: document.getElementById('memberDescription').value,
                     image_url: imageUrl,
-                    ordre: Date.now()
+                    ordre: Math.floor(Date.now() / 1000)
                 }]);
                 
                 alert('Membre ajouté');
@@ -509,7 +509,7 @@
                 if (!supabaseClient) return alert('Supabase non initialisé');
                 const titre = document.getElementById('specMedTitre').value.trim();
                 if (!titre) return alert('Titre requis');
-                await supabaseClient.from('specialites_medicales').insert([{ titre, description: document.getElementById('specMedDesc').value, ordre: Date.now() }]);
+                await supabaseClient.from('specialites_medicales').insert([{ titre, description: document.getElementById('specMedDesc').value, ordre: Math.floor(Date.now() / 1000) }]);
                 alert('Ajouté');
                 document.getElementById('specMedTitre').value = ''; 
                 document.getElementById('specMedDesc').value = '';
@@ -520,7 +520,7 @@
                 if (!supabaseClient) return alert('Supabase non initialisé');
                 const titre = document.getElementById('specChirTitre').value.trim();
                 if (!titre) return alert('Titre requis');
-                await supabaseClient.from('specialites_chirurgicales').insert([{ titre, description: document.getElementById('specChirDesc').value, ordre: Date.now() }]);
+                await supabaseClient.from('specialites_chirurgicales').insert([{ titre, description: document.getElementById('specChirDesc').value, ordre: Math.floor(Date.now() / 1000) }]);
                 alert('Ajouté');
                 document.getElementById('specChirTitre').value = ''; 
                 document.getElementById('specChirDesc').value = '';
@@ -531,7 +531,7 @@
                 if (!supabaseClient) return alert('Supabase non initialisé');
                 const titre = document.getElementById('gyneTitre').value.trim();
                 if (!titre) return alert('Titre requis');
-                await supabaseClient.from('gynecologie').insert([{ titre, description: document.getElementById('gyneDesc').value, ordre: Date.now() }]);
+                await supabaseClient.from('gynecologie').insert([{ titre, description: document.getElementById('gyneDesc').value, ordre: Math.floor(Date.now() / 1000) }]);
                 alert('Ajouté');
                 document.getElementById('gyneTitre').value = ''; 
                 document.getElementById('gyneDesc').value = '';
@@ -542,7 +542,7 @@
                 if (!supabaseClient) return alert('Supabase non initialisé');
                 const titre = document.getElementById('exploTitre').value.trim();
                 if (!titre) return alert('Titre requis');
-                await supabaseClient.from('explorations').insert([{ titre, description: document.getElementById('exploDesc').value, ordre: Date.now() }]);
+                await supabaseClient.from('explorations').insert([{ titre, description: document.getElementById('exploDesc').value, ordre: Math.floor(Date.now() / 1000) }]);
                 alert('Ajouté');
                 document.getElementById('exploTitre').value = ''; 
                 document.getElementById('exploDesc').value = '';
@@ -553,7 +553,7 @@
                 if (!supabaseClient) return alert('Supabase non initialisé');
                 const titre = document.getElementById('imagerieTitre').value.trim();
                 if (!titre) return alert('Titre requis');
-                await supabaseClient.from('imagerie').insert([{ titre, ordre: Date.now() }]);
+                await supabaseClient.from('imagerie').insert([{ titre, ordre: Math.floor(Date.now() / 1000) }]);
                 alert('Ajouté');
                 document.getElementById('imagerieTitre').value = '';
                 loadAllAdminData();
@@ -567,7 +567,7 @@
                     titre, 
                     description: document.getElementById('equipDesc').value, 
                     badge: document.getElementById('equipBadge').value, 
-                    ordre: Date.now() 
+                    ordre: Math.floor(Date.now() / 1000)
                 }]);
                 alert('Ajouté');
                 document.getElementById('equipTitre').value = ''; 
