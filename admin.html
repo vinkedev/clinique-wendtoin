@@ -2,547 +2,906 @@
 <html lang="fr">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
     <title>Administration - Clinique WENDTOIN</title>
-    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
     <style>
-        * { margin: 0; padding: 0; box-sizing: border-box; }
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
         body {
             font-family: 'Inter', sans-serif;
             background: #f1f5f9;
             color: #1e293b;
         }
-        .login-container {
-            min-height: 100vh;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            background: linear-gradient(135deg, #0077A4, #1D8B5D);
-        }
-        .login-box {
-            background: white;
-            padding: 40px;
-            border-radius: 28px;
-            width: 400px;
-            max-width: 90%;
-            box-shadow: 0 20px 40px rgba(0,0,0,0.2);
-        }
-        .login-box h2 {
-            margin-bottom: 25px;
-            color: #0077A4;
-        }
-        .login-box input {
-            width: 100%;
-            padding: 12px 15px;
-            margin-bottom: 15px;
-            border: 1px solid #e2e8f0;
-            border-radius: 12px;
-            font-size: 1rem;
-        }
-        .login-box button {
-            width: 100%;
-            padding: 12px;
-            background: #1D8B5D;
-            color: white;
-            border: none;
-            border-radius: 12px;
-            font-weight: 600;
-            cursor: pointer;
-        }
-        .error-msg {
-            color: #dc3545;
-            margin-top: 10px;
-            text-align: center;
-            font-size: 0.85rem;
-        }
-        .admin-panel {
-            display: none;
-        }
-        /* Admin layout */
+
         .admin-container {
-            display: flex;
-            min-height: 100vh;
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 20px;
         }
-        .sidebar {
-            width: 280px;
-            background: #0f172a;
-            color: white;
-            padding: 25px 0;
-            position: fixed;
-            height: 100vh;
-        }
-        .sidebar-header {
-            padding: 0 20px 20px;
-            border-bottom: 1px solid #334155;
-        }
-        .nav-item {
-            padding: 12px 20px;
-            margin: 5px 10px;
-            border-radius: 12px;
-            cursor: pointer;
-            transition: 0.3s;
-            font-weight: 500;
-        }
-        .nav-item:hover, .nav-item.active {
-            background: #1D8B5D;
-        }
-        .main-content {
-            flex: 1;
-            margin-left: 280px;
-            padding: 25px;
-        }
-        .top-bar {
+
+        /* Header */
+        .admin-header {
             background: white;
-            border-radius: 20px;
+            border-radius: 24px;
             padding: 15px 25px;
             margin-bottom: 25px;
             display: flex;
             justify-content: space-between;
             align-items: center;
+            flex-wrap: wrap;
+            gap: 15px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
         }
-        .panel {
-            display: none;
+
+        .admin-header h1 {
+            font-size: 1.4rem;
+            background: linear-gradient(135deg, #0077A4, #1D8B5D);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
         }
-        .panel.active-panel {
-            display: block;
-        }
-        table {
-            width: 100%;
-            background: white;
-            border-radius: 20px;
-            overflow: hidden;
-            border-collapse: collapse;
-        }
-        th, td {
-            padding: 12px 15px;
-            text-align: left;
-            border-bottom: 1px solid #e2e8f0;
-        }
-        th {
-            background: #f8fafc;
-            font-weight: 600;
-        }
-        .btn-add {
+
+        .admin-header .badge {
             background: #1D8B5D;
             color: white;
-            border: none;
-            padding: 10px 20px;
-            border-radius: 30px;
-            margin-bottom: 20px;
-            cursor: pointer;
-        }
-        .btn-edit {
-            background: #0077A4;
-            color: white;
-            border: none;
             padding: 5px 12px;
-            border-radius: 8px;
-            margin-right: 5px;
-            cursor: pointer;
+            border-radius: 30px;
+            font-size: 0.7rem;
         }
-        .btn-delete {
+
+        .btn-logout {
             background: #dc3545;
             color: white;
             border: none;
-            padding: 5px 12px;
-            border-radius: 8px;
+            padding: 8px 20px;
+            border-radius: 40px;
             cursor: pointer;
+            font-weight: 600;
+            transition: 0.3s;
         }
-        .modal {
+
+        .btn-logout:hover {
+            background: #b91c1c;
+        }
+
+        /* Onglets */
+        .tabs {
+            display: flex;
+            gap: 8px;
+            flex-wrap: wrap;
+            margin-bottom: 25px;
+            background: white;
+            padding: 12px 20px;
+            border-radius: 60px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+        }
+
+        .tab-btn {
+            background: transparent;
+            border: none;
+            padding: 8px 20px;
+            font-weight: 600;
+            border-radius: 40px;
+            cursor: pointer;
+            transition: 0.2s;
+            font-size: 0.85rem;
+        }
+
+        .tab-btn:hover {
+            background: #e2e8f0;
+        }
+
+        .tab-btn.active {
+            background: #1D8B5D;
+            color: white;
+        }
+
+        /* Panneaux */
+        .tab-pane {
             display: none;
+            background: white;
+            border-radius: 28px;
+            padding: 25px;
+            margin-bottom: 30px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+        }
+
+        .tab-pane.active {
+            display: block;
+            animation: fadeIn 0.3s ease;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Formulaires */
+        .form-admin {
+            background: #f8fafc;
+            padding: 20px;
+            border-radius: 20px;
+            margin-bottom: 30px;
+        }
+
+        .form-admin h3 {
+            margin-bottom: 15px;
+            color: #0077A4;
+            font-size: 1.1rem;
+        }
+
+        .form-admin input, 
+        .form-admin textarea, 
+        .form-admin select {
+            width: 100%;
+            padding: 12px 15px;
+            margin-bottom: 15px;
+            border: 1px solid #e2e8f0;
+            border-radius: 40px;
+            font-family: inherit;
+            font-size: 0.9rem;
+            transition: 0.2s;
+        }
+
+        .form-admin input:focus,
+        .form-admin textarea:focus {
+            outline: none;
+            border-color: #1D8B5D;
+            box-shadow: 0 0 0 3px rgba(29,139,93,0.1);
+        }
+
+        .form-admin textarea {
+            border-radius: 20px;
+            resize: vertical;
+        }
+
+        .btn-save {
+            background: #1D8B5D;
+            color: white;
+            border: none;
+            padding: 10px 24px;
+            border-radius: 40px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: 0.3s;
+        }
+
+        .btn-save:hover {
+            background: #146b48;
+            transform: translateY(-2px);
+        }
+
+        .btn-danger {
+            background: #dc3545;
+        }
+
+        .btn-danger:hover {
+            background: #b91c1c;
+        }
+
+        /* Liste des éléments */
+        .item-list {
+            margin-top: 20px;
+        }
+
+        .item-list h4 {
+            margin-bottom: 15px;
+            color: #1e293b;
+            font-size: 1rem;
+        }
+
+        .item-card {
+            background: #f8fafc;
+            padding: 15px;
+            border-radius: 20px;
+            margin-bottom: 12px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 10px;
+            border: 1px solid #eef2f6;
+            transition: 0.2s;
+        }
+
+        .item-card:hover {
+            background: white;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+        }
+
+        .item-info {
+            flex: 1;
+        }
+
+        .item-info strong {
+            color: #0077A4;
+            font-size: 1rem;
+        }
+
+        .item-info .small {
+            font-size: 0.75rem;
+            color: #64748b;
+            margin-top: 4px;
+        }
+
+        .item-actions {
+            display: flex;
+            gap: 8px;
+        }
+
+        .item-actions button {
+            background: #e2e8f0;
+            border: none;
+            padding: 6px 14px;
+            border-radius: 30px;
+            cursor: pointer;
+            font-size: 0.75rem;
+            font-weight: 500;
+            transition: 0.2s;
+        }
+
+        .item-actions .delete-btn {
+            background: #fee2e2;
+            color: #b91c1c;
+        }
+
+        .item-actions .delete-btn:hover {
+            background: #fecaca;
+        }
+
+        /* Modal login */
+        .login-modal {
+            display: flex;
             position: fixed;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
-            background: rgba(0,0,0,0.5);
+            background: rgba(0,0,0,0.8);
+            backdrop-filter: blur(6px);
+            z-index: 2000;
             align-items: center;
             justify-content: center;
-            z-index: 1000;
         }
-        .modal-content {
+
+        .login-card {
             background: white;
-            padding: 25px;
-            border-radius: 24px;
-            width: 500px;
-            max-width: 90%;
+            max-width: 380px;
+            width: 90%;
+            border-radius: 32px;
+            padding: 32px;
+            text-align: center;
         }
-        .modal-content input, .modal-content textarea, .modal-content select {
+
+        .login-card h2 {
+            color: #0077A4;
+            margin-bottom: 20px;
+            font-size: 1.5rem;
+        }
+
+        .login-card input {
             width: 100%;
-            padding: 10px;
-            margin-bottom: 15px;
+            padding: 14px;
             border: 1px solid #e2e8f0;
-            border-radius: 12px;
+            border-radius: 60px;
+            margin-bottom: 20px;
+            font-size: 1rem;
         }
-        .modal-buttons {
-            display: flex;
-            gap: 10px;
-            margin-top: 15px;
-        }
-        .modal-buttons button {
-            flex: 1;
-            padding: 10px;
-            border-radius: 12px;
-            cursor: pointer;
-        }
-        .btn-save {
+
+        .login-card button {
             background: #1D8B5D;
             color: white;
             border: none;
-        }
-        .btn-cancel {
-            background: #64748b;
-            color: white;
-            border: none;
-        }
-        .logout-btn {
-            background: #ef4444;
-            color: white;
-            border: none;
-            padding: 8px 20px;
-            border-radius: 30px;
+            padding: 12px;
+            width: 100%;
+            border-radius: 60px;
+            font-weight: 700;
+            font-size: 1rem;
             cursor: pointer;
+        }
+
+        .login-card .error {
+            color: #dc3545;
+            margin-top: 12px;
+            font-size: 0.8rem;
+        }
+
+        /* Loader */
+        .loader {
+            text-align: center;
+            padding: 40px;
+            color: #64748b;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .admin-container {
+                padding: 12px;
+            }
+            .tabs {
+                border-radius: 20px;
+                overflow-x: auto;
+                flex-wrap: nowrap;
+            }
+            .tab-btn {
+                white-space: nowrap;
+            }
+            .item-card {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+            .item-actions {
+                width: 100%;
+                justify-content: flex-end;
+            }
+        }
+
+        /* Stats */
+        .stats-row {
+            display: flex;
+            gap: 15px;
+            flex-wrap: wrap;
+            margin-bottom: 20px;
+        }
+        .stat-card {
+            background: linear-gradient(135deg, #0077A4, #1D8B5D);
+            color: white;
+            padding: 15px 25px;
+            border-radius: 24px;
+            flex: 1;
+            min-width: 150px;
+        }
+        .stat-card .number {
+            font-size: 1.8rem;
+            font-weight: 800;
+        }
+        .stat-card .label {
+            font-size: 0.8rem;
+            opacity: 0.9;
         }
     </style>
 </head>
 <body>
-    <!-- Login Form -->
-    <div id="loginContainer" class="login-container">
-        <div class="login-box">
-            <h2>🔐 Administration</h2>
-            <input type="password" id="adminPassword" placeholder="Mot de passe admin" autocomplete="off">
-            <button onclick="checkLogin()">Se connecter</button>
-            <div id="loginError" class="error-msg"></div>
-        </div>
-    </div>
-
-    <!-- Admin Panel -->
-    <div id="adminPanel" class="admin-panel">
-        <div class="admin-container">
-            <div class="sidebar">
-                <div class="sidebar-header">
-                    <h2>Clinique WENDTOIN</h2>
-                    <p>Espace Administration</p>
-                </div>
-                <div class="nav-item active" data-panel="actualites">
-                    <span class="emoji">📰</span> Actualités
-                </div>
-                <div class="nav-item" data-panel="specialites">
-                    <span class="emoji">🩺</span> Spécialités
-                </div>
-                <div class="nav-item" data-panel="equipe">
-                    <span class="emoji">👨‍⚕️</span> Équipe
-                </div>
-            </div>
-            <div class="main-content">
-                <div class="top-bar">
-                    <h1 id="panelTitle">Gestion des Actualités</h1>
-                    <button class="logout-btn" onclick="logout()">Déconnexion</button>
-                </div>
-
-                <!-- Actualités Panel -->
-                <div id="panelActualites" class="panel active-panel">
-                    <button class="btn-add" onclick="openActualiteModal()">+ Nouvelle actualité</button>
-                    <table id="actualitesTable">
-                        <thead>
-                            <tr><th>Titre</th><th>Date</th><th>Description</th><th>Actions</th></tr>
-                        </thead>
-                        <tbody id="actualitesList"></tbody>
-                    </table>
-                </div>
-
-                <!-- Spécialités Panel -->
-                <div id="panelSpecialites" class="panel">
-                    <button class="btn-add" onclick="openSpecialiteModal()">+ Nouvelle spécialité</button>
-                    <table id="specialitesTable">
-                        <thead><tr><th>Nom</th><th>Description</th><th>Catégorie</th><th>Actions</th></tr></thead>
-                        <tbody id="specialitesList"></tbody>
-                    </table>
-                </div>
-
-                <!-- Équipe Panel -->
-                <div id="panelEquipe" class="panel">
-                    <button class="btn-add" onclick="openMembreModal()">+ Nouveau membre</button>
-                    <table id="equipeTable">
-                        <thead><tr><th>Nom</th><th>Poste</th><th>Description</th><th>Image</th><th>Actions</th></tr></thead>
-                        <tbody id="equipeList"></tbody>
-                    </table>
-                </div>
+    <div id="app">
+        <!-- Modal de connexion -->
+        <div id="loginModal" class="login-modal">
+            <div class="login-card">
+                <h2>🔐 Administration</h2>
+                <input type="password" id="adminPassword" placeholder="Mot de passe" autofocus>
+                <button id="submitLoginBtn">Se connecter</button>
+                <div id="loginError" class="error"></div>
             </div>
         </div>
-    </div>
 
-    <!-- Modal -->
-    <div id="crudModal" class="modal">
-        <div class="modal-content">
-            <h3 id="modalTitle">Ajouter</h3>
-            <div id="modalFields"></div>
-            <div class="modal-buttons">
-                <button class="btn-save" onclick="saveItem()">Enregistrer</button>
-                <button class="btn-cancel" onclick="closeModal()">Annuler</button>
+        <!-- Dashboard admin (caché jusqu'à connexion) -->
+        <div id="adminDashboard" style="display: none;">
+            <div class="admin-container">
+                <div class="admin-header">
+                    <div>
+                        <h1>⚙️ Administration Clinique WENDTOIN</h1>
+                        <span class="badge">Gestion complète du contenu</span>
+                    </div>
+                    <button id="logoutAdminBtn" class="btn-logout">🔓 Déconnexion</button>
+                </div>
+
+                <!-- Stats rapides -->
+                <div class="stats-row" id="statsContainer">
+                    <div class="stat-card"><div class="number" id="statActus">0</div><div class="label">Actualités</div></div>
+                    <div class="stat-card"><div class="number" id="statEquipe">0</div><div class="label">Membres équipe</div></div>
+                    <div class="stat-card"><div class="number" id="statSpecMed">0</div><div class="label">Spécialités médicales</div></div>
+                    <div class="stat-card"><div class="number" id="statSpecChir">0</div><div class="label">Spécialités chirurgicales</div></div>
+                </div>
+
+                <!-- Onglets -->
+                <div class="tabs">
+                    <button class="tab-btn active" data-tab="actualites">📰 Actualités</button>
+                    <button class="tab-btn" data-tab="specMedicales">🩺 Spécialités médicales</button>
+                    <button class="tab-btn" data-tab="specChirurgicales">🔪 Spécialités chirurgicales</button>
+                    <button class="tab-btn" data-tab="gynecologie">👶 Gynécologie</button>
+                    <button class="tab-btn" data-tab="explorations">🔬 Explorations</button>
+                    <button class="tab-btn" data-tab="imagerie">📷 Imagerie</button>
+                    <button class="tab-btn" data-tab="equipements">⚕️ Équipements</button>
+                    <button class="tab-btn" data-tab="equipe">👥 Équipe</button>
+                </div>
+
+                <!-- Panneau Actualités -->
+                <div id="actualites" class="tab-pane active">
+                    <div class="form-admin">
+                        <h3>➕ Ajouter une actualité</h3>
+                        <input type="text" id="actuTitre" placeholder="Titre *">
+                        <textarea id="actuDescription" rows="2" placeholder="Description"></textarea>
+                        <input type="text" id="actuDate" placeholder="Date (ex: 15 Mars 2026)">
+                        <input type="text" id="actuEmoji" placeholder="Emoji (ex: 🏥, 👨‍⚕️, 📢)">
+                        <button id="createActuBtn" class="btn-save">📌 Publier</button>
+                    </div>
+                    <div class="item-list">
+                        <h4>📋 Liste des actualités</h4>
+                        <div id="adminActusList">Chargement...</div>
+                    </div>
+                </div>
+
+                <!-- Panneau Spécialités médicales -->
+                <div id="specMedicales" class="tab-pane">
+                    <div class="form-admin">
+                        <h3>➕ Ajouter une spécialité médicale</h3>
+                        <input type="text" id="specMedTitre" placeholder="Nom (ex: Cardiologie)">
+                        <textarea id="specMedDesc" rows="2" placeholder="Description"></textarea>
+                        <button id="createSpecMedBtn" class="btn-save">Ajouter</button>
+                    </div>
+                    <div class="item-list">
+                        <h4>📋 Liste des spécialités médicales</h4>
+                        <div id="adminSpecMedList">Chargement...</div>
+                    </div>
+                </div>
+
+                <!-- Panneau Spécialités chirurgicales -->
+                <div id="specChirurgicales" class="tab-pane">
+                    <div class="form-admin">
+                        <h3>➕ Ajouter une spécialité chirurgicale</h3>
+                        <input type="text" id="specChirTitre" placeholder="Nom">
+                        <textarea id="specChirDesc" rows="2" placeholder="Description"></textarea>
+                        <button id="createSpecChirBtn" class="btn-save">Ajouter</button>
+                    </div>
+                    <div class="item-list">
+                        <h4>📋 Liste des spécialités chirurgicales</h4>
+                        <div id="adminSpecChirList">Chargement...</div>
+                    </div>
+                </div>
+
+                <!-- Panneau Gynécologie -->
+                <div id="gynecologie" class="tab-pane">
+                    <div class="form-admin">
+                        <h3>➕ Ajouter un service de gynécologie</h3>
+                        <input type="text" id="gyneTitre" placeholder="Titre">
+                        <textarea id="gyneDesc" rows="2" placeholder="Description"></textarea>
+                        <button id="createGyneBtn" class="btn-save">Ajouter</button>
+                    </div>
+                    <div class="item-list">
+                        <h4>📋 Liste des services</h4>
+                        <div id="adminGyneList">Chargement...</div>
+                    </div>
+                </div>
+
+                <!-- Panneau Explorations -->
+                <div id="explorations" class="tab-pane">
+                    <div class="form-admin">
+                        <h3>➕ Ajouter une exploration</h3>
+                        <input type="text" id="exploTitre" placeholder="Titre">
+                        <textarea id="exploDesc" rows="2" placeholder="Description"></textarea>
+                        <button id="createExploBtn" class="btn-save">Ajouter</button>
+                    </div>
+                    <div class="item-list">
+                        <h4>📋 Liste des explorations</h4>
+                        <div id="adminExploList">Chargement...</div>
+                    </div>
+                </div>
+
+                <!-- Panneau Imagerie -->
+                <div id="imagerie" class="tab-pane">
+                    <div class="form-admin">
+                        <h3>➕ Ajouter un service d'imagerie</h3>
+                        <input type="text" id="imagerieTitre" placeholder="Titre (ex: Scanner, IRM, Radiologie)">
+                        <button id="createImagerieBtn" class="btn-save">Ajouter</button>
+                    </div>
+                    <div class="item-list">
+                        <h4>📋 Liste des services d'imagerie</h4>
+                        <div id="adminImagerieList">Chargement...</div>
+                    </div>
+                </div>
+
+                <!-- Panneau Équipements -->
+                <div id="equipements" class="tab-pane">
+                    <div class="form-admin">
+                        <h3>➕ Ajouter un équipement spécialisé</h3>
+                        <input type="text" id="equipTitre" placeholder="Titre">
+                        <textarea id="equipDesc" rows="2" placeholder="Description"></textarea>
+                        <input type="text" id="equipBadge" placeholder="Badge (optionnel: 24h/24, Urgence)">
+                        <button id="createEquipBtn" class="btn-save">Ajouter</button>
+                    </div>
+                    <div class="item-list">
+                        <h4>📋 Liste des équipements</h4>
+                        <div id="adminEquipList">Chargement...</div>
+                    </div>
+                </div>
+
+                <!-- Panneau Équipe -->
+                <div id="equipe" class="tab-pane">
+                    <div class="form-admin">
+                        <h3>➕ Ajouter un membre de l'équipe</h3>
+                        <input type="text" id="memberNom" placeholder="Nom complet *">
+                        <input type="text" id="memberPoste" placeholder="Poste *">
+                        <textarea id="memberDescription" rows="2" placeholder="Description / Bio"></textarea>
+                        <input type="text" id="memberImageUrl" placeholder="URL de la photo (optionnel)">
+                        <button id="createMemberBtn" class="btn-save">👤 Ajouter</button>
+                    </div>
+                    <div class="item-list">
+                        <h4>👥 Membres de l'équipe</h4>
+                        <div id="adminTeamList">Chargement...</div>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
 
     <script>
-        // Configuration Supabase - À MODIFIER AVEC VOS IDENTIFIANTS
-        const SUPABASE_URL = "https://VOTRE_PROJET.supabase.co";
-        const SUPABASE_ANON_KEY = "VOTRE_CLE_ANON";
+        // ========== CONFIGURATION SUPABASE ==========
+        const SUPABASE_URL = "https://otdiywrvzappbmjfkkyi.supabase.co";
+        const SUPABASE_ANON_KEY = "sb_publishable_tn6FW9OxsqNdKMg9uCuB5A_gZICo-Jy";
+        const supabase = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
         
-        let supabase;
-        let currentTable = null;
-        let currentEditId = null;
-        let currentType = null;
+        const ADMIN_PASSWORD = "Wendtoin2026";
+        let isAdmin = false;
 
-        // Mot de passe simple pour l'admin (vous pouvez changer)
-        const ADMIN_PASSWORD = "admin123";
+        // Éléments DOM
+        const loginModal = document.getElementById('loginModal');
+        const adminDashboard = document.getElementById('adminDashboard');
+        const submitLoginBtn = document.getElementById('submitLoginBtn');
+        const logoutBtn = document.getElementById('logoutAdminBtn');
+        const adminPassword = document.getElementById('adminPassword');
+        const loginError = document.getElementById('loginError');
 
-        function checkLogin() {
-            const pwd = document.getElementById('adminPassword').value;
-            if (pwd === ADMIN_PASSWORD) {
-                document.getElementById('loginContainer').style.display = 'none';
-                document.getElementById('adminPanel').style.display = 'block';
-                initSupabase();
+        // Vérifier si déjà connecté (session)
+        if (sessionStorage.getItem('clinique_admin') === 'true') {
+            isAdmin = true;
+            loginModal.style.display = 'none';
+            adminDashboard.style.display = 'block';
+            loadAllAdminData();
+        }
+
+        // Connexion
+        submitLoginBtn.addEventListener('click', () => {
+            if (adminPassword.value === ADMIN_PASSWORD) {
+                isAdmin = true;
+                sessionStorage.setItem('clinique_admin', 'true');
+                loginModal.style.display = 'none';
+                adminDashboard.style.display = 'block';
+                loadAllAdminData();
             } else {
-                document.getElementById('loginError').innerText = 'Mot de passe incorrect';
+                loginError.innerText = 'Mot de passe incorrect';
             }
+        });
+
+        // Déconnexion
+        logoutBtn.addEventListener('click', () => {
+            sessionStorage.removeItem('clinique_admin');
+            isAdmin = false;
+            adminDashboard.style.display = 'none';
+            loginModal.style.display = 'flex';
+            adminPassword.value = '';
+            loginError.innerText = '';
+        });
+
+        // Enter key dans le modal
+        adminPassword.addEventListener('keypress', (e) => {
+            if (e.key === 'Enter') submitLoginBtn.click();
+        });
+
+        // ========== CHARGEMENT DES DONNÉES ADMIN ==========
+        
+        // Actualités
+        async function loadAdminActualites() {
+            const { data, error } = await supabase.from('actualites').select('*').order('created_at', { ascending: false });
+            const container = document.getElementById('adminActusList');
+            if (error) { container.innerHTML = '<p>Erreur de chargement</p>'; return; }
+            if (!data?.length) { container.innerHTML = '<p>Aucune actualité</p>'; return; }
+            container.innerHTML = data.map(a => `
+                <div class="item-card">
+                    <div class="item-info">
+                        <strong>${escapeHtml(a.titre)}</strong>
+                        <div class="small">${escapeHtml(a.date || '')} ${a.image_emoji ? '· ' + a.image_emoji : ''}</div>
+                        <div class="small">${escapeHtml(a.description || '')}</div>
+                    </div>
+                    <div class="item-actions">
+                        <button class="delete-btn" data-id="${a.id}" data-table="actualites">🗑 Supprimer</button>
+                    </div>
+                </div>
+            `).join('');
+            attachDeleteEvents();
+            document.getElementById('statActus').innerText = data.length;
         }
 
-        function logout() {
-            document.getElementById('loginContainer').style.display = 'flex';
-            document.getElementById('adminPanel').style.display = 'none';
-            document.getElementById('adminPassword').value = '';
+        // Spécialités médicales
+        async function loadAdminSpecMedicales() {
+            const { data } = await supabase.from('specialites_medicales').select('*').order('ordre', { ascending: true });
+            const container = document.getElementById('adminSpecMedList');
+            if (!data?.length) { container.innerHTML = '<p>Aucune spécialité médicale</p>'; return; }
+            container.innerHTML = data.map(s => `
+                <div class="item-card">
+                    <div class="item-info">
+                        <strong>${escapeHtml(s.titre)}</strong>
+                        <div class="small">${escapeHtml(s.description || '')}</div>
+                    </div>
+                    <div class="item-actions">
+                        <button class="delete-btn" data-id="${s.id}" data-table="specialites_medicales">🗑 Supprimer</button>
+                    </div>
+                </div>
+            `).join('');
+            attachDeleteEvents();
+            document.getElementById('statSpecMed').innerText = data.length;
         }
 
-        async function initSupabase() {
-            supabase = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
-            await loadActualites();
-            await loadSpecialites();
-            await loadEquipe();
+        // Spécialités chirurgicales
+        async function loadAdminSpecChirurgicales() {
+            const { data } = await supabase.from('specialites_chirurgicales').select('*').order('ordre', { ascending: true });
+            const container = document.getElementById('adminSpecChirList');
+            if (!data?.length) { container.innerHTML = '<p>Aucune spécialité chirurgicale</p>'; return; }
+            container.innerHTML = data.map(s => `
+                <div class="item-card">
+                    <div class="item-info">
+                        <strong>${escapeHtml(s.titre)}</strong>
+                        <div class="small">${escapeHtml(s.description || '')}</div>
+                    </div>
+                    <div class="item-actions">
+                        <button class="delete-btn" data-id="${s.id}" data-table="specialites_chirurgicales">🗑 Supprimer</button>
+                    </div>
+                </div>
+            `).join('');
+            attachDeleteEvents();
+            document.getElementById('statSpecChir').innerText = data.length;
         }
 
-        // Navigation
-        document.querySelectorAll('.nav-item').forEach(item => {
-            item.addEventListener('click', () => {
-                document.querySelectorAll('.nav-item').forEach(nav => nav.classList.remove('active'));
-                item.classList.add('active');
-                const panel = item.dataset.panel;
-                document.querySelectorAll('.panel').forEach(p => p.classList.remove('active-panel'));
-                document.getElementById(`panel${panel.charAt(0).toUpperCase() + panel.slice(1)}`).classList.add('active-panel');
-                
-                const titles = { actualites: 'Gestion des Actualités', specialites: 'Gestion des Spécialités', equipe: 'Gestion de l\'Équipe' };
-                document.getElementById('panelTitle').innerText = titles[panel];
+        // Gynécologie
+        async function loadAdminGynecologie() {
+            const { data } = await supabase.from('gynecologie').select('*').order('ordre', { ascending: true });
+            const container = document.getElementById('adminGyneList');
+            if (!data?.length) { container.innerHTML = '<p>Aucun service</p>'; return; }
+            container.innerHTML = data.map(g => `
+                <div class="item-card">
+                    <div class="item-info">
+                        <strong>${escapeHtml(g.titre)}</strong>
+                        <div class="small">${escapeHtml(g.description || '')}</div>
+                    </div>
+                    <div class="item-actions">
+                        <button class="delete-btn" data-id="${g.id}" data-table="gynecologie">🗑 Supprimer</button>
+                    </div>
+                </div>
+            `).join('');
+            attachDeleteEvents();
+        }
+
+        // Explorations
+        async function loadAdminExplorations() {
+            const { data } = await supabase.from('explorations').select('*').order('ordre', { ascending: true });
+            const container = document.getElementById('adminExploList');
+            if (!data?.length) { container.innerHTML = '<p>Aucune exploration</p>'; return; }
+            container.innerHTML = data.map(e => `
+                <div class="item-card">
+                    <div class="item-info">
+                        <strong>${escapeHtml(e.titre)}</strong>
+                        <div class="small">${escapeHtml(e.description || '')}</div>
+                    </div>
+                    <div class="item-actions">
+                        <button class="delete-btn" data-id="${e.id}" data-table="explorations">🗑 Supprimer</button>
+                    </div>
+                </div>
+            `).join('');
+            attachDeleteEvents();
+        }
+
+        // Imagerie
+        async function loadAdminImagerie() {
+            const { data } = await supabase.from('imagerie').select('*').order('ordre', { ascending: true });
+            const container = document.getElementById('adminImagerieList');
+            if (!data?.length) { container.innerHTML = '<p>Aucun service d\'imagerie</p>'; return; }
+            container.innerHTML = data.map(i => `
+                <div class="item-card">
+                    <div class="item-info">
+                        <strong>${escapeHtml(i.titre)}</strong>
+                    </div>
+                    <div class="item-actions">
+                        <button class="delete-btn" data-id="${i.id}" data-table="imagerie">🗑 Supprimer</button>
+                    </div>
+                </div>
+            `).join('');
+            attachDeleteEvents();
+        }
+
+        // Équipements
+        async function loadAdminEquipements() {
+            const { data } = await supabase.from('equipements').select('*').order('ordre', { ascending: true });
+            const container = document.getElementById('adminEquipList');
+            if (!data?.length) { container.innerHTML = '<p>Aucun équipement</p>'; return; }
+            container.innerHTML = data.map(e => `
+                <div class="item-card">
+                    <div class="item-info">
+                        <strong>${escapeHtml(e.titre)}</strong>
+                        ${e.badge ? `<span style="background:#1D8B5D; color:white; padding:2px 8px; border-radius:20px; font-size:0.6rem; margin-left:8px;">${escapeHtml(e.badge)}</span>` : ''}
+                        <div class="small">${escapeHtml(e.description || '')}</div>
+                    </div>
+                    <div class="item-actions">
+                        <button class="delete-btn" data-id="${e.id}" data-table="equipements">🗑 Supprimer</button>
+                    </div>
+                </div>
+            `).join('');
+            attachDeleteEvents();
+        }
+
+        // Équipe
+        async function loadAdminTeam() {
+            const { data } = await supabase.from('equipes').select('*').order('ordre', { ascending: true });
+            const container = document.getElementById('adminTeamList');
+            if (!data?.length) { container.innerHTML = '<p>Aucun membre</p>'; return; }
+            container.innerHTML = data.map(m => `
+                <div class="item-card">
+                    <div class="item-info">
+                        <strong>${escapeHtml(m.nom)}</strong> - <em>${escapeHtml(m.poste)}</em>
+                        <div class="small">${escapeHtml(m.description || '')}</div>
+                        ${m.image_url ? `<div class="small">📷 ${escapeHtml(m.image_url.substring(0, 50))}...</div>` : ''}
+                    </div>
+                    <div class="item-actions">
+                        <button class="delete-btn" data-id="${m.id}" data-table="equipes">🗑 Supprimer</button>
+                    </div>
+                </div>
+            `).join('');
+            attachDeleteEvents();
+            document.getElementById('statEquipe').innerText = data.length;
+        }
+
+        // ========== CRÉATIONS ==========
+        document.getElementById('createActuBtn')?.addEventListener('click', async () => {
+            const titre = document.getElementById('actuTitre').value.trim();
+            if (!titre) { alert('Le titre est requis'); return; }
+            await supabase.from('actualites').insert([{
+                titre,
+                description: document.getElementById('actuDescription').value,
+                date: document.getElementById('actuDate').value,
+                image_emoji: document.getElementById('actuEmoji').value
+            }]);
+            alert('Actualité ajoutée');
+            document.getElementById('actuTitre').value = '';
+            document.getElementById('actuDescription').value = '';
+            document.getElementById('actuDate').value = '';
+            document.getElementById('actuEmoji').value = '';
+            loadAllAdminData();
+        });
+
+        document.getElementById('createSpecMedBtn')?.addEventListener('click', async () => {
+            const titre = document.getElementById('specMedTitre').value.trim();
+            if (!titre) { alert('Titre requis'); return; }
+            await supabase.from('specialites_medicales').insert([{ titre, description: document.getElementById('specMedDesc').value, ordre: Date.now() }]);
+            alert('Ajouté');
+            document.getElementById('specMedTitre').value = '';
+            document.getElementById('specMedDesc').value = '';
+            loadAllAdminData();
+        });
+
+        document.getElementById('createSpecChirBtn')?.addEventListener('click', async () => {
+            const titre = document.getElementById('specChirTitre').value.trim();
+            if (!titre) { alert('Titre requis'); return; }
+            await supabase.from('specialites_chirurgicales').insert([{ titre, description: document.getElementById('specChirDesc').value, ordre: Date.now() }]);
+            alert('Ajouté');
+            document.getElementById('specChirTitre').value = '';
+            document.getElementById('specChirDesc').value = '';
+            loadAllAdminData();
+        });
+
+        document.getElementById('createGyneBtn')?.addEventListener('click', async () => {
+            const titre = document.getElementById('gyneTitre').value.trim();
+            if (!titre) { alert('Titre requis'); return; }
+            await supabase.from('gynecologie').insert([{ titre, description: document.getElementById('gyneDesc').value, ordre: Date.now() }]);
+            alert('Ajouté');
+            document.getElementById('gyneTitre').value = '';
+            document.getElementById('gyneDesc').value = '';
+            loadAllAdminData();
+        });
+
+        document.getElementById('createExploBtn')?.addEventListener('click', async () => {
+            const titre = document.getElementById('exploTitre').value.trim();
+            if (!titre) { alert('Titre requis'); return; }
+            await supabase.from('explorations').insert([{ titre, description: document.getElementById('exploDesc').value, ordre: Date.now() }]);
+            alert('Ajouté');
+            document.getElementById('exploTitre').value = '';
+            document.getElementById('exploDesc').value = '';
+            loadAllAdminData();
+        });
+
+        document.getElementById('createImagerieBtn')?.addEventListener('click', async () => {
+            const titre = document.getElementById('imagerieTitre').value.trim();
+            if (!titre) { alert('Titre requis'); return; }
+            await supabase.from('imagerie').insert([{ titre, ordre: Date.now() }]);
+            alert('Ajouté');
+            document.getElementById('imagerieTitre').value = '';
+            loadAllAdminData();
+        });
+
+        document.getElementById('createEquipBtn')?.addEventListener('click', async () => {
+            const titre = document.getElementById('equipTitre').value.trim();
+            if (!titre) { alert('Titre requis'); return; }
+            await supabase.from('equipements').insert([{ 
+                titre, 
+                description: document.getElementById('equipDesc').value, 
+                badge: document.getElementById('equipBadge').value, 
+                ordre: Date.now() 
+            }]);
+            alert('Ajouté');
+            document.getElementById('equipTitre').value = '';
+            document.getElementById('equipDesc').value = '';
+            document.getElementById('equipBadge').value = '';
+            loadAllAdminData();
+        });
+
+        document.getElementById('createMemberBtn')?.addEventListener('click', async () => {
+            const nom = document.getElementById('memberNom').value.trim();
+            const poste = document.getElementById('memberPoste').value.trim();
+            if (!nom || !poste) { alert('Le nom et le poste sont requis'); return; }
+            await supabase.from('equipes').insert([{
+                nom,
+                poste,
+                description: document.getElementById('memberDescription').value,
+                image_url: document.getElementById('memberImageUrl').value,
+                ordre: Date.now()
+            }]);
+            alert('Membre ajouté');
+            document.getElementById('memberNom').value = '';
+            document.getElementById('memberPoste').value = '';
+            document.getElementById('memberDescription').value = '';
+            document.getElementById('memberImageUrl').value = '';
+            loadAllAdminData();
+        });
+
+        // ========== SUPPRESSION ==========
+        function attachDeleteEvents() {
+            document.querySelectorAll('.delete-btn').forEach(btn => {
+                btn.removeEventListener('click', handleDelete);
+                btn.addEventListener('click', handleDelete);
+            });
+        }
+
+        async function handleDelete(e) {
+            const btn = e.currentTarget;
+            const id = btn.getAttribute('data-id');
+            const table = btn.getAttribute('data-table');
+            if (!confirm('Supprimer définitivement cet élément ?')) return;
+            const { error } = await supabase.from(table).delete().eq('id', id);
+            if (error) { alert('Erreur: ' + error.message); return; }
+            alert('Supprimé avec succès');
+            loadAllAdminData();
+        }
+
+        // ========== CHARGEMENT TOUTES LES DONNÉES ==========
+        async function loadAllAdminData() {
+            await Promise.all([
+                loadAdminActualites(),
+                loadAdminSpecMedicales(),
+                loadAdminSpecChirurgicales(),
+                loadAdminGynecologie(),
+                loadAdminExplorations(),
+                loadAdminImagerie(),
+                loadAdminEquipements(),
+                loadAdminTeam()
+            ]);
+        }
+
+        // ========== ONGLETS ==========
+        const tabs = document.querySelectorAll('.tab-btn');
+        const panes = document.querySelectorAll('.tab-pane');
+
+        tabs.forEach(tab => {
+            tab.addEventListener('click', () => {
+                const targetId = tab.getAttribute('data-tab');
+                tabs.forEach(t => t.classList.remove('active'));
+                tab.classList.add('active');
+                panes.forEach(pane => pane.classList.remove('active'));
+                document.getElementById(targetId).classList.add('active');
             });
         });
 
-        // ========== ACTUALITÉS ==========
-        async function loadActualites() {
-            const { data, error } = await supabase.from('actualites').select('*').order('date', { ascending: false });
-            if (error) { console.error(error); return; }
-            const tbody = document.getElementById('actualitesList');
-            tbody.innerHTML = '';
-            data.forEach(actu => {
-                const row = tbody.insertRow();
-                row.insertCell(0).innerText = actu.titre;
-                row.insertCell(1).innerText = actu.date;
-                row.insertCell(2).innerText = actu.description.substring(0, 50) + (actu.description.length > 50 ? '...' : '');
-                const actions = row.insertCell(3);
-                actions.innerHTML = `<button class="btn-edit" onclick="editActualite('${actu.id}')">✏️</button>
-                                    <button class="btn-delete" onclick="deleteActualite('${actu.id}')">🗑️</button>`;
+        // ========== UTILITAIRES ==========
+        function escapeHtml(str) {
+            if (!str) return '';
+            return str.replace(/[&<>]/g, function(m) {
+                if (m === '&') return '&amp;';
+                if (m === '<') return '&lt;';
+                if (m === '>') return '&gt;';
+                return m;
             });
         }
-
-        function openActualiteModal(editId = null) {
-            currentType = 'actualite';
-            currentEditId = editId;
-            document.getElementById('modalTitle').innerText = editId ? 'Modifier l\'actualité' : 'Ajouter une actualité';
-            document.getElementById('modalFields').innerHTML = `
-                <input type="text" id="titre" placeholder="Titre" required>
-                <input type="date" id="date" required>
-                <textarea id="description" rows="4" placeholder="Description"></textarea>
-            `;
-            if (editId) loadActualiteData(editId);
-            document.getElementById('crudModal').style.display = 'flex';
-        }
-
-        async function loadActualiteData(id) {
-            const { data } = await supabase.from('actualites').select('*').eq('id', id).single();
-            if (data) {
-                document.getElementById('titre').value = data.titre;
-                document.getElementById('date').value = data.date;
-                document.getElementById('description').value = data.description;
-            }
-        }
-
-        async function deleteActualite(id) {
-            if (confirm('Supprimer cette actualité ?')) {
-                await supabase.from('actualites').delete().eq('id', id);
-                await loadActualites();
-            }
-        }
-
-        // ========== SPÉCIALITÉS ==========
-        async function loadSpecialites() {
-            const { data, error } = await supabase.from('specialites').select('*').order('nom');
-            if (error) { console.error(error); return; }
-            const tbody = document.getElementById('specialitesList');
-            tbody.innerHTML = '';
-            data.forEach(spec => {
-                const row = tbody.insertRow();
-                row.insertCell(0).innerText = spec.nom;
-                row.insertCell(1).innerText = spec.description || '-';
-                row.insertCell(2).innerText = spec.categorie || 'Médicale';
-                const actions = row.insertCell(3);
-                actions.innerHTML = `<button class="btn-edit" onclick="editSpecialite('${spec.id}')">✏️</button>
-                                    <button class="btn-delete" onclick="deleteSpecialite('${spec.id}')">🗑️</button>`;
-            });
-        }
-
-        function openSpecialiteModal(editId = null) {
-            currentType = 'specialite';
-            currentEditId = editId;
-            document.getElementById('modalTitle').innerText = editId ? 'Modifier la spécialité' : 'Ajouter une spécialité';
-            document.getElementById('modalFields').innerHTML = `
-                <input type="text" id="nom" placeholder="Nom de la spécialité" required>
-                <textarea id="description" rows="3" placeholder="Description"></textarea>
-                <select id="categorie">
-                    <option value="Médicale">Médicale</option>
-                    <option value="Chirurgicale">Chirurgicale</option>
-                    <option value="Exploration">Exploration</option>
-                    <option value="Imagerie">Imagerie</option>
-                </select>
-            `;
-            if (editId) loadSpecialiteData(editId);
-            document.getElementById('crudModal').style.display = 'flex';
-        }
-
-        async function loadSpecialiteData(id) {
-            const { data } = await supabase.from('specialites').select('*').eq('id', id).single();
-            if (data) {
-                document.getElementById('nom').value = data.nom;
-                document.getElementById('description').value = data.description || '';
-                document.getElementById('categorie').value = data.categorie || 'Médicale';
-            }
-        }
-
-        async function deleteSpecialite(id) {
-            if (confirm('Supprimer cette spécialité ?')) {
-                await supabase.from('specialites').delete().eq('id', id);
-                await loadSpecialites();
-            }
-        }
-
-        // ========== ÉQUIPE ==========
-        async function loadEquipe() {
-            const { data, error } = await supabase.from('equipe').select('*').order('nom');
-            if (error) { console.error(error); return; }
-            const tbody = document.getElementById('equipeList');
-            tbody.innerHTML = '';
-            data.forEach(membre => {
-                const row = tbody.insertRow();
-                row.insertCell(0).innerText = membre.nom;
-                row.insertCell(1).innerText = membre.poste;
-                row.insertCell(2).innerText = membre.description.substring(0, 40) + (membre.description.length > 40 ? '...' : '');
-                row.insertCell(3).innerHTML = membre.image ? `<img src="${membre.image}" style="width:40px;height:40px;object-fit:cover;border-radius:50%;">` : 'Aucune';
-                const actions = row.insertCell(4);
-                actions.innerHTML = `<button class="btn-edit" onclick="editMembre('${membre.id}')">✏️</button>
-                                    <button class="btn-delete" onclick="deleteMembre('${membre.id}')">🗑️</button>`;
-            });
-        }
-
-        function openMembreModal(editId = null) {
-            currentType = 'membre';
-            currentEditId = editId;
-            document.getElementById('modalTitle').innerText = editId ? 'Modifier le membre' : 'Ajouter un membre';
-            document.getElementById('modalFields').innerHTML = `
-                <input type="text" id="nom" placeholder="Nom complet" required>
-                <input type="text" id="poste" placeholder="Poste / Spécialité" required>
-                <textarea id="description" rows="3" placeholder="Description"></textarea>
-                <input type="text" id="image" placeholder="URL de l'image (optionnel)">
-            `;
-            if (editId) loadMembreData(editId);
-            document.getElementById('crudModal').style.display = 'flex';
-        }
-
-        async function loadMembreData(id) {
-            const { data } = await supabase.from('equipe').select('*').eq('id', id).single();
-            if (data) {
-                document.getElementById('nom').value = data.nom;
-                document.getElementById('poste').value = data.poste;
-                document.getElementById('description').value = data.description || '';
-                document.getElementById('image').value = data.image || '';
-            }
-        }
-
-        async function deleteMembre(id) {
-            if (confirm('Supprimer ce membre ?')) {
-                await supabase.from('equipe').delete().eq('id', id);
-                await loadEquipe();
-            }
-        }
-
-        // ========== SAUVEGARDE GÉNÉRIQUE ==========
-        async function saveItem() {
-            if (currentType === 'actualite') {
-                const titre = document.getElementById('titre').value;
-                const date = document.getElementById('date').value;
-                const description = document.getElementById('description').value;
-                if (!titre || !date) { alert('Titre et date requis'); return; }
-                if (currentEditId) {
-                    await supabase.from('actualites').update({ titre, date, description }).eq('id', currentEditId);
-                } else {
-                    await supabase.from('actualites').insert([{ titre, date, description }]);
-                }
-                await loadActualites();
-            }
-            else if (currentType === 'specialite') {
-                const nom = document.getElementById('nom').value;
-                const description = document.getElementById('description').value;
-                const categorie = document.getElementById('categorie').value;
-                if (!nom) { alert('Nom requis'); return; }
-                if (currentEditId) {
-                    await supabase.from('specialites').update({ nom, description, categorie }).eq('id', currentEditId);
-                } else {
-                    await supabase.from('specialites').insert([{ nom, description, categorie }]);
-                }
-                await loadSpecialites();
-            }
-            else if (currentType === 'membre') {
-                const nom = document.getElementById('nom').value;
-                const poste = document.getElementById('poste').value;
-                const description = document.getElementById('description').value;
-                const image = document.getElementById('image').value;
-                if (!nom || !poste) { alert('Nom et poste requis'); return; }
-                if (currentEditId) {
-                    await supabase.from('equipe').update({ nom, poste, description, image }).eq('id', currentEditId);
-                } else {
-                    await supabase.from('equipe').insert([{ nom, poste, description, image }]);
-                }
-                await loadEquipe();
-            }
-            closeModal();
-        }
-
-        function closeModal() {
-            document.getElementById('crudModal').style.display = 'none';
-            currentEditId = null;
-        }
-
-        // Exposer les fonctions globales
-        window.checkLogin = checkLogin;
-        window.logout = logout;
-        window.openActualiteModal = openActualiteModal;
-        window.editActualite = (id) => openActualiteModal(id);
-        window.deleteActualite = deleteActualite;
-        window.openSpecialiteModal = openSpecialiteModal;
-        window.editSpecialite = (id) => openSpecialiteModal(id);
-        window.deleteSpecialite = deleteSpecialite;
-        window.openMembreModal = openMembreModal;
-        window.editMembre = (id) => openMembreModal(id);
-        window.deleteMembre = deleteMembre;
-        window.saveItem = saveItem;
-        window.closeModal = closeModal;
     </script>
 </body>
 </html>
