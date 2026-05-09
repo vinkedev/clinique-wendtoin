@@ -187,7 +187,7 @@
         .carousel-counter { font-size: 0.72rem; color: #94a3b8; font-weight: 500; min-width: 36px; text-align: center; }
         @media (max-width: 768px) { .carousel-outer { padding: 0 32px; } .carousel-btn { width: 32px; height: 32px; font-size: 16px; } }
 
-        /* ===== ACTUALITÉS — Cartes verticales compactes ===== */
+        /* ===== ACTUALITÉS — Cartes verticales compactes (hauteur image 210px sur desktop) ===== */
         .actu-group-slide { flex: 0 0 100%; display: flex; gap: 18px; box-sizing: border-box; align-items: stretch; }
         .actu-card-v2 {
             flex: 1; min-width: 0;
@@ -197,7 +197,7 @@
             display: flex; flex-direction: column;
         }
         .actu-card-v2:hover { transform: translateY(-6px); box-shadow: 0 14px 30px rgba(0,0,0,0.13); }
-        .actu-v2-img { width: 100%; height: 160px; object-fit: cover; object-position: center; display: block; background: linear-gradient(135deg, #0077A4, #1D8B5D); flex-shrink: 0; transition: transform 0.4s ease; }
+        .actu-v2-img { width: 100%; height: 210px; object-fit: cover; object-position: center; display: block; background: linear-gradient(135deg, #0077A4, #1D8B5D); flex-shrink: 0; transition: transform 0.4s ease; }
         .actu-card-v2:hover .actu-v2-img { transform: scale(1.04); }
         .actu-v2-img-wrap { overflow: hidden; flex-shrink: 0; position: relative; }
         .actu-v2-cat {
@@ -207,18 +207,18 @@
             padding: 3px 9px; border-radius: 50px; text-transform: uppercase;
             backdrop-filter: blur(4px); z-index: 2;
         }
-        .actu-v2-no-img { width: 100%; height: 160px; background: linear-gradient(135deg, #0077A4, #1D8B5D); display: flex; align-items: center; justify-content: center; font-size: 2.5rem; flex-shrink: 0; position: relative; }
+        .actu-v2-no-img { width: 100%; height: 210px; background: linear-gradient(135deg, #0077A4, #1D8B5D); display: flex; align-items: center; justify-content: center; font-size: 2.5rem; flex-shrink: 0; position: relative; }
         .actu-v2-body { padding: 14px 16px 16px; display: flex; flex-direction: column; flex: 1; }
         .actu-v2-date { font-size: 0.67rem; color: #1D8B5D; font-weight: 600; margin-bottom: 7px; display: flex; align-items: center; gap: 4px; }
         .actu-v2-title { font-size: 0.92rem; font-weight: 700; color: #0f172a; line-height: 1.35; margin-bottom: 8px; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
         .actu-v2-desc { font-size: 0.78rem; color: #64748b; line-height: 1.55; flex: 1; display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; overflow: hidden; }
         .actu-v2-footer { margin-top: 12px; display: flex; align-items: center; gap: 5px; font-size: 0.72rem; font-weight: 600; color: #0077A4; }
         @media (max-width: 640px) { .actu-group-slide { flex-direction: column; gap: 0; } .actu-v2-img { height: 180px; } .actu-v2-no-img { height: 180px; } }
-        @media (min-width: 641px) and (max-width: 1023px) { .actu-group-slide { gap: 16px; } .actu-v2-img { height: 150px; } .actu-v2-no-img { height: 150px; } }
+        @media (min-width: 641px) and (max-width: 1023px) { .actu-group-slide { gap: 16px; } .actu-v2-img { height: 160px; } .actu-v2-no-img { height: 160px; } }
         .no-actu-message { flex: 0 0 100%; text-align: center; padding: 50px 20px; background: #f8fafc; border-radius: 18px; color: #64748b; font-size: 1rem; }
 
-        /* ===== ÉQUIPE — Mobile en carte horizontale ===== */
-        .equipe-group-slide { flex: 0 0 100%; display: flex; gap: 18px; box-sizing: border-box; align-items: stretch; }
+        /* ===== ÉQUIPE — 4 membres par slide sur desktop ===== */
+        .equipe-group-slide { flex: 0 0 100%; display: flex; gap: 18px; box-sizing: border-box; align-items: stretch; flex-wrap: wrap; }
         .team-card-enhanced {
             flex: 1; min-width: 0;
             background: #f8fafc; border-radius: 22px; overflow: hidden;
@@ -237,8 +237,10 @@
         .team-deco-line { width: 32px; height: 2px; background: linear-gradient(90deg, #0077A4, #1D8B5D); border-radius: 2px; margin: 0 auto 8px; }
         .team-desc-enhanced { color: #475569; font-size: 0.75rem; line-height: 1.5; display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; overflow: hidden; }
         .team-specialty-badge { display: inline-block; margin-top: 10px; background: linear-gradient(135deg, #e0f0ff, #e6f7f0); color: #0077A4; font-size: 0.62rem; font-weight: 700; padding: 3px 10px; border-radius: 50px; letter-spacing: 0.3px; }
+        
+        /* Mobile : 1 carte horizontale */
         @media (max-width: 640px) {
-            .equipe-group-slide { flex-direction: column; gap: 0; }
+            .equipe-group-slide { flex-direction: column; gap: 0; flex-wrap: nowrap; }
             .team-card-enhanced { flex-direction: row; align-items: stretch; text-align: left; border-radius: 18px; }
             .team-img-wrap { width: 110px; flex-shrink: 0; }
             .team-img-wrap::after { display: none; }
@@ -250,8 +252,18 @@
             .team-desc-enhanced { -webkit-line-clamp: 2; font-size: 0.72rem; }
             .team-specialty-badge { font-size: 0.6rem; }
         }
-        @media (min-width: 641px) and (max-width: 1023px) { .equipe-group-slide { gap: 16px; } .team-card-enhanced { flex: 0 0 calc(50% - 9px); } }
-        @media (min-width: 1024px) { .equipe-group-slide { gap: 20px; } .team-card-enhanced { flex: 1; } }
+        
+        /* Tablette : 2 cartes par ligne */
+        @media (min-width: 641px) and (max-width: 1023px) {
+            .equipe-group-slide { flex-wrap: wrap; }
+            .team-card-enhanced { flex: 0 0 calc(50% - 9px); }
+        }
+        
+        /* Desktop : 4 cartes par ligne */
+        @media (min-width: 1024px) {
+            .equipe-group-slide { flex-wrap: wrap; }
+            .team-card-enhanced { flex: 0 0 calc(25% - 15px); }
+        }
 
         /* Partenaires ticker */
         .partners-section { background: linear-gradient(135deg, #f8fafc, #f1f5f9); padding: 30px 0; border-top: 1px solid #e2e8f0; border-bottom: 1px solid #e2e8f0; }
@@ -453,7 +465,7 @@
         </div>
     </div>
 
-    <!-- SECTION ÉQUIPE V2 -->
+    <!-- SECTION ÉQUIPE V2 (4 membres par slide sur desktop) -->
     <section id="equipe" class="carousel-section bg-light">
         <div class="container">
             <h2 class="section-title animate-on-scroll">Notre équipe</h2>
@@ -941,7 +953,7 @@
             }); 
         }
 
-        // ==================== CARROUSEL NOUVEAU ====================
+        // ==================== CARROUSEL ====================
         function createCarouselNoProgress(opts) {
             const INTERVAL = opts.interval || 5000;
             const groupSize = opts.groupSize || 1;
@@ -1042,7 +1054,8 @@
         }
 
         function equipeGroupSize() {
-            if (window.innerWidth >= 1024) return 2;
+            // Sur desktop : 4 membres par slide
+            if (window.innerWidth >= 1024) return 4;
             if (window.innerWidth >= 641) return 2;
             return 1;
         }
