@@ -423,32 +423,15 @@
         }
 
         async function loadWithCache(table, options = {}) {
-            const cacheKey = `cache_${table}`;
-            const cacheTimeKey = `${cacheKey}_time`;
-            
-            try {
-                const cached = localStorage.getItem(cacheKey);
-                const cacheTime = localStorage.getItem(cacheTimeKey);
-                if (cached && cacheTime && (Date.now() - parseInt(cacheTime)) < 600000) {
-                    console.log(`📦 Cache pour ${table}`);
-                    return JSON.parse(cached);
-                }
-            } catch(e) { console.log(`⚠️ Cache indisponible pour ${table}:`, e.message); }
-            
-            if (!supabaseClient) return null;
-            console.log(`🌐 Supabase pour ${table}`);
-            let query = supabaseClient.from(table).select('*');
-            if (options.orderBy) query = query.order(options.orderBy, { ascending: options.ascending !== false });
-            if (options.order) query = query.order('ordre');
-            const { data, error } = await query;
-            if (error) { console.error(`❌ Erreur ${table}:`, error); return null; }
-            try { 
-                localStorage.setItem(cacheKey, JSON.stringify(data)); 
-                localStorage.setItem(cacheTimeKey, Date.now().toString()); 
-            } catch(e) { console.log('⚠️ Sauvegarde impossible'); }
-            return data;
-        }
-
+    if (!supabaseClient) return null;
+    console.log(`🌐 Supabase pour ${table}`);
+    let query = supabaseClient.from(table).select('*');
+    if (options.orderBy) query = query.order(options.orderBy, { ascending: options.ascending !== false });
+    if (options.order) query = query.order('ordre');
+    const { data, error } = await query;
+    if (error) { console.error(`❌ Erreur ${table}:`, error); return null; }
+    return data;
+}
         let actualitesData = [];
         
         async function loadPublicActualites() {
