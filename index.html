@@ -417,14 +417,20 @@
     let clickTimeout = null;
 
     function initSupabase() {
-        if (window.supabase) {
-            supabaseClient = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
-            console.log("✅ Supabase initialisé");
-            if (!isSlowConnection) { loadAllPublicData(); } 
-            else { console.log("Mode économie de données actif"); showMinimalContent(); }
-            checkAdminSession();
-        } else { setTimeout(initSupabase, 200); }
+    if (window.supabase) {
+        supabaseClient = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+        console.log("✅ Supabase initialisé");
+        
+        // ATTENDRE 1 SECONDE pour être sûr que tout est prêt
+        setTimeout(() => {
+            loadAllPublicData();
+        }, 1000);
+        
+        checkAdminSession();
+    } else {
+        setTimeout(initSupabase, 200);
     }
+}
     
     function showMinimalContent() {
         const containers = ['specialitesMedicalesList', 'specialitesChirurgicalesList', 'gynecologieList', 'explorationsList', 'imagerieList', 'equipementsList'];
@@ -612,6 +618,21 @@
     supabaseScript.async = true;
     supabaseScript.onload = () => { console.log('Supabase chargé'); initSupabase(); };
     document.body.appendChild(supabaseScript);
+</script>
+ <button onclick="forcerChargement()" style="position:fixed; bottom:10px; left:10px; z-index:9999; background:#1D8B5D; color:white; padding:10px; border-radius:50px; font-size:12px;">
+🔄 FORCER CHARGEMENT
+</button>
+
+<script>
+function forcerChargement() {
+    console.log("=== FORCAGE MANUEL ===");
+    if (supabaseClient) {
+        loadAllPublicData();
+        alert("Chargement forcé ! Regarde si les spécialités apparaissent.");
+    } else {
+        alert("supabaseClient pas encore prêt");
+    }
+}
 </script>
 </body>
 </html>
