@@ -12,29 +12,14 @@
     <link rel="dns-prefetch" href="https://otdiywrvzappbmjfkkyi.supabase.co">
     
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet" media="print" onload="this.media='all'">
-    <noscript>
-        <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-    </noscript>
+    <noscript><link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet"></noscript>
     
     <style>
-        body {
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif;
-        }
-        
-        .fonts-loaded body {
-            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-        }
-        
-        .fonts-loaded .logo-text h1,
-        .fonts-loaded .logo-text p {
-            font-family: 'Poppins', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
-        }
-        
         * { margin: 0; padding: 0; box-sizing: border-box; }
         html { scroll-behavior: smooth; scroll-padding-top: 80px; -webkit-overflow-scrolling: touch; }
-        body { color: #1e293b; line-height: 1.6; background: #F8F9FA; overflow-x: hidden; }
+        body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; color: #1e293b; line-height: 1.6; background: #F8F9FA; overflow-x: hidden; }
+        .fonts-loaded body { font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; }
         .container { width: 100%; max-width: 1280px; margin: 0 auto; padding: 0 20px; }
-
         @keyframes fadeInUp { from { opacity: 0; transform: translateY(35px); } to { opacity: 1; transform: translateY(0); } }
         @keyframes fadeInDown { from { opacity: 0; transform: translateY(-15px); } to { opacity: 1; transform: translateY(0); } }
         @keyframes pulse { 0% { transform: scale(1); box-shadow: 0 0 0 0 rgba(29,139,93,0.6); } 70% { transform: scale(1.03); box-shadow: 0 0 0 12px rgba(29,139,93,0); } 100% { transform: scale(1); box-shadow: 0 0 0 0 rgba(29,139,93,0); } }
@@ -48,9 +33,6 @@
         @keyframes shimmer { 0% { background-position: 200% 0; } 100% { background-position: -200% 0; } }
         
         .skeleton { background: linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 50%, #f0f0f0 75%); background-size: 200% 100%; animation: shimmer 1.5s infinite; border-radius: 8px; }
-        .skeleton-text { height: 20px; margin-bottom: 10px; }
-        .skeleton-title { height: 24px; width: 80%; margin-bottom: 15px; }
-        .skeleton-card { background: white; border-radius: 24px; overflow: hidden; box-shadow: 0 10px 30px rgba(0,0,0,0.06); }
         .text-animate { animation: fadeInDown 0.6s ease-out forwards; }
         .animate-on-scroll { opacity: 0; transform: translateY(35px); transition: opacity 0.7s cubic-bezier(0.2,0.9,0.4,1.1), transform 0.7s cubic-bezier(0.2,0.9,0.4,1.1); }
         .animate-on-scroll.visible { opacity: 1; transform: translateY(0); }
@@ -62,10 +44,9 @@
         header.scrolled { background: rgba(255,255,255,0.95); backdrop-filter: blur(12px); box-shadow: 0 8px 30px rgba(0,0,0,0.12); }
         .header-container { display: flex; justify-content: space-between; align-items: center; padding: 8px 20px; max-width: 1280px; margin: 0 auto; gap: 15px; }
         .logo { display: flex; align-items: center; gap: 10px; flex-shrink: 0; cursor: pointer; }
-        .logo img { height: 50px; width: auto; pointer-events: none; }
-        .logo-text { pointer-events: none; }
-        .logo-text h1 { font-size: 1.2rem; font-weight: 700; background: linear-gradient(135deg, #0077A4 0%, #1D8B5D 100%); -webkit-background-clip: text; background-clip: text; color: transparent; line-height: 1.2; }
-        .logo-text p { font-size: 0.6rem; color: #64748b; letter-spacing: 0.5px; }
+        .logo img { height: 50px; width: auto; }
+        .logo-text h1 { font-size: 1.2rem; font-weight: 700; background: linear-gradient(135deg, #0077A4 0%, #1D8B5D 100%); -webkit-background-clip: text; background-clip: text; color: transparent; }
+        .logo-text p { font-size: 0.6rem; color: #64748b; }
         nav ul { display: none; flex-direction: column; position: absolute; top: 100%; left: 0; right: 0; background: white; padding: 15px; box-shadow: 0 20px 30px rgba(0,0,0,0.1); gap: 12px; border-radius: 0 0 20px 20px; list-style: none; z-index: 999; }
         nav ul.show { display: flex; }
         nav a { text-decoration: none; color: #1e293b; font-weight: 500; transition: all 0.3s ease; display: block; padding: 8px 0; font-size: 0.95rem; }
@@ -79,7 +60,7 @@
         .hero-content { position: relative; z-index: 2; animation: fadeInUp 0.9s ease-out; }
         .hero-content h2 { font-size: 1.6rem; margin-bottom: 12px; font-weight: 700; line-height: 1.3; }
         .hero-content h2 span { background: rgba(255,255,255,0.2); padding: 0 8px; border-radius: 50px; display: inline-block; animation: pulse 2.2s infinite; font-size: 1.4rem; }
-        .hero-slogan { font-size: 0.9rem; margin-bottom: 25px; opacity: 0.96; }
+        .hero-slogan { font-size: 0.9rem; margin-bottom: 25px; }
         .hero-buttons-custom { display: flex; gap: 15px; justify-content: center; flex-wrap: wrap; }
         .slider-dots { position: absolute; bottom: 20px; left: 0; right: 0; display: flex; justify-content: center; gap: 12px; z-index: 15; }
         .dot { width: 12px; height: 12px; border-radius: 50%; background-color: rgba(255,255,255,0.5); cursor: pointer; transition: all 0.3s ease; border: none; padding: 0; }
@@ -89,7 +70,7 @@
         .slider-prev { left: 15px; }
         .slider-next { right: 15px; }
         .slider-progress { position: absolute; bottom: 0; left: 0; height: 4px; background: #1D8B5D; z-index: 20; width: 0%; }
-        .btn { display: inline-block; padding: 10px 20px; border-radius: 60px; text-decoration: none; font-weight: 600; margin: 6px; transition: all 0.4s ease; font-size: 0.85rem; position: relative; overflow: hidden; }
+        .btn { display: inline-block; padding: 10px 20px; border-radius: 60px; text-decoration: none; font-weight: 600; margin: 6px; transition: all 0.4s ease; font-size: 0.85rem; }
         .btn-primary { background: #1D8B5D; color: white; box-shadow: 0 6px 18px rgba(29,139,93,0.35); }
         .btn-primary:hover { background: #146b48; transform: translateY(-3px); }
         .btn-outline { background: transparent; border: 2px solid white; color: white; animation: float 3s ease-in-out infinite; }
@@ -120,7 +101,6 @@
         .actu-card:hover { transform: translateY(-12px) scale(1.02); box-shadow: 0 25px 45px rgba(0,0,0,0.2); }
         .actu-image { width: 100%; height: 200px; background: linear-gradient(135deg, #0077A4, #1D8B5D); display: flex; align-items: center; justify-content: center; overflow: hidden; position: relative; flex-shrink: 0; }
         .actu-image img { width: 100%; height: 100%; object-fit: cover; object-position: center; transition: transform 0.5s ease; display: block; }
-        .actu-card:hover .actu-image img { transform: scale(1.08); }
         .actu-content { padding: 18px; }
         .actu-date { font-size: 0.7rem; color: #1D8B5D; font-weight: 700; margin-bottom: 8px; letter-spacing: 0.5px; }
         .actu-title { font-size: 1.1rem; font-weight: 700; color: #1e293b; margin-bottom: 10px; line-height: 1.3; }
@@ -128,19 +108,18 @@
         .no-actu-message { text-align: center; padding: 40px 20px; background: #f8fafc; border-radius: 24px; color: #64748b; font-size: 1rem; }
         .actu-modal { display: none; position: fixed; z-index: 10001; left: 0; top: 0; width: 100%; height: 100%; background-color: rgba(0,0,0,0.85); backdrop-filter: blur(8px); align-items: center; justify-content: center; cursor: pointer; }
         .actu-modal-content { background: white; width: 90%; max-width: 700px; max-height: 85vh; border-radius: 28px; overflow-y: auto; position: relative; cursor: default; animation: fadeScale 0.3s ease; }
-        .actu-modal-header { position: relative; width: 100%; height: 260px; background: linear-gradient(135deg, #0077A4, #1D8B5D); overflow: hidden; border-radius: 28px 28px 0 0; flex-shrink: 0; }
+        .actu-modal-header { position: relative; width: 100%; height: 260px; background: linear-gradient(135deg, #0077A4, #1D8B5D); overflow: hidden; border-radius: 28px 28px 0 0; }
         .actu-modal-header img { width: 100%; height: 100%; object-fit: cover; object-position: center; display: block; }
         .actu-modal-close { position: absolute; top: 15px; right: 15px; width: 40px; height: 40px; background: rgba(0,0,0,0.6); border-radius: 50%; display: flex; align-items: center; justify-content: center; color: white; font-size: 28px; cursor: pointer; transition: all 0.2s ease; z-index: 10; border: none; }
         .actu-modal-close:hover { background: #dc3545; transform: scale(1.1); }
         .actu-modal-body { padding: 25px; }
         .actu-modal-date { font-size: 0.8rem; color: #1D8B5D; font-weight: 600; margin-bottom: 12px; display: inline-block; background: #e6f7f0; padding: 4px 12px; border-radius: 50px; }
-        .actu-modal-title { font-size: 1.6rem; font-weight: 700; color: #1e293b; margin-bottom: 20px; line-height: 1.3; }
+        .actu-modal-title { font-size: 1.6rem; font-weight: 700; color: #1e293b; margin-bottom: 20px; }
         .actu-modal-description { font-size: 1rem; color: #334155; line-height: 1.7; white-space: pre-wrap; }
-        .actu-modal-description p { margin-bottom: 15px; }
         .actu-modal-share { margin-top: 25px; padding-top: 20px; border-top: 1px solid #eef2f6; display: flex; gap: 15px; justify-content: flex-end; }
         .share-wa-btn { background: #25D366; color: white; border: none; padding: 10px 20px; border-radius: 50px; cursor: pointer; font-weight: 600; display: inline-flex; align-items: center; gap: 8px; transition: all 0.3s ease; }
         .share-wa-btn:hover { background: #128C7E; transform: translateY(-2px); }
-        @media (max-width: 640px) { .actu-modal-header { height: 200px; } .actu-modal-title { font-size: 1.3rem; } .actu-modal-body { padding: 18px; } .actu-modal-description { font-size: 0.9rem; } .actu-image { height: 170px; } }
+        @media (max-width: 640px) { .actu-modal-header { height: 200px; } .actu-modal-title { font-size: 1.3rem; } .actu-modal-body { padding: 18px; } }
         .stats { background: #0077A4; color: white; padding: 40px 0; position: relative; overflow: hidden; }
         .stats::before { content: ''; position: absolute; top: -50%; left: -50%; width: 200%; height: 200%; background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, transparent 70%); animation: rotateBg 22s linear infinite; }
         .stats-container { display: flex; justify-content: space-around; text-align: center; flex-wrap: wrap; gap: 25px; position: relative; z-index: 1; }
@@ -177,7 +156,6 @@
         .team-name { font-size: 1.15rem; font-weight: 700; margin-bottom: 5px; }
         .team-position { color: #1D8B5D; font-weight: 600; font-size: 0.8rem; margin-bottom: 10px; }
         .team-desc { color: #475569; font-size: 0.82rem; line-height: 1.45; }
-        #equipe .team-name { color: #0077A4; }
         .gallery-section { background: white; }
         .gallery-title { text-align: center; font-size: 1.6rem; margin-bottom: 25px; color: #0077A4; font-weight: 700; position: relative; }
         .gallery-title::after { content: ''; position: absolute; bottom: -10px; left: 50%; transform: translateX(-50%); width: 50px; height: 3px; background: linear-gradient(90deg, #0077A4, #1D8B5D); border-radius: 4px; }
@@ -186,7 +164,6 @@
         .gallery-item { background: #f8fafc; border-radius: 20px; overflow: hidden; box-shadow: 0 10px 25px rgba(0,0,0,0.08); transition: transform 0.3s ease; cursor: pointer; border: 1px solid #eef2f6; }
         .gallery-item:hover { transform: translateY(-5px); }
         .gallery-img { width: 100%; aspect-ratio: 4 / 3; object-fit: cover; display: block; transition: transform 0.5s ease; }
-        .gallery-item:hover .gallery-img { transform: scale(1.05); }
         .image-modal { display: none; position: fixed; z-index: 10000; left: 0; top: 0; width: 100%; height: 100%; background-color: rgba(0,0,0,0.92); cursor: pointer; align-items: center; justify-content: center; }
         .image-modal img { max-width: 90%; max-height: 90%; object-fit: contain; border-radius: 12px; }
         .close-image-modal { position: absolute; top: 20px; right: 35px; color: white; font-size: 36px; font-weight: bold; cursor: pointer; background: rgba(0,0,0,0.5); width: 45px; height: 45px; border-radius: 50%; display: flex; align-items: center; justify-content: center; }
@@ -197,7 +174,6 @@
         .video-thumbnail { width: 100%; aspect-ratio: 16 / 9; background: linear-gradient(145deg, #1e293b, #0f172a); display: flex; align-items: center; justify-content: center; color: white; font-size: 2.8rem; }
         .video-info { padding: 12px; }
         .video-title { font-weight: 600; color: #1e293b; margin-bottom: 4px; font-size: 0.85rem; }
-        .video-date { font-size: 0.65rem; color: #64748b; }
         footer { background: #0f172a; color: #cbd5e1; padding: 35px 0 25px; }
         .footer-grid { display: grid; grid-template-columns: 1fr; gap: 25px; text-align: center; }
         .footer-grid a { color: #cbd5e1; text-decoration: none; transition: all 0.3s ease; }
@@ -207,52 +183,23 @@
         .modal-header { background: linear-gradient(135deg, #0077A4, #1D8B5D); padding: 15px 20px; border-radius: 28px 28px 0 0; color: white; position: sticky; top: 0; z-index: 1; }
         .modal-header h3 { font-size: 1.3rem; margin: 0; padding-right: 30px; }
         .modal-body { padding: 20px; }
-        .modal-body p { margin-bottom: 12px; color: #334155; line-height: 1.6; font-size: 0.9rem; }
-        .close-modal { position: absolute; top: 12px; right: 18px; color: white; font-size: 28px; font-weight: bold; cursor: pointer; background: rgba(0,0,0,0.3); width: 32px; height: 32px; border-radius: 50%; display: flex; align-items: center; justify-content: center; transition: all 0.2s ease; z-index: 2; }
-        .close-modal:hover { background: #dc3545; transform: scale(1.05); }
         .password-wrapper { position: relative; margin-bottom: 20px; }
         .password-wrapper input { width: 100%; padding: 12px; padding-right: 50px; border-radius: 40px; border: 1px solid #ddd; }
         .toggle-password { position: absolute; right: 15px; top: 50%; transform: translateY(-50%); cursor: pointer; font-size: 1.2rem; color: #64748b; background: none; border: none; }
         .toggle-password:hover { color: #1D8B5D; }
         @media (min-width: 640px) { .hero-content h2 { font-size: 2rem; } .section-title { font-size: 1.8rem; } }
-        @media (min-width: 1024px) { .mobile-menu-btn { display: none; } nav ul { display: flex !important; flex-direction: row; position: static; background: transparent; box-shadow: none; padding: 0; gap: 25px; } nav a { padding: 0; font-size: 0.95rem; } .hero-content h2 { font-size: 2.5rem; } .hero-slogan { font-size: 1.1rem; } .btn { padding: 12px 32px; font-size: 0.95rem; } .rdv-grid { grid-template-columns: 1fr 1fr; gap: 45px; } .presentation-grid { grid-template-columns: 1fr 1fr; gap: 50px; } .footer-grid { grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); text-align: left; } .stats-container { gap: 35px; } .stat-number { font-size: 2.3rem; } section { padding: 30px 0; } }
-        @media (max-width: 768px) { .container { padding: 0 14px; } .hero-buttons-custom { flex-direction: column; align-items: center; gap: 10px; } .btn { width: 90%; margin: 4px auto; text-align: center; } section { padding: 30px 0; } }
+        @media (min-width: 1024px) { .mobile-menu-btn { display: none; } nav ul { display: flex !important; flex-direction: row; position: static; background: transparent; box-shadow: none; padding: 0; gap: 25px; } nav a { padding: 0; } .hero-content h2 { font-size: 2.5rem; } .hero-slogan { font-size: 1.1rem; } .btn { padding: 12px 32px; font-size: 0.95rem; } .rdv-grid { grid-template-columns: 1fr 1fr; gap: 45px; } .presentation-grid { grid-template-columns: 1fr 1fr; gap: 50px; } .footer-grid { grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); text-align: left; } .stats-container { gap: 35px; } .stat-number { font-size: 2.3rem; } }
+        @media (max-width: 768px) { .container { padding: 0 14px; } .hero-buttons-custom { flex-direction: column; align-items: center; gap: 10px; } .btn { width: 90%; margin: 4px auto; text-align: center; } }
         #services .section-title { color: #0077A4; }
-        #services .section-title::after { background: linear-gradient(90deg, #0077A4, #00b4d8); }
-        #services .badge-category { background: linear-gradient(135deg, #e0f0ff, #cce4f5); color: #0077A4; }
         #specialites .section-title { color: #0077A4; }
-        #specialites .section-title::after { background: linear-gradient(90deg, #0077A4, #00b4d8); }
-        #specialites .specialty-item { border-left-color: #0077A4; }
-        #specialites .specialty-item strong { color: #0077A4; }
         #specialites-chirurgicales .section-title { color: #0077A4; }
-        #specialites-chirurgicales .section-title::after { background: linear-gradient(90deg, #0077A4, #00b4d8); }
-        #specialites-chirurgicales .specialty-item { border-left-color: #0077A4; }
-        #specialites-chirurgicales .specialty-item strong { color: #0077A4; }
         #gynecologie .section-title { color: #0077A4; }
-        #gynecologie .section-title::after { background: linear-gradient(90deg, #0077A4, #00b4d8); }
-        #gynecologie .specialty-item { border-left-color: #0077A4; }
-        #gynecologie .specialty-item strong { color: #0077A4; }
         #explorations .section-title { color: #0077A4; }
-        #explorations .section-title::after { background: linear-gradient(90deg, #0077A4, #00b4d8); }
-        #explorations .specialty-item { border-left-color: #0077A4; }
-        #explorations .specialty-item strong { color: #0077A4; }
         #imagerie .section-title { color: #0077A4; }
-        #imagerie .section-title::after { background: linear-gradient(90deg, #0077A4, #00b4d8); }
-        #imagerie .specialty-item { border-left-color: #0077A4; }
-        #imagerie .specialty-item strong { color: #0077A4; }
         #poles .section-title { color: #0077A4; }
-        #poles .section-title::after { background: linear-gradient(90deg, #0077A4, #00b4d8); }
-        #poles .specialty-item { border-left-color: #0077A4; }
-        #poles .specialty-item strong { color: #0077A4; }
-        #poles .badge-247 { background: #0077A4; }
         #equipe .section-title { color: #0077A4; }
-        #equipe .section-title::after { background: linear-gradient(90deg, #0077A4, #00b4d8); }
-        #equipe .team-name { color: #0077A4; }
-        #equipe .team-position { color: #1D8B5D; }
         #video .section-title { color: #0077A4; }
-        #video .section-title::after { background: linear-gradient(90deg, #0077A4, #00b4d8); }
         #contact .section-title { color: #0077A4; }
-        #contact .section-title::after { background: linear-gradient(90deg, #0077A4, #00b4d8); }
     </style>
 </head>
 <body>
@@ -260,7 +207,7 @@
 <header>
     <div class="header-container">
         <div class="logo" id="secretAdminLogo">
-            <img src="cliniquewendtoin/logo_wendtoin.jpg" alt="Logo Clinique WENDTOIN" width="50" height="50" loading="eager" onerror="this.src='https://placehold.co/50x50/0077A4/white?text=W'">
+            <img src="cliniquewendtoin/logo_wendtoin.jpg" alt="Logo Clinique WENDTOIN" width="50" height="50" onerror="this.src='https://placehold.co/50x50/0077A4/white?text=W'">
             <div class="logo-text">
                 <h1>Clinique WENDTOIN</h1>
                 <p>Depuis janvier 2016</p>
@@ -340,29 +287,23 @@
     <section id="actualites">
         <div class="container">
             <h2 class="section-title animate-on-scroll">Actualités</h2>
-            <div id="actualitesContainer">
-                <div class="actualites-scroll">
-                    <div class="actu-card skeleton-card"><div class="actu-image skeleton"></div><div class="actu-content"><div class="skeleton skeleton-text" style="width: 40%"></div><div class="skeleton skeleton-title"></div><div class="skeleton skeleton-text"></div><div class="skeleton skeleton-text" style="width: 70%"></div></div></div>
-                    <div class="actu-card skeleton-card"><div class="actu-image skeleton"></div><div class="actu-content"><div class="skeleton skeleton-text" style="width: 40%"></div><div class="skeleton skeleton-title"></div><div class="skeleton skeleton-text"></div><div class="skeleton skeleton-text" style="width: 70%"></div></div></div>
-                    <div class="actu-card skeleton-card"><div class="actu-image skeleton"></div><div class="actu-content"><div class="skeleton skeleton-text" style="width: 40%"></div><div class="skeleton skeleton-title"></div><div class="skeleton skeleton-text"></div><div class="skeleton skeleton-text" style="width: 70%"></div></div></div>
-                </div>
-            </div>
+            <div id="actualitesContainer"><div class="no-actu-message">📭 Aucune actualité pour le moment</div></div>
         </div>
     </section>
 
     <div id="actuModal" class="actu-modal">
         <div class="actu-modal-content">
-            <div class="actu-modal-header"><img id="modalActuImage" src="" alt="Image actualité" loading="lazy"><button class="actu-modal-close" id="closeActuModal">✕</button></div>
+            <div class="actu-modal-header"><img id="modalActuImage" src="" alt="Image actualité"><button class="actu-modal-close" id="closeActuModal">✕</button></div>
             <div class="actu-modal-body"><div class="actu-modal-date" id="modalActuDate"></div><h2 class="actu-modal-title" id="modalActuTitle"></h2><div class="actu-modal-description" id="modalActuDesc"></div><div class="actu-modal-share"><button class="share-wa-btn" id="shareActuWa">📱 Partager sur WhatsApp</button></div></div>
         </div>
     </div>
 
-    <section id="specialites"><div class="container"><h2 class="section-title animate-on-scroll">Spécialités médicales</h2><div id="specialitesMedicalesList" class="specialty-grid"><div class="skeleton skeleton-text" style="height: 80px; margin: 10px;"></div><div class="skeleton skeleton-text" style="height: 80px; margin: 10px;"></div></div></div></section>
-    <section id="specialites-chirurgicales"><div class="container"><h2 class="section-title animate-on-scroll">Spécialités chirurgicales</h2><div id="specialitesChirurgicalesList" class="specialty-grid"><div class="skeleton skeleton-text" style="height: 80px; margin: 10px;"></div><div class="skeleton skeleton-text" style="height: 80px; margin: 10px;"></div></div></div></section>
-    <section id="gynecologie"><div class="container"><h2 class="section-title animate-on-scroll">Gynécologie - Obstétrique</h2><div id="gynecologieList" class="specialty-grid"><div class="skeleton skeleton-text" style="height: 80px; margin: 10px;"></div></div></div></section>
-    <section id="explorations"><div class="container"><h2 class="section-title animate-on-scroll">Explorations</h2><div id="explorationsList" class="specialty-grid"><div class="skeleton skeleton-text" style="height: 80px; margin: 10px;"></div></div></div></section>
-    <section id="imagerie"><div class="container"><h2 class="section-title animate-on-scroll">Imagerie</h2><div id="imagerieList" class="specialty-grid"><div class="skeleton skeleton-text" style="height: 80px; margin: 10px;"></div></div></div></section>
-    <section id="poles"><div class="container"><h2 class="section-title animate-on-scroll">Centre de Dialyse</h2><div id="equipementsList" class="specialty-grid"><div class="skeleton skeleton-text" style="height: 80px; margin: 10px;"></div></div></div></section>
+    <section id="specialites"><div class="container"><h2 class="section-title animate-on-scroll">Spécialités médicales</h2><div id="specialitesMedicalesList" class="specialty-grid"><div class="skeleton" style="height:80px; margin:10px;"></div></div></div></section>
+    <section id="specialites-chirurgicales"><div class="container"><h2 class="section-title animate-on-scroll">Spécialités chirurgicales</h2><div id="specialitesChirurgicalesList" class="specialty-grid"><div class="skeleton" style="height:80px; margin:10px;"></div></div></div></section>
+    <section id="gynecologie"><div class="container"><h2 class="section-title animate-on-scroll">Gynécologie - Obstétrique</h2><div id="gynecologieList" class="specialty-grid"><div class="skeleton" style="height:80px; margin:10px;"></div></div></div></section>
+    <section id="explorations"><div class="container"><h2 class="section-title animate-on-scroll">Explorations</h2><div id="explorationsList" class="specialty-grid"><div class="skeleton" style="height:80px; margin:10px;"></div></div></div></section>
+    <section id="imagerie"><div class="container"><h2 class="section-title animate-on-scroll">Imagerie</h2><div id="imagerieList" class="specialty-grid"><div class="skeleton" style="height:80px; margin:10px;"></div></div></div></section>
+    <section id="poles"><div class="container"><h2 class="section-title animate-on-scroll">Centre de Dialyse</h2><div id="equipementsList" class="specialty-grid"><div class="skeleton" style="height:80px; margin:10px;"></div></div></div></section>
 
     <section id="rdv">
         <div class="container">
@@ -374,18 +315,16 @@
         </div>
     </section>
 
-    <section id="equipe"><div class="container"><h2 class="section-title animate-on-scroll">Notre équipe</h2><div id="teamList" class="team-grid"><div class="team-card skeleton-card"><div class="skeleton" style="aspect-ratio: 1/1; width: 100%;"></div><div class="team-info"><div class="skeleton skeleton-text" style="width: 70%; margin: 0 auto 10px;"></div><div class="skeleton skeleton-text" style="width: 50%; margin: 0 auto 10px;"></div><div class="skeleton skeleton-text"></div></div></div></div></div></section>
+    <section id="equipe"><div class="container"><h2 class="section-title animate-on-scroll">Notre équipe</h2><div id="teamList" class="team-grid"><div class="skeleton" style="height:300px; margin:10px;"></div></div></div></section>
 
     <section id="gallery" class="gallery-section"><div class="container"><h2 class="gallery-title animate-on-scroll">Notre clinique en images</h2><div class="gallery-grid" id="galleryGrid"></div></div></section>
 
-    <section id="video"><div class="container"><h2 class="section-title animate-on-scroll">Nos vidéos éducatives</h2><div class="video-grid" id="videoGrid"></div><div style="text-align: center; margin-top: 35px;"><button id="showMoreVideos" class="btn-secondary">Afficher plus de vidéos</button></div></div></section>
+    <section id="video"><div class="container"><h2 class="section-title animate-on-scroll">Nos vidéos éducatives</h2><div class="video-grid" id="videoGrid"></div><div style="text-align:center; margin-top:35px;"><button id="showMoreVideos" class="btn-secondary">Afficher plus de vidéos</button></div></div></section>
 
-    <section id="contact">
-        <div class="container"><h2 class="section-title animate-on-scroll">Contact & localisation</h2><div class="rdv-grid"><div><div class="info-box animate-on-scroll"><h3>Adresse</h3><p>Boulevard des Tensoba, Secteur n°25<br>Cissin, Ouagadougou<br>Burkina Faso</p><p>11 BP 1104 CMS Ouagadougou 11</p></div><div class="info-box animate-on-scroll"><h3>Téléphone</h3><p><strong>Urgences 24/24 :</strong><br><a href="tel:51000647" style="color:#1D8B5D; font-size:1.1rem; text-decoration:none;">51 00 06 47</a><br><strong>Standard :</strong> <a href="tel:78365657" style="color:#1D8B5D;">78 36 56 57</a></p></div><div class="info-box animate-on-scroll"><h3>WhatsApp</h3><p><a href="https://wa.me/22651000647" style="color:#25D366;">51 00 06 47</a><br>Pour rendez-vous et questions rapides</p></div><div class="info-box animate-on-scroll"><h3>Email</h3><p><a href="mailto:clinwend@gmail.com">clinwend@gmail.com</a></p></div></div><div><div class="info-box animate-on-scroll"><h3>Plan d'accès</h3><div style="border-radius: 24px; overflow: hidden; height: 260px;"><iframe src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d15590.747808531722!2d-1.5628767!3d12.3368449!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0xe2e967403b1226b%3A0xd4fdc5490ba66f45!2sClinique%20WendToin!5e0!3m2!1sfr!2sbf!4v1777369119568!5m2!1sfr!2sbf" width="100%" height="260" style="border:0;" allowfullscreen="" loading="lazy"></iframe></div><p style="margin-top:10px;">Boulevard des Tensoba, Secteur 25, Cissin</p></div></div></div></div>
-    </section>
+    <section id="contact"><div class="container"><h2 class="section-title animate-on-scroll">Contact & localisation</h2><div class="rdv-grid"><div><div class="info-box animate-on-scroll"><h3>Adresse</h3><p>Boulevard des Tensoba, Secteur n°25<br>Cissin, Ouagadougou<br>Burkina Faso</p><p>11 BP 1104 CMS Ouagadougou 11</p></div><div class="info-box animate-on-scroll"><h3>Téléphone</h3><p><strong>Urgences 24/24 :</strong><br><a href="tel:51000647" style="color:#1D8B5D;">51 00 06 47</a><br><strong>Standard :</strong> <a href="tel:78365657" style="color:#1D8B5D;">78 36 56 57</a></p></div><div class="info-box animate-on-scroll"><h3>WhatsApp</h3><p><a href="https://wa.me/22651000647" style="color:#25D366;">51 00 06 47</a><br>Pour rendez-vous et questions rapides</p></div><div class="info-box animate-on-scroll"><h3>Email</h3><p><a href="mailto:clinwend@gmail.com">clinwend@gmail.com</a></p></div></div><div><div class="info-box animate-on-scroll"><h3>Plan d'accès</h3><div style="border-radius:24px; overflow:hidden; height:260px;"><iframe src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d15590.747808531722!2d-1.5628767!3d12.3368449!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0xe2e967403b1226b%3A0xd4fdc5490ba66f45!2sClinique%20WendToin!5e0!3m2!1sfr!2sbf!4v1777369119568!5m2!1sfr!2sbf" width="100%" height="260" style="border:0;" allowfullscreen="" loading="lazy"></iframe></div><p style="margin-top:10px;">Boulevard des Tensoba, Secteur 25, Cissin</p></div></div></div></div></section>
 </main>
 
-<footer><div class="container"><div class="footer-grid"><div><h4 style="color: #1D8B5D;">Clinique WENDTOIN</h4><p>Boulevard des Tensoba, Secteur 25<br>Cissin, Ouagadougou<br>Tél: <a href="tel:51000647" style="color:#1D8B5D;">51 00 06 47</a><br>Email: clinwend@gmail.com</p></div><div><h4 style="color: #1D8B5D;">Urgences 24/24</h4><p><strong><a href="tel:51000647" style="color:#1D8B5D;">51 00 06 47</a></strong></p><p>WhatsApp : <a href="https://wa.me/22651000647" style="color:#1D8B5D;">51 00 06 47</a></p></div><div><h4 style="color: #1D8B5D;">Horaires consultations</h4><p>Lun-Ven : 7h30-19h30<br>Sam : 7h30-12h</p><p><strong>Hémodialyse :</strong> 24h/24</p></div><div><h4 style="color: #1D8B5D;">Liens rapides</h4><p><a href="#rdv">Prendre RDV</a><br><a href="#equipe">Notre équipe</a><br><a href="#gallery">Galerie</a><br><a href="#video">Vidéos</a><br><a href="#contact">Nous trouver</a></p></div></div><div style="text-align:center; margin-top:30px; padding-top:15px; border-top:1px solid #334155;"><p>&copy; 2026 Clinique WENDTOIN – Tous droits réservés</p></div></div></footer>
+<footer><div class="container"><div class="footer-grid"><div><h4 style="color:#1D8B5D;">Clinique WENDTOIN</h4><p>Boulevard des Tensoba, Secteur 25<br>Cissin, Ouagadougou<br>Tél: <a href="tel:51000647" style="color:#1D8B5D;">51 00 06 47</a><br>Email: clinwend@gmail.com</p></div><div><h4 style="color:#1D8B5D;">Urgences 24/24</h4><p><strong><a href="tel:51000647" style="color:#1D8B5D;">51 00 06 47</a></strong></p><p>WhatsApp : <a href="https://wa.me/22651000647" style="color:#1D8B5D;">51 00 06 47</a></p></div><div><h4 style="color:#1D8B5D;">Horaires consultations</h4><p>Lun-Ven : 7h30-19h30<br>Sam : 7h30-12h</p><p><strong>Hémodialyse :</strong> 24h/24</p></div><div><h4 style="color:#1D8B5D;">Liens rapides</h4><p><a href="#rdv">Prendre RDV</a><br><a href="#equipe">Notre équipe</a><br><a href="#gallery">Galerie</a><br><a href="#video">Vidéos</a><br><a href="#contact">Nous trouver</a></p></div></div><div style="text-align:center; margin-top:30px; padding-top:15px; border-top:1px solid #334155;"><p>&copy; 2026 Clinique WENDTOIN – Tous droits réservés</p></div></div></footer>
 
 <div id="imageModal" class="image-modal"><span class="close-image-modal">✕</span><img id="modalImage" src=""></div>
 
@@ -402,285 +341,412 @@
 </div>
 
 <script>
-    // Détection des polices
-    if ('fonts' in document) {
-        document.fonts.ready.then(function() { document.body.classList.add('fonts-loaded'); });
-    } else {
-        document.body.classList.add('fonts-loaded');
-    }
+    if ('fonts' in document) { document.fonts.ready.then(function() { document.body.classList.add('fonts-loaded'); }); } 
+    else { document.body.classList.add('fonts-loaded'); }
     
-    // Configuration
     const SUPABASE_URL = "https://otdiywrvzappbmjfkkyi.supabase.co";
     const SUPABASE_ANON_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im90ZGl5d3J2emFwcGJtamZra3lpIiwicm9sZSI6ImFub24iLCJpYXQiOjE3Njk2MTQyMDcsImV4cCI6MjA4NTE5MDIwN30.O5gHqJF1SCvpu19Z0OFHhQsT_ZmeIFbuEu-bpBZXXtY";
     let supabaseClient = null;
-    
-    // Fonction d'échappement
+    let isAdmin = false;
+    const ADMIN_PASSWORD = "wendtoin2016";
+
     function escapeHtml(str) { if(!str) return ''; return str.replace(/[&<>]/g, function(m){ if(m==='&') return '&amp;'; if(m==='<') return '&lt;'; if(m==='>') return '&gt;'; return m;}); }
-    
-    // Chargement des spécialités - VERSION DIRECTE SANS CACHE
-    async function chargerSpecialites() {
-        console.log("🔵 chargerSpecialites appelée");
+
+    // ==================== VERSION CORRIGÉE DE loadWithCache (AVEC TRY/CATCH) ====================
+    async function loadWithCache(table, options = {}) {
+        const cacheKey = `cache_${table}`;
+        const cacheTimeKey = `${cacheKey}_time`;
         
-        if (!supabaseClient) {
-            console.log("🔴 supabaseClient pas encore prêt, nouvel essai dans 500ms");
-            setTimeout(chargerSpecialites, 500);
-            return;
+        // Lecture cache sécurisée
+        try {
+            const cached = localStorage.getItem(cacheKey);
+            const cacheTime = localStorage.getItem(cacheTimeKey);
+            if (cached && cacheTime && (Date.now() - parseInt(cacheTime)) < 600000) {
+                console.log(`📦 Cache pour ${table}`);
+                return JSON.parse(cached);
+            }
+        } catch(e) { 
+            console.log(`⚠️ Cache indisponible pour ${table}:`, e.message);
         }
         
-        console.log("🟢 supabaseClient prêt, je charge les spécialités");
+        if (!supabaseClient) return null;
+        console.log(`🌐 Chargement depuis Supabase pour ${table}`);
         
+        let query = supabaseClient.from(table).select('*');
+        if (options.orderBy) query = query.order(options.orderBy, { ascending: options.ascending !== false });
+        if (options.order) query = query.order('ordre');
+        
+        const { data, error } = await query;
+        if (error) { console.error(`❌ Erreur ${table}:`, error); return null; }
+        
+        // Sauvegarde cache sécurisée
         try {
-            const { data, error } = await supabaseClient
-                .from('specialites_medicales')
-                .select('*')
-                .order('ordre');
-            
-            if (error) {
-                console.error("🔴 Erreur Supabase:", error);
-                return;
-            }
-            
-            console.log("🟢 Données reçues:", data?.length, "spécialités");
-            
-            const container = document.getElementById('specialitesMedicalesList');
-            if (container && data && data.length > 0) {
-                container.innerHTML = data.map(s => 
-                    `<div class="specialty-item"><strong>${escapeHtml(s.titre)}</strong><p>${escapeHtml(s.description || '')}</p></div>`
-                ).join('');
-                console.log("🟢 Affichage terminé");
-            } else {
-                console.log("🔴 Container non trouvé ou données vides");
-            }
-        } catch(e) {
-            console.error("🔴 Exception:", e);
+            localStorage.setItem(cacheKey, JSON.stringify(data));
+            localStorage.setItem(cacheTimeKey, Date.now().toString());
+            console.log(`💾 Cache sauvegardé pour ${table}`);
+        } catch(e) { 
+            console.log(`⚠️ Sauvegarde impossible pour ${table}`);
+        }
+        
+        return data;
+    }
+
+    async function loadPublicSpecialitesMedicales() {
+        const data = await loadWithCache('specialites_medicales', { order: true });
+        const container = document.getElementById('specialitesMedicalesList');
+        if (container) {
+            container.innerHTML = data?.length ? data.map(s => `<div class="specialty-item"><strong>${escapeHtml(s.titre)}</strong><p>${escapeHtml(s.description || '')}</p></div>`).join('') : '<div class="specialty-item"><strong>Aucune spécialité</strong><p></p></div>';
         }
     }
-    
-    // Initialisation
-    function demarrer() {
-        console.log("🚀 Site démarré sur mobile");
-        
-        // Créer le client Supabase
+
+    async function loadPublicSpecialitesChirurgicales() {
+        const data = await loadWithCache('specialites_chirurgicales', { order: true });
+        const container = document.getElementById('specialitesChirurgicalesList');
+        if (container) {
+            container.innerHTML = data?.length ? data.map(s => `<div class="specialty-item"><strong>${escapeHtml(s.titre)}</strong><p>${escapeHtml(s.description || '')}</p></div>`).join('') : '<div class="specialty-item"><strong>Aucune spécialité</strong><p></p></div>';
+        }
+    }
+
+    async function loadPublicGynecologie() {
+        const data = await loadWithCache('gynecologie', { order: true });
+        const container = document.getElementById('gynecologieList');
+        if (container) {
+            container.innerHTML = data?.length ? data.map(g => `<div class="specialty-item"><strong>${escapeHtml(g.titre)}</strong><p>${escapeHtml(g.description || '')}</p></div>`).join('') : '<div class="specialty-item"><strong>Aucun service</strong><p></p></div>';
+        }
+    }
+
+    async function loadPublicExplorations() {
+        const data = await loadWithCache('explorations', { order: true });
+        const container = document.getElementById('explorationsList');
+        if (container) {
+            container.innerHTML = data?.length ? data.map(e => `<div class="specialty-item"><strong>${escapeHtml(e.titre)}</strong><p>${escapeHtml(e.description || '')}</p></div>`).join('') : '<div class="specialty-item"><strong>Aucune exploration</strong><p></p></div>';
+        }
+    }
+
+    async function loadPublicImagerie() {
+        const data = await loadWithCache('imagerie', { order: true });
+        const container = document.getElementById('imagerieList');
+        if (container) {
+            container.innerHTML = data?.length ? data.map(i => `<div class="specialty-item"><strong>${escapeHtml(i.titre)}</strong><p></p></div>`).join('') : '<div class="specialty-item"><strong>Aucun service d\'imagerie</strong><p></p></div>';
+        }
+    }
+
+    async function loadPublicEquipements() {
+        const data = await loadWithCache('equipements', { order: true });
+        const container = document.getElementById('equipementsList');
+        if (container) {
+            container.innerHTML = data?.length ? data.map(e => `<div class="specialty-item"><strong>${escapeHtml(e.titre)}${e.badge ? ` <span class="badge-247">${escapeHtml(e.badge)}</span>` : ''}</strong><p>${escapeHtml(e.description || '')}</p></div>`).join('') : '<div class="specialty-item"><strong>Aucun équipement</strong><p></p></div>';
+        }
+    }
+
+    async function loadPublicTeam() {
+        const data = await loadWithCache('equipes', { order: true });
+        const container = document.getElementById('teamList');
+        if (!data?.length) { container.innerHTML = '<p>Aucun membre pour le moment</p>'; return; }
+        container.innerHTML = data.map(m => `
+            <div class="team-card">
+                <img src="${escapeHtml(m.image_url) || 'https://placehold.co/400x400/0077A4/white?text=Photo'}" alt="${escapeHtml(m.nom)}" class="team-image" loading="lazy" onerror="this.src='https://placehold.co/400x400/0077A4/white?text=Photo'">
+                <div class="team-info">
+                    <div class="team-name">${escapeHtml(m.nom)}</div>
+                    <div class="team-position">${escapeHtml(m.poste)}</div>
+                    <div class="team-desc">${escapeHtml(m.description || '')}</div>
+                </div>
+            </div>
+        `).join('');
+    }
+
+    async function loadAllPublicData() {
+        await Promise.all([
+            loadPublicSpecialitesMedicales(),
+            loadPublicSpecialitesChirurgicales(),
+            loadPublicGynecologie(),
+            loadPublicExplorations(),
+            loadPublicImagerie(),
+            loadPublicEquipements(),
+            loadPublicTeam()
+        ]);
+    }
+
+    function initSupabase() {
         if (window.supabase) {
             supabaseClient = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
-            console.log("✅ Client créé");
-            chargerSpecialites();
+            console.log("✅ Supabase initialisé");
+            loadAllPublicData();
+            checkAdminSession();
         } else {
-            console.log("⏳ Attente de Supabase...");
-            setTimeout(demarrer, 500);
+            setTimeout(initSupabase, 200);
         }
     }
-    
-    // Chargement différé du script Supabase
-    const supabaseScript = document.createElement('script');
-    supabaseScript.src = 'https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2';
-    supabaseScript.async = true;
-    supabaseScript.onload = function() {
-        console.log("📦 Supabase chargé");
-        demarrer();
-    };
-    document.body.appendChild(supabaseScript);
-    
-    // Menu mobile (version simple)
-    const mobileBtn = document.querySelector('.mobile-menu-btn');
-    const navMenu = document.getElementById('navMenu');
-    if (mobileBtn && navMenu) {
-        mobileBtn.addEventListener('click', function() {
-            navMenu.classList.toggle('show');
-            mobileBtn.innerHTML = navMenu.classList.contains('show') ? '✕' : '☰';
+
+    // Slider
+    const slides = [
+        { image: "slide/churigie.jpeg", titre: "Chirurgie moderne", badge: "à votre service", text: "Blocs opératoires de pointe, chirurgie programmée et d'urgence 24h/24", lien: "#specialites-chirurgicales" },
+        { image: "slide/dialyse.jpg", titre: "Centre d'Hémodialyse", badge: "24h/24", text: "Prise en charge complète de l'insuffisance rénale, disponible nuit et jour, 7j/7", lien: "#poles" },
+        { image: "slide/equipe_specialiste.jpg", titre: "Plus de 40 médecins", badge: "à votre service", text: "Cardiologues, neurologues, pédiatres, gynécologues, chirurgiens et bien plus", lien: "#equipe" },
+        { image: "slide/urgence.jpeg", titre: "Urgences médicales", badge: "24h/24 & 7j/7", text: "Prise en charge immédiate des accidents, douleurs aiguës et détresses vitales", lien: "tel:51000647" }
+    ];
+
+    let currentIndex = 0, autoInterval;
+    const slidesContainer = document.getElementById('heroSlides');
+    const dotsContainer = document.getElementById('sliderDots');
+    const dynamicText = document.getElementById('heroDynamicText');
+    const titleEl = document.getElementById('heroTitle');
+    const heroButtonsContainer = document.getElementById('heroButtons');
+    const progressBar = document.getElementById('sliderProgress');
+
+    function createSlides() {
+        slidesContainer.innerHTML = '';
+        slides.forEach((slide, i) => {
+            const div = document.createElement('div');
+            div.className = 'hero-slide' + (i === 0 ? ' active' : '');
+            if (i === 0) div.style.backgroundImage = `url('${slide.image}')`;
+            slidesContainer.appendChild(div);
         });
     }
-    
-    // Animation scroll (simplifiée)
-    const observer = new IntersectionObserver((entries) => {
-        entries.forEach(entry => {
-            if (entry.isIntersecting) {
-                entry.target.classList.add('visible');
-            }
+
+    function createDots() {
+        dotsContainer.innerHTML = '';
+        slides.forEach((_, i) => {
+            const dot = document.createElement('button');
+            dot.className = 'dot' + (i === currentIndex ? ' active' : '');
+            dot.addEventListener('click', () => goToSlide(i));
+            dotsContainer.appendChild(dot);
         });
-    }, { threshold: 0.1 });
-    document.querySelectorAll('.animate-on-scroll').forEach(el => observer.observe(el));
-    
-    // Compteurs
-    function animateCounter(el, start, end, duration) {
-        let startTime = null;
-        el.innerText = start;
-        function update(now) {
-            if (!startTime) startTime = now;
-            const p = Math.min((now - startTime) / duration, 1);
-            el.innerText = Math.floor(p * (end - start) + start);
-            if (p < 1) requestAnimationFrame(update);
+    }
+
+    function updateButtons() {
+        const currentSlide = slides[currentIndex];
+        heroButtonsContainer.innerHTML = `<a href="#rdv" class="btn btn-primary">Prendre rendez-vous</a><a href="${currentSlide.lien}" class="btn btn-outline" data-tooltip="Appel gratuit 24h/24">Urgence 24/24 <span class="urgences-badge">URGENCE</span></a>`;
+    }
+
+    function startProgressBar() {
+        if (progressBar) {
+            progressBar.style.animation = 'none';
+            void progressBar.offsetWidth;
+            progressBar.style.animation = 'progress 3s linear';
         }
-        requestAnimationFrame(update);
     }
-    
-    const statObserver = new IntersectionObserver((entries) => {
-        entries.forEach(entry => {
-            if (entry.isIntersecting) {
-                const yearsEl = document.getElementById('stat-years');
-                if (yearsEl && yearsEl.innerText === "0") animateCounter(yearsEl, 0, 10, 1500);
-                const doctorsEl = document.getElementById('stat-doctors');
-                if (doctorsEl && doctorsEl.innerText === "0") animateCounter(doctorsEl, 0, 40, 1500);
-                statObserver.unobserve(entry.target);
+
+    function updateSlidesAndText() {
+        const allSlides = document.querySelectorAll('.hero-slide');
+        allSlides.forEach((slide, i) => slide.classList.toggle('active', i === currentIndex));
+        document.querySelectorAll('.dot').forEach((dot, i) => dot.classList.toggle('active', i === currentIndex));
+        titleEl.classList.remove('text-animate');
+        dynamicText.classList.remove('text-animate');
+        void titleEl.offsetWidth;
+        titleEl.innerHTML = slides[currentIndex].titre + ' <span>' + slides[currentIndex].badge + '</span>';
+        dynamicText.textContent = slides[currentIndex].text;
+        updateButtons();
+        titleEl.classList.add('text-animate');
+        dynamicText.classList.add('text-animate');
+        startProgressBar();
+    }
+
+    function goToSlide(index) { currentIndex = index; updateSlidesAndText(); resetAutoPlay(); }
+    function nextSlide() { currentIndex = (currentIndex + 1) % slides.length; updateSlidesAndText(); resetAutoPlay(); }
+    function prevSlide() { currentIndex = (currentIndex - 1 + slides.length) % slides.length; updateSlidesAndText(); resetAutoPlay(); }
+    function resetAutoPlay() { if (autoInterval) clearInterval(autoInterval); autoInterval = setInterval(nextSlide, 3000); }
+
+    createSlides();
+    createDots();
+    updateSlidesAndText();
+    resetAutoPlay();
+
+    document.getElementById('sliderPrev').addEventListener('click', prevSlide);
+    document.getElementById('sliderNext').addEventListener('click', nextSlide);
+
+    // Admin login
+    let logoClickCount = 0, clickTimeout = null;
+    const secretLogo = document.getElementById('secretAdminLogo');
+    if (secretLogo) {
+        secretLogo.addEventListener('click', () => {
+            logoClickCount++;
+            clearTimeout(clickTimeout);
+            clickTimeout = setTimeout(() => { logoClickCount = 0; }, 1000);
+            if (logoClickCount >= 5) {
+                logoClickCount = 0;
+                document.getElementById('loginModal').style.display = 'flex';
             }
         });
-    }, { threshold: 0.3 });
-    const statsContainer = document.querySelector('.stats-container');
-    if (statsContainer) statObserver.observe(statsContainer);
-    
-    // WhatsApp
-    const whatsappForm = document.getElementById('whatsappForm');
-    if (whatsappForm) {
-        whatsappForm.addEventListener('submit', function(e) {
-            e.preventDefault();
-            const nom = document.getElementById('nom');
-            if (!nom.value.trim()) {
-                nom.classList.add('form-error');
-                setTimeout(() => nom.classList.remove('form-error'), 500);
-                alert('Veuillez remplir votre nom');
-                return;
-            }
-            const service = document.getElementById('service').value;
-            const motif = document.getElementById('motif').value;
-            let message = `Bonjour Clinique WENDTOIN,%0A%0A Demande de rendez-vous%0A Nom : ${encodeURIComponent(nom.value.trim())}%0A Service : ${encodeURIComponent(service)}%0A`;
-            if (motif) message += ` Message : ${encodeURIComponent(motif)}%0A`;
-            message += `%0AMerci de me confirmer un créneau.`;
-            const btn = document.getElementById('submitRdvBtn');
-            btn.classList.add('btn-loading');
-            btn.innerHTML = 'Envoi en cours...';
-            setTimeout(() => {
-                window.open(`https://wa.me/22651000647?text=${message}`, '_blank');
-                whatsappForm.reset();
-                btn.classList.remove('btn-loading');
-                btn.innerHTML = 'Envoyer la demande';
-            }, 500);
+    }
+
+    function checkAdminSession() {
+        if (sessionStorage.getItem('clinique_admin') === 'true') {
+            isAdmin = true;
+        }
+    }
+
+    const loginModal = document.getElementById('loginModal');
+    const submitLogin = document.getElementById('submitLoginBtn');
+    const closeLogin = document.querySelector('.close-login');
+    const togglePasswordBtn = document.getElementById('togglePassword');
+    const adminPasswordInput = document.getElementById('adminPassword');
+
+    if (togglePasswordBtn && adminPasswordInput) {
+        togglePasswordBtn.addEventListener('click', () => {
+            const type = adminPasswordInput.getAttribute('type') === 'password' ? 'text' : 'password';
+            adminPasswordInput.setAttribute('type', type);
+            togglePasswordBtn.textContent = type === 'password' ? '👁️' : '🙈';
         });
     }
-    
-    // Galerie (simplifiée)
+
+    if (closeLogin) closeLogin.addEventListener('click', () => { loginModal.style.display = 'none'; });
+    window.addEventListener('click', (e) => { if (e.target === loginModal) loginModal.style.display = 'none'; });
+
+    submitLogin.addEventListener('click', () => {
+        if (adminPasswordInput.value === ADMIN_PASSWORD) {
+            sessionStorage.setItem('clinique_admin', 'true');
+            isAdmin = true;
+            loginModal.style.display = 'none';
+            window.location.href = 'admin.html';
+        } else {
+            document.getElementById('loginError').innerText = 'Mot de passe incorrect';
+        }
+    });
+
+    // Galerie
     const galleryImages = ["cliniquewendtoin/Im1.jpeg","cliniquewendtoin/Im3.jpeg","cliniquewendtoin/Im4.jpeg","cliniquewendtoin/Im5.jpeg","cliniquewendtoin/Im7.jpeg","cliniquewendtoin/Im8.jpeg","cliniquewendtoin/Im9.jpeg","cliniquewendtoin/Im10.jpeg","cliniquewendtoin/Im11.jpeg","cliniquewendtoin/Im12.jpeg","cliniquewendtoin/Im13.jpeg","cliniquewendtoin/Im14.jpeg"];
     const galleryGrid = document.getElementById('galleryGrid');
+    const imageModal = document.getElementById('imageModal');
+    const modalImage = document.getElementById('modalImage');
+    const closeImageModal = document.querySelector('.close-image-modal');
+
     if (galleryGrid) {
         galleryImages.forEach(imgSrc => {
             const item = document.createElement('div');
             item.className = 'gallery-item animate-on-scroll';
-            item.innerHTML = `<img src="${imgSrc}" alt="Clinique" class="gallery-img" loading="lazy" onerror="this.src='https://placehold.co/400x300/0077A4/white?text=Photo'">`;
-            item.addEventListener('click', () => {
-                document.getElementById('modalImage').src = imgSrc;
-                document.getElementById('imageModal').style.display = 'flex';
-            });
+            item.innerHTML = `<img src="${imgSrc}" alt="Clinique WENDTOIN" class="gallery-img" loading="lazy" decoding="async" onerror="this.src='https://placehold.co/400x300/0077A4/white?text=Photo'">`;
+            item.addEventListener('click', () => { modalImage.src = imgSrc; imageModal.style.display = 'flex'; });
             galleryGrid.appendChild(item);
         });
     }
-    
+    if (closeImageModal) closeImageModal.addEventListener('click', () => { imageModal.style.display = 'none'; });
+    window.addEventListener('click', (e) => { if (e.target === imageModal) imageModal.style.display = 'none'; });
+
     // Vidéos
     const allVideos = [
         { title: "Pr Gilbert BONKOUGOU - Maladie hémorroïdaire", url: "https://web.facebook.com/reel/645204957720787" },
         { title: "Unité de dialyse - Clinique WENDTOIN", url: "https://web.facebook.com/reel/879902179764068" },
         { title: "Neuro monitoring - Thyroïdectomie sécurisée", url: "https://web.facebook.com/reel/1608565729972155" },
         { title: "Chirurgie de l'obésité - Sleeve gastrectomie", url: "https://web.facebook.com/reel/2537992576496661" },
-        { title: "Pr Gilbert BONKOUGOU - Varices", url: "https://web.facebook.com/reel/1634296984276574" },
+        { title: "Pr Gilbert BONKOUGOU - Varices des membres inférieurs", url: "https://web.facebook.com/reel/1634296984276574" },
         { title: "Obésité : un réel problème de santé", url: "https://web.facebook.com/reel/1662097440846319" },
-        { title: "Dr Natacha OUEDRAOGO - AVC", url: "https://web.facebook.com/reel/610483310353530" },
-        { title: "Dr Marcel Kuiré - L'asthme", url: "https://web.facebook.com/reel/743148739906723" }
+        { title: "Dr Natacha OUEDRAOGO - Accident vasculaire cérébral (AVC)", url: "https://web.facebook.com/reel/610483310353530" },
+        { title: "Dr Marcel Kuiré - L'asthme", url: "https://web.facebook.com/reel/743148739906723" },
+        { title: "Dr Nadia TOE/ROUAMBA - Lombalgie", url: "https://web.facebook.com/reel/929689517848124" },
+        { title: "Dr Dimitri Darankoum – Reflux gastro-œsophagien", url: "https://www.facebook.com/reel/262682895320909" },
+        { title: "Dr Rodrigue Salou – Les ulcères d'estomac", url: "https://www.facebook.com/reel/464631578234706" },
+        { title: "Cœlioscopie et douleurs pelviennes", url: "https://www.facebook.com/reel/285134829629359" }
     ];
+
     let visibleVideos = 4;
     const videoGrid = document.getElementById('videoGrid');
+    const showMoreBtn = document.getElementById('showMoreVideos');
+
     function displayVideos() {
         if (!videoGrid) return;
         videoGrid.innerHTML = '';
-        allVideos.slice(0, visibleVideos).forEach(video => {
+        const videosToShow = allVideos.slice(0, visibleVideos);
+        videosToShow.forEach(video => {
             const card = document.createElement('div');
             card.className = 'video-card';
-            card.onclick = () => window.open(video.url, '_blank');
+            card.addEventListener('click', () => { window.open(video.url, '_blank', 'noopener,noreferrer'); });
             card.innerHTML = `<div class="video-thumbnail">▶️</div><div class="video-info"><div class="video-title">${escapeHtml(video.title)}</div></div>`;
             videoGrid.appendChild(card);
         });
+        if (showMoreBtn) showMoreBtn.style.display = visibleVideos >= allVideos.length ? 'none' : 'inline-block';
     }
+    
+    if (showMoreBtn) showMoreBtn.addEventListener('click', () => { visibleVideos = Math.min(visibleVideos + 4, allVideos.length); displayVideos(); });
     displayVideos();
-    const showMoreBtn = document.getElementById('showMoreVideos');
-    if (showMoreBtn) {
-        showMoreBtn.onclick = () => { visibleVideos = Math.min(visibleVideos + 4, allVideos.length); displayVideos(); };
-    }
-    
-    // Slider
-    const slides = [
-        { image: "slide/churigie.jpeg", titre: "Chirurgie moderne", badge: "à votre service", text: "Blocs opératoires de pointe, chirurgie d'urgence 24h/24", lien: "#specialites-chirurgicales" },
-        { image: "slide/dialyse.jpg", titre: "Centre d'Hémodialyse", badge: "24h/24", text: "Prise en charge complète de l'insuffisance rénale", lien: "#poles" },
-        { image: "slide/equipe_specialiste.jpg", titre: "Plus de 40 médecins", badge: "à votre service", text: "Cardiologues, neurologues, pédiatres, chirurgiens", lien: "#equipe" },
-        { image: "slide/urgence.jpeg", titre: "Urgences médicales", badge: "24h/24", text: "Prise en charge immédiate des accidents", lien: "tel:51000647" }
-    ];
-    let slideIndex = 0;
-    function updateSlide() {
-        const s = slides[slideIndex];
-        document.getElementById('heroTitle').innerHTML = s.titre + ' <span>' + s.badge + '</span>';
-        document.getElementById('heroDynamicText').innerHTML = s.text;
-        document.getElementById('heroButtons').innerHTML = `<a href="#rdv" class="btn btn-primary">Prendre rendez-vous</a><a href="${s.lien}" class="btn btn-outline">Urgence 24/24</a>`;
-        document.querySelectorAll('.hero-slide').forEach((el, i) => el.classList.toggle('active', i === slideIndex));
-        document.querySelectorAll('.dot').forEach((el, i) => el.classList.toggle('active', i === slideIndex));
-    }
-    function createSlides() {
-        const container = document.getElementById('heroSlides');
-        container.innerHTML = '';
-        slides.forEach((s, i) => {
-            const div = document.createElement('div');
-            div.className = 'hero-slide' + (i === 0 ? ' active' : '');
-            if (i === 0) div.style.backgroundImage = `url('${s.image}')`;
-            container.appendChild(div);
+
+    // Animations scroll
+    const animateElements = document.querySelectorAll('.animate-on-scroll');
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach((entry, index) => {
+            if (entry.isIntersecting) {
+                setTimeout(() => { entry.target.classList.add('visible'); }, index * 60);
+                observer.unobserve(entry.target);
+            }
         });
-        const dots = document.getElementById('sliderDots');
-        dots.innerHTML = '';
-        slides.forEach((_, i) => {
-            const dot = document.createElement('button');
-            dot.className = 'dot' + (i === 0 ? ' active' : '');
-            dot.onclick = () => { slideIndex = i; updateSlide(); };
-            dots.appendChild(dot);
+    }, { threshold: 0.15 });
+    animateElements.forEach(el => observer.observe(el));
+    
+    window.addEventListener('scroll', () => { document.querySelector('header')?.classList.toggle('scrolled', window.scrollY > 50); });
+    
+    // Menu mobile
+    const mobileBtn = document.querySelector('.mobile-menu-btn');
+    const navMenu = document.getElementById('navMenu');
+    if (mobileBtn && navMenu) {
+        mobileBtn.addEventListener('click', (e) => { e.stopPropagation(); navMenu.classList.toggle('show'); mobileBtn.innerHTML = navMenu.classList.contains('show') ? '✕' : '☰'; });
+        navMenu.querySelectorAll('a').forEach(link => link.addEventListener('click', () => { navMenu.classList.remove('show'); if (mobileBtn) mobileBtn.innerHTML = '☰'; }));
+        document.addEventListener('click', (e) => { if (!mobileBtn.contains(e.target) && !navMenu.contains(e.target)) { navMenu.classList.remove('show'); if (mobileBtn) mobileBtn.innerHTML = '☰'; } });
+    }
+    
+    // Compteurs
+    function animateCounter(el, start, end, duration) { 
+        let startTime = null; 
+        el.innerText = start; 
+        function update(now) { 
+            if (!startTime) startTime = now; 
+            const p = Math.min((now - startTime) / duration, 1); 
+            el.innerText = Math.floor(p * (end - start) + start); 
+            if (p < 1) requestAnimationFrame(update); 
+        } 
+        requestAnimationFrame(update); 
+    }
+
+    let countersAnimated = false;
+    const statObserver = new IntersectionObserver((entries) => { 
+        entries.forEach(e => { 
+            if (e.isIntersecting && !countersAnimated) { 
+                countersAnimated = true;
+                const yEl = document.getElementById('stat-years'); 
+                if (yEl && yEl.innerText === "0") animateCounter(yEl, 0, 10, 1500);
+                const doctorEl = document.getElementById('stat-doctors');
+                if (doctorEl && doctorEl.innerText === "0") animateCounter(doctorEl, 0, 40, 1500);
+                statObserver.unobserve(e.target); 
+            } 
+        }); 
+    }, { threshold: 0.3 });
+    const statsContainerEl = document.querySelector('.stats-container'); 
+    if (statsContainerEl) statObserver.observe(statsContainerEl);
+    
+    // WhatsApp
+    const whatsappForm = document.getElementById('whatsappForm');
+    if (whatsappForm) {
+        whatsappForm.addEventListener('submit', function(e) { 
+            e.preventDefault(); 
+            const nom = document.getElementById('nom'); 
+            if (!nom.value.trim()) { 
+                nom.classList.add('form-error'); 
+                setTimeout(() => nom.classList.remove('form-error'), 500); 
+                alert('Veuillez remplir votre nom'); 
+                return; 
+            } 
+            const service = document.getElementById('service').value; 
+            const motif = document.getElementById('motif').value; 
+            let message = `Bonjour Clinique WENDTOIN,%0A%0A Demande de rendez-vous%0A Nom : ${encodeURIComponent(nom.value.trim())}%0A Service : ${encodeURIComponent(service)}%0A`; 
+            if (motif) message += ` Message : ${encodeURIComponent(motif)}%0A`; 
+            message += `%0AMerci de me confirmer un créneau.`; 
+            const btn = document.getElementById('submitRdvBtn'); 
+            btn.classList.add('btn-loading'); 
+            btn.innerHTML = 'Envoi en cours...'; 
+            setTimeout(() => { 
+                window.open(`https://wa.me/22651000647?text=${message}`, '_blank'); 
+                whatsappForm.reset(); 
+                btn.classList.remove('btn-loading'); 
+                btn.innerHTML = 'Envoyer la demande'; 
+            }, 500); 
         });
     }
-    createSlides();
-    updateSlide();
-    setInterval(() => { slideIndex = (slideIndex + 1) % slides.length; updateSlide(); }, 4000);
-    document.getElementById('sliderPrev').onclick = () => { slideIndex = (slideIndex - 1 + slides.length) % slides.length; updateSlide(); };
-    document.getElementById('sliderNext').onclick = () => { slideIndex = (slideIndex + 1) % slides.length; updateSlide(); };
-    
-    // Scroll header
-    window.addEventListener('scroll', () => {
-        if (window.scrollY > 50) document.querySelector('header')?.classList.add('scrolled');
-        else document.querySelector('header')?.classList.remove('scrolled');
-    });
-    
-    // Login admin (secret)
-    let clickCount = 0;
-    document.getElementById('secretAdminLogo')?.addEventListener('click', () => {
-        clickCount++;
-        setTimeout(() => { clickCount = 0; }, 1000);
-        if (clickCount >= 5) {
-            document.getElementById('loginModal').style.display = 'flex';
-            clickCount = 0;
-        }
-    });
-    document.querySelector('.close-login')?.addEventListener('click', () => {
-        document.getElementById('loginModal').style.display = 'none';
-    });
-    document.getElementById('submitLoginBtn')?.addEventListener('click', () => {
-        const pwd = document.getElementById('adminPassword').value;
-        if (pwd === 'wendtoin2016') {
-            sessionStorage.setItem('clinique_admin', 'true');
-            window.location.href = 'admin.html';
-        } else {
-            document.getElementById('loginError').innerText = 'Mot de passe incorrect';
-        }
-    });
-    
-    // Fermeture modales
-    document.querySelector('.close-image-modal')?.addEventListener('click', () => {
-        document.getElementById('imageModal').style.display = 'none';
-    });
-    document.getElementById('imageModal')?.addEventListener('click', (e) => {
-        if (e.target === document.getElementById('imageModal')) document.getElementById('imageModal').style.display = 'none';
-    });
-    
-    console.log("✅ Tous les scripts sont chargés");
+
+    // Chargement de Supabase
+    const supabaseScript = document.createElement('script');
+    supabaseScript.src = 'https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2';
+    supabaseScript.async = true;
+    supabaseScript.onload = () => { console.log('Supabase chargé'); initSupabase(); };
+    document.body.appendChild(supabaseScript);
 </script>
 </body>
 </html>
