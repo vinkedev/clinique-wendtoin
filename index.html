@@ -416,16 +416,6 @@
     let logoClickCount = 0;
     let clickTimeout = null;
 
-    function initSupabase() {
-        if (window.supabase) {
-            supabaseClient = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
-            console.log("✅ Supabase initialisé");
-            if (!isSlowConnection) { loadAllPublicData(); } 
-            else { console.log("Mode économie de données actif"); showMinimalContent(); }
-            checkAdminSession();
-        } else { setTimeout(initSupabase, 200); }
-    }
-    
     function showMinimalContent() {
         const containers = ['specialitesMedicalesList', 'specialitesChirurgicalesList', 'gynecologieList', 'explorationsList', 'imagerieList', 'equipementsList'];
         containers.forEach(id => { const el = document.getElementById(id); if (el && el.innerHTML.includes('skeleton')) { el.innerHTML = '<div class="specialty-item"><strong>Chargement différé</strong><p>Mode économie de données activé</p></div>'; } });
@@ -607,10 +597,30 @@
 
     function escapeHtml(str) { if(!str) return ''; return str.replace(/[&<>]/g, function(m){ if(m==='&') return '&amp;'; if(m==='<') return '&lt;'; if(m==='>') return '&gt;'; return m;}); }
 
+    // ========== CHARGEMENT DE SUPABASE CORRIGÉ ==========
     const supabaseScript = document.createElement('script');
     supabaseScript.src = 'https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2';
     supabaseScript.async = true;
-    supabaseScript.onload = () => { console.log('Supabase chargé'); initSupabase(); };
+    supabaseScript.onerror = () => {
+        console.error('❌ Impossible de charger Supabase');
+        const container = document.getElementById('actualitesContainer');
+        if (container) {
+            container.innerHTML = '<div class="no-actu-message">⚠️ Erreur de chargement des données. Veuillez rafraîchir la page.</div>';
+        }
+    };
+    supabaseScript.onload = () => {
+        console.log('✅ Supabase chargé, initialisation...');
+        supabaseClient = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+        console.log("✅ Supabase initialisé et prêt");
+        
+        if (!isSlowConnection) {
+            loadAllPublicData();
+        } else {
+            console.log("Mode économie de données actif");
+            showMinimalContent();
+        }
+        checkAdminSession();
+    };
     document.body.appendChild(supabaseScript);
 </script>
 </body>
