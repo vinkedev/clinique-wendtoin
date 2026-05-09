@@ -160,7 +160,7 @@
         .toggle-password { position: absolute; right: 15px; top: 50%; transform: translateY(-50%); cursor: pointer; font-size: 1.2rem; color: #64748b; background: none; border: none; }
         .toggle-password:hover { color: #1D8B5D; }
         
-        /* ===== CARROUSEL COMMUN - NOUVEAU STYLE ===== */
+        /* ===== CARROUSEL COMMUN - SANS BARRE DE PROGRESSION ===== */
         .carousel-section { padding: 50px 0; background: white; }
         .carousel-section.bg-light { background: #F8F9FA; }
         .carousel-outer { position: relative; padding: 0 48px; }
@@ -173,12 +173,9 @@
         .carousel-footer { display: flex; align-items: center; justify-content: center; gap: 12px; margin-top: 22px; }
         .c-dot { width: 8px; height: 8px; border-radius: 50%; background: #cbd5e1; border: none; cursor: pointer; padding: 0; transition: all 0.35s ease; }
         .c-dot.active { width: 24px; border-radius: 6px; background: #0077A4; }
-        .c-progress-wrap { height: 3px; background: #e2e8f0; border-radius: 3px; margin-top: 18px; overflow: hidden; }
-        .c-progress-fill { height: 100%; width: 0%; background: linear-gradient(90deg, #0077A4, #1D8B5D); border-radius: 3px; transition: width 0.08s linear; }
         .carousel-counter { font-size: 0.75rem; color: #94a3b8; font-weight: 500; min-width: 40px; text-align: center; }
         
         /* ===== ACTUALITÉS CARTES ===== */
-        .actu-slide-item { flex: 0 0 100%; box-sizing: border-box; }
         .actu-card-new { background: white; border-radius: 24px; overflow: hidden; border: 1px solid #eef2f6; box-shadow: 0 8px 30px rgba(0,0,0,0.07); display: flex; flex-direction: column; }
         @media (min-width: 768px) { .actu-card-new { flex-direction: row; min-height: 280px; } }
         .actu-card-image { flex-shrink: 0; width: 100%; height: 220px; background: linear-gradient(135deg, #0077A4 0%, #1D8B5D 100%); position: relative; overflow: hidden; display: flex; align-items: center; justify-content: center; }
@@ -197,7 +194,6 @@
         .actu-card-link:hover { gap: 10px; }
         
         /* ===== ÉQUIPE CARTES ===== */
-        .equipe-slide-item { flex: 0 0 100%; box-sizing: border-box; }
         .team-card-enhanced { background: #f8fafc; border-radius: 24px; overflow: hidden; box-shadow: 0 10px 25px rgba(0,0,0,0.08); border: 1px solid #eef2f6; transition: transform 0.3s ease, box-shadow 0.3s ease; display: flex; flex-direction: column; align-items: center; text-align: center; }
         .team-card-enhanced:hover { transform: translateY(-8px); box-shadow: 0 20px 35px rgba(0,0,0,0.15); }
         .equipe-slide-group { flex: 0 0 100%; display: flex; gap: 20px; box-sizing: border-box; }
@@ -211,6 +207,9 @@
         .team-deco-line { width: 36px; height: 2px; background: linear-gradient(90deg, #0077A4, #1D8B5D); border-radius: 2px; margin: 0 auto 10px; }
         .team-desc-enhanced { color: #475569; font-size: 0.78rem; line-height: 1.5; }
         .team-specialty-badge { display: inline-block; margin-top: 12px; background: linear-gradient(135deg, #e0f0ff, #e6f7f0); color: #0077A4; font-size: 0.65rem; font-weight: 700; padding: 4px 12px; border-radius: 50px; letter-spacing: 0.3px; }
+        
+        /* Message aucune actualité */
+        .no-actu-message { text-align: center; padding: 60px 20px; background: #f8fafc; border-radius: 24px; color: #64748b; font-size: 1rem; }
         
         @media (min-width: 640px) { .hero-content h2 { font-size: 2rem; } .section-title { font-size: 1.8rem; } }
         @media (min-width: 1024px) { .mobile-menu-btn { display: none; } nav ul { display: flex !important; flex-direction: row; position: static; background: transparent; box-shadow: none; padding: 0; gap: 25px; } nav a { padding: 0; font-size: 0.95rem; } .hero-content h2 { font-size: 2.5rem; } .hero-slogan { font-size: 1.1rem; } .btn { padding: 12px 32px; font-size: 0.95rem; } .rdv-grid { grid-template-columns: 1fr 1fr; gap: 45px; } .presentation-grid { grid-template-columns: 1fr 1fr; gap: 50px; } .footer-grid { grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); text-align: left; } .stats-container { gap: 35px; } .stat-number { font-size: 2.3rem; } section { padding: 30px 0; } }
@@ -338,18 +337,19 @@
     <section id="actualites" class="carousel-section">
         <div class="container">
             <h2 class="section-title animate-on-scroll">Actualités</h2>
-            <div class="carousel-outer">
-                <button class="carousel-btn prev" id="actuPrev" aria-label="Actualité précédente">&#8249;</button>
-                <div class="carousel-viewport">
-                    <div class="carousel-track" id="actuTrack"></div>
+            <div id="actuCarouselContainer">
+                <div class="carousel-outer">
+                    <button class="carousel-btn prev" id="actuPrev" aria-label="Actualité précédente">&#8249;</button>
+                    <div class="carousel-viewport">
+                        <div class="carousel-track" id="actuTrack"></div>
+                    </div>
+                    <button class="carousel-btn next" id="actuNext" aria-label="Actualité suivante">&#8250;</button>
                 </div>
-                <button class="carousel-btn next" id="actuNext" aria-label="Actualité suivante">&#8250;</button>
+                <div class="carousel-footer">
+                    <div class="carousel-dots" id="actuDots"></div>
+                    <span class="carousel-counter" id="actuCounter">1 / 1</span>
+                </div>
             </div>
-            <div class="carousel-footer">
-                <div class="carousel-dots" id="actuDots"></div>
-                <span class="carousel-counter" id="actuCounter">1 / 1</span>
-            </div>
-            <div class="c-progress-wrap"><div class="c-progress-fill" id="actuProgressFill"></div></div>
         </div>
     </section>
 
@@ -392,7 +392,6 @@
                 <div class="carousel-dots" id="equipeDots"></div>
                 <span class="carousel-counter" id="equipeCounter">1 / 1</span>
             </div>
-            <div class="c-progress-wrap"><div class="c-progress-fill" id="equipeProgressFill"></div></div>
         </div>
     </section>
 
@@ -832,7 +831,7 @@
             }); 
         }
 
-        // ==================== CARROUSEL POUR ACTUALITÉS ET ÉQUIPE ====================
+        // ==================== CARROUSEL POUR ACTUALITÉS ET ÉQUIPE (SANS BARRE DE PROGRESSION) ====================
         
         function renderActuSlide(actu) {
             const hasImg = actu.image_url && actu.image_url.trim() !== '';
@@ -880,7 +879,7 @@
             </div>`;
         }
 
-        function createCarousel(opts) {
+        function createCarouselNoProgress(opts) {
             const INTERVAL = opts.interval || 4000;
             const groupSize = opts.groupSize || 1;
             const track = document.getElementById(opts.trackId);
@@ -888,8 +887,14 @@
             const btnNext = document.getElementById(opts.nextId);
             const dotsWrap = document.getElementById(opts.dotsId);
             const counter = document.getElementById(opts.counterId);
-            const progFill = document.getElementById(opts.progressId);
             if (!track) return;
+            if (!opts.items || opts.items.length === 0) {
+                const emptyMsg = opts.emptyMessage || '<div class="no-actu-message">📭 Aucune actualité pour le moment</div>';
+                track.innerHTML = `<div style="flex:0 0 100%;">${emptyMsg}</div>`;
+                if (counter) counter.textContent = '0 / 0';
+                if (dotsWrap) dotsWrap.innerHTML = '';
+                return;
+            }
             const groups = [];
             for (let i = 0; i < opts.items.length; i += groupSize) {
                 groups.push(opts.items.slice(i, i + groupSize));
@@ -897,8 +902,6 @@
             const total = groups.length;
             let current = 0;
             let autoTimer = null;
-            let progressTimer = null;
-            let progressVal = 0;
             track.innerHTML = '';
             groups.forEach(group => {
                 const slide = document.createElement('div');
@@ -929,31 +932,18 @@
                 dotsWrap.querySelectorAll('.c-dot').forEach((d, i) => d.classList.toggle('active', i === current));
                 if (counter) counter.textContent = (current + 1) + ' / ' + total;
             }
-            function startProgress() {
-                if (progressTimer) clearInterval(progressTimer);
-                progressVal = 0;
-                if (progFill) progFill.style.width = '0%';
-                const step = 100 / (INTERVAL / 80);
-                progressTimer = setInterval(() => {
-                    progressVal = Math.min(progressVal + step, 100);
-                    if (progFill) progFill.style.width = progressVal + '%';
-                    if (progressVal >= 100) clearInterval(progressTimer);
-                }, 80);
-            }
             function startAuto() {
                 if (autoTimer) clearInterval(autoTimer);
-                startProgress();
                 autoTimer = setInterval(() => {
                     current = (current + 1) % total;
                     updateUI();
-                    startProgress();
                 }, INTERVAL);
             }
             function goTo(idx) { current = idx; updateUI(); startAuto(); }
             if (btnPrev) btnPrev.addEventListener('click', () => goTo((current - 1 + total) % total));
             if (btnNext) btnNext.addEventListener('click', () => goTo((current + 1) % total));
             if (track.parentElement) {
-                track.parentElement.addEventListener('mouseenter', () => { clearInterval(autoTimer); clearInterval(progressTimer); });
+                track.parentElement.addEventListener('mouseenter', () => { if (autoTimer) clearInterval(autoTimer); });
                 track.parentElement.addEventListener('mouseleave', startAuto);
             }
             let touchStartX = 0;
@@ -978,12 +968,15 @@
                 const { data: rows, error } = await supabaseClient.from('actualites').select('*').order('created_at', { ascending: false });
                 if (!error && rows && rows.length) data = rows;
             }
-            if (!data.length) data = [{ titre: "Bienvenue à la Clinique WENDTOIN", description: "Découvrez nos services d'urgence 24h/24 et nos spécialités médicales.", date: new Date().toLocaleDateString('fr-FR'), categorie: "Information" }];
             window.actualitesData = data;
-            createCarousel({
+            createCarouselNoProgress({
                 trackId: 'actuTrack', prevId: 'actuPrev', nextId: 'actuNext',
-                dotsId: 'actuDots', counterId: 'actuCounter', progressId: 'actuProgressFill',
-                items: data, renderSlide: renderActuSlide, interval: 4000, groupSize: 1
+                dotsId: 'actuDots', counterId: 'actuCounter',
+                items: data,
+                renderSlide: renderActuSlide,
+                interval: 4000,
+                groupSize: 1,
+                emptyMessage: '<div class="no-actu-message">📭 Aucune actualité pour le moment</div>'
             });
             document.getElementById('actuTrack')?.addEventListener('click', function(e) {
                 const link = e.target.closest('.actu-card-link');
@@ -1012,9 +1005,9 @@
                     { nom: "Dr Fatimata ZONGO", poste: "Pédiatre", description: "Prise en charge des enfants de 0 à 15 ans, vaccins, suivi.", image_url: "" }
                 ];
             }
-            createCarousel({
+            createCarouselNoProgress({
                 trackId: 'equipeTrack', prevId: 'equipePrev', nextId: 'equipeNext',
-                dotsId: 'equipeDots', counterId: 'equipeCounter', progressId: 'equipeProgressFill',
+                dotsId: 'equipeDots', counterId: 'equipeCounter',
                 items: data, renderSlide: renderEquipeSlide, interval: 4000, groupSize: equipeGroupSize()
             });
         };
