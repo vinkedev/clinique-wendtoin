@@ -5,7 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
     <title>Administration - Clinique WENDTOIN</title>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
         body { font-family: 'Inter', sans-serif; background: #f1f5f9; color: #1e293b; }
@@ -297,15 +296,26 @@
         .btn-cancel { background: #64748b; color: white; border: none; padding: 8px 20px; border-radius: 40px; cursor: pointer; transition: all 0.3s; }
         .btn-cancel:hover { background: #475569; transform: translateY(-2px); }
         
-        /* Chargement spinner */
+        .loading-screen {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: white;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 9999;
+            transition: opacity 0.5s;
+        }
         .loading-spinner {
-            display: inline-block;
-            width: 20px;
-            height: 20px;
-            border: 3px solid rgba(255,255,255,0.3);
+            width: 50px;
+            height: 50px;
+            border: 4px solid #e2e8f0;
+            border-top-color: #1D8B5D;
             border-radius: 50%;
-            border-top-color: white;
-            animation: spin 0.6s linear infinite;
+            animation: spin 0.8s linear infinite;
         }
         @keyframes spin {
             to { transform: rotate(360deg); }
@@ -321,10 +331,14 @@
     </style>
 </head>
 <body>
-    <div id="adminDashboard">
+    <div class="loading-screen" id="loadingScreen">
+        <div class="loading-spinner"></div>
+    </div>
+
+    <div id="adminDashboard" style="display: none;">
         <div class="admin-container">
             <div class="admin-header">
-                <div><h1>Administration Clinique WENDTOIN</h1></div>
+                <div><h1>Administration du site de la Clinique WENDTOIN</h1></div>
                 <button id="logoutAdminBtn" class="btn-logout">Déconnexion</button>
             </div>
 
@@ -435,7 +449,7 @@
                 <div class="item-list"><h4>Liste des services d'imagerie</h4><div id="adminImagerieList">Chargement...</div></div>
             </div>
 
-            <!-- Centre de dialyse (anciennement Équipements) -->
+            <!-- Centre de dialyse -->
             <div id="centreDialyse" class="tab-pane">
                 <div class="form-admin">
                     <h3>Ajouter un service de dialyse</h3>
@@ -447,7 +461,7 @@
                 <div class="item-list"><h4>Liste des services de dialyse</h4><div id="adminDialyseList">Chargement...</div></div>
             </div>
 
-            <!-- Équipe avec upload d'image -->
+            <!-- Équipe -->
             <div id="equipe" class="tab-pane">
                 <div class="form-admin">
                     <h3>Ajouter un membre de l'équipe</h3>
@@ -497,6 +511,28 @@
             window.location.href = 'index.html';
         }
 
+        // Chargement de Supabase avec CDN Unpkg
+        function loadSupabase() {
+            return new Promise((resolve, reject) => {
+                if (window.supabase) {
+                    resolve(window.supabase);
+                    return;
+                }
+                
+                const supabaseScript = document.createElement('script');
+                supabaseScript.src = 'https://unpkg.com/@supabase/supabase-js@2/dist/umd/supabase.js';
+                supabaseScript.onload = () => {
+                    if (window.supabase) {
+                        resolve(window.supabase);
+                    } else {
+                        reject(new Error('Supabase non disponible après chargement'));
+                    }
+                };
+                supabaseScript.onerror = () => reject(new Error('Erreur de chargement de Supabase'));
+                document.head.appendChild(supabaseScript);
+            });
+        }
+
         // Toast notification
         function showToast(message, type = 'success') {
             const toast = document.getElementById('toastNotification');
@@ -542,15 +578,27 @@
         }
 
         // Fonction d'initialisation
-        function initAdmin() {
-            if (window.supabase) {
-                supabaseClient = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
-                console.log("Admin - Supabase initialisé");
-                loadAllAdminData();
+        async function initAdmin() {
+            try {
+                // Charger Supabase
+                const supabaseModule = await loadSupabase();
+                supabaseClient = supabaseModule.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+                console.log("Admin - Supabase initialisé avec succès");
+                
+                // Charger les données
+                await loadAllAdminData();
                 attachEventListeners();
-            } else {
-                console.log("Attente de Supabase...");
-                setTimeout(initAdmin, 200);
+                
+                // Cacher l'écran de chargement
+                document.getElementById('loadingScreen').style.opacity = '0';
+                setTimeout(() => {
+                    document.getElementById('loadingScreen').style.display = 'none';
+                    document.getElementById('adminDashboard').style.display = 'block';
+                }, 500);
+            } catch (error) {
+                console.error('Erreur d\'initialisation:', error);
+                showToast('Erreur de chargement de Supabase', 'error');
+                document.getElementById('loadingScreen').innerHTML = '<div style="text-align:center;color:red;">Erreur de chargement<br>Veuillez rafraîchir la page</div>';
             }
         }
 
@@ -660,7 +708,6 @@
                 loadAllAdminData();
             });
 
-            // Spécialités médicales
             document.getElementById('createSpecMedBtn')?.addEventListener('click', async () => {
                 if (!supabaseClient) return showToast('Supabase non initialisé', 'error');
                 const titre = document.getElementById('specMedTitre').value.trim();
@@ -677,7 +724,6 @@
                 loadAllAdminData();
             });
 
-            // Spécialités chirurgicales
             document.getElementById('createSpecChirBtn')?.addEventListener('click', async () => {
                 if (!supabaseClient) return showToast('Supabase non initialisé', 'error');
                 const titre = document.getElementById('specChirTitre').value.trim();
@@ -694,7 +740,6 @@
                 loadAllAdminData();
             });
 
-            // Gynécologie
             document.getElementById('createGyneBtn')?.addEventListener('click', async () => {
                 if (!supabaseClient) return showToast('Supabase non initialisé', 'error');
                 const titre = document.getElementById('gyneTitre').value.trim();
@@ -711,7 +756,6 @@
                 loadAllAdminData();
             });
 
-            // Explorations
             document.getElementById('createExploBtn')?.addEventListener('click', async () => {
                 if (!supabaseClient) return showToast('Supabase non initialisé', 'error');
                 const titre = document.getElementById('exploTitre').value.trim();
@@ -728,7 +772,6 @@
                 loadAllAdminData();
             });
 
-            // Imagerie
             document.getElementById('createImagerieBtn')?.addEventListener('click', async () => {
                 if (!supabaseClient) return showToast('Supabase non initialisé', 'error');
                 const titre = document.getElementById('imagerieTitre').value.trim();
@@ -743,7 +786,6 @@
                 loadAllAdminData();
             });
 
-            // Centre de dialyse (anciennement équipements)
             document.getElementById('createDialyseBtn')?.addEventListener('click', async () => {
                 if (!supabaseClient) return showToast('Supabase non initialisé', 'error');
                 const titre = document.getElementById('dialyseTitre').value.trim();
@@ -763,7 +805,7 @@
             });
         }
 
-        // Gestion des événements (éditer/supprimer)
+        // Gestion des événements
         function attachItemEvents() {
             document.querySelectorAll('.edit-btn').forEach(btn => {
                 btn.removeEventListener('click', handleEdit);
@@ -908,7 +950,7 @@
             container.innerHTML = data.map(a => `
                 <div class="item-card">
                     <div class="item-info">
-                        ${a.image_url ? `<img src="${a.image_url}" class="preview-small">` : '📰'}
+                        ${a.image_url ? `<img src="${a.image_url}" class="preview-small">` : ''}
                         <strong>${escapeHtml(a.titre)}</strong>
                         <div class="small">${escapeHtml(a.date || '')}</div>
                         <div class="small">${escapeHtml(a.description || '')}</div>
@@ -931,7 +973,7 @@
             container.innerHTML = data.map(m => `
                 <div class="item-card">
                     <div class="item-info">
-                        ${m.image_url ? `<img src="${m.image_url}" class="preview-small">` : '👤'}
+                        ${m.image_url ? `<img src="${m.image_url}" class="preview-small">` : ''}
                         <strong>${escapeHtml(m.nom)}</strong> - ${escapeHtml(m.poste)}
                         <div class="small">${escapeHtml(m.description || '')}</div>
                     </div>
