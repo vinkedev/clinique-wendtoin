@@ -859,7 +859,7 @@
         alert('4. Chargement du script Supabase...');
         
         const supabaseScript = document.createElement('script');
-        supabaseScript.src = 'https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2';
+        supabaseScript.src = 'https://unpkg.com/@supabase/supabase-js@2/dist/umd/supabase.js';
         supabaseScript.async = true;
         supabaseScript.onerror = () => {
             console.error('❌ Impossible de charger Supabase');
