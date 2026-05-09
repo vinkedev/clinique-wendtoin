@@ -160,14 +160,14 @@
         .toggle-password { position: absolute; right: 15px; top: 50%; transform: translateY(-50%); cursor: pointer; font-size: 1.2rem; color: #64748b; background: none; border: none; }
         .toggle-password:hover { color: #1D8B5D; }
         
-        /* ===== CARROUSEL COMMUN ===== */
+        /* ===== CARROUSEL ===== */
         .carousel-section { padding: 50px 0; background: white; }
         .carousel-section.bg-light { background: #F8F9FA; }
         .carousel-outer { position: relative; padding: 0 48px; }
         .carousel-viewport { overflow: hidden; border-radius: 24px; }
         .carousel-track { display: flex; transition: transform 0.55s cubic-bezier(0.4, 0, 0.2, 1); will-change: transform; }
-        .carousel-btn { position: absolute; top: 50%; transform: translateY(-60%); width: 44px; height: 44px; border-radius: 50%; background: white; border: 1.5px solid #e2e8f0; display: flex; align-items: center; justify-content: center; cursor: pointer; z-index: 10; color: #1e293b; box-shadow: 0 4px 15px rgba(0,0,0,0.1); transition: all 0.25s ease; font-size: 18px; }
-        .carousel-btn:hover { background: #1D8B5D; color: white; border-color: #1D8B5D; transform: translateY(-60%) scale(1.08); }
+        .carousel-btn { position: absolute; top: 50%; transform: translateY(-50%); width: 44px; height: 44px; border-radius: 50%; background: white; border: 1.5px solid #e2e8f0; display: flex; align-items: center; justify-content: center; cursor: pointer; z-index: 10; color: #1e293b; box-shadow: 0 4px 15px rgba(0,0,0,0.1); transition: all 0.25s ease; font-size: 18px; }
+        .carousel-btn:hover { background: #1D8B5D; color: white; border-color: #1D8B5D; transform: translateY(-50%) scale(1.08); }
         .carousel-btn.prev { left: 0; }
         .carousel-btn.next { right: 0; }
         .carousel-footer { display: flex; align-items: center; justify-content: center; gap: 12px; margin-top: 22px; }
@@ -193,12 +193,11 @@
         .actu-card-link { display: inline-flex; align-items: center; gap: 6px; margin-top: 18px; color: #0077A4; font-size: 0.8rem; font-weight: 600; text-decoration: none; transition: gap 0.2s ease; cursor: pointer; }
         .actu-card-link:hover { gap: 10px; }
         
-        /* ===== ÉQUIPE CARTES ===== */
+        /* ===== ÉQUIPE CARTES - 4 par slide sur desktop ===== */
         .team-card-enhanced { background: #f8fafc; border-radius: 24px; overflow: hidden; box-shadow: 0 10px 25px rgba(0,0,0,0.08); border: 1px solid #eef2f6; transition: transform 0.3s ease, box-shadow 0.3s ease; display: flex; flex-direction: column; align-items: center; text-align: center; }
         .team-card-enhanced:hover { transform: translateY(-8px); box-shadow: 0 20px 35px rgba(0,0,0,0.15); }
         .equipe-slide-group { flex: 0 0 100%; display: flex; gap: 20px; box-sizing: border-box; flex-wrap: wrap; justify-content: center; }
-        .equipe-slide-group .team-card-enhanced { flex: 0 0 calc(50% - 10px); min-width: 200px; }
-        @media (min-width: 1024px) { .equipe-slide-group .team-card-enhanced { flex: 0 0 calc(25% - 15px); } }
+        .equipe-slide-group .team-card-enhanced { flex: 1; min-width: 0; }
         .team-image-enhanced { width: 100%; aspect-ratio: 1 / 1; object-fit: cover; object-position: center 20%; background: linear-gradient(145deg, #f0f9ff, #e0f0e8); display: block; position: relative; }
         .team-img-wrap { position: relative; width: 100%; overflow: hidden; }
         .team-img-wrap::after { content: ''; position: absolute; bottom: 0; left: 0; right: 0; height: 50%; background: linear-gradient(to top, rgba(0,119,164,0.15), transparent); pointer-events: none; }
@@ -208,6 +207,11 @@
         .team-deco-line { width: 36px; height: 2px; background: linear-gradient(90deg, #0077A4, #1D8B5D); border-radius: 2px; margin: 0 auto 10px; }
         .team-desc-enhanced { color: #475569; font-size: 0.78rem; line-height: 1.5; }
         .team-specialty-badge { display: inline-block; margin-top: 12px; background: linear-gradient(135deg, #e0f0ff, #e6f7f0); color: #0077A4; font-size: 0.65rem; font-weight: 700; padding: 4px 12px; border-radius: 50px; letter-spacing: 0.3px; }
+        
+        /* Responsive équipe : 1 sur mobile, 2 sur tablette, 4 sur desktop */
+        @media (max-width: 640px) { .equipe-slide-group .team-card-enhanced { flex: 0 0 calc(100% - 10px); } }
+        @media (min-width: 641px) and (max-width: 1023px) { .equipe-slide-group .team-card-enhanced { flex: 0 0 calc(50% - 10px); } }
+        @media (min-width: 1024px) { .equipe-slide-group .team-card-enhanced { flex: 0 0 calc(25% - 15px); } }
         
         /* ===== TICKER ASSURANCES ===== */
         .partners-section { background: linear-gradient(135deg, #f8fafc, #f1f5f9); padding: 30px 0; border-top: 1px solid #e2e8f0; border-bottom: 1px solid #e2e8f0; }
@@ -223,6 +227,19 @@
         @media (max-width: 768px) { .partner-logo { height: 35px; } .partner-badge { font-size: 0.8rem; padding: 5px 15px; } .partner-item { margin: 0 10px; padding: 5px 15px; } }
         
         .no-actu-message { text-align: center; padding: 60px 20px; background: #f8fafc; border-radius: 24px; color: #64748b; font-size: 1rem; }
+        
+        /* Modale actualité - pas de message d'erreur */
+        .actu-modal { display: none; position: fixed; z-index: 10001; left: 0; top: 0; width: 100%; height: 100%; background-color: rgba(0,0,0,0.85); backdrop-filter: blur(8px); align-items: center; justify-content: center; cursor: pointer; }
+        .actu-modal-content { background: white; width: 90%; max-width: 700px; max-height: 85vh; border-radius: 28px; overflow-y: auto; position: relative; cursor: default; animation: fadeScale 0.3s ease; }
+        .actu-modal-header { position: relative; width: 100%; height: 260px; background: linear-gradient(135deg, #0077A4, #1D8B5D); overflow: hidden; border-radius: 28px 28px 0 0; flex-shrink: 0; }
+        .actu-modal-header img { width: 100%; height: 100%; object-fit: cover; object-position: center; display: block; }
+        .actu-modal-close { position: absolute; top: 15px; right: 15px; width: 40px; height: 40px; background: rgba(0,0,0,0.6); border-radius: 50%; display: flex; align-items: center; justify-content: center; color: white; font-size: 28px; cursor: pointer; transition: all 0.2s ease; z-index: 10; border: none; }
+        .actu-modal-close:hover { background: #dc3545; transform: scale(1.1); }
+        .actu-modal-body { padding: 25px; }
+        .actu-modal-date { font-size: 0.8rem; color: #1D8B5D; font-weight: 600; margin-bottom: 12px; display: inline-block; background: #e6f7f0; padding: 4px 12px; border-radius: 50px; }
+        .actu-modal-title { font-size: 1.6rem; font-weight: 700; color: #1e293b; margin-bottom: 20px; line-height: 1.3; }
+        .actu-modal-description { font-size: 1rem; color: #334155; line-height: 1.7; white-space: pre-wrap; }
+        @media (max-width: 640px) { .actu-modal-header { height: 200px; } .actu-modal-title { font-size: 1.3rem; } .actu-modal-body { padding: 18px; } }
         
         @media (min-width: 640px) { .hero-content h2 { font-size: 2rem; } .section-title { font-size: 1.8rem; } }
         @media (min-width: 1024px) { .mobile-menu-btn { display: none; } nav ul { display: flex !important; flex-direction: row; position: static; background: transparent; box-shadow: none; padding: 0; gap: 25px; } nav a { padding: 0; font-size: 0.95rem; } .hero-content h2 { font-size: 2.5rem; } .hero-slogan { font-size: 1.1rem; } .btn { padding: 12px 32px; font-size: 0.95rem; } .rdv-grid { grid-template-columns: 1fr 1fr; gap: 45px; } .presentation-grid { grid-template-columns: 1fr 1fr; gap: 50px; } .footer-grid { grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); text-align: left; } .stats-container { gap: 35px; } .stat-number { font-size: 2.3rem; } section { padding: 30px 0; } }
@@ -346,22 +363,20 @@
         </div>
     </section>
 
-    <!-- ==================== SECTION ACTUALITÉS AVEC CARROUSEL ==================== -->
+    <!-- SECTION ACTUALITÉS -->
     <section id="actualites" class="carousel-section">
         <div class="container">
             <h2 class="section-title animate-on-scroll">Actualités</h2>
-            <div id="actuCarouselContainer">
-                <div class="carousel-outer">
-                    <button class="carousel-btn prev" id="actuPrev" aria-label="Actualité précédente">&#8249;</button>
-                    <div class="carousel-viewport">
-                        <div class="carousel-track" id="actuTrack"></div>
-                    </div>
-                    <button class="carousel-btn next" id="actuNext" aria-label="Actualité suivante">&#8250;</button>
+            <div class="carousel-outer">
+                <button class="carousel-btn prev" id="actuPrev" aria-label="Actualité précédente">&#8249;</button>
+                <div class="carousel-viewport">
+                    <div class="carousel-track" id="actuTrack"></div>
                 </div>
-                <div class="carousel-footer">
-                    <div class="carousel-dots" id="actuDots"></div>
-                    <span class="carousel-counter" id="actuCounter">1 / 1</span>
-                </div>
+                <button class="carousel-btn next" id="actuNext" aria-label="Actualité suivante">&#8250;</button>
+            </div>
+            <div class="carousel-footer">
+                <div class="carousel-dots" id="actuDots"></div>
+                <span class="carousel-counter" id="actuCounter">1 / 1</span>
             </div>
         </div>
     </section>
@@ -390,7 +405,7 @@
         </div>
     </section>
 
-    <!-- ==================== BANDEAU ASSURANCES (TICKER) ==================== -->
+    <!-- BANDEAU ASSURANCES -->
     <div class="partners-section">
         <div class="container">
             <div class="partners-title">Nos partenaires <span>Assurances</span></div>
@@ -400,7 +415,7 @@
         </div>
     </div>
 
-    <!-- ==================== SECTION NOTRE ÉQUIPE AVEC CARROUSEL (2 par slide sur PC) ==================== -->
+    <!-- SECTION ÉQUIPE - 4 par slide sur desktop -->
     <section id="equipe" class="carousel-section bg-light">
         <div class="container">
             <h2 class="section-title animate-on-scroll">Notre équipe</h2>
@@ -533,7 +548,7 @@
             ]);
         }
 
-        // Slider
+        // Slider principal
         const slides = [
             { image: "slide/churigie.jpeg", titre: "Chirurgie moderne", badge: "à votre service", text: "Blocs opératoires de pointe, chirurgie programmée et d'urgence 24h/24", lien: "#specialites-chirurgicales" },
             { image: "slide/dialyse.jpg", titre: "Centre d'Hémodialyse", badge: "24h/24", text: "Prise en charge complète de l'insuffisance rénale, disponible nuit et jour, 7j/7", lien: "#poles" },
@@ -589,7 +604,7 @@
         document.getElementById('sliderNext').addEventListener('click', nextSlide);
         document.addEventListener('visibilitychange', () => { isSliderActive = !document.hidden; if (isSliderActive) resetAutoPlay(); else if (autoInterval) clearInterval(autoInterval); });
 
-        // Modal actualités (SANS WhatsApp)
+        // Modal actualités (SANS partage WhatsApp)
         const actuModal = document.getElementById('actuModal');
         const modalActuImage = document.getElementById('modalActuImage');
         const modalActuDate = document.getElementById('modalActuDate');
@@ -599,11 +614,16 @@
         
         function openActuModal(actu) { 
             currentActuForModal = actu; 
-            modalActuImage.src = actu.image_url || 'https://placehold.co/800x400/0077A4/white?text=Actualit%C3%A9'; 
-            modalActuImage.alt = actu.titre || ''; 
-            modalActuDate.textContent = actu.date || ''; 
-            modalActuTitle.textContent = actu.titre || ''; 
-            const fullContent = actu.contenu_complet || actu.description || ''; 
+            if (actu.image_url && actu.image_url.trim() !== '') {
+                modalActuImage.src = actu.image_url;
+                modalActuImage.alt = actu.titre || '';
+            } else {
+                modalActuImage.src = 'https://placehold.co/800x400/0077A4/white?text=Clinique+WENDTOIN';
+                modalActuImage.alt = 'Clinique WENDTOIN';
+            }
+            modalActuDate.textContent = actu.date || '';
+            modalActuTitle.textContent = actu.titre || '';
+            const fullContent = actu.contenu_complet || actu.description || '';
             modalActuDesc.innerHTML = formatTextToHtml(fullContent); 
             actuModal.style.display = 'flex'; 
             document.body.style.overflow = 'hidden'; 
@@ -613,7 +633,7 @@
             if (!text) return '<p>Contenu non disponible</p>'; 
             let html = text.replace(/\n/g, '<br>'); 
             html = html.replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>'); 
-            return `<p>${html}</p>`; 
+            return `<div>${html}</div>`; 
         }
         
         function closeActuModal() { 
@@ -706,7 +726,7 @@
             } 
         }
 
-        // Liste des assurances avec leurs images
+        // Liste des assurances
         const partnersList = [
             { name: "ASCOMA", img: "Assurances/ASCOMA.jpg" },
             { name: "DAYO", img: null },
@@ -728,20 +748,15 @@
         function initPartnersTicker() {
             const tickerContainer = document.getElementById('partnersTicker');
             if (!tickerContainer) return;
-            
             let itemsHtml = '';
-            // Dupliquer les logos pour un défilement continu infini
             const doubledPartners = [...partnersList, ...partnersList];
-            
             doubledPartners.forEach(partner => {
                 if (partner.img && partner.img !== "Assurances/null") {
-                    // Essayer de charger l'image, si erreur afficher le badge
                     itemsHtml += `<div class="partner-item"><img src="${partner.img}" alt="${partner.name}" class="partner-logo" onerror="this.style.display='none'; this.parentElement.innerHTML='<span class=\'partner-badge\'>${partner.name}</span>'"></div>`;
                 } else {
                     itemsHtml += `<div class="partner-item"><span class="partner-badge">${partner.name}</span></div>`;
                 }
             });
-            
             tickerContainer.innerHTML = itemsHtml;
         }
 
@@ -1015,7 +1030,9 @@
         }
 
         function equipeGroupSize() {
-            return 2; // 2 membres par slide sur PC
+            if (window.innerWidth >= 1024) return 4;
+            if (window.innerWidth >= 640) return 2;
+            return 1;
         }
 
         window.loadPublicActualites = async function() {
@@ -1030,7 +1047,7 @@
                 dotsId: 'actuDots', counterId: 'actuCounter',
                 items: data,
                 renderSlide: renderActuSlide,
-                interval: 4000,
+                interval: 3000,
                 groupSize: 1,
                 emptyMessage: '<div class="no-actu-message">📭 Aucune actualité pour le moment</div>'
             });
@@ -1064,7 +1081,7 @@
             createCarouselNoProgress({
                 trackId: 'equipeTrack', prevId: 'equipePrev', nextId: 'equipeNext',
                 dotsId: 'equipeDots', counterId: 'equipeCounter',
-                items: data, renderSlide: renderEquipeSlide, interval: 4000, groupSize: equipeGroupSize()
+                items: data, renderSlide: renderEquipeSlide, interval: 3000, groupSize: equipeGroupSize()
             });
         };
 
