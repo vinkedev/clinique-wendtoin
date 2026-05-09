@@ -24,18 +24,37 @@
             box-shadow: 0 2px 10px rgba(0,0,0,0.05);
         }
         .admin-header h1 { font-size: 1.4rem; background: linear-gradient(135deg, #0077A4, #1D8B5D); -webkit-background-clip: text; background-clip: text; color: transparent; }
-        .btn-logout { background: #dc3545; color: white; border: none; padding: 8px 20px; border-radius: 40px; cursor: pointer; font-weight: 600; }
-        .btn-logout:hover { background: #b91c1c; }
+        .btn-logout { background: #dc3545; color: white; border: none; padding: 8px 20px; border-radius: 40px; cursor: pointer; font-weight: 600; transition: all 0.3s; }
+        .btn-logout:hover { background: #b91c1c; transform: translateY(-2px); }
         
+        /* Onglets améliorés pour mobile */
+        .tabs-wrapper {
+            position: relative;
+            margin-bottom: 25px;
+        }
         .tabs {
             display: flex;
             gap: 8px;
-            flex-wrap: wrap;
-            margin-bottom: 25px;
             background: white;
             padding: 12px 20px;
-            border-radius: 60px;
+            border-radius: 20px;
             box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+            overflow-x: auto;
+            overflow-y: hidden;
+            scroll-behavior: smooth;
+            -webkit-overflow-scrolling: touch;
+            scrollbar-width: thin;
+        }
+        .tabs::-webkit-scrollbar {
+            height: 4px;
+        }
+        .tabs::-webkit-scrollbar-track {
+            background: #e2e8f0;
+            border-radius: 10px;
+        }
+        .tabs::-webkit-scrollbar-thumb {
+            background: #1D8B5D;
+            border-radius: 10px;
         }
         .tab-btn {
             background: transparent;
@@ -45,9 +64,31 @@
             border-radius: 40px;
             cursor: pointer;
             transition: 0.2s;
+            white-space: nowrap;
+            flex-shrink: 0;
         }
         .tab-btn:hover { background: #e2e8f0; }
         .tab-btn.active { background: #1D8B5D; color: white; }
+        
+        /* Indicateur de défilement pour mobile */
+        .scroll-indicator {
+            display: none;
+            position: absolute;
+            right: 10px;
+            top: 50%;
+            transform: translateY(-50%);
+            background: linear-gradient(90deg, transparent, white);
+            padding-left: 30px;
+            pointer-events: none;
+        }
+        @media (max-width: 768px) {
+            .tabs-wrapper {
+                position: relative;
+            }
+            .scroll-indicator {
+                display: block;
+            }
+        }
         
         .tab-pane {
             display: none;
@@ -75,6 +116,7 @@
             border-radius: 40px;
             font-family: inherit;
             font-size: 0.9rem;
+            transition: all 0.3s;
         }
         .form-admin input:focus, .form-admin textarea:focus {
             outline: none;
@@ -92,8 +134,9 @@
             margin-bottom: 15px;
             font-size: 0.85rem;
             font-weight: 500;
+            transition: all 0.3s;
         }
-        .file-input-label:hover { background: #cbd5e1; }
+        .file-input-label:hover { background: #cbd5e1; transform: translateY(-2px); }
         .preview-img {
             max-width: 100px;
             max-height: 100px;
@@ -127,6 +170,11 @@
             flex-wrap: wrap;
             gap: 10px;
             border: 1px solid #eef2f6;
+            transition: all 0.3s;
+        }
+        .item-card:hover {
+            transform: translateX(5px);
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
         }
         .item-info { flex: 1; }
         .item-info strong { color: #0077A4; }
@@ -134,10 +182,21 @@
         .item-info .preview-small { width: 40px; height: 40px; border-radius: 50%; object-fit: cover; margin-right: 10px; vertical-align: middle; }
         
         .item-actions { display: flex; gap: 8px; }
-        .item-actions button { background: #e2e8f0; border: none; padding: 6px 14px; border-radius: 30px; cursor: pointer; }
+        .item-actions button { 
+            background: #e2e8f0; 
+            border: none; 
+            padding: 6px 14px; 
+            border-radius: 30px; 
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        .item-actions button:hover { transform: translateY(-2px); }
         .item-actions .delete-btn { background: #fee2e2; color: #b91c1c; }
+        .item-actions .delete-btn:hover { background: #fecaca; }
         .item-actions .edit-btn { background: #e0f2fe; color: #0369a1; }
+        .item-actions .edit-btn:hover { background: #bae6fd; }
         
+        /* Stats améliorées avec animations */
         .stats-row { display: flex; gap: 15px; flex-wrap: wrap; margin-bottom: 20px; }
         .stat-card {
             background: linear-gradient(135deg, #0077A4, #1D8B5D);
@@ -146,9 +205,50 @@
             border-radius: 24px;
             flex: 1;
             min-width: 150px;
+            transition: all 0.3s;
+            cursor: pointer;
         }
-        .stat-card .number { font-size: 1.8rem; font-weight: 800; }
+        .stat-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+        }
+        .stat-card .number { 
+            font-size: 1.8rem; 
+            font-weight: 800;
+            transition: all 0.3s;
+        }
+        .stat-card:hover .number {
+            transform: scale(1.1);
+        }
         .stat-card .label { font-size: 0.8rem; opacity: 0.9; }
+        
+        /* Toast notification améliorée */
+        .toast-notification {
+            position: fixed;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%) translateY(100px);
+            background: #1D8B5D;
+            color: white;
+            padding: 12px 24px;
+            border-radius: 50px;
+            font-weight: 500;
+            z-index: 3000;
+            transition: transform 0.3s ease;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        .toast-notification.show {
+            transform: translateX(-50%) translateY(0);
+        }
+        .toast-notification.error {
+            background: #dc3545;
+        }
+        .toast-notification.success {
+            background: #1D8B5D;
+        }
         
         /* Modal d'édition */
         .edit-modal {
@@ -162,6 +262,7 @@
             z-index: 2000;
             align-items: center;
             justify-content: center;
+            animation: fadeIn 0.3s ease;
         }
         .edit-modal-content {
             background: white;
@@ -171,6 +272,11 @@
             width: 90%;
             max-height: 85vh;
             overflow-y: auto;
+            animation: slideUp 0.3s ease;
+        }
+        @keyframes slideUp {
+            from { transform: translateY(50px); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
         }
         .edit-modal-content h3 { margin-bottom: 20px; color: #0077A4; }
         .edit-modal-content input, .edit-modal-content textarea {
@@ -180,16 +286,37 @@
             border: 1px solid #ddd;
             border-radius: 20px;
             font-family: inherit;
+            transition: all 0.3s;
+        }
+        .edit-modal-content input:focus, .edit-modal-content textarea:focus {
+            outline: none;
+            border-color: #1D8B5D;
+            box-shadow: 0 0 0 3px rgba(29,139,93,0.1);
         }
         .edit-modal-buttons { display: flex; gap: 10px; justify-content: flex-end; margin-top: 15px; }
-        .btn-cancel { background: #64748b; color: white; border: none; padding: 8px 20px; border-radius: 40px; cursor: pointer; }
+        .btn-cancel { background: #64748b; color: white; border: none; padding: 8px 20px; border-radius: 40px; cursor: pointer; transition: all 0.3s; }
+        .btn-cancel:hover { background: #475569; transform: translateY(-2px); }
+        
+        /* Chargement spinner */
+        .loading-spinner {
+            display: inline-block;
+            width: 20px;
+            height: 20px;
+            border: 3px solid rgba(255,255,255,0.3);
+            border-radius: 50%;
+            border-top-color: white;
+            animation: spin 0.6s linear infinite;
+        }
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
         
         @media (max-width: 768px) {
             .admin-container { padding: 12px; }
-            .tabs { border-radius: 20px; overflow-x: auto; flex-wrap: nowrap; }
-            .tab-btn { white-space: nowrap; }
             .item-card { flex-direction: column; align-items: flex-start; }
             .item-actions { width: 100%; justify-content: flex-end; }
+            .stat-card .number { font-size: 1.4rem; }
+            .stat-card .label { font-size: 0.7rem; }
         }
     </style>
 </head>
@@ -197,44 +324,59 @@
     <div id="adminDashboard">
         <div class="admin-container">
             <div class="admin-header">
-                <div><h1>⚙️ Administration Clinique WENDTOIN</h1></div>
-                <button id="logoutAdminBtn" class="btn-logout">🔓 Déconnexion</button>
+                <div><h1>Administration Clinique WENDTOIN</h1></div>
+                <button id="logoutAdminBtn" class="btn-logout">Déconnexion</button>
             </div>
 
             <div class="stats-row" id="statsContainer">
-                <div class="stat-card"><div class="number" id="statActus">0</div><div class="label">Actualités</div></div>
-                <div class="stat-card"><div class="number" id="statEquipe">0</div><div class="label">Membres équipe</div></div>
-                <div class="stat-card"><div class="number" id="statSpecMed">0</div><div class="label">Spécialités médicales</div></div>
-                <div class="stat-card"><div class="number" id="statSpecChir">0</div><div class="label">Spécialités chirurgicales</div></div>
+                <div class="stat-card" data-tab="actualites">
+                    <div class="number" id="statActus">0</div>
+                    <div class="label">Actualités</div>
+                </div>
+                <div class="stat-card" data-tab="equipe">
+                    <div class="number" id="statEquipe">0</div>
+                    <div class="label">Membres équipe</div>
+                </div>
+                <div class="stat-card" data-tab="specMedicales">
+                    <div class="number" id="statSpecMed">0</div>
+                    <div class="label">Spécialités médicales</div>
+                </div>
+                <div class="stat-card" data-tab="specChirurgicales">
+                    <div class="number" id="statSpecChir">0</div>
+                    <div class="label">Spécialités chirurgicales</div>
+                </div>
             </div>
 
-            <div class="tabs">
-                <button class="tab-btn active" data-tab="actualites">📰 Actualités</button>
-                <button class="tab-btn" data-tab="specMedicales">🩺 Spécialités médicales</button>
-                <button class="tab-btn" data-tab="specChirurgicales">🔪 Spécialités chirurgicales</button>
-                <button class="tab-btn" data-tab="gynecologie">👶 Gynécologie</button>
-                <button class="tab-btn" data-tab="explorations">🔬 Explorations</button>
-                <button class="tab-btn" data-tab="imagerie">📷 Imagerie</button>
-                <button class="tab-btn" data-tab="equipements">⚕️ Équipements</button>
-                <button class="tab-btn" data-tab="equipe">👥 Équipe</button>
+            <div class="tabs-wrapper">
+                <div class="tabs" id="tabsContainer">
+                    <button class="tab-btn active" data-tab="actualites">Actualités</button>
+                    <button class="tab-btn" data-tab="specMedicales">Spécialités médicales</button>
+                    <button class="tab-btn" data-tab="specChirurgicales">Spécialités chirurgicales</button>
+                    <button class="tab-btn" data-tab="gynecologie">Gynécologie</button>
+                    <button class="tab-btn" data-tab="explorations">Explorations</button>
+                    <button class="tab-btn" data-tab="imagerie">Imagerie</button>
+                    <button class="tab-btn" data-tab="centreDialyse">Centre de dialyse</button>
+                    <button class="tab-btn" data-tab="equipe">Équipe</button>
+                </div>
+                <div class="scroll-indicator">→</div>
             </div>
 
             <!-- Actualités -->
             <div id="actualites" class="tab-pane active">
                 <div class="form-admin">
-                    <h3>➕ Ajouter une actualité</h3>
+                    <h3>Ajouter une actualité</h3>
                     <input type="text" id="actuTitre" placeholder="Titre *">
                     <textarea id="actuDescription" rows="2" placeholder="Description"></textarea>
                     <input type="text" id="actuDate" placeholder="Date (ex: 15 Mars 2026)">
                     <div>
-                        <label class="file-input-label">📷 Choisir une image</label>
+                        <label class="file-input-label">Choisir une image</label>
                         <input type="file" id="actuImageFile" accept="image/*" style="display:none">
                         <div id="actuImagePreview"></div>
                     </div>
-                    <button id="createActuBtn" class="btn-save">📌 Publier</button>
+                    <button id="createActuBtn" class="btn-save">Publier</button>
                 </div>
                 <div class="item-list">
-                    <h4>📋 Liste des actualités</h4>
+                    <h4>Liste des actualités</h4>
                     <div id="adminActusList">Chargement...</div>
                 </div>
             </div>
@@ -242,85 +384,85 @@
             <!-- Spécialités médicales -->
             <div id="specMedicales" class="tab-pane">
                 <div class="form-admin">
-                    <h3>➕ Ajouter une spécialité médicale</h3>
+                    <h3>Ajouter une spécialité médicale</h3>
                     <input type="text" id="specMedTitre" placeholder="Nom (ex: Cardiologie)">
                     <textarea id="specMedDesc" rows="2" placeholder="Description"></textarea>
                     <button id="createSpecMedBtn" class="btn-save">Ajouter</button>
                 </div>
-                <div class="item-list"><h4>📋 Liste des spécialités médicales</h4><div id="adminSpecMedList">Chargement...</div></div>
+                <div class="item-list"><h4>Liste des spécialités médicales</h4><div id="adminSpecMedList">Chargement...</div></div>
             </div>
 
             <!-- Spécialités chirurgicales -->
             <div id="specChirurgicales" class="tab-pane">
                 <div class="form-admin">
-                    <h3>➕ Ajouter une spécialité chirurgicale</h3>
+                    <h3>Ajouter une spécialité chirurgicale</h3>
                     <input type="text" id="specChirTitre" placeholder="Nom">
                     <textarea id="specChirDesc" rows="2" placeholder="Description"></textarea>
                     <button id="createSpecChirBtn" class="btn-save">Ajouter</button>
                 </div>
-                <div class="item-list"><h4>📋 Liste des spécialités chirurgicales</h4><div id="adminSpecChirList">Chargement...</div></div>
+                <div class="item-list"><h4>Liste des spécialités chirurgicales</h4><div id="adminSpecChirList">Chargement...</div></div>
             </div>
 
             <!-- Gynécologie -->
             <div id="gynecologie" class="tab-pane">
                 <div class="form-admin">
-                    <h3>➕ Ajouter un service de gynécologie</h3>
+                    <h3>Ajouter un service de gynécologie</h3>
                     <input type="text" id="gyneTitre" placeholder="Titre">
                     <textarea id="gyneDesc" rows="2" placeholder="Description"></textarea>
                     <button id="createGyneBtn" class="btn-save">Ajouter</button>
                 </div>
-                <div class="item-list"><h4>📋 Liste des services</h4><div id="adminGyneList">Chargement...</div></div>
+                <div class="item-list"><h4>Liste des services</h4><div id="adminGyneList">Chargement...</div></div>
             </div>
 
             <!-- Explorations -->
             <div id="explorations" class="tab-pane">
                 <div class="form-admin">
-                    <h3>➕ Ajouter une exploration</h3>
+                    <h3>Ajouter une exploration</h3>
                     <input type="text" id="exploTitre" placeholder="Titre">
                     <textarea id="exploDesc" rows="2" placeholder="Description"></textarea>
                     <button id="createExploBtn" class="btn-save">Ajouter</button>
                 </div>
-                <div class="item-list"><h4>📋 Liste des explorations</h4><div id="adminExploList">Chargement...</div></div>
+                <div class="item-list"><h4>Liste des explorations</h4><div id="adminExploList">Chargement...</div></div>
             </div>
 
             <!-- Imagerie -->
             <div id="imagerie" class="tab-pane">
                 <div class="form-admin">
-                    <h3>➕ Ajouter un service d'imagerie</h3>
+                    <h3>Ajouter un service d'imagerie</h3>
                     <input type="text" id="imagerieTitre" placeholder="Titre (ex: Scanner, IRM)">
                     <button id="createImagerieBtn" class="btn-save">Ajouter</button>
                 </div>
-                <div class="item-list"><h4>📋 Liste des services d'imagerie</h4><div id="adminImagerieList">Chargement...</div></div>
+                <div class="item-list"><h4>Liste des services d'imagerie</h4><div id="adminImagerieList">Chargement...</div></div>
             </div>
 
-            <!-- Équipements -->
-            <div id="equipements" class="tab-pane">
+            <!-- Centre de dialyse (anciennement Équipements) -->
+            <div id="centreDialyse" class="tab-pane">
                 <div class="form-admin">
-                    <h3>➕ Ajouter un équipement spécialisé</h3>
-                    <input type="text" id="equipTitre" placeholder="Titre">
-                    <textarea id="equipDesc" rows="2" placeholder="Description"></textarea>
-                    <input type="text" id="equipBadge" placeholder="Badge (optionnel: 24h/24, Urgence)">
-                    <button id="createEquipBtn" class="btn-save">Ajouter</button>
+                    <h3>Ajouter un service de dialyse</h3>
+                    <input type="text" id="dialyseTitre" placeholder="Titre">
+                    <textarea id="dialyseDesc" rows="2" placeholder="Description"></textarea>
+                    <input type="text" id="dialyseBadge" placeholder="Badge (optionnel: 24h/24, Urgence)">
+                    <button id="createDialyseBtn" class="btn-save">Ajouter</button>
                 </div>
-                <div class="item-list"><h4>📋 Liste des équipements</h4><div id="adminEquipList">Chargement...</div></div>
+                <div class="item-list"><h4>Liste des services de dialyse</h4><div id="adminDialyseList">Chargement...</div></div>
             </div>
 
             <!-- Équipe avec upload d'image -->
             <div id="equipe" class="tab-pane">
                 <div class="form-admin">
-                    <h3>➕ Ajouter un membre de l'équipe</h3>
+                    <h3>Ajouter un membre de l'équipe</h3>
                     <input type="text" id="memberNom" placeholder="Nom complet *">
                     <input type="text" id="memberPoste" placeholder="Poste *">
                     <textarea id="memberDescription" rows="2" placeholder="Description / Bio"></textarea>
                     <div>
-                        <label class="file-input-label">📷 Choisir une photo</label>
+                        <label class="file-input-label">Choisir une photo</label>
                         <input type="file" id="memberImageFile" accept="image/*" style="display:none">
                         <div id="memberImagePreview"></div>
                     </div>
-                    <button id="createMemberBtn" class="btn-save">👤 Ajouter</button>
+                    <button id="createMemberBtn" class="btn-save">Ajouter</button>
                 </div>
                 <div class="item-list">
-                    <h4>👥 Membres de l'équipe</h4>
+                    <h4>Membres de l'équipe</h4>
                     <div id="adminTeamList">Chargement...</div>
                 </div>
             </div>
@@ -330,54 +472,44 @@
     <!-- Modal d'édition -->
     <div id="editModal" class="edit-modal">
         <div class="edit-modal-content">
-            <h3 id="editModalTitle">✏️ Modifier</h3>
+            <h3 id="editModalTitle">Modifier</h3>
             <div id="editModalBody"></div>
             <div class="edit-modal-buttons">
                 <button id="cancelEditBtn" class="btn-cancel">Annuler</button>
-                <button id="saveEditBtn" class="btn-save">💾 Enregistrer</button>
+                <button id="saveEditBtn" class="btn-save">Enregistrer</button>
             </div>
         </div>
     </div>
 
+    <!-- Toast notification -->
+    <div id="toastNotification" class="toast-notification"></div>
+
     <script>
-        // ========== CONFIGURATION SUPABASE ==========
+        // Configuration Supabase
         const SUPABASE_URL = "https://otdiywrvzappbmjfkkyi.supabase.co";
         const SUPABASE_ANON_KEY = "sb_publishable_tn6FW9OxsqNdKMg9uCuB5A_gZICo-Jy";
-        const ADMIN_PASSWORD = "Wendtoin2026";
         
         let supabaseClient = null;
         let currentEditItem = { id: null, table: null, type: null };
         
-        // Vérifier session admin
+        // Vérification admin
         if (sessionStorage.getItem('clinique_admin') !== 'true') {
             window.location.href = 'index.html';
         }
 
-        // Attendre que Supabase soit chargé
-        function initAdmin() {
-            if (window.supabase) {
-                supabaseClient = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
-                console.log("✅ Admin - Supabase initialisé");
-                loadAllAdminData();
-                attachEventListeners();
-            } else {
-                console.log("⏳ Admin - Attente de Supabase...");
-                setTimeout(initAdmin, 200);
-            }
+        // Toast notification
+        function showToast(message, type = 'success') {
+            const toast = document.getElementById('toastNotification');
+            toast.textContent = message;
+            toast.className = `toast-notification ${type}`;
+            toast.classList.add('show');
+            
+            setTimeout(() => {
+                toast.classList.remove('show');
+            }, 3000);
         }
 
-        // Éléments DOM
-        const logoutBtn = document.getElementById('logoutAdminBtn');
-
-        // Déconnexion
-        if (logoutBtn) {
-            logoutBtn.addEventListener('click', () => {
-                sessionStorage.removeItem('clinique_admin');
-                window.location.href = 'index.html';
-            });
-        }
-
-        // Fonction d'upload d'image
+        // Upload image
         async function uploadImage(file, type) {
             if (!file || !supabaseClient) return null;
             const fileExt = file.name.split('.').pop();
@@ -398,7 +530,7 @@
             
             if (error) {
                 console.error('Upload error:', error);
-                alert('Erreur upload: ' + error.message);
+                showToast('Erreur upload: ' + error.message, 'error');
                 return null;
             }
             
@@ -407,6 +539,19 @@
                 .getPublicUrl(fileName);
             
             return urlData.publicUrl;
+        }
+
+        // Fonction d'initialisation
+        function initAdmin() {
+            if (window.supabase) {
+                supabaseClient = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+                console.log("Admin - Supabase initialisé");
+                loadAllAdminData();
+                attachEventListeners();
+            } else {
+                console.log("Attente de Supabase...");
+                setTimeout(initAdmin, 200);
+            }
         }
 
         // Preview images
@@ -447,12 +592,12 @@
             if (fileLabels[1]) fileLabels[1].addEventListener('click', () => document.getElementById('memberImageFile')?.click());
         }
 
-        // ========== CRÉATIONS ==========
+        // Fonctions de création
         function attachCreateListeners() {
             document.getElementById('createActuBtn')?.addEventListener('click', async () => {
-                if (!supabaseClient) return alert('Supabase non initialisé');
+                if (!supabaseClient) return showToast('Supabase non initialisé', 'error');
                 const titre = document.getElementById('actuTitre').value.trim();
-                if (!titre) { alert('Titre requis'); return; }
+                if (!titre) { showToast('Titre requis', 'error'); return; }
                 
                 let imageUrl = null;
                 const imageFile = document.getElementById('actuImageFile').files[0];
@@ -460,14 +605,19 @@
                     imageUrl = await uploadImage(imageFile, 'actualite');
                 }
                 
-                await supabaseClient.from('actualites').insert([{
+                const { error } = await supabaseClient.from('actualites').insert([{
                     titre,
                     description: document.getElementById('actuDescription').value,
                     date: document.getElementById('actuDate').value,
                     image_url: imageUrl
                 }]);
                 
-                alert('Actualité ajoutée');
+                if (error) {
+                    showToast('Erreur: ' + error.message, 'error');
+                    return;
+                }
+                
+                showToast('Actualité ajoutée avec succès', 'success');
                 document.getElementById('actuTitre').value = '';
                 document.getElementById('actuDescription').value = '';
                 document.getElementById('actuDate').value = '';
@@ -477,10 +627,10 @@
             });
 
             document.getElementById('createMemberBtn')?.addEventListener('click', async () => {
-                if (!supabaseClient) return alert('Supabase non initialisé');
+                if (!supabaseClient) return showToast('Supabase non initialisé', 'error');
                 const nom = document.getElementById('memberNom').value.trim();
                 const poste = document.getElementById('memberPoste').value.trim();
-                if (!nom || !poste) { alert('Nom et poste requis'); return; }
+                if (!nom || !poste) { showToast('Nom et poste requis', 'error'); return; }
                 
                 let imageUrl = null;
                 const imageFile = document.getElementById('memberImageFile').files[0];
@@ -488,7 +638,7 @@
                     imageUrl = await uploadImage(imageFile, 'team');
                 }
                 
-                await supabaseClient.from('equipes').insert([{
+                const { error } = await supabaseClient.from('equipes').insert([{
                     nom,
                     poste,
                     description: document.getElementById('memberDescription').value,
@@ -496,7 +646,12 @@
                     ordre: Math.floor(Date.now() / 1000)
                 }]);
                 
-                alert('Membre ajouté');
+                if (error) {
+                    showToast('Erreur: ' + error.message, 'error');
+                    return;
+                }
+                
+                showToast('Membre ajouté avec succès', 'success');
                 document.getElementById('memberNom').value = '';
                 document.getElementById('memberPoste').value = '';
                 document.getElementById('memberDescription').value = '';
@@ -505,79 +660,151 @@
                 loadAllAdminData();
             });
 
+            // Spécialités médicales
             document.getElementById('createSpecMedBtn')?.addEventListener('click', async () => {
-                if (!supabaseClient) return alert('Supabase non initialisé');
+                if (!supabaseClient) return showToast('Supabase non initialisé', 'error');
                 const titre = document.getElementById('specMedTitre').value.trim();
-                if (!titre) return alert('Titre requis');
-                await supabaseClient.from('specialites_medicales').insert([{ titre, description: document.getElementById('specMedDesc').value, ordre: Math.floor(Date.now() / 1000) }]);
-                alert('Ajouté');
+                if (!titre) { showToast('Titre requis', 'error'); return; }
+                const { error } = await supabaseClient.from('specialites_medicales').insert([{ 
+                    titre, 
+                    description: document.getElementById('specMedDesc').value, 
+                    ordre: Math.floor(Date.now() / 1000) 
+                }]);
+                if (error) { showToast('Erreur: ' + error.message, 'error'); return; }
+                showToast('Spécialité ajoutée avec succès', 'success');
                 document.getElementById('specMedTitre').value = ''; 
                 document.getElementById('specMedDesc').value = '';
                 loadAllAdminData();
             });
 
+            // Spécialités chirurgicales
             document.getElementById('createSpecChirBtn')?.addEventListener('click', async () => {
-                if (!supabaseClient) return alert('Supabase non initialisé');
+                if (!supabaseClient) return showToast('Supabase non initialisé', 'error');
                 const titre = document.getElementById('specChirTitre').value.trim();
-                if (!titre) return alert('Titre requis');
-                await supabaseClient.from('specialites_chirurgicales').insert([{ titre, description: document.getElementById('specChirDesc').value, ordre: Math.floor(Date.now() / 1000) }]);
-                alert('Ajouté');
+                if (!titre) { showToast('Titre requis', 'error'); return; }
+                const { error } = await supabaseClient.from('specialites_chirurgicales').insert([{ 
+                    titre, 
+                    description: document.getElementById('specChirDesc').value, 
+                    ordre: Math.floor(Date.now() / 1000) 
+                }]);
+                if (error) { showToast('Erreur: ' + error.message, 'error'); return; }
+                showToast('Spécialité ajoutée avec succès', 'success');
                 document.getElementById('specChirTitre').value = ''; 
                 document.getElementById('specChirDesc').value = '';
                 loadAllAdminData();
             });
 
+            // Gynécologie
             document.getElementById('createGyneBtn')?.addEventListener('click', async () => {
-                if (!supabaseClient) return alert('Supabase non initialisé');
+                if (!supabaseClient) return showToast('Supabase non initialisé', 'error');
                 const titre = document.getElementById('gyneTitre').value.trim();
-                if (!titre) return alert('Titre requis');
-                await supabaseClient.from('gynecologie').insert([{ titre, description: document.getElementById('gyneDesc').value, ordre: Math.floor(Date.now() / 1000) }]);
-                alert('Ajouté');
+                if (!titre) { showToast('Titre requis', 'error'); return; }
+                const { error } = await supabaseClient.from('gynecologie').insert([{ 
+                    titre, 
+                    description: document.getElementById('gyneDesc').value, 
+                    ordre: Math.floor(Date.now() / 1000) 
+                }]);
+                if (error) { showToast('Erreur: ' + error.message, 'error'); return; }
+                showToast('Service ajouté avec succès', 'success');
                 document.getElementById('gyneTitre').value = ''; 
                 document.getElementById('gyneDesc').value = '';
                 loadAllAdminData();
             });
 
+            // Explorations
             document.getElementById('createExploBtn')?.addEventListener('click', async () => {
-                if (!supabaseClient) return alert('Supabase non initialisé');
+                if (!supabaseClient) return showToast('Supabase non initialisé', 'error');
                 const titre = document.getElementById('exploTitre').value.trim();
-                if (!titre) return alert('Titre requis');
-                await supabaseClient.from('explorations').insert([{ titre, description: document.getElementById('exploDesc').value, ordre: Math.floor(Date.now() / 1000) }]);
-                alert('Ajouté');
+                if (!titre) { showToast('Titre requis', 'error'); return; }
+                const { error } = await supabaseClient.from('explorations').insert([{ 
+                    titre, 
+                    description: document.getElementById('exploDesc').value, 
+                    ordre: Math.floor(Date.now() / 1000) 
+                }]);
+                if (error) { showToast('Erreur: ' + error.message, 'error'); return; }
+                showToast('Exploration ajoutée avec succès', 'success');
                 document.getElementById('exploTitre').value = ''; 
                 document.getElementById('exploDesc').value = '';
                 loadAllAdminData();
             });
 
+            // Imagerie
             document.getElementById('createImagerieBtn')?.addEventListener('click', async () => {
-                if (!supabaseClient) return alert('Supabase non initialisé');
+                if (!supabaseClient) return showToast('Supabase non initialisé', 'error');
                 const titre = document.getElementById('imagerieTitre').value.trim();
-                if (!titre) return alert('Titre requis');
-                await supabaseClient.from('imagerie').insert([{ titre, ordre: Math.floor(Date.now() / 1000) }]);
-                alert('Ajouté');
+                if (!titre) { showToast('Titre requis', 'error'); return; }
+                const { error } = await supabaseClient.from('imagerie').insert([{ 
+                    titre, 
+                    ordre: Math.floor(Date.now() / 1000) 
+                }]);
+                if (error) { showToast('Erreur: ' + error.message, 'error'); return; }
+                showToast('Service ajouté avec succès', 'success');
                 document.getElementById('imagerieTitre').value = '';
                 loadAllAdminData();
             });
 
-            document.getElementById('createEquipBtn')?.addEventListener('click', async () => {
-                if (!supabaseClient) return alert('Supabase non initialisé');
-                const titre = document.getElementById('equipTitre').value.trim();
-                if (!titre) return alert('Titre requis');
-                await supabaseClient.from('equipements').insert([{ 
+            // Centre de dialyse (anciennement équipements)
+            document.getElementById('createDialyseBtn')?.addEventListener('click', async () => {
+                if (!supabaseClient) return showToast('Supabase non initialisé', 'error');
+                const titre = document.getElementById('dialyseTitre').value.trim();
+                if (!titre) { showToast('Titre requis', 'error'); return; }
+                const { error } = await supabaseClient.from('equipements').insert([{ 
                     titre, 
-                    description: document.getElementById('equipDesc').value, 
-                    badge: document.getElementById('equipBadge').value, 
+                    description: document.getElementById('dialyseDesc').value, 
+                    badge: document.getElementById('dialyseBadge').value, 
                     ordre: Math.floor(Date.now() / 1000)
                 }]);
-                alert('Ajouté');
-                document.getElementById('equipTitre').value = ''; 
-                document.getElementById('equipDesc').value = ''; 
-                document.getElementById('equipBadge').value = '';
+                if (error) { showToast('Erreur: ' + error.message, 'error'); return; }
+                showToast('Service de dialyse ajouté avec succès', 'success');
+                document.getElementById('dialyseTitre').value = ''; 
+                document.getElementById('dialyseDesc').value = ''; 
+                document.getElementById('dialyseBadge').value = '';
                 loadAllAdminData();
             });
         }
 
-        // ========== ÉDITION ==========
+        // Gestion des événements (éditer/supprimer)
+        function attachItemEvents() {
+            document.querySelectorAll('.edit-btn').forEach(btn => {
+                btn.removeEventListener('click', handleEdit);
+                btn.addEventListener('click', handleEdit);
+            });
+            document.querySelectorAll('.delete-btn').forEach(btn => {
+                btn.removeEventListener('click', handleDelete);
+                btn.addEventListener('click', handleDelete);
+            });
+        }
+        
+        async function handleEdit(e) {
+            if (!supabaseClient) return;
+            const btn = e.currentTarget;
+            const id = btn.getAttribute('data-id');
+            const table = btn.getAttribute('data-table');
+            const type = btn.getAttribute('data-type') || '';
+            
+            const { data } = await supabaseClient.from(table).select('*').eq('id', id).single();
+            if (data) {
+                openEditModal(id, table, data, type);
+            }
+        }
+        
+        async function handleDelete(e) {
+            if (!supabaseClient) return;
+            const btn = e.currentTarget;
+            const id = btn.getAttribute('data-id');
+            const table = btn.getAttribute('data-table');
+            if (!confirm('Supprimer définitivement cet élément ?')) return;
+            
+            const { error } = await supabaseClient.from(table).delete().eq('id', id);
+            if (error) { 
+                showToast('Erreur: ' + error.message, 'error');
+                return; 
+            }
+            showToast('Élément supprimé avec succès', 'success');
+            loadAllAdminData();
+        }
+
+        // Modal d'édition
         function openEditModal(id, table, itemData, type) {
             currentEditItem = { id, table, type };
             const modal = document.getElementById('editModal');
@@ -587,32 +814,32 @@
             let html = '';
             
             if (table === 'actualites') {
-                modalTitle.innerText = '✏️ Modifier l\'actualité';
+                modalTitle.innerText = 'Modifier l\'actualité';
                 html = `
                     <input type="text" id="edit_titre" value="${escapeHtml(itemData.titre)}" placeholder="Titre">
                     <textarea id="edit_description" rows="3" placeholder="Description">${escapeHtml(itemData.description || '')}</textarea>
                     <input type="text" id="edit_date" value="${escapeHtml(itemData.date || '')}" placeholder="Date">
                 `;
             } else if (table === 'equipes') {
-                modalTitle.innerText = '✏️ Modifier le membre';
+                modalTitle.innerText = 'Modifier le membre';
                 html = `
                     <input type="text" id="edit_nom" value="${escapeHtml(itemData.nom)}" placeholder="Nom">
                     <input type="text" id="edit_poste" value="${escapeHtml(itemData.poste)}" placeholder="Poste">
                     <textarea id="edit_description" rows="3" placeholder="Description">${escapeHtml(itemData.description || '')}</textarea>
                 `;
             } else if (table === 'specialites_medicales' || table === 'specialites_chirurgicales' || table === 'gynecologie' || table === 'explorations') {
-                modalTitle.innerText = '✏️ Modifier';
+                modalTitle.innerText = 'Modifier';
                 html = `
                     <input type="text" id="edit_titre" value="${escapeHtml(itemData.titre)}" placeholder="Titre">
                     <textarea id="edit_description" rows="3" placeholder="Description">${escapeHtml(itemData.description || '')}</textarea>
                 `;
             } else if (table === 'imagerie') {
-                modalTitle.innerText = '✏️ Modifier le service d\'imagerie';
+                modalTitle.innerText = 'Modifier le service d\'imagerie';
                 html = `
                     <input type="text" id="edit_titre" value="${escapeHtml(itemData.titre)}" placeholder="Titre">
                 `;
             } else if (table === 'equipements') {
-                modalTitle.innerText = '✏️ Modifier l\'équipement';
+                modalTitle.innerText = 'Modifier le service de dialyse';
                 html = `
                     <input type="text" id="edit_titre" value="${escapeHtml(itemData.titre)}" placeholder="Titre">
                     <textarea id="edit_description" rows="3" placeholder="Description">${escapeHtml(itemData.description || '')}</textarea>
@@ -625,7 +852,7 @@
         }
         
         async function saveEdit() {
-            const { id, table, type } = currentEditItem;
+            const { id, table } = currentEditItem;
             let updateData = {};
             
             if (table === 'actualites') {
@@ -658,8 +885,11 @@
             }
             
             const { error } = await supabaseClient.from(table).update(updateData).eq('id', id);
-            if (error) { alert('Erreur: ' + error.message); return; }
-            alert('Modifié avec succès !');
+            if (error) { 
+                showToast('Erreur: ' + error.message, 'error');
+                return; 
+            }
+            showToast('Modifié avec succès', 'success');
             document.getElementById('editModal').style.display = 'none';
             loadAllAdminData();
         }
@@ -669,7 +899,7 @@
             currentEditItem = { id: null, table: null, type: null };
         }
 
-        // ========== CHARGEMENT DES DONNÉES ==========
+        // Chargement des données
         async function loadAdminActualites() {
             if (!supabaseClient) return;
             const { data } = await supabaseClient.from('actualites').select('*').order('created_at', { ascending: false });
@@ -684,8 +914,8 @@
                         <div class="small">${escapeHtml(a.description || '')}</div>
                     </div>
                     <div class="item-actions">
-                        <button class="edit-btn" data-id="${a.id}" data-table="actualites" data-type="actualite">✏️ Modifier</button>
-                        <button class="delete-btn" data-id="${a.id}" data-table="actualites">🗑 Supprimer</button>
+                        <button class="edit-btn" data-id="${a.id}" data-table="actualites" data-type="actualite">Modifier</button>
+                        <button class="delete-btn" data-id="${a.id}" data-table="actualites">Supprimer</button>
                     </div>
                 </div>
             `).join('');
@@ -706,8 +936,8 @@
                         <div class="small">${escapeHtml(m.description || '')}</div>
                     </div>
                     <div class="item-actions">
-                        <button class="edit-btn" data-id="${m.id}" data-table="equipes" data-type="team">✏️ Modifier</button>
-                        <button class="delete-btn" data-id="${m.id}" data-table="equipes">🗑 Supprimer</button>
+                        <button class="edit-btn" data-id="${m.id}" data-table="equipes" data-type="team">Modifier</button>
+                        <button class="delete-btn" data-id="${m.id}" data-table="equipes">Supprimer</button>
                     </div>
                 </div>
             `).join('');
@@ -724,8 +954,8 @@
                 <div class="item-card">
                     <div class="item-info"><strong>${escapeHtml(s.titre)}</strong><div class="small">${escapeHtml(s.description || '')}</div></div>
                     <div class="item-actions">
-                        <button class="edit-btn" data-id="${s.id}" data-table="specialites_medicales">✏️ Modifier</button>
-                        <button class="delete-btn" data-id="${s.id}" data-table="specialites_medicales">🗑 Supprimer</button>
+                        <button class="edit-btn" data-id="${s.id}" data-table="specialites_medicales">Modifier</button>
+                        <button class="delete-btn" data-id="${s.id}" data-table="specialites_medicales">Supprimer</button>
                     </div>
                 </div>
             `).join('');
@@ -742,8 +972,8 @@
                 <div class="item-card">
                     <div class="item-info"><strong>${escapeHtml(s.titre)}</strong><div class="small">${escapeHtml(s.description || '')}</div></div>
                     <div class="item-actions">
-                        <button class="edit-btn" data-id="${s.id}" data-table="specialites_chirurgicales">✏️ Modifier</button>
-                        <button class="delete-btn" data-id="${s.id}" data-table="specialites_chirurgicales">🗑 Supprimer</button>
+                        <button class="edit-btn" data-id="${s.id}" data-table="specialites_chirurgicales">Modifier</button>
+                        <button class="delete-btn" data-id="${s.id}" data-table="specialites_chirurgicales">Supprimer</button>
                     </div>
                 </div>
             `).join('');
@@ -760,8 +990,8 @@
                 <div class="item-card">
                     <div class="item-info"><strong>${escapeHtml(g.titre)}</strong><div class="small">${escapeHtml(g.description || '')}</div></div>
                     <div class="item-actions">
-                        <button class="edit-btn" data-id="${g.id}" data-table="gynecologie">✏️ Modifier</button>
-                        <button class="delete-btn" data-id="${g.id}" data-table="gynecologie">🗑 Supprimer</button>
+                        <button class="edit-btn" data-id="${g.id}" data-table="gynecologie">Modifier</button>
+                        <button class="delete-btn" data-id="${g.id}" data-table="gynecologie">Supprimer</button>
                     </div>
                 </div>
             `).join('');
@@ -777,8 +1007,8 @@
                 <div class="item-card">
                     <div class="item-info"><strong>${escapeHtml(e.titre)}</strong><div class="small">${escapeHtml(e.description || '')}</div></div>
                     <div class="item-actions">
-                        <button class="edit-btn" data-id="${e.id}" data-table="explorations">✏️ Modifier</button>
-                        <button class="delete-btn" data-id="${e.id}" data-table="explorations">🗑 Supprimer</button>
+                        <button class="edit-btn" data-id="${e.id}" data-table="explorations">Modifier</button>
+                        <button class="delete-btn" data-id="${e.id}" data-table="explorations">Supprimer</button>
                     </div>
                 </div>
             `).join('');
@@ -794,19 +1024,19 @@
                 <div class="item-card">
                     <div class="item-info"><strong>${escapeHtml(i.titre)}</strong></div>
                     <div class="item-actions">
-                        <button class="edit-btn" data-id="${i.id}" data-table="imagerie">✏️ Modifier</button>
-                        <button class="delete-btn" data-id="${i.id}" data-table="imagerie">🗑 Supprimer</button>
+                        <button class="edit-btn" data-id="${i.id}" data-table="imagerie">Modifier</button>
+                        <button class="delete-btn" data-id="${i.id}" data-table="imagerie">Supprimer</button>
                     </div>
                 </div>
             `).join('');
             attachItemEvents();
         }
 
-        async function loadAdminEquipements() {
+        async function loadAdminDialyse() {
             if (!supabaseClient) return;
             const { data } = await supabaseClient.from('equipements').select('*').order('ordre');
-            const container = document.getElementById('adminEquipList');
-            if (!data?.length) { container.innerHTML = '<p>Aucun équipement</p>'; return; }
+            const container = document.getElementById('adminDialyseList');
+            if (!data?.length) { container.innerHTML = '<p>Aucun service de dialyse</p>'; return; }
             container.innerHTML = data.map(e => `
                 <div class="item-card">
                     <div class="item-info">
@@ -815,51 +1045,12 @@
                         <div class="small">${escapeHtml(e.description || '')}</div>
                     </div>
                     <div class="item-actions">
-                        <button class="edit-btn" data-id="${e.id}" data-table="equipements">✏️ Modifier</button>
-                        <button class="delete-btn" data-id="${e.id}" data-table="equipements">🗑 Supprimer</button>
+                        <button class="edit-btn" data-id="${e.id}" data-table="equipements">Modifier</button>
+                        <button class="delete-btn" data-id="${e.id}" data-table="equipements">Supprimer</button>
                     </div>
                 </div>
             `).join('');
             attachItemEvents();
-        }
-
-        // Gestion des événements (éditer/supprimer)
-        function attachItemEvents() {
-            // Boutons modifier
-            document.querySelectorAll('.edit-btn').forEach(btn => {
-                btn.removeEventListener('click', handleEdit);
-                btn.addEventListener('click', handleEdit);
-            });
-            // Boutons supprimer
-            document.querySelectorAll('.delete-btn').forEach(btn => {
-                btn.removeEventListener('click', handleDelete);
-                btn.addEventListener('click', handleDelete);
-            });
-        }
-        
-        async function handleEdit(e) {
-            if (!supabaseClient) return;
-            const btn = e.currentTarget;
-            const id = btn.getAttribute('data-id');
-            const table = btn.getAttribute('data-table');
-            const type = btn.getAttribute('data-type') || '';
-            
-            const { data } = await supabaseClient.from(table).select('*').eq('id', id).single();
-            if (data) {
-                openEditModal(id, table, data, type);
-            }
-        }
-        
-        async function handleDelete(e) {
-            if (!supabaseClient) return;
-            const btn = e.currentTarget;
-            const id = btn.getAttribute('data-id');
-            const table = btn.getAttribute('data-table');
-            if (!confirm('Supprimer définitivement ?')) return;
-            const { error } = await supabaseClient.from(table).delete().eq('id', id);
-            if (error) { alert('Erreur: ' + error.message); return; }
-            alert('Supprimé');
-            loadAllAdminData();
         }
 
         async function loadAllAdminData() {
@@ -872,15 +1063,42 @@
                 loadAdminGynecologie(),
                 loadAdminExplorations(),
                 loadAdminImagerie(),
-                loadAdminEquipements()
+                loadAdminDialyse()
             ]);
+        }
+
+        // Navigation stats cliquables
+        function attachStatsNavigation() {
+            document.querySelectorAll('.stat-card').forEach(card => {
+                card.addEventListener('click', () => {
+                    const tabId = card.getAttribute('data-tab');
+                    if (tabId) {
+                        const tabBtn = document.querySelector(`.tab-btn[data-tab="${tabId}"]`);
+                        if (tabBtn) tabBtn.click();
+                    }
+                });
+            });
+        }
+
+        // Défilement automatique des onglets
+        function setupTabsScrolling() {
+            const tabsContainer = document.getElementById('tabsContainer');
+            if (tabsContainer) {
+                tabsContainer.addEventListener('wheel', (e) => {
+                    if (e.deltaY !== 0) {
+                        e.preventDefault();
+                        tabsContainer.scrollLeft += e.deltaY;
+                    }
+                });
+            }
         }
 
         function attachEventListeners() {
             attachPreviewListeners();
             attachCreateListeners();
+            attachStatsNavigation();
+            setupTabsScrolling();
             
-            // Modal d'édition
             document.getElementById('cancelEditBtn')?.addEventListener('click', closeEditModal);
             document.getElementById('saveEditBtn')?.addEventListener('click', saveEdit);
             window.addEventListener('click', (e) => {
@@ -888,7 +1106,6 @@
                 if (e.target === modal) closeEditModal();
             });
             
-            // Onglets
             const tabs = document.querySelectorAll('.tab-btn');
             const panes = document.querySelectorAll('.tab-pane');
             tabs.forEach(tab => {
@@ -899,6 +1116,14 @@
                     panes.forEach(pane => pane.classList.remove('active'));
                     document.getElementById(targetId).classList.add('active');
                 });
+            });
+            
+            document.getElementById('logoutAdminBtn')?.addEventListener('click', () => {
+                sessionStorage.removeItem('clinique_admin');
+                showToast('Déconnexion réussie', 'success');
+                setTimeout(() => {
+                    window.location.href = 'index.html';
+                }, 500);
             });
         }
 
