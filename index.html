@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+mon amie sur mobile je voit pas mes donne <!DOCTYPE html>
 <html lang="fr">
 <head>
     <meta charset="UTF-8">
@@ -12,12 +12,24 @@
     <link rel="dns-prefetch" href="https://otdiywrvzappbmjfkkyi.supabase.co">
     
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet" media="print" onload="this.media='all'">
-    <noscript><link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet"></noscript>
+    <noscript>
+        <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    </noscript>
     
     <style>
-        body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif; }
-        .fonts-loaded body { font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; }
-        .fonts-loaded .logo-text h1, .fonts-loaded .logo-text p { font-family: 'Poppins', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif;
+        }
+        
+        .fonts-loaded body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+        }
+        
+        .fonts-loaded .logo-text h1,
+        .fonts-loaded .logo-text p {
+            font-family: 'Poppins', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+        }
+        
         * { margin: 0; padding: 0; box-sizing: border-box; }
         html { scroll-behavior: smooth; scroll-padding-top: 80px; -webkit-overflow-scrolling: touch; }
         body { color: #1e293b; line-height: 1.6; background: #F8F9FA; overflow-x: hidden; }
@@ -390,283 +402,216 @@
 </div>
 
 <script>
-// Chargement DIRECT de Supabase - Version ULTRA SIMPLE
-(function() {
-    console.log("🚀 Démarrage du site");
+    if ('fonts' in document) { document.fonts.ready.then(function() { document.body.classList.add('fonts-loaded'); }); } 
+    else { document.body.classList.add('fonts-loaded'); }
+    
+    let isSlowConnection = false;
+    if (navigator.connection) { isSlowConnection = navigator.connection.effectiveType === 'slow-2g' || navigator.connection.effectiveType === '2g' || navigator.connection.saveData; }
     
     const SUPABASE_URL = "https://otdiywrvzappbmjfkkyi.supabase.co";
     const SUPABASE_ANON_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im90ZGl5d3J2emFwcGJtamZra3lpIiwicm9sZSI6ImFub24iLCJpYXQiOjE3Njk2MTQyMDcsImV4cCI6MjA4NTE5MDIwN30.O5gHqJF1SCvpu19Z0OFHhQsT_ZmeIFbuEu-bpBZXXtY";
-    
     let supabaseClient = null;
-    
-    // Fonctions simples
-    function escapeHtml(str) { if(!str) return ''; return str.replace(/[&<>]/g, function(m){ if(m==='&') return '&amp;'; if(m==='<') return '&lt;'; if(m==='>') return '&gt;'; return m;}); }
-    
-    // Chargement des spécialités MÉDICALES
-    async function chargerSpecialitesMedicales() {
-        console.log("📥 Chargement spécialités médicales...");
-        if (!supabaseClient) { console.log("❌ Pas de client"); return; }
-        
-        const { data, error } = await supabaseClient.from('specialites_medicales').select('*').order('ordre');
-        if (error) { console.error("Erreur:", error); return; }
-        
-        console.log("✅ Spécialités médicales reçues:", data?.length);
-        const container = document.getElementById('specialitesMedicalesList');
-        if (container && data?.length) {
-            container.innerHTML = data.map(s => `<div class="specialty-item"><strong>${escapeHtml(s.titre)}</strong><p>${escapeHtml(s.description || '')}</p></div>`).join('');
-        }
-    }
-    
-    // Chargement des spécialités CHIRURGICALES
-    async function chargerSpecialitesChirurgicales() {
-        console.log("📥 Chargement spécialités chirurgicales...");
-        if (!supabaseClient) return;
-        
-        const { data } = await supabaseClient.from('specialites_chirurgicales').select('*').order('ordre');
-        console.log("✅ Spécialités chirurgicales reçues:", data?.length);
-        const container = document.getElementById('specialitesChirurgicalesList');
-        if (container && data?.length) {
-            container.innerHTML = data.map(s => `<div class="specialty-item"><strong>${escapeHtml(s.titre)}</strong><p>${escapeHtml(s.description || '')}</p></div>`).join('');
-        }
-    }
-    
-    // Chargement GYNÉCOLOGIE
-    async function chargerGynecologie() {
-        console.log("📥 Chargement gynécologie...");
-        if (!supabaseClient) return;
-        
-        const { data } = await supabaseClient.from('gynecologie').select('*').order('ordre');
-        console.log("✅ Gynécologie reçue:", data?.length);
-        const container = document.getElementById('gynecologieList');
-        if (container && data?.length) {
-            container.innerHTML = data.map(g => `<div class="specialty-item"><strong>${escapeHtml(g.titre)}</strong><p>${escapeHtml(g.description || '')}</p></div>`).join('');
-        }
-    }
-    
-    // Chargement EXPLORATIONS
-    async function chargerExplorations() {
-        console.log("📥 Chargement explorations...");
-        if (!supabaseClient) return;
-        
-        const { data } = await supabaseClient.from('explorations').select('*').order('ordre');
-        console.log("✅ Explorations reçues:", data?.length);
-        const container = document.getElementById('explorationsList');
-        if (container && data?.length) {
-            container.innerHTML = data.map(e => `<div class="specialty-item"><strong>${escapeHtml(e.titre)}</strong><p>${escapeHtml(e.description || '')}</p></div>`).join('');
-        }
-    }
-    
-    // Chargement IMAGERIE
-    async function chargerImagerie() {
-        console.log("📥 Chargement imagerie...");
-        if (!supabaseClient) return;
-        
-        const { data } = await supabaseClient.from('imagerie').select('*').order('ordre');
-        console.log("✅ Imagerie reçue:", data?.length);
-        const container = document.getElementById('imagerieList');
-        if (container && data?.length) {
-            container.innerHTML = data.map(i => `<div class="specialty-item"><strong>${escapeHtml(i.titre)}</strong><p></p></div>`).join('');
-        }
-    }
-    
-    // Chargement ÉQUIPEMENTS (Dialyse)
-    async function chargerEquipements() {
-        console.log("📥 Chargement équipements...");
-        if (!supabaseClient) return;
-        
-        const { data } = await supabaseClient.from('equipements').select('*').order('ordre');
-        console.log("✅ Équipements reçus:", data?.length);
-        const container = document.getElementById('equipementsList');
-        if (container && data?.length) {
-            container.innerHTML = data.map(e => `<div class="specialty-item"><strong>${escapeHtml(e.titre)}${e.badge ? ` <span class="badge-247">${escapeHtml(e.badge)}</span>` : ''}</strong><p>${escapeHtml(e.description || '')}</p></div>`).join('');
-        }
-    }
-    
-    // Chargement ÉQUIPE
-    async function chargerEquipe() {
-        console.log("📥 Chargement équipe...");
-        if (!supabaseClient) return;
-        
-        const { data } = await supabaseClient.from('equipes').select('*').order('ordre');
-        console.log("✅ Équipe reçue:", data?.length);
-        const container = document.getElementById('teamList');
-        if (container && data?.length) {
-            container.innerHTML = data.map(m => `<div class="team-card"><img src="${escapeHtml(m.image_url) || 'https://placehold.co/400x400/0077A4/white?text=Photo'}" alt="${escapeHtml(m.nom)}" class="team-image" loading="lazy" onerror="this.src='https://placehold.co/400x400/0077A4/white?text=Photo'"><div class="team-info"><div class="team-name">${escapeHtml(m.nom)}</div><div class="team-position">${escapeHtml(m.poste)}</div><div class="team-desc">${escapeHtml(m.description || '')}</div></div></div>`).join('');
-        }
-    }
-    
-    // Chargement ACTUALITÉS
-    async function chargerActualites() {
-        console.log("📥 Chargement actualités...");
-        if (!supabaseClient) return;
-        
-        const { data } = await supabaseClient.from('actualites').select('*').order('created_at', { ascending: false });
-        console.log("✅ Actualités reçues:", data?.length);
-        const container = document.getElementById('actualitesContainer');
-        if (!container) return;
-        
-        if (!data?.length) {
-            container.innerHTML = '<div class="no-actu-message">📭 Aucune actualité pour le moment</div>';
-            return;
-        }
-        
-        container.innerHTML = `<div class="actualites-wrapper"><div class="actualites-scroll" id="actualitesList"></div></div>`;
-        const listContainer = document.getElementById('actualitesList');
-        listContainer.innerHTML = data.map((a, idx) => `<div class="actu-card" data-actu-idx="${idx}"><div class="actu-image">${a.image_url ? `<img src="${escapeHtml(a.image_url)}" loading="lazy" onerror="this.style.display='none'">` : '<div style="font-size:3rem; text-align:center; padding:50px;">📢</div>'}</div><div class="actu-content"><div class="actu-date">${escapeHtml(a.date || '')}</div><div class="actu-title">${escapeHtml(a.titre)}</div><div class="actu-desc">${escapeHtml(a.description || '').substring(0, 100)}${(a.description || '').length > 100 ? '...' : ''}</div></div></div>`).join('');
-    }
-    
-    // Chargement TOUT
-    async function chargerTout() {
-        console.log("🔄 Chargement de toutes les données...");
-        await chargerSpecialitesMedicales();
-        await chargerSpecialitesChirurgicales();
-        await chargerGynecologie();
-        await chargerExplorations();
-        await chargerImagerie();
-        await chargerEquipements();
-        await chargerEquipe();
-        await chargerActualites();
-        console.log("✅ Tous les chargements terminés !");
-    }
-    
-    // Initialisation : attendre que Supabase soit dispo, avec MAX de tentatives
-    let tentatives = 0;
-    function attendreSupabase() {
-        tentatives++;
-        console.log("Tentative", tentatives, "- window.supabase =", !!window.supabase);
-        
+    let isAdmin = false;
+    const ADMIN_PASSWORD = "wendtoin2016";
+    let logoClickCount = 0;
+    let clickTimeout = null;
+
+    function initSupabase() {
         if (window.supabase) {
-            console.log("🎉 Supabase trouvé ! Création du client...");
             supabaseClient = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
-            console.log("✅ Client créé, lancement du chargement...");
-            chargerTout();
-        } else if (tentatives < 50) {
-            console.log("⏳ Supabase pas encore là, nouvelle tentative dans 200ms");
-            setTimeout(attendreSupabase, 200);
-        } else {
-            console.error("💀 Supabase n'a pas chargé après 10 secondes !");
-            document.getElementById('specialitesMedicalesList').innerHTML = '<div class="specialty-item" style="background:#fee;"><strong>⚠️ Erreur réseau</strong><p>Vérifie ta connexion internet</p></div>';
-        }
+            console.log("✅ Supabase initialisé");
+            if (!isSlowConnection) { loadAllPublicData(); } 
+            else { console.log("Mode économie de données actif"); showMinimalContent(); }
+            checkAdminSession();
+        } else { setTimeout(initSupabase, 200); }
     }
     
-    // Charger le script Supabase
-    console.log("📦 Chargement du script Supabase...");
-    const supabaseScript = document.createElement('script');
-    supabaseScript.src = 'https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2';
-    supabaseScript.onload = () => {
-        console.log("📦 Script Supabase chargé, démarrage de l'attente...");
-        attendreSupabase();
-    };
-    supabaseScript.onerror = () => {
-        console.error("💀 Impossible de charger le script Supabase !");
-        document.getElementById('specialitesMedicalesList').innerHTML = '<div class="specialty-item" style="background:#fee;"><strong>⚠️ Erreur réseau</strong><p>Impossible de charger Supabase</p></div>';
-    };
-    document.body.appendChild(supabaseScript);
-    
-    // ========== LE RESTE DU SITE (Slider, menu, compteurs, etc.) ==========
-    
-    // Polices
-    if ('fonts' in document) { document.fonts.ready.then(() => document.body.classList.add('fonts-loaded')); } 
-    else { document.body.classList.add('fonts-loaded'); }
-    
-    // Slider
+    function showMinimalContent() {
+        const containers = ['specialitesMedicalesList', 'specialitesChirurgicalesList', 'gynecologieList', 'explorationsList', 'imagerieList', 'equipementsList'];
+        containers.forEach(id => { const el = document.getElementById(id); if (el && el.innerHTML.includes('skeleton')) { el.innerHTML = '<div class="specialty-item"><strong>Chargement différé</strong><p>Mode économie de données activé</p></div>'; } });
+    }
+
+    const secretLogo = document.getElementById('secretAdminLogo');
+    if (secretLogo) {
+        secretLogo.addEventListener('click', () => {
+            logoClickCount++;
+            clearTimeout(clickTimeout);
+            clickTimeout = setTimeout(() => { logoClickCount = 0; }, 1000);
+            if (logoClickCount >= 5) { logoClickCount = 0; openLoginModal(); }
+        });
+    }
+
     const slides = [
         { image: "slide/churigie.jpeg", titre: "Chirurgie moderne", badge: "à votre service", text: "Blocs opératoires de pointe, chirurgie programmée et d'urgence 24h/24", lien: "#specialites-chirurgicales" },
         { image: "slide/dialyse.jpg", titre: "Centre d'Hémodialyse", badge: "24h/24", text: "Prise en charge complète de l'insuffisance rénale, disponible nuit et jour, 7j/7", lien: "#poles" },
         { image: "slide/equipe_specialiste.jpg", titre: "Plus de 40 médecins", badge: "à votre service", text: "Cardiologues, neurologues, pédiatres, gynécologues, chirurgiens et bien plus", lien: "#equipe" },
         { image: "slide/urgence.jpeg", titre: "Urgences médicales", badge: "24h/24 & 7j/7", text: "Prise en charge immédiate des accidents, douleurs aiguës et détresses vitales", lien: "tel:51000647" }
     ];
-    
-    let slideIndex = 0, autoInterval;
-    function updateSlide() {
-        const s = slides[slideIndex];
-        document.getElementById('heroTitle').innerHTML = s.titre + ' <span>' + s.badge + '</span>';
-        document.getElementById('heroDynamicText').innerHTML = s.text;
-        document.getElementById('heroButtons').innerHTML = `<a href="#rdv" class="btn btn-primary">Prendre rendez-vous</a><a href="${s.lien}" class="btn btn-outline" data-tooltip="Appel gratuit 24h/24">Urgence 24/24 <span class="urgences-badge">URGENCE</span></a>`;
-        document.querySelectorAll('.hero-slide').forEach((el, i) => el.classList.toggle('active', i === slideIndex));
-        document.querySelectorAll('.dot').forEach((el, i) => el.classList.toggle('active', i === slideIndex));
-    }
+
+    let currentIndex = 0, autoInterval, isSliderActive = true;
+    const slidesContainer = document.getElementById('heroSlides');
+    const dotsContainer = document.getElementById('sliderDots');
+    const dynamicText = document.getElementById('heroDynamicText');
+    const titleEl = document.getElementById('heroTitle');
+    const heroButtonsContainer = document.getElementById('heroButtons');
+    const progressBar = document.getElementById('sliderProgress');
+
     function createSlides() {
-        const container = document.getElementById('heroSlides');
-        container.innerHTML = '';
-        slides.forEach((s, i) => {
+        slidesContainer.innerHTML = '';
+        slides.forEach((slide, i) => {
             const div = document.createElement('div');
             div.className = 'hero-slide' + (i === 0 ? ' active' : '');
-            if (i === 0) div.style.backgroundImage = `url('${s.image}')`;
-            container.appendChild(div);
-        });
-        const dots = document.getElementById('sliderDots');
-        dots.innerHTML = '';
-        slides.forEach((_, i) => {
-            const dot = document.createElement('button');
-            dot.className = 'dot' + (i === 0 ? ' active' : '');
-            dot.onclick = () => { slideIndex = i; updateSlide(); resetAutoPlay(); };
-            dots.appendChild(dot);
+            if (i === 0) { div.style.backgroundImage = `url('${slide.image}')`; } 
+            else { const img = new Image(); img.src = slide.image; img.onload = () => { if (div.style.backgroundImage === 'none' || !div.style.backgroundImage) div.style.backgroundImage = `url('${slide.image}')`; }; }
+            slidesContainer.appendChild(div);
         });
     }
-    function resetAutoPlay() { if (autoInterval) clearInterval(autoInterval); autoInterval = setInterval(() => { slideIndex = (slideIndex + 1) % slides.length; updateSlide(); }, 4000); }
-    createSlides(); updateSlide(); resetAutoPlay();
-    document.getElementById('sliderPrev').onclick = () => { slideIndex = (slideIndex - 1 + slides.length) % slides.length; updateSlide(); resetAutoPlay(); };
-    document.getElementById('sliderNext').onclick = () => { slideIndex = (slideIndex + 1) % slides.length; updateSlide(); resetAutoPlay(); };
-    
-    // Menu mobile
-    const mobileBtn = document.querySelector('.mobile-menu-btn');
-    const navMenu = document.getElementById('navMenu');
-    if (mobileBtn && navMenu) {
-        mobileBtn.addEventListener('click', (e) => { e.stopPropagation(); navMenu.classList.toggle('show'); mobileBtn.innerHTML = navMenu.classList.contains('show') ? '✕' : '☰'; });
-        navMenu.querySelectorAll('a').forEach(link => link.addEventListener('click', () => { navMenu.classList.remove('show'); if (mobileBtn) mobileBtn.innerHTML = '☰'; }));
-        document.addEventListener('click', (e) => { if (!mobileBtn.contains(e.target) && !navMenu.contains(e.target)) { navMenu.classList.remove('show'); if (mobileBtn) mobileBtn.innerHTML = '☰'; } });
+
+    function createDots() {
+        dotsContainer.innerHTML = '';
+        slides.forEach((_, i) => { const dot = document.createElement('button'); dot.className = 'dot' + (i === currentIndex ? ' active' : ''); dot.addEventListener('click', () => goToSlide(i)); dotsContainer.appendChild(dot); });
     }
-    
-    // Scroll header
-    window.addEventListener('scroll', () => { document.querySelector('header')?.classList.toggle('scrolled', window.scrollY > 50); });
-    
-    // Animations scroll
-    const observer = new IntersectionObserver((entries) => { entries.forEach((entry, i) => { if (entry.isIntersecting) { setTimeout(() => entry.target.classList.add('visible'), i * 60); observer.unobserve(entry.target); } }); }, { threshold: 0.15 });
-    document.querySelectorAll('.animate-on-scroll').forEach(el => observer.observe(el));
-    
-    // Compteurs
+
+    function updateButtons() { const currentSlide = slides[currentIndex]; heroButtonsContainer.innerHTML = `<a href="#rdv" class="btn btn-primary">Prendre rendez-vous</a><a href="${currentSlide.lien}" class="btn btn-outline" data-tooltip="Appel gratuit 24h/24">Urgence 24/24 <span class="urgences-badge">URGENCE</span></a>`; }
+    function startProgressBar() { if (progressBar && isSliderActive) { progressBar.style.transition = 'none'; progressBar.style.width = '0%'; requestAnimationFrame(() => { progressBar.style.transition = 'width 3s linear'; progressBar.style.width = '100%'; }); } }
+    function updateSlidesAndText() {
+        const allSlides = document.querySelectorAll('.hero-slide');
+        allSlides.forEach((slide, i) => slide.classList.toggle('active', i === currentIndex));
+        document.querySelectorAll('.dot').forEach((dot, i) => dot.classList.toggle('active', i === currentIndex));
+        titleEl.classList.remove('text-animate'); dynamicText.classList.remove('text-animate');
+        void titleEl.offsetWidth;
+        titleEl.innerHTML = slides[currentIndex].titre + ' <span>' + slides[currentIndex].badge + '</span>';
+        dynamicText.textContent = slides[currentIndex].text;
+        updateButtons();
+        titleEl.classList.add('text-animate'); dynamicText.classList.add('text-animate');
+        startProgressBar();
+    }
+    function goToSlide(index) { currentIndex = index; updateSlidesAndText(); resetAutoPlay(); }
+    function nextSlide() { currentIndex = (currentIndex + 1) % slides.length; updateSlidesAndText(); resetAutoPlay(); }
+    function prevSlide() { currentIndex = (currentIndex - 1 + slides.length) % slides.length; updateSlidesAndText(); resetAutoPlay(); }
+    function resetAutoPlay() { if (autoInterval) clearInterval(autoInterval); if (isSliderActive) autoInterval = setInterval(nextSlide, 3000); }
+
+    createSlides(); createDots(); updateSlidesAndText(); resetAutoPlay();
+    document.getElementById('sliderPrev').addEventListener('click', prevSlide);
+    document.getElementById('sliderNext').addEventListener('click', nextSlide);
+    document.addEventListener('visibilitychange', () => { isSliderActive = !document.hidden; if (isSliderActive) resetAutoPlay(); else if (autoInterval) clearInterval(autoInterval); });
+
+    let actualitesData = [];
+
+    async function loadWithCache(table, options = {}) {
+        const cacheKey = `cache_${table}`;
+        const cacheTimeKey = `${cacheKey}_time`;
+        
+        try {
+            const cached = localStorage.getItem(cacheKey);
+            const cacheTime = localStorage.getItem(cacheTimeKey);
+            if (cached && cacheTime && (Date.now() - parseInt(cacheTime)) < 600000) {
+                console.log(`📦 Cache pour ${table}`);
+                return JSON.parse(cached);
+            }
+        } catch(e) { console.log(`⚠️ Cache indisponible pour ${table}:`, e.message); }
+        
+        if (!supabaseClient) return null;
+        console.log(`🌐 Supabase pour ${table}`);
+        let query = supabaseClient.from(table).select('*');
+        if (options.orderBy) query = query.order(options.orderBy, { ascending: options.ascending !== false });
+        if (options.order) query = query.order('ordre');
+        const { data, error } = await query;
+        if (error) { console.error(`❌ Erreur ${table}:`, error); return null; }
+        try { localStorage.setItem(cacheKey, JSON.stringify(data)); localStorage.setItem(cacheTimeKey, Date.now().toString()); } catch(e) { console.log('⚠️ Sauvegarde impossible'); }
+        return data;
+    }
+
+    async function loadPublicActualites() {
+        const data = await loadWithCache('actualites', { orderBy: 'created_at', ascending: false });
+        actualitesData = data || [];
+        const container = document.getElementById('actualitesContainer');
+        if (!actualitesData.length) { container.innerHTML = '<div class="no-actu-message">📭 Aucune actualité pour le moment</div>'; return; }
+        container.innerHTML = `<div class="actualites-wrapper" id="actualitesWrapper"><div class="actualites-scroll" id="actualitesList"></div></div>`;
+        const listContainer = document.getElementById('actualitesList');
+        listContainer.innerHTML = actualitesData.map((a, idx) => `<div class="actu-card" data-actu-idx="${idx}"><div class="actu-image">${a.image_url ? `<img src="${escapeHtml(a.image_url)}" alt="${escapeHtml(a.titre)}" loading="lazy" onerror="this.style.display='none'; this.parentElement.innerHTML='📢'">` : '<div style="font-size:3rem; display:flex; align-items:center; justify-content:center; height:100%;">📢</div>'}</div><div class="actu-content"><div class="actu-date">${escapeHtml(a.date || '')}</div><div class="actu-title">${escapeHtml(a.titre)}</div><div class="actu-desc">${escapeHtml(a.description || '').substring(0, 100)}${(a.description || '').length > 100 ? '...' : ''}</div></div></div>`).join('');
+        document.querySelectorAll('.actu-card').forEach(card => { card.addEventListener('click', (e) => { e.stopPropagation(); const idx = parseInt(card.dataset.actuIdx); if (!isNaN(idx) && actualitesData[idx]) { openActuModal(actualitesData[idx]); } }); });
+    }
+
+    async function loadPublicSpecialitesMedicales() { const data = await loadWithCache('specialites_medicales', { order: true }); document.getElementById('specialitesMedicalesList').innerHTML = data?.length ? data.map(s => `<div class="specialty-item"><strong>${escapeHtml(s.titre)}</strong><p>${escapeHtml(s.description || '')}</p></div>`).join('') : '<div class="specialty-item"><strong>Aucune spécialité</strong><p></p></div>'; }
+    async function loadPublicSpecialitesChirurgicales() { const data = await loadWithCache('specialites_chirurgicales', { order: true }); document.getElementById('specialitesChirurgicalesList').innerHTML = data?.length ? data.map(s => `<div class="specialty-item"><strong>${escapeHtml(s.titre)}</strong><p>${escapeHtml(s.description || '')}</p></div>`).join('') : '<div class="specialty-item"><strong>Aucune spécialité</strong><p></p></div>'; }
+    async function loadPublicGynecologie() { const data = await loadWithCache('gynecologie', { order: true }); document.getElementById('gynecologieList').innerHTML = data?.length ? data.map(g => `<div class="specialty-item"><strong>${escapeHtml(g.titre)}</strong><p>${escapeHtml(g.description || '')}</p></div>`).join('') : '<div class="specialty-item"><strong>Aucun service</strong><p></p></div>'; }
+    async function loadPublicExplorations() { const data = await loadWithCache('explorations', { order: true }); document.getElementById('explorationsList').innerHTML = data?.length ? data.map(e => `<div class="specialty-item"><strong>${escapeHtml(e.titre)}</strong><p>${escapeHtml(e.description || '')}</p></div>`).join('') : '<div class="specialty-item"><strong>Aucune exploration</strong><p></p></div>'; }
+    async function loadPublicImagerie() { const data = await loadWithCache('imagerie', { order: true }); document.getElementById('imagerieList').innerHTML = data?.length ? data.map(i => `<div class="specialty-item"><strong>${escapeHtml(i.titre)}</strong><p></p></div>`).join('') : '<div class="specialty-item"><strong>Aucun service d\'imagerie</strong><p></p></div>'; }
+    async function loadPublicEquipements() { const data = await loadWithCache('equipements', { order: true }); document.getElementById('equipementsList').innerHTML = data?.length ? data.map(e => `<div class="specialty-item"><strong>${escapeHtml(e.titre)}${e.badge ? ` <span class="badge-247">${escapeHtml(e.badge)}</span>` : ''}</strong><p>${escapeHtml(e.description || '')}</p></div>`).join('') : '<div class="specialty-item"><strong>Aucun équipement</strong><p></p></div>'; }
+    async function loadPublicTeam() { const data = await loadWithCache('equipes', { order: true }); const container = document.getElementById('teamList'); if (!data?.length) { container.innerHTML = '<p>Aucun membre pour le moment</p>'; return; } container.innerHTML = data.map(m => `<div class="team-card"><img src="${escapeHtml(m.image_url) || 'https://placehold.co/400x400/0077A4/white?text=Photo'}" alt="${escapeHtml(m.nom)}" class="team-image" loading="lazy" onerror="this.src='https://placehold.co/400x400/0077A4/white?text=Photo'"><div class="team-info"><div class="team-name">${escapeHtml(m.nom)}</div><div class="team-position">${escapeHtml(m.poste)}</div><div class="team-desc">${escapeHtml(m.description || '')}</div></div></div>`).join(''); }
+
+    let dataLoaded = false;
+    async function loadAllPublicData() { if (dataLoaded) return; dataLoaded = true; await Promise.allSettled([loadPublicActualites(), loadPublicSpecialitesMedicales(), loadPublicSpecialitesChirurgicales(), loadPublicGynecologie(), loadPublicExplorations(), loadPublicImagerie(), loadPublicEquipements(), loadPublicTeam()]); }
+
+    const actuModal = document.getElementById('actuModal');
+    const modalActuImage = document.getElementById('modalActuImage');
+    const modalActuDate = document.getElementById('modalActuDate');
+    const modalActuTitle = document.getElementById('modalActuTitle');
+    const modalActuDesc = document.getElementById('modalActuDesc');
+    let currentActuForShare = null;
+    function openActuModal(actu) { currentActuForShare = actu; modalActuImage.src = actu.image_url || 'https://placehold.co/800x400/0077A4/white?text=Actualit%C3%A9'; modalActuImage.alt = actu.titre || ''; modalActuDate.textContent = actu.date || ''; modalActuTitle.textContent = actu.titre || ''; const fullContent = actu.contenu_complet || actu.description || ''; modalActuDesc.innerHTML = formatTextToHtml(fullContent); actuModal.style.display = 'flex'; document.body.style.overflow = 'hidden'; }
+    function formatTextToHtml(text) { if (!text) return '<p>Contenu non disponible</p>'; let html = text.replace(/\n/g, '<br>'); html = html.replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>'); return `<p>${html}</p>`; }
+    function closeActuModal() { actuModal.style.display = 'none'; document.body.style.overflow = ''; currentActuForShare = null; }
+    document.getElementById('closeActuModal').addEventListener('click', closeActuModal);
+    actuModal.addEventListener('click', (e) => { if (e.target === actuModal) closeActuModal(); });
+    document.addEventListener('keydown', (e) => { if (e.key === 'Escape' && actuModal.style.display === 'flex') closeActuModal(); });
+    document.getElementById('shareActuWa').addEventListener('click', () => { if (currentActuForShare) { const message = `*${currentActuForShare.titre}*\n\n${currentActuForShare.description || ''}\n\nÀ lire sur Clinique WENDTOIN`; window.open(`https://wa.me/?text=${encodeURIComponent(message)}`, '_blank'); } });
+
     function animateCounter(el, start, end, duration) { let startTime = null; el.innerText = start; function update(now) { if (!startTime) startTime = now; const p = Math.min((now - startTime) / duration, 1); el.innerText = Math.floor(p * (end - start) + start); if (p < 1) requestAnimationFrame(update); } requestAnimationFrame(update); }
-    let countersDone = false;
-    const statObserver = new IntersectionObserver((entries) => { entries.forEach(e => { if (e.isIntersecting && !countersDone) { countersDone = true; const yEl = document.getElementById('stat-years'); if (yEl && yEl.innerText === "0") animateCounter(yEl, 0, 10, 1500); const dEl = document.getElementById('stat-doctors'); if (dEl && dEl.innerText === "0") animateCounter(dEl, 0, 40, 1500); statObserver.unobserve(e.target); } }); }, { threshold: 0.3 });
-    const statsContainer = document.querySelector('.stats-container'); if (statsContainer) statObserver.observe(statsContainer);
-    
-    // WhatsApp
-    const whatsappForm = document.getElementById('whatsappForm');
-    if (whatsappForm) {
-        whatsappForm.addEventListener('submit', function(e) { e.preventDefault(); const nom = document.getElementById('nom'); if (!nom.value.trim()) { nom.classList.add('form-error'); setTimeout(() => nom.classList.remove('form-error'), 500); alert('Veuillez remplir votre nom'); return; } const service = document.getElementById('service').value; const motif = document.getElementById('motif').value; let message = `Bonjour Clinique WENDTOIN,%0A%0A Demande de rendez-vous%0A Nom : ${encodeURIComponent(nom.value.trim())}%0A Service : ${encodeURIComponent(service)}%0A`; if (motif) message += ` Message : ${encodeURIComponent(motif)}%0A`; message += `%0AMerci de me confirmer un créneau.`; const btn = document.getElementById('submitRdvBtn'); btn.classList.add('btn-loading'); btn.innerHTML = 'Envoi en cours...'; setTimeout(() => { window.open(`https://wa.me/22651000647?text=${message}`, '_blank'); whatsappForm.reset(); btn.classList.remove('btn-loading'); btn.innerHTML = 'Envoyer la demande'; }, 500); });
-    }
-    
-    // Galerie
+    let countersAnimated = false;
+    const statObserver = new IntersectionObserver((entries) => { entries.forEach(e => { if (e.isIntersecting && !countersAnimated) { countersAnimated = true; const yEl = document.getElementById('stat-years'); if (yEl && yEl.innerText === "0") { animateCounter(yEl, 0, 10, 1500); } const doctorEl = document.getElementById('stat-doctors'); if (doctorEl && doctorEl.innerText === "0") { animateCounter(doctorEl, 0, 40, 1500); } statObserver.unobserve(e.target); } }); }, { threshold: 0.3 });
+    const statsContainerEl = document.querySelector('.stats-container'); if (statsContainerEl) statObserver.observe(statsContainerEl);
+
+    const loginModal = document.getElementById('loginModal');
+    const submitLogin = document.getElementById('submitLoginBtn');
+    const closeLogin = document.querySelector('.close-login');
+    const togglePasswordBtn = document.getElementById('togglePassword');
+    const adminPasswordInput = document.getElementById('adminPassword');
+    if (togglePasswordBtn && adminPasswordInput) { togglePasswordBtn.addEventListener('click', () => { const type = adminPasswordInput.getAttribute('type') === 'password' ? 'text' : 'password'; adminPasswordInput.setAttribute('type', type); togglePasswordBtn.textContent = type === 'password' ? '👁️' : '🙈'; }); }
+    function openLoginModal() { loginModal.style.display = 'flex'; }
+    function closeLoginModal() { loginModal.style.display = 'none'; if (adminPasswordInput) adminPasswordInput.value = ''; document.getElementById('loginError').innerText = ''; }
+    if (closeLogin) closeLogin.addEventListener('click', closeLoginModal);
+    window.addEventListener('click', (e) => { if (e.target === loginModal) closeLoginModal(); });
+    submitLogin.addEventListener('click', () => { if (adminPasswordInput.value === ADMIN_PASSWORD) { sessionStorage.setItem('clinique_admin', 'true'); isAdmin = true; closeLoginModal(); window.location.href = 'admin.html'; } else { document.getElementById('loginError').innerText = 'Mot de passe incorrect'; } });
+    function checkAdminSession() { if (sessionStorage.getItem('clinique_admin') === 'true') { isAdmin = true; } }
+
     const galleryImages = ["cliniquewendtoin/Im1.jpeg","cliniquewendtoin/Im3.jpeg","cliniquewendtoin/Im4.jpeg","cliniquewendtoin/Im5.jpeg","cliniquewendtoin/Im7.jpeg","cliniquewendtoin/Im8.jpeg","cliniquewendtoin/Im9.jpeg","cliniquewendtoin/Im10.jpeg","cliniquewendtoin/Im11.jpeg","cliniquewendtoin/Im12.jpeg","cliniquewendtoin/Im13.jpeg","cliniquewendtoin/Im14.jpeg"];
     const galleryGrid = document.getElementById('galleryGrid');
-    if (galleryGrid) {
-        galleryImages.forEach(imgSrc => { const item = document.createElement('div'); item.className = 'gallery-item animate-on-scroll'; item.innerHTML = `<img src="${imgSrc}" class="gallery-img" loading="lazy" onerror="this.src='https://placehold.co/400x300/0077A4/white?text=Photo'">`; item.addEventListener('click', () => { document.getElementById('modalImage').src = imgSrc; document.getElementById('imageModal').style.display = 'flex'; }); galleryGrid.appendChild(item); });
-    }
-    document.querySelector('.close-image-modal')?.addEventListener('click', () => { document.getElementById('imageModal').style.display = 'none'; });
-    document.getElementById('imageModal')?.addEventListener('click', (e) => { if (e.target === document.getElementById('imageModal')) document.getElementById('imageModal').style.display = 'none'; });
-    
-    // Vidéos
-    const allVideos = [
-        { title: "Pr Gilbert BONKOUGOU - Maladie hémorroïdaire", url: "https://web.facebook.com/reel/645204957720787" },
-        { title: "Unité de dialyse - Clinique WENDTOIN", url: "https://web.facebook.com/reel/879902179764068" },
-        { title: "Neuro monitoring - Thyroïdectomie sécurisée", url: "https://web.facebook.com/reel/1608565729972155" },
-        { title: "Chirurgie de l'obésité - Sleeve gastrectomie", url: "https://web.facebook.com/reel/2537992576496661" }
-    ];
+    const imageModal = document.getElementById('imageModal');
+    const modalImage = document.getElementById('modalImage');
+    const closeImageModal = document.querySelector('.close-image-modal');
+    if (galleryGrid) { galleryImages.forEach(imgSrc => { const item = document.createElement('div'); item.className = 'gallery-item animate-on-scroll'; item.innerHTML = `<img src="${imgSrc}" alt="Clinique WENDTOIN" class="gallery-img" loading="lazy" decoding="async" onerror="this.src='https://placehold.co/400x300/0077A4/white?text=Photo'">`; item.addEventListener('click', () => { modalImage.src = imgSrc; imageModal.style.display = 'flex'; }); galleryGrid.appendChild(item); }); }
+    if (closeImageModal) closeImageModal.addEventListener('click', () => { imageModal.style.display = 'none'; });
+    window.addEventListener('click', (e) => { if (e.target === imageModal) imageModal.style.display = 'none'; });
+
+    const allVideos = [{ title: "Pr Gilbert BONKOUGOU - Maladie hémorroïdaire", desc: "Les hémorroïdes expliquées par le Pr Gilbert BONKOUGOU", url: "https://web.facebook.com/reel/645204957720787" },{ title: "Unité de dialyse - Clinique WENDTOIN", desc: "Prise en charge des insuffisances rénales aiguës et chroniques", url: "https://web.facebook.com/reel/879902179764068" },{ title: "Neuro monitoring - Thyroïdectomie sécurisée", desc: "Recherche du nerf récurrent lors de la chirurgie thyroïdienne", url: "https://web.facebook.com/reel/1608565729972155" },{ title: "Chirurgie de l'obésité - Sleeve gastrectomie", desc: "Opération classique donnant d'excellents résultats pour la perte de poids", url: "https://web.facebook.com/reel/2537992576496661" },{ title: "Pr Gilbert BONKOUGOU - Varices des membres inférieurs", desc: "Prise en charge des varices", url: "https://web.facebook.com/reel/1634296984276574" },{ title: "Obésité : un réel problème de santé", desc: "Liens avec diabète, douleurs articulaires, hypertension, maladies respiratoires", url: "https://web.facebook.com/reel/1662097440846319" },{ title: "Dr Natacha OUEDRAOGO - Accident vasculaire cérébral (AVC)", desc: "Neurologue, elle nous parle de cette maladie qui fait peur", url: "https://web.facebook.com/reel/610483310353530" },{ title: "Dr Marcel Kuiré - L'asthme", desc: "Maladie respiratoire fréquente qui peut être grave si non diagnostiquée", url: "https://web.facebook.com/reel/743148739906723" },{ title: "Dr Nadia TOE/ROUAMBA - Lombalgie (maux de reins)", desc: "Spécialiste en Rhumatologie explique les causes diverses", url: "https://web.facebook.com/reel/929689517848124" },{ title: "Dr Dimitri Darankoum – Reflux gastro-œsophagien", desc: "Spécialiste en gastro-entérologie vous en dit plus sur cette maladie observée tant chez l'homme que chez la femme", url: "https://www.facebook.com/reel/262682895320909" },{ title: "Dr Rodrigue Salou – Les ulcères d'estomac", desc: "Vous en avez entendu parler. Vous en souffrez peut-être. Le médecin spécialiste en gastro-entérologie vous en parle", url: "https://www.facebook.com/reel/464631578234706" },{ title: "Cœlioscopie et douleurs pelviennes", desc: "Explication de la cœlioscopie pour diagnostiquer et traiter les douleurs pelviennes", url: "https://www.facebook.com/reel/285134829629359" },{ title: "Nouvelle vidéo santé 1", desc: "Titre et description à préciser", url: "https://www.facebook.com/reel/1594688714056018" },{ title: "Nouvelle vidéo santé 2", desc: "Titre et description à préciser", url: "https://www.facebook.com/reel/171772914469537" }];
     let visibleVideos = 4;
     const videoGrid = document.getElementById('videoGrid');
-    function displayVideos() { if (!videoGrid) return; videoGrid.innerHTML = ''; allVideos.slice(0, visibleVideos).forEach(v => { const card = document.createElement('div'); card.className = 'video-card'; card.onclick = () => window.open(v.url, '_blank'); card.innerHTML = `<div class="video-thumbnail">▶️</div><div class="video-info"><div class="video-title">${escapeHtml(v.title)}</div></div>`; videoGrid.appendChild(card); }); }
+    const showMoreBtn = document.getElementById('showMoreVideos');
+    function displayVideos() { if (!videoGrid) return; videoGrid.innerHTML = ''; const videosToShow = allVideos.slice(0, visibleVideos); videosToShow.forEach(video => { const card = document.createElement('div'); card.className = 'video-card'; card.addEventListener('click', () => { window.open(video.url, '_blank', 'noopener,noreferrer'); }); card.innerHTML = `<div class="video-thumbnail">▶️</div><div class="video-info"><div class="video-title">${escapeHtml(video.title)}</div><div class="video-date">${escapeHtml(video.desc)}</div></div>`; videoGrid.appendChild(card); }); if (showMoreBtn) showMoreBtn.style.display = visibleVideos >= allVideos.length ? 'none' : 'inline-block'; }
+    if (showMoreBtn) showMoreBtn.addEventListener('click', () => { visibleVideos = Math.min(visibleVideos + 4, allVideos.length); displayVideos(); });
     displayVideos();
-    document.getElementById('showMoreVideos')?.addEventListener('click', () => { visibleVideos = Math.min(visibleVideos + 4, allVideos.length); displayVideos(); });
-    
-    // Login admin
-    let clickCount = 0;
-    document.getElementById('secretAdminLogo')?.addEventListener('click', () => { clickCount++; setTimeout(() => { clickCount = 0; }, 1000); if (clickCount >= 5) { document.getElementById('loginModal').style.display = 'flex'; clickCount = 0; } });
-    document.querySelector('.close-login')?.addEventListener('click', () => { document.getElementById('loginModal').style.display = 'none'; });
-    document.getElementById('submitLoginBtn')?.addEventListener('click', () => { if (document.getElementById('adminPassword').value === 'wendtoin2016') { sessionStorage.setItem('clinique_admin', 'true'); window.location.href = 'admin.html'; } else { document.getElementById('loginError').innerText = 'Mot de passe incorrect'; } });
-    
-    console.log("✅ Site prêt !");
-})();
+
+    const animateElements = document.querySelectorAll('.animate-on-scroll');
+    const observer = new IntersectionObserver((entries) => { entries.forEach((entry, index) => { if (entry.isIntersecting) { setTimeout(() => { entry.target.classList.add('visible'); }, index * 60); observer.unobserve(entry.target); } }); }, { threshold: 0.15 });
+    animateElements.forEach(el => observer.observe(el));
+    window.addEventListener('scroll', () => { document.querySelector('header')?.classList.toggle('scrolled', window.scrollY > 50); });
+
+    const mobileBtn = document.querySelector('.mobile-menu-btn');
+    const navMenu = document.getElementById('navMenu');
+    if (mobileBtn && navMenu) { mobileBtn.addEventListener('click', (e) => { e.stopPropagation(); navMenu.classList.toggle('show'); mobileBtn.innerHTML = navMenu.classList.contains('show') ? '✕' : '☰'; }); navMenu.querySelectorAll('a').forEach(link => link.addEventListener('click', () => { navMenu.classList.remove('show'); if (mobileBtn) mobileBtn.innerHTML = '☰'; })); document.addEventListener('click', (e) => { if (!mobileBtn.contains(e.target) && !navMenu.contains(e.target)) { navMenu.classList.remove('show'); if (mobileBtn) mobileBtn.innerHTML = '☰'; } }); }
+
+    const whatsappForm = document.getElementById('whatsappForm');
+    if (whatsappForm) { whatsappForm.addEventListener('submit', function(e) { e.preventDefault(); const nom = document.getElementById('nom'); if (!nom.value.trim()) { nom.classList.add('form-error'); setTimeout(() => nom.classList.remove('form-error'), 500); alert('Veuillez remplir votre nom'); return; } const service = document.getElementById('service').value; const motif = document.getElementById('motif').value; let message = `Bonjour Clinique WENDTOIN,%0A%0A Demande de rendez-vous%0A Nom : ${encodeURIComponent(nom.value.trim())}%0A Service : ${encodeURIComponent(service)}%0A`; if (motif) message += ` Message : ${encodeURIComponent(motif)}%0A`; message += `%0AMerci de me confirmer un créneau.`; const btn = document.getElementById('submitRdvBtn'); btn.classList.add('btn-loading'); btn.innerHTML = 'Envoi en cours...'; setTimeout(() => { window.open(`https://wa.me/22651000647?text=${message}`, '_blank'); whatsappForm.reset(); btn.classList.remove('btn-loading'); btn.innerHTML = 'Envoyer la demande'; }, 500); }); }
+
+    function escapeHtml(str) { if(!str) return ''; return str.replace(/[&<>]/g, function(m){ if(m==='&') return '&amp;'; if(m==='<') return '&lt;'; if(m==='>') return '&gt;'; return m;}); }
+
+    const supabaseScript = document.createElement('script');
+    supabaseScript.src = 'https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2';
+    supabaseScript.async = true;
+    supabaseScript.onload = () => { console.log('Supabase chargé'); initSupabase(); };
+    document.body.appendChild(supabaseScript);
 </script>
 </body>
 </html>
