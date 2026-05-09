@@ -175,40 +175,122 @@
         .c-dot.active { width: 24px; border-radius: 6px; background: #0077A4; }
         .carousel-counter { font-size: 0.75rem; color: #94a3b8; font-weight: 500; min-width: 40px; text-align: center; }
         
-        /* ===== ACTUALITÉS CARTES ===== */
-        .actu-card-new { background: white; border-radius: 24px; overflow: hidden; border: 1px solid #eef2f6; box-shadow: 0 8px 30px rgba(0,0,0,0.07); display: flex; flex-direction: column; }
-        @media (min-width: 768px) { .actu-card-new { flex-direction: row; min-height: 280px; } }
-        .actu-card-image { flex-shrink: 0; width: 100%; height: 220px; background: linear-gradient(135deg, #0077A4 0%, #1D8B5D 100%); position: relative; overflow: hidden; display: flex; align-items: center; justify-content: center; }
-        @media (min-width: 768px) { .actu-card-image { width: 340px; height: auto; } }
-        .actu-card-image img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.6s ease; }
+        /* ===== ACTUALITÉS CARTES - Image 40% sur desktop ===== */
+        .actu-card-new { 
+            background: white; 
+            border-radius: 24px; 
+            overflow: hidden; 
+            border: 1px solid #eef2f6; 
+            box-shadow: 0 8px 30px rgba(0,0,0,0.07); 
+            display: flex; 
+            flex-direction: column; 
+            cursor: pointer;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        .actu-card-new:hover { transform: translateY(-5px); box-shadow: 0 15px 35px rgba(0,0,0,0.15); }
+        @media (min-width: 768px) { 
+            .actu-card-new { flex-direction: row; min-height: 280px; } 
+            .actu-card-new .actu-card-image { width: 40%; height: auto; }
+            .actu-card-new .actu-card-body { width: 60%; }
+        }
+        .actu-card-image { 
+            flex-shrink: 0; 
+            width: 100%; 
+            height: 220px; 
+            background: linear-gradient(135deg, #0077A4 0%, #1D8B5D 100%); 
+            position: relative; 
+            overflow: hidden; 
+            display: flex; 
+            align-items: center; 
+            justify-content: center; 
+        }
+        .actu-card-image img { 
+            width: 100%; 
+            height: 100%; 
+            object-fit: cover; 
+            transition: transform 0.6s ease; 
+        }
         .actu-card-new:hover .actu-card-image img { transform: scale(1.06); }
         .actu-card-image .actu-placeholder-icon { font-size: 60px; opacity: 0.5; }
-        .actu-tag { position: absolute; top: 16px; left: 16px; background: rgba(255,255,255,0.2); color: white; font-size: 0.65rem; font-weight: 700; letter-spacing: 0.8px; padding: 5px 12px; border-radius: 50px; backdrop-filter: blur(8px); text-transform: uppercase; }
+        .actu-tag { 
+            position: absolute; 
+            top: 16px; 
+            left: 16px; 
+            background: rgba(255,255,255,0.2); 
+            color: white; 
+            font-size: 0.65rem; 
+            font-weight: 700; 
+            letter-spacing: 0.8px; 
+            padding: 5px 12px; 
+            border-radius: 50px; 
+            backdrop-filter: blur(8px); 
+            text-transform: uppercase; 
+        }
         .actu-card-body { padding: 24px 28px; display: flex; flex-direction: column; justify-content: center; flex: 1; }
         .actu-meta { display: flex; align-items: center; gap: 10px; margin-bottom: 12px; flex-wrap: wrap; }
         .actu-date-badge { display: inline-flex; align-items: center; gap: 5px; background: #e6f7f0; color: #1D8B5D; font-size: 0.7rem; font-weight: 700; padding: 4px 10px; border-radius: 50px; }
         .actu-author { font-size: 0.7rem; color: #94a3b8; font-weight: 500; }
         .actu-card-title { font-size: 1.15rem; font-weight: 700; color: #0f172a; margin-bottom: 10px; line-height: 1.35; }
         .actu-card-desc { font-size: 0.85rem; color: #475569; line-height: 1.65; flex: 1; }
-        .actu-card-link { display: inline-flex; align-items: center; gap: 6px; margin-top: 18px; color: #0077A4; font-size: 0.8rem; font-weight: 600; text-decoration: none; transition: gap 0.2s ease; cursor: pointer; }
-        .actu-card-link:hover { gap: 10px; }
         
-        /* ===== ÉQUIPE CARTES - 4 par slide sur desktop ===== */
-        .team-card-enhanced { background: #f8fafc; border-radius: 24px; overflow: hidden; box-shadow: 0 10px 25px rgba(0,0,0,0.08); border: 1px solid #eef2f6; transition: transform 0.3s ease, box-shadow 0.3s ease; display: flex; flex-direction: column; align-items: center; text-align: center; }
+        /* ===== ÉQUIPE CARTES - Images agrandies sur mobile ===== */
+        .team-card-enhanced { 
+            background: #f8fafc; 
+            border-radius: 24px; 
+            overflow: hidden; 
+            box-shadow: 0 10px 25px rgba(0,0,0,0.08); 
+            border: 1px solid #eef2f6; 
+            transition: transform 0.3s ease, box-shadow 0.3s ease; 
+            display: flex; 
+            flex-direction: column; 
+            align-items: center; 
+            text-align: center; 
+        }
         .team-card-enhanced:hover { transform: translateY(-8px); box-shadow: 0 20px 35px rgba(0,0,0,0.15); }
-        .equipe-slide-group { flex: 0 0 100%; display: flex; gap: 20px; box-sizing: border-box; flex-wrap: wrap; justify-content: center; }
-        .equipe-slide-group .team-card-enhanced { flex: 1; min-width: 0; }
-        .team-image-enhanced { width: 100%; aspect-ratio: 1 / 1; object-fit: cover; object-position: center 20%; background: linear-gradient(145deg, #f0f9ff, #e0f0e8); display: block; position: relative; }
+        .team-image-enhanced { 
+            width: 100%; 
+            aspect-ratio: 1 / 1; 
+            object-fit: cover; 
+            object-position: center 20%; 
+            background: linear-gradient(145deg, #f0f9ff, #e0f0e8); 
+            display: block; 
+            position: relative; 
+        }
+        /* Sur mobile, image plus grande */
+        @media (max-width: 640px) { 
+            .team-image-enhanced { aspect-ratio: 0.9 / 1; }
+        }
         .team-img-wrap { position: relative; width: 100%; overflow: hidden; }
-        .team-img-wrap::after { content: ''; position: absolute; bottom: 0; left: 0; right: 0; height: 50%; background: linear-gradient(to top, rgba(0,119,164,0.15), transparent); pointer-events: none; }
+        .team-img-wrap::after {
+            content: ''; 
+            position: absolute; 
+            bottom: 0; 
+            left: 0; 
+            right: 0; 
+            height: 40%; 
+            background: linear-gradient(to top, rgba(0,119,164,0.2), transparent); 
+            pointer-events: none; 
+        }
         .team-info-enhanced { padding: 18px 16px 22px; width: 100%; }
         .team-name-enhanced { font-size: 1rem; font-weight: 700; color: #0077A4; margin-bottom: 4px; }
         .team-position-enhanced { color: #1D8B5D; font-weight: 600; font-size: 0.75rem; margin-bottom: 10px; }
         .team-deco-line { width: 36px; height: 2px; background: linear-gradient(90deg, #0077A4, #1D8B5D); border-radius: 2px; margin: 0 auto 10px; }
         .team-desc-enhanced { color: #475569; font-size: 0.78rem; line-height: 1.5; }
-        .team-specialty-badge { display: inline-block; margin-top: 12px; background: linear-gradient(135deg, #e0f0ff, #e6f7f0); color: #0077A4; font-size: 0.65rem; font-weight: 700; padding: 4px 12px; border-radius: 50px; letter-spacing: 0.3px; }
+        .team-specialty-badge { 
+            display: inline-block; 
+            margin-top: 12px; 
+            background: linear-gradient(135deg, #e0f0ff, #e6f7f0); 
+            color: #0077A4; 
+            font-size: 0.65rem; 
+            font-weight: 700; 
+            padding: 4px 12px; 
+            border-radius: 50px; 
+            letter-spacing: 0.3px; 
+        }
         
         /* Responsive équipe : 1 sur mobile, 2 sur tablette, 4 sur desktop */
+        .equipe-slide-group { flex: 0 0 100%; display: flex; gap: 20px; box-sizing: border-box; flex-wrap: wrap; justify-content: center; }
+        .equipe-slide-group .team-card-enhanced { flex: 1; min-width: 0; }
         @media (max-width: 640px) { .equipe-slide-group .team-card-enhanced { flex: 0 0 calc(100% - 10px); } }
         @media (min-width: 641px) and (max-width: 1023px) { .equipe-slide-group .team-card-enhanced { flex: 0 0 calc(50% - 10px); } }
         @media (min-width: 1024px) { .equipe-slide-group .team-card-enhanced { flex: 0 0 calc(25% - 15px); } }
@@ -228,7 +310,7 @@
         
         .no-actu-message { text-align: center; padding: 60px 20px; background: #f8fafc; border-radius: 24px; color: #64748b; font-size: 1rem; }
         
-        /* Modale actualité - pas de message d'erreur */
+        /* Modale actualité */
         .actu-modal { display: none; position: fixed; z-index: 10001; left: 0; top: 0; width: 100%; height: 100%; background-color: rgba(0,0,0,0.85); backdrop-filter: blur(8px); align-items: center; justify-content: center; cursor: pointer; }
         .actu-modal-content { background: white; width: 90%; max-width: 700px; max-height: 85vh; border-radius: 28px; overflow-y: auto; position: relative; cursor: default; animation: fadeScale 0.3s ease; }
         .actu-modal-header { position: relative; width: 100%; height: 260px; background: linear-gradient(135deg, #0077A4, #1D8B5D); overflow: hidden; border-radius: 28px 28px 0 0; flex-shrink: 0; }
@@ -415,7 +497,7 @@
         </div>
     </div>
 
-    <!-- SECTION ÉQUIPE - 4 par slide sur desktop -->
+    <!-- SECTION ÉQUIPE - PAS DE DÉFILEMENT AUTO -->
     <section id="equipe" class="carousel-section bg-light">
         <div class="container">
             <h2 class="section-title animate-on-scroll">Notre équipe</h2>
@@ -604,7 +686,7 @@
         document.getElementById('sliderNext').addEventListener('click', nextSlide);
         document.addEventListener('visibilitychange', () => { isSliderActive = !document.hidden; if (isSliderActive) resetAutoPlay(); else if (autoInterval) clearInterval(autoInterval); });
 
-        // Modal actualités (SANS partage WhatsApp)
+        // Modal actualités
         const actuModal = document.getElementById('actuModal');
         const modalActuImage = document.getElementById('modalActuImage');
         const modalActuDate = document.getElementById('modalActuDate');
@@ -902,8 +984,7 @@
             }); 
         }
 
-        // ==================== CARROUSEL POUR ACTUALITÉS ET ÉQUIPE ====================
-        
+        // ==================== CARROUSEL POUR ACTUALITÉS ====================
         function renderActuSlide(actu) {
             const hasImg = actu.image_url && actu.image_url.trim() !== '';
             const imgHtml = hasImg ? `<img src="${escapeHtml(actu.image_url)}" alt="${escapeHtml(actu.titre)}" loading="lazy" onerror="this.style.display='none';this.parentElement.querySelector('.actu-placeholder-icon').style.display='block'">` : '';
@@ -924,11 +1005,11 @@
                     </div>
                     <div class="actu-card-title">${titre}</div>
                     <div class="actu-card-desc">${desc}</div>
-                    <div class="actu-card-link" data-actu-idx>Lire l'article complet →</div>
                 </div>
             </div>`;
         }
 
+        // ==================== CARROUSEL POUR ÉQUIPE (SANS DÉFILEMENT AUTO) ====================
         function renderEquipeSlide(membre) {
             const photo = escapeHtml(membre.image_url || '');
             const nom   = escapeHtml(membre.nom || '');
@@ -1007,15 +1088,17 @@
             }
             function startAuto() {
                 if (autoTimer) clearInterval(autoTimer);
-                autoTimer = setInterval(() => {
-                    current = (current + 1) % total;
-                    updateUI();
-                }, INTERVAL);
+                if (opts.auto !== false) {
+                    autoTimer = setInterval(() => {
+                        current = (current + 1) % total;
+                        updateUI();
+                    }, INTERVAL);
+                }
             }
             function goTo(idx) { current = idx; updateUI(); startAuto(); }
             if (btnPrev) btnPrev.addEventListener('click', () => goTo((current - 1 + total) % total));
             if (btnNext) btnNext.addEventListener('click', () => goTo((current + 1) % total));
-            if (track.parentElement) {
+            if (track.parentElement && opts.auto !== false) {
                 track.parentElement.addEventListener('mouseenter', () => { if (autoTimer) clearInterval(autoTimer); });
                 track.parentElement.addEventListener('mouseleave', startAuto);
             }
@@ -1049,11 +1132,13 @@
                 renderSlide: renderActuSlide,
                 interval: 3000,
                 groupSize: 1,
+                auto: true,
                 emptyMessage: '<div class="no-actu-message">📭 Aucune actualité pour le moment</div>'
             });
+            // Carte entière cliquable
             document.getElementById('actuTrack')?.addEventListener('click', function(e) {
-                const link = e.target.closest('.actu-card-link');
-                if (link) {
+                const card = e.target.closest('.actu-card-new');
+                if (card) {
                     const track = document.getElementById('actuTrack');
                     const tx = track.style.transform;
                     const match = tx.match(/-(\d+)/);
@@ -1081,7 +1166,8 @@
             createCarouselNoProgress({
                 trackId: 'equipeTrack', prevId: 'equipePrev', nextId: 'equipeNext',
                 dotsId: 'equipeDots', counterId: 'equipeCounter',
-                items: data, renderSlide: renderEquipeSlide, interval: 3000, groupSize: equipeGroupSize()
+                items: data, renderSlide: renderEquipeSlide, interval: 3000, groupSize: equipeGroupSize(),
+                auto: false  // PAS de défilement automatique pour l'équipe
             });
         };
 
