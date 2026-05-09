@@ -33,6 +33,10 @@
         @keyframes spin { to { transform: rotate(360deg); } }
         @keyframes progress { from { width: 0%; } to { width: 100%; } }
         @keyframes shimmer { 0% { background-position: 200% 0; } 100% { background-position: -200% 0; } }
+        @keyframes cardRevealLarge {
+            from { opacity: 0; transform: translateY(25px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
         
         .skeleton { background: linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 50%, #f0f0f0 75%); background-size: 200% 100%; animation: shimmer 1.5s infinite; border-radius: 8px; }
         .skeleton-text { height: 20px; margin-bottom: 10px; }
@@ -97,21 +101,138 @@
         .card-title { font-size: 1rem; font-weight: 700; margin: 8px 20px 5px 20px; color: #0f172a; }
         .card-content { padding: 0 20px 12px 20px; }
         .card-text { color: #334155; font-size: 0.8rem; }
-        .actualites-wrapper { position: relative; width: 100%; overflow-x: auto; overflow-y: hidden; white-space: nowrap; scrollbar-width: thin; scroll-snap-type: x mandatory; padding: 20px 0 30px 0; cursor: grab; user-select: none; -webkit-overflow-scrolling: touch; }
-        .actualites-wrapper:active { cursor: grabbing; }
-        .actualites-wrapper::-webkit-scrollbar { height: 6px; }
-        .actualites-wrapper::-webkit-scrollbar-track { background: #e2e8f0; border-radius: 10px; }
-        .actualites-wrapper::-webkit-scrollbar-thumb { background: #1D8B5D; border-radius: 10px; }
-        .actualites-scroll { display: inline-flex; gap: 25px; padding: 0 20px; }
-        .actu-card { flex: 0 0 auto; width: 300px; background: white; border-radius: 24px; overflow: hidden; box-shadow: 0 15px 35px rgba(0,0,0,0.1); transition: transform 0.4s cubic-bezier(0.2,0.9,0.4,1.1), box-shadow 0.3s ease; border: 1px solid #eef2f6; scroll-snap-align: start; white-space: normal; display: inline-block; vertical-align: top; cursor: pointer; }
-        .actu-card:hover { transform: translateY(-12px) scale(1.02); box-shadow: 0 25px 45px rgba(0,0,0,0.2); }
-        .actu-image { width: 100%; height: 200px; background: linear-gradient(135deg, #0077A4, #1D8B5D); display: flex; align-items: center; justify-content: center; overflow: hidden; position: relative; flex-shrink: 0; }
-        .actu-image img { width: 100%; height: 100%; object-fit: cover; object-position: center; transition: transform 0.5s ease; display: block; }
-        .actu-card:hover .actu-image img { transform: scale(1.08); }
-        .actu-content { padding: 18px; }
-        .actu-date { font-size: 0.7rem; color: #1D8B5D; font-weight: 700; margin-bottom: 8px; letter-spacing: 0.5px; }
-        .actu-title { font-size: 1.1rem; font-weight: 700; color: #1e293b; margin-bottom: 10px; line-height: 1.3; }
-        .actu-desc { font-size: 0.85rem; color: #64748b; line-height: 1.5; display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; overflow: hidden; }
+
+        /* ========== SECTION ACTUALITÉS - VERSION 2 TAILLE AUGMENTÉE ========== */
+        .actualites-premium-grid-large {
+            display: grid;
+            gap: 35px;
+            margin-top: 35px;
+        }
+
+        @media (max-width: 640px) {
+            .actualites-premium-grid-large {
+                grid-template-columns: 1fr;
+                gap: 30px;
+            }
+        }
+
+        @media (min-width: 641px) and (max-width: 1023px) {
+            .actualites-premium-grid-large {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 30px;
+            }
+        }
+
+        @media (min-width: 1024px) {
+            .actualites-premium-grid-large {
+                grid-template-columns: repeat(3, 1fr);
+                gap: 35px;
+            }
+        }
+
+        /* CARTE PREMIUM - TAILLE AUGMENTÉE */
+        .actu-card-premium-large {
+            background: white;
+            border-radius: 28px;
+            overflow: hidden;
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.08);
+            transition: all 0.4s cubic-bezier(0.2, 0.9, 0.4, 1.1);
+            cursor: pointer;
+            position: relative;
+            border: 1px solid #eef2f6;
+            animation: cardRevealLarge 0.6s ease backwards;
+        }
+
+        .actu-card-premium-large::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(90deg, #0077A4, #1D8B5D, #00b4d8);
+            z-index: 1;
+            border-radius: 28px 28px 0 0;
+        }
+
+        .actu-card-premium-large:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 25px 45px rgba(0, 0, 0, 0.15);
+            border-color: rgba(29, 139, 93, 0.3);
+        }
+
+        .actu-card-premium-large:nth-child(1) { animation-delay: 0.05s; }
+        .actu-card-premium-large:nth-child(2) { animation-delay: 0.1s; }
+        .actu-card-premium-large:nth-child(3) { animation-delay: 0.15s; }
+        .actu-card-premium-large:nth-child(4) { animation-delay: 0.2s; }
+        .actu-card-premium-large:nth-child(5) { animation-delay: 0.25s; }
+        .actu-card-premium-large:nth-child(6) { animation-delay: 0.3s; }
+
+        .actu-image-premium-large {
+            width: 100%;
+            height: 240px;
+            object-fit: cover;
+            transition: transform 0.6s ease;
+        }
+
+        .actu-card-premium-large:hover .actu-image-premium-large {
+            transform: scale(1.05);
+        }
+
+        .actu-content-premium-large {
+            padding: 24px;
+        }
+
+        .actu-date-premium-large {
+            display: inline-block;
+            background: linear-gradient(135deg, #e6f7f0, #d1f0e4);
+            color: #1D8B5D;
+            padding: 5px 16px;
+            border-radius: 50px;
+            font-size: 0.75rem;
+            font-weight: 700;
+            margin-bottom: 16px;
+            letter-spacing: 0.5px;
+        }
+
+        .actu-title-premium-large {
+            font-size: 1.2rem;
+            font-weight: 700;
+            color: #0f172a;
+            margin-bottom: 12px;
+            line-height: 1.4;
+        }
+
+        .actu-desc-premium-large {
+            color: #475569;
+            font-size: 0.9rem;
+            line-height: 1.6;
+            margin-bottom: 20px;
+            display: -webkit-box;
+            -webkit-line-clamp: 3;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+        }
+
+        .actu-link-premium-large {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            color: #0077A4;
+            font-weight: 600;
+            font-size: 0.85rem;
+            transition: all 0.3s ease;
+        }
+
+        .actu-link-premium-large::after {
+            content: '→';
+            transition: transform 0.2s ease;
+        }
+
+        .actu-card-premium-large:hover .actu-link-premium-large::after {
+            transform: translateX(4px);
+        }
+
         .no-actu-message { text-align: center; padding: 40px 20px; background: #f8fafc; border-radius: 24px; color: #64748b; font-size: 1rem; }
         .actu-modal { display: none; position: fixed; z-index: 10001; left: 0; top: 0; width: 100%; height: 100%; background-color: rgba(0,0,0,0.85); backdrop-filter: blur(8px); align-items: center; justify-content: center; cursor: pointer; }
         .actu-modal-content { background: white; width: 90%; max-width: 700px; max-height: 85vh; border-radius: 28px; overflow-y: auto; position: relative; cursor: default; animation: fadeScale 0.3s ease; }
@@ -127,7 +248,8 @@
         .actu-modal-share { margin-top: 25px; padding-top: 20px; border-top: 1px solid #eef2f6; display: flex; gap: 15px; justify-content: flex-end; }
         .share-wa-btn { background: #25D366; color: white; border: none; padding: 10px 20px; border-radius: 50px; cursor: pointer; font-weight: 600; display: inline-flex; align-items: center; gap: 8px; transition: all 0.3s ease; }
         .share-wa-btn:hover { background: #128C7E; transform: translateY(-2px); }
-        @media (max-width: 640px) { .actu-modal-header { height: 200px; } .actu-modal-title { font-size: 1.3rem; } .actu-modal-body { padding: 18px; } .actu-modal-description { font-size: 0.9rem; } .actu-image { height: 170px; } }
+        @media (max-width: 640px) { .actu-modal-header { height: 200px; } .actu-modal-title { font-size: 1.3rem; } .actu-modal-body { padding: 18px; } .actu-modal-description { font-size: 0.9rem; } }
+        
         .stats { background: #0077A4; color: white; padding: 40px 0; position: relative; overflow: hidden; }
         .stats::before { content: ''; position: absolute; top: -50%; left: -50%; width: 200%; height: 200%; background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, transparent 70%); animation: rotateBg 22s linear infinite; }
         .stats-container { display: flex; justify-content: space-around; text-align: center; flex-wrap: wrap; gap: 25px; position: relative; z-index: 1; }
@@ -328,10 +450,10 @@
         <div class="container">
             <h2 class="section-title animate-on-scroll">Actualités</h2>
             <div id="actualitesContainer">
-                <div class="actualites-scroll">
-                    <div class="actu-card skeleton-card"><div class="actu-image skeleton"></div><div class="actu-content"><div class="skeleton skeleton-text" style="width: 40%"></div><div class="skeleton skeleton-title"></div><div class="skeleton skeleton-text"></div><div class="skeleton skeleton-text" style="width: 70%"></div></div></div>
-                    <div class="actu-card skeleton-card"><div class="actu-image skeleton"></div><div class="actu-content"><div class="skeleton skeleton-text" style="width: 40%"></div><div class="skeleton skeleton-title"></div><div class="skeleton skeleton-text"></div><div class="skeleton skeleton-text" style="width: 70%"></div></div></div>
-                    <div class="actu-card skeleton-card"><div class="actu-image skeleton"></div><div class="actu-content"><div class="skeleton skeleton-text" style="width: 40%"></div><div class="skeleton skeleton-title"></div><div class="skeleton skeleton-text"></div><div class="skeleton skeleton-text" style="width: 70%"></div></div></div>
+                <div class="actualites-premium-grid-large">
+                    <div class="actu-card-premium-large skeleton-card"><div class="skeleton" style="height:240px; width:100%;"></div><div class="actu-content-premium-large"><div class="skeleton skeleton-text" style="width: 40%"></div><div class="skeleton skeleton-title"></div><div class="skeleton skeleton-text"></div><div class="skeleton skeleton-text" style="width: 70%"></div></div></div>
+                    <div class="actu-card-premium-large skeleton-card"><div class="skeleton" style="height:240px; width:100%;"></div><div class="actu-content-premium-large"><div class="skeleton skeleton-text" style="width: 40%"></div><div class="skeleton skeleton-title"></div><div class="skeleton skeleton-text"></div><div class="skeleton skeleton-text" style="width: 70%"></div></div></div>
+                    <div class="actu-card-premium-large skeleton-card"><div class="skeleton" style="height:240px; width:100%;"></div><div class="actu-content-premium-large"><div class="skeleton skeleton-text" style="width: 40%"></div><div class="skeleton skeleton-title"></div><div class="skeleton skeleton-text"></div><div class="skeleton skeleton-text" style="width: 70%"></div></div></div>
                 </div>
             </div>
         </div>
@@ -423,15 +545,16 @@
         }
 
         async function loadWithCache(table, options = {}) {
-    if (!supabaseClient) return null;
-    console.log(`🌐 Supabase pour ${table}`);
-    let query = supabaseClient.from(table).select('*');
-    if (options.orderBy) query = query.order(options.orderBy, { ascending: options.ascending !== false });
-    if (options.order) query = query.order('ordre');
-    const { data, error } = await query;
-    if (error) { console.error(`❌ Erreur ${table}:`, error); return null; }
-    return data;
-}
+            if (!supabaseClient) return null;
+            console.log(`🌐 Supabase pour ${table}`);
+            let query = supabaseClient.from(table).select('*');
+            if (options.orderBy) query = query.order(options.orderBy, { ascending: options.ascending !== false });
+            if (options.order) query = query.order('ordre');
+            const { data, error } = await query;
+            if (error) { console.error(`❌ Erreur ${table}:`, error); return null; }
+            return data;
+        }
+        
         let actualitesData = [];
         
         async function loadPublicActualites() {
@@ -442,10 +565,24 @@
                 container.innerHTML = '<div class="no-actu-message">📭 Aucune actualité pour le moment</div>'; 
                 return; 
             }
-            container.innerHTML = `<div class="actualites-wrapper" id="actualitesWrapper"><div class="actualites-scroll" id="actualitesList"></div></div>`;
+            container.innerHTML = `<div class="actualites-premium-grid-large" id="actualitesList"></div>`;
             const listContainer = document.getElementById('actualitesList');
-            listContainer.innerHTML = actualitesData.map((a, idx) => `<div class="actu-card" data-actu-idx="${idx}"><div class="actu-image">${a.image_url ? `<img src="${escapeHtml(a.image_url)}" alt="${escapeHtml(a.titre)}" loading="lazy" onerror="this.style.display='none'; this.parentElement.innerHTML='📢'">` : '<div style="font-size:3rem; display:flex; align-items:center; justify-content:center; height:100%;">📢</div>'}</div><div class="actu-content"><div class="actu-date">${escapeHtml(a.date || '')}</div><div class="actu-title">${escapeHtml(a.titre)}</div><div class="actu-desc">${escapeHtml(a.description || '').substring(0, 100)}${(a.description || '').length > 100 ? '...' : ''}</div></div></div>`).join('');
-            document.querySelectorAll('.actu-card').forEach(card => { 
+            listContainer.innerHTML = actualitesData.map((a, idx) => `
+                <div class="actu-card-premium-large" data-actu-idx="${idx}">
+                    ${a.image_url ? 
+                        `<img src="${escapeHtml(a.image_url)}" alt="${escapeHtml(a.titre)}" class="actu-image-premium-large" loading="lazy" onerror="this.style.display='none'; this.parentElement.innerHTML='<div style=\"height:240px; background:linear-gradient(135deg,#0077A4,#1D8B5D); display:flex; align-items:center; justify-content:center; color:white; font-size:2rem;\">📢</div>'">` : 
+                        `<div style="height:240px; background:linear-gradient(135deg,#0077A4,#1D8B5D); display:flex; align-items:center; justify-content:center; color:white; font-size:2rem;">📢</div>`
+                    }
+                    <div class="actu-content-premium-large">
+                        <div class="actu-date-premium-large">${escapeHtml(a.date || 'Actualité')}</div>
+                        <div class="actu-title-premium-large">${escapeHtml(a.titre)}</div>
+                        <div class="actu-desc-premium-large">${escapeHtml(a.description || '').substring(0, 120)}${(a.description || '').length > 120 ? '...' : ''}</div>
+                        <div class="actu-link-premium-large">Lire la suite</div>
+                    </div>
+                </div>
+            `).join('');
+            
+            document.querySelectorAll('.actu-card-premium-large').forEach(card => { 
                 card.addEventListener('click', (e) => { 
                     e.stopPropagation(); 
                     const idx = parseInt(card.dataset.actuIdx); 
@@ -832,7 +969,7 @@
             }); 
         }
 
-        // ========== CHARGEMENT DE SUPABASE VERSION PROPRE ==========
+        // ========== CHARGEMENT DE SUPABASE ==========
         const supabaseScript = document.createElement('script');
         supabaseScript.src = 'https://unpkg.com/@supabase/supabase-js@2/dist/umd/supabase.js';
         supabaseScript.async = true;
