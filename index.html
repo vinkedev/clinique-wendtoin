@@ -127,7 +127,21 @@
         .gallery-title { text-align: center; font-size: 1.6rem; margin-bottom: 25px; color: #0077A4; font-weight: 700; position: relative; }
         .gallery-title::after { content: ''; position: absolute; bottom: -10px; left: 50%; transform: translateX(-50%); width: 50px; height: 3px; background: linear-gradient(90deg, #0077A4, #1D8B5D); border-radius: 4px; }
         .gallery-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 20px; }
-        @media (max-width: 768px) { .gallery-grid { display: flex; overflow-x: auto; scroll-snap-type: x mandatory; gap: 14px; padding-bottom: 15px; } .gallery-item { flex: 0 0 70%; scroll-snap-align: start; min-width: 230px; } }
+        /* Galerie plus grande sur mobile */
+        @media (max-width: 768px) { 
+            .gallery-grid { 
+                display: flex; 
+                overflow-x: auto; 
+                scroll-snap-type: x mandatory; 
+                gap: 16px; 
+                padding-bottom: 15px; 
+            } 
+            .gallery-item { 
+                flex: 0 0 80%; 
+                scroll-snap-align: start; 
+                min-width: 260px; 
+            } 
+        }
         .gallery-item { background: #f8fafc; border-radius: 20px; overflow: hidden; box-shadow: 0 10px 25px rgba(0,0,0,0.08); transition: transform 0.3s ease; cursor: pointer; border: 1px solid #eef2f6; }
         .gallery-item:hover { transform: translateY(-5px); }
         .gallery-img { width: 100%; aspect-ratio: 4 / 3; object-fit: cover; display: block; transition: transform 0.5s ease; }
@@ -175,7 +189,7 @@
         .c-dot.active { width: 24px; border-radius: 6px; background: #0077A4; }
         .carousel-counter { font-size: 0.75rem; color: #94a3b8; font-weight: 500; min-width: 40px; text-align: center; }
         
-        /* ===== ACTUALITÉS CARTES - Image 40% sur desktop ===== */
+        /* ===== ACTUALITÉS CARTES - Image 60% sur desktop ===== */
         .actu-card-new { 
             background: white; 
             border-radius: 24px; 
@@ -190,13 +204,13 @@
         .actu-card-new:hover { transform: translateY(-5px); box-shadow: 0 15px 35px rgba(0,0,0,0.15); }
         @media (min-width: 768px) { 
             .actu-card-new { flex-direction: row; min-height: 280px; } 
-            .actu-card-new .actu-card-image { width: 40%; height: auto; }
-            .actu-card-new .actu-card-body { width: 60%; }
+            .actu-card-new .actu-card-image { width: 60%; height: auto; }
+            .actu-card-new .actu-card-body { width: 40%; }
         }
         .actu-card-image { 
             flex-shrink: 0; 
             width: 100%; 
-            height: 220px; 
+            height: 240px; 
             background: linear-gradient(135deg, #0077A4 0%, #1D8B5D 100%); 
             position: relative; 
             overflow: hidden; 
@@ -212,20 +226,6 @@
         }
         .actu-card-new:hover .actu-card-image img { transform: scale(1.06); }
         .actu-card-image .actu-placeholder-icon { font-size: 60px; opacity: 0.5; }
-        .actu-tag { 
-            position: absolute; 
-            top: 16px; 
-            left: 16px; 
-            background: rgba(255,255,255,0.2); 
-            color: white; 
-            font-size: 0.65rem; 
-            font-weight: 700; 
-            letter-spacing: 0.8px; 
-            padding: 5px 12px; 
-            border-radius: 50px; 
-            backdrop-filter: blur(8px); 
-            text-transform: uppercase; 
-        }
         .actu-card-body { padding: 24px 28px; display: flex; flex-direction: column; justify-content: center; flex: 1; }
         .actu-meta { display: flex; align-items: center; gap: 10px; margin-bottom: 12px; flex-wrap: wrap; }
         .actu-date-badge { display: inline-flex; align-items: center; gap: 5px; background: #e6f7f0; color: #1D8B5D; font-size: 0.7rem; font-weight: 700; padding: 4px 10px; border-radius: 50px; }
@@ -233,7 +233,7 @@
         .actu-card-title { font-size: 1.15rem; font-weight: 700; color: #0f172a; margin-bottom: 10px; line-height: 1.35; }
         .actu-card-desc { font-size: 0.85rem; color: #475569; line-height: 1.65; flex: 1; }
         
-        /* ===== ÉQUIPE CARTES - Images agrandies sur mobile ===== */
+        /* ===== ÉQUIPE CARTES - MÊME TAILLE POUR TOUS ===== */
         .team-card-enhanced { 
             background: #f8fafc; 
             border-radius: 24px; 
@@ -245,6 +245,7 @@
             flex-direction: column; 
             align-items: center; 
             text-align: center; 
+            width: 100%;
         }
         .team-card-enhanced:hover { transform: translateY(-8px); box-shadow: 0 20px 35px rgba(0,0,0,0.15); }
         .team-image-enhanced { 
@@ -254,11 +255,6 @@
             object-position: center 20%; 
             background: linear-gradient(145deg, #f0f9ff, #e0f0e8); 
             display: block; 
-            position: relative; 
-        }
-        /* Sur mobile, image plus grande */
-        @media (max-width: 640px) { 
-            .team-image-enhanced { aspect-ratio: 0.9 / 1; }
         }
         .team-img-wrap { position: relative; width: 100%; overflow: hidden; }
         .team-img-wrap::after {
@@ -275,7 +271,7 @@
         .team-name-enhanced { font-size: 1rem; font-weight: 700; color: #0077A4; margin-bottom: 4px; }
         .team-position-enhanced { color: #1D8B5D; font-weight: 600; font-size: 0.75rem; margin-bottom: 10px; }
         .team-deco-line { width: 36px; height: 2px; background: linear-gradient(90deg, #0077A4, #1D8B5D); border-radius: 2px; margin: 0 auto 10px; }
-        .team-desc-enhanced { color: #475569; font-size: 0.78rem; line-height: 1.5; }
+        .team-desc-enhanced { color: #475569; font-size: 0.78rem; line-height: 1.5; display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; overflow: hidden; }
         .team-specialty-badge { 
             display: inline-block; 
             margin-top: 12px; 
@@ -288,10 +284,10 @@
             letter-spacing: 0.3px; 
         }
         
-        /* Responsive équipe : 1 sur mobile, 2 sur tablette, 4 sur desktop */
+        /* Responsive équipe : 1 sur mobile, 2 sur tablette, 4 sur desktop - TOUS IDENTIQUES */
         .equipe-slide-group { flex: 0 0 100%; display: flex; gap: 20px; box-sizing: border-box; flex-wrap: wrap; justify-content: center; }
         .equipe-slide-group .team-card-enhanced { flex: 1; min-width: 0; }
-        @media (max-width: 640px) { .equipe-slide-group .team-card-enhanced { flex: 0 0 calc(100% - 10px); } }
+        @media (max-width: 640px) { .equipe-slide-group .team-card-enhanced { flex: 0 0 calc(100% - 10px); max-width: 100%; } }
         @media (min-width: 641px) and (max-width: 1023px) { .equipe-slide-group .team-card-enhanced { flex: 0 0 calc(50% - 10px); } }
         @media (min-width: 1024px) { .equipe-slide-group .team-card-enhanced { flex: 0 0 calc(25% - 15px); } }
         
@@ -700,8 +696,7 @@
                 modalActuImage.src = actu.image_url;
                 modalActuImage.alt = actu.titre || '';
             } else {
-                modalActuImage.src = 'https://placehold.co/800x400/0077A4/white?text=Clinique+WENDTOIN';
-                modalActuImage.alt = 'Clinique WENDTOIN';
+                modalActuImage.style.display = 'none';
             }
             modalActuDate.textContent = actu.date || '';
             modalActuTitle.textContent = actu.titre || '';
@@ -722,6 +717,7 @@
             actuModal.style.display = 'none'; 
             document.body.style.overflow = ''; 
             currentActuForModal = null; 
+            modalActuImage.style.display = 'block';
         }
         
         document.getElementById('closeActuModal').addEventListener('click', closeActuModal);
@@ -988,7 +984,6 @@
         function renderActuSlide(actu) {
             const hasImg = actu.image_url && actu.image_url.trim() !== '';
             const imgHtml = hasImg ? `<img src="${escapeHtml(actu.image_url)}" alt="${escapeHtml(actu.titre)}" loading="lazy" onerror="this.style.display='none';this.parentElement.querySelector('.actu-placeholder-icon').style.display='block'">` : '';
-            const cat = escapeHtml(actu.categorie || 'Actualité');
             const date = escapeHtml(actu.date || '');
             const titre = escapeHtml(actu.titre || '');
             const desc = escapeHtml((actu.description || '').substring(0, 220)) + ((actu.description || '').length > 220 ? '…' : '');
@@ -996,7 +991,6 @@
                 <div class="actu-card-image">
                     ${imgHtml}
                     <span class="actu-placeholder-icon" style="${hasImg?'display:none':''}">📢</span>
-                    <span class="actu-tag">${cat}</span>
                 </div>
                 <div class="actu-card-body">
                     <div class="actu-meta">
@@ -1032,7 +1026,7 @@
         }
 
         function createCarouselNoProgress(opts) {
-            const INTERVAL = opts.interval || 4000;
+            const INTERVAL = opts.interval || 5000;
             const groupSize = opts.groupSize || 1;
             const track = document.getElementById(opts.trackId);
             const btnPrev = document.getElementById(opts.prevId);
@@ -1130,12 +1124,11 @@
                 dotsId: 'actuDots', counterId: 'actuCounter',
                 items: data,
                 renderSlide: renderActuSlide,
-                interval: 3000,
+                interval: 5000,
                 groupSize: 1,
                 auto: true,
                 emptyMessage: '<div class="no-actu-message">📭 Aucune actualité pour le moment</div>'
             });
-            // Carte entière cliquable
             document.getElementById('actuTrack')?.addEventListener('click', function(e) {
                 const card = e.target.closest('.actu-card-new');
                 if (card) {
@@ -1166,8 +1159,8 @@
             createCarouselNoProgress({
                 trackId: 'equipeTrack', prevId: 'equipePrev', nextId: 'equipeNext',
                 dotsId: 'equipeDots', counterId: 'equipeCounter',
-                items: data, renderSlide: renderEquipeSlide, interval: 3000, groupSize: equipeGroupSize(),
-                auto: false  // PAS de défilement automatique pour l'équipe
+                items: data, renderSlide: renderEquipeSlide, interval: 5000, groupSize: equipeGroupSize(),
+                auto: false
             });
         };
 
