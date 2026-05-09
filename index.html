@@ -390,9 +390,6 @@
 
 <script>
     (function() {
-        // Alerte au démarrage pour confirmer que le JS s'exécute
-        alert('1. Page chargée - Début du script');
-        
         if ('fonts' in document) { 
             document.fonts.ready.then(function() { 
                 document.body.classList.add('fonts-loaded'); 
@@ -425,7 +422,6 @@
             });
         }
 
-        // Fonctions de chargement des données
         async function loadWithCache(table, options = {}) {
             const cacheKey = `cache_${table}`;
             const cacheTimeKey = `${cacheKey}_time`;
@@ -520,7 +516,6 @@
         async function loadAllPublicData() { 
             if (dataLoaded) return; 
             dataLoaded = true; 
-            alert('2. Chargement des données Supabase...');
             await Promise.allSettled([
                 loadPublicActualites(), 
                 loadPublicSpecialitesMedicales(), 
@@ -531,7 +526,6 @@
                 loadPublicEquipements(), 
                 loadPublicTeam()
             ]);
-            alert('3. Données chargées avec succès !');
         }
 
         // Slider
@@ -855,32 +849,26 @@
             }); 
         }
 
-        // ========== CHARGEMENT DE SUPABASE AVEC ALERTES ==========
-        alert('4. Chargement du script Supabase...');
-        
+        // ========== CHARGEMENT DE SUPABASE VERSION PROPRE ==========
         const supabaseScript = document.createElement('script');
         supabaseScript.src = 'https://unpkg.com/@supabase/supabase-js@2/dist/umd/supabase.js';
         supabaseScript.async = true;
         supabaseScript.onerror = () => {
             console.error('❌ Impossible de charger Supabase');
-            alert('ERREUR: Impossible de charger Supabase! Vérifiez votre connexion internet.');
             const container = document.getElementById('actualitesContainer');
             if (container) {
                 container.innerHTML = '<div class="no-actu-message">⚠️ Erreur de chargement des données. Veuillez rafraîchir la page.</div>';
             }
         };
         supabaseScript.onload = () => {
-            alert('5. Supabase chargé avec succès! Création du client...');
             console.log('✅ Supabase chargé, initialisation...');
             supabaseClient = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
             console.log("✅ Supabase initialisé et prêt");
-            alert('6. Client Supabase créé! Chargement des données...');
             
             if (!isSlowConnection) {
                 loadAllPublicData();
             } else {
                 console.log("Mode économie de données actif");
-                alert('7. Mode économie de données activé');
                 showMinimalContent();
             }
             checkAdminSession();
