@@ -187,7 +187,7 @@
         .carousel-counter { font-size: 0.72rem; color: #94a3b8; font-weight: 500; min-width: 36px; text-align: center; }
         @media (max-width: 768px) { .carousel-outer { padding: 0 32px; } .carousel-btn { width: 32px; height: 32px; font-size: 16px; } }
 
-        /* ===== ACTUALITÉS — Cartes verticales compactes (hauteur image 210px sur desktop) ===== */
+        /* ===== ACTUALITÉS — Hauteur image 160px ===== */
         .actu-group-slide { flex: 0 0 100%; display: flex; gap: 18px; box-sizing: border-box; align-items: stretch; }
         .actu-card-v2 {
             flex: 1; min-width: 0;
@@ -197,7 +197,7 @@
             display: flex; flex-direction: column;
         }
         .actu-card-v2:hover { transform: translateY(-6px); box-shadow: 0 14px 30px rgba(0,0,0,0.13); }
-        .actu-v2-img { width: 100%; height: 210px; object-fit: cover; object-position: center; display: block; background: linear-gradient(135deg, #0077A4, #1D8B5D); flex-shrink: 0; transition: transform 0.4s ease; }
+        .actu-v2-img { width: 100%; height: 160px; object-fit: cover; object-position: center; display: block; background: linear-gradient(135deg, #0077A4, #1D8B5D); flex-shrink: 0; transition: transform 0.4s ease; }
         .actu-card-v2:hover .actu-v2-img { transform: scale(1.04); }
         .actu-v2-img-wrap { overflow: hidden; flex-shrink: 0; position: relative; }
         .actu-v2-cat {
@@ -207,17 +207,16 @@
             padding: 3px 9px; border-radius: 50px; text-transform: uppercase;
             backdrop-filter: blur(4px); z-index: 2;
         }
-        .actu-v2-no-img { width: 100%; height: 210px; background: linear-gradient(135deg, #0077A4, #1D8B5D); display: flex; align-items: center; justify-content: center; font-size: 2.5rem; flex-shrink: 0; position: relative; }
+        .actu-v2-no-img { width: 100%; height: 160px; background: linear-gradient(135deg, #0077A4, #1D8B5D); display: flex; align-items: center; justify-content: center; font-size: 2.5rem; flex-shrink: 0; position: relative; }
         .actu-v2-body { padding: 14px 16px 16px; display: flex; flex-direction: column; flex: 1; }
         .actu-v2-date { font-size: 0.67rem; color: #1D8B5D; font-weight: 600; margin-bottom: 7px; display: flex; align-items: center; gap: 4px; }
         .actu-v2-title { font-size: 0.92rem; font-weight: 700; color: #0f172a; line-height: 1.35; margin-bottom: 8px; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
         .actu-v2-desc { font-size: 0.78rem; color: #64748b; line-height: 1.55; flex: 1; display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; overflow: hidden; }
         .actu-v2-footer { margin-top: 12px; display: flex; align-items: center; gap: 5px; font-size: 0.72rem; font-weight: 600; color: #0077A4; }
-        @media (max-width: 640px) { .actu-group-slide { flex-direction: column; gap: 0; } .actu-v2-img { height: 180px; } .actu-v2-no-img { height: 180px; } }
-        @media (min-width: 641px) and (max-width: 1023px) { .actu-group-slide { gap: 16px; } .actu-v2-img { height: 160px; } .actu-v2-no-img { height: 160px; } }
+        @media (max-width: 640px) { .actu-group-slide { flex-direction: column; gap: 0; } }
         .no-actu-message { flex: 0 0 100%; text-align: center; padding: 50px 20px; background: #f8fafc; border-radius: 18px; color: #64748b; font-size: 1rem; }
 
-        /* ===== ÉQUIPE — 4 membres par slide sur desktop ===== */
+        /* ===== ÉQUIPE — Hauteur image fixe 160px (pas d'aspect-ratio) ===== */
         .equipe-group-slide { flex: 0 0 100%; display: flex; gap: 18px; box-sizing: border-box; align-items: stretch; flex-wrap: wrap; }
         .team-card-enhanced {
             flex: 1; min-width: 0;
@@ -229,7 +228,7 @@
         .team-card-enhanced:hover { transform: translateY(-7px); box-shadow: 0 18px 32px rgba(0,0,0,0.14); }
         .team-img-wrap { position: relative; width: 100%; overflow: hidden; }
         .team-img-wrap::after { content: ''; position: absolute; bottom: 0; left: 0; right: 0; height: 40%; background: linear-gradient(to top, rgba(0,119,164,0.18), transparent); pointer-events: none; }
-        .team-image-enhanced { width: 100%; aspect-ratio: 1 / 1; object-fit: cover; object-position: center 15%; display: block; transition: transform 0.4s ease; background: linear-gradient(145deg, #f0f9ff, #e0f0e8); }
+        .team-image-enhanced { width: 100%; height: 160px; object-fit: cover; object-position: center 15%; display: block; transition: transform 0.4s ease; background: linear-gradient(145deg, #f0f9ff, #e0f0e8); }
         .team-card-enhanced:hover .team-image-enhanced { transform: scale(1.04); }
         .team-info-enhanced { padding: 16px 14px 20px; width: 100%; }
         .team-name-enhanced { font-size: 0.95rem; font-weight: 700; color: #0077A4; margin-bottom: 3px; }
@@ -242,9 +241,9 @@
         @media (max-width: 640px) {
             .equipe-group-slide { flex-direction: column; gap: 0; flex-wrap: nowrap; }
             .team-card-enhanced { flex-direction: row; align-items: stretch; text-align: left; border-radius: 18px; }
-            .team-img-wrap { width: 110px; flex-shrink: 0; }
+            .team-img-wrap { width: 130px; flex-shrink: 0; }
             .team-img-wrap::after { display: none; }
-            .team-image-enhanced { width: 110px; height: 100%; aspect-ratio: unset; object-position: center 10%; border-radius: 0; }
+            .team-image-enhanced { width: 130px; height: 160px; object-position: center 10%; border-radius: 0; }
             .team-info-enhanced { padding: 14px 14px 14px 16px; display: flex; flex-direction: column; justify-content: center; }
             .team-name-enhanced { font-size: 0.88rem; }
             .team-position-enhanced { font-size: 0.68rem; }
@@ -953,9 +952,8 @@
             }); 
         }
 
-        // ==================== CARROUSEL ====================
+        // ==================== CARROUSEL SANS AUTO-PLAY ET SANS SCROLL INFINI ====================
         function createCarouselNoProgress(opts) {
-            const INTERVAL = opts.interval || 5000;
             const groupSize = opts.groupSize || 1;
             const track    = document.getElementById(opts.trackId);
             const btnPrev  = document.getElementById(opts.prevId);
@@ -976,7 +974,7 @@
                 groups.push(opts.items.slice(i, i + groupSize));
             }
             const total = groups.length;
-            let current = 0, autoTimer = null;
+            let current = 0;
 
             track.innerHTML = '';
             groups.forEach(group => {
@@ -1013,38 +1011,36 @@
                 track.style.transform = 'translateX(-' + (current * 100) + '%)';
                 if (dotsWrap) dotsWrap.querySelectorAll('.c-dot').forEach((d, i) => d.classList.toggle('active', i === current));
                 if (counter) counter.textContent = (current + 1) + ' / ' + total;
-            }
-
-            function startAuto() {
-                if (autoTimer) clearInterval(autoTimer);
-                if (opts.auto !== false && total > 1) {
-                    autoTimer = setInterval(() => {
-                        current = (current + 1) % total;
-                        updateUI();
-                    }, INTERVAL);
+                // Désactiver les flèches aux extrémités
+                if (btnPrev) {
+                    btnPrev.style.opacity = current === 0 ? '0.3' : '1';
+                    btnPrev.style.pointerEvents = current === 0 ? 'none' : 'auto';
+                }
+                if (btnNext) {
+                    btnNext.style.opacity = current === total - 1 ? '0.3' : '1';
+                    btnNext.style.pointerEvents = current === total - 1 ? 'none' : 'auto';
                 }
             }
 
-            function goTo(idx) { current = idx; updateUI(); startAuto(); }
-
-            if (btnPrev) btnPrev.addEventListener('click', () => goTo((current - 1 + total) % total));
-            if (btnNext) btnNext.addEventListener('click', () => goTo((current + 1) % total));
-
-            const viewport = track.parentElement;
-            if (viewport && opts.auto !== false) {
-                viewport.addEventListener('mouseenter', () => { if (autoTimer) clearInterval(autoTimer); });
-                viewport.addEventListener('mouseleave', startAuto);
+            function goTo(idx) {
+                // Pas de scroll infini — bloque aux extrémités
+                if (idx < 0 || idx >= total) return;
+                current = idx;
+                updateUI();
             }
 
+            if (btnPrev) btnPrev.addEventListener('click', () => goTo(current - 1));
+            if (btnNext) btnNext.addEventListener('click', () => goTo(current + 1));
+
+            // Swipe tactile sans scroll infini
             let tx = 0;
             track.addEventListener('touchstart', e => { tx = e.touches[0].clientX; }, { passive: true });
             track.addEventListener('touchend', e => {
                 const dx = e.changedTouches[0].clientX - tx;
-                if (Math.abs(dx) > 40) goTo(dx < 0 ? (current + 1) % total : (current - 1 + total) % total);
+                if (Math.abs(dx) > 40) goTo(dx < 0 ? current + 1 : current - 1);
             });
 
             updateUI();
-            startAuto();
         }
 
         function actuGroupSize() {
@@ -1129,9 +1125,7 @@
                 dotsId: 'actuDots', counterId: 'actuCounter',
                 items: data,
                 renderSlide: renderActuSlide,
-                interval: 4000,
                 groupSize: actuGroupSize(),
-                auto: true,
                 emptyMessage: '<div class="no-actu-message">📭 Aucune actualité pour le moment</div>'
             });
 
@@ -1165,9 +1159,7 @@
                 dotsId: 'equipeDots', counterId: 'equipeCounter',
                 items: data,
                 renderSlide: renderEquipeSlide,
-                interval: 4000,
-                groupSize: equipeGroupSize(),
-                auto: true
+                groupSize: equipeGroupSize()
             });
         };
 
