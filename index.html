@@ -978,34 +978,20 @@
 
             track.innerHTML = '';
             groups.forEach(group => {
-                const slide = document.createElement('div');
-                slide.style.cssText = 'flex:0 0 100%;box-sizing:border-box;';
-                if (group.length > 1) {
-                    slide.style.display = 'flex';
-                    slide.style.gap = '18px';
-                    slide.style.alignItems = 'stretch';
-                    group.forEach(item => {
-                        const inner = document.createElement('div');
-                        inner.style.cssText = 'flex:1;min-width:0;';
-                        inner.innerHTML = opts.renderSlide(item);
-                        slide.appendChild(inner);
-                    });
-                } else {
-                    slide.innerHTML = opts.renderSlide(group[0]);
-                }
-                track.appendChild(slide);
-            });
-
-            if (dotsWrap) {
-                dotsWrap.innerHTML = '';
-                for (let i = 0; i < total; i++) {
-                    const dot = document.createElement('button');
-                    dot.className = 'c-dot' + (i === 0 ? ' active' : '');
-                    dot.setAttribute('aria-label', 'Slide ' + (i + 1));
-                    dot.addEventListener('click', () => goTo(i));
-                    dotsWrap.appendChild(dot);
-                }
-            }
+    const slide = document.createElement('div');
+    slide.style.cssText = 'flex:0 0 100%;box-sizing:border-box;display:flex;gap:18px;align-items:stretch;';
+    
+    group.forEach(item => {
+        const inner = document.createElement('div');
+        // Chaque carte occupe toujours 1/groupSize de la largeur, peu importe le nombre réel
+        const pct = (100 / opts.groupSize).toFixed(4);
+        inner.style.cssText = `flex:0 0 calc(${pct}% - 12px);min-width:0;`;
+        inner.innerHTML = opts.renderSlide(item);
+        slide.appendChild(inner);
+    });
+    
+    track.appendChild(slide);
+});
 
             function updateUI() {
                 track.style.transform = 'translateX(-' + (current * 100) + '%)';
