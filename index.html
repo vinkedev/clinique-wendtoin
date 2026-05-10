@@ -74,7 +74,6 @@ body {
             font-size: 0.9rem;
             overflow: hidden;
             white-space: nowrap;
-            cursor: pointer;
         }
         .site-bandeau .bandeau-ticker {
             display: inline-block;
@@ -715,7 +714,7 @@ body {
             ]);
         }
 
-        // ===== BANDEAU "À LA UNE" AVEC DÉFILEMENT (TICKER) =====
+        // ===== BANDEAU "À LA UNE" AVEC DÉFILEMENT - SANS LOCALSTORAGE =====
         async function loadPublicBandeau() {
             if (!supabaseClient) return;
             
@@ -730,10 +729,6 @@ body {
                 
                 // Vérifier si le bandeau est actif ET qu'il y a un message non vide
                 if (data.bandeau_actif && data.bandeau_message && data.bandeau_message.trim() !== '') {
-                    
-                    // Vérifier si l'utilisateur a déjà fermé ce bandeau
-                    const bandeauFerme = localStorage.getItem('bandeau_ferme');
-                    if (bandeauFerme === 'oui') return;
                     
                     // Déterminer la couleur
                     let bgColor = '';
@@ -760,7 +755,7 @@ body {
                     if (header && !document.querySelector('.site-bandeau')) {
                         header.parentNode.insertBefore(bandeau, header);
                         
-                        // Gérer la fermeture du bandeau
+                        // Gérer la fermeture du bandeau (pas de localStorage, il disparaît juste)
                         const closeBtn = bandeau.querySelector('.bandeau-close');
                         if (closeBtn) {
                             closeBtn.addEventListener('click', (e) => {
@@ -768,7 +763,7 @@ body {
                                 bandeau.style.opacity = '0';
                                 bandeau.style.transform = 'translateY(-100%)';
                                 setTimeout(() => bandeau.remove(), 300);
-                                localStorage.setItem('bandeau_ferme', 'oui');
+                                // PAS de localStorage ici ! Le bandeau reviendra au prochain rafraîchissement
                             });
                         }
                         
