@@ -1014,25 +1014,27 @@
         window.addEventListener('click', (e) => { if (e.target === imageModal) imageModal.style.display = 'none'; });
 
         // Vidéos
-        const allVideos = [
-            { title: "Pr Gilbert BONKOUGOU - Maladie hémorroïdaire", desc: "Les hémorroïdes expliquées par le Pr Gilbert BONKOUGOU", url: "https://web.facebook.com/reel/645204957720787" },
-            { title: "Unité de dialyse - Clinique WENDTOIN", desc: "Prise en charge des insuffisances rénales aiguës et chroniques", url: "https://web.facebook.com/reel/879902179764068" },
-            { title: "Neuro monitoring - Thyroïdectomie sécurisée", desc: "Recherche du nerf récurrent lors de la chirurgie thyroïdienne", url: "https://web.facebook.com/reel/1608565729972155" },
-            { title: "Chirurgie de l'obésité - Sleeve gastrectomie", desc: "Opération classique donnant d'excellents résultats pour la perte de poids", url: "https://web.facebook.com/reel/2537992576496661" },
-            { title: "Pr Gilbert BONKOUGOU - Varices des membres inférieurs", desc: "Prise en charge des varices", url: "https://web.facebook.com/reel/1634296984276574" },
-            { title: "Obésité : un réel problème de santé", desc: "Liens avec diabète, douleurs articulaires, hypertension, maladies respiratoires", url: "https://web.facebook.com/reel/1662097440846319" },
-            { title: "Dr Natacha OUEDRAOGO - Accident vasculaire cérébral (AVC)", desc: "Neurologue, elle nous parle de cette maladie qui fait peur", url: "https://web.facebook.com/reel/610483310353530" },
-            { title: "Dr Marcel Kuiré - L'asthme", desc: "Maladie respiratoire fréquente qui peut être grave si non diagnostiquée", url: "https://web.facebook.com/reel/743148739906723" },
-            { title: "Dr Nadia TOE/ROUAMBA - Lombalgie (maux de reins)", desc: "Spécialiste en Rhumatologie explique les causes diverses", url: "https://web.facebook.com/reel/929689517848124" },
-            { title: "Dr Dimitri Darankoum – Reflux gastro-œsophagien", desc: "Spécialiste en gastro-entérologie vous en dit plus sur cette maladie observée tant chez l'homme que chez la femme", url: "https://www.facebook.com/reel/262682895320909" },
-            { title: "Dr Rodrigue Salou – Les ulcères d'estomac", desc: "Vous en avez entendu parler. Vous en souffrez peut-être. Le médecin spécialiste en gastro-entérologie vous en parle", url: "https://www.facebook.com/reel/464631578234706" },
-            { title: "Cœlioscopie et douleurs pelviennes", desc: "Explication de la cœlioscopie pour diagnostiquer et traiter les douleurs pelviennes", url: "https://www.facebook.com/reel/285134829629359" },
-            { title: "Nouvelle vidéo santé 1", desc: "Titre et description à préciser", url: "https://www.facebook.com/reel/1594688714056018" },
-            { title: "Nouvelle vidéo santé 2", desc: "Titre et description à préciser", url: "https://www.facebook.com/reel/171772914469537" }
-                { title: "Pr Gilbert BONKOUGOU - Varices des membres inférieurs", desc: "Prise en charge des varices par le Pr Gilbert BONKOUGOU", url: "https://web.facebook.com/reel/953192637302228" },
-    { title: "Pr  Gilbert BONKOUGOU - Gynécomastie : un homme qui 'pousse des seins' ? Cela intrigue, inquiète, fait peur", desc: "Explication de la gynécomastie par un Professeur", url: "https://web.facebook.com/reel/2986569131572491" },
-    { title: "Pr Gilbert BONKOUGOU  - Hypertrophie des seins (forte poitrine) : douleurs des épaules et du dos", desc: "Prise en charge de l'hypertrophie mammaire par un Professeur", url: "https://web.facebook.com/reel/1879660532188010" }
-        ];
+const allVideos = [
+    { title: "Pr Gilbert BONKOUGOU - Maladie hémorroïdaire", desc: "Les hémorroïdes expliquées par le Pr Gilbert BONKOUGOU", url: "https://web.facebook.com/reel/645204957720787" },
+    { title: "Unité de dialyse - Clinique WENDTOIN", desc: "Prise en charge des insuffisances rénales aiguës et chroniques", url: "https://web.facebook.com/reel/879902179764068" },
+    { title: "Neuro monitoring - Thyroïdectomie sécurisée", desc: "Recherche du nerf récurrent lors de la chirurgie thyroïdienne", url: "https://web.facebook.com/reel/1608565729972155" },
+    { title: "Chirurgie de l'obésité - Sleeve gastrectomie", desc: "Opération classique donnant d'excellents résultats pour la perte de poids", url: "https://web.facebook.com/reel/2537992576496661" },
+    { title: "Pr Gilbert BONKOUGOU - Varices des membres inférieurs", desc: "Prise en charge des varices", url: "https://web.facebook.com/reel/1634296984276574" },
+    { title: "Obésité : un réel problème de santé", desc: "Liens avec diabète, douleurs articulaires, hypertension, maladies respiratoires", url: "https://web.facebook.com/reel/1662097440846319" },
+    { title: "Dr Natacha OUEDRAOGO - Accident vasculaire cérébral (AVC)", desc: "Neurologue, elle nous parle de cette maladie qui fait peur", url: "https://web.facebook.com/reel/610483310353530" },
+    { title: "Dr Marcel Kuiré - L'asthme", desc: "Maladie respiratoire fréquente qui peut être grave si non diagnostiquée", url: "https://web.facebook.com/reel/743148739906723" },
+    { title: "Dr Nadia TOE/ROUAMBA - Lombalgie (maux de reins)", desc: "Spécialiste en Rhumatologie explique les causes diverses", url: "https://web.facebook.com/reel/929689517848124" },
+    { title: "Dr Dimitri Darankoum – Reflux gastro-œsophagien", desc: "Spécialiste en gastro-entérologie vous en dit plus", url: "https://www.facebook.com/reel/262682895320909" },
+    { title: "Dr Rodrigue Salou – Les ulcères d'estomac", desc: "Le médecin spécialiste en gastro-entérologie vous en parle", url: "https://www.facebook.com/reel/464631578234706" },
+    { title: "Cœlioscopie et douleurs pelviennes", desc: "Explication de la cœlioscopie", url: "https://www.facebook.com/reel/285134829629359" },
+    { title: "Nouvelle vidéo santé 1", desc: "Titre et description à préciser", url: "https://www.facebook.com/reel/1594688714056018" },
+    { title: "Nouvelle vidéo santé 2", desc: "Titre et description à préciser", url: "https://www.facebook.com/reel/171772914469537" },  // <-- AJOUTER LA VIRGULE ICI
+
+    // TROIS NOUVELLES VIDÉOS DU PR
+    { title: "Pr Gilbert BONKOUGOU - Varices des membres inférieurs (2)", desc: "Prise en charge des varices par le Pr Gilbert BONKOUGOU", url: "https://web.facebook.com/reel/953192637302228" },
+    { title: "Pr Gilbert BONKOUGOU - Gynécomastie", desc: "Un homme qui 'pousse des seins' ? La gynécomastie expliquée par le Pr", url: "https://web.facebook.com/reel/2986569131572491" },
+    { title: "Pr Gilbert BONKOUGOU - Hypertrophie mammaire", desc: "Forte poitrine : douleurs des épaules et du dos", url: "https://web.facebook.com/reel/1879660532188010" }
+];
         
         let visibleVideos = 4;
         const videoGrid = document.getElementById('videoGrid');
