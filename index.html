@@ -447,6 +447,24 @@
         @media (min-width: 640px) { .hero-content h2 { font-size: 2rem; } .section-title { font-size: 1.8rem; } }
         @media (min-width: 1024px) { .mobile-menu-btn { display: none; } nav ul { display: flex !important; flex-direction: row; position: static; background: transparent; box-shadow: none; padding: 0; gap: 25px; } nav a { padding: 0; font-size: 0.95rem; } .hero-content h2 { font-size: 2.5rem; } .hero-slogan { font-size: 1.1rem; } .btn { padding: 12px 32px; font-size: 0.95rem; } .rdv-grid { grid-template-columns: 1fr 1fr; gap: 45px; } .presentation-grid { grid-template-columns: 1fr 1fr; gap: 50px; } .footer-grid { grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); text-align: left; } .stats-container { gap: 35px; } .stat-number { font-size: 2.3rem; } section { padding: 30px 0; } }
         @media (max-width: 768px) { .container { padding: 0 14px; } .hero-buttons-custom { flex-direction: column; align-items: center; gap: 10px; } .btn { width: 90%; margin: 4px auto; text-align: center; } section { padding: 30px 0; } }
+        
+        /* ===== TOAST NOTIFICATION ===== */
+        .toast-notification {
+            position: fixed;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%) translateY(100px);
+            background: #1D8B5D;
+            color: white;
+            padding: 12px 24px;
+            border-radius: 50px;
+            font-weight: 500;
+            z-index: 3000;
+            transition: transform 0.3s ease;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+        }
+        .toast-notification.show { transform: translateX(-50%) translateY(0); }
+        .toast-notification.error { background: #dc3545; }
     </style>
 </head>
 <body>
@@ -563,12 +581,65 @@
     <section id="imagerie"><div class="container"><h2 class="section-title animate-on-scroll">Imagerie</h2><div id="imagerieList" class="specialty-grid"><div class="skeleton skeleton-text" style="height: 80px; margin: 10px;"></div></div></div></section>
     <section id="poles"><div class="container"><h2 class="section-title animate-on-scroll">Centre de Dialyse</h2><div id="equipementsList" class="specialty-grid"><div class="skeleton skeleton-text" style="height: 80px; margin: 10px;"></div></div></div></section>
 
+    <!-- SECTION RDV AVEC CALENDRIER ET ENREGISTREMENT SUPABASE -->
     <section id="rdv">
         <div class="container">
             <h2 class="section-title animate-on-scroll">Prendre rendez-vous</h2>
             <div class="rdv-grid">
-                <div class="info-box animate-on-scroll"><h3>Formulaire de rendez-vous</h3><form id="whatsappForm"><div class="form-group"><input type="text" id="nom" placeholder="Nom complet" required></div><div class="form-group"><select id="service"><option>Consultation générale</option><option>Cardiologie</option><option>Gynécologie - Obstétrique</option><option>Pédiatrie</option><option>Chirurgie générale</option><option>Neurologie</option><option>Médecine interne</option><option>Dermatologie</option><option>Pneumologie</option><option>Néphrologie</option><option>ORL</option><option>Rhumatologie</option><option>Urologie</option></select></div><div class="form-group"><textarea id="motif" rows="3" placeholder="Date souhaitée et horaire de préférence"></textarea></div><button type="submit" class="btn-rdv" id="submitRdvBtn">Envoyer la demande</button></form><p style="font-size:0.65rem; text-align:center; margin-top:12px;">Vous serez redirigé vers WhatsApp</p></div>
-                <div><div class="info-box animate-on-scroll"><h3>Horaires d'ouverture</h3><p><strong>Consultations :</strong><br>Lundi – Vendredi : 7h30 – 19h30<br>Samedi : 7h30 – 12h00</p><p style="margin-top:8px;"><strong>Urgences 24/24 – 7j/7</strong><br>Sans rendez-vous, prise en charge immédiate.</p><p><strong>Hémodialyse :</strong> 24h/24 et 7j/7</p></div><div class="info-box animate-on-scroll"><h3>Assurances acceptées</h3><p><strong>Partenaires :</strong> ASCOMA, DAYO, GA, MAADO, MUTAB, MUPOL, OLEA, MCI, SONAR, SUNU, UAB, VIMSO, VISTA, CNAMU.<br><strong>Autres :</strong> CNSS, Inami Burkina, mutuelles.</p></div></div>
+                <div class="info-box animate-on-scroll">
+                    <h3>Formulaire de rendez-vous</h3>
+                    <div id="rdvSuccessMsg" style="display:none; background:#d1fae5; color:#065f46; padding:12px; border-radius:16px; margin-bottom:15px;">
+                        ✅ Votre demande a été enregistrée ! Nous vous contacterons dans les plus brefs délais.
+                    </div>
+                    <form id="rdvForm">
+                        <div class="form-group">
+                            <input type="text" id="rdvNom" placeholder="Nom complet *" required>
+                        </div>
+                        <div class="form-group">
+                            <input type="tel" id="rdvTelephone" placeholder="Téléphone *" required>
+                        </div>
+                        <div class="form-group">
+                            <select id="rdvSpecialite" required>
+                                <option value="">Sélectionnez une spécialité</option>
+                                <option>Consultation générale</option><option>Cardiologie</option><option>Gynécologie - Obstétrique</option>
+                                <option>Pédiatrie</option><option>Chirurgie générale</option><option>Neurologie</option><option>Médecine interne</option>
+                                <option>Dermatologie</option><option>Pneumologie</option><option>Néphrologie</option><option>ORL</option><option>Rhumatologie</option>
+                                <option>Urologie</option><option>Imagerie médicale</option><option>Centre de dialyse</option>
+                            </select>
+                        </div>
+                        <div id="horaireInfo"></div>
+                        <div class="form-group">
+                            <label style="font-size:0.8rem; font-weight:500;">📅 Date souhaitée</label>
+                            <input type="date" id="rdvDate" min="">
+                        </div>
+                        <div class="form-group">
+                            <label style="font-size:0.8rem; font-weight:500;">⏰ Heure souhaitée</label>
+                            <select id="rdvHeure">
+                                <option value="">Sélectionnez une heure</option>
+                                <option>08:00</option><option>08:30</option><option>09:00</option><option>09:30</option>
+                                <option>10:00</option><option>10:30</option><option>11:00</option><option>11:30</option>
+                                <option>12:00</option><option>12:30</option><option>13:00</option><option>13:30</option>
+                                <option>14:00</option><option>14:30</option><option>15:00</option><option>15:30</option>
+                                <option>16:00</option><option>16:30</option><option>17:00</option><option>17:30</option>
+                                <option>18:00</option><option>18:30</option><option>19:00</option><option>19:30</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label style="display:flex; align-items:center; gap:8px;">
+                                <input type="checkbox" id="rdvFlexible"> 
+                                📞 Je suis flexible, contactez-moi
+                            </label>
+                        </div>
+                        <div class="form-group">
+                            <textarea id="rdvMessage" rows="2" placeholder="Message complémentaire (optionnel)"></textarea>
+                        </div>
+                        <button type="submit" class="btn-rdv" id="rdvSubmitBtn">Envoyer ma demande</button>
+                    </form>
+                </div>
+                <div>
+                    <div class="info-box animate-on-scroll"><h3>Horaires d'ouverture</h3><p><strong>Consultations :</strong><br>Lundi – Vendredi : 7h30 – 19h30<br>Samedi : 7h30 – 12h00</p><p style="margin-top:8px;"><strong>Urgences 24/24 – 7j/7</strong><br>Sans rendez-vous, prise en charge immédiate.</p><p><strong>Hémodialyse :</strong> 24h/24 et 7j/7</p></div>
+                    <div class="info-box animate-on-scroll"><h3>Assurances acceptées</h3><p><strong>Partenaires :</strong> ASCOMA, DAYO, GA, MAADO, MUTAB, MUPOL, OLEA, MCI, SONAR, SUNU, UAB, VIMSO, VISTA, CNAMU.<br><strong>Autres :</strong> CNSS, Inami Burkina, mutuelles.</p></div>
+                </div>
             </div>
         </div>
     </section>
@@ -649,6 +720,20 @@
         let logoClickCount = 0;
         let clickTimeout = null;
         let dataLoaded = false;
+        let horairesCache = {};
+
+        function showToast(message, type = 'success') {
+            let toast = document.getElementById('toastNotification');
+            if (!toast) {
+                toast = document.createElement('div');
+                toast.id = 'toastNotification';
+                toast.className = 'toast-notification';
+                document.body.appendChild(toast);
+            }
+            toast.textContent = message;
+            toast.className = `toast-notification ${type} show`;
+            setTimeout(() => toast.classList.remove('show'), 3000);
+        }
 
         function showMinimalContent() {
             const containers = ['specialitesMedicalesList', 'specialitesChirurgicalesList', 'gynecologieList', 'explorationsList', 'imagerieList', 'equipementsList'];
@@ -716,6 +801,33 @@
                 '<div class="specialty-item"><strong>Aucun équipement</strong><p></p></div>'; 
         }
         
+        async function loadAllHoraires() {
+            if (!supabaseClient) return;
+            const tables = ['specialites_medicales', 'specialites_chirurgicales', 'gynecologie', 'explorations', 'imagerie', 'equipements'];
+            for (const table of tables) {
+                const { data, error } = await supabaseClient.from(table).select('titre, horaires');
+                if (!error && data) {
+                    data.forEach(item => { if (item.horaires && item.horaires.trim() !== '') horairesCache[item.titre] = item.horaires; });
+                }
+            }
+            console.log('📅 Horaires chargés:', horairesCache);
+        }
+
+        function initHorairesAffichage() {
+            const specialiteSelect = document.getElementById('rdvSpecialite');
+            const horaireInfoDiv = document.getElementById('horaireInfo');
+            if (!specialiteSelect || !horaireInfoDiv) return;
+            
+            specialiteSelect.addEventListener('change', function() {
+                const horaire = horairesCache[this.value];
+                if (horaire) {
+                    horaireInfoDiv.innerHTML = `<div style="background:#e6f7f0; padding:12px; border-radius:16px; border-left:4px solid #1D8B5D; margin-bottom:15px;"><strong style="color:#065f46;">🗓️ Horaires de consultation :</strong><br><span style="color:#065f46;">${escapeHtml(horaire)}</span></div>`;
+                } else {
+                    horaireInfoDiv.innerHTML = `<div style="background:#fff3cd; padding:12px; border-radius:16px; border-left:4px solid #ffc107; margin-bottom:15px;"><span style="color:#856404;">ℹ️ Nous vous contacterons pour confirmer le créneau horaire.</span></div>`;
+                }
+            });
+        }
+        
         async function loadAllPublicData() { 
             if (dataLoaded) return; 
             dataLoaded = true; 
@@ -725,8 +837,108 @@
                 loadPublicGynecologie(), 
                 loadPublicExplorations(), 
                 loadPublicImagerie(), 
-                loadPublicEquipements()
+                loadPublicEquipements(),
+                loadAllHoraires()
             ]);
+            initHorairesAffichage();
+        }
+
+        // ===== GESTION DU FORMULAIRE RDV AVEC SUPABASE =====
+        async function initRdvForm() {
+            const rdvForm = document.getElementById('rdvForm');
+            const rdvSubmitBtn = document.getElementById('rdvSubmitBtn');
+            const rdvSuccessMsg = document.getElementById('rdvSuccessMsg');
+            const rdvDateInput = document.getElementById('rdvDate');
+            const rdvHeureSelect = document.getElementById('rdvHeure');
+            const rdvFlexibleCheck = document.getElementById('rdvFlexible');
+            
+            if (rdvDateInput) {
+                const today = new Date().toISOString().split('T')[0];
+                rdvDateInput.min = today;
+                rdvDateInput.value = today;
+            }
+            
+            if (rdvFlexibleCheck) {
+                rdvFlexibleCheck.addEventListener('change', function() {
+                    const isFlexible = this.checked;
+                    if (rdvDateInput) rdvDateInput.disabled = isFlexible;
+                    if (rdvHeureSelect) rdvHeureSelect.disabled = isFlexible;
+                    if (isFlexible) {
+                        if (rdvDateInput) rdvDateInput.value = '';
+                        if (rdvHeureSelect) rdvHeureSelect.value = '';
+                    } else {
+                        if (rdvDateInput) rdvDateInput.value = new Date().toISOString().split('T')[0];
+                    }
+                });
+            }
+            
+            if (rdvForm) {
+                rdvForm.addEventListener('submit', async function(e) {
+                    e.preventDefault();
+                    
+                    const nom = document.getElementById('rdvNom')?.value.trim();
+                    const telephone = document.getElementById('rdvTelephone')?.value.trim();
+                    const specialite = document.getElementById('rdvSpecialite')?.value;
+                    
+                    if (!nom) { showToast('Veuillez entrer votre nom', 'error'); return; }
+                    if (!telephone) { showToast('Veuillez entrer votre téléphone', 'error'); return; }
+                    if (!specialite) { showToast('Veuillez sélectionner une spécialité', 'error'); return; }
+                    
+                    if (rdvSubmitBtn) {
+                        rdvSubmitBtn.disabled = true;
+                        rdvSubmitBtn.innerHTML = 'Envoi en cours...';
+                    }
+                    
+                    const isFlexible = rdvFlexibleCheck?.checked || false;
+                    const rdvData = {
+                        nom: nom,
+                        telephone: telephone,
+                        specialite: specialite,
+                        date_rdv: (!isFlexible && rdvDateInput?.value) ? rdvDateInput.value : null,
+                        heure_rdv: (!isFlexible && rdvHeureSelect?.value) ? rdvHeureSelect.value : null,
+                        flexible: isFlexible,
+                        message: document.getElementById('rdvMessage')?.value || null,
+                        statut: 'en_attente',
+                        date_creation: new Date().toISOString()
+                    };
+                    
+                    try {
+                        if (supabaseClient) {
+                            const { error } = await supabaseClient.from('rendez_vous').insert([rdvData]);
+                            if (error) throw error;
+                        }
+                        
+                        const messageWA = `📋 *NOUVEAU RDV - SITE WEB*%0A%0A` +
+                            `👤 Patient : ${encodeURIComponent(nom)}%0A` +
+                            `📞 Tél : ${encodeURIComponent(telephone)}%0A` +
+                            `🏥 Spécialité : ${encodeURIComponent(specialite)}%0A` +
+                            (rdvData.date_rdv ? `📅 Date : ${rdvData.date_rdv}%0A` : '') +
+                            (rdvData.heure_rdv ? `⏰ Heure : ${rdvData.heure_rdv}%0A` : '') +
+                            (isFlexible ? `🔄 Flexible : OUI (contacter patient)%0A` : '') +
+                            (rdvData.message ? `💬 Message : ${encodeURIComponent(rdvData.message)}%0A` : '');
+                        
+                        window.open(`https://wa.me/22651000647?text=${messageWA}`, '_blank');
+                        
+                        showToast('✅ Demande envoyée ! Nous vous contacterons.', 'success');
+                        if (rdvSuccessMsg) rdvSuccessMsg.style.display = 'block';
+                        rdvForm.reset();
+                        if (rdvDateInput) rdvDateInput.value = new Date().toISOString().split('T')[0];
+                        if (rdvFlexibleCheck) rdvFlexibleCheck.checked = false;
+                        if (rdvDateInput) rdvDateInput.disabled = false;
+                        if (rdvHeureSelect) rdvHeureSelect.disabled = false;
+                        
+                        setTimeout(() => { if (rdvSuccessMsg) rdvSuccessMsg.style.display = 'none'; }, 5000);
+                    } catch (error) {
+                        console.error('Erreur:', error);
+                        showToast('Une erreur est survenue. Veuillez réessayer.', 'error');
+                    } finally {
+                        if (rdvSubmitBtn) {
+                            rdvSubmitBtn.disabled = false;
+                            rdvSubmitBtn.innerHTML = 'Envoyer ma demande';
+                        }
+                    }
+                });
+            }
         }
 
         // ===== BANDEAU "À LA UNE" AVEC DÉFILEMENT =====
@@ -1110,35 +1322,6 @@
             }); 
         }
 
-        // Formulaire WhatsApp
-        const whatsappForm = document.getElementById('whatsappForm');
-        if (whatsappForm) { 
-            whatsappForm.addEventListener('submit', function(e) { 
-                e.preventDefault(); 
-                const nom = document.getElementById('nom'); 
-                if (!nom.value.trim()) { 
-                    nom.classList.add('form-error'); 
-                    setTimeout(() => nom.classList.remove('form-error'), 500); 
-                    alert('Veuillez remplir votre nom'); 
-                    return; 
-                } 
-                const service = document.getElementById('service').value; 
-                const motif = document.getElementById('motif').value; 
-                let message = `Bonjour Clinique WENDTOIN,%0A%0A Demande de rendez-vous%0A Nom : ${encodeURIComponent(nom.value.trim())}%0A Service : ${encodeURIComponent(service)}%0A`; 
-                if (motif) message += ` Message : ${encodeURIComponent(motif)}%0A`; 
-                message += `%0AMerci de me confirmer un créneau.`; 
-                const btn = document.getElementById('submitRdvBtn'); 
-                btn.classList.add('btn-loading'); 
-                btn.innerHTML = 'Envoi en cours...'; 
-                setTimeout(() => { 
-                    window.open(`https://wa.me/22651000647?text=${message}`, '_blank'); 
-                    whatsappForm.reset(); 
-                    btn.classList.remove('btn-loading'); 
-                    btn.innerHTML = 'Envoyer la demande'; 
-                }, 500); 
-            }); 
-        }
-
         function escapeHtml(str) { 
             if(!str) return ''; 
             return str.replace(/[&<>]/g, function(m){ 
@@ -1369,6 +1552,7 @@
             console.log("✅ Supabase initialisé");
             
             loadPublicBandeau();
+            initRdvForm();
             
             if (!isSlowConnection) {
                 loadAllPublicData();
