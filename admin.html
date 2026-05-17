@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
     <title>Administration - Clinique WENDTOIN</title>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <script src="https://unpkg.com/@supabase/supabase-js@2/dist/umd/supabase.js"></script>
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
         body { font-family: 'Inter', sans-serif; background: #f1f5f9; color: #1e293b; }
@@ -278,7 +279,7 @@
             </div>
 
             <div class="stats-row" id="statsContainer">
-                <div class="stat-card" data-tab="bandeau"><div class="number" id="statBandeau">📢</div><div class="label">Bandeau</div></div>
+                <div class="stat-card" data-tab="bandeau"><div class="number">📢</div><div class="label">Bandeau</div></div>
                 <div class="stat-card" data-tab="actualites"><div class="number" id="statActus">0</div><div class="label">Actualités</div></div>
                 <div class="stat-card" data-tab="specMedicales"><div class="number" id="statSpecMed">0</div><div class="label">Spécialités médicales</div></div>
                 <div class="stat-card" data-tab="specChirurgicales"><div class="number" id="statSpecChir">0</div><div class="label">Spécialités chirurgicales</div></div>
@@ -370,8 +371,8 @@
                                 <span class="jour-btn dimanche" data-jour="Dimanche">Dim</span>
                             </div>
                             <div class="heures-row">
-                                <div class="h-group"><label>Heure début</label><select id="debutSpecMed">${generateHourOptions()}</select></div>
-                                <div class="h-group"><label>Heure fin</label><select id="finSpecMed">${generateHourOptionsEnd()}</select></div>
+                                <div class="h-group"><label>Heure début</label><select id="debutSpecMed"></select></div>
+                                <div class="h-group"><label>Heure fin</label><select id="finSpecMed"></select></div>
                             </div>
                             <div class="horaires-apercu" id="apercuSpecMed"></div>
                         </div>
@@ -391,7 +392,7 @@
                         <div class="horaires-toggle"><input type="checkbox" id="specChirHasHoraires"><span>Ajouter des horaires de consultation (optionnel)</span></div>
                         <div id="specChirHorairesContent" class="horaires-content disabled">
                             <div class="jours-grid" id="joursSpecChir"><span class="jour-btn" data-jour="Lundi">Lun</span><span class="jour-btn" data-jour="Mardi">Mar</span><span class="jour-btn" data-jour="Mercredi">Mer</span><span class="jour-btn" data-jour="Jeudi">Jeu</span><span class="jour-btn" data-jour="Vendredi">Ven</span><span class="jour-btn" data-jour="Samedi">Sam</span><span class="jour-btn dimanche" data-jour="Dimanche">Dim</span></div>
-                            <div class="heures-row"><div class="h-group"><label>Heure début</label><select id="debutSpecChir">${generateHourOptions()}</select></div><div class="h-group"><label>Heure fin</label><select id="finSpecChir">${generateHourOptionsEnd()}</select></div></div>
+                            <div class="heures-row"><div class="h-group"><label>Heure début</label><select id="debutSpecChir"></select></div><div class="h-group"><label>Heure fin</label><select id="finSpecChir"></select></div></div>
                             <div class="horaires-apercu" id="apercuSpecChir"></div>
                         </div>
                     </div>
@@ -410,7 +411,7 @@
                         <div class="horaires-toggle"><input type="checkbox" id="gyneHasHoraires"><span>Ajouter des horaires de consultation (optionnel)</span></div>
                         <div id="gyneHorairesContent" class="horaires-content disabled">
                             <div class="jours-grid" id="joursGyne"><span class="jour-btn" data-jour="Lundi">Lun</span><span class="jour-btn" data-jour="Mardi">Mar</span><span class="jour-btn" data-jour="Mercredi">Mer</span><span class="jour-btn" data-jour="Jeudi">Jeu</span><span class="jour-btn" data-jour="Vendredi">Ven</span><span class="jour-btn" data-jour="Samedi">Sam</span><span class="jour-btn dimanche" data-jour="Dimanche">Dim</span></div>
-                            <div class="heures-row"><div class="h-group"><label>Heure début</label><select id="debutGyne">${generateHourOptions()}</select></div><div class="h-group"><label>Heure fin</label><select id="finGyne">${generateHourOptionsEnd()}</select></div></div>
+                            <div class="heures-row"><div class="h-group"><label>Heure début</label><select id="debutGyne"></select></div><div class="h-group"><label>Heure fin</label><select id="finGyne"></select></div></div>
                             <div class="horaires-apercu" id="apercuGyne"></div>
                         </div>
                     </div>
@@ -429,7 +430,7 @@
                         <div class="horaires-toggle"><input type="checkbox" id="exploHasHoraires"><span>Ajouter des horaires de disponibilité (optionnel)</span></div>
                         <div id="exploHorairesContent" class="horaires-content disabled">
                             <div class="jours-grid" id="joursExplo"><span class="jour-btn" data-jour="Lundi">Lun</span><span class="jour-btn" data-jour="Mardi">Mar</span><span class="jour-btn" data-jour="Mercredi">Mer</span><span class="jour-btn" data-jour="Jeudi">Jeu</span><span class="jour-btn" data-jour="Vendredi">Ven</span><span class="jour-btn" data-jour="Samedi">Sam</span><span class="jour-btn dimanche" data-jour="Dimanche">Dim</span></div>
-                            <div class="heures-row"><div class="h-group"><label>Heure début</label><select id="debutExplo">${generateHourOptions()}</select></div><div class="h-group"><label>Heure fin</label><select id="finExplo">${generateHourOptionsEnd()}</select></div></div>
+                            <div class="heures-row"><div class="h-group"><label>Heure début</label><select id="debutExplo"></select></div><div class="h-group"><label>Heure fin</label><select id="finExplo"></select></div></div>
                             <div class="horaires-apercu" id="apercuExplo"></div>
                         </div>
                     </div>
@@ -447,7 +448,7 @@
                         <div class="horaires-toggle"><input type="checkbox" id="imagerieHasHoraires"><span>Ajouter des horaires (optionnel)</span></div>
                         <div id="imagerieHorairesContent" class="horaires-content disabled">
                             <div class="jours-grid" id="joursImagerie"><span class="jour-btn" data-jour="Lundi">Lun</span><span class="jour-btn" data-jour="Mardi">Mar</span><span class="jour-btn" data-jour="Mercredi">Mer</span><span class="jour-btn" data-jour="Jeudi">Jeu</span><span class="jour-btn" data-jour="Vendredi">Ven</span><span class="jour-btn" data-jour="Samedi">Sam</span><span class="jour-btn dimanche" data-jour="Dimanche">Dim</span></div>
-                            <div class="heures-row"><div class="h-group"><label>Heure début</label><select id="debutImagerie">${generateHourOptions()}</select></div><div class="h-group"><label>Heure fin</label><select id="finImagerie">${generateHourOptionsEnd()}</select></div></div>
+                            <div class="heures-row"><div class="h-group"><label>Heure début</label><select id="debutImagerie"></select></div><div class="h-group"><label>Heure fin</label><select id="finImagerie"></select></div></div>
                             <div class="horaires-apercu" id="apercuImagerie"></div>
                         </div>
                     </div>
@@ -467,7 +468,7 @@
                         <div class="horaires-toggle"><input type="checkbox" id="dialyseHasHoraires"><span>Ajouter des horaires (optionnel)</span></div>
                         <div id="dialyseHorairesContent" class="horaires-content disabled">
                             <div class="jours-grid" id="joursDialyse"><span class="jour-btn" data-jour="Lundi">Lun</span><span class="jour-btn" data-jour="Mardi">Mar</span><span class="jour-btn" data-jour="Mercredi">Mer</span><span class="jour-btn" data-jour="Jeudi">Jeu</span><span class="jour-btn" data-jour="Vendredi">Ven</span><span class="jour-btn" data-jour="Samedi">Sam</span><span class="jour-btn dimanche" data-jour="Dimanche">Dim</span></div>
-                            <div class="heures-row"><div class="h-group"><label>Heure début</label><select id="debutDialyse">${generateHourOptions()}</select></div><div class="h-group"><label>Heure fin</label><select id="finDialyse">${generateHourOptionsEnd()}</select></div></div>
+                            <div class="heures-row"><div class="h-group"><label>Heure début</label><select id="debutDialyse"></select></div><div class="h-group"><label>Heure fin</label><select id="finDialyse"></select></div></div>
                             <div class="horaires-apercu" id="apercuDialyse"></div>
                         </div>
                     </div>
@@ -517,8 +518,9 @@
                             <thead>
                                 <tr><th>Date création</th><th>Patient</th><th>Téléphone</th><th>Spécialité</th><th>Date RDV</th><th>Heure</th><th>Statut</th><th>Actions</th></tr>
                             </thead>
-                            <tbody id="rdvTableBody"><tr><td colspan="8" style="text-align:center;">Chargement...</td></tr></tbody>
-                         </table>
+                            <tbody id="rdvTableBody"><tr><td colspan="8" style="text-align:center;">Chargement...</td></tr>
+                            </tbody>
+                        </table>
                     </div>
                 </div>
             </div>
@@ -556,6 +558,18 @@
             const hours = ['08:00','08:30','09:00','09:30','10:00','10:30','11:00','11:30','12:00','12:30','13:00','13:30','14:00','14:30','15:00','15:30','16:00','16:30','17:00','17:30','18:00','18:30','19:00','19:30','20:00','21:00'];
             return '<option value="">--</option>' + hours.map(h => `<option value="${h}">${h}</option>`).join('');
         }
+
+        // Remplir les selects d'heures
+        document.addEventListener('DOMContentLoaded', function() {
+            const selects = document.querySelectorAll('select[id^="debut"], select[id^="fin"]');
+            selects.forEach(select => {
+                if (select.id.includes('debut')) {
+                    select.innerHTML = generateHourOptions();
+                } else if (select.id.includes('fin')) {
+                    select.innerHTML = generateHourOptionsEnd();
+                }
+            });
+        });
 
         if (sessionStorage.getItem('clinique_admin') !== 'true') {
             window.location.href = 'index.html';
@@ -1041,8 +1055,8 @@
             const ordre = ['Lundi','Mardi','Mercredi','Jeudi','Vendredi','Samedi','Dimanche'];
             const jours = ordre.filter(j => joursState[key].includes(j));
             const debut = document.getElementById('debut' + key)?.value || '';
-            const fin   = document.getElementById('fin'   + key)?.value || '';
-            const el    = document.getElementById('apercu' + key);
+            const fin = document.getElementById('fin' + key)?.value || '';
+            const el = document.getElementById('apercu' + key);
             if (!el) return;
             if (jours.length === 0 && (!debut || !fin)) { el.className = 'horaires-apercu'; return; }
             let texte = '';
@@ -1057,7 +1071,7 @@
             const ordre = ['Lundi','Mardi','Mercredi','Jeudi','Vendredi','Samedi','Dimanche'];
             const jours = ordre.filter(j => joursState[key].includes(j));
             const debut = document.getElementById('debut' + key)?.value || '';
-            const fin   = document.getElementById('fin'   + key)?.value || '';
+            const fin = document.getElementById('fin' + key)?.value || '';
             if (jours.length === 0 && (!debut || !fin)) return '';
             let t = '';
             if (jours.length > 0) t += jours.join(', ');
@@ -1070,7 +1084,7 @@
             const grid = document.getElementById('jours' + key);
             if (grid) grid.querySelectorAll('.jour-btn').forEach(b => b.classList.remove('actif'));
             const debut = document.getElementById('debut' + key);
-            const fin   = document.getElementById('fin'   + key);
+            const fin = document.getElementById('fin' + key);
             if (debut) debut.value = '';
             if (fin) fin.value = '';
             const apercu = document.getElementById('apercu' + key);
@@ -1084,6 +1098,14 @@
             initHorairesToggle('Explo', 'exploHorairesContent', 'exploHasHoraires');
             initHorairesToggle('Imagerie', 'imagerieHorairesContent', 'imagerieHasHoraires');
             initHorairesToggle('Dialyse', 'dialyseHorairesContent', 'dialyseHasHoraires');
+        }
+
+        // Remplir les selects d'heures dynamiquement
+        function fillHourSelects() {
+            const debutSelects = document.querySelectorAll('select[id^="debut"]');
+            const finSelects = document.querySelectorAll('select[id^="fin"]');
+            debutSelects.forEach(select => { if(select.innerHTML === '') select.innerHTML = generateHourOptions(); });
+            finSelects.forEach(select => { if(select.innerHTML === '') select.innerHTML = generateHourOptionsEnd(); });
         }
 
         // ==================== ATTACHEMENT DES ÉVÉNEMENTS DE CRÉATION ====================
@@ -1217,8 +1239,8 @@
 
         async function initAdmin() {
             try {
-                const { createClient } = supabase;
-                supabaseClient = createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+                supabaseClient = supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+                fillHourSelects();
                 initJoursBtns();
                 initAllHorairesToggles();
                 await loadAllAdminData();
