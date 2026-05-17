@@ -61,7 +61,6 @@
         }
         .form-admin textarea { border-radius: 20px; resize: vertical; }
 
-        /* ===== HORAIRES ===== */
         .horaires-section {
             background: white;
             border: 1px solid #e2e8f0;
@@ -110,7 +109,7 @@
             gap: 6px;
             margin-bottom: 14px;
         }
-        .jour-btn {
+        .jour-btn, .jour-btn-edit {
             padding: 7px 13px;
             border: 1.5px solid #e2e8f0;
             border-radius: 30px;
@@ -122,10 +121,9 @@
             transition: all 0.2s;
             user-select: none;
         }
-        .jour-btn:hover { border-color: #0077A4; color: #0077A4; }
-        .jour-btn.actif { background: #0077A4; color: white; border-color: #0077A4; }
-        .jour-btn.dimanche:hover { border-color: #dc3545; color: #dc3545; }
-        .jour-btn.dimanche.actif { background: #dc3545; border-color: #dc3545; color: white; }
+        .jour-btn:hover, .jour-btn-edit:hover { border-color: #0077A4; color: #0077A4; }
+        .jour-btn.actif, .jour-btn-edit.actif { background: #0077A4; color: white; border-color: #0077A4; }
+        .jour-btn.dimanche.actif, .jour-btn-edit.dimanche.actif { background: #dc3545; border-color: #dc3545; color: white; }
         .heures-row {
             display: grid;
             grid-template-columns: 1fr 1fr;
@@ -202,6 +200,11 @@
         .stat-card:hover .number { transform: scale(1.1); }
         .stat-card .label { font-size: 0.8rem; opacity: 0.9; }
         
+        .rdv-stats { display: flex; gap: 15px; flex-wrap: wrap; margin-bottom: 20px; }
+        .rdv-stat-card { background: white; padding: 12px 20px; border-radius: 20px; border-left: 4px solid #1D8B5D; flex: 1; min-width: 120px; box-shadow: 0 1px 3px rgba(0,0,0,0.1); }
+        .rdv-stat-card .number { font-size: 1.5rem; font-weight: 700; color: #1D8B5D; }
+        .rdv-stat-card .label { font-size: 0.7rem; color: #64748b; }
+        
         .bandeau-preview { margin-top: 20px; padding: 15px; border-radius: 16px; text-align: center; font-weight: 600; transition: all 0.3s; }
         
         .toast-notification {
@@ -212,24 +215,19 @@
         }
         .toast-notification.show { transform: translateX(-50%) translateY(0); }
         .toast-notification.error { background: #dc3545; }
-        .toast-notification.success { background: #1D8B5D; }
         
         .edit-modal {
             display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-            background: rgba(0,0,0,0.5); z-index: 2000; align-items: center; justify-content: center; animation: fadeIn 0.3s ease;
+            background: rgba(0,0,0,0.5); z-index: 2000; align-items: center; justify-content: center;
         }
         .edit-modal-content {
             background: white; border-radius: 28px; padding: 25px;
-            max-width: 650px; width: 90%; max-height: 85vh; overflow-y: auto; animation: slideUp 0.3s ease;
+            max-width: 650px; width: 90%; max-height: 85vh; overflow-y: auto;
         }
-        @keyframes slideUp { from { transform: translateY(50px); opacity: 0; } to { transform: translateY(0); opacity: 1; } }
         .edit-modal-content h3 { margin-bottom: 20px; color: #0077A4; }
-        .edit-modal-content input, .edit-modal-content textarea {
+        .edit-modal-content input, .edit-modal-content textarea, .edit-modal-content select {
             width: 100%; padding: 10px 14px; margin-bottom: 15px;
             border: 1px solid #ddd; border-radius: 20px; font-family: inherit;
-        }
-        .edit-modal-content input:focus, .edit-modal-content textarea:focus {
-            outline: none; border-color: #1D8B5D; box-shadow: 0 0 0 3px rgba(29,139,93,0.1);
         }
         .edit-modal-buttons { display: flex; gap: 10px; justify-content: flex-end; margin-top: 15px; }
         .btn-cancel { background: #64748b; color: white; border: none; padding: 8px 20px; border-radius: 40px; cursor: pointer; }
@@ -237,12 +235,11 @@
         
         .loading-screen {
             position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-            background: white; display: flex; justify-content: center; align-items: center; z-index: 9999; transition: opacity 0.5s;
+            background: white; display: flex; justify-content: center; align-items: center; z-index: 9999;
         }
         .loading-spinner { width: 50px; height: 50px; border: 4px solid #e2e8f0; border-top-color: #1D8B5D; border-radius: 50%; animation: spin 0.8s linear infinite; }
         @keyframes spin { to { transform: rotate(360deg); } }
         
-        /* Styles pour la table des rendez-vous */
         .rdv-table { width: 100%; border-collapse: collapse; margin-top: 15px; }
         .rdv-table th, .rdv-table td { padding: 12px; text-align: left; border-bottom: 1px solid #e2e8f0; }
         .rdv-table th { background: #f8fafc; font-weight: 600; color: #0077A4; }
@@ -255,10 +252,6 @@
         .filter-bar { display: flex; gap: 15px; flex-wrap: wrap; margin-bottom: 20px; align-items: flex-end; }
         .filter-bar .form-group { margin-bottom: 0; flex: 1; min-width: 150px; }
         .filter-bar label { font-size: 0.7rem; color: #64748b; display: block; margin-bottom: 4px; }
-        .rdv-stats { display: flex; gap: 15px; flex-wrap: wrap; margin-bottom: 20px; }
-        .rdv-stat-card { background: white; padding: 12px 20px; border-radius: 20px; border-left: 4px solid #1D8B5D; flex: 1; min-width: 120px; }
-        .rdv-stat-card .number { font-size: 1.5rem; font-weight: 700; color: #1D8B5D; }
-        .rdv-stat-card .label { font-size: 0.7rem; color: #64748b; }
         
         @media (max-width: 768px) {
             .admin-container { padding: 12px; }
@@ -285,8 +278,8 @@
             </div>
 
             <div class="stats-row" id="statsContainer">
+                <div class="stat-card" data-tab="bandeau"><div class="number" id="statBandeau">📢</div><div class="label">Bandeau</div></div>
                 <div class="stat-card" data-tab="actualites"><div class="number" id="statActus">0</div><div class="label">Actualités</div></div>
-                <div class="stat-card" data-tab="equipe"><div class="number" id="statEquipe">0</div><div class="label">Membres équipe</div></div>
                 <div class="stat-card" data-tab="specMedicales"><div class="number" id="statSpecMed">0</div><div class="label">Spécialités médicales</div></div>
                 <div class="stat-card" data-tab="specChirurgicales"><div class="number" id="statSpecChir">0</div><div class="label">Spécialités chirurgicales</div></div>
                 <div class="stat-card" data-tab="rendezvous"><div class="number" id="statRdvs">0</div><div class="label">Rendez-vous</div></div>
@@ -294,7 +287,8 @@
 
             <div class="tabs-wrapper">
                 <div class="tabs" id="tabsContainer">
-                    <button class="tab-btn active" data-tab="actualites">Actualités</button>
+                    <button class="tab-btn active" data-tab="bandeau">📢 Bandeau</button>
+                    <button class="tab-btn" data-tab="actualites">Actualités</button>
                     <button class="tab-btn" data-tab="specMedicales">Spécialités médicales</button>
                     <button class="tab-btn" data-tab="specChirurgicales">Spécialités chirurgicales</button>
                     <button class="tab-btn" data-tab="gynecologie">Gynécologie</button>
@@ -303,13 +297,39 @@
                     <button class="tab-btn" data-tab="centreDialyse">Centre de dialyse</button>
                     <button class="tab-btn" data-tab="equipe">Équipe</button>
                     <button class="tab-btn" data-tab="rendezvous">📋 Rendez-vous</button>
-                    <button class="tab-btn" data-tab="bandeau">📢 Bandeau</button>
                 </div>
                 <div class="scroll-indicator">→</div>
             </div>
 
+            <!-- BANDEAU (premier) -->
+            <div id="bandeau" class="tab-pane active">
+                <div class="form-admin">
+                    <h3>📢 Gérer le bandeau "À la une"</h3>
+                    <div style="margin-bottom: 20px;">
+                        <label style="display: flex; align-items: center; gap: 10px;">
+                            <input type="checkbox" id="bandeauActif" style="width:auto; margin:0;"> Activer le bandeau
+                        </label>
+                    </div>
+                    <textarea id="bandeauMessage" rows="2" placeholder="Votre message ici..."></textarea>
+                    <div style="margin-top: 10px;">
+                        <label>Couleur :</label>
+                        <select id="bandeauCouleur" style="margin-left: 10px; padding: 8px; width: auto; border-radius: 30px;">
+                            <option value="rouge">🔴 Rouge (alerte/urgence)</option>
+                            <option value="bleu">🔵 Bleu (information)</option>
+                            <option value="vert">🟢 Vert (bonne nouvelle)</option>
+                            <option value="orange">🟠 Orange (attention)</option>
+                        </select>
+                    </div>
+                    <div style="margin-top: 20px;">
+                        <strong>Aperçu :</strong>
+                        <div id="bandeauPreview" class="bandeau-preview" style="background: #dc3545; color: white;">📢 Aperçu de votre message</div>
+                    </div>
+                    <button id="saveBandeauBtn" class="btn-save" style="margin-top: 15px;">💾 Enregistrer le bandeau</button>
+                </div>
+            </div>
+
             <!-- Actualités -->
-            <div id="actualites" class="tab-pane active">
+            <div id="actualites" class="tab-pane">
                 <div class="form-admin">
                     <h3>Ajouter une actualité</h3>
                     <input type="text" id="actuTitre" placeholder="Titre *">
@@ -350,8 +370,8 @@
                                 <span class="jour-btn dimanche" data-jour="Dimanche">Dim</span>
                             </div>
                             <div class="heures-row">
-                                <div class="h-group"><label>Heure début</label><select id="debutSpecMed"><option value="">--</option><option>07:00</option><option>07:30</option><option>08:00</option><option>08:30</option><option>09:00</option><option>09:30</option><option>10:00</option><option>10:30</option><option>11:00</option><option>11:30</option><option>12:00</option><option>12:30</option><option>13:00</option><option>13:30</option><option>14:00</option><option>14:30</option><option>15:00</option><option>15:30</option><option>16:00</option><option>16:30</option><option>17:00</option><option>17:30</option><option>18:00</option><option>18:30</option><option>19:00</option><option>19:30</option></select></div>
-                                <div class="h-group"><label>Heure fin</label><select id="finSpecMed"><option value="">--</option><option>08:00</option><option>08:30</option><option>09:00</option><option>09:30</option><option>10:00</option><option>10:30</option><option>11:00</option><option>11:30</option><option>12:00</option><option>12:30</option><option>13:00</option><option>13:30</option><option>14:00</option><option>14:30</option><option>15:00</option><option>15:30</option><option>16:00</option><option>16:30</option><option>17:00</option><option>17:30</option><option>18:00</option><option>18:30</option><option>19:00</option><option>19:30</option><option>20:00</option><option>21:00</option></select></div>
+                                <div class="h-group"><label>Heure début</label><select id="debutSpecMed">${generateHourOptions()}</select></div>
+                                <div class="h-group"><label>Heure fin</label><select id="finSpecMed">${generateHourOptionsEnd()}</select></div>
                             </div>
                             <div class="horaires-apercu" id="apercuSpecMed"></div>
                         </div>
@@ -371,7 +391,7 @@
                         <div class="horaires-toggle"><input type="checkbox" id="specChirHasHoraires"><span>Ajouter des horaires de consultation (optionnel)</span></div>
                         <div id="specChirHorairesContent" class="horaires-content disabled">
                             <div class="jours-grid" id="joursSpecChir"><span class="jour-btn" data-jour="Lundi">Lun</span><span class="jour-btn" data-jour="Mardi">Mar</span><span class="jour-btn" data-jour="Mercredi">Mer</span><span class="jour-btn" data-jour="Jeudi">Jeu</span><span class="jour-btn" data-jour="Vendredi">Ven</span><span class="jour-btn" data-jour="Samedi">Sam</span><span class="jour-btn dimanche" data-jour="Dimanche">Dim</span></div>
-                            <div class="heures-row"><div class="h-group"><label>Heure début</label><select id="debutSpecChir"><option value="">--</option><option>07:00</option><option>07:30</option><option>08:00</option><option>08:30</option><option>09:00</option><option>09:30</option><option>10:00</option></select></div><div class="h-group"><label>Heure fin</label><select id="finSpecChir"><option value="">--</option><option>12:00</option><option>12:30</option><option>13:00</option><option>14:00</option><option>15:00</option><option>16:00</option><option>17:00</option><option>17:30</option><option>18:00</option><option>19:00</option><option>19:30</option></select></div></div>
+                            <div class="heures-row"><div class="h-group"><label>Heure début</label><select id="debutSpecChir">${generateHourOptions()}</select></div><div class="h-group"><label>Heure fin</label><select id="finSpecChir">${generateHourOptionsEnd()}</select></div></div>
                             <div class="horaires-apercu" id="apercuSpecChir"></div>
                         </div>
                     </div>
@@ -390,7 +410,7 @@
                         <div class="horaires-toggle"><input type="checkbox" id="gyneHasHoraires"><span>Ajouter des horaires de consultation (optionnel)</span></div>
                         <div id="gyneHorairesContent" class="horaires-content disabled">
                             <div class="jours-grid" id="joursGyne"><span class="jour-btn" data-jour="Lundi">Lun</span><span class="jour-btn" data-jour="Mardi">Mar</span><span class="jour-btn" data-jour="Mercredi">Mer</span><span class="jour-btn" data-jour="Jeudi">Jeu</span><span class="jour-btn" data-jour="Vendredi">Ven</span><span class="jour-btn" data-jour="Samedi">Sam</span><span class="jour-btn dimanche" data-jour="Dimanche">Dim</span></div>
-                            <div class="heures-row"><div class="h-group"><label>Heure début</label><select id="debutGyne"><option value="">--</option><option>07:00</option><option>07:30</option><option>08:00</option><option>08:30</option><option>09:00</option><option>09:30</option><option>10:00</option></select></div><div class="h-group"><label>Heure fin</label><select id="finGyne"><option value="">--</option><option>12:00</option><option>12:30</option><option>13:00</option><option>14:00</option><option>15:00</option><option>16:00</option><option>17:00</option><option>17:30</option><option>18:00</option><option>19:00</option><option>19:30</option></select></div></div>
+                            <div class="heures-row"><div class="h-group"><label>Heure début</label><select id="debutGyne">${generateHourOptions()}</select></div><div class="h-group"><label>Heure fin</label><select id="finGyne">${generateHourOptionsEnd()}</select></div></div>
                             <div class="horaires-apercu" id="apercuGyne"></div>
                         </div>
                     </div>
@@ -409,7 +429,7 @@
                         <div class="horaires-toggle"><input type="checkbox" id="exploHasHoraires"><span>Ajouter des horaires de disponibilité (optionnel)</span></div>
                         <div id="exploHorairesContent" class="horaires-content disabled">
                             <div class="jours-grid" id="joursExplo"><span class="jour-btn" data-jour="Lundi">Lun</span><span class="jour-btn" data-jour="Mardi">Mar</span><span class="jour-btn" data-jour="Mercredi">Mer</span><span class="jour-btn" data-jour="Jeudi">Jeu</span><span class="jour-btn" data-jour="Vendredi">Ven</span><span class="jour-btn" data-jour="Samedi">Sam</span><span class="jour-btn dimanche" data-jour="Dimanche">Dim</span></div>
-                            <div class="heures-row"><div class="h-group"><label>Heure début</label><select id="debutExplo"><option value="">--</option><option>07:00</option><option>07:30</option><option>08:00</option><option>08:30</option><option>09:00</option><option>09:30</option><option>10:00</option></select></div><div class="h-group"><label>Heure fin</label><select id="finExplo"><option value="">--</option><option>12:00</option><option>12:30</option><option>13:00</option><option>14:00</option><option>15:00</option><option>16:00</option><option>17:00</option><option>17:30</option><option>18:00</option><option>19:00</option><option>19:30</option></select></div></div>
+                            <div class="heures-row"><div class="h-group"><label>Heure début</label><select id="debutExplo">${generateHourOptions()}</select></div><div class="h-group"><label>Heure fin</label><select id="finExplo">${generateHourOptionsEnd()}</select></div></div>
                             <div class="horaires-apercu" id="apercuExplo"></div>
                         </div>
                     </div>
@@ -427,7 +447,7 @@
                         <div class="horaires-toggle"><input type="checkbox" id="imagerieHasHoraires"><span>Ajouter des horaires (optionnel)</span></div>
                         <div id="imagerieHorairesContent" class="horaires-content disabled">
                             <div class="jours-grid" id="joursImagerie"><span class="jour-btn" data-jour="Lundi">Lun</span><span class="jour-btn" data-jour="Mardi">Mar</span><span class="jour-btn" data-jour="Mercredi">Mer</span><span class="jour-btn" data-jour="Jeudi">Jeu</span><span class="jour-btn" data-jour="Vendredi">Ven</span><span class="jour-btn" data-jour="Samedi">Sam</span><span class="jour-btn dimanche" data-jour="Dimanche">Dim</span></div>
-                            <div class="heures-row"><div class="h-group"><label>Heure début</label><select id="debutImagerie"><option value="">--</option><option>07:00</option><option>07:30</option><option>08:00</option><option>08:30</option><option>09:00</option><option>09:30</option><option>10:00</option></select></div><div class="h-group"><label>Heure fin</label><select id="finImagerie"><option value="">--</option><option>12:00</option><option>12:30</option><option>13:00</option><option>14:00</option><option>15:00</option><option>16:00</option><option>17:00</option><option>17:30</option><option>18:00</option><option>19:00</option><option>19:30</option></select></div></div>
+                            <div class="heures-row"><div class="h-group"><label>Heure début</label><select id="debutImagerie">${generateHourOptions()}</select></div><div class="h-group"><label>Heure fin</label><select id="finImagerie">${generateHourOptionsEnd()}</select></div></div>
                             <div class="horaires-apercu" id="apercuImagerie"></div>
                         </div>
                     </div>
@@ -447,7 +467,7 @@
                         <div class="horaires-toggle"><input type="checkbox" id="dialyseHasHoraires"><span>Ajouter des horaires (optionnel)</span></div>
                         <div id="dialyseHorairesContent" class="horaires-content disabled">
                             <div class="jours-grid" id="joursDialyse"><span class="jour-btn" data-jour="Lundi">Lun</span><span class="jour-btn" data-jour="Mardi">Mar</span><span class="jour-btn" data-jour="Mercredi">Mer</span><span class="jour-btn" data-jour="Jeudi">Jeu</span><span class="jour-btn" data-jour="Vendredi">Ven</span><span class="jour-btn" data-jour="Samedi">Sam</span><span class="jour-btn dimanche" data-jour="Dimanche">Dim</span></div>
-                            <div class="heures-row"><div class="h-group"><label>Heure début</label><select id="debutDialyse"><option value="">--</option><option>07:00</option><option>07:30</option><option>08:00</option><option>08:30</option><option>09:00</option><option>09:30</option><option>10:00</option></select></div><div class="h-group"><label>Heure fin</label><select id="finDialyse"><option value="">--</option><option>12:00</option><option>12:30</option><option>13:00</option><option>14:00</option><option>15:00</option><option>16:00</option><option>17:00</option><option>17:30</option><option>18:00</option><option>19:00</option><option>19:30</option></select></div></div>
+                            <div class="heures-row"><div class="h-group"><label>Heure début</label><select id="debutDialyse">${generateHourOptions()}</select></div><div class="h-group"><label>Heure fin</label><select id="finDialyse">${generateHourOptionsEnd()}</select></div></div>
                             <div class="horaires-apercu" id="apercuDialyse"></div>
                         </div>
                     </div>
@@ -477,12 +497,12 @@
             <div id="rendezvous" class="tab-pane">
                 <div class="form-admin">
                     <h3>📋 Gestion des rendez-vous</h3>
+                    
                     <div class="rdv-stats" id="rdvStats">
                         <div class="rdv-stat-card"><div class="number" id="rdvTotal">0</div><div class="label">Total RDV</div></div>
-                        <div class="rdv-stat-card"><div class="number" id="rdvEnAttente">0</div><div class="label">En attente</div></div>
-                        <div class="rdv-stat-card"><div class="number" id="rdvConfirme">0</div><div class="label">Confirmés</div></div>
-                        <div class="rdv-stat-card"><div class="number" id="rdvAnnule">0</div><div class="label">Annulés</div></div>
+                        <div class="rdv-stat-card"><div class="number" id="rdvAujourdhui">0</div><div class="label">RDV aujourd'hui</div></div>
                         <div class="rdv-stat-card"><div class="number" id="rdvCetteSemaine">0</div><div class="label">Cette semaine</div></div>
+                        <div class="rdv-stat-card"><div class="number" id="rdvCeMois">0</div><div class="label">Ce mois</div></div>
                     </div>
                     
                     <div class="filter-bar">
@@ -498,41 +518,14 @@
                                 <tr><th>Date création</th><th>Patient</th><th>Téléphone</th><th>Spécialité</th><th>Date RDV</th><th>Heure</th><th>Statut</th><th>Actions</th></tr>
                             </thead>
                             <tbody id="rdvTableBody"><tr><td colspan="8" style="text-align:center;">Chargement...</td></tr></tbody>
-                        </table>
+                         </table>
                     </div>
-                </div>
-            </div>
-
-            <!-- Bandeau -->
-            <div id="bandeau" class="tab-pane">
-                <div class="form-admin">
-                    <h3>📢 Gérer le bandeau "À la une"</h3>
-                    <div style="margin-bottom: 20px;">
-                        <label style="display: flex; align-items: center; gap: 10px;">
-                            <input type="checkbox" id="bandeauActif" style="width:auto; margin:0;"> Activer le bandeau
-                        </label>
-                    </div>
-                    <textarea id="bandeauMessage" rows="2" placeholder="Votre message ici..."></textarea>
-                    <div style="margin-top: 10px;">
-                        <label>Couleur :</label>
-                        <select id="bandeauCouleur" style="margin-left: 10px; padding: 8px; width: auto; border-radius: 30px;">
-                            <option value="rouge">🔴 Rouge (alerte/urgence)</option>
-                            <option value="bleu">🔵 Bleu (information)</option>
-                            <option value="vert">🟢 Vert (bonne nouvelle)</option>
-                            <option value="orange">🟠 Orange (attention)</option>
-                        </select>
-                    </div>
-                    <div style="margin-top: 20px;">
-                        <strong>Aperçu :</strong>
-                        <div id="bandeauPreview" class="bandeau-preview" style="background: #dc3545; color: white;">📢 Aperçu de votre message</div>
-                    </div>
-                    <button id="saveBandeauBtn" class="btn-save" style="margin-top: 15px;">💾 Enregistrer le bandeau</button>
                 </div>
             </div>
         </div>
     </div>
 
-    <!-- Modal d'édition avec interface horaires complète -->
+    <!-- Modal d'édition -->
     <div id="editModal" class="edit-modal">
         <div class="edit-modal-content">
             <h3 id="editModalTitle">Modifier</h3>
@@ -551,22 +544,457 @@
         const SUPABASE_ANON_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im90ZGl5d3J2emFwcGJtamZra3lpIiwicm9sZSI6ImFub24iLCJpYXQiOjE3Njk2MTQyMDcsImV4cCI6MjA4NTE5MDIwN30.O5gHqJF1SCvpu19Z0OFHhQsT_ZmeIFbuEu-bpBZXXtY";
         
         let supabaseClient = null;
-        let currentEditItem = { id: null, table: null, type: null, horairesData: null };
+        let currentEditItem = { id: null, table: null };
         let allRdvs = [];
 
-        // Vérification admin
+        function generateHourOptions() {
+            const hours = ['07:00','07:30','08:00','08:30','09:00','09:30','10:00','10:30','11:00','11:30','12:00','12:30','13:00','13:30','14:00','14:30','15:00','15:30','16:00','16:30','17:00','17:30','18:00','18:30','19:00','19:30'];
+            return '<option value="">--</option>' + hours.map(h => `<option value="${h}">${h}</option>`).join('');
+        }
+        
+        function generateHourOptionsEnd() {
+            const hours = ['08:00','08:30','09:00','09:30','10:00','10:30','11:00','11:30','12:00','12:30','13:00','13:30','14:00','14:30','15:00','15:30','16:00','16:30','17:00','17:30','18:00','18:30','19:00','19:30','20:00','21:00'];
+            return '<option value="">--</option>' + hours.map(h => `<option value="${h}">${h}</option>`).join('');
+        }
+
         if (sessionStorage.getItem('clinique_admin') !== 'true') {
             window.location.href = 'index.html';
         }
 
-        // ===== GESTION DES JOURS (pour toutes les sections) =====
-        const joursState = {
-            SpecMed: [], SpecChir: [], Gyne: [], Explo: [], Imagerie: [], Dialyse: []
-        };
+        function showToast(message, type = 'success') {
+            const toast = document.getElementById('toastNotification');
+            toast.textContent = message;
+            toast.className = `toast-notification ${type} show`;
+            setTimeout(() => toast.classList.remove('show'), 3000);
+        }
 
-        const hasHorairesState = {
-            SpecMed: false, SpecChir: false, Gyne: false, Explo: false, Imagerie: false, Dialyse: false
-        };
+        function escapeHtml(str) { if (!str) return ''; return str.replace(/[&<>]/g, m => m==='&'?'&amp;':m==='<'?'&lt;':'&gt;'); }
+
+        async function uploadImage(file, type) {
+            if (!file || !supabaseClient) return null;
+            const ext = file.name.split('.').pop();
+            const name = `${Date.now()}_${Math.random().toString(36).substring(2,8)}.${ext}`;
+            const bucket = type === 'actualite' ? 'actualites' : 'team';
+            const { error } = await supabaseClient.storage.from(bucket).upload(name, file);
+            if (error) { showToast('Erreur upload: ' + error.message, 'error'); return null; }
+            const { data } = supabaseClient.storage.from(bucket).getPublicUrl(name);
+            return data.publicUrl;
+        }
+
+        // ==================== BANDEAU ====================
+        async function loadBandeauSettings() {
+            if (!supabaseClient) return;
+            const { data } = await supabaseClient.from('site_settings').select('*').eq('id', 1).single();
+            if (data) {
+                document.getElementById('bandeauActif').checked = data.bandeau_actif;
+                document.getElementById('bandeauMessage').value = data.bandeau_message || '';
+                document.getElementById('bandeauCouleur').value = data.bandeau_couleur || 'rouge';
+                updateBandeauPreview();
+            }
+        }
+
+        function updateBandeauPreview() {
+            const msg = document.getElementById('bandeauMessage').value;
+            const couleur = document.getElementById('bandeauCouleur').value;
+            const colors = { rouge:'#dc3545', bleu:'#0077A4', vert:'#1D8B5D', orange:'#e67e22' };
+            const p = document.getElementById('bandeauPreview');
+            p.innerHTML = msg ? `📢 ${escapeHtml(msg)}` : '📢 (vide)';
+            p.style.background = msg ? (colors[couleur] || '#dc3545') : '#e2e8f0';
+            p.style.color = msg ? 'white' : '#64748b';
+        }
+
+        async function saveBandeau() {
+            if (!supabaseClient) return;
+            const { error } = await supabaseClient.from('site_settings').update({
+                bandeau_message: document.getElementById('bandeauMessage').value,
+                bandeau_actif: document.getElementById('bandeauActif').checked,
+                bandeau_couleur: document.getElementById('bandeauCouleur').value,
+                updated_at: new Date().toISOString()
+            }).eq('id', 1);
+            if (error) { showToast('Erreur: ' + error.message, 'error'); return; }
+            showToast('✅ Bandeau enregistré !', 'success');
+        }
+
+        // ==================== RENDEZ-VOUS ====================
+        async function loadRdvs() {
+            if (!supabaseClient) return;
+            const { data, error } = await supabaseClient.from('rendez_vous').select('*').order('date_creation', { ascending: false });
+            if (error) { console.error(error); return; }
+            allRdvs = data || [];
+            updateRdvStats();
+            renderRdvTable();
+            updateSpecialiteFilter();
+            document.getElementById('statRdvs').innerText = allRdvs.length;
+        }
+
+        function updateRdvStats() {
+            const total = allRdvs.length;
+            const today = new Date().toISOString().split('T')[0];
+            const aujourdhui = allRdvs.filter(r => r.date_rdv === today).length;
+            
+            const todayDate = new Date();
+            const thisWeek = allRdvs.filter(r => {
+                if (!r.date_rdv) return false;
+                const rdvDate = new Date(r.date_rdv);
+                const diffDays = Math.ceil((rdvDate - todayDate) / (1000 * 60 * 60 * 24));
+                return diffDays >= 0 && diffDays <= 7;
+            }).length;
+            
+            const thisMonth = allRdvs.filter(r => {
+                if (!r.date_rdv) return false;
+                const rdvDate = new Date(r.date_rdv);
+                return rdvDate.getMonth() === todayDate.getMonth() && rdvDate.getFullYear() === todayDate.getFullYear();
+            }).length;
+            
+            document.getElementById('rdvTotal').innerText = total;
+            document.getElementById('rdvAujourdhui').innerText = aujourdhui;
+            document.getElementById('rdvCetteSemaine').innerText = thisWeek;
+            document.getElementById('rdvCeMois').innerText = thisMonth;
+        }
+
+        function renderRdvTable() {
+            const dateFilter = document.getElementById('filterDate')?.value;
+            const specFilter = document.getElementById('filterSpecialite')?.value;
+            const statusFilter = document.getElementById('filterStatus')?.value;
+            
+            let filtered = [...allRdvs];
+            if (dateFilter) filtered = filtered.filter(r => r.date_rdv === dateFilter);
+            if (specFilter) filtered = filtered.filter(r => r.specialite === specFilter);
+            if (statusFilter) filtered = filtered.filter(r => r.statut === statusFilter);
+            
+            const tbody = document.getElementById('rdvTableBody');
+            if (filtered.length === 0) {
+                tbody.innerHTML = '<tr><td colspan="8" style="text-align:center;">Aucun rendez-vous trouvé</td></tr>';
+                return;
+            }
+            
+            tbody.innerHTML = filtered.map(rdv => `
+                <tr>
+                    <td>${new Date(rdv.date_creation).toLocaleDateString('fr-FR')}</td>
+                    <td><strong>${escapeHtml(rdv.nom)}</strong></td>
+                    <td><a href="tel:${rdv.telephone}" style="color:#1D8B5D;">${escapeHtml(rdv.telephone)}</a></td>
+                    <td>${escapeHtml(rdv.specialite || '-')}</td>
+                    <td>${rdv.date_rdv ? new Date(rdv.date_rdv).toLocaleDateString('fr-FR') : (rdv.flexible ? '📞 Flexible' : '-')}</td>
+                    <td>${rdv.heure_rdv || '-'}</td>
+                    <td>
+                        <select class="status-select" data-id="${rdv.id}" style="padding:4px 8px; border-radius:20px; font-size:0.7rem;">
+                            <option value="en_attente" ${rdv.statut === 'en_attente' ? 'selected' : ''}>⏳ En attente</option>
+                            <option value="confirme" ${rdv.statut === 'confirme' ? 'selected' : ''}>✅ Confirmé</option>
+                            <option value="annule" ${rdv.statut === 'annule' ? 'selected' : ''}>❌ Annulé</option>
+                            <option value="traite" ${rdv.statut === 'traite' ? 'selected' : ''}>📋 Traité</option>
+                        </select>
+                    </td>
+                    <td>
+                        <button class="delete-rdv-btn" data-id="${rdv.id}" style="background:#fee2e2; border:none; padding:4px 8px; border-radius:20px; cursor:pointer; color:#b91c1c;">🗑️</button>
+                    </td>
+                </tr>
+            `).join('');
+            
+            document.querySelectorAll('.status-select').forEach(select => {
+                select.addEventListener('change', async (e) => {
+                    const newStatus = e.target.value;
+                    const id = parseInt(e.target.dataset.id);
+                    const { error } = await supabaseClient.from('rendez_vous').update({ statut: newStatus, date_traitement: new Date().toISOString() }).eq('id', id);
+                    if (!error) { showToast('Statut mis à jour', 'success'); loadRdvs(); }
+                    else { showToast('Erreur', 'error'); }
+                });
+            });
+            
+            document.querySelectorAll('.delete-rdv-btn').forEach(btn => {
+                btn.addEventListener('click', async (e) => {
+                    if (!confirm('Supprimer ce rendez-vous ?')) return;
+                    const id = parseInt(btn.dataset.id);
+                    const { error } = await supabaseClient.from('rendez_vous').delete().eq('id', id);
+                    if (!error) { showToast('RDV supprimé', 'success'); loadRdvs(); }
+                    else { showToast('Erreur', 'error'); }
+                });
+            });
+        }
+
+        function updateSpecialiteFilter() {
+            const specialites = [...new Set(allRdvs.map(r => r.specialite).filter(Boolean))];
+            const select = document.getElementById('filterSpecialite');
+            if (select) {
+                select.innerHTML = '<option value="">Toutes</option>' + specialites.map(s => `<option value="${escapeHtml(s)}">${escapeHtml(s)}</option>`).join('');
+            }
+        }
+
+        document.getElementById('exportRdvBtn')?.addEventListener('click', () => {
+            let csv = "Date création,Nom,Téléphone,Spécialité,Date RDV,Heure RDV,Flexible,Statut,Message\n";
+            allRdvs.forEach(r => {
+                csv += `"${new Date(r.date_creation).toLocaleDateString('fr-FR')}","${escapeCsv(r.nom)}","${r.telephone}","${escapeCsv(r.specialite || '')}","${r.date_rdv || ''}","${r.heure_rdv || ''}","${r.flexible ? 'OUI' : 'NON'}","${r.statut}","${escapeCsv(r.message || '')}"\n`;
+            });
+            const blob = new Blob([csv], { type: 'text/csv;charset=utf-8;' });
+            const link = document.createElement('a');
+            link.href = URL.createObjectURL(blob);
+            link.download = `rdv_clinique_${new Date().toISOString().split('T')[0]}.csv`;
+            link.click();
+            showToast('Export CSV lancé', 'success');
+        });
+        
+        function escapeCsv(str) { if (!str) return ''; return str.replace(/"/g, '""'); }
+
+        // ==================== CRUD ====================
+        async function createItem(table, titre, description, horaires, badge = null) {
+            const data = { titre, description, horaires, ordre: Math.floor(Date.now() / 1000) };
+            if (badge !== null) data.badge = badge;
+            const { error } = await supabaseClient.from(table).insert([data]);
+            if (error) throw error;
+        }
+
+        // ==================== MODAL AVEC INTERFACE HORAIRES COMPLÈTE ====================
+        async function openEditModalWithHoraires(id, table, data) {
+            currentEditItem = { id, table };
+            const title = document.getElementById('editModalTitle');
+            const body = document.getElementById('editModalBody');
+            
+            const tablesAvecHoraires = ['specialites_medicales', 'specialites_chirurgicales', 'gynecologie', 'explorations', 'imagerie', 'equipements'];
+            
+            if (table === 'actualites') {
+                title.innerText = "Modifier l'actualité";
+                body.innerHTML = `<input type="text" id="edit_titre" value="${escapeHtml(data.titre)}" placeholder="Titre">
+                                <textarea id="edit_description" rows="3">${escapeHtml(data.description||'')}</textarea>
+                                <input type="text" id="edit_date" value="${escapeHtml(data.date||'')}" placeholder="Date">`;
+            } 
+            else if (table === 'equipes') {
+                title.innerText = "Modifier le membre";
+                body.innerHTML = `<input type="text" id="edit_nom" value="${escapeHtml(data.nom)}" placeholder="Nom">
+                                <input type="text" id="edit_poste" value="${escapeHtml(data.poste)}" placeholder="Poste">
+                                <textarea id="edit_description" rows="3">${escapeHtml(data.description||'')}</textarea>`;
+            }
+            else if (tablesAvecHoraires.includes(table)) {
+                title.innerText = "Modifier - Horaires de consultation";
+                let html = `<input type="text" id="edit_titre" value="${escapeHtml(data.titre)}" placeholder="Titre *">`;
+                
+                if (data.description !== undefined || table !== 'imagerie') {
+                    html += `<textarea id="edit_description" rows="2" placeholder="Description">${escapeHtml(data.description||'')}</textarea>`;
+                }
+                if (table === 'equipements') {
+                    html += `<input type="text" id="edit_badge" value="${escapeHtml(data.badge||'')}" placeholder="Badge">`;
+                }
+                
+                html += `
+                    <div class="horaires-section" style="margin-top:15px;">
+                        <label><strong>🗓️ Horaires de consultation</strong></label>
+                        <div class="jours-grid" id="editJoursGrid">
+                            <span class="jour-btn-edit" data-jour="Lundi">Lun</span>
+                            <span class="jour-btn-edit" data-jour="Mardi">Mar</span>
+                            <span class="jour-btn-edit" data-jour="Mercredi">Mer</span>
+                            <span class="jour-btn-edit" data-jour="Jeudi">Jeu</span>
+                            <span class="jour-btn-edit" data-jour="Vendredi">Ven</span>
+                            <span class="jour-btn-edit" data-jour="Samedi">Sam</span>
+                            <span class="jour-btn-edit dimanche" data-jour="Dimanche">Dim</span>
+                        </div>
+                        <div class="heures-row">
+                            <div class="h-group"><label>Heure début</label><select id="editDebut">${generateHourOptions()}</select></div>
+                            <div class="h-group"><label>Heure fin</label><select id="editFin">${generateHourOptionsEnd()}</select></div>
+                        </div>
+                        <div class="horaires-apercu" id="editApercu"></div>
+                    </div>
+                `;
+                body.innerHTML = html;
+                
+                setTimeout(() => {
+                    const horairesExistants = data.horaires || '';
+                    const editJoursGrid = document.getElementById('editJoursGrid');
+                    const editDebut = document.getElementById('editDebut');
+                    const editFin = document.getElementById('editFin');
+                    const editApercu = document.getElementById('editApercu');
+                    
+                    let joursExtraits = [];
+                    let debutExtraite = '';
+                    let finExtraite = '';
+                    
+                    if (horairesExistants) {
+                        const heureMatch = horairesExistants.match(/(\d{2}:\d{2})\s*[-–]\s*(\d{2}:\d{2})/);
+                        if (heureMatch) {
+                            debutExtraite = heureMatch[1];
+                            finExtraite = heureMatch[2];
+                        }
+                        const joursListe = ['Lundi', 'Mardi', 'Mercredi', 'Jeudi', 'Vendredi', 'Samedi', 'Dimanche'];
+                        joursExtraits = joursListe.filter(jour => horairesExistants.includes(jour));
+                    }
+                    
+                    if (editDebut && debutExtraite) editDebut.value = debutExtraite;
+                    if (editFin && finExtraite) editFin.value = finExtraite;
+                    
+                    if (editJoursGrid) {
+                        editJoursGrid.querySelectorAll('.jour-btn-edit').forEach(btn => {
+                            const jour = btn.getAttribute('data-jour');
+                            if (joursExtraits.includes(jour)) btn.classList.add('actif');
+                            else btn.classList.remove('actif');
+                        });
+                    }
+                    
+                    const updateApercu = () => {
+                        const joursActifs = Array.from(editJoursGrid?.querySelectorAll('.jour-btn-edit.actif') || []).map(b => b.dataset.jour);
+                        const debut = editDebut?.value || '';
+                        const fin = editFin?.value || '';
+                        if (joursActifs.length === 0 && (!debut || !fin)) {
+                            if (editApercu) editApercu.className = 'horaires-apercu';
+                            return;
+                        }
+                        let texte = '';
+                        if (joursActifs.length > 0) texte += joursActifs.join(', ');
+                        if (debut && fin) texte += (texte ? ' : ' : '') + debut + ' – ' + fin;
+                        if (editApercu) {
+                            editApercu.innerHTML = '👁 Aperçu : ' + texte;
+                            editApercu.className = 'horaires-apercu show';
+                        }
+                    };
+                    
+                    editJoursGrid?.querySelectorAll('.jour-btn-edit').forEach(btn => {
+                        btn.addEventListener('click', (e) => { e.target.classList.toggle('actif'); updateApercu(); });
+                    });
+                    if (editDebut) editDebut.addEventListener('change', updateApercu);
+                    if (editFin) editFin.addEventListener('change', updateApercu);
+                    updateApercu();
+                }, 50);
+            }
+            else {
+                title.innerText = "Modifier";
+                body.innerHTML = `<input type="text" id="edit_titre" value="${escapeHtml(data.titre)}" placeholder="Titre">`;
+            }
+            document.getElementById('editModal').style.display = 'flex';
+        }
+
+        async function saveEditWithHoraires() {
+            const { id, table } = currentEditItem;
+            let update = {};
+            const tablesAvecHoraires = ['specialites_medicales', 'specialites_chirurgicales', 'gynecologie', 'explorations', 'imagerie', 'equipements'];
+            
+            if (table === 'actualites') {
+                update = { titre: document.getElementById('edit_titre').value, description: document.getElementById('edit_description').value, date: document.getElementById('edit_date').value };
+            } 
+            else if (table === 'equipes') {
+                update = { nom: document.getElementById('edit_nom').value, poste: document.getElementById('edit_poste').value, description: document.getElementById('edit_description').value };
+            }
+            else if (tablesAvecHoraires.includes(table)) {
+                const editJoursGrid = document.getElementById('editJoursGrid');
+                const editDebut = document.getElementById('editDebut');
+                const editFin = document.getElementById('editFin');
+                const editBadge = document.getElementById('edit_badge');
+                const jours = Array.from(editJoursGrid?.querySelectorAll('.jour-btn-edit.actif') || []).map(b => b.dataset.jour);
+                const debut = editDebut?.value || '';
+                const fin = editFin?.value || '';
+                let horaires = '';
+                if (jours.length > 0) horaires += jours.join(', ');
+                if (debut && fin) horaires += (horaires ? ' : ' : '') + debut + ' – ' + fin;
+                
+                update = { titre: document.getElementById('edit_titre').value, horaires: horaires };
+                const desc = document.getElementById('edit_description');
+                if (desc) update.description = desc.value;
+                if (editBadge) update.badge = editBadge.value;
+            }
+            else {
+                update = { titre: document.getElementById('edit_titre').value };
+            }
+            
+            const { error } = await supabaseClient.from(table).update(update).eq('id', id);
+            if (error) { showToast('Erreur: ' + error.message, 'error'); return; }
+            showToast('✅ Modifié avec succès', 'success');
+            document.getElementById('editModal').style.display = 'none';
+            loadAllAdminData();
+        }
+
+        // ==================== CHARGEMENT DES LISTES ====================
+        function horairesTag(h) { if (!h || h.trim() === '') return ''; return `<span class="horaires-badge">🕐 ${escapeHtml(h)}</span>`; }
+
+        async function loadAdminActualites() {
+            const { data } = await supabaseClient.from('actualites').select('*').order('created_at', { ascending: false });
+            const c = document.getElementById('adminActusList');
+            if (!data?.length) { c.innerHTML = '<p>Aucune actualité</p>'; return; }
+            c.innerHTML = data.map(a => `<div class="item-card"><div class="item-info">${a.image_url ? `<img src="${a.image_url}" class="preview-small">` : ''}<strong>${escapeHtml(a.titre)}</strong><div class="small">${escapeHtml(a.date||'')} — ${escapeHtml((a.description||'').substring(0,80))}</div></div><div class="item-actions"><button class="edit-btn" data-id="${a.id}" data-table="actualites">Modifier</button><button class="delete-btn" data-id="${a.id}" data-table="actualites">Supprimer</button></div></div>`).join('');
+            attachItemEvents(); document.getElementById('statActus').innerText = data.length;
+        }
+
+        async function loadAdminTeam() {
+            const { data } = await supabaseClient.from('equipes').select('*').order('ordre');
+            const c = document.getElementById('adminTeamList');
+            if (!data?.length) { c.innerHTML = '<p>Aucun membre</p>'; return; }
+            c.innerHTML = data.map(m => `<div class="item-card"><div class="item-info">${m.image_url ? `<img src="${m.image_url}" class="preview-small">` : ''}<strong>${escapeHtml(m.nom)}</strong> — ${escapeHtml(m.poste)}<div class="small">${escapeHtml(m.description||'')}</div></div><div class="item-actions"><button class="edit-btn" data-id="${m.id}" data-table="equipes">Modifier</button><button class="delete-btn" data-id="${m.id}" data-table="equipes">Supprimer</button></div></div>`).join('');
+            attachItemEvents(); document.getElementById('statEquipe').innerText = data.length;
+        }
+
+        async function loadAdminSpecMedicales() {
+            const { data } = await supabaseClient.from('specialites_medicales').select('*').order('ordre');
+            const c = document.getElementById('adminSpecMedList');
+            if (!data?.length) { c.innerHTML = '<p>Aucune spécialité</p>'; return; }
+            c.innerHTML = data.map(s => `<div class="item-card"><div class="item-info"><strong>${escapeHtml(s.titre)}</strong><div class="small">${escapeHtml(s.description||'')}</div>${horairesTag(s.horaires)}</div><div class="item-actions"><button class="edit-btn" data-id="${s.id}" data-table="specialites_medicales">Modifier</button><button class="delete-btn" data-id="${s.id}" data-table="specialites_medicales">Supprimer</button></div></div>`).join('');
+            attachItemEvents(); document.getElementById('statSpecMed').innerText = data.length;
+        }
+
+        async function loadAdminSpecChirurgicales() {
+            const { data } = await supabaseClient.from('specialites_chirurgicales').select('*').order('ordre');
+            const c = document.getElementById('adminSpecChirList');
+            if (!data?.length) { c.innerHTML = '<p>Aucune spécialité</p>'; return; }
+            c.innerHTML = data.map(s => `<div class="item-card"><div class="item-info"><strong>${escapeHtml(s.titre)}</strong><div class="small">${escapeHtml(s.description||'')}</div>${horairesTag(s.horaires)}</div><div class="item-actions"><button class="edit-btn" data-id="${s.id}" data-table="specialites_chirurgicales">Modifier</button><button class="delete-btn" data-id="${s.id}" data-table="specialites_chirurgicales">Supprimer</button></div></div>`).join('');
+            attachItemEvents(); document.getElementById('statSpecChir').innerText = data.length;
+        }
+
+        async function loadAdminGynecologie() {
+            const { data } = await supabaseClient.from('gynecologie').select('*').order('ordre');
+            const c = document.getElementById('adminGyneList');
+            if (!data?.length) { c.innerHTML = '<p>Aucun service</p>'; return; }
+            c.innerHTML = data.map(g => `<div class="item-card"><div class="item-info"><strong>${escapeHtml(g.titre)}</strong><div class="small">${escapeHtml(g.description||'')}</div>${horairesTag(g.horaires)}</div><div class="item-actions"><button class="edit-btn" data-id="${g.id}" data-table="gynecologie">Modifier</button><button class="delete-btn" data-id="${g.id}" data-table="gynecologie">Supprimer</button></div></div>`).join('');
+            attachItemEvents();
+        }
+
+        async function loadAdminExplorations() {
+            const { data } = await supabaseClient.from('explorations').select('*').order('ordre');
+            const c = document.getElementById('adminExploList');
+            if (!data?.length) { c.innerHTML = '<p>Aucune exploration</p>'; return; }
+            c.innerHTML = data.map(e => `<div class="item-card"><div class="item-info"><strong>${escapeHtml(e.titre)}</strong><div class="small">${escapeHtml(e.description||'')}</div>${horairesTag(e.horaires)}</div><div class="item-actions"><button class="edit-btn" data-id="${e.id}" data-table="explorations">Modifier</button><button class="delete-btn" data-id="${e.id}" data-table="explorations">Supprimer</button></div></div>`).join('');
+            attachItemEvents();
+        }
+
+        async function loadAdminImagerie() {
+            const { data } = await supabaseClient.from('imagerie').select('*').order('ordre');
+            const c = document.getElementById('adminImagerieList');
+            if (!data?.length) { c.innerHTML = '<p>Aucun service</p>'; return; }
+            c.innerHTML = data.map(i => `<div class="item-card"><div class="item-info"><strong>${escapeHtml(i.titre)}</strong>${horairesTag(i.horaires)}</div><div class="item-actions"><button class="edit-btn" data-id="${i.id}" data-table="imagerie">Modifier</button><button class="delete-btn" data-id="${i.id}" data-table="imagerie">Supprimer</button></div></div>`).join('');
+            attachItemEvents();
+        }
+
+        async function loadAdminDialyse() {
+            const { data } = await supabaseClient.from('equipements').select('*').order('ordre');
+            const c = document.getElementById('adminDialyseList');
+            if (!data?.length) { c.innerHTML = '<p>Aucun service</p>'; return; }
+            c.innerHTML = data.map(e => `<div class="item-card"><div class="item-info"><strong>${escapeHtml(e.titre)}</strong>${e.badge ? `<span style="background:#1D8B5D;color:white;padding:2px 8px;border-radius:20px;font-size:0.6rem;margin-left:8px;">${escapeHtml(e.badge)}</span>` : ''}<div class="small">${escapeHtml(e.description||'')}</div>${horairesTag(e.horaires)}</div><div class="item-actions"><button class="edit-btn" data-id="${e.id}" data-table="equipements">Modifier</button><button class="delete-btn" data-id="${e.id}" data-table="equipements">Supprimer</button></div></div>`).join('');
+            attachItemEvents();
+        }
+
+        async function loadAllAdminData() {
+            if (!supabaseClient) return;
+            await Promise.all([
+                loadAdminActualites(), loadAdminTeam(), loadAdminSpecMedicales(),
+                loadAdminSpecChirurgicales(), loadAdminGynecologie(), loadAdminExplorations(),
+                loadAdminImagerie(), loadAdminDialyse(), loadBandeauSettings(), loadRdvs()
+            ]);
+        }
+
+        function attachItemEvents() {
+            document.querySelectorAll('.edit-btn').forEach(btn => { btn.replaceWith(btn.cloneNode(true)); });
+            document.querySelectorAll('.delete-btn').forEach(btn => { btn.replaceWith(btn.cloneNode(true)); });
+            document.querySelectorAll('.edit-btn').forEach(btn => btn.addEventListener('click', async (e) => {
+                const id = e.currentTarget.getAttribute('data-id');
+                const table = e.currentTarget.getAttribute('data-table');
+                const { data } = await supabaseClient.from(table).select('*').eq('id', id).single();
+                if (data) openEditModalWithHoraires(id, table, data);
+            }));
+            document.querySelectorAll('.delete-btn').forEach(btn => btn.addEventListener('click', async (e) => {
+                const id = e.currentTarget.getAttribute('data-id');
+                const table = e.currentTarget.getAttribute('data-table');
+                if (!confirm('Supprimer définitivement ?')) return;
+                const { error } = await supabaseClient.from(table).delete().eq('id', id);
+                if (error) { showToast('Erreur: ' + error.message, 'error'); return; }
+                showToast('✅ Élément supprimé', 'success'); loadAllAdminData();
+            }));
+        }
+
+        // ==================== GESTION DES HORAIRES DANS LE FORMULAIRE D'AJOUT ====================
+        const joursState = { SpecMed: [], SpecChir: [], Gyne: [], Explo: [], Imagerie: [], Dialyse: [] };
+        const hasHorairesState = { SpecMed: false, SpecChir: false, Gyne: false, Explo: false, Imagerie: false, Dialyse: false };
 
         function initHorairesToggle(sectionId, contentId, checkboxId) {
             const checkbox = document.getElementById(checkboxId);
@@ -649,441 +1077,16 @@
             if (apercu) apercu.className = 'horaires-apercu';
         }
 
-        // ===== SUPABASE =====
-        function loadSupabase() {
-            return new Promise((resolve, reject) => {
-                if (window.supabase) { resolve(window.supabase); return; }
-                const s = document.createElement('script');
-                s.src = 'https://unpkg.com/@supabase/supabase-js@2/dist/umd/supabase.js';
-                s.onload = () => window.supabase ? resolve(window.supabase) : reject(new Error('Supabase non disponible'));
-                s.onerror = () => reject(new Error('Erreur chargement Supabase'));
-                document.head.appendChild(s);
-            });
+        function initAllHorairesToggles() {
+            initHorairesToggle('SpecMed', 'specMedHorairesContent', 'specMedHasHoraires');
+            initHorairesToggle('SpecChir', 'specChirHorairesContent', 'specChirHasHoraires');
+            initHorairesToggle('Gyne', 'gyneHorairesContent', 'gyneHasHoraires');
+            initHorairesToggle('Explo', 'exploHorairesContent', 'exploHasHoraires');
+            initHorairesToggle('Imagerie', 'imagerieHorairesContent', 'imagerieHasHoraires');
+            initHorairesToggle('Dialyse', 'dialyseHorairesContent', 'dialyseHasHoraires');
         }
 
-        function showToast(message, type = 'success') {
-            const toast = document.getElementById('toastNotification');
-            toast.textContent = message;
-            toast.className = `toast-notification ${type} show`;
-            setTimeout(() => toast.classList.remove('show'), 3000);
-        }
-
-        async function uploadImage(file, type) {
-            if (!file || !supabaseClient) return null;
-            const ext = file.name.split('.').pop();
-            const name = `${Date.now()}_${Math.random().toString(36).substring(2,8)}.${ext}`;
-            const bucket = type === 'actualite' ? 'actualites' : 'team';
-            const { error } = await supabaseClient.storage.from(bucket).upload(name, file);
-            if (error) { showToast('Erreur upload: ' + error.message, 'error'); return null; }
-            const { data } = supabaseClient.storage.from(bucket).getPublicUrl(name);
-            return data.publicUrl;
-        }
-
-        // ===== BANDEAU =====
-        async function loadBandeauSettings() {
-            if (!supabaseClient) return;
-            const { data } = await supabaseClient.from('site_settings').select('*').eq('id', 1).single();
-            if (data) {
-                document.getElementById('bandeauActif').checked = data.bandeau_actif;
-                document.getElementById('bandeauMessage').value = data.bandeau_message || '';
-                document.getElementById('bandeauCouleur').value = data.bandeau_couleur || 'rouge';
-                updateBandeauPreview();
-            }
-        }
-
-        function updateBandeauPreview() {
-            const msg = document.getElementById('bandeauMessage').value;
-            const couleur = document.getElementById('bandeauCouleur').value;
-            const p = document.getElementById('bandeauPreview');
-            const colors = { rouge:'#dc3545', bleu:'#0077A4', vert:'#1D8B5D', orange:'#e67e22' };
-            p.innerHTML = msg ? `📢 ${escapeHtml(msg)}` : '📢 (vide)';
-            p.style.background = msg ? (colors[couleur] || '#dc3545') : '#e2e8f0';
-            p.style.color = msg ? 'white' : '#64748b';
-        }
-
-        async function saveBandeau() {
-            if (!supabaseClient) return;
-            const { error } = await supabaseClient.from('site_settings').update({
-                bandeau_message: document.getElementById('bandeauMessage').value,
-                bandeau_actif: document.getElementById('bandeauActif').checked,
-                bandeau_couleur: document.getElementById('bandeauCouleur').value,
-                updated_at: new Date().toISOString()
-            }).eq('id', 1);
-            if (error) { showToast('Erreur: ' + error.message, 'error'); return; }
-            showToast('✅ Bandeau enregistré !', 'success');
-        }
-
-        // ===== RENDEZ-VOUS =====
-        async function loadRdvs() {
-            if (!supabaseClient) return;
-            const { data, error } = await supabaseClient.from('rendez_vous').select('*').order('date_creation', { ascending: false });
-            if (error) { console.error('Erreur chargement RDV:', error); return; }
-            allRdvs = data || [];
-            updateRdvStats();
-            renderRdvTable();
-            updateSpecialiteFilter();
-        }
-
-        function updateRdvStats() {
-            const total = allRdvs.length;
-            const enAttente = allRdvs.filter(r => r.statut === 'en_attente').length;
-            const confirme = allRdvs.filter(r => r.statut === 'confirme').length;
-            const annule = allRdvs.filter(r => r.statut === 'annule').length;
-            
-            document.getElementById('rdvTotal').innerText = total;
-            document.getElementById('rdvEnAttente').innerText = enAttente;
-            document.getElementById('rdvConfirme').innerText = confirme;
-            document.getElementById('rdvAnnule').innerText = annule;
-            document.getElementById('statRdvs').innerText = total;
-            
-            // Cette semaine
-            const today = new Date();
-            const thisWeek = allRdvs.filter(r => {
-                if (!r.date_rdv) return false;
-                const rdvDate = new Date(r.date_rdv);
-                const diffDays = Math.ceil((rdvDate - today) / (1000 * 60 * 60 * 24));
-                return diffDays >= 0 && diffDays <= 7;
-            });
-            document.getElementById('rdvCetteSemaine').innerText = thisWeek.length;
-        }
-
-        function renderRdvTable() {
-            const dateFilter = document.getElementById('filterDate')?.value;
-            const specFilter = document.getElementById('filterSpecialite')?.value;
-            const statusFilter = document.getElementById('filterStatus')?.value;
-            
-            let filtered = [...allRdvs];
-            if (dateFilter) filtered = filtered.filter(r => r.date_rdv === dateFilter);
-            if (specFilter) filtered = filtered.filter(r => r.specialite === specFilter);
-            if (statusFilter) filtered = filtered.filter(r => r.statut === statusFilter);
-            
-            const tbody = document.getElementById('rdvTableBody');
-            if (filtered.length === 0) {
-                tbody.innerHTML = '<tr><td colspan="8" style="text-align:center;">Aucun rendez-vous trouvé</td></tr>';
-                return;
-            }
-            
-            tbody.innerHTML = filtered.map(rdv => `
-                <tr>
-                    <td>${new Date(rdv.date_creation).toLocaleDateString('fr-FR')}</td>
-                    <td><strong>${escapeHtml(rdv.nom)}</strong></td>
-                    <td><a href="tel:${rdv.telephone}" style="color:#1D8B5D;">${escapeHtml(rdv.telephone)}</a></td>
-                    <td>${escapeHtml(rdv.specialite || '-')}</td>
-                    <td>${rdv.date_rdv ? new Date(rdv.date_rdv).toLocaleDateString('fr-FR') : (rdv.flexible ? '📞 Flexible' : '-')}</td>
-                    <td>${rdv.heure_rdv || '-'}</td>
-                    <td>
-                        <select class="status-select" data-id="${rdv.id}" data-status="${rdv.statut}" style="padding:4px 8px; border-radius:20px; font-size:0.7rem;">
-                            <option value="en_attente" ${rdv.statut === 'en_attente' ? 'selected' : ''}>⏳ En attente</option>
-                            <option value="confirme" ${rdv.statut === 'confirme' ? 'selected' : ''}>✅ Confirmé</option>
-                            <option value="annule" ${rdv.statut === 'annule' ? 'selected' : ''}>❌ Annulé</option>
-                            <option value="traite" ${rdv.statut === 'traite' ? 'selected' : ''}>📋 Traité</option>
-                        </select>
-                    </td>
-                    <td>
-                        <button class="delete-rdv-btn" data-id="${rdv.id}" style="background:#fee2e2; border:none; padding:4px 8px; border-radius:20px; cursor:pointer; color:#b91c1c;">🗑️</button>
-                    </td>
-                </tr>
-            `).join('');
-            
-            // Événements pour les changements de statut
-            document.querySelectorAll('.status-select').forEach(select => {
-                select.addEventListener('change', async (e) => {
-                    const newStatus = e.target.value;
-                    const id = parseInt(e.target.dataset.id);
-                    const { error } = await supabaseClient.from('rendez_vous').update({ statut: newStatus, date_traitement: new Date().toISOString() }).eq('id', id);
-                    if (!error) { showToast('Statut mis à jour', 'success'); loadRdvs(); }
-                    else { showToast('Erreur', 'error'); }
-                });
-            });
-            
-            // Événements pour la suppression
-            document.querySelectorAll('.delete-rdv-btn').forEach(btn => {
-                btn.addEventListener('click', async (e) => {
-                    if (!confirm('Supprimer ce rendez-vous ?')) return;
-                    const id = parseInt(btn.dataset.id);
-                    const { error } = await supabaseClient.from('rendez_vous').delete().eq('id', id);
-                    if (!error) { showToast('RDV supprimé', 'success'); loadRdvs(); }
-                    else { showToast('Erreur', 'error'); }
-                });
-            });
-        }
-
-        function updateSpecialiteFilter() {
-            const specialites = [...new Set(allRdvs.map(r => r.specialite).filter(Boolean))];
-            const select = document.getElementById('filterSpecialite');
-            if (select) {
-                select.innerHTML = '<option value="">Toutes</option>' + specialites.map(s => `<option value="${escapeHtml(s)}">${escapeHtml(s)}</option>`).join('');
-            }
-        }
-
-        // Export CSV
-        document.getElementById('exportRdvBtn')?.addEventListener('click', () => {
-            let csv = "Date création,Nom,Téléphone,Spécialité,Date RDV,Heure RDV,Flexible,Statut,Message\n";
-            allRdvs.forEach(r => {
-                csv += `"${new Date(r.date_creation).toLocaleDateString('fr-FR')}","${escapeCsv(r.nom)}","${r.telephone}","${escapeCsv(r.specialite || '')}","${r.date_rdv || ''}","${r.heure_rdv || ''}","${r.flexible ? 'OUI' : 'NON'}","${r.statut}","${escapeCsv(r.message || '')}"\n`;
-            });
-            const blob = new Blob([csv], { type: 'text/csv;charset=utf-8;' });
-            const link = document.createElement('a');
-            link.href = URL.createObjectURL(blob);
-            link.download = `rdv_clinique_${new Date().toISOString().split('T')[0]}.csv`;
-            link.click();
-            showToast('Export CSV lancé', 'success');
-        });
-        
-        function escapeCsv(str) { if (!str) return ''; return str.replace(/"/g, '""'); }
-
-        // ===== CRÉATION DES ÉLÉMENTS =====
-        async function createItem(table, titre, description, horaires, badge = null) {
-            const data = { titre, description, horaires, ordre: Math.floor(Date.now() / 1000) };
-            if (badge !== null) data.badge = badge;
-            const { error } = await supabaseClient.from(table).insert([data]);
-            if (error) throw error;
-        }
-
-        // ===== MODIFICATION AVEC INTERFACE HORAIRES COMPLÈTE =====
-        async function openEditModalWithHoraires(id, table, data) {
-            currentEditItem = { id, table };
-            const title = document.getElementById('editModalTitle');
-            const body = document.getElementById('editModalBody');
-            
-            let html = '';
-            
-            if (table === 'actualites') {
-                title.innerText = "Modifier l'actualité";
-                html = `<input type="text" id="edit_titre" value="${escapeHtml(data.titre)}" placeholder="Titre">
-                        <textarea id="edit_description" rows="3">${escapeHtml(data.description||'')}</textarea>
-                        <input type="text" id="edit_date" value="${escapeHtml(data.date||'')}" placeholder="Date">`;
-            } else if (table === 'equipes') {
-                title.innerText = "Modifier le membre";
-                html = `<input type="text" id="edit_nom" value="${escapeHtml(data.nom)}" placeholder="Nom">
-                        <input type="text" id="edit_poste" value="${escapeHtml(data.poste)}" placeholder="Poste">
-                        <textarea id="edit_description" rows="3">${escapeHtml(data.description||'')}</textarea>`;
-            } else if (table === 'imagerie') {
-                title.innerText = "Modifier le service d'imagerie";
-                html = `<input type="text" id="edit_titre" value="${escapeHtml(data.titre)}" placeholder="Titre">
-                        <div class="horaires-section" style="margin-top:15px;">
-                            <label>🗓️ Horaires de consultation</label>
-                            <input type="text" id="edit_horaires" value="${escapeHtml(data.horaires||'')}" placeholder="Ex: Lundi, Mercredi : 08:00 – 17:00" style="border-radius:20px;">
-                            <small style="color:#64748b;">Format libre : indiquez les jours et heures</small>
-                        </div>`;
-            } else if (table === 'equipements') {
-                title.innerText = "Modifier le service";
-                html = `<input type="text" id="edit_titre" value="${escapeHtml(data.titre)}" placeholder="Titre">
-                        <textarea id="edit_description" rows="3">${escapeHtml(data.description||'')}</textarea>
-                        <input type="text" id="edit_badge" value="${escapeHtml(data.badge||'')}" placeholder="Badge">
-                        <div class="horaires-section" style="margin-top:15px;">
-                            <label>🗓️ Horaires</label>
-                            <input type="text" id="edit_horaires" value="${escapeHtml(data.horaires||'')}" placeholder="Ex: 24h/24, 7j/7" style="border-radius:20px;">
-                        </div>`;
-            } else {
-                title.innerText = "Modifier";
-                // Interface complète avec jours et heures
-                const horairesActuels = data.horaires || '';
-                html = `<input type="text" id="edit_titre" value="${escapeHtml(data.titre)}" placeholder="Titre">
-                        <textarea id="edit_description" rows="3">${escapeHtml(data.description||'')}</textarea>
-                        <div class="horaires-section">
-                            <label>🗓️ Jours et heures de consultation</label>
-                            <div class="jours-grid" id="editJoursGrid">
-                                <span class="jour-btn-edit" data-jour="Lundi">Lun</span>
-                                <span class="jour-btn-edit" data-jour="Mardi">Mar</span>
-                                <span class="jour-btn-edit" data-jour="Mercredi">Mer</span>
-                                <span class="jour-btn-edit" data-jour="Jeudi">Jeu</span>
-                                <span class="jour-btn-edit" data-jour="Vendredi">Ven</span>
-                                <span class="jour-btn-edit" data-jour="Samedi">Sam</span>
-                                <span class="jour-btn-edit dimanche" data-jour="Dimanche">Dim</span>
-                            </div>
-                            <div class="heures-row">
-                                <div class="h-group"><label>Heure début</label><select id="editDebut"><option value="">--</option><option>07:00</option><option>07:30</option><option>08:00</option><option>08:30</option><option>09:00</option><option>09:30</option><option>10:00</option><option>10:30</option><option>11:00</option><option>11:30</option><option>12:00</option><option>12:30</option><option>13:00</option><option>13:30</option><option>14:00</option><option>14:30</option><option>15:00</option><option>15:30</option><option>16:00</option><option>16:30</option><option>17:00</option><option>17:30</option><option>18:00</option><option>18:30</option><option>19:00</option><option>19:30</option></select></div>
-                                <div class="h-group"><label>Heure fin</label><select id="editFin"><option value="">--</option><option>08:00</option><option>08:30</option><option>09:00</option><option>09:30</option><option>10:00</option><option>10:30</option><option>11:00</option><option>11:30</option><option>12:00</option><option>12:30</option><option>13:00</option><option>13:30</option><option>14:00</option><option>14:30</option><option>15:00</option><option>15:30</option><option>16:00</option><option>16:30</option><option>17:00</option><option>17:30</option><option>18:00</option><option>18:30</option><option>19:00</option><option>19:30</option><option>20:00</option><option>21:00</option></select></div>
-                            </div>
-                            <div class="horaires-apercu" id="editApercu"></div>
-                            <small style="color:#64748b; display:block; margin-top:8px;">Laissez vide si pas d'horaires</small>
-                        </div>`;
-                
-                // Extraire les jours et heures existants si possible
-                setTimeout(() => {
-                    const editJoursGrid = document.getElementById('editJoursGrid');
-                    const editDebut = document.getElementById('editDebut');
-                    const editFin = document.getElementById('editFin');
-                    const editApercu = document.getElementById('editApercu');
-                    
-                    // Fonction pour parser les horaires existants
-                    if (horairesActuels && horairesActuels.includes('–')) {
-                        const match = horairesActuels.match(/(\d{2}:\d{2})\s*–\s*(\d{2}:\d{2})/);
-                        if (match) {
-                            if (editDebut) editDebut.value = match[1];
-                            if (editFin) editFin.value = match[2];
-                        }
-                        // Extraire les jours
-                        const joursMatch = horairesActuels.match(/^([A-Za-zéèê, ]+)\s*:/);
-                        if (joursMatch && editJoursGrid) {
-                            const joursTexte = joursMatch[1];
-                            const joursList = ['Lundi', 'Mardi', 'Mercredi', 'Jeudi', 'Vendredi', 'Samedi', 'Dimanche'];
-                            joursList.forEach(jour => {
-                                if (joursTexte.includes(jour)) {
-                                    const btn = editJoursGrid.querySelector(`[data-jour="${jour}"]`);
-                                    if (btn) btn.classList.add('actif');
-                                }
-                            });
-                        }
-                    }
-                    
-                    // Mettre à jour l'aperçu
-                    const updateEditApercu = () => {
-                        const jours = Array.from(editJoursGrid?.querySelectorAll('.jour-btn-edit.actif') || []).map(b => b.dataset.jour);
-                        const debut = editDebut?.value || '';
-                        const fin = editFin?.value || '';
-                        if (jours.length === 0 && (!debut || !fin)) { if(editApercu) editApercu.className = 'horaires-apercu'; return; }
-                        let texte = '';
-                        if (jours.length > 0) texte += jours.join(', ');
-                        if (debut && fin) texte += (texte ? ' : ' : '') + debut + ' – ' + fin;
-                        if (editApercu) { editApercu.textContent = '👁 Aperçu : ' + texte; editApercu.className = 'horaires-apercu show'; }
-                    };
-                    
-                    editJoursGrid?.querySelectorAll('.jour-btn-edit').forEach(btn => {
-                        btn.addEventListener('click', () => { btn.classList.toggle('actif'); updateEditApercu(); });
-                    });
-                    if (editDebut) editDebut.addEventListener('change', updateEditApercu);
-                    if (editFin) editFin.addEventListener('change', updateEditApercu);
-                    updateEditApercu();
-                }, 50);
-            }
-            
-            body.innerHTML = html;
-            document.getElementById('editModal').style.display = 'flex';
-        }
-
-        async function saveEditWithHoraires() {
-            const { id, table } = currentEditItem;
-            let update = {};
-            
-            if (table === 'actualites') {
-                update = { titre: document.getElementById('edit_titre').value, description: document.getElementById('edit_description').value, date: document.getElementById('edit_date').value };
-            } else if (table === 'equipes') {
-                update = { nom: document.getElementById('edit_nom').value, poste: document.getElementById('edit_poste').value, description: document.getElementById('edit_description').value };
-            } else if (table === 'imagerie') {
-                update = { titre: document.getElementById('edit_titre').value, horaires: document.getElementById('edit_horaires').value };
-            } else if (table === 'equipements') {
-                update = { titre: document.getElementById('edit_titre').value, description: document.getElementById('edit_description').value, badge: document.getElementById('edit_badge').value, horaires: document.getElementById('edit_horaires').value };
-            } else if (['specialites_medicales', 'specialites_chirurgicales', 'gynecologie', 'explorations'].includes(table)) {
-                // Construire les horaires à partir de l'interface
-                const editJoursGrid = document.getElementById('editJoursGrid');
-                const editDebut = document.getElementById('editDebut');
-                const editFin = document.getElementById('editFin');
-                const jours = Array.from(editJoursGrid?.querySelectorAll('.jour-btn-edit.actif') || []).map(b => b.dataset.jour);
-                const debut = editDebut?.value || '';
-                const fin = editFin?.value || '';
-                let horaires = '';
-                if (jours.length > 0) horaires += jours.join(', ');
-                if (debut && fin) horaires += (horaires ? ' : ' : '') + debut + ' – ' + fin;
-                update = { titre: document.getElementById('edit_titre').value, description: document.getElementById('edit_description').value, horaires: horaires };
-            } else {
-                update = { titre: document.getElementById('edit_titre').value, description: document.getElementById('edit_description').value, horaires: document.getElementById('edit_horaires')?.value || '' };
-            }
-            
-            const { error } = await supabaseClient.from(table).update(update).eq('id', id);
-            if (error) { showToast('Erreur: ' + error.message, 'error'); return; }
-            showToast('✅ Modifié avec succès', 'success');
-            document.getElementById('editModal').style.display = 'none';
-            loadAllAdminData();
-        }
-
-        // ===== CHARGEMENT DES LISTES =====
-        function horairesTag(h) { if (!h || h.trim() === '') return ''; return `<span class="horaires-badge">🕐 ${escapeHtml(h)}</span>`; }
-
-        async function loadAdminActualites() {
-            const { data } = await supabaseClient.from('actualites').select('*').order('created_at', { ascending: false });
-            const c = document.getElementById('adminActusList');
-            if (!data?.length) { c.innerHTML = '<p>Aucune actualité</p>'; return; }
-            c.innerHTML = data.map(a => `<div class="item-card"><div class="item-info">${a.image_url ? `<img src="${a.image_url}" class="preview-small">` : ''}<strong>${escapeHtml(a.titre)}</strong><div class="small">${escapeHtml(a.date||'')} — ${escapeHtml((a.description||'').substring(0,80))}</div></div><div class="item-actions"><button class="edit-btn" data-id="${a.id}" data-table="actualites">Modifier</button><button class="delete-btn" data-id="${a.id}" data-table="actualites">Supprimer</button></div></div>`).join('');
-            attachItemEvents(); document.getElementById('statActus').innerText = data.length;
-        }
-
-        async function loadAdminTeam() {
-            const { data } = await supabaseClient.from('equipes').select('*').order('ordre');
-            const c = document.getElementById('adminTeamList');
-            if (!data?.length) { c.innerHTML = '<p>Aucun membre</p>'; return; }
-            c.innerHTML = data.map(m => `<div class="item-card"><div class="item-info">${m.image_url ? `<img src="${m.image_url}" class="preview-small">` : ''}<strong>${escapeHtml(m.nom)}</strong> — ${escapeHtml(m.poste)}<div class="small">${escapeHtml(m.description||'')}</div></div><div class="item-actions"><button class="edit-btn" data-id="${m.id}" data-table="equipes">Modifier</button><button class="delete-btn" data-id="${m.id}" data-table="equipes">Supprimer</button></div></div>`).join('');
-            attachItemEvents(); document.getElementById('statEquipe').innerText = data.length;
-        }
-
-        async function loadAdminSpecMedicales() {
-            const { data } = await supabaseClient.from('specialites_medicales').select('*').order('ordre');
-            const c = document.getElementById('adminSpecMedList');
-            if (!data?.length) { c.innerHTML = '<p>Aucune spécialité</p>'; return; }
-            c.innerHTML = data.map(s => `<div class="item-card"><div class="item-info"><strong>${escapeHtml(s.titre)}</strong><div class="small">${escapeHtml(s.description||'')}</div>${horairesTag(s.horaires)}</div><div class="item-actions"><button class="edit-btn" data-id="${s.id}" data-table="specialites_medicales">Modifier</button><button class="delete-btn" data-id="${s.id}" data-table="specialites_medicales">Supprimer</button></div></div>`).join('');
-            attachItemEvents(); document.getElementById('statSpecMed').innerText = data.length;
-        }
-
-        async function loadAdminSpecChirurgicales() {
-            const { data } = await supabaseClient.from('specialites_chirurgicales').select('*').order('ordre');
-            const c = document.getElementById('adminSpecChirList');
-            if (!data?.length) { c.innerHTML = '<p>Aucune spécialité</p>'; return; }
-            c.innerHTML = data.map(s => `<div class="item-card"><div class="item-info"><strong>${escapeHtml(s.titre)}</strong><div class="small">${escapeHtml(s.description||'')}</div>${horairesTag(s.horaires)}</div><div class="item-actions"><button class="edit-btn" data-id="${s.id}" data-table="specialites_chirurgicales">Modifier</button><button class="delete-btn" data-id="${s.id}" data-table="specialites_chirurgicales">Supprimer</button></div></div>`).join('');
-            attachItemEvents(); document.getElementById('statSpecChir').innerText = data.length;
-        }
-
-        async function loadAdminGynecologie() {
-            const { data } = await supabaseClient.from('gynecologie').select('*').order('ordre');
-            const c = document.getElementById('adminGyneList');
-            if (!data?.length) { c.innerHTML = '<p>Aucun service</p>'; return; }
-            c.innerHTML = data.map(g => `<div class="item-card"><div class="item-info"><strong>${escapeHtml(g.titre)}</strong><div class="small">${escapeHtml(g.description||'')}</div>${horairesTag(g.horaires)}</div><div class="item-actions"><button class="edit-btn" data-id="${g.id}" data-table="gynecologie">Modifier</button><button class="delete-btn" data-id="${g.id}" data-table="gynecologie">Supprimer</button></div></div>`).join('');
-            attachItemEvents();
-        }
-
-        async function loadAdminExplorations() {
-            const { data } = await supabaseClient.from('explorations').select('*').order('ordre');
-            const c = document.getElementById('adminExploList');
-            if (!data?.length) { c.innerHTML = '<p>Aucune exploration</p>'; return; }
-            c.innerHTML = data.map(e => `<div class="item-card"><div class="item-info"><strong>${escapeHtml(e.titre)}</strong><div class="small">${escapeHtml(e.description||'')}</div>${horairesTag(e.horaires)}</div><div class="item-actions"><button class="edit-btn" data-id="${e.id}" data-table="explorations">Modifier</button><button class="delete-btn" data-id="${e.id}" data-table="explorations">Supprimer</button></div></div>`).join('');
-            attachItemEvents();
-        }
-
-        async function loadAdminImagerie() {
-            const { data } = await supabaseClient.from('imagerie').select('*').order('ordre');
-            const c = document.getElementById('adminImagerieList');
-            if (!data?.length) { c.innerHTML = '<p>Aucun service</p>'; return; }
-            c.innerHTML = data.map(i => `<div class="item-card"><div class="item-info"><strong>${escapeHtml(i.titre)}</strong>${horairesTag(i.horaires)}</div><div class="item-actions"><button class="edit-btn" data-id="${i.id}" data-table="imagerie">Modifier</button><button class="delete-btn" data-id="${i.id}" data-table="imagerie">Supprimer</button></div></div>`).join('');
-            attachItemEvents();
-        }
-
-        async function loadAdminDialyse() {
-            const { data } = await supabaseClient.from('equipements').select('*').order('ordre');
-            const c = document.getElementById('adminDialyseList');
-            if (!data?.length) { c.innerHTML = '<p>Aucun service</p>'; return; }
-            c.innerHTML = data.map(e => `<div class="item-card"><div class="item-info"><strong>${escapeHtml(e.titre)}</strong>${e.badge ? `<span style="background:#1D8B5D;color:white;padding:2px 8px;border-radius:20px;font-size:0.6rem;margin-left:8px;">${escapeHtml(e.badge)}</span>` : ''}<div class="small">${escapeHtml(e.description||'')}</div>${horairesTag(e.horaires)}</div><div class="item-actions"><button class="edit-btn" data-id="${e.id}" data-table="equipements">Modifier</button><button class="delete-btn" data-id="${e.id}" data-table="equipements">Supprimer</button></div></div>`).join('');
-            attachItemEvents();
-        }
-
-        async function loadAllAdminData() {
-            if (!supabaseClient) return;
-            await Promise.all([
-                loadAdminActualites(), loadAdminTeam(),
-                loadAdminSpecMedicales(), loadAdminSpecChirurgicales(),
-                loadAdminGynecologie(), loadAdminExplorations(),
-                loadAdminImagerie(), loadAdminDialyse(), loadBandeauSettings(), loadRdvs()
-            ]);
-        }
-
-        function attachItemEvents() {
-            document.querySelectorAll('.edit-btn').forEach(btn => { btn.replaceWith(btn.cloneNode(true)); });
-            document.querySelectorAll('.delete-btn').forEach(btn => { btn.replaceWith(btn.cloneNode(true)); });
-            document.querySelectorAll('.edit-btn').forEach(btn => btn.addEventListener('click', async (e) => {
-                const id = e.currentTarget.getAttribute('data-id');
-                const table = e.currentTarget.getAttribute('data-table');
-                const { data } = await supabaseClient.from(table).select('*').eq('id', id).single();
-                if (data) openEditModalWithHoraires(id, table, data);
-            }));
-            document.querySelectorAll('.delete-btn').forEach(btn => btn.addEventListener('click', async (e) => {
-                const id = e.currentTarget.getAttribute('data-id');
-                const table = e.currentTarget.getAttribute('data-table');
-                if (!confirm('Supprimer définitivement ?')) return;
-                const { error } = await supabaseClient.from(table).delete().eq('id', id);
-                if (error) { showToast('Erreur: ' + error.message, 'error'); return; }
-                showToast('✅ Élément supprimé', 'success'); loadAllAdminData();
-            }));
-        }
-
+        // ==================== ATTACHEMENT DES ÉVÉNEMENTS DE CRÉATION ====================
         function attachCreateListeners() {
             document.getElementById('saveBandeauBtn')?.addEventListener('click', saveBandeau);
             document.getElementById('bandeauMessage')?.addEventListener('input', updateBandeauPreview);
@@ -1093,7 +1096,6 @@
             document.getElementById('filterSpecialite')?.addEventListener('change', () => renderRdvTable());
             document.getElementById('filterStatus')?.addEventListener('change', () => renderRdvTable());
 
-            // Spécialités médicales
             document.getElementById('createSpecMedBtn')?.addEventListener('click', async () => {
                 const titre = document.getElementById('specMedTitre').value.trim();
                 if (!titre) { showToast('Titre requis', 'error'); return; }
@@ -1213,21 +1215,10 @@
             });
         }
 
-        function escapeHtml(str) { if (!str) return ''; return str.replace(/[&<>]/g, m => m==='&'?'&amp;':m==='<'?'&lt;':'&gt;'); }
-
-        function initAllHorairesToggles() {
-            initHorairesToggle('SpecMed', 'specMedHorairesContent', 'specMedHasHoraires');
-            initHorairesToggle('SpecChir', 'specChirHorairesContent', 'specChirHasHoraires');
-            initHorairesToggle('Gyne', 'gyneHorairesContent', 'gyneHasHoraires');
-            initHorairesToggle('Explo', 'exploHorairesContent', 'exploHasHoraires');
-            initHorairesToggle('Imagerie', 'imagerieHorairesContent', 'imagerieHasHoraires');
-            initHorairesToggle('Dialyse', 'dialyseHorairesContent', 'dialyseHasHoraires');
-        }
-
         async function initAdmin() {
             try {
-                const mod = await loadSupabase();
-                supabaseClient = mod.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+                const { createClient } = supabase;
+                supabaseClient = createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
                 initJoursBtns();
                 initAllHorairesToggles();
                 await loadAllAdminData();
