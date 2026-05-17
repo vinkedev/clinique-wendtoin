@@ -581,7 +581,7 @@
     <section id="imagerie"><div class="container"><h2 class="section-title animate-on-scroll">Imagerie</h2><div id="imagerieList" class="specialty-grid"><div class="skeleton skeleton-text" style="height: 80px; margin: 10px;"></div></div></div></section>
     <section id="poles"><div class="container"><h2 class="section-title animate-on-scroll">Centre de Dialyse</h2><div id="equipementsList" class="specialty-grid"><div class="skeleton skeleton-text" style="height: 80px; margin: 10px;"></div></div></div></section>
 
-    <!-- SECTION RDV AVEC CALENDRIER ET ENREGISTREMENT SUPABASE -->
+    <!-- SECTION RDV AVEC CALENDRIER ET ENREGISTREMENT SUPABASE (SANS TÉLÉPHONE NI OPTION FLEXIBLE) -->
     <section id="rdv">
         <div class="container">
             <h2 class="section-title animate-on-scroll">Prendre rendez-vous</h2>
@@ -596,9 +596,6 @@
                             <input type="text" id="rdvNom" placeholder="Nom complet *" required>
                         </div>
                         <div class="form-group">
-                            <input type="tel" id="rdvTelephone" placeholder="Téléphone *" required>
-                        </div>
-                        <div class="form-group">
                             <select id="rdvSpecialite" required>
                                 <option value="">Sélectionnez une spécialité</option>
                                 <option>Consultation générale</option><option>Cardiologie</option><option>Gynécologie - Obstétrique</option>
@@ -610,11 +607,11 @@
                         <div id="horaireInfo"></div>
                         <div class="form-group">
                             <label style="font-size:0.8rem; font-weight:500;">📅 Date souhaitée</label>
-                            <input type="date" id="rdvDate" min="">
+                            <input type="date" id="rdvDate" min="" required>
                         </div>
                         <div class="form-group">
                             <label style="font-size:0.8rem; font-weight:500;">⏰ Heure souhaitée</label>
-                            <select id="rdvHeure">
+                            <select id="rdvHeure" required>
                                 <option value="">Sélectionnez une heure</option>
                                 <option>08:00</option><option>08:30</option><option>09:00</option><option>09:30</option>
                                 <option>10:00</option><option>10:30</option><option>11:00</option><option>11:30</option>
@@ -623,12 +620,6 @@
                                 <option>16:00</option><option>16:30</option><option>17:00</option><option>17:30</option>
                                 <option>18:00</option><option>18:30</option><option>19:00</option><option>19:30</option>
                             </select>
-                        </div>
-                        <div class="form-group">
-                            <label style="display:flex; align-items:center; gap:8px;">
-                                <input type="checkbox" id="rdvFlexible"> 
-                                📞 Je suis flexible, contactez-moi
-                            </label>
                         </div>
                         <div class="form-group">
                             <textarea id="rdvMessage" rows="2" placeholder="Message complémentaire (optionnel)"></textarea>
@@ -843,14 +834,13 @@
             initHorairesAffichage();
         }
 
-        // ===== GESTION DU FORMULAIRE RDV AVEC SUPABASE =====
+        // ===== GESTION DU FORMULAIRE RDV AVEC SUPABASE (SANS TÉLÉPHONE NI FLEXIBLE) =====
         async function initRdvForm() {
             const rdvForm = document.getElementById('rdvForm');
             const rdvSubmitBtn = document.getElementById('rdvSubmitBtn');
             const rdvSuccessMsg = document.getElementById('rdvSuccessMsg');
             const rdvDateInput = document.getElementById('rdvDate');
             const rdvHeureSelect = document.getElementById('rdvHeure');
-            const rdvFlexibleCheck = document.getElementById('rdvFlexible');
             
             if (rdvDateInput) {
                 const today = new Date().toISOString().split('T')[0];
@@ -858,45 +848,30 @@
                 rdvDateInput.value = today;
             }
             
-            if (rdvFlexibleCheck) {
-                rdvFlexibleCheck.addEventListener('change', function() {
-                    const isFlexible = this.checked;
-                    if (rdvDateInput) rdvDateInput.disabled = isFlexible;
-                    if (rdvHeureSelect) rdvHeureSelect.disabled = isFlexible;
-                    if (isFlexible) {
-                        if (rdvDateInput) rdvDateInput.value = '';
-                        if (rdvHeureSelect) rdvHeureSelect.value = '';
-                    } else {
-                        if (rdvDateInput) rdvDateInput.value = new Date().toISOString().split('T')[0];
-                    }
-                });
-            }
-            
             if (rdvForm) {
                 rdvForm.addEventListener('submit', async function(e) {
                     e.preventDefault();
                     
                     const nom = document.getElementById('rdvNom')?.value.trim();
-                    const telephone = document.getElementById('rdvTelephone')?.value.trim();
                     const specialite = document.getElementById('rdvSpecialite')?.value;
+                    const date = rdvDateInput?.value || null;
+                    const heure = rdvHeureSelect?.value || null;
                     
                     if (!nom) { showToast('Veuillez entrer votre nom', 'error'); return; }
-                    if (!telephone) { showToast('Veuillez entrer votre téléphone', 'error'); return; }
                     if (!specialite) { showToast('Veuillez sélectionner une spécialité', 'error'); return; }
+                    if (!date) { showToast('Veuillez sélectionner une date', 'error'); return; }
+                    if (!heure) { showToast('Veuillez sélectionner une heure', 'error'); return; }
                     
                     if (rdvSubmitBtn) {
                         rdvSubmitBtn.disabled = true;
                         rdvSubmitBtn.innerHTML = 'Envoi en cours...';
                     }
                     
-                    const isFlexible = rdvFlexibleCheck?.checked || false;
                     const rdvData = {
                         nom: nom,
-                        telephone: telephone,
                         specialite: specialite,
-                        date_rdv: (!isFlexible && rdvDateInput?.value) ? rdvDateInput.value : null,
-                        heure_rdv: (!isFlexible && rdvHeureSelect?.value) ? rdvHeureSelect.value : null,
-                        flexible: isFlexible,
+                        date_rdv: date,
+                        heure_rdv: heure,
                         message: document.getElementById('rdvMessage')?.value || null,
                         statut: 'en_attente',
                         date_creation: new Date().toISOString()
@@ -910,11 +885,9 @@
                         
                         const messageWA = `📋 *NOUVEAU RDV - SITE WEB*%0A%0A` +
                             `👤 Patient : ${encodeURIComponent(nom)}%0A` +
-                            `📞 Tél : ${encodeURIComponent(telephone)}%0A` +
                             `🏥 Spécialité : ${encodeURIComponent(specialite)}%0A` +
-                            (rdvData.date_rdv ? `📅 Date : ${rdvData.date_rdv}%0A` : '') +
-                            (rdvData.heure_rdv ? `⏰ Heure : ${rdvData.heure_rdv}%0A` : '') +
-                            (isFlexible ? `🔄 Flexible : OUI (contacter patient)%0A` : '') +
+                            `📅 Date : ${date}%0A` +
+                            `⏰ Heure : ${heure}%0A` +
                             (rdvData.message ? `💬 Message : ${encodeURIComponent(rdvData.message)}%0A` : '');
                         
                         window.open(`https://wa.me/22651000647?text=${messageWA}`, '_blank');
@@ -923,9 +896,6 @@
                         if (rdvSuccessMsg) rdvSuccessMsg.style.display = 'block';
                         rdvForm.reset();
                         if (rdvDateInput) rdvDateInput.value = new Date().toISOString().split('T')[0];
-                        if (rdvFlexibleCheck) rdvFlexibleCheck.checked = false;
-                        if (rdvDateInput) rdvDateInput.disabled = false;
-                        if (rdvHeureSelect) rdvHeureSelect.disabled = false;
                         
                         setTimeout(() => { if (rdvSuccessMsg) rdvSuccessMsg.style.display = 'none'; }, 5000);
                     } catch (error) {
