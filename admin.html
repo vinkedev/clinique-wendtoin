@@ -26,163 +26,161 @@
         .btn-logout { background: #dc3545; color: white; border: none; padding: 8px 20px; border-radius: 40px; cursor: pointer; font-weight: 600; transition: all 0.3s; }
         .btn-logout:hover { background: #b91c1c; transform: translateY(-2px); }
         
-        .tabs-wrapper {
-            position: relative;
-            margin-bottom: 25px;
-        }
+        .tabs-wrapper { position: relative; margin-bottom: 25px; }
         .tabs {
-            display: flex;
-            gap: 8px;
-            background: white;
-            padding: 12px 20px;
-            border-radius: 20px;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.05);
-            overflow-x: auto;
-            overflow-y: hidden;
-            scroll-behavior: smooth;
-            -webkit-overflow-scrolling: touch;
-            scrollbar-width: thin;
+            display: flex; gap: 8px; background: white; padding: 12px 20px;
+            border-radius: 20px; box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+            overflow-x: auto; overflow-y: hidden; scroll-behavior: smooth;
+            -webkit-overflow-scrolling: touch; scrollbar-width: thin;
         }
-        .tabs::-webkit-scrollbar {
-            height: 4px;
-        }
-        .tabs::-webkit-scrollbar-track {
-            background: #e2e8f0;
-            border-radius: 10px;
-        }
-        .tabs::-webkit-scrollbar-thumb {
-            background: #1D8B5D;
-            border-radius: 10px;
-        }
+        .tabs::-webkit-scrollbar { height: 4px; }
+        .tabs::-webkit-scrollbar-track { background: #e2e8f0; border-radius: 10px; }
+        .tabs::-webkit-scrollbar-thumb { background: #1D8B5D; border-radius: 10px; }
         .tab-btn {
-            background: transparent;
-            border: none;
-            padding: 8px 20px;
-            font-weight: 600;
-            border-radius: 40px;
-            cursor: pointer;
-            transition: 0.2s;
-            white-space: nowrap;
-            flex-shrink: 0;
+            background: transparent; border: none; padding: 8px 20px; font-weight: 600;
+            border-radius: 40px; cursor: pointer; transition: 0.2s; white-space: nowrap; flex-shrink: 0;
         }
         .tab-btn:hover { background: #e2e8f0; }
         .tab-btn.active { background: #1D8B5D; color: white; }
+        .scroll-indicator { display: none; position: absolute; right: 10px; top: 50%; transform: translateY(-50%); background: linear-gradient(90deg, transparent, white); padding-left: 30px; pointer-events: none; }
+        @media (max-width: 768px) { .scroll-indicator { display: block; } }
         
-        .scroll-indicator {
-            display: none;
-            position: absolute;
-            right: 10px;
-            top: 50%;
-            transform: translateY(-50%);
-            background: linear-gradient(90deg, transparent, white);
-            padding-left: 30px;
-            pointer-events: none;
-        }
-        @media (max-width: 768px) {
-            .tabs-wrapper { position: relative; }
-            .scroll-indicator { display: block; }
-        }
-        
-        .tab-pane {
-            display: none;
-            background: white;
-            border-radius: 28px;
-            padding: 25px;
-            margin-bottom: 30px;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
-        }
+        .tab-pane { display: none; background: white; border-radius: 28px; padding: 25px; margin-bottom: 30px; box-shadow: 0 4px 15px rgba(0,0,0,0.05); }
         .tab-pane.active { display: block; animation: fadeIn 0.3s ease; }
         @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
         
-        .form-admin {
-            background: #f8fafc;
-            padding: 20px;
-            border-radius: 20px;
-            margin-bottom: 30px;
-        }
+        .form-admin { background: #f8fafc; padding: 20px; border-radius: 20px; margin-bottom: 30px; }
         .form-admin h3 { margin-bottom: 15px; color: #0077A4; font-size: 1.1rem; }
         .form-admin input, .form-admin textarea, .form-admin select {
-            width: 100%;
-            padding: 12px 15px;
-            margin-bottom: 15px;
-            border: 1px solid #e2e8f0;
-            border-radius: 40px;
-            font-family: inherit;
-            font-size: 0.9rem;
-            transition: all 0.3s;
+            width: 100%; padding: 12px 15px; margin-bottom: 15px;
+            border: 1px solid #e2e8f0; border-radius: 40px;
+            font-family: inherit; font-size: 0.9rem; transition: all 0.3s;
         }
         .form-admin input:focus, .form-admin textarea:focus, .form-admin select:focus {
-            outline: none;
-            border-color: #1D8B5D;
-            box-shadow: 0 0 0 3px rgba(29,139,93,0.1);
+            outline: none; border-color: #1D8B5D; box-shadow: 0 0 0 3px rgba(29,139,93,0.1);
         }
         .form-admin textarea { border-radius: 20px; resize: vertical; }
-        
-        .file-input-label {
-            background: #e2e8f0;
-            padding: 12px 20px;
-            border-radius: 40px;
-            cursor: pointer;
-            display: inline-block;
+
+        /* ===== HORAIRES (optionnel pour toutes les tables) ===== */
+        .horaires-section {
+            background: white;
+            border: 1px solid #e2e8f0;
+            border-radius: 16px;
+            padding: 16px;
             margin-bottom: 15px;
-            font-size: 0.85rem;
+        }
+        .horaires-section label {
+            display: block;
+            font-size: 0.8rem;
+            font-weight: 600;
+            color: #0077A4;
+            margin-bottom: 10px;
+            padding: 0;
+            width: auto;
+        }
+        .horaires-toggle {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 15px;
+            padding-bottom: 10px;
+            border-bottom: 1px dashed #e2e8f0;
+        }
+        .horaires-toggle input {
+            width: auto;
+            margin: 0;
+            transform: scale(1.2);
+            cursor: pointer;
+        }
+        .horaires-toggle span {
+            font-size: 0.8rem;
+            color: #64748b;
+            cursor: pointer;
+        }
+        .horaires-content {
+            transition: all 0.3s ease;
+        }
+        .horaires-content.disabled {
+            opacity: 0.5;
+            pointer-events: none;
+        }
+        .jours-grid {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 6px;
+            margin-bottom: 14px;
+        }
+        .jour-btn {
+            padding: 7px 13px;
+            border: 1.5px solid #e2e8f0;
+            border-radius: 30px;
+            cursor: pointer;
+            font-size: 0.78rem;
+            font-weight: 600;
+            background: white;
+            color: #64748b;
+            transition: all 0.2s;
+            user-select: none;
+        }
+        .jour-btn:hover { border-color: #0077A4; color: #0077A4; }
+        .jour-btn.actif { background: #0077A4; color: white; border-color: #0077A4; }
+        .jour-btn.dimanche:hover { border-color: #dc3545; color: #dc3545; }
+        .jour-btn.dimanche.actif { background: #dc3545; border-color: #dc3545; color: white; }
+        .heures-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 10px;
+        }
+        .heures-row .h-group label {
+            font-size: 0.72rem;
+            color: #64748b;
+            margin-bottom: 4px;
             font-weight: 500;
-            transition: all 0.3s;
+        }
+        .heures-row select {
+            margin-bottom: 0 !important;
+            border-radius: 30px !important;
+            padding: 9px 12px !important;
+            font-size: 0.85rem !important;
+        }
+        .horaires-apercu {
+            margin-top: 12px;
+            padding: 9px 14px;
+            background: #e0f2fe;
+            border-radius: 30px;
+            font-size: 0.78rem;
+            color: #0369a1;
+            font-weight: 500;
+            display: none;
+        }
+        .horaires-apercu.show { display: block; }
+
+        .file-input-label {
+            background: #e2e8f0; padding: 12px 20px; border-radius: 40px;
+            cursor: pointer; display: inline-block; margin-bottom: 15px;
+            font-size: 0.85rem; font-weight: 500; transition: all 0.3s;
         }
         .file-input-label:hover { background: #cbd5e1; transform: translateY(-2px); }
-        .preview-img {
-            max-width: 100px;
-            max-height: 100px;
-            border-radius: 12px;
-            margin: 10px 0;
-            object-fit: cover;
-        }
+        .preview-img { max-width: 100px; max-height: 100px; border-radius: 12px; margin: 10px 0; object-fit: cover; }
         
-        .btn-save {
-            background: #1D8B5D;
-            color: white;
-            border: none;
-            padding: 10px 24px;
-            border-radius: 40px;
-            cursor: pointer;
-            font-weight: 600;
-            transition: 0.3s;
-        }
+        .btn-save { background: #1D8B5D; color: white; border: none; padding: 10px 24px; border-radius: 40px; cursor: pointer; font-weight: 600; transition: 0.3s; }
         .btn-save:hover { background: #146b48; transform: translateY(-2px); }
         
         .item-list { margin-top: 20px; }
         .item-list h4 { margin-bottom: 15px; color: #1e293b; }
         .item-card {
-            background: #f8fafc;
-            padding: 15px;
-            border-radius: 20px;
-            margin-bottom: 12px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            flex-wrap: wrap;
-            gap: 10px;
-            border: 1px solid #eef2f6;
-            transition: all 0.3s;
+            background: #f8fafc; padding: 15px; border-radius: 20px; margin-bottom: 12px;
+            display: flex; justify-content: space-between; align-items: center;
+            flex-wrap: wrap; gap: 10px; border: 1px solid #eef2f6; transition: all 0.3s;
         }
-        .item-card:hover {
-            transform: translateX(5px);
-            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
-        }
+        .item-card:hover { transform: translateX(5px); box-shadow: 0 2px 8px rgba(0,0,0,0.1); }
         .item-info { flex: 1; }
         .item-info strong { color: #0077A4; }
         .item-info .small { font-size: 0.75rem; color: #64748b; margin-top: 4px; }
+        .item-info .horaires-badge { display: inline-block; background: #e0f2fe; color: #0369a1; padding: 2px 10px; border-radius: 20px; font-size: 0.65rem; font-weight: 600; margin-top: 5px; }
         .item-info .preview-small { width: 40px; height: 40px; border-radius: 50%; object-fit: cover; margin-right: 10px; vertical-align: middle; }
-        
         .item-actions { display: flex; gap: 8px; }
-        .item-actions button { 
-            background: #e2e8f0; 
-            border: none; 
-            padding: 6px 14px; 
-            border-radius: 30px; 
-            cursor: pointer;
-            transition: all 0.3s;
-        }
+        .item-actions button { background: #e2e8f0; border: none; padding: 6px 14px; border-radius: 30px; cursor: pointer; transition: all 0.3s; }
         .item-actions button:hover { transform: translateY(-2px); }
         .item-actions .delete-btn { background: #fee2e2; color: #b91c1c; }
         .item-actions .delete-btn:hover { background: #fecaca; }
@@ -191,124 +189,53 @@
         
         .stats-row { display: flex; gap: 15px; flex-wrap: wrap; margin-bottom: 20px; }
         .stat-card {
-            background: linear-gradient(135deg, #0077A4, #1D8B5D);
-            color: white;
-            padding: 15px 25px;
-            border-radius: 24px;
-            flex: 1;
-            min-width: 150px;
-            transition: all 0.3s;
-            cursor: pointer;
+            background: linear-gradient(135deg, #0077A4, #1D8B5D); color: white;
+            padding: 15px 25px; border-radius: 24px; flex: 1; min-width: 150px;
+            transition: all 0.3s; cursor: pointer;
         }
-        .stat-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
-        }
-        .stat-card .number { 
-            font-size: 1.8rem; 
-            font-weight: 800;
-            transition: all 0.3s;
-        }
+        .stat-card:hover { transform: translateY(-5px); box-shadow: 0 10px 25px rgba(0,0,0,0.1); }
+        .stat-card .number { font-size: 1.8rem; font-weight: 800; transition: all 0.3s; }
         .stat-card:hover .number { transform: scale(1.1); }
         .stat-card .label { font-size: 0.8rem; opacity: 0.9; }
         
-        /* Preview bandeau */
-        .bandeau-preview {
-            margin-top: 20px;
-            padding: 15px;
-            border-radius: 16px;
-            text-align: center;
-            font-weight: 600;
-            transition: all 0.3s;
-        }
+        .bandeau-preview { margin-top: 20px; padding: 15px; border-radius: 16px; text-align: center; font-weight: 600; transition: all 0.3s; }
         
         .toast-notification {
-            position: fixed;
-            bottom: 20px;
-            left: 50%;
-            transform: translateX(-50%) translateY(100px);
-            background: #1D8B5D;
-            color: white;
-            padding: 12px 24px;
-            border-radius: 50px;
-            font-weight: 500;
-            z-index: 3000;
-            transition: transform 0.3s ease;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
-            display: flex;
-            align-items: center;
-            gap: 10px;
+            position: fixed; bottom: 20px; left: 50%; transform: translateX(-50%) translateY(100px);
+            background: #1D8B5D; color: white; padding: 12px 24px; border-radius: 50px;
+            font-weight: 500; z-index: 3000; transition: transform 0.3s ease;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2); display: flex; align-items: center; gap: 10px;
         }
         .toast-notification.show { transform: translateX(-50%) translateY(0); }
         .toast-notification.error { background: #dc3545; }
         .toast-notification.success { background: #1D8B5D; }
         
         .edit-modal {
-            display: none;
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0,0,0,0.5);
-            z-index: 2000;
-            align-items: center;
-            justify-content: center;
-            animation: fadeIn 0.3s ease;
+            display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(0,0,0,0.5); z-index: 2000; align-items: center; justify-content: center; animation: fadeIn 0.3s ease;
         }
         .edit-modal-content {
-            background: white;
-            border-radius: 28px;
-            padding: 25px;
-            max-width: 500px;
-            width: 90%;
-            max-height: 85vh;
-            overflow-y: auto;
-            animation: slideUp 0.3s ease;
+            background: white; border-radius: 28px; padding: 25px;
+            max-width: 520px; width: 90%; max-height: 85vh; overflow-y: auto; animation: slideUp 0.3s ease;
         }
-        @keyframes slideUp {
-            from { transform: translateY(50px); opacity: 0; }
-            to { transform: translateY(0); opacity: 1; }
-        }
+        @keyframes slideUp { from { transform: translateY(50px); opacity: 0; } to { transform: translateY(0); opacity: 1; } }
         .edit-modal-content h3 { margin-bottom: 20px; color: #0077A4; }
         .edit-modal-content input, .edit-modal-content textarea {
-            width: 100%;
-            padding: 10px 14px;
-            margin-bottom: 15px;
-            border: 1px solid #ddd;
-            border-radius: 20px;
-            font-family: inherit;
+            width: 100%; padding: 10px 14px; margin-bottom: 15px;
+            border: 1px solid #ddd; border-radius: 20px; font-family: inherit;
         }
         .edit-modal-content input:focus, .edit-modal-content textarea:focus {
-            outline: none;
-            border-color: #1D8B5D;
-            box-shadow: 0 0 0 3px rgba(29,139,93,0.1);
+            outline: none; border-color: #1D8B5D; box-shadow: 0 0 0 3px rgba(29,139,93,0.1);
         }
         .edit-modal-buttons { display: flex; gap: 10px; justify-content: flex-end; margin-top: 15px; }
         .btn-cancel { background: #64748b; color: white; border: none; padding: 8px 20px; border-radius: 40px; cursor: pointer; }
         .btn-cancel:hover { background: #475569; transform: translateY(-2px); }
         
         .loading-screen {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: white;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            z-index: 9999;
-            transition: opacity 0.5s;
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            background: white; display: flex; justify-content: center; align-items: center; z-index: 9999; transition: opacity 0.5s;
         }
-        .loading-spinner {
-            width: 50px;
-            height: 50px;
-            border: 4px solid #e2e8f0;
-            border-top-color: #1D8B5D;
-            border-radius: 50%;
-            animation: spin 0.8s linear infinite;
-        }
+        .loading-spinner { width: 50px; height: 50px; border: 4px solid #e2e8f0; border-top-color: #1D8B5D; border-radius: 50%; animation: spin 0.8s linear infinite; }
         @keyframes spin { to { transform: rotate(360deg); } }
         
         @media (max-width: 768px) {
@@ -316,7 +243,23 @@
             .item-card { flex-direction: column; align-items: flex-start; }
             .item-actions { width: 100%; justify-content: flex-end; }
             .stat-card .number { font-size: 1.4rem; }
-            .stat-card .label { font-size: 0.7rem; }
+            .jours-grid { gap: 4px; }
+            .jour-btn { padding: 6px 10px; font-size: 0.72rem; }
+        }
+        
+        .info-optionnel {
+            background: #fef3c7;
+            padding: 8px 12px;
+            border-radius: 12px;
+            font-size: 0.7rem;
+            color: #92400e;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        .info-optionnel::before {
+            content: "💡";
         }
     </style>
 </head>
@@ -333,22 +276,10 @@
             </div>
 
             <div class="stats-row" id="statsContainer">
-                <div class="stat-card" data-tab="actualites">
-                    <div class="number" id="statActus">0</div>
-                    <div class="label">Actualités</div>
-                </div>
-                <div class="stat-card" data-tab="equipe">
-                    <div class="number" id="statEquipe">0</div>
-                    <div class="label">Membres équipe</div>
-                </div>
-                <div class="stat-card" data-tab="specMedicales">
-                    <div class="number" id="statSpecMed">0</div>
-                    <div class="label">Spécialités médicales</div>
-                </div>
-                <div class="stat-card" data-tab="specChirurgicales">
-                    <div class="number" id="statSpecChir">0</div>
-                    <div class="label">Spécialités chirurgicales</div>
-                </div>
+                <div class="stat-card" data-tab="actualites"><div class="number" id="statActus">0</div><div class="label">Actualités</div></div>
+                <div class="stat-card" data-tab="equipe"><div class="number" id="statEquipe">0</div><div class="label">Membres équipe</div></div>
+                <div class="stat-card" data-tab="specMedicales"><div class="number" id="statSpecMed">0</div><div class="label">Spécialités médicales</div></div>
+                <div class="stat-card" data-tab="specChirurgicales"><div class="number" id="statSpecChir">0</div><div class="label">Spécialités chirurgicales</div></div>
             </div>
 
             <div class="tabs-wrapper">
@@ -390,8 +321,54 @@
             <div id="specMedicales" class="tab-pane">
                 <div class="form-admin">
                     <h3>Ajouter une spécialité médicale</h3>
-                    <input type="text" id="specMedTitre" placeholder="Nom (ex: Cardiologie)">
-                    <textarea id="specMedDesc" rows="2" placeholder="Description"></textarea>
+                    <input type="text" id="specMedTitre" placeholder="Nom (ex: Cardiologie) *">
+                    <textarea id="specMedDesc" rows="2" placeholder="Description (optionnel)"></textarea>
+                    <div class="horaires-section">
+                        <div class="horaires-toggle">
+                            <input type="checkbox" id="specMedHasHoraires">
+                            <span>Ajouter des horaires de consultation (optionnel)</span>
+                        </div>
+                        <div id="specMedHorairesContent" class="horaires-content disabled">
+                            <div class="jours-grid" id="joursSpecMed">
+                                <span class="jour-btn" data-jour="Lundi">Lun</span>
+                                <span class="jour-btn" data-jour="Mardi">Mar</span>
+                                <span class="jour-btn" data-jour="Mercredi">Mer</span>
+                                <span class="jour-btn" data-jour="Jeudi">Jeu</span>
+                                <span class="jour-btn" data-jour="Vendredi">Ven</span>
+                                <span class="jour-btn" data-jour="Samedi">Sam</span>
+                                <span class="jour-btn dimanche" data-jour="Dimanche">Dim</span>
+                            </div>
+                            <div class="heures-row">
+                                <div class="h-group">
+                                    <label>Heure début</label>
+                                    <select id="debutSpecMed">
+                                        <option value="">--</option>
+                                        <option>07:00</option><option>07:30</option><option>08:00</option><option>08:30</option>
+                                        <option>09:00</option><option>09:30</option><option>10:00</option><option>10:30</option>
+                                        <option>11:00</option><option>11:30</option><option>12:00</option><option>12:30</option>
+                                        <option>13:00</option><option>13:30</option><option>14:00</option><option>14:30</option>
+                                        <option>15:00</option><option>15:30</option><option>16:00</option><option>16:30</option>
+                                        <option>17:00</option><option>17:30</option><option>18:00</option><option>18:30</option>
+                                        <option>19:00</option><option>19:30</option>
+                                    </select>
+                                </div>
+                                <div class="h-group">
+                                    <label>Heure fin</label>
+                                    <select id="finSpecMed">
+                                        <option value="">--</option>
+                                        <option>08:00</option><option>08:30</option><option>09:00</option><option>09:30</option>
+                                        <option>10:00</option><option>10:30</option><option>11:00</option><option>11:30</option>
+                                        <option>12:00</option><option>12:30</option><option>13:00</option><option>13:30</option>
+                                        <option>14:00</option><option>14:30</option><option>15:00</option><option>15:30</option>
+                                        <option>16:00</option><option>16:30</option><option>17:00</option><option>17:30</option>
+                                        <option>18:00</option><option>18:30</option><option>19:00</option><option>19:30</option>
+                                        <option>20:00</option><option>21:00</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="horaires-apercu" id="apercuSpecMed"></div>
+                        </div>
+                    </div>
                     <button id="createSpecMedBtn" class="btn-save">Ajouter</button>
                 </div>
                 <div class="item-list"><h4>Liste des spécialités médicales</h4><div id="adminSpecMedList">Chargement...</div></div>
@@ -401,8 +378,30 @@
             <div id="specChirurgicales" class="tab-pane">
                 <div class="form-admin">
                     <h3>Ajouter une spécialité chirurgicale</h3>
-                    <input type="text" id="specChirTitre" placeholder="Nom">
-                    <textarea id="specChirDesc" rows="2" placeholder="Description"></textarea>
+                    <input type="text" id="specChirTitre" placeholder="Nom *">
+                    <textarea id="specChirDesc" rows="2" placeholder="Description (optionnel)"></textarea>
+                    <div class="horaires-section">
+                        <div class="horaires-toggle">
+                            <input type="checkbox" id="specChirHasHoraires">
+                            <span>Ajouter des horaires de consultation (optionnel)</span>
+                        </div>
+                        <div id="specChirHorairesContent" class="horaires-content disabled">
+                            <div class="jours-grid" id="joursSpecChir">
+                                <span class="jour-btn" data-jour="Lundi">Lun</span>
+                                <span class="jour-btn" data-jour="Mardi">Mar</span>
+                                <span class="jour-btn" data-jour="Mercredi">Mer</span>
+                                <span class="jour-btn" data-jour="Jeudi">Jeu</span>
+                                <span class="jour-btn" data-jour="Vendredi">Ven</span>
+                                <span class="jour-btn" data-jour="Samedi">Sam</span>
+                                <span class="jour-btn dimanche" data-jour="Dimanche">Dim</span>
+                            </div>
+                            <div class="heures-row">
+                                <div class="h-group"><label>Heure début</label><select id="debutSpecChir">【option】</select></div>
+                                <div class="h-group"><label>Heure fin</label><select id="finSpecChir">【option】</select></div>
+                            </div>
+                            <div class="horaires-apercu" id="apercuSpecChir"></div>
+                        </div>
+                    </div>
                     <button id="createSpecChirBtn" class="btn-save">Ajouter</button>
                 </div>
                 <div class="item-list"><h4>Liste des spécialités chirurgicales</h4><div id="adminSpecChirList">Chargement...</div></div>
@@ -412,8 +411,30 @@
             <div id="gynecologie" class="tab-pane">
                 <div class="form-admin">
                     <h3>Ajouter un service de gynécologie</h3>
-                    <input type="text" id="gyneTitre" placeholder="Titre">
-                    <textarea id="gyneDesc" rows="2" placeholder="Description"></textarea>
+                    <input type="text" id="gyneTitre" placeholder="Titre *">
+                    <textarea id="gyneDesc" rows="2" placeholder="Description (optionnel)"></textarea>
+                    <div class="horaires-section">
+                        <div class="horaires-toggle">
+                            <input type="checkbox" id="gyneHasHoraires">
+                            <span>Ajouter des horaires de consultation (optionnel)</span>
+                        </div>
+                        <div id="gyneHorairesContent" class="horaires-content disabled">
+                            <div class="jours-grid" id="joursGyne">
+                                <span class="jour-btn" data-jour="Lundi">Lun</span>
+                                <span class="jour-btn" data-jour="Mardi">Mar</span>
+                                <span class="jour-btn" data-jour="Mercredi">Mer</span>
+                                <span class="jour-btn" data-jour="Jeudi">Jeu</span>
+                                <span class="jour-btn" data-jour="Vendredi">Ven</span>
+                                <span class="jour-btn" data-jour="Samedi">Sam</span>
+                                <span class="jour-btn dimanche" data-jour="Dimanche">Dim</span>
+                            </div>
+                            <div class="heures-row">
+                                <div class="h-group"><label>Heure début</label><select id="debutGyne">【option】</select></div>
+                                <div class="h-group"><label>Heure fin</label><select id="finGyne">【option】</select></div>
+                            </div>
+                            <div class="horaires-apercu" id="apercuGyne"></div>
+                        </div>
+                    </div>
                     <button id="createGyneBtn" class="btn-save">Ajouter</button>
                 </div>
                 <div class="item-list"><h4>Liste des services</h4><div id="adminGyneList">Chargement...</div></div>
@@ -423,8 +444,30 @@
             <div id="explorations" class="tab-pane">
                 <div class="form-admin">
                     <h3>Ajouter une exploration</h3>
-                    <input type="text" id="exploTitre" placeholder="Titre">
-                    <textarea id="exploDesc" rows="2" placeholder="Description"></textarea>
+                    <input type="text" id="exploTitre" placeholder="Titre *">
+                    <textarea id="exploDesc" rows="2" placeholder="Description (optionnel)"></textarea>
+                    <div class="horaires-section">
+                        <div class="horaires-toggle">
+                            <input type="checkbox" id="exploHasHoraires">
+                            <span>Ajouter des horaires de disponibilité (optionnel)</span>
+                        </div>
+                        <div id="exploHorairesContent" class="horaires-content disabled">
+                            <div class="jours-grid" id="joursExplo">
+                                <span class="jour-btn" data-jour="Lundi">Lun</span>
+                                <span class="jour-btn" data-jour="Mardi">Mar</span>
+                                <span class="jour-btn" data-jour="Mercredi">Mer</span>
+                                <span class="jour-btn" data-jour="Jeudi">Jeu</span>
+                                <span class="jour-btn" data-jour="Vendredi">Ven</span>
+                                <span class="jour-btn" data-jour="Samedi">Sam</span>
+                                <span class="jour-btn dimanche" data-jour="Dimanche">Dim</span>
+                            </div>
+                            <div class="heures-row">
+                                <div class="h-group"><label>Heure début</label><select id="debutExplo">【option】</select></div>
+                                <div class="h-group"><label>Heure fin</label><select id="finExplo">【option】</select></div>
+                            </div>
+                            <div class="horaires-apercu" id="apercuExplo"></div>
+                        </div>
+                    </div>
                     <button id="createExploBtn" class="btn-save">Ajouter</button>
                 </div>
                 <div class="item-list"><h4>Liste des explorations</h4><div id="adminExploList">Chargement...</div></div>
@@ -434,7 +477,29 @@
             <div id="imagerie" class="tab-pane">
                 <div class="form-admin">
                     <h3>Ajouter un service d'imagerie</h3>
-                    <input type="text" id="imagerieTitre" placeholder="Titre (ex: Scanner, IRM)">
+                    <input type="text" id="imagerieTitre" placeholder="Titre (ex: Scanner, IRM) *">
+                    <div class="horaires-section">
+                        <div class="horaires-toggle">
+                            <input type="checkbox" id="imagerieHasHoraires">
+                            <span>Ajouter des horaires (optionnel)</span>
+                        </div>
+                        <div id="imagerieHorairesContent" class="horaires-content disabled">
+                            <div class="jours-grid" id="joursImagerie">
+                                <span class="jour-btn" data-jour="Lundi">Lun</span>
+                                <span class="jour-btn" data-jour="Mardi">Mar</span>
+                                <span class="jour-btn" data-jour="Mercredi">Mer</span>
+                                <span class="jour-btn" data-jour="Jeudi">Jeu</span>
+                                <span class="jour-btn" data-jour="Vendredi">Ven</span>
+                                <span class="jour-btn" data-jour="Samedi">Sam</span>
+                                <span class="jour-btn dimanche" data-jour="Dimanche">Dim</span>
+                            </div>
+                            <div class="heures-row">
+                                <div class="h-group"><label>Heure début</label><select id="debutImagerie">【option】</select></div>
+                                <div class="h-group"><label>Heure fin</label><select id="finImagerie">【option】</select></div>
+                            </div>
+                            <div class="horaires-apercu" id="apercuImagerie"></div>
+                        </div>
+                    </div>
                     <button id="createImagerieBtn" class="btn-save">Ajouter</button>
                 </div>
                 <div class="item-list"><h4>Liste des services d'imagerie</h4><div id="adminImagerieList">Chargement...</div></div>
@@ -444,9 +509,31 @@
             <div id="centreDialyse" class="tab-pane">
                 <div class="form-admin">
                     <h3>Ajouter un service de dialyse</h3>
-                    <input type="text" id="dialyseTitre" placeholder="Titre">
+                    <input type="text" id="dialyseTitre" placeholder="Titre *">
                     <textarea id="dialyseDesc" rows="2" placeholder="Description"></textarea>
                     <input type="text" id="dialyseBadge" placeholder="Badge (optionnel: 24h/24, Urgence)">
+                    <div class="horaires-section">
+                        <div class="horaires-toggle">
+                            <input type="checkbox" id="dialyseHasHoraires">
+                            <span>Ajouter des horaires (optionnel)</span>
+                        </div>
+                        <div id="dialyseHorairesContent" class="horaires-content disabled">
+                            <div class="jours-grid" id="joursDialyse">
+                                <span class="jour-btn" data-jour="Lundi">Lun</span>
+                                <span class="jour-btn" data-jour="Mardi">Mar</span>
+                                <span class="jour-btn" data-jour="Mercredi">Mer</span>
+                                <span class="jour-btn" data-jour="Jeudi">Jeu</span>
+                                <span class="jour-btn" data-jour="Vendredi">Ven</span>
+                                <span class="jour-btn" data-jour="Samedi">Sam</span>
+                                <span class="jour-btn dimanche" data-jour="Dimanche">Dim</span>
+                            </div>
+                            <div class="heures-row">
+                                <div class="h-group"><label>Heure début</label><select id="debutDialyse">【option】</select></div>
+                                <div class="h-group"><label>Heure fin</label><select id="finDialyse">【option】</select></div>
+                            </div>
+                            <div class="horaires-apercu" id="apercuDialyse"></div>
+                        </div>
+                    </div>
                     <button id="createDialyseBtn" class="btn-save">Ajouter</button>
                 </div>
                 <div class="item-list"><h4>Liste des services de dialyse</h4><div id="adminDialyseList">Chargement...</div></div>
@@ -466,38 +553,31 @@
                     </div>
                     <button id="createMemberBtn" class="btn-save">Ajouter</button>
                 </div>
-                <div class="item-list">
-                    <h4>Membres de l'équipe</h4>
-                    <div id="adminTeamList">Chargement...</div>
-                </div>
+                <div class="item-list"><h4>Membres de l'équipe</h4><div id="adminTeamList">Chargement...</div></div>
             </div>
 
-            <!-- Bandeau À la une -->
+            <!-- Bandeau -->
             <div id="bandeau" class="tab-pane">
                 <div class="form-admin">
                     <h3>📢 Gérer le bandeau "À la une"</h3>
                     <div style="margin-bottom: 20px;">
                         <label style="display: flex; align-items: center; gap: 10px;">
-                            <input type="checkbox" id="bandeauActif"> Activer le bandeau
+                            <input type="checkbox" id="bandeauActif" style="width:auto; margin:0;"> Activer le bandeau
                         </label>
                     </div>
-                    <div>
-                        <textarea id="bandeauMessage" rows="2" placeholder="Votre message ici..." style="width: 100%; padding: 12px;"></textarea>
-                        <div style="margin-top: 10px;">
-                            <label>Couleur :</label>
-                            <select id="bandeauCouleur" style="margin-left: 10px; padding: 8px;">
-                                <option value="rouge">🔴 Rouge (alerte/urgence)</option>
-                                <option value="bleu">🔵 Bleu (information)</option>
-                                <option value="vert">🟢 Vert (bonne nouvelle)</option>
-                                <option value="orange">🟠 Orange (attention)</option>
-                            </select>
-                        </div>
+                    <textarea id="bandeauMessage" rows="2" placeholder="Votre message ici..."></textarea>
+                    <div style="margin-top: 10px;">
+                        <label>Couleur :</label>
+                        <select id="bandeauCouleur" style="margin-left: 10px; padding: 8px; width: auto; border-radius: 30px;">
+                            <option value="rouge">🔴 Rouge (alerte/urgence)</option>
+                            <option value="bleu">🔵 Bleu (information)</option>
+                            <option value="vert">🟢 Vert (bonne nouvelle)</option>
+                            <option value="orange">🟠 Orange (attention)</option>
+                        </select>
                     </div>
                     <div style="margin-top: 20px;">
                         <strong>Aperçu :</strong>
-                        <div id="bandeauPreview" class="bandeau-preview" style="background: #dc3545; color: white;">
-                            📢 Aperçu de votre message
-                        </div>
+                        <div id="bandeauPreview" class="bandeau-preview" style="background: #dc3545; color: white;">📢 Aperçu de votre message</div>
                     </div>
                     <button id="saveBandeauBtn" class="btn-save" style="margin-top: 15px;">💾 Enregistrer le bandeau</button>
                 </div>
@@ -517,97 +597,146 @@
         </div>
     </div>
 
-    <!-- Toast notification -->
     <div id="toastNotification" class="toast-notification"></div>
 
     <script>
-        // Configuration Supabase
         const SUPABASE_URL = "https://otdiywrvzappbmjfkkyi.supabase.co";
-        const SUPABASE_ANON_KEY = "sb_publishable_tn6FW9OxsqNdKMg9uCuB5A_gZICo-Jy";
+        // À remplacer par VOTRE vraie clé Supabase
+        const SUPABASE_ANON_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im90ZGl5d3J2emFwcGJtamZra3lpIiwicm9sZSI6ImFub24iLCJpYXQiOjE3Njk2MTQyMDcsImV4cCI6MjA4NTE5MDIwN30.O5gHqJF1SCvpu19Z0OFHhQsT_ZmeIFbuEu-bpBZXXtY";
         
         let supabaseClient = null;
         let currentEditItem = { id: null, table: null, type: null };
-        
+
         // Vérification admin
         if (sessionStorage.getItem('clinique_admin') !== 'true') {
             window.location.href = 'index.html';
         }
 
-        // Chargement de Supabase avec CDN Unpkg
-        function loadSupabase() {
-            return new Promise((resolve, reject) => {
-                if (window.supabase) {
-                    resolve(window.supabase);
-                    return;
-                }
-                
-                const supabaseScript = document.createElement('script');
-                supabaseScript.src = 'https://unpkg.com/@supabase/supabase-js@2/dist/umd/supabase.js';
-                supabaseScript.onload = () => {
-                    if (window.supabase) {
-                        resolve(window.supabase);
+        // ===== GESTION DES JOURS (pour toutes les sections) =====
+        const joursState = {
+            SpecMed: [], SpecChir: [], Gyne: [], Explo: [], Imagerie: [], Dialyse: []
+        };
+
+        const hasHorairesState = {
+            SpecMed: false, SpecChir: false, Gyne: false, Explo: false, Imagerie: false, Dialyse: false
+        };
+
+        function initHorairesToggle(sectionId, contentId, checkboxId) {
+            const checkbox = document.getElementById(checkboxId);
+            const content = document.getElementById(contentId);
+            if (checkbox && content) {
+                checkbox.addEventListener('change', function() {
+                    if (this.checked) {
+                        content.classList.remove('disabled');
+                        hasHorairesState[sectionId] = true;
                     } else {
-                        reject(new Error('Supabase non disponible après chargement'));
+                        content.classList.add('disabled');
+                        hasHorairesState[sectionId] = false;
+                        // Réinitialiser la sélection
+                        resetHoraires(sectionId);
                     }
-                };
-                supabaseScript.onerror = () => reject(new Error('Erreur de chargement de Supabase'));
-                document.head.appendChild(supabaseScript);
+                });
+            }
+        }
+
+        function initJoursBtns() {
+            const sections = ['SpecMed', 'SpecChir', 'Gyne', 'Explo', 'Imagerie', 'Dialyse'];
+            sections.forEach(key => {
+                const grid = document.getElementById('jours' + key);
+                if (!grid) return;
+                grid.querySelectorAll('.jour-btn').forEach(btn => {
+                    btn.addEventListener('click', () => {
+                        if (!hasHorairesState[key]) return;
+                        const jour = btn.getAttribute('data-jour');
+                        const idx = joursState[key].indexOf(jour);
+                        if (idx > -1) {
+                            joursState[key].splice(idx, 1);
+                            btn.classList.remove('actif');
+                        } else {
+                            joursState[key].push(jour);
+                            btn.classList.add('actif');
+                        }
+                        updateApercu(key);
+                    });
+                });
             });
         }
 
-        // Toast notification
+        function updateApercu(key) {
+            if (!hasHorairesState[key]) return;
+            const ordre = ['Lundi','Mardi','Mercredi','Jeudi','Vendredi','Samedi','Dimanche'];
+            const jours = ordre.filter(j => joursState[key].includes(j));
+            const debut = document.getElementById('debut' + key)?.value || '';
+            const fin   = document.getElementById('fin'   + key)?.value || '';
+            const el    = document.getElementById('apercu' + key);
+            if (!el) return;
+            if (jours.length === 0 && (!debut || !fin)) { el.className = 'horaires-apercu'; return; }
+            let texte = '';
+            if (jours.length > 0) texte += jours.join(', ');
+            if (debut && fin) texte += (texte ? ' : ' : '') + debut + ' – ' + fin;
+            el.textContent = '👁 Aperçu : ' + texte;
+            el.className = 'horaires-apercu show';
+        }
+
+        function getHorairesString(key) {
+            if (!hasHorairesState[key]) return '';
+            const ordre = ['Lundi','Mardi','Mercredi','Jeudi','Vendredi','Samedi','Dimanche'];
+            const jours = ordre.filter(j => joursState[key].includes(j));
+            const debut = document.getElementById('debut' + key)?.value || '';
+            const fin   = document.getElementById('fin'   + key)?.value || '';
+            if (jours.length === 0 && (!debut || !fin)) return '';
+            let t = '';
+            if (jours.length > 0) t += jours.join(', ');
+            if (debut && fin) t += (t ? ' : ' : '') + debut + ' – ' + fin;
+            return t;
+        }
+
+        function resetHoraires(key) {
+            joursState[key] = [];
+            const grid = document.getElementById('jours' + key);
+            if (grid) grid.querySelectorAll('.jour-btn').forEach(b => b.classList.remove('actif'));
+            const debut = document.getElementById('debut' + key);
+            const fin   = document.getElementById('fin'   + key);
+            if (debut) debut.value = '';
+            if (fin) fin.value = '';
+            const apercu = document.getElementById('apercu' + key);
+            if (apercu) apercu.className = 'horaires-apercu';
+        }
+
+        // ===== SUPABASE =====
+        function loadSupabase() {
+            return new Promise((resolve, reject) => {
+                if (window.supabase) { resolve(window.supabase); return; }
+                const s = document.createElement('script');
+                s.src = 'https://unpkg.com/@supabase/supabase-js@2/dist/umd/supabase.js';
+                s.onload = () => window.supabase ? resolve(window.supabase) : reject(new Error('Supabase non disponible'));
+                s.onerror = () => reject(new Error('Erreur chargement Supabase'));
+                document.head.appendChild(s);
+            });
+        }
+
         function showToast(message, type = 'success') {
             const toast = document.getElementById('toastNotification');
             toast.textContent = message;
-            toast.className = `toast-notification ${type}`;
-            toast.classList.add('show');
-            
-            setTimeout(() => {
-                toast.classList.remove('show');
-            }, 3000);
+            toast.className = `toast-notification ${type} show`;
+            setTimeout(() => toast.classList.remove('show'), 3000);
         }
 
-        // Upload image
         async function uploadImage(file, type) {
             if (!file || !supabaseClient) return null;
-            const fileExt = file.name.split('.').pop();
-            const fileName = `${Date.now()}_${Math.random().toString(36).substring(2, 8)}.${fileExt}`;
-            
-            let bucketName = '';
-            if (type === 'actualite') {
-                bucketName = 'actualites';
-            } else if (type === 'team') {
-                bucketName = 'team';
-            } else {
-                return null;
-            }
-            
-            const { data, error } = await supabaseClient.storage
-                .from(bucketName)
-                .upload(fileName, file);
-            
-            if (error) {
-                console.error('Upload error:', error);
-                showToast('Erreur upload: ' + error.message, 'error');
-                return null;
-            }
-            
-            const { data: urlData } = supabaseClient.storage
-                .from(bucketName)
-                .getPublicUrl(fileName);
-            
-            return urlData.publicUrl;
+            const ext = file.name.split('.').pop();
+            const name = `${Date.now()}_${Math.random().toString(36).substring(2,8)}.${ext}`;
+            const bucket = type === 'actualite' ? 'actualites' : 'team';
+            const { error } = await supabaseClient.storage.from(bucket).upload(name, file);
+            if (error) { showToast('Erreur upload: ' + error.message, 'error'); return null; }
+            const { data } = supabaseClient.storage.from(bucket).getPublicUrl(name);
+            return data.publicUrl;
         }
 
-        // ===== GESTION DU BANDEAU =====
+        // ===== BANDEAU =====
         async function loadBandeauSettings() {
             if (!supabaseClient) return;
-            const { data, error } = await supabaseClient
-                .from('site_settings')
-                .select('*')
-                .eq('id', 1)
-                .single();
-            
+            const { data } = await supabaseClient.from('site_settings').select('*').eq('id', 1).single();
             if (data) {
                 document.getElementById('bandeauActif').checked = data.bandeau_actif;
                 document.getElementById('bandeauMessage').value = data.bandeau_message || '';
@@ -617,181 +746,142 @@
         }
 
         function updateBandeauPreview() {
-            const message = document.getElementById('bandeauMessage').value;
+            const msg = document.getElementById('bandeauMessage').value;
             const couleur = document.getElementById('bandeauCouleur').value;
-            const preview = document.getElementById('bandeauPreview');
-            
-            if (!message) {
-                preview.innerHTML = '📢 (vide)';
-                preview.style.background = '#e2e8f0';
-                preview.style.color = '#64748b';
-                return;
-            }
-            
-            let bgColor = '';
-            switch(couleur) {
-                case 'rouge': bgColor = '#dc3545'; break;
-                case 'bleu': bgColor = '#0077A4'; break;
-                case 'vert': bgColor = '#1D8B5D'; break;
-                case 'orange': bgColor = '#e67e22'; break;
-                default: bgColor = '#dc3545';
-            }
-            
-            preview.innerHTML = `📢 ${escapeHtml(message)}`;
-            preview.style.background = bgColor;
-            preview.style.color = 'white';
+            const p = document.getElementById('bandeauPreview');
+            const colors = { rouge:'#dc3545', bleu:'#0077A4', vert:'#1D8B5D', orange:'#e67e22' };
+            p.innerHTML = msg ? `📢 ${escapeHtml(msg)}` : '📢 (vide)';
+            p.style.background = msg ? (colors[couleur] || '#dc3545') : '#e2e8f0';
+            p.style.color = msg ? 'white' : '#64748b';
         }
 
         async function saveBandeau() {
             if (!supabaseClient) return;
-            
-            const bandeau_actif = document.getElementById('bandeauActif').checked;
-            const bandeau_message = document.getElementById('bandeauMessage').value;
-            const bandeau_couleur = document.getElementById('bandeauCouleur').value;
-            
-            const { error } = await supabaseClient
-                .from('site_settings')
-                .update({
-                    bandeau_message: bandeau_message,
-                    bandeau_actif: bandeau_actif,
-                    bandeau_couleur: bandeau_couleur,
-                    updated_at: new Date().toISOString()
-                })
-                .eq('id', 1);
-            
-            if (error) {
-                showToast('Erreur: ' + error.message, 'error');
-                return;
-            }
-            
-            showToast('✅ Bandeau enregistré avec succès !', 'success');
+            const { error } = await supabaseClient.from('site_settings').update({
+                bandeau_message: document.getElementById('bandeauMessage').value,
+                bandeau_actif: document.getElementById('bandeauActif').checked,
+                bandeau_couleur: document.getElementById('bandeauCouleur').value,
+                updated_at: new Date().toISOString()
+            }).eq('id', 1);
+            if (error) { showToast('Erreur: ' + error.message, 'error'); return; }
+            showToast('✅ Bandeau enregistré !', 'success');
         }
 
-        // Fonction d'initialisation
-        async function initAdmin() {
-            try {
-                const supabaseModule = await loadSupabase();
-                supabaseClient = supabaseModule.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
-                console.log("Admin - Supabase initialisé avec succès");
-                
-                await loadAllAdminData();
-                attachEventListeners();
-                
-                document.getElementById('loadingScreen').style.opacity = '0';
-                setTimeout(() => {
-                    document.getElementById('loadingScreen').style.display = 'none';
-                    document.getElementById('adminDashboard').style.display = 'block';
-                }, 500);
-            } catch (error) {
-                console.error('Erreur d\'initialisation:', error);
-                showToast('Erreur de chargement de Supabase', 'error');
-                document.getElementById('loadingScreen').innerHTML = '<div style="text-align:center;color:red;">Erreur de chargement<br>Veuillez rafraîchir la page</div>';
-            }
+        // ===== CRÉATION DES ÉLÉMENTS =====
+        async function createItem(table, titre, description, horaires, badge = null) {
+            const data = { titre, description, horaires, ordre: Math.floor(Date.now() / 1000) };
+            if (badge !== null) data.badge = badge;
+            const { error } = await supabaseClient.from(table).insert([data]);
+            if (error) throw error;
         }
 
-        // Preview images
-        function attachPreviewListeners() {
-            const actuImageFile = document.getElementById('actuImageFile');
-            const memberImageFile = document.getElementById('memberImageFile');
-            
-            if (actuImageFile) {
-                actuImageFile.addEventListener('change', (e) => {
-                    const file = e.target.files[0];
-                    if (file) {
-                        const reader = new FileReader();
-                        reader.onload = (event) => {
-                            const preview = document.getElementById('actuImagePreview');
-                            if (preview) preview.innerHTML = `<img src="${event.target.result}" class="preview-img">`;
-                        };
-                        reader.readAsDataURL(file);
-                    }
-                });
-            }
-            
-            if (memberImageFile) {
-                memberImageFile.addEventListener('change', (e) => {
-                    const file = e.target.files[0];
-                    if (file) {
-                        const reader = new FileReader();
-                        reader.onload = (event) => {
-                            const preview = document.getElementById('memberImagePreview');
-                            if (preview) preview.innerHTML = `<img src="${event.target.result}" class="preview-img">`;
-                        };
-                        reader.readAsDataURL(file);
-                    }
-                });
-            }
-            
-            const fileLabels = document.querySelectorAll('.file-input-label');
-            if (fileLabels[0]) fileLabels[0].addEventListener('click', () => document.getElementById('actuImageFile')?.click());
-            if (fileLabels[1]) fileLabels[1].addEventListener('click', () => document.getElementById('memberImageFile')?.click());
-        }
-
-        // Fonctions de création
         function attachCreateListeners() {
-            // Bandeau
             document.getElementById('saveBandeauBtn')?.addEventListener('click', saveBandeau);
             document.getElementById('bandeauMessage')?.addEventListener('input', updateBandeauPreview);
             document.getElementById('bandeauCouleur')?.addEventListener('change', updateBandeauPreview);
 
-            document.getElementById('createActuBtn')?.addEventListener('click', async () => {
-                if (!supabaseClient) return showToast('Supabase non initialisé', 'error');
-                const titre = document.getElementById('actuTitre').value.trim();
+            // Spécialités médicales
+            document.getElementById('createSpecMedBtn')?.addEventListener('click', async () => {
+                const titre = document.getElementById('specMedTitre').value.trim();
                 if (!titre) { showToast('Titre requis', 'error'); return; }
-                
-                let imageUrl = null;
-                const imageFile = document.getElementById('actuImageFile').files[0];
-                if (imageFile) {
-                    imageUrl = await uploadImage(imageFile, 'actualite');
-                }
-                
-                const { error } = await supabaseClient.from('actualites').insert([{
-                    titre,
-                    description: document.getElementById('actuDescription').value,
-                    date: document.getElementById('actuDate').value,
-                    image_url: imageUrl
-                }]);
-                
-                if (error) {
-                    showToast('Erreur: ' + error.message, 'error');
-                    return;
-                }
-                
-                showToast('Actualité ajoutée avec succès', 'success');
-                document.getElementById('actuTitre').value = '';
-                document.getElementById('actuDescription').value = '';
-                document.getElementById('actuDate').value = '';
-                document.getElementById('actuImageFile').value = '';
-                document.getElementById('actuImagePreview').innerHTML = '';
+                const horaires = getHorairesString('SpecMed');
+                await createItem('specialites_medicales', titre, document.getElementById('specMedDesc').value, horaires);
+                showToast('✅ Spécialité médicale ajoutée !', 'success');
+                document.getElementById('specMedTitre').value = '';
+                document.getElementById('specMedDesc').value = '';
+                document.getElementById('specMedHasHoraires').checked = false;
+                resetHoraires('SpecMed');
                 loadAllAdminData();
             });
 
+            // Spécialités chirurgicales
+            document.getElementById('createSpecChirBtn')?.addEventListener('click', async () => {
+                const titre = document.getElementById('specChirTitre').value.trim();
+                if (!titre) { showToast('Titre requis', 'error'); return; }
+                const horaires = getHorairesString('SpecChir');
+                await createItem('specialites_chirurgicales', titre, document.getElementById('specChirDesc').value, horaires);
+                showToast('✅ Spécialité chirurgicale ajoutée !', 'success');
+                document.getElementById('specChirTitre').value = '';
+                document.getElementById('specChirDesc').value = '';
+                document.getElementById('specChirHasHoraires').checked = false;
+                resetHoraires('SpecChir');
+                loadAllAdminData();
+            });
+
+            // Gynécologie
+            document.getElementById('createGyneBtn')?.addEventListener('click', async () => {
+                const titre = document.getElementById('gyneTitre').value.trim();
+                if (!titre) { showToast('Titre requis', 'error'); return; }
+                const horaires = getHorairesString('Gyne');
+                await createItem('gynecologie', titre, document.getElementById('gyneDesc').value, horaires);
+                showToast('✅ Service gynécologie ajouté !', 'success');
+                document.getElementById('gyneTitre').value = '';
+                document.getElementById('gyneDesc').value = '';
+                document.getElementById('gyneHasHoraires').checked = false;
+                resetHoraires('Gyne');
+                loadAllAdminData();
+            });
+
+            // Explorations
+            document.getElementById('createExploBtn')?.addEventListener('click', async () => {
+                const titre = document.getElementById('exploTitre').value.trim();
+                if (!titre) { showToast('Titre requis', 'error'); return; }
+                const horaires = getHorairesString('Explo');
+                await createItem('explorations', titre, document.getElementById('exploDesc').value, horaires);
+                showToast('✅ Exploration ajoutée !', 'success');
+                document.getElementById('exploTitre').value = '';
+                document.getElementById('exploDesc').value = '';
+                document.getElementById('exploHasHoraires').checked = false;
+                resetHoraires('Explo');
+                loadAllAdminData();
+            });
+
+            // Imagerie
+            document.getElementById('createImagerieBtn')?.addEventListener('click', async () => {
+                const titre = document.getElementById('imagerieTitre').value.trim();
+                if (!titre) { showToast('Titre requis', 'error'); return; }
+                const horaires = getHorairesString('Imagerie');
+                await createItem('imagerie', titre, '', horaires);
+                showToast('✅ Service imagerie ajouté !', 'success');
+                document.getElementById('imagerieTitre').value = '';
+                document.getElementById('imagerieHasHoraires').checked = false;
+                resetHoraires('Imagerie');
+                loadAllAdminData();
+            });
+
+            // Dialyse
+            document.getElementById('createDialyseBtn')?.addEventListener('click', async () => {
+                const titre = document.getElementById('dialyseTitre').value.trim();
+                if (!titre) { showToast('Titre requis', 'error'); return; }
+                const horaires = getHorairesString('Dialyse');
+                const { error } = await supabaseClient.from('equipements').insert([{ 
+                    titre, 
+                    description: document.getElementById('dialyseDesc').value, 
+                    badge: document.getElementById('dialyseBadge').value,
+                    horaires,
+                    ordre: Math.floor(Date.now()/1000) 
+                }]);
+                if (error) { showToast('Erreur: ' + error.message, 'error'); return; }
+                showToast('✅ Service dialyse ajouté !', 'success');
+                document.getElementById('dialyseTitre').value = '';
+                document.getElementById('dialyseDesc').value = '';
+                document.getElementById('dialyseBadge').value = '';
+                document.getElementById('dialyseHasHoraires').checked = false;
+                resetHoraires('Dialyse');
+                loadAllAdminData();
+            });
+
+            // Équipe
             document.getElementById('createMemberBtn')?.addEventListener('click', async () => {
-                if (!supabaseClient) return showToast('Supabase non initialisé', 'error');
                 const nom = document.getElementById('memberNom').value.trim();
                 const poste = document.getElementById('memberPoste').value.trim();
                 if (!nom || !poste) { showToast('Nom et poste requis', 'error'); return; }
-                
                 let imageUrl = null;
-                const imageFile = document.getElementById('memberImageFile').files[0];
-                if (imageFile) {
-                    imageUrl = await uploadImage(imageFile, 'team');
-                }
-                
-                const { error } = await supabaseClient.from('equipes').insert([{
-                    nom,
-                    poste,
-                    description: document.getElementById('memberDescription').value,
-                    image_url: imageUrl,
-                    ordre: Math.floor(Date.now() / 1000)
-                }]);
-                
-                if (error) {
-                    showToast('Erreur: ' + error.message, 'error');
-                    return;
-                }
-                
-                showToast('Membre ajouté avec succès', 'success');
+                const f = document.getElementById('memberImageFile').files[0];
+                if (f) imageUrl = await uploadImage(f, 'team');
+                const { error } = await supabaseClient.from('equipes').insert([{ nom, poste, description: document.getElementById('memberDescription').value, image_url: imageUrl, ordre: Math.floor(Date.now()/1000) }]);
+                if (error) { showToast('Erreur: ' + error.message, 'error'); return; }
+                showToast('✅ Membre ajouté !', 'success');
                 document.getElementById('memberNom').value = '';
                 document.getElementById('memberPoste').value = '';
                 document.getElementById('memberDescription').value = '';
@@ -800,479 +890,294 @@
                 loadAllAdminData();
             });
 
-            document.getElementById('createSpecMedBtn')?.addEventListener('click', async () => {
-                if (!supabaseClient) return showToast('Supabase non initialisé', 'error');
-                const titre = document.getElementById('specMedTitre').value.trim();
+            // Actualités
+            document.getElementById('createActuBtn')?.addEventListener('click', async () => {
+                const titre = document.getElementById('actuTitre').value.trim();
                 if (!titre) { showToast('Titre requis', 'error'); return; }
-                const { error } = await supabaseClient.from('specialites_medicales').insert([{ 
-                    titre, 
-                    description: document.getElementById('specMedDesc').value, 
-                    ordre: Math.floor(Date.now() / 1000) 
-                }]);
+                let imageUrl = null;
+                const f = document.getElementById('actuImageFile').files[0];
+                if (f) imageUrl = await uploadImage(f, 'actualite');
+                const { error } = await supabaseClient.from('actualites').insert([{ titre, description: document.getElementById('actuDescription').value, date: document.getElementById('actuDate').value, image_url: imageUrl }]);
                 if (error) { showToast('Erreur: ' + error.message, 'error'); return; }
-                showToast('Spécialité ajoutée avec succès', 'success');
-                document.getElementById('specMedTitre').value = ''; 
-                document.getElementById('specMedDesc').value = '';
-                loadAllAdminData();
-            });
-
-            document.getElementById('createSpecChirBtn')?.addEventListener('click', async () => {
-                if (!supabaseClient) return showToast('Supabase non initialisé', 'error');
-                const titre = document.getElementById('specChirTitre').value.trim();
-                if (!titre) { showToast('Titre requis', 'error'); return; }
-                const { error } = await supabaseClient.from('specialites_chirurgicales').insert([{ 
-                    titre, 
-                    description: document.getElementById('specChirDesc').value, 
-                    ordre: Math.floor(Date.now() / 1000) 
-                }]);
-                if (error) { showToast('Erreur: ' + error.message, 'error'); return; }
-                showToast('Spécialité ajoutée avec succès', 'success');
-                document.getElementById('specChirTitre').value = ''; 
-                document.getElementById('specChirDesc').value = '';
-                loadAllAdminData();
-            });
-
-            document.getElementById('createGyneBtn')?.addEventListener('click', async () => {
-                if (!supabaseClient) return showToast('Supabase non initialisé', 'error');
-                const titre = document.getElementById('gyneTitre').value.trim();
-                if (!titre) { showToast('Titre requis', 'error'); return; }
-                const { error } = await supabaseClient.from('gynecologie').insert([{ 
-                    titre, 
-                    description: document.getElementById('gyneDesc').value, 
-                    ordre: Math.floor(Date.now() / 1000) 
-                }]);
-                if (error) { showToast('Erreur: ' + error.message, 'error'); return; }
-                showToast('Service ajouté avec succès', 'success');
-                document.getElementById('gyneTitre').value = ''; 
-                document.getElementById('gyneDesc').value = '';
-                loadAllAdminData();
-            });
-
-            document.getElementById('createExploBtn')?.addEventListener('click', async () => {
-                if (!supabaseClient) return showToast('Supabase non initialisé', 'error');
-                const titre = document.getElementById('exploTitre').value.trim();
-                if (!titre) { showToast('Titre requis', 'error'); return; }
-                const { error } = await supabaseClient.from('explorations').insert([{ 
-                    titre, 
-                    description: document.getElementById('exploDesc').value, 
-                    ordre: Math.floor(Date.now() / 1000) 
-                }]);
-                if (error) { showToast('Erreur: ' + error.message, 'error'); return; }
-                showToast('Exploration ajoutée avec succès', 'success');
-                document.getElementById('exploTitre').value = ''; 
-                document.getElementById('exploDesc').value = '';
-                loadAllAdminData();
-            });
-
-            document.getElementById('createImagerieBtn')?.addEventListener('click', async () => {
-                if (!supabaseClient) return showToast('Supabase non initialisé', 'error');
-                const titre = document.getElementById('imagerieTitre').value.trim();
-                if (!titre) { showToast('Titre requis', 'error'); return; }
-                const { error } = await supabaseClient.from('imagerie').insert([{ 
-                    titre, 
-                    ordre: Math.floor(Date.now() / 1000) 
-                }]);
-                if (error) { showToast('Erreur: ' + error.message, 'error'); return; }
-                showToast('Service ajouté avec succès', 'success');
-                document.getElementById('imagerieTitre').value = '';
-                loadAllAdminData();
-            });
-
-            document.getElementById('createDialyseBtn')?.addEventListener('click', async () => {
-                if (!supabaseClient) return showToast('Supabase non initialisé', 'error');
-                const titre = document.getElementById('dialyseTitre').value.trim();
-                if (!titre) { showToast('Titre requis', 'error'); return; }
-                const { error } = await supabaseClient.from('equipements').insert([{ 
-                    titre, 
-                    description: document.getElementById('dialyseDesc').value, 
-                    badge: document.getElementById('dialyseBadge').value, 
-                    ordre: Math.floor(Date.now() / 1000)
-                }]);
-                if (error) { showToast('Erreur: ' + error.message, 'error'); return; }
-                showToast('Service de dialyse ajouté avec succès', 'success');
-                document.getElementById('dialyseTitre').value = ''; 
-                document.getElementById('dialyseDesc').value = ''; 
-                document.getElementById('dialyseBadge').value = '';
+                showToast('✅ Actualité publiée !', 'success');
+                document.getElementById('actuTitre').value = '';
+                document.getElementById('actuDescription').value = '';
+                document.getElementById('actuDate').value = '';
+                document.getElementById('actuImageFile').value = '';
+                document.getElementById('actuImagePreview').innerHTML = '';
                 loadAllAdminData();
             });
         }
 
-        // Gestion des événements
         function attachItemEvents() {
             document.querySelectorAll('.edit-btn').forEach(btn => {
-                btn.removeEventListener('click', handleEdit);
-                btn.addEventListener('click', handleEdit);
+                btn.replaceWith(btn.cloneNode(true));
             });
             document.querySelectorAll('.delete-btn').forEach(btn => {
-                btn.removeEventListener('click', handleDelete);
-                btn.addEventListener('click', handleDelete);
+                btn.replaceWith(btn.cloneNode(true));
             });
+            document.querySelectorAll('.edit-btn').forEach(btn => btn.addEventListener('click', handleEdit));
+            document.querySelectorAll('.delete-btn').forEach(btn => btn.addEventListener('click', handleDelete));
         }
-        
+
         async function handleEdit(e) {
-            if (!supabaseClient) return;
             const btn = e.currentTarget;
             const id = btn.getAttribute('data-id');
             const table = btn.getAttribute('data-table');
-            const type = btn.getAttribute('data-type') || '';
-            
             const { data } = await supabaseClient.from(table).select('*').eq('id', id).single();
-            if (data) {
-                openEditModal(id, table, data, type);
-            }
+            if (data) openEditModal(id, table, data);
         }
-        
+
         async function handleDelete(e) {
-            if (!supabaseClient) return;
             const btn = e.currentTarget;
             const id = btn.getAttribute('data-id');
             const table = btn.getAttribute('data-table');
             if (!confirm('Supprimer définitivement cet élément ?')) return;
-            
             const { error } = await supabaseClient.from(table).delete().eq('id', id);
-            if (error) { 
-                showToast('Erreur: ' + error.message, 'error');
-                return; 
-            }
-            showToast('Élément supprimé avec succès', 'success');
+            if (error) { showToast('Erreur: ' + error.message, 'error'); return; }
+            showToast('✅ Élément supprimé', 'success');
             loadAllAdminData();
         }
 
-        // Modal d'édition
-        function openEditModal(id, table, itemData, type) {
-            currentEditItem = { id, table, type };
-            const modal = document.getElementById('editModal');
-            const modalTitle = document.getElementById('editModalTitle');
-            const modalBody = document.getElementById('editModalBody');
-            
+        function openEditModal(id, table, data) {
+            currentEditItem = { id, table };
+            const title = document.getElementById('editModalTitle');
+            const body  = document.getElementById('editModalBody');
             let html = '';
-            
+
             if (table === 'actualites') {
-                modalTitle.innerText = 'Modifier l\'actualité';
-                html = `
-                    <input type="text" id="edit_titre" value="${escapeHtml(itemData.titre)}" placeholder="Titre">
-                    <textarea id="edit_description" rows="3" placeholder="Description">${escapeHtml(itemData.description || '')}</textarea>
-                    <input type="text" id="edit_date" value="${escapeHtml(itemData.date || '')}" placeholder="Date">
-                `;
+                title.innerText = "Modifier l'actualité";
+                html = `<input type="text" id="edit_titre" value="${escapeHtml(data.titre)}" placeholder="Titre">
+                        <textarea id="edit_description" rows="3">${escapeHtml(data.description||'')}</textarea>
+                        <input type="text" id="edit_date" value="${escapeHtml(data.date||'')}" placeholder="Date">`;
             } else if (table === 'equipes') {
-                modalTitle.innerText = 'Modifier le membre';
-                html = `
-                    <input type="text" id="edit_nom" value="${escapeHtml(itemData.nom)}" placeholder="Nom">
-                    <input type="text" id="edit_poste" value="${escapeHtml(itemData.poste)}" placeholder="Poste">
-                    <textarea id="edit_description" rows="3" placeholder="Description">${escapeHtml(itemData.description || '')}</textarea>
-                `;
-            } else if (table === 'specialites_medicales' || table === 'specialites_chirurgicales' || table === 'gynecologie' || table === 'explorations') {
-                modalTitle.innerText = 'Modifier';
-                html = `
-                    <input type="text" id="edit_titre" value="${escapeHtml(itemData.titre)}" placeholder="Titre">
-                    <textarea id="edit_description" rows="3" placeholder="Description">${escapeHtml(itemData.description || '')}</textarea>
-                `;
+                title.innerText = "Modifier le membre";
+                html = `<input type="text" id="edit_nom" value="${escapeHtml(data.nom)}" placeholder="Nom">
+                        <input type="text" id="edit_poste" value="${escapeHtml(data.poste)}" placeholder="Poste">
+                        <textarea id="edit_description" rows="3">${escapeHtml(data.description||'')}</textarea>`;
             } else if (table === 'imagerie') {
-                modalTitle.innerText = 'Modifier le service d\'imagerie';
-                html = `
-                    <input type="text" id="edit_titre" value="${escapeHtml(itemData.titre)}" placeholder="Titre">
-                `;
+                title.innerText = "Modifier le service d'imagerie";
+                html = `<input type="text" id="edit_titre" value="${escapeHtml(data.titre)}" placeholder="Titre">
+                        <input type="text" id="edit_horaires" value="${escapeHtml(data.horaires||'')}" placeholder="Horaires (optionnel)" style="border-radius:20px;">`;
             } else if (table === 'equipements') {
-                modalTitle.innerText = 'Modifier le service de dialyse';
-                html = `
-                    <input type="text" id="edit_titre" value="${escapeHtml(itemData.titre)}" placeholder="Titre">
-                    <textarea id="edit_description" rows="3" placeholder="Description">${escapeHtml(itemData.description || '')}</textarea>
-                    <input type="text" id="edit_badge" value="${escapeHtml(itemData.badge || '')}" placeholder="Badge (optionnel)">
-                `;
+                title.innerText = "Modifier le service";
+                html = `<input type="text" id="edit_titre" value="${escapeHtml(data.titre)}" placeholder="Titre">
+                        <textarea id="edit_description" rows="3">${escapeHtml(data.description||'')}</textarea>
+                        <input type="text" id="edit_badge" value="${escapeHtml(data.badge||'')}" placeholder="Badge">
+                        <input type="text" id="edit_horaires" value="${escapeHtml(data.horaires||'')}" placeholder="Horaires (optionnel)" style="border-radius:20px;">`;
+            } else {
+                title.innerText = "Modifier";
+                html = `<input type="text" id="edit_titre" value="${escapeHtml(data.titre)}" placeholder="Titre">
+                        <textarea id="edit_description" rows="3">${escapeHtml(data.description||'')}</textarea>
+                        <input type="text" id="edit_horaires" value="${escapeHtml(data.horaires||'')}" placeholder="Horaires (optionnel)" style="border-radius:20px;">
+                        <small style="color:#64748b; font-size:0.75rem; padding-left:12px;">Laissez vide si pas d'horaires</small>`;
             }
-            
-            modalBody.innerHTML = html;
-            modal.style.display = 'flex';
+
+            body.innerHTML = html;
+            document.getElementById('editModal').style.display = 'flex';
         }
-        
+
         async function saveEdit() {
             const { id, table } = currentEditItem;
-            let updateData = {};
-            
+            let update = {};
             if (table === 'actualites') {
-                updateData = {
-                    titre: document.getElementById('edit_titre').value,
-                    description: document.getElementById('edit_description').value,
-                    date: document.getElementById('edit_date').value
-                };
+                update = { titre: document.getElementById('edit_titre').value, description: document.getElementById('edit_description').value, date: document.getElementById('edit_date').value };
             } else if (table === 'equipes') {
-                updateData = {
-                    nom: document.getElementById('edit_nom').value,
-                    poste: document.getElementById('edit_poste').value,
-                    description: document.getElementById('edit_description').value
-                };
-            } else if (table === 'specialites_medicales' || table === 'specialites_chirurgicales' || table === 'gynecologie' || table === 'explorations') {
-                updateData = {
-                    titre: document.getElementById('edit_titre').value,
-                    description: document.getElementById('edit_description').value
-                };
+                update = { nom: document.getElementById('edit_nom').value, poste: document.getElementById('edit_poste').value, description: document.getElementById('edit_description').value };
             } else if (table === 'imagerie') {
-                updateData = {
-                    titre: document.getElementById('edit_titre').value
-                };
+                update = { titre: document.getElementById('edit_titre').value, horaires: document.getElementById('edit_horaires').value };
             } else if (table === 'equipements') {
-                updateData = {
-                    titre: document.getElementById('edit_titre').value,
-                    description: document.getElementById('edit_description').value,
-                    badge: document.getElementById('edit_badge').value
+                update = { 
+                    titre: document.getElementById('edit_titre').value, 
+                    description: document.getElementById('edit_description').value, 
+                    badge: document.getElementById('edit_badge').value,
+                    horaires: document.getElementById('edit_horaires').value
                 };
+            } else {
+                update = { titre: document.getElementById('edit_titre').value, description: document.getElementById('edit_description').value, horaires: document.getElementById('edit_horaires').value };
             }
-            
-            const { error } = await supabaseClient.from(table).update(updateData).eq('id', id);
-            if (error) { 
-                showToast('Erreur: ' + error.message, 'error');
-                return; 
-            }
-            showToast('Modifié avec succès', 'success');
+            const { error } = await supabaseClient.from(table).update(update).eq('id', id);
+            if (error) { showToast('Erreur: ' + error.message, 'error'); return; }
+            showToast('✅ Modifié avec succès', 'success');
             document.getElementById('editModal').style.display = 'none';
             loadAllAdminData();
         }
-        
-        function closeEditModal() {
-            document.getElementById('editModal').style.display = 'none';
-            currentEditItem = { id: null, table: null, type: null };
+
+        // ===== CHARGEMENT DES LISTES =====
+        function horairesTag(h) {
+            if (!h || h.trim() === '') return '';
+            return `<span class="horaires-badge">🕐 ${escapeHtml(h)}</span>`;
         }
 
-        // Chargement des données
         async function loadAdminActualites() {
-            if (!supabaseClient) return;
             const { data } = await supabaseClient.from('actualites').select('*').order('created_at', { ascending: false });
-            const container = document.getElementById('adminActusList');
-            if (!data?.length) { container.innerHTML = '<p>Aucune actualité</p>'; return; }
-            container.innerHTML = data.map(a => `
-                <div class="item-card">
-                    <div class="item-info">
-                        ${a.image_url ? `<img src="${a.image_url}" class="preview-small">` : ''}
-                        <strong>${escapeHtml(a.titre)}</strong>
-                        <div class="small">${escapeHtml(a.date || '')}</div>
-                        <div class="small">${escapeHtml(a.description || '')}</div>
-                    </div>
-                    <div class="item-actions">
-                        <button class="edit-btn" data-id="${a.id}" data-table="actualites" data-type="actualite">Modifier</button>
-                        <button class="delete-btn" data-id="${a.id}" data-table="actualites">Supprimer</button>
-                    </div>
-                </div>
-            `).join('');
+            const c = document.getElementById('adminActusList');
+            if (!data?.length) { c.innerHTML = '<p>Aucune actualité</p>'; return; }
+            c.innerHTML = data.map(a => `<div class="item-card">
+                <div class="item-info">${a.image_url ? `<img src="${a.image_url}" class="preview-small">` : ''}<strong>${escapeHtml(a.titre)}</strong><div class="small">${escapeHtml(a.date||'')} — ${escapeHtml((a.description||'').substring(0,80))}</div></div>
+                <div class="item-actions"><button class="edit-btn" data-id="${a.id}" data-table="actualites">Modifier</button><button class="delete-btn" data-id="${a.id}" data-table="actualites">Supprimer</button></div>
+            </div>`).join('');
             attachItemEvents();
             document.getElementById('statActus').innerText = data.length;
         }
 
         async function loadAdminTeam() {
-            if (!supabaseClient) return;
-            const { data } = await supabaseClient.from('equipes').select('*').order('ordre', { ascending: true });
-            const container = document.getElementById('adminTeamList');
-            if (!data?.length) { container.innerHTML = '<p>Aucun membre</p>'; return; }
-            container.innerHTML = data.map(m => `
-                <div class="item-card">
-                    <div class="item-info">
-                        ${m.image_url ? `<img src="${m.image_url}" class="preview-small">` : ''}
-                        <strong>${escapeHtml(m.nom)}</strong> - ${escapeHtml(m.poste)}
-                        <div class="small">${escapeHtml(m.description || '')}</div>
-                    </div>
-                    <div class="item-actions">
-                        <button class="edit-btn" data-id="${m.id}" data-table="equipes" data-type="team">Modifier</button>
-                        <button class="delete-btn" data-id="${m.id}" data-table="equipes">Supprimer</button>
-                    </div>
-                </div>
-            `).join('');
+            const { data } = await supabaseClient.from('equipes').select('*').order('ordre');
+            const c = document.getElementById('adminTeamList');
+            if (!data?.length) { c.innerHTML = '<p>Aucun membre</p>'; return; }
+            c.innerHTML = data.map(m => `<div class="item-card">
+                <div class="item-info">${m.image_url ? `<img src="${m.image_url}" class="preview-small">` : ''}<strong>${escapeHtml(m.nom)}</strong> — ${escapeHtml(m.poste)}<div class="small">${escapeHtml(m.description||'')}</div></div>
+                <div class="item-actions"><button class="edit-btn" data-id="${m.id}" data-table="equipes">Modifier</button><button class="delete-btn" data-id="${m.id}" data-table="equipes">Supprimer</button></div>
+            </div>`).join('');
             attachItemEvents();
             document.getElementById('statEquipe').innerText = data.length;
         }
 
         async function loadAdminSpecMedicales() {
-            if (!supabaseClient) return;
             const { data } = await supabaseClient.from('specialites_medicales').select('*').order('ordre');
-            const container = document.getElementById('adminSpecMedList');
-            if (!data?.length) { container.innerHTML = '<p>Aucune spécialité</p>'; return; }
-            container.innerHTML = data.map(s => `
-                <div class="item-card">
-                    <div class="item-info"><strong>${escapeHtml(s.titre)}</strong><div class="small">${escapeHtml(s.description || '')}</div></div>
-                    <div class="item-actions">
-                        <button class="edit-btn" data-id="${s.id}" data-table="specialites_medicales">Modifier</button>
-                        <button class="delete-btn" data-id="${s.id}" data-table="specialites_medicales">Supprimer</button>
-                    </div>
-                </div>
-            `).join('');
+            const c = document.getElementById('adminSpecMedList');
+            if (!data?.length) { c.innerHTML = '<p>Aucune spécialité</p>'; return; }
+            c.innerHTML = data.map(s => `<div class="item-card">
+                <div class="item-info"><strong>${escapeHtml(s.titre)}</strong><div class="small">${escapeHtml(s.description||'')}</div>${horairesTag(s.horaires)}</div>
+                <div class="item-actions"><button class="edit-btn" data-id="${s.id}" data-table="specialites_medicales">Modifier</button><button class="delete-btn" data-id="${s.id}" data-table="specialites_medicales">Supprimer</button></div>
+            </div>`).join('');
             attachItemEvents();
             document.getElementById('statSpecMed').innerText = data.length;
         }
 
         async function loadAdminSpecChirurgicales() {
-            if (!supabaseClient) return;
             const { data } = await supabaseClient.from('specialites_chirurgicales').select('*').order('ordre');
-            const container = document.getElementById('adminSpecChirList');
-            if (!data?.length) { container.innerHTML = '<p>Aucune spécialité</p>'; return; }
-            container.innerHTML = data.map(s => `
-                <div class="item-card">
-                    <div class="item-info"><strong>${escapeHtml(s.titre)}</strong><div class="small">${escapeHtml(s.description || '')}</div></div>
-                    <div class="item-actions">
-                        <button class="edit-btn" data-id="${s.id}" data-table="specialites_chirurgicales">Modifier</button>
-                        <button class="delete-btn" data-id="${s.id}" data-table="specialites_chirurgicales">Supprimer</button>
-                    </div>
-                </div>
-            `).join('');
+            const c = document.getElementById('adminSpecChirList');
+            if (!data?.length) { c.innerHTML = '<p>Aucune spécialité</p>'; return; }
+            c.innerHTML = data.map(s => `<div class="item-card">
+                <div class="item-info"><strong>${escapeHtml(s.titre)}</strong><div class="small">${escapeHtml(s.description||'')}</div>${horairesTag(s.horaires)}</div>
+                <div class="item-actions"><button class="edit-btn" data-id="${s.id}" data-table="specialites_chirurgicales">Modifier</button><button class="delete-btn" data-id="${s.id}" data-table="specialites_chirurgicales">Supprimer</button></div>
+            </div>`).join('');
             attachItemEvents();
             document.getElementById('statSpecChir').innerText = data.length;
         }
 
         async function loadAdminGynecologie() {
-            if (!supabaseClient) return;
             const { data } = await supabaseClient.from('gynecologie').select('*').order('ordre');
-            const container = document.getElementById('adminGyneList');
-            if (!data?.length) { container.innerHTML = '<p>Aucun service</p>'; return; }
-            container.innerHTML = data.map(g => `
-                <div class="item-card">
-                    <div class="item-info"><strong>${escapeHtml(g.titre)}</strong><div class="small">${escapeHtml(g.description || '')}</div></div>
-                    <div class="item-actions">
-                        <button class="edit-btn" data-id="${g.id}" data-table="gynecologie">Modifier</button>
-                        <button class="delete-btn" data-id="${g.id}" data-table="gynecologie">Supprimer</button>
-                    </div>
-                </div>
-            `).join('');
+            const c = document.getElementById('adminGyneList');
+            if (!data?.length) { c.innerHTML = '<p>Aucun service</p>'; return; }
+            c.innerHTML = data.map(g => `<div class="item-card">
+                <div class="item-info"><strong>${escapeHtml(g.titre)}</strong><div class="small">${escapeHtml(g.description||'')}</div>${horairesTag(g.horaires)}</div>
+                <div class="item-actions"><button class="edit-btn" data-id="${g.id}" data-table="gynecologie">Modifier</button><button class="delete-btn" data-id="${g.id}" data-table="gynecologie">Supprimer</button></div>
+            </div>`).join('');
             attachItemEvents();
         }
 
         async function loadAdminExplorations() {
-            if (!supabaseClient) return;
             const { data } = await supabaseClient.from('explorations').select('*').order('ordre');
-            const container = document.getElementById('adminExploList');
-            if (!data?.length) { container.innerHTML = '<p>Aucune exploration</p>'; return; }
-            container.innerHTML = data.map(e => `
-                <div class="item-card">
-                    <div class="item-info"><strong>${escapeHtml(e.titre)}</strong><div class="small">${escapeHtml(e.description || '')}</div></div>
-                    <div class="item-actions">
-                        <button class="edit-btn" data-id="${e.id}" data-table="explorations">Modifier</button>
-                        <button class="delete-btn" data-id="${e.id}" data-table="explorations">Supprimer</button>
-                    </div>
-                </div>
-            `).join('');
+            const c = document.getElementById('adminExploList');
+            if (!data?.length) { c.innerHTML = '<p>Aucune exploration</p>'; return; }
+            c.innerHTML = data.map(e => `<div class="item-card">
+                <div class="item-info"><strong>${escapeHtml(e.titre)}</strong><div class="small">${escapeHtml(e.description||'')}</div>${horairesTag(e.horaires)}</div>
+                <div class="item-actions"><button class="edit-btn" data-id="${e.id}" data-table="explorations">Modifier</button><button class="delete-btn" data-id="${e.id}" data-table="explorations">Supprimer</button></div>
+            </div>`).join('');
             attachItemEvents();
         }
 
         async function loadAdminImagerie() {
-            if (!supabaseClient) return;
             const { data } = await supabaseClient.from('imagerie').select('*').order('ordre');
-            const container = document.getElementById('adminImagerieList');
-            if (!data?.length) { container.innerHTML = '<p>Aucun service</p>'; return; }
-            container.innerHTML = data.map(i => `
-                <div class="item-card">
-                    <div class="item-info"><strong>${escapeHtml(i.titre)}</strong></div>
-                    <div class="item-actions">
-                        <button class="edit-btn" data-id="${i.id}" data-table="imagerie">Modifier</button>
-                        <button class="delete-btn" data-id="${i.id}" data-table="imagerie">Supprimer</button>
-                    </div>
-                </div>
-            `).join('');
+            const c = document.getElementById('adminImagerieList');
+            if (!data?.length) { c.innerHTML = '<p>Aucun service</p>'; return; }
+            c.innerHTML = data.map(i => `<div class="item-card">
+                <div class="item-info"><strong>${escapeHtml(i.titre)}</strong>${horairesTag(i.horaires)}</div>
+                <div class="item-actions"><button class="edit-btn" data-id="${i.id}" data-table="imagerie">Modifier</button><button class="delete-btn" data-id="${i.id}" data-table="imagerie">Supprimer</button></div>
+            </div>`).join('');
             attachItemEvents();
         }
 
         async function loadAdminDialyse() {
-            if (!supabaseClient) return;
             const { data } = await supabaseClient.from('equipements').select('*').order('ordre');
-            const container = document.getElementById('adminDialyseList');
-            if (!data?.length) { container.innerHTML = '<p>Aucun service de dialyse</p>'; return; }
-            container.innerHTML = data.map(e => `
-                <div class="item-card">
-                    <div class="item-info">
-                        <strong>${escapeHtml(e.titre)}</strong>
-                        ${e.badge ? `<span style="background:#1D8B5D; color:white; padding:2px 8px; border-radius:20px; font-size:0.6rem; margin-left:8px;">${escapeHtml(e.badge)}</span>` : ''}
-                        <div class="small">${escapeHtml(e.description || '')}</div>
-                    </div>
-                    <div class="item-actions">
-                        <button class="edit-btn" data-id="${e.id}" data-table="equipements">Modifier</button>
-                        <button class="delete-btn" data-id="${e.id}" data-table="equipements">Supprimer</button>
-                    </div>
-                </div>
-            `).join('');
+            const c = document.getElementById('adminDialyseList');
+            if (!data?.length) { c.innerHTML = '<p>Aucun service</p>'; return; }
+            c.innerHTML = data.map(e => `<div class="item-card">
+                <div class="item-info"><strong>${escapeHtml(e.titre)}</strong>${e.badge ? `<span style="background:#1D8B5D;color:white;padding:2px 8px;border-radius:20px;font-size:0.6rem;margin-left:8px;">${escapeHtml(e.badge)}</span>` : ''}<div class="small">${escapeHtml(e.description||'')}</div>${horairesTag(e.horaires)}</div>
+                <div class="item-actions"><button class="edit-btn" data-id="${e.id}" data-table="equipements">Modifier</button><button class="delete-btn" data-id="${e.id}" data-table="equipements">Supprimer</button></div>
+            </div>`).join('');
             attachItemEvents();
         }
 
         async function loadAllAdminData() {
             if (!supabaseClient) return;
             await Promise.all([
-                loadAdminActualites(),
-                loadAdminTeam(),
-                loadAdminSpecMedicales(),
-                loadAdminSpecChirurgicales(),
-                loadAdminGynecologie(),
-                loadAdminExplorations(),
-                loadAdminImagerie(),
-                loadAdminDialyse(),
-                loadBandeauSettings()
+                loadAdminActualites(), loadAdminTeam(),
+                loadAdminSpecMedicales(), loadAdminSpecChirurgicales(),
+                loadAdminGynecologie(), loadAdminExplorations(),
+                loadAdminImagerie(), loadAdminDialyse(), loadBandeauSettings()
             ]);
         }
 
-        // Navigation stats cliquables
-        function attachStatsNavigation() {
+        function attachEventListeners() {
+            attachCreateListeners();
+
             document.querySelectorAll('.stat-card').forEach(card => {
                 card.addEventListener('click', () => {
                     const tabId = card.getAttribute('data-tab');
-                    if (tabId) {
-                        const tabBtn = document.querySelector(`.tab-btn[data-tab="${tabId}"]`);
-                        if (tabBtn) tabBtn.click();
-                    }
+                    document.querySelector(`.tab-btn[data-tab="${tabId}"]`)?.click();
                 });
             });
-        }
 
-        // Défilement automatique des onglets
-        function setupTabsScrolling() {
             const tabsContainer = document.getElementById('tabsContainer');
-            if (tabsContainer) {
-                tabsContainer.addEventListener('wheel', (e) => {
-                    if (e.deltaY !== 0) {
-                        e.preventDefault();
-                        tabsContainer.scrollLeft += e.deltaY;
-                    }
-                });
-            }
-        }
+            tabsContainer?.addEventListener('wheel', e => { if(e.deltaY) { e.preventDefault(); tabsContainer.scrollLeft += e.deltaY; } });
 
-        function attachEventListeners() {
-            attachPreviewListeners();
-            attachCreateListeners();
-            attachStatsNavigation();
-            setupTabsScrolling();
-            
-            document.getElementById('cancelEditBtn')?.addEventListener('click', closeEditModal);
-            document.getElementById('saveEditBtn')?.addEventListener('click', saveEdit);
-            window.addEventListener('click', (e) => {
-                const modal = document.getElementById('editModal');
-                if (e.target === modal) closeEditModal();
-            });
-            
-            const tabs = document.querySelectorAll('.tab-btn');
-            const panes = document.querySelectorAll('.tab-pane');
-            tabs.forEach(tab => {
+            document.querySelectorAll('.tab-btn').forEach(tab => {
                 tab.addEventListener('click', () => {
-                    const targetId = tab.getAttribute('data-tab');
-                    tabs.forEach(t => t.classList.remove('active'));
+                    document.querySelectorAll('.tab-btn').forEach(t => t.classList.remove('active'));
                     tab.classList.add('active');
-                    panes.forEach(pane => pane.classList.remove('active'));
-                    document.getElementById(targetId).classList.add('active');
+                    document.querySelectorAll('.tab-pane').forEach(p => p.classList.remove('active'));
+                    document.getElementById(tab.getAttribute('data-tab')).classList.add('active');
                 });
             });
-            
+
+            document.getElementById('cancelEditBtn')?.addEventListener('click', () => { document.getElementById('editModal').style.display = 'none'; });
+            document.getElementById('saveEditBtn')?.addEventListener('click', saveEdit);
+            window.addEventListener('click', e => { if (e.target === document.getElementById('editModal')) document.getElementById('editModal').style.display = 'none'; });
+
             document.getElementById('logoutAdminBtn')?.addEventListener('click', () => {
                 sessionStorage.removeItem('clinique_admin');
                 showToast('Déconnexion réussie', 'success');
-                setTimeout(() => {
-                    window.location.href = 'index.html';
-                }, 500);
+                setTimeout(() => window.location.href = 'index.html', 500);
             });
         }
 
         function escapeHtml(str) {
             if (!str) return '';
-            return str.replace(/[&<>]/g, function(m) {
-                if (m === '&') return '&amp;';
-                if (m === '<') return '&lt;';
-                if (m === '>') return '&gt;';
-                return m;
-            });
+            return str.replace(/[&<>]/g, m => m==='&'?'&amp;':m==='<'?'&lt;':'&gt;');
         }
 
-        // Démarrer l'administration
+        // Initialisation des toggles horaires
+        function initAllHorairesToggles() {
+            initHorairesToggle('SpecMed', 'specMedHorairesContent', 'specMedHasHoraires');
+            initHorairesToggle('SpecChir', 'specChirHorairesContent', 'specChirHasHoraires');
+            initHorairesToggle('Gyne', 'gyneHorairesContent', 'gyneHasHoraires');
+            initHorairesToggle('Explo', 'exploHorairesContent', 'exploHasHoraires');
+            initHorairesToggle('Imagerie', 'imagerieHorairesContent', 'imagerieHasHoraires');
+            initHorairesToggle('Dialyse', 'dialyseHorairesContent', 'dialyseHasHoraires');
+        }
+
+        async function initAdmin() {
+            try {
+                const mod = await loadSupabase();
+                supabaseClient = mod.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+                initJoursBtns();
+                initAllHorairesToggles();
+                await loadAllAdminData();
+                attachEventListeners();
+                document.getElementById('loadingScreen').style.opacity = '0';
+                setTimeout(() => {
+                    document.getElementById('loadingScreen').style.display = 'none';
+                    document.getElementById('adminDashboard').style.display = 'block';
+                }, 500);
+            } catch(e) {
+                console.error(e);
+                document.getElementById('loadingScreen').innerHTML = '<div style="text-align:center;color:red;">Erreur de chargement<br>Veuillez rafraîchir</div>';
+            }
+        }
+
         initAdmin();
     </script>
 </body>
