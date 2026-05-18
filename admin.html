@@ -197,11 +197,6 @@
         .stat-card:hover .number { transform: scale(1.1); }
         .stat-card .label { font-size: 0.8rem; opacity: 0.9; }
         
-        .rdv-stats { display: flex; gap: 15px; flex-wrap: wrap; margin-bottom: 20px; }
-        .rdv-stat-card { background: white; padding: 12px 20px; border-radius: 20px; border-left: 4px solid #1D8B5D; flex: 1; min-width: 120px; box-shadow: 0 1px 3px rgba(0,0,0,0.1); }
-        .rdv-stat-card .number { font-size: 1.5rem; font-weight: 700; color: #1D8B5D; }
-        .rdv-stat-card .label { font-size: 0.7rem; color: #64748b; }
-        
         .bandeau-preview { margin-top: 20px; padding: 15px; border-radius: 16px; text-align: center; font-weight: 600; transition: all 0.3s; }
         
         .toast-notification {
@@ -275,7 +270,7 @@
                 <div class="stat-card" data-tab="specMedicales"><div class="number" id="statSpecMed">0</div><div class="label">Spécialités médicales</div></div>
                 <div class="stat-card" data-tab="specChirurgicales"><div class="number" id="statSpecChir">0</div><div class="label">Spécialités chirurgicales</div></div>
                 <div class="stat-card" data-tab="equipe"><div class="number" id="statEquipe">0</div><div class="label">Équipe</div></div>
-                <div class="stat-card" data-tab="rendezvous"><div class="number" id="statRdvs">0</div><div class="label">Rendez-vous</div></div>
+                <div class="stat-card" data-tab="rendezvous"><div class="number">📅</div><div class="label">Rendez-vous</div></div>
             </div>
 
             <div class="tabs-wrapper">
@@ -491,13 +486,6 @@
                 <div class="form-admin">
                     <h3>📋 Gestion des rendez-vous</h3>
                     
-                    <div class="rdv-stats" id="rdvStats">
-                        <div class="rdv-stat-card"><div class="number" id="rdvTotal">0</div><div class="label">Total RDV</div></div>
-                        <div class="rdv-stat-card"><div class="number" id="rdvAujourdhui">0</div><div class="label">RDV aujourd'hui</div></div>
-                        <div class="rdv-stat-card"><div class="number" id="rdvCetteSemaine">0</div><div class="label">Cette semaine</div></div>
-                        <div class="rdv-stat-card"><div class="number" id="rdvCeMois">0</div><div class="label">Ce mois</div></div>
-                    </div>
-                    
                     <div class="filter-bar">
                         <div class="form-group"><label>🔍 Filtrer par date</label><input type="date" id="filterDate"></div>
                         <div class="form-group"><label>🏥 Spécialité</label><select id="filterSpecialite"><option value="">Toutes</option></select></div>
@@ -623,40 +611,8 @@
             const { data, error } = await supabaseClient.from('rendez_vous').select('*').order('date_creation', { ascending: false });
             if (error) { console.error(error); return; }
             allRdvs = data || [];
-            updateRdvStats();
             renderRdvTable();
             updateSpecialiteFilter();
-            const statRdvs = document.getElementById('statRdvs');
-            if (statRdvs) statRdvs.innerText = allRdvs.length;
-        }
-
-        function updateRdvStats() {
-            const total = allRdvs.length;
-            const today = new Date().toISOString().split('T')[0];
-            const aujourdhui = allRdvs.filter(r => r.date_rdv === today).length;
-            
-            const todayDate = new Date();
-            const thisWeek = allRdvs.filter(r => {
-                if (!r.date_rdv) return false;
-                const rdvDate = new Date(r.date_rdv);
-                const diffDays = Math.ceil((rdvDate - todayDate) / (1000 * 60 * 60 * 24));
-                return diffDays >= 0 && diffDays <= 7;
-            }).length;
-            
-            const thisMonth = allRdvs.filter(r => {
-                if (!r.date_rdv) return false;
-                const rdvDate = new Date(r.date_rdv);
-                return rdvDate.getMonth() === todayDate.getMonth() && rdvDate.getFullYear() === todayDate.getFullYear();
-            }).length;
-            
-            const rdvTotal = document.getElementById('rdvTotal');
-            const rdvAujourdhui = document.getElementById('rdvAujourdhui');
-            const rdvCetteSemaine = document.getElementById('rdvCetteSemaine');
-            const rdvCeMois = document.getElementById('rdvCeMois');
-            if (rdvTotal) rdvTotal.innerText = total;
-            if (rdvAujourdhui) rdvAujourdhui.innerText = aujourdhui;
-            if (rdvCetteSemaine) rdvCetteSemaine.innerText = thisWeek;
-            if (rdvCeMois) rdvCeMois.innerText = thisMonth;
         }
 
         function renderRdvTable() {
@@ -672,7 +628,7 @@
             const tbody = document.getElementById('rdvTableBody');
             if (!tbody) return;
             if (filtered.length === 0) {
-                tbody.innerHTML = '<tr><td colspan="8" style="text-align:center;">Aucun rendez-vous trouvé</td></tr>';
+                tbody.innerHTML = '<tr><td colspan="8" style="text-align:center;">Aucune demande pour le moment</td></tr>';
                 return;
             }
             
