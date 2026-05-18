@@ -237,7 +237,7 @@
         .rdv-table th { background: #f8fafc; font-weight: 600; color: #0077A4; }
         .rdv-table tr:hover { background: #f8fafc; }
         .filter-bar { display: flex; gap: 15px; flex-wrap: wrap; margin-bottom: 20px; align-items: flex-end; }
-        .filter-bar .form-group { margin-bottom: 0; flex: 1; min-width: 150px; }
+        .filter-bar .form-group { margin-bottom: 0; flex: 1; min-width: 200px; }
         .filter-bar label { font-size: 0.7rem; color: #64748b; display: block; margin-bottom: 4px; }
         
         @media (max-width: 768px) {
@@ -488,9 +488,6 @@
                     
                     <div class="filter-bar">
                         <div class="form-group"><label>🔍 Filtrer par date</label><input type="date" id="filterDate"></div>
-                        <div class="form-group"><label>🏥 Spécialité</label><select id="filterSpecialite"><option value="">Toutes</option></select></div>
-                        <div class="form-group"><label>📌 Statut</label><select id="filterStatus"><option value="">Tous</option><option value="en_attente">En attente</option><option value="confirme">Confirmé</option><option value="annule">Annulé</option><option value="traite">Traité</option></select></div>
-                        <div><button id="exportRdvBtn" class="btn-save" style="background:#0077A4;">📊 Exporter CSV</button></div>
                     </div>
                     
                     <div style="overflow-x: auto;">
@@ -612,18 +609,13 @@
             if (error) { console.error(error); return; }
             allRdvs = data || [];
             renderRdvTable();
-            updateSpecialiteFilter();
         }
 
         function renderRdvTable() {
             const dateFilter = document.getElementById('filterDate')?.value;
-            const specFilter = document.getElementById('filterSpecialite')?.value;
-            const statusFilter = document.getElementById('filterStatus')?.value;
             
             let filtered = [...allRdvs];
             if (dateFilter) filtered = filtered.filter(r => r.date_rdv === dateFilter);
-            if (specFilter) filtered = filtered.filter(r => r.specialite === specFilter);
-            if (statusFilter) filtered = filtered.filter(r => r.statut === statusFilter);
             
             const tbody = document.getElementById('rdvTableBody');
             if (!tbody) return;
@@ -674,32 +666,6 @@
                 });
             });
         }
-
-        function updateSpecialiteFilter() {
-            const specialites = [...new Set(allRdvs.map(r => r.specialite).filter(Boolean))];
-            const select = document.getElementById('filterSpecialite');
-            if (select) {
-                select.innerHTML = '<option value="">Toutes</option>' + specialites.map(s => `<option value="${escapeHtml(s)}">${escapeHtml(s)}</option>`).join('');
-            }
-        }
-
-        const exportBtn = document.getElementById('exportRdvBtn');
-        if (exportBtn) {
-            exportBtn.addEventListener('click', () => {
-                let csv = "Date création,Nom,Téléphone,Spécialité,Date RDV,Heure RDV,Flexible,Statut,Message\n";
-                allRdvs.forEach(r => {
-                    csv += `"${new Date(r.date_creation).toLocaleDateString('fr-FR')}","${escapeCsv(r.nom)}","${r.telephone}","${escapeCsv(r.specialite || '')}","${r.date_rdv || ''}","${r.heure_rdv || ''}","${r.flexible ? 'OUI' : 'NON'}","${r.statut}","${escapeCsv(r.message || '')}"\n`;
-                });
-                const blob = new Blob([csv], { type: 'text/csv;charset=utf-8;' });
-                const link = document.createElement('a');
-                link.href = URL.createObjectURL(blob);
-                link.download = `rdv_clinique_${new Date().toISOString().split('T')[0]}.csv`;
-                link.click();
-                showToast('Export CSV lancé', 'success');
-            });
-        }
-        
-        function escapeCsv(str) { if (!str) return ''; return str.replace(/"/g, '""'); }
 
         // ==================== CRUD ====================
         async function createItem(table, titre, description, horaires, badge = null) {
@@ -1099,12 +1065,6 @@
             
             const filterDate = document.getElementById('filterDate');
             if (filterDate) filterDate.addEventListener('change', () => renderRdvTable());
-            
-            const filterSpecialite = document.getElementById('filterSpecialite');
-            if (filterSpecialite) filterSpecialite.addEventListener('change', () => renderRdvTable());
-            
-            const filterStatus = document.getElementById('filterStatus');
-            if (filterStatus) filterStatus.addEventListener('change', () => renderRdvTable());
 
             const createSpecMedBtn = document.getElementById('createSpecMedBtn');
             if (createSpecMedBtn) {
