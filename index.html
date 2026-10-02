@@ -465,6 +465,33 @@
         }
         .toast-notification.show { transform: translateX(-50%) translateY(0); }
         .toast-notification.error { background: #dc3545; }
+
+        /* ===== CRÉDIT MAHMARGROUP ===== */
+        .footer-credit {
+            font-size: 0.72rem;
+            color: #94a3b8;
+            margin-top: 6px;
+            letter-spacing: 0.02em;
+        }
+        .footer-credit a {
+            color: #1D8B5D;
+            font-weight: 700;
+            position: relative;
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+        .footer-credit a::after {
+            content: '';
+            position: absolute;
+            left: 0; right: 0; bottom: -2px;
+            height: 1.5px;
+            background: #0077A4;
+            transform: scaleX(0);
+            transform-origin: left;
+            transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        .footer-credit a:hover { color: #0077A4; }
+        .footer-credit a:hover::after { transform: scaleX(1); }
     </style>
 </head>
 <body>
@@ -696,8 +723,10 @@
         </div>
         <div style="text-align:center; margin-top:30px; padding-top:15px; border-top:1px solid #334155;">
             <p>&copy; 2026 Clinique WENDTOIN – Tous droits réservés</p>
-            <!-- Mention "Créé par Kévin ZONGO" ajoutée ici -->
-            <p style="font-size:0.7rem; color:#94a3b8; margin-top:6px;">Réalisé par Sion Tech</p>
+            <!-- Crédit MahmarGroup -->
+            <p class="footer-credit">
+                Conçu par <a href="#" target="_blank" rel="noopener">MahmarGroup</a>
+            </p>
         </div>
     </div>
 </footer>
